@@ -21,9 +21,5 @@ export const Map = () => {
     })
   }, [])
 
-  return (
-    <div className={mapStyles.mapWrapper}>
-      <div ref={mapContainer} className={mapStyles.map} />
-    </div>
-  )
+  return <div ref={mapContainer} className={mapStyles.map} />
 }

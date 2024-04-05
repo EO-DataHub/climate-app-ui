@@ -1,68 +1,81 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+#root {
+  width: 100vw;
+  --spacing: 8px;
+}
+:root,
+.light,
+.light-theme {
+  --yellow-1: #fefdf8;
+  --yellow-2: #fffce4;
+  --yellow-3: #fff9ad;
+  --yellow-4: #fff272;
+  --yellow-5: #ffe839;
+  --yellow-6: #f2d935;
+  --yellow-7: #e1cb41;
+  --yellow-8: #cdb400;
+  --yellow-9: #ffe735;
+  --yellow-10: #fd0;
+  --yellow-11: #8e7800;
+  --yellow-12: #443d15;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --yellow-a1: #dbb70007;
+  --yellow-a2: #ffe3001b;
+  --yellow-a3: #ffed0052;
+  --yellow-a4: #ffe8008d;
+  --yellow-a5: #ffe200c6;
+  --yellow-a6: #efcf00ca;
+  --yellow-a7: #d7b900be;
+  --yellow-a8: #cdb400;
+  --yellow-a9: #ffe100ca;
+  --yellow-a10: #ffdd00;
+  --yellow-a11: #8e7800;
+  --yellow-a12: #332c00ea;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --yellow-contrast: #262209;
+  --yellow-surface: #fffbddcc;
+  --yellow-indicator: #ffe735;
+  --yellow-track: #ffe735;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+@supports (color: color(display-p3 1 1 1)) {
+  @media (color-gamut: p3) {
+    :root,
+    .light,
+    .light-theme {
+      --yellow-1: oklch(0.993 0.007 99.96);
+      --yellow-2: oklch(0.988 0.032 99.96);
+      --yellow-3: oklch(0.974 0.107 99.96);
+      --yellow-4: oklch(0.953 0.148 99.96);
+      --yellow-5: oklch(0.925 0.179 99.96);
+      --yellow-6: oklch(0.881 0.17 99.96);
+      --yellow-7: oklch(0.836 0.153 99.96);
+      --yellow-8: oklch(0.766 0.174 99.96);
+      --yellow-9: oklch(0.927 0.229 99.96);
+      --yellow-10: oklch(0.897 0.229 99.96);
+      --yellow-11: oklch(0.574 0.173 99.96);
+      --yellow-12: oklch(0.358 0.058 99.96);
+
+      --yellow-a1: color(display-p3 0.863 0.722 0.024 / 0.028);
+      --yellow-a2: color(display-p3 0.961 0.882 0.012 / 0.099);
+      --yellow-a3: color(display-p3 0.988 0.922 0.004 / 0.287);
+      --yellow-a4: color(display-p3 0.984 0.894 0.004 / 0.479);
+      --yellow-a5: color(display-p3 0.976 0.863 0 / 0.632);
+      --yellow-a6: color(display-p3 0.898 0.78 0 / 0.655);
+      --yellow-a7: color(display-p3 0.792 0.69 0 / 0.644);
+      --yellow-a8: color(display-p3 0.725 0.624 0 / 0.769);
+      --yellow-a9: color(display-p3 0.976 0.859 0 / 0.64);
+      --yellow-a10: color(display-p3 0.969 0.816 0 / 0.706);
+      --yellow-a11: color(display-p3 0.463 0.384 0 / 0.855);
+      --yellow-a12: color(display-p3 0.176 0.149 0 / 0.895);
+
+      --yellow-contrast: #262209;
+      --yellow-surface: color(display-p3 1 0.984 0.878 / 0.8);
+      --yellow-indicator: oklch(0.927 0.229 99.96);
+      --yellow-track: oklch(0.927 0.229 99.96);
+    }
+  }
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }

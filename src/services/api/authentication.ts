@@ -1,5 +1,4 @@
 import Keycloak, { KeycloakOnLoad } from 'keycloak-js'
-console.log('code outside of component, should only run once in dev envt')
 const initOptions = {
   url: import.meta.env.VITE_KEYCLOAK_URL as string,
   realm: import.meta.env.VITE_KEYCLOAK_REALM as string,
@@ -21,7 +20,8 @@ export interface AuthenticationService {
 const authenticationInstance = new Keycloak(initOptions)
 
 const initialize = () => {
-  console.log('initi keycloak')
+  // @ts-expect-error - didInitialize isnt technically a public property, but ticket accepted to make it so https://github.com/keycloak/keycloak/issues/27040
+  if (authenticationInstance.didInitialize) return // this ensures vite HMR keeps working in development
   authenticationInstance
     .init({
       onLoad: initOptions.onLoad as KeycloakOnLoad,

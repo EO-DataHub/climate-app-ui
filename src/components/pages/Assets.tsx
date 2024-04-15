@@ -1,17 +1,14 @@
 import { Button, Table, Text } from '@radix-ui/themes'
-import { useRef } from 'react'
-import { LoadUserAssets } from '../../useUploadedAssets'
+import { useContext, useRef } from 'react'
 import { PageWithMapLayout } from '../Layout/PageWithMapLayout'
 import { Map } from '../Map/Map'
+import { useMap } from '../Map/useMap'
+import { UserAssetsContext } from '../../context/UserAssetsContext'
 
-export const Assets = ({
-  loadUserAssets,
-  mapContainer,
-}: {
-  loadUserAssets: LoadUserAssets
-  mapContainer: React.RefObject<HTMLDivElement>
-}) => {
+export const Assets = () => {
+  const { mapContainer } = useMap()
   const uploadRef = useRef<HTMLInputElement>(null)
+  const { loadUserAssets } = useContext(UserAssetsContext)
   const sidebarContent = (
     <>
       <Text>A hypothetical side bar</Text>

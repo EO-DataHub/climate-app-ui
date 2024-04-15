@@ -1,10 +1,8 @@
 // @ts-expect-error - no types available
 import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
 import { FeatureCollection } from 'geojson'
-import { useEffect, useState } from 'react'
-import { LngLatBoundsLike, Map as MaplibreMap } from 'maplibre-gl'
-// @ts-expect-error - no types available
-import { bbox as turfBbox } from '@turf/turf'
+import { useState } from 'react'
+import { ReactNode, createContext } from 'react'
 
 enum UploadFileType {
   GEOJSON = 'application/geo+json',
@@ -14,11 +12,14 @@ export type LoadUserAssets = (
   event: React.ChangeEvent<HTMLInputElement>,
 ) => void
 
-export const useUploadedAssets = ({
-  mapInstance,
-}: {
-  mapInstance: MaplibreMap | undefined
-}) => {
+interface UserAssetsContextValue {
+  userAssets?: FeatureCollection
+  loadUserAssets?: LoadUserAssets
+}
+
+export const UserAssetsContext = createContext<UserAssetsContextValue>({})
+
+export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [userAssets, setUserAssets] = useState<FeatureCollection | undefined>()
 
   const loadUserAssets = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,44 +70,9 @@ export const useUploadedAssets = ({
     fileReader.readAsText(uploadedFile)
   }
 
-  useEffect(
-    function updateUserAssets() {
-      if (!mapInstance || !userAssets) return
-
-      const userAssetBounds = turfBbox(userAssets) as LngLatBoundsLike
-      const userAssetsSource = mapInstance.getSource(
-        'userAssets',
-      ) as maplibregl.GeoJSONSource
-
-      const userAssetsLayer = mapInstance.getLayer('userAssets')
-
-      if (userAssetsSource) {
-        userAssetsSource.setData(userAssets)
-      }
-
-      if (!userAssetsSource) {
-        mapInstance.addSource('userAssets', {
-          type: 'geojson',
-          data: userAssets,
-        })
-      }
-
-      if (!userAssetsLayer) {
-        mapInstance.addLayer({
-          id: 'userAssets',
-          type: 'circle',
-          source: 'userAssets',
-          paint: {
-            'circle-color': '#FF0000',
-            'circle-radius': 5,
-          },
-        })
-      }
-
-      mapInstance.fitBounds(userAssetBounds)
-    },
-    [mapInstance, userAssets],
+  return (
+    <UserAssetsContext.Provider value={{ userAssets, loadUserAssets }}>
+      {children}
+    </UserAssetsContext.Provider>
   )
-
-  return { userAssets, loadUserAssets }
 }

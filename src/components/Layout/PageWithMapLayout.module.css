@@ -1,14 +1,17 @@
 .layoutWrapper {
   position: relative;
   height: 100vh;
+  width: 100%;
   display: flex;
 }
 
-.hypotheticalSidebar {
-  width: 30%;
-  min-width: 300px;
+.sidebar {
+  flex-basis: 70%;
+  flex-grow: 0;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
   box-sizing: border-box;
+  padding: var(--space-6);
 }

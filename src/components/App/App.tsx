@@ -9,9 +9,9 @@ import './App.module.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 import authenticationService from '../../services/api/authentication'
-import { useMap } from '../Map/useMap'
-import { useUploadedAssets } from '../../useUploadedAssets'
-import { Assets } from '../pages/Assets'
+import { RouterProvider } from 'react-router-dom'
+import { UserAssetsProvider } from '../../context/UserAssetsContext'
+import { router } from './router'
 
 // import axiosService from '../../services/axios'
 
@@ -50,13 +50,12 @@ authenticationService.initialize()
 function App() {
   const queryClient = new QueryClient()
 
-  const { mapContainer, mapInstance } = useMap()
-  const { loadUserAssets } = useUploadedAssets({ mapInstance })
-
   return (
     <QueryClientProvider client={queryClient}>
       <RadixTheme {...RADIX_THEME_PROPS}>
-        <Assets loadUserAssets={loadUserAssets} mapContainer={mapContainer} />
+        <UserAssetsProvider>
+          <RouterProvider router={router} />
+        </UserAssetsProvider>
       </RadixTheme>
 
       {/* <ReactQueryDevtools initialIsOpen={false} /> */}

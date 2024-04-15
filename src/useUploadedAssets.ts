@@ -10,6 +10,9 @@ enum UploadFileType {
   GEOJSON = 'application/geo+json',
   CSV = 'text/csv',
 }
+export type LoadUserAssets = (
+  event: React.ChangeEvent<HTMLInputElement>,
+) => void
 
 export const useUploadedAssets = ({
   mapInstance,

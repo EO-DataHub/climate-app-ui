@@ -6,20 +6,18 @@ import { useMap } from '../Map/useMap'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 
 export const Assets = () => {
+  const { loadUserAssets } = useContext(UserAssetsContext)
   const { mapContainer } = useMap()
   const uploadRef = useRef<HTMLInputElement>(null)
-  const { loadUserAssets } = useContext(UserAssetsContext)
   const sidebarContent = (
     <>
       <Text>A hypothetical side bar</Text>
-      {/* <Button onClick={handleLogin}>login demo</Button>
-      <Button onClick={handleLogout}>logout demo</Button> */}
       <input
         type="file"
         id="upload-assets"
         hidden
         ref={uploadRef}
-        onChange={(event) => loadUserAssets(event)}
+        onChange={(event) => loadUserAssets?.(event)}
         accept=".csv, .geojson"
       />
       <Button onClick={() => uploadRef.current?.click()}>

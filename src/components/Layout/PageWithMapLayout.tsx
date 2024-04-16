@@ -15,7 +15,7 @@ export const PageWithMapLayout = ({
   return (
     <div className={pageWithMapStyles.layoutWrapper}>
       <div className={pageWithMapStyles.sidebar}>
-        <div className={containerStyles.flexSpaceBetweenCenter}>
+        <div className={containerStyles.flexRowSpaceBetweenCenter}>
           <div>
             <Heading as="h2">{pageName}</Heading>
           </div>
@@ -23,8 +23,8 @@ export const PageWithMapLayout = ({
             <Button>Show Fullscreen Map</Button>
           </div>
         </div>
-        <div className={containerStyles.flexSpaceBetweenCenter}>
-          <div className={containerStyles.flexStartCenter}>
+        <div className={containerStyles.flexRowSpaceBetweenCenter}>
+          <div className={containerStyles.flexRowStartCenter}>
             <Select.Root defaultValue="apple">
               <Select.Trigger />
               <Select.Content>

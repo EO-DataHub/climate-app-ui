@@ -1,6 +1,7 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
 import { Assets } from '../pages/Assets'
 import { AppLayout } from '../Layout/AppLayout'
+import { NotFound } from '../pages/404'
 
 export const router = createBrowserRouter(
   [
@@ -15,6 +16,7 @@ export const router = createBrowserRouter(
           path: '/assets',
           element: <Assets />,
         },
+        { path: '*', element: <NotFound /> },
       ],
     },
   ],

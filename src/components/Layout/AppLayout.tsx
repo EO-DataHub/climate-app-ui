@@ -5,7 +5,7 @@ import { NavLink, Outlet } from 'react-router-dom'
 export const AppLayout = () => {
   return (
     <div
-      className={`${appLayoutStyles.layoutWrapper} ${containerStyles.flexRowSpaceBetweenCenter}`}
+      className={`${appLayoutStyles.layoutWrapper} ${containerStyles.flexRowStartCenter}`}
     >
       <div
         className={`${appLayoutStyles.navWrapper} ${containerStyles.flexColumnSpaceBetweenCenter}`}

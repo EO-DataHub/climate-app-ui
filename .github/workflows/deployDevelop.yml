@@ -43,7 +43,8 @@ jobs:
           VITE_KEYCLOAK_REALM: ${{ secrets.VITE_KEYCLOAK_REALM }}
           VITE_KEYCLOAK_CLIENT_ID: ${{ secrets.VITE_KEYCLOAK_CLIENT_ID }}
           VITE_BASE_PATH: ${{ secrets.VITE_BASE_PATH }}
-
+      - name: Copy intex.html to 404.html to satisfy GitHub Pages SPA routing
+        run: cp dist/index.html dist/404.html
       - name: Upload build files
         uses: actions/upload-pages-artifact@v3
         with:

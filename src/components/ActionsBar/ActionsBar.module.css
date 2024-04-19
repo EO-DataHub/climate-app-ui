@@ -1,0 +1,22 @@
+.actionsWrapper {
+  background-color: var(--gray-2);
+  height: 100vh;
+  width: 60px;
+
+  & svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  & :global(a.active) {
+    outline: solid 3px var(--accent-8);
+  }
+}
+.nav1 {
+  flex-grow: 1;
+  width: 100%;
+}
+.navLinkActive {
+  border: solid thin black;
+  padding: var(--space-1);
+}

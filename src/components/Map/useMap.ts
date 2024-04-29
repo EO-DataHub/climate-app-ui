@@ -21,6 +21,6 @@ export const useMap = () => {
 
   return {
     mapContainer,
-    mapInstance: mapRef.current,
+    mapRef,
   }
 }

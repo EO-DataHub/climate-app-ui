@@ -6,6 +6,7 @@ import { ReactNode, createContext } from 'react'
 import {
   bbox as getBbox,
   featureCollection as getFeatureCollection,
+  // @ts-expect-error - no types available
 } from '@turf/turf'
 
 enum UploadFileType {

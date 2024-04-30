@@ -2,7 +2,7 @@ name: Deploy develop branch build
 
 on:
   push:
-    branches: ['develop']
+    branches: ['demo']
 
 permissions:
   contents: read

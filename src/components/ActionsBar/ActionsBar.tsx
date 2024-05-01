@@ -10,6 +10,7 @@ import InfoIcon from '@material-design-icons/svg/outlined/info.svg?react'
 import UploadIcon from '@material-design-icons/svg/outlined/upload_file.svg?react'
 import ArticleIcon from '@material-design-icons/svg/outlined/article.svg?react'
 import NotificationsIcon from '@material-design-icons/svg/outlined/notifications.svg?react'
+import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 
 import containerStyles from '../genericStyles/containers.module.css'
 import actionBarStyles from './ActionsBar.module.css'
@@ -19,7 +20,7 @@ export const ActionsBar = () => {
     <div
       className={`${actionBarStyles.actionsWrapper} ${containerStyles.flexColumnSpaceBetweenCenter}`}
     >
-      <div className="supercali">logo</div>
+      <SparkgeoLogo className={actionBarStyles.logo} />
       <nav
         className={`${containerStyles.flexColumnStartCenter} ${actionBarStyles.nav1}`}
       >

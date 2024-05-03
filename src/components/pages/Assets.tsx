@@ -4,88 +4,175 @@ import { VegaLite, VisualizationSpec } from 'react-vega'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import { PageSizeSelector } from '../Pagination/PageSizeSelector/PageSizeSelector'
+import { PageSelector } from '../Pagination/PageSelector/PageSelector'
 
 import { Map } from '../Map/Map'
 import { PageWithMapLayout } from '../Layout/PageWithMapLayout'
 import { useMap } from '../Map/useMap'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import containerStyles from '../genericStyles/containers.module.css'
+import {
+  AssetRisk,
+  fake5000TableAssets,
+} from '../../localAssets/fakeAssetTableData'
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 
 enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
 }
+
+const columnHelper = createColumnHelper<AssetRisk>()
+
+const columns = [
+  columnHelper.accessor('id', {
+    header: 'asset id',
+  }),
+  columnHelper.group({
+    header: '2030',
+    columns: [
+      columnHelper.accessor('2030_ssp126_chronicheat', {
+        header: 'SSP126',
+      }),
+      columnHelper.accessor('2030_ssp245_chronicheat', {
+        header: 'SSP245',
+      }),
+      columnHelper.accessor('2030_ssp585_chronicheat', {
+        header: 'SSP585',
+      }),
+    ],
+  }),
+  columnHelper.group({
+    header: '2040',
+    columns: [
+      columnHelper.accessor('2040_ssp126_chronicheat', { header: 'SSP126' }),
+      columnHelper.accessor('2040_ssp245_chronicheat', { header: 'SSP245' }),
+      columnHelper.accessor('2040_ssp585_chronicheat', { header: 'SSP585' }),
+    ],
+  }),
+  columnHelper.group({
+    header: '2050',
+    columns: [
+      columnHelper.accessor('2040_ssp126_chronicheat', { header: 'SSP126' }),
+      columnHelper.accessor('2040_ssp245_chronicheat', { header: 'SSP245' }),
+      columnHelper.accessor('2040_ssp585_chronicheat', { header: 'SSP585' }),
+    ],
+  }),
+]
 
 export const Assets = () => {
   const [areHazardTilesLoading, setAreHazardTilesLoading] = useState(false)
   const { loadUserAssets } = useContext(UserAssetsContext)
   const { mapContainer, mapRef } = useMap()
   const uploadRef = useRef<HTMLInputElement>(null)
+  const [tableData] = useState(() => [...fake5000TableAssets])
+
+  const table = useReactTable({
+    data: tableData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 15,
+      },
+    },
+  })
 
   const {
-    // isPending: isAssetHazardDataLoading,
-    // error: assetHazardDataError,
+    isPending: isAssetHazardDataLoading,
+    error: assetHazardDataError,
     data: assetHazardData,
   } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
       axios.get('http://54.170.128.128:8000/mock').then((res) => {
-        console.log('HERE')
-        const sampleAssetHazardData = res.data[3]
-        const twenty30 = sampleAssetHazardData['2030']
-        const twenty40 = sampleAssetHazardData['2040']
-        const twenty50 = sampleAssetHazardData['2050']
-        const formattedData = [
-          {
-            category: 2030,
-            scenario: 'SPP126',
-            value: twenty30?.ssp126.ChronicHeat,
-          },
-          {
-            category: 2030,
-            scenario: 'SPP245',
-            value: twenty30?.ssp245.ChronicHeat,
-          },
-          {
-            category: 2030,
-            scenario: 'SPP585',
-            value: twenty30?.ssp585.ChronicHeat,
-          },
-          {
-            category: 2040,
-            scenario: 'SPP126',
-            value: twenty40?.ssp126.ChronicHeat,
-          },
-          {
-            category: 2040,
-            scenario: 'SPP245',
-            value: twenty40?.ssp245.ChronicHeat,
-          },
-          {
-            category: 2040,
-            scenario: 'SPP585',
-            value: twenty40?.ssp585.ChronicHeat,
-          },
-          {
-            category: 2050,
-            scenario: 'SPP126',
-            value: twenty50?.ssp126.ChronicHeat,
-          },
-          {
-            category: 2050,
-            scenario: 'SPP245',
-            value: twenty50?.ssp245.ChronicHeat,
-          },
-          {
-            category: 2050,
-            scenario: 'SPP585',
-            value: twenty50?.ssp585.ChronicHeat,
-          },
-        ]
-        console.log('foo', formattedData)
-
-        return formattedData
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+        return res.data
       }),
   })
+
+  const sampleAssetHazardDataForVegaLite = assetHazardData?.[3]
+  const twenty30 = sampleAssetHazardDataForVegaLite?.['2030']
+  const twenty40 = sampleAssetHazardDataForVegaLite?.['2040']
+  const twenty50 = sampleAssetHazardDataForVegaLite?.['2050']
+  const assetHazardDataForVegaLite = [
+    {
+      category: 2030,
+      scenario: 'SPP126',
+      value: twenty30?.ssp126.ChronicHeat,
+    },
+    {
+      category: 2030,
+      scenario: 'SPP245',
+      value: twenty30?.ssp245.ChronicHeat,
+    },
+    {
+      category: 2030,
+      scenario: 'SPP585',
+      value: twenty30?.ssp585.ChronicHeat,
+    },
+    {
+      category: 2040,
+      scenario: 'SPP126',
+      value: twenty40?.ssp126.ChronicHeat,
+    },
+    {
+      category: 2040,
+      scenario: 'SPP245',
+      value: twenty40?.ssp245.ChronicHeat,
+    },
+    {
+      category: 2040,
+      scenario: 'SPP585',
+      value: twenty40?.ssp585.ChronicHeat,
+    },
+    {
+      category: 2050,
+      scenario: 'SPP126',
+      value: twenty50?.ssp126.ChronicHeat,
+    },
+    {
+      category: 2050,
+      scenario: 'SPP245',
+      value: twenty50?.ssp245.ChronicHeat,
+    },
+    {
+      category: 2050,
+      scenario: 'SPP585',
+      value: twenty50?.ssp585.ChronicHeat,
+    },
+  ]
+
+  // function getRandomInRange(min: number, max: number) {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min
+  // }
+
+  // const generateFakeTableData = () => {
+  //   const scenarios = ['ssp126', 'ssp245', 'ssp585']
+  //   const years = ['2030', '2040', '2050']
+  //   const data = []
+
+  //   for (let i = 0; i < 5000; i++) {
+  //     const obj = { id: i }
+  //     for (const year of years) {
+  //       for (const scenario of scenarios) {
+  //         obj[`${year}_${scenario}_chronicheat`] = getRandomInRange(0, 5)
+  //       }
+  //     }
+  //     data.push(obj)
+  //   }
+
+  //   return data
+  // }
+
+  // console.log(generateFakeTableData())
 
   const updateHazardMapTiles = useCallback(() => {
     if (!mapRef.current) return
@@ -122,7 +209,7 @@ export const Assets = () => {
   }, [mapRef])
 
   const data1 = {
-    myData: assetHazardData,
+    myData: assetHazardDataForVegaLite,
   }
 
   const spec1: VisualizationSpec = {
@@ -150,7 +237,6 @@ export const Assets = () => {
 
   const sidebarContent = (
     <>
-      foo:{JSON.stringify(assetHazardData)}
       <Text>Internal &apos;technically works&apos; demo (not a UX demo)</Text>
       <input
         type="file"
@@ -196,6 +282,77 @@ export const Assets = () => {
         </Select.Root>
         {areHazardTilesLoading ? <Spinner /> : null}
       </div>
+
+      {!isAssetHazardDataLoading && !assetHazardDataError ? (
+        <>
+          <table>
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+            <tfoot>
+              {table.getFooterGroups().map((footerGroup) => (
+                <tr key={footerGroup.id}>
+                  {footerGroup.headers.map((header) => (
+                    <th key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.footer,
+                            header.getContext(),
+                          )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </tfoot>
+          </table>
+          <PageSizeSelector
+            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
+              table.setPageSize(parseInt(event.target.value))
+            }
+            pageSize={table.getState().pagination.pageSize}
+            pageSizeOptions={[15, 50, 100]}
+            unfilteredRowLength={tableData.length}
+          />
+          <PageSelector
+            currentPageIndex={table.getState().pagination.pageIndex}
+            nextDisabled={!table.getCanNextPage()}
+            onGoToPage={table.setPageIndex}
+            onNextClick={table.nextPage}
+            onPreviousClick={table.previousPage}
+            pageCount={table.getPageCount()}
+            previousDisabled={!table.getCanPreviousPage()}
+          />
+          ,
+        </>
+      ) : null}
       <VegaLite data={data1} spec={spec1} />
     </>
   )

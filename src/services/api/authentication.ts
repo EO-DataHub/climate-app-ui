@@ -32,12 +32,15 @@ const initialize = () => {
     .then(
       (auth) => {
         if (!auth) {
+          // eslint-disable-next-line no-console
           console.error('Not Authenticated')
         } else {
+          // eslint-disable-next-line no-console
           console.info('Authenticated', authenticationInstance)
         }
       },
       () => {
+        // eslint-disable-next-line no-console
         console.error('Authenticated Failed')
       },
     )

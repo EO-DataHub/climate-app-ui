@@ -1,7 +1,8 @@
 import { Navigate, createBrowserRouter } from 'react-router-dom'
-import { Assets } from '../pages/Assets'
+import { AssetsSpeculativeJunkDrawer } from '../pages/AssetsSpeculativeJunkDrawer'
 import { AppLayout } from '../Layout/AppLayout'
 import { NotFound } from '../pages/404'
+import { Assets } from '../pages/Assets'
 
 export const router = createBrowserRouter(
   [
@@ -15,6 +16,10 @@ export const router = createBrowserRouter(
         {
           path: '/assets',
           element: <Assets />,
+        },
+        {
+          path: '/junk-drawer',
+          element: <AssetsSpeculativeJunkDrawer />,
         },
         { path: '*', element: <NotFound /> },
       ],

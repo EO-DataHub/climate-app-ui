@@ -16,7 +16,7 @@ import { router } from './router'
 // import axiosService from '../../services/axios'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
-  accentColor: 'yellow',
+  accentColor: 'indigo',
 }
 
 authenticationService.initialize()

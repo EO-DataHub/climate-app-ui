@@ -14,8 +14,8 @@ export const useMap = () => {
     mapRef.current = new Maplibregl.Map({
       container: mapContainer.current as HTMLElement,
       style: `https://api.protomaps.com/styles/v2/light.json?key=${PROTON_MAPS_API_KEY}`,
-      center: [-118.805, 34.027],
-      zoom: 14,
+      center: [0, 0],
+      zoom: 1,
     })
   }, [])
 

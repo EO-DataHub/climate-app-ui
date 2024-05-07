@@ -6,7 +6,7 @@
 }
 
 .sidebar {
-  flex-basis: 70%;
+  flex-basis: 50%;
   flex-grow: 0;
   flex-shrink: 0;
   display: flex;

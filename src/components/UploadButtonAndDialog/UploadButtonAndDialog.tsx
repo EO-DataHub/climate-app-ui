@@ -1,23 +1,30 @@
 import { Button, Dialog, Link, Spinner, Text } from '@radix-ui/themes'
 import { useCallback, useContext, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { Map as MaplibreMap } from 'maplibre-gl'
 
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.css'
 import containerStyles from '../genericStyles/containers.module.css'
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
+import { useUpdateUserAssetsInMap } from '../pages/Assets/useUpdateUserAssetsInMap'
 
-export const UploadButtonAndDialog = () => {
-  const { parseAssetsIntoGeoJson, setUserAssets } =
-    useContext(UserAssetsContext)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [isFileParseError, setIsFileParseError] = useState(false)
-  const [isFileLoading, setIsFileLoading] = useState(false)
+export const UploadButtonAndDialog = ({
+  mapRef,
+}: {
+  mapRef: React.MutableRefObject<MaplibreMap | undefined>
+}) => {
   const [chosenUnparsedFiles, setChosenUnparsedFiles] = useState<File[]>([])
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isFileLoading, setIsFileLoading] = useState(false)
+  const [isFileParseError, setIsFileParseError] = useState(false)
   const [parsedAssets, setParsedAssets] = useState<FeatureCollection<
     Geometry,
     GeoJsonProperties
   > | null>(null)
+  const { parseAssetsIntoGeoJson, setUserAssets } =
+    useContext(UserAssetsContext)
+  const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({ mapRef })
 
   const formatAssets = useCallback(
     (acceptedFiles: File[]) => {
@@ -29,7 +36,13 @@ export const UploadButtonAndDialog = () => {
       parseAssetsIntoGeoJson?.(acceptedFiles?.[0])
         .then((response) => {
           setIsFileLoading(false)
-          setParsedAssets(response)
+
+          if (!response?.features.length) {
+            setIsFileParseError(true)
+          }
+          if (response?.features.length) {
+            setParsedAssets(response)
+          }
         })
         .catch(() => {
           setIsFileParseError(true)
@@ -66,11 +79,13 @@ export const UploadButtonAndDialog = () => {
   const handleDialogOpenChange = (isOpen: boolean) => {
     setChosenUnparsedFiles([])
     setParsedAssets(null)
+    setIsFileParseError(false)
     setIsDialogOpen(isOpen)
   }
 
   const handleLoadAssetsClick = () => {
     setUserAssets?.(parsedAssets)
+    updateUserAssetsInMap(parsedAssets)
     setIsDialogOpen(false)
   }
 

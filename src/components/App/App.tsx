@@ -12,6 +12,7 @@ import authenticationService from '../../services/api/authentication'
 import { RouterProvider } from 'react-router-dom'
 import { UserAssetsProvider } from '../../context/UserAssetsContext'
 import { router } from './router'
+import { LoadingContextProvider } from '../../context/LoadingContext'
 
 // import axiosService from '../../services/axios'
 
@@ -51,16 +52,18 @@ function App() {
   const queryClient = new QueryClient()
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <RadixTheme {...RADIX_THEME_PROPS}>
-        <UserAssetsProvider>
-          <RouterProvider router={router} />
-        </UserAssetsProvider>
-      </RadixTheme>
+    <LoadingContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <RadixTheme {...RADIX_THEME_PROPS}>
+          <UserAssetsProvider>
+            <RouterProvider router={router} />
+          </UserAssetsProvider>
+        </RadixTheme>
 
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-      {/* will only show in dev environments */}
-    </QueryClientProvider>
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        {/* will only show in dev environments */}
+      </QueryClientProvider>
+    </LoadingContextProvider>
   )
 }
 

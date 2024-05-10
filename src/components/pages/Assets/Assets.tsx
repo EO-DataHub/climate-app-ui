@@ -1,13 +1,13 @@
 import { Select, Text } from '@radix-ui/themes'
 
-import { Map } from '../Map/Map'
-import { PageWithMapLayout } from '../Layout/PageWithMapLayout'
-import { useMap } from '../Map/useMap'
-import containerStyles from '../genericStyles/containers.module.css'
-import { UploadButtonAndDialog } from '../UploadButtonAndDialog/UploadButtonAndDialog'
+import { Map } from '../../Map/Map'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
+import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
+import { useMap } from '../../Map/useMap'
+import containerStyles from '../../genericStyles/containers.module.css'
 
 export const Assets = () => {
-  const { mapContainer } = useMap()
+  const { mapContainer, mapRef } = useMap()
 
   const sidebarContent = (
     <>
@@ -46,7 +46,7 @@ export const Assets = () => {
             </Select.Group>
           </Select.Content>
         </Select.Root>
-        <UploadButtonAndDialog />
+        <UploadButtonAndDialog mapRef={mapRef} />
       </div>
     </>
   )

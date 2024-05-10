@@ -6,6 +6,11 @@ body {
 }
 :root {
   --error-color: var(--red-11);
+  --large-marker-cluster-color: #bbb;
+  --medium-marker-cluster-color: #aaa;
+  --small-marker-cluster-color: #999;
+  --unclustered-marker-color: #666;
+  --marker-stroke-color: #eeeeeeee;
 }
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;

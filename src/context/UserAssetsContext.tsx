@@ -10,12 +10,12 @@ import {
 } from '@turf/turf'
 import { getIsFileCsv, getIsFileGeoJson } from '../services/fileTypes'
 
-type UserAssets = FeatureCollection<Geometry, GeoJsonProperties> | null
+export type UserAssets = FeatureCollection<Geometry, GeoJsonProperties> | null
 
 export type ParseAssetsIntoGeoJson = (uploadedFile: File) => Promise<UserAssets>
 
 interface UserAssetsContextValue {
-  userAssets?: FeatureCollection | null
+  userAssets?: UserAssets
   parseAssetsIntoGeoJson?: ParseAssetsIntoGeoJson
   setUserAssets?: React.Dispatch<React.SetStateAction<UserAssets>>
 }
@@ -23,7 +23,7 @@ interface UserAssetsContextValue {
 export const UserAssetsContext = createContext<UserAssetsContextValue>({})
 
 export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
-  const [userAssets, setUserAssets] = useState<FeatureCollection | null>(null)
+  const [userAssets, setUserAssets] = useState<UserAssets>(null)
 
   const getPyStacItemCollectionFromFeatureCollection = (
     // https://pystac.readthedocs.io/en/stable/api/pystac.html#pystac.ItemCollection

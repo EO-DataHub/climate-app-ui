@@ -1,15 +1,28 @@
 .actionsWrapper {
   background-color: #333132;
-  height: 100vh;
-  width: 60px;
+  height: 100%;
+  padding: var(--space-5) var(--space-4);
+  box-sizing: border-box;
 
-  & nav svg {
-    height: 20px;
-    width: 20px;
+  & a svg {
+    height: 32px;
+    width: 32px;
+    fill: var(--accent-6);
   }
 
-  & :global(a.active) {
-    outline: solid 3px var(--accent-8);
+  & a {
+    padding: var(--space-3);
+    border-radius: var(--radius-4);
+    transition: background-color 0.4s;
+  }
+
+  & :global(a.active) svg,
+  a:hover svg {
+    fill: var(--white-a12);
+  }
+  & :global(a.active),
+  a:hover {
+    background-color: var(--accent-9);
   }
 }
 .nav1 {
@@ -17,6 +30,8 @@
   width: 100%;
 }
 .logo {
-  width: 100%;
+  width: 48px;
+  height: 48px;
+  padding: 2px;
   fill: #fff;
 }

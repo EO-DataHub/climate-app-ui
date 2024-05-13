@@ -1,4 +1,4 @@
-import { IconButton, Tooltip } from '@radix-ui/themes'
+import { IconButton } from '@radix-ui/themes'
 import { NavLink } from 'react-router-dom'
 
 import WarningIcon from '@material-design-icons/svg/outlined/warning_amber.svg?react'
@@ -14,6 +14,7 @@ import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 
 import containerStyles from '../genericStyles/containers.module.css'
 import actionBarStyles from './ActionsBar.module.css'
+import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 
 export const ActionsBar = () => {
   return (
@@ -24,70 +25,70 @@ export const ActionsBar = () => {
       <nav
         className={`${containerStyles.flexColumnStartCenter} ${actionBarStyles.nav1}`}
       >
-        <Tooltip content="Hazards" side="right">
+        <TooltipForNav content="Hazards" side="right">
           <IconButton asChild>
             <NavLink to="/hazards">
               <WarningIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
-        <Tooltip content="Observations" side="right">
+        </TooltipForNav>
+        <TooltipForNav content="Observations" side="right">
           <IconButton asChild>
             <NavLink to="/observations">
               <VisibilityIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
-        <Tooltip content="Assets" side="right">
+        </TooltipForNav>
+        <TooltipForNav content="Assets" side="right">
           <IconButton asChild>
             <NavLink to="/assets">
               <ApartmentIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
-        <Tooltip content="Portfolios" side="right">
+        </TooltipForNav>
+        <TooltipForNav content="Portfolios" side="right">
           <IconButton asChild>
             <NavLink to="/portfolios">
               <FolderIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
-        <Tooltip content="Reports" side="right">
+        </TooltipForNav>
+        <TooltipForNav content="Reports" side="right">
           <IconButton asChild>
             <NavLink to="/reports">
               <ArticleIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
+        </TooltipForNav>
       </nav>
       <div className={containerStyles.flexColumnEndCenter}>
-        <Tooltip content="Upload assets" side="right">
+        <TooltipForNav content="Upload assets" side="right">
           <IconButton>
             <UploadIcon />
           </IconButton>
-        </Tooltip>
-        <Tooltip content="Notifications" side="right">
+        </TooltipForNav>
+        <TooltipForNav content="Notifications" side="right">
           <IconButton>
             <NotificationsIcon />
           </IconButton>
-        </Tooltip>
+        </TooltipForNav>
       </div>
       <nav className={containerStyles.flexColumnEndCenter}>
-        <Tooltip content="about" side="right">
+        <TooltipForNav content="about" side="right">
           <IconButton asChild>
             <NavLink to="/about">
               <InfoIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
+        </TooltipForNav>
 
-        <Tooltip content="Account settings" side="right">
+        <TooltipForNav content="Account settings" side="right">
           <IconButton asChild>
             <NavLink to="/account">
               <PersonIcon />
             </NavLink>
           </IconButton>
-        </Tooltip>
+        </TooltipForNav>
       </nav>
     </div>
   )

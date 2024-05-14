@@ -21,6 +21,13 @@
   align-items: center;
   gap: var(--space-4);
 }
+.flexColumnSpaceBetweenStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
 .flexColumnStartCenter {
   display: flex;
   flex-direction: column;

@@ -18,7 +18,7 @@
 
   & :global(a.active) svg,
   a:hover svg {
-    fill: var(--white-a12);
+    fill: #fff;
   }
   & :global(a.active),
   a:hover {

@@ -373,7 +373,7 @@ export const AssetsSpeculativeJunkDrawer = () => {
     <PageWithMapLayout
       map={<Map mapContainer={mapContainer} />}
       sidebarContent={sidebarContent}
-      pageName="Assets"
+      title="Assets"
     />
   )
 }

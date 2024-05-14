@@ -3,6 +3,7 @@ import { AssetsSpeculativeJunkDrawer } from '../pages/AssetsSpeculativeJunkDrawe
 import { AppLayout } from '../Layout/AppLayout'
 import { NotFound } from '../pages/404'
 import { Assets } from '../pages/Assets/Assets'
+import { Hazards } from '../pages/Hazards/Hazards'
 
 export const router = createBrowserRouter(
   [
@@ -16,6 +17,10 @@ export const router = createBrowserRouter(
         {
           path: '/assets',
           element: <Assets />,
+        },
+        {
+          path: '/hazards',
+          element: <Hazards />,
         },
         {
           path: '/junk-drawer',

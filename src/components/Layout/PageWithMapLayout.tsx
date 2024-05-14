@@ -1,26 +1,40 @@
+import { Heading, Text } from '@radix-ui/themes'
 import { ReactNode } from 'react'
+
 import pageWithMapStyles from './PageWithMapLayout.module.css'
-import containerStyles from '../genericStyles/containers.module.css'
-import { Heading } from '@radix-ui/themes'
 
 export const PageWithMapLayout = ({
   map,
-  pageName,
   sidebarContent,
+  sidebarWidth = '50%',
+  subtitle,
+  title,
+  legend,
 }: {
   map: ReactNode
-  pageName: string
   sidebarContent: ReactNode
+  sidebarWidth?: string
+  subtitle?: string
+  title: string
+  legend?: ReactNode
 }) => {
   return (
     <div className={pageWithMapStyles.layoutWrapper}>
-      <div className={pageWithMapStyles.sidebar}>
-        <div className={containerStyles.flexRowSpaceBetweenCenter}>
-          <Heading as="h2">{pageName}</Heading>
+      <div
+        className={pageWithMapStyles.sidebar}
+        style={{ flexBasis: sidebarWidth }}
+      >
+        <div className={pageWithMapStyles.titlesContainer}>
+          <Heading as="h2" size="7">
+            {title}
+          </Heading>
+          {subtitle ? <Text size="3">{subtitle}</Text> : null}
         </div>
+
         {sidebarContent}
       </div>
       {map}
+      {legend ? <div className={pageWithMapStyles.legend}>{legend}</div> : null}
     </div>
   )
 }

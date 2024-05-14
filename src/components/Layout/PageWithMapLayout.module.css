@@ -4,15 +4,24 @@
   width: 100vw;
   display: flex;
 }
-
 .sidebar {
-  flex-basis: 50%;
   flex-grow: 0;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  box-sizing: border-box;
-  padding: var(--space-6);
+  padding: var(--space-5);
   overflow-y: auto;
+}
+.titlesContainer {
+  margin-bottom: var(--space-6);
+}
+.legend {
+  position: fixed;
+  right: var(--space-3);
+  bottom: var(--space-7);
+  background-color: #fff;
+  padding: var(--space-2);
+  border-radius: var(--radius-4);
+  box-shadow: var(--shadow-3);
 }

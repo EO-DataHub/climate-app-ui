@@ -5,7 +5,7 @@
   ); /* --radius-x variables are defined for this use for some reason, so a fallback value is supplied*/
   background-color: var(--slate-11);
   padding: 2px var(--space-2, 4px); /* --space-x variables are defined for this use for some reason, so a fallback value is supplied*/
-  color: var(--white-a12);
+  color: #fcfcfc;
 }
 .tooltipArrow {
   fill: var(--slate-11);

@@ -1,40 +1,62 @@
-import { Button, Heading, Select, Text } from '@radix-ui/themes'
-import { Map } from '../../Map/Map'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { useMap } from '../../Map/useMap'
-import containerStyles from '../../genericStyles/containers.module.css'
-import hazardsStyles from './Hazards.module.css'
-import { useNavigate } from 'react-router-dom'
-import { useContext, useEffect, useState } from 'react'
-import { RasterTileSource } from 'maplibre-gl'
-import { LoadingContext } from '../../../context/LoadingContext'
-import { InputLabelContainer } from '../../Form/InputLabelContainer'
+import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
+
 import {
   cmip6ModelOptions,
   indicatorOptions,
   scenarioOptions,
   yearOptions,
 } from '../../../services/api/fakeApiData'
+import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../../../constants'
+import { AssetsSelect } from '../../AssetsSelect'
+import { InputLabelContainer } from '../../Form/InputLabelContainer'
+import { LoadingContext } from '../../../context/LoadingContext'
+import { Map } from '../../Map/Map'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
+import { RasterTileSource } from 'maplibre-gl'
+import { useCallback, useContext, useEffect, useState } from 'react'
+import { useMap } from '../../Map/useMap'
+import { useNavigate } from 'react-router-dom'
+import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { useUpdateUserAssetsInMap } from '../Assets/useUpdateUserAssetsInMap'
+import containerStyles from '../../genericStyles/containers.module.css'
+import hazardsStyles from './Hazards.module.css'
 
 enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
 }
 
 export const Hazards = () => {
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
-  const { setIsLoading } = useContext(LoadingContext)
-  const navigate = useNavigate()
   const [hazardIndicator, setHazardIndicator] = useState(
     indicatorOptions[0].value,
   )
   const [cmip6Model, setCmip6Model] = useState(cmip6ModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
+  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { setIsLoading } = useContext(LoadingContext)
+  const { updateUserAssetsInMap, removeUserAssetsFromMap } =
+    useUpdateUserAssetsInMap({ mapRef })
+  const { userAssets } = useContext(UserAssetsContext)
   const hazardType = 'chronic_heat'
+  const navigate = useNavigate()
 
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
+
+  const updateAssetsOnMap = useCallback(
+    (portfolioName: string) => {
+      if (!portfolioName) {
+        removeUserAssetsFromMap()
+        return
+      }
+
+      if (userAssets && portfolioName == ASSET_SELSECT_UNSAVED_ASSETS_VALUE) {
+        updateUserAssetsInMap(userAssets)
+      }
+    },
+    [removeUserAssetsFromMap, updateUserAssetsInMap, userAssets],
+  )
 
   useEffect(
     function updateHazardMapTiles() {
@@ -173,6 +195,11 @@ export const Hazards = () => {
             </InputLabelContainer>
           </div>
         </form>
+        <Separator size="4" />
+        <InputLabelContainer>
+          <label htmlFor="year">View Assets on Map</label>
+          <AssetsSelect showUnsaved onValueChange={updateAssetsOnMap} />
+        </InputLabelContainer>
         <div className={hazardsStyles.indicatorDetails}>
           <Heading size="4" as="h2">
             Indicator Detail (placeholder for demo)

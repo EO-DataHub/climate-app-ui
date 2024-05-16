@@ -19,6 +19,21 @@ export const useUpdateUserAssetsInMap = ({
   const { setIsLoading } = useContext(LoadingContext)
   const cssStyles = window.getComputedStyle(document.body)
 
+  const removeUserAssetsFromMap = () => {
+    if (!mapRef.current || !setIsLoading) return
+
+    setIsLoading(true)
+
+    void mapRef.current.once('idle', () => {
+      setIsLoading(false)
+    })
+
+    mapRef.current.removeSource('userAssets')
+    mapRef.current.removeLayer('userAssetsClusters')
+    mapRef.current.removeLayer('userAssetsUnclustered')
+    mapRef.current.removeLayer('clusterCount')
+  }
+
   const updateUserAssetsInMap = (userAssets: UserAssets) => {
     if (!mapRef.current || !userAssets || !setIsLoading) return
 
@@ -190,5 +205,5 @@ export const useUpdateUserAssetsInMap = ({
     }
   }
 
-  return { updateUserAssetsInMap }
+  return { updateUserAssetsInMap, removeUserAssetsFromMap }
 }

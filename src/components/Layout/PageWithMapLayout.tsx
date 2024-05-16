@@ -25,7 +25,7 @@ export const PageWithMapLayout = ({
         style={{ flexBasis: sidebarWidth }}
       >
         <div className={pageWithMapStyles.titlesContainer}>
-          <Heading as="h2" size="7">
+          <Heading as="h1" size="7">
             {title}
           </Heading>
           {subtitle ? <Text size="3">{subtitle}</Text> : null}

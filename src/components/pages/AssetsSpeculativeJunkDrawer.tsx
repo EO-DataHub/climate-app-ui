@@ -374,6 +374,7 @@ export const AssetsSpeculativeJunkDrawer = () => {
       map={<Map mapContainer={mapContainer} />}
       sidebarContent={sidebarContent}
       title="Assets"
+      sidebarWidth="80%"
     />
   )
 }

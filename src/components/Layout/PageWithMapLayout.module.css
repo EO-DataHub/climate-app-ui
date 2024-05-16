@@ -11,10 +11,9 @@
   flex-direction: column;
   gap: var(--space-2);
   padding: var(--space-5);
-  overflow-y: auto;
 }
 .titlesContainer {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
 }
 .legend {
   position: fixed;

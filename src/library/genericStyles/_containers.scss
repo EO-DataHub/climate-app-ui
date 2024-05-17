@@ -1,0 +1,7 @@
+@mixin flexColumnSpaceBetweenStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-5);
+}

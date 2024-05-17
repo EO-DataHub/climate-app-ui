@@ -1,3 +1,5 @@
+@use '../../../library/genericStyles/containers';
+
 .sidebarContent {
   height: 100%;
   overflow-y: hidden;
@@ -18,4 +20,9 @@
 .hazardTilesForm {
   width: 100%;
   box-sizing: border-box;
+}
+.portfolioSelectWrapper {
+  @include containers.flexColumnSpaceBetweenStart;
+  gap: var(--space-3);
+  width: 100%;
 }

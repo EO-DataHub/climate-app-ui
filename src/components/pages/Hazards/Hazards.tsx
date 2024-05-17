@@ -19,7 +19,7 @@ import { useNavigate } from 'react-router-dom'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 import containerStyles from '../../../library/genericStyles/containers.module.css'
-import hazardsStyles from './Hazards.module.css'
+import hazardsStyles from './Hazards.module.scss'
 
 enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
@@ -203,10 +203,17 @@ export const Hazards = () => {
           </div>
         </form>
         <Separator size="4" />
-        <InputLabelContainer>
-          <label htmlFor="year">View Assets on Map</label>
-          <AssetsSelect showUnsaved onValueChange={updateAssetsOnMap} />
-        </InputLabelContainer>
+
+        <div className={hazardsStyles.portfolioSelectWrapper}>
+          <Text size="3" weight="bold">
+            View Assets on Map
+          </Text>
+          <InputLabelContainer>
+            <label htmlFor="year">Portfolios</label>
+            <AssetsSelect showUnsaved onValueChange={updateAssetsOnMap} />
+          </InputLabelContainer>
+        </div>
+
         <div className={hazardsStyles.indicatorDetails}>
           <Heading size="4" as="h2">
             Indicator Detail (placeholder for demo)

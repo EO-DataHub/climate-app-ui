@@ -1,12 +1,12 @@
 .actionsWrapper {
   background-color: #333132;
   height: 100%;
-  padding: var(--space-5) var(--space-4);
+  padding: var(--space-5) var(--space-3);
   box-sizing: border-box;
 
   & a svg {
-    height: 32px;
-    width: 32px;
+    height: 18px;
+    width: 18px;
     fill: var(--accent-6);
   }
 
@@ -31,8 +31,9 @@
   width: 100%;
 }
 .logo {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   padding: 2px;
   fill: #fff;
+  margin-bottom: var(--space-6);
 }

@@ -6,11 +6,11 @@ import InformationIcon from '@material-design-icons/svg/filled/info.svg?react'
 import NotificationsIcon from '@material-design-icons/svg/filled/notifications.svg?react'
 import ObservationsIcon from '@material-design-icons/svg/filled/view_timeline.svg?react'
 import PortfolioIcon from '@material-design-icons/svg/filled/folder.svg?react'
-import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.css'
 import containerStyles from '../../library/genericStyles/containers.module.css'
+import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 
 export const ActionsBar = () => {
   return (

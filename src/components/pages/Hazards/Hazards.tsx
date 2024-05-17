@@ -5,7 +5,7 @@ import {
   indicatorOptions,
   scenarioOptions,
   yearOptions,
-} from '../../../services/api/fakeApiData'
+} from '../../../library/api/fakeApiData'
 import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../../../constants'
 import { AssetsSelect } from '../../AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
@@ -17,8 +17,8 @@ import { useCallback, useContext, useEffect, useState } from 'react'
 import { useMap } from '../../Map/useMap'
 import { useNavigate } from 'react-router-dom'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
-import { useUpdateUserAssetsInMap } from '../Assets/useUpdateUserAssetsInMap'
-import containerStyles from '../../genericStyles/containers.module.css'
+import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
+import containerStyles from '../../../library/genericStyles/containers.module.css'
 import hazardsStyles from './Hazards.module.css'
 
 enum MapSourceIds {

@@ -15,3 +15,11 @@ body {
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;
 }
+.maplibregl-popup-content {
+  box-shadow: var(--shadow-3);
+  padding: var(--space-4);
+  border-radius: var(--radius-4);
+  background-color: var(--accent-1);
+  width: fit-content;
+  height: fit-content;
+}

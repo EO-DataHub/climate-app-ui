@@ -5,9 +5,9 @@ import { Map as MaplibreMap } from 'maplibre-gl'
 
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.css'
-import containerStyles from '../genericStyles/containers.module.css'
+import containerStyles from '../../library/genericStyles/containers.module.css'
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
-import { useUpdateUserAssetsInMap } from '../pages/Assets/useUpdateUserAssetsInMap'
+import { useUpdateUserAssetsInMap } from '../../library/userAssets/useUpdateUserAssetsInMap'
 
 export const UploadButtonAndDialog = ({
   mapRef,

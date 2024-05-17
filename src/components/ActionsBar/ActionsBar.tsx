@@ -10,7 +10,7 @@ import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.css'
-import containerStyles from '../genericStyles/containers.module.css'
+import containerStyles from '../../library/genericStyles/containers.module.css'
 
 export const ActionsBar = () => {
   return (

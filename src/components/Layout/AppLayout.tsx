@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-import containerStyles from '../genericStyles/containers.module.css'
+import containerStyles from '../../library/genericStyles/containers.module.css'
 import appLayoutStyles from './AppLayout.module.css'
 import { ActionsBar } from '../ActionsBar/ActionsBar'
 import { LoadingOverlay } from '../LoadingOverlay/LoadingOverlay'

@@ -1,0 +1,8 @@
+.assetsPopupContent {
+  min-width: 300px;
+  gap: var(--space-4);
+
+  & > button {
+    width: 100%;
+  }
+}

@@ -8,8 +8,12 @@ import {
 import { bbox as turfBbox } from '@turf/turf'
 import { useContext } from 'react'
 
-import { UserAssets } from '../../../context/UserAssetsContext'
-import { LoadingContext } from '../../../context/LoadingContext'
+import { Badge, Button, DataList, Text } from '@radix-ui/themes'
+import { LoadingContext } from '../../context/LoadingContext'
+import { renderToString } from 'react-dom/server'
+import { UserAssets } from '../../context/UserAssetsContext'
+import assetsPopupStyles from './AssetsPopup.module.css'
+import containerStyles from '../../library/genericStyles/containers.module.css'
 
 export const useUpdateUserAssetsInMap = ({
   mapRef,
@@ -81,7 +85,8 @@ export const useUpdateUserAssetsInMap = ({
     const handleMarkerClick = (event: MapLayerMouseEvent) => {
       // @ts-expect-error - maplibre-gl types are contradictory with docs
       const coordinates = event.features?.[0].geometry.coordinates.slice()
-      const assetId = event.features?.[0].properties.id
+      const assetVulnerability =
+        event.features?.[0].properties.assetVulnerability
       const assetType = event.features?.[0].properties.assetType
 
       // Ensure popup appears over correct world 'copy'
@@ -89,9 +94,48 @@ export const useUpdateUserAssetsInMap = ({
         coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360
       }
 
+      const popupContent = (
+        <div
+          className={`${containerStyles.flexColumnSpaceBetweenStart} ${assetsPopupStyles.assetsPopupContent}`}
+        >
+          <Text size="2">
+            Data for this asset is currently being processed or is unavailable.
+          </Text>
+          <DataList.Root
+            orientation={{ initial: 'vertical', sm: 'horizontal' }}
+          >
+            <DataList.Item>
+              <DataList.Label>Asset Vulnerability</DataList.Label>
+              <DataList.Value>
+                {assetVulnerability ? (
+                  assetVulnerability
+                ) : (
+                  <Badge variant="soft" color="gray">
+                    Data Unavailable
+                  </Badge>
+                )}
+              </DataList.Value>
+            </DataList.Item>
+            <DataList.Item>
+              <DataList.Label>Asset Type</DataList.Label>
+              <DataList.Value>
+                {assetType ? (
+                  assetType
+                ) : (
+                  <Badge variant="soft" color="gray">
+                    Data Unavailable
+                  </Badge>
+                )}
+              </DataList.Value>
+            </DataList.Item>
+          </DataList.Root>
+          <Button disabled>View Detailed Analysis</Button>
+        </div>
+      )
+
       new Popup()
         .setLngLat(coordinates)
-        .setHTML(`ID: ${assetId} <br>Asset Type: ${assetType}`)
+        .setHTML(renderToString(popupContent))
         .addTo(mapRef.current!)
     }
     const handleMarkerMouseEnter = () => {

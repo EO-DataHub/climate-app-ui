@@ -8,7 +8,7 @@ import {
   featureCollection as getFeatureCollection,
   // @ts-expect-error - no types available
 } from '@turf/turf'
-import { getIsFileCsv, getIsFileGeoJson } from '../services/fileTypes'
+import { getIsFileCsv, getIsFileGeoJson } from '../library/fileTypes'
 
 export type UserAssets = FeatureCollection<Geometry, GeoJsonProperties> | null
 

@@ -32,7 +32,7 @@ export const Hazards = () => {
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { mapContainer, mapRef, isMapLoaded, firstLabelsLayerId } = useMap()
   const { setIsLoading } = useContext(LoadingContext)
   const { updateUserAssetsInMap, removeUserAssetsFromMap } =
     useUpdateUserAssetsInMap({ mapRef })
@@ -95,15 +95,22 @@ export const Hazards = () => {
 
       const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARD_DATA)
       if (!hazardLayer) {
-        mapRef.current.addLayer({
-          id: MapSourceIds.HAZARD_DATA,
-          type: 'raster',
-          source: MapSourceIds.HAZARD_DATA,
-        })
+        mapRef.current.addLayer(
+          {
+            id: MapSourceIds.HAZARD_DATA,
+            type: 'raster',
+            source: MapSourceIds.HAZARD_DATA,
+            paint: {
+              'raster-opacity': 0.5,
+            },
+          },
+          firstLabelsLayerId,
+        )
       }
     },
     [
       climateModel,
+      firstLabelsLayerId,
       hazardIndicator,
       isMapLoaded,
       mapRef,

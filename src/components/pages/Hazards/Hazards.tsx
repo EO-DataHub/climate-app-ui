@@ -1,7 +1,7 @@
 import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
 
 import {
-  cmip6ModelOptions,
+  climateModelOptions,
   indicatorOptions,
   scenarioOptions,
   yearOptions,
@@ -29,10 +29,10 @@ export const Hazards = () => {
   const [hazardIndicator, setHazardIndicator] = useState(
     indicatorOptions[0].value,
   )
-  const [cmip6Model, setCmip6Model] = useState(cmip6ModelOptions[0].value)
+  const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { mapContainer, mapRef, isMapLoaded, firstLabelsLayerId } = useMap()
   const { setIsLoading } = useContext(LoadingContext)
   const { updateUserAssetsInMap, removeUserAssetsFromMap } =
     useUpdateUserAssetsInMap({ mapRef })
@@ -64,7 +64,7 @@ export const Hazards = () => {
         !mapRef.current ||
         !setIsLoading ||
         !hazardIndicator ||
-        !cmip6Model ||
+        !climateModel ||
         !scenario ||
         !year ||
         !isMapLoaded
@@ -80,7 +80,7 @@ export const Hazards = () => {
         MapSourceIds.HAZARD_DATA,
       ) as RasterTileSource
 
-      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard-test-titiler-xarray/hazard.zarr/${hazardType}/osc/v2/${hazardIndicator}_${cmip6Model}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap_name=viridis&maxzoom10=`
+      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard-test-titiler-xarray/hazard.zarr/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap_name=ylorrd&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARD_DATA, {
@@ -95,15 +95,22 @@ export const Hazards = () => {
 
       const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARD_DATA)
       if (!hazardLayer) {
-        mapRef.current.addLayer({
-          id: MapSourceIds.HAZARD_DATA,
-          type: 'raster',
-          source: MapSourceIds.HAZARD_DATA,
-        })
+        mapRef.current.addLayer(
+          {
+            id: MapSourceIds.HAZARD_DATA,
+            type: 'raster',
+            source: MapSourceIds.HAZARD_DATA,
+            paint: {
+              'raster-opacity': 0.5,
+            },
+          },
+          firstLabelsLayerId,
+        )
       }
     },
     [
-      cmip6Model,
+      climateModel,
+      firstLabelsLayerId,
       hazardIndicator,
       isMapLoaded,
       mapRef,
@@ -151,11 +158,11 @@ export const Hazards = () => {
           </InputLabelContainer>
 
           <InputLabelContainer>
-            <label htmlFor="cmip6Model">CMIP6 Model</label>
-            <Select.Root value={cmip6Model} onValueChange={setCmip6Model}>
+            <label htmlFor="climateModel">Climate Model</label>
+            <Select.Root value={climateModel} onValueChange={setClimateModel}>
               <Select.Trigger placeholder="Select" />
-              <Select.Content id="cmip6Model">
-                {cmip6ModelOptions.map(({ value, label }) => (
+              <Select.Content id="climateModel">
+                {climateModelOptions.map(({ value, label }) => (
                   <Select.Item key={value} value={value}>
                     {label}
                   </Select.Item>

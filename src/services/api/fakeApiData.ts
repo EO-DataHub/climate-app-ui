@@ -21,7 +21,7 @@ export const indicatorOptions = [
   },
 ]
 
-export const cmip6ModelOptions = [
+export const climateModelOptions = [
   { value: 'ACCESS-CM2', label: 'ACCESS-CM2' },
   { value: 'NorESM2-MM', label: 'NorESM2-MM' },
 ]

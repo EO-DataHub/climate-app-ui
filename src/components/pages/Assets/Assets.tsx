@@ -12,9 +12,7 @@ export const Assets = () => {
 
   const sidebarContent = (
     <>
-      <Text>
-        Choose an existing portfolio or upload a new file for analysis
-      </Text>
+      <Text>Choose an existing portfolio or open a new file for analysis</Text>
 
       <div className={containerStyles.flexRowStartCenter}>
         <AssetsSelect />

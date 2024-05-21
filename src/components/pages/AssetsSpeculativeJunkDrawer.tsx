@@ -239,13 +239,13 @@ export const AssetsSpeculativeJunkDrawer = () => {
       <Text>Internal &apos;technically works&apos; demo (not a UX demo)</Text>
       <input
         type="file"
-        id="upload-assets"
+        id="open-assets"
         hidden
         ref={uploadRef}
         accept=".csv, .geojson"
       />
       <Button onClick={() => uploadRef.current?.click()}>
-        Upload GeoJSON or CSV Assets (proof of concept)
+        Open GeoJSON or CSV Assets (proof of concept)
       </Button>
       <div className={containerStyles.flexRowStartCenter}>
         <label htmlFor="hazard-type">Hazard Type</label>

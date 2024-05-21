@@ -114,12 +114,12 @@ export const UploadButtonAndDialog = ({
     <Dialog.Root open={isDialogOpen} onOpenChange={handleDialogOpenChange}>
       <Dialog.Trigger>
         <Link asChild>
-          <button>+ Upload File</button>
+          <button>+ Open File</button>
         </Link>
       </Dialog.Trigger>
 
       <Dialog.Content className={uploadButtonAndDialogStyles.dialogContent}>
-        <Dialog.Title>Upload File</Dialog.Title>
+        <Dialog.Title>Open File</Dialog.Title>
         <Dialog.Description size="2">
           Select a file for analysis
         </Dialog.Description>
@@ -133,7 +133,7 @@ export const UploadButtonAndDialog = ({
           {isFileLoading ? (
             <>
               <Spinner size="3" />
-              <Text weight="bold">Upload in progress</Text>
+              <Text weight="bold">File opening in progress</Text>
               {chosenFileInfo}
             </>
           ) : null}
@@ -147,12 +147,12 @@ export const UploadButtonAndDialog = ({
             </Text>
           ) : null}
           {parsedAssets && !isFileLoading ? (
-            <Text weight="bold">Upload Complete</Text>
+            <Text weight="bold">File opened</Text>
           ) : null}
           {assetsFileFinePrint}
           {fileRejections.length > 0 ? (
             <Text className={uploadButtonAndDialogStyles.fileRejectedError}>
-              Unsupported file type. Please upload a .csv or .geojson file.
+              Unsupported file type. Please choose a .csv or .geojson file.
             </Text>
           ) : null}
           {isFileParseError ? (

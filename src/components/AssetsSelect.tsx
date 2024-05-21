@@ -16,7 +16,7 @@ export const AssetsSelect = ({
       <Select.Trigger placeholder="Select Portfolio" />
       <Select.Content position="popper">
         <Select.Group>
-          <Select.Label>Saved Portfolios</Select.Label>
+          <Select.Label>My Portfolios</Select.Label>
           <Select.Item value="#" disabled>
             Portfolio 1
           </Select.Item>

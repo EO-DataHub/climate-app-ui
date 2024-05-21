@@ -150,21 +150,20 @@ export const Hazards = () => {
             </Select.Root>
           </InputLabelContainer>
 
-          <InputLabelContainer>
-            <label htmlFor="climateModel">Climate Model</label>
-            <Select.Root value={climateModel} onValueChange={setClimateModel}>
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="climateModel">
-                {climateModelOptions.map(({ value, label }) => (
-                  <Select.Item key={value} value={value}>
-                    {label}
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Root>
-          </InputLabelContainer>
-
           <div className={hazardsStyles.scenarioYearRow}>
+            <InputLabelContainer>
+              <label htmlFor="climateModel">Climate Model</label>
+              <Select.Root value={climateModel} onValueChange={setClimateModel}>
+                <Select.Trigger placeholder="Select" />
+                <Select.Content id="climateModel">
+                  {climateModelOptions.map(({ value, label }) => (
+                    <Select.Item key={value} value={value}>
+                      {label}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            </InputLabelContainer>
             <InputLabelContainer>
               <label htmlFor="scenario">Scenario</label>
               <Select.Root value={scenario} onValueChange={setScenario}>
@@ -240,7 +239,7 @@ export const Hazards = () => {
       sidebarContent={sidebarContent}
       title="Hazards"
       subtitle="Explore hazard scenarios or analyze assets."
-      sidebarWidth="421px"
+      sidebarWidth="542px"
       legend={legend}
     />
   )

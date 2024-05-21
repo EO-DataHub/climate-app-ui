@@ -1,4 +1,7 @@
+@use '../../library/genericStyles/containers';
+
 .assetsPopupContent {
+  @include containers.flexColumnSpaceBetweenStart;
   min-width: 300px;
   gap: var(--space-4);
 

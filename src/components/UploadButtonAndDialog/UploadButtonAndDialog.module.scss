@@ -1,3 +1,5 @@
+@use '../../library/genericStyles/containers';
+
 .dropzone {
   flex: 1;
   display: flex;
@@ -17,6 +19,7 @@
   border-color: var(--accent-5);
 }
 .fileDescription {
+  @include containers.flexRowStartStart;
   width: 100%;
   & td {
     vertical-align: top;

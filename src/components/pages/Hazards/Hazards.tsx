@@ -18,7 +18,6 @@ import { useMap } from '../../Map/useMap'
 import { useNavigate } from 'react-router-dom'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
-import containerStyles from '../../../library/genericStyles/containers.module.css'
 import hazardsStyles from './Hazards.module.scss'
 
 enum MapSourceIds {
@@ -121,15 +120,9 @@ export const Hazards = () => {
   )
 
   const sidebarContent = (
-    <div
-      className={`${containerStyles.flexColumnSpaceBetweenStart} ${hazardsStyles.sidebarContent}`}
-    >
-      <div
-        className={`${containerStyles.flexColumnStartStart} ${hazardsStyles.sidepanelMidSection}`}
-      >
-        <form
-          className={`${containerStyles.flexColumnStartStart} ${hazardsStyles.hazardTilesForm}`}
-        >
+    <div className={hazardsStyles.sidebarContent}>
+      <div className={hazardsStyles.sidepanelMidSection}>
+        <form className={hazardsStyles.hazardTilesForm}>
           <InputLabelContainer>
             <label htmlFor="hazard-type">Hazard Type</label>
             <Select.Root value={hazardType}>
@@ -171,9 +164,7 @@ export const Hazards = () => {
             </Select.Root>
           </InputLabelContainer>
 
-          <div
-            className={`${containerStyles.flexRowSpaceBetweenCenter} ${hazardsStyles.scenarioYearRow}`}
-          >
+          <div className={hazardsStyles.scenarioYearRow}>
             <InputLabelContainer>
               <label htmlFor="scenario">Scenario</label>
               <Select.Root value={scenario} onValueChange={setScenario}>

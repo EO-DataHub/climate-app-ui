@@ -1,4 +1,7 @@
+@use '../../library/genericStyles/containers';
+
 .container {
+  @include containers.flexColumnStartStart;
   width: 100%;
   gap: var(--space-1);
 

@@ -1,0 +1,30 @@
+@use './containers';
+
+.flexRowSpaceBetweenCenter {
+  @include containers.flexRowSpaceBetweenCenter;
+}
+.flexRowStartCenter {
+  @include containers.flexRowStartCenter;
+}
+.flexRowStartStart {
+  @include containers.flexRowStartStart;
+}
+.flexColumnSpaceBetweenCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-5);
+}
+.flexColumnSpaceBetweenStart {
+  @include containers.flexColumnSpaceBetweenStart;
+}
+.flexColumnStartCenter {
+  @include containers.flexColumnStartCenter;
+}
+.flexColumnStartStart {
+  @include containers.flexColumnStartStart;
+}
+.flexColumnEndCenter {
+  @include containers.flexColumnEndCenter;
+}

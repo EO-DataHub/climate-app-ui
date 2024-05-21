@@ -4,7 +4,7 @@ import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
 import { useMap } from '../../Map/useMap'
-import containerStyles from '../../../library/genericStyles/containers.module.css'
+import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import { AssetsSelect } from '../../AssetsSelect'
 
 export const Assets = () => {

@@ -8,19 +8,15 @@ import ObservationsIcon from '@material-design-icons/svg/filled/view_timeline.sv
 import PortfolioIcon from '@material-design-icons/svg/filled/folder.svg?react'
 
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
-import actionBarStyles from './ActionsBar.module.css'
-import containerStyles from '../../library/genericStyles/containers.module.css'
+import actionBarStyles from './ActionsBar.module.scss'
+import containerStyles from '../../library/genericStyles/containers.module.scss'
 import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 
 export const ActionsBar = () => {
   return (
-    <div
-      className={`${actionBarStyles.actionsWrapper} ${containerStyles.flexColumnSpaceBetweenCenter}`}
-    >
+    <div className={actionBarStyles.actionsWrapper}>
       <SparkgeoLogo className={actionBarStyles.logo} />
-      <nav
-        className={`${containerStyles.flexColumnStartCenter} ${actionBarStyles.nav1}`}
-      >
+      <nav className={actionBarStyles.nav1}>
         <TooltipForNav content="Hazards">
           <NavLink to="/hazards">
             <HazardsIcon />

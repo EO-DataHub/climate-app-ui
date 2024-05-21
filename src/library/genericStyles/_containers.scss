@@ -5,3 +5,52 @@
   align-items: flex-start;
   gap: var(--space-5);
 }
+
+@mixin flexRowSpaceBetweenCenter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+@mixin flexRowStartCenter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+@mixin flexRowStartStart {
+  display: flex;
+  align-items: start;
+  gap: var(--space-5);
+}
+
+@mixin flexColumnSpaceBetweenCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+@mixin flexColumnStartCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: var(--space-5);
+}
+@mixin flexColumnStartStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+  gap: var(--space-5);
+}
+@mixin flexColumnEndCenter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-5);
+}

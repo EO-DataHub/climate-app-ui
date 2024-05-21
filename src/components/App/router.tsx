@@ -5,6 +5,7 @@ import { NotFound } from '../pages/404'
 import { Assets } from '../pages/Assets/Assets'
 import { Hazards } from '../pages/Hazards/Hazards'
 import { AssetsAnalyse } from '../pages/AssetsAnalyse/AssetsAnalyse'
+import { Observations } from '../pages/Observations/Observations'
 
 export const router = createBrowserRouter(
   [
@@ -30,6 +31,10 @@ export const router = createBrowserRouter(
         {
           path: '/analyse-assets',
           element: <AssetsAnalyse />,
+        },
+        {
+          path: '/observations',
+          element: <Observations />,
         },
         { path: '*', element: <NotFound /> },
       ],

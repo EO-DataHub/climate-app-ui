@@ -6,17 +6,15 @@ import {
   scenarioOptions,
   yearOptions,
 } from '../../../library/api/fakeApiData'
-import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../../../constants'
 import { AssetsSelect } from '../../AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { RasterTileSource } from 'maplibre-gl'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useMap } from '../../Map/useMap'
 import { useNavigate } from 'react-router-dom'
-import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 import hazardsStyles from './Hazards.module.scss'
 
@@ -33,29 +31,13 @@ export const Hazards = () => {
   const [year, setYear] = useState(yearOptions[0])
   const { mapContainer, mapRef, isMapLoaded, firstLabelsLayerId } = useMap()
   const { setIsLoading } = useContext(LoadingContext)
-  const { updateUserAssetsInMap, removeUserAssetsFromMap } =
-    useUpdateUserAssetsInMap({ mapRef })
-  const { userAssets } = useContext(UserAssetsContext)
+  const { updateSelectedAssetsOnMap } = useUpdateUserAssetsInMap({ mapRef })
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
 
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
-
-  const updateAssetsOnMap = useCallback(
-    (portfolioName: string) => {
-      if (!portfolioName) {
-        removeUserAssetsFromMap()
-        return
-      }
-
-      if (userAssets && portfolioName == ASSET_SELSECT_UNSAVED_ASSETS_VALUE) {
-        updateUserAssetsInMap(userAssets)
-      }
-    },
-    [removeUserAssetsFromMap, updateUserAssetsInMap, userAssets],
-  )
 
   useEffect(
     function updateHazardMapTiles() {
@@ -200,7 +182,10 @@ export const Hazards = () => {
           </Text>
           <InputLabelContainer>
             <label htmlFor="year">Portfolios</label>
-            <AssetsSelect showUnsaved onValueChange={updateAssetsOnMap} />
+            <AssetsSelect
+              showUnsaved
+              onValueChange={updateSelectedAssetsOnMap}
+            />
           </InputLabelContainer>
         </div>
 

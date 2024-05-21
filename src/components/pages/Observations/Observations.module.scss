@@ -1,0 +1,34 @@
+@use '../../../library/genericStyles/containers';
+
+.sidebarContent {
+  @include containers.flexColumnSpaceBetweenStart;
+  height: 100%;
+  overflow-y: hidden;
+}
+.sidepanelMidSection {
+  @include containers.flexColumnStartStart;
+  overflow-y: hidden;
+  width: 100%;
+}
+.selectAssetsButton {
+  width: 100%;
+}
+.observationsForm {
+  @include containers.flexColumnStartStart;
+  width: 100%;
+  box-sizing: border-box;
+}
+.portfolioSelectWrapper {
+  @include containers.flexColumnSpaceBetweenStart;
+  gap: var(--space-3);
+  width: 100%;
+}
+.multiInputRow {
+  @include containers.flexRowSpaceBetweenCenter;
+  width: 100%;
+}
+.greyBox {
+  background-color: #d9d9d9;
+  width: 100%;
+  height: 250px;
+}

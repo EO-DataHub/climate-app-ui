@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
           element: <AssetsSpeculativeJunkDrawer />,
         },
         {
-          path: '/analyse-assets',
+          path: '/analytics',
           element: <AssetsAnalyse />,
         },
         {

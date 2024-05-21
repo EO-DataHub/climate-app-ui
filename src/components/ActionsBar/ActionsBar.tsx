@@ -6,6 +6,7 @@ import InformationIcon from '@material-design-icons/svg/filled/info.svg?react'
 import NotificationsIcon from '@material-design-icons/svg/filled/notifications.svg?react'
 import ObservationsIcon from '@material-design-icons/svg/filled/view_timeline.svg?react'
 import PortfolioIcon from '@material-design-icons/svg/filled/folder.svg?react'
+import AnalyticsIcon from '@material-design-icons/svg/filled/leaderboard.svg?react'
 
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.scss'
@@ -30,6 +31,11 @@ export const ActionsBar = () => {
         <TooltipForNav content="Observations">
           <NavLink to="/observations">
             <ObservationsIcon />
+          </NavLink>
+        </TooltipForNav>
+        <TooltipForNav content="Analytics">
+          <NavLink to="/analytics">
+            <AnalyticsIcon />
           </NavLink>
         </TooltipForNav>
 

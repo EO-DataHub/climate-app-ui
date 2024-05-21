@@ -26,7 +26,7 @@ export const Assets = () => {
         {userAssets ? (
           <Button
             onClick={() => {
-              navigate('/analyse-assets')
+              navigate('/analytics')
             }}
           >
             Analyse Assets

@@ -12,8 +12,7 @@ import { Badge, Button, DataList, Text } from '@radix-ui/themes'
 import { LoadingContext } from '../../context/LoadingContext'
 import { renderToString } from 'react-dom/server'
 import { UserAssets } from '../../context/UserAssetsContext'
-import assetsPopupStyles from './AssetsPopup.module.css'
-import containerStyles from '../../library/genericStyles/containers.module.css'
+import assetsPopupStyles from './AssetsPopup.module.scss'
 
 export const useUpdateUserAssetsInMap = ({
   mapRef,
@@ -95,9 +94,7 @@ export const useUpdateUserAssetsInMap = ({
       }
 
       const popupContent = (
-        <div
-          className={`${containerStyles.flexColumnSpaceBetweenStart} ${assetsPopupStyles.assetsPopupContent}`}
-        >
+        <div className={assetsPopupStyles.assetsPopupContent}>
           <Text size="2">
             Data for this asset is currently being processed or is unavailable.
           </Text>

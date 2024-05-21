@@ -1,4 +1,7 @@
+@use '../../library/genericStyles/containers';
+
 .actionsWrapper {
+  @include containers.flexColumnSpaceBetweenCenter;
   background-color: #333132;
   height: 100%;
   padding: var(--space-5) var(--space-3);
@@ -27,6 +30,7 @@
   }
 }
 .nav1 {
+  @include containers.flexColumnStartCenter;
   flex-grow: 1;
   width: 100%;
 }

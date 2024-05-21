@@ -4,8 +4,7 @@ import { useDropzone } from 'react-dropzone'
 import { Map as MaplibreMap } from 'maplibre-gl'
 
 import { UserAssetsContext } from '../../context/UserAssetsContext'
-import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.css'
-import containerStyles from '../../library/genericStyles/containers.module.css'
+import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
 import { useUpdateUserAssetsInMap } from '../../library/userAssets/useUpdateUserAssetsInMap'
 
@@ -95,9 +94,7 @@ export const UploadButtonAndDialog = ({
     : uploadButtonAndDialogStyles.dropzone
 
   const chosenFileInfo = chosenFile ? (
-    <table
-      className={`${containerStyles.flexRowStartStart} ${uploadButtonAndDialogStyles.fileDescription}`}
-    >
+    <table className={uploadButtonAndDialogStyles.fileDescription}>
       <tbody>
         <tr>
           <td>{chosenFile.name}</td>

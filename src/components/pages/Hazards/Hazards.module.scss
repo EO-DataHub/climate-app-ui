@@ -1,6 +1,7 @@
 @use '../../../library/genericStyles/containers';
 
 .sidebarContent {
+  @include containers.flexColumnSpaceBetweenStart;
   height: 100%;
   overflow-y: hidden;
 }
@@ -9,15 +10,18 @@
 }
 
 .scenarioYearRow {
+  @include containers.flexRowSpaceBetweenCenter;
   width: 100%;
 }
 .indicatorDetails {
   overflow-y: auto;
 }
 .sidepanelMidSection {
+  @include containers.flexColumnStartStart;
   overflow-y: hidden;
 }
 .hazardTilesForm {
+  @include containers.flexColumnStartStart;
   width: 100%;
   box-sizing: border-box;
 }

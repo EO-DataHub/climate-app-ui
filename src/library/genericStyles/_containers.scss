@@ -19,6 +19,13 @@
   gap: var(--space-5);
 }
 
+@mixin flexRowEndCenter {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  justify-content: flex-end;
+}
+
 @mixin flexRowStartStart {
   display: flex;
   align-items: start;

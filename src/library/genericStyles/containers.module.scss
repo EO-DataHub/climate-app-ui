@@ -9,6 +9,9 @@
 .flexRowStartStart {
   @include containers.flexRowStartStart;
 }
+.flexRowEndCenter {
+  @include containers.flexRowEndCenter;
+}
 .flexColumnSpaceBetweenCenter {
   display: flex;
   flex-direction: column;

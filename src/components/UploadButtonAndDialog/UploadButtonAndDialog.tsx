@@ -1,12 +1,12 @@
 import { Button, Dialog, Link, Spinner, Text } from '@radix-ui/themes'
+import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
+import { Map as MaplibreMap } from 'maplibre-gl'
 import { useCallback, useContext, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { Map as MaplibreMap } from 'maplibre-gl'
 
 import { UserAssetsContext } from '../../context/UserAssetsContext'
-import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
-import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
 import { useUpdateUserAssetsInMap } from '../../library/userAssets/useUpdateUserAssetsInMap'
+import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
 
 export const UploadButtonAndDialog = ({
   mapRef,

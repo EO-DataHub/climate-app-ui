@@ -1,0 +1,11 @@
+@use '../../../library/genericStyles/containers';
+
+.sidebarContent {
+  @include containers.flexColumnSpaceBetweenStart;
+  height: 100%;
+}
+
+.analyseButtonRow {
+  @include containers.flexRowEndCenter;
+  width: 100%;
+}

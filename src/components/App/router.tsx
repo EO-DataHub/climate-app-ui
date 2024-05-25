@@ -4,7 +4,7 @@ import { AppLayout } from '../Layout/AppLayout'
 import { NotFound } from '../pages/404'
 import { Assets } from '../pages/Assets/Assets'
 import { Hazards } from '../pages/Hazards/Hazards'
-import { AssetsAnalyse } from '../pages/AssetsAnalyse/AssetsAnalyse'
+import { AssetsAnalytics } from '../pages/AssetsAnalytics/AssetsAnalytics'
 import { Observations } from '../pages/Observations/Observations'
 
 export const router = createBrowserRouter(
@@ -30,7 +30,7 @@ export const router = createBrowserRouter(
         },
         {
           path: '/analytics',
-          element: <AssetsAnalyse />,
+          element: <AssetsAnalytics />,
         },
         {
           path: '/observations',

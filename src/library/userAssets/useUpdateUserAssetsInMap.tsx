@@ -14,6 +14,7 @@ import { renderToString } from 'react-dom/server'
 import { UserAssets, UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsPopupStyles from './AssetsPopup.module.scss'
 import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../../constants'
+import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
 
 export const useUpdateUserAssetsInMap = ({
   mapRef,
@@ -22,7 +23,6 @@ export const useUpdateUserAssetsInMap = ({
 }) => {
   const { setIsLoading } = useContext(LoadingContext)
   const { userAssets } = useContext(UserAssetsContext)
-  const cssStyles = window.getComputedStyle(document.body)
 
   const removeUserAssetsFromMap = useCallback(() => {
     if (!mapRef.current || !setIsLoading) return
@@ -42,6 +42,8 @@ export const useUpdateUserAssetsInMap = ({
   const updateUserAssetsInMap = useCallback(
     (userAssets: UserAssets) => {
       if (!mapRef.current || !userAssets || !setIsLoading) return
+
+      const cssStyles = window.getComputedStyle(document.body)
 
       setIsLoading(true)
 
@@ -87,8 +89,7 @@ export const useUpdateUserAssetsInMap = ({
       const handleMarkerClick = (event: MapLayerMouseEvent) => {
         // @ts-expect-error - maplibre-gl types are contradictory with docs
         const coordinates = event.features?.[0].geometry.coordinates.slice()
-        const assetVulnerability =
-          event.features?.[0].properties.assetVulnerability
+        const assetVulnerability = event.features?.[0].properties.vulnerability
         const assetType = event.features?.[0].properties.assetType
 
         // Ensure popup appears over correct world 'copy'
@@ -98,23 +99,19 @@ export const useUpdateUserAssetsInMap = ({
 
         const popupContent = (
           <div className={assetsPopupStyles.assetsPopupContent}>
-            <Text size="2">
-              Data for this asset is currently being processed or is
-              unavailable.
-            </Text>
+            {!assetVulnerability ? (
+              <Text size="2">
+                Data for this asset is currently being processed or is
+                unavailable.
+              </Text>
+            ) : null}
             <DataList.Root
               orientation={{ initial: 'vertical', sm: 'horizontal' }}
             >
               <DataList.Item>
                 <DataList.Label>Asset Vulnerability</DataList.Label>
                 <DataList.Value>
-                  {assetVulnerability ? (
-                    assetVulnerability
-                  ) : (
-                    <Badge variant="soft" color="gray">
-                      Data Unavailable
-                    </Badge>
-                  )}
+                  <AssetVulnerabilityBadge vulnerability={assetVulnerability} />
                 </DataList.Value>
               </DataList.Item>
               <DataList.Item>
@@ -130,7 +127,9 @@ export const useUpdateUserAssetsInMap = ({
                 </DataList.Value>
               </DataList.Item>
             </DataList.Root>
-            <Button disabled>View Detailed Analysis</Button>
+            {!assetVulnerability ? (
+              <Button disabled>View Detailed Analysis</Button>
+            ) : null}
           </div>
         )
 
@@ -159,6 +158,17 @@ export const useUpdateUserAssetsInMap = ({
       )
       const markerStrokeColor = cssStyles.getPropertyValue(
         '--marker-stroke-color',
+      )
+
+      const lowAssetRiskColor = cssStyles.getPropertyValue(
+        '--low-asset-risk-color',
+      )
+
+      const mediumAssetRiskColor = cssStyles.getPropertyValue(
+        '--medium-asset-risk-color',
+      )
+      const highAssetRiskColor = cssStyles.getPropertyValue(
+        '--high-asset-risk-color',
       )
 
       mapRef.current.fitBounds(userAssetBounds)
@@ -233,10 +243,21 @@ export const useUpdateUserAssetsInMap = ({
           source: 'userAssets',
           filter: ['!', ['has', 'point_count']],
           paint: {
-            'circle-color': unclusteredColor,
+            // 'circle-color': unclusteredColor,
             'circle-radius': 4,
             'circle-stroke-width': 1,
             'circle-stroke-color': markerStrokeColor,
+            'circle-color': [
+              'match',
+              ['get', 'vulnerability'],
+              'High',
+              highAssetRiskColor,
+              'Medium',
+              mediumAssetRiskColor,
+              'Low',
+              lowAssetRiskColor,
+              unclusteredColor,
+            ],
           },
         })
 
@@ -253,7 +274,7 @@ export const useUpdateUserAssetsInMap = ({
         )
       }
     },
-    [cssStyles, mapRef, setIsLoading],
+    [mapRef, setIsLoading],
   )
 
   const updateSelectedAssetsOnMap = useCallback(

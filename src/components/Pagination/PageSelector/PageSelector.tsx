@@ -1,4 +1,20 @@
+import { Button, ButtonProps } from '@radix-ui/themes'
 import { useEffect, useState, ReactNode, ReactElement } from 'react'
+import BackIcon from '@material-design-icons/svg/filled/chevron_left.svg?react'
+import NextIcon from '@material-design-icons/svg/filled/chevron_right.svg?react'
+
+import pageSelectorStyles from './PageSelector.module.scss'
+
+const SelectorButton = ({ className, ...restOfProps }: ButtonProps) => {
+  return (
+    <Button
+      variant="soft"
+      size="1"
+      {...restOfProps}
+      className={`${pageSelectorStyles.selectorButton} ${className}`}
+    />
+  )
+}
 
 const PageButton = ({
   pageIndex,
@@ -13,8 +29,8 @@ const PageButton = ({
   const isCurrentPage = currentPageIndex === pageIndex
 
   return (
-    <button
-      className={isCurrentPage ? 'paginationCurrentPage' : undefined}
+    <SelectorButton
+      className={isCurrentPage ? pageSelectorStyles.currentPage : undefined}
       aria-current={isCurrentPage}
       onClick={() => {
         onGoToPage(pageIndex)
@@ -22,7 +38,7 @@ const PageButton = ({
       key={`pagination-button-${pageIndex}`}
     >
       {pageLabel}
-    </button>
+    </SelectorButton>
   )
 }
 
@@ -159,13 +175,13 @@ export const PageSelector = ({
 
   return (
     <div data-testid="page-control">
-      <button onClick={onPreviousClick} disabled={previousDisabled}>
-        Back
-      </button>
+      <SelectorButton onClick={onPreviousClick} disabled={previousDisabled}>
+        <BackIcon /> Back
+      </SelectorButton>
       {pageButtons}
-      <button onClick={onNextClick} disabled={nextDisabled}>
-        Next
-      </button>
+      <SelectorButton onClick={onNextClick} disabled={nextDisabled}>
+        Next <NextIcon />
+      </SelectorButton>
     </div>
   )
 }

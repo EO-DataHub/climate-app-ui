@@ -1,9 +1,7 @@
 @use '../../../library/genericStyles/containers';
 
 .sidebarContent {
-  @include containers.flexColumnSpaceBetweenStart;
-  height: 100%;
-  overflow-y: hidden;
+  @include containers.sidebarContent;
 }
 .selectAssetsButton {
   width: 100%;

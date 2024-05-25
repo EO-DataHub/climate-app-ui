@@ -1,0 +1,12 @@
+.iconButton {
+  & svg {
+    fill: var(--button-svg-fill);
+    height: 16px;
+    width: 16px;
+  }
+}
+.iconButton:disabled {
+  & svg {
+    fill: var(--button-svg-fill-disabled);
+  }
+}

@@ -61,3 +61,8 @@
   align-items: center;
   gap: var(--space-5);
 }
+@mixin sidebarContent {
+  @include flexColumnSpaceBetweenStart;
+  height: 100%;
+  overflow-y: hidden;
+}

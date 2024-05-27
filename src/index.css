@@ -19,6 +19,7 @@ body {
   --low-asset-risk-color: #218358;
   --button-svg-fill: var(--indigo-11);
   --button-svg-fill-disabled: var(--gray-a8);
+  --white: #fff;
 }
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;

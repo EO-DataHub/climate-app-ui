@@ -22,7 +22,7 @@
 
   & :global(a.active) svg,
   a:hover svg {
-    fill: #fff;
+    fill: var(--white);
   }
   & :global(a.active),
   a:hover {
@@ -38,6 +38,6 @@
   width: 40px;
   height: 40px;
   padding: 2px;
-  fill: #fff;
+  fill: var(--white);
   margin-bottom: var(--space-6);
 }

@@ -109,127 +109,129 @@ export const AssetsAnalytics = () => {
   })
 
   const sidebarContent = (
-    <Tabs.Root
-      defaultValue="section1"
-      className={analyseAssetsStyles.sidebarContent}
-    >
-      <Tabs.List>
-        <Tabs.Trigger value="section1">Section 1</Tabs.Trigger>
-        <Tabs.Trigger value="section2">Section 2</Tabs.Trigger>
-        <Tabs.Trigger value="section3">Section 3</Tabs.Trigger>
-        <Tabs.Trigger value="section4">Section 4</Tabs.Trigger>
-      </Tabs.List>
-      <Box pt="3" className={analyseAssetsStyles.tabsContentWrapper}>
-        <Tabs.Content value="section1">
-          <div
-            className={containerStyles.flexRowSpaceBetweenCenter}
-            style={{ width: '100%', marginBottom: '48px' }}
-          >
+    <div className={containerStyles.sidebarContent}>
+      <Tabs.Root
+        defaultValue="section1"
+        className={analyseAssetsStyles.tabsRoot}
+      >
+        <Tabs.List>
+          <Tabs.Trigger value="section1">Section 1</Tabs.Trigger>
+          <Tabs.Trigger value="section2">Section 2</Tabs.Trigger>
+          <Tabs.Trigger value="section3">Section 3</Tabs.Trigger>
+          <Tabs.Trigger value="section4">Section 4</Tabs.Trigger>
+        </Tabs.List>
+        <Box pt="3">
+          <Tabs.Content value="section1">
             <div
-              className={containerStyles.flexColumnStartStart}
-              style={{ width: '100%' }}
+              className={containerStyles.flexRowSpaceBetweenCenter}
+              style={{ width: '100%', marginBottom: '48px' }}
             >
-              <Heading size="3" as="h3">
-                Chart Title
-              </Heading>
-              <div className={analyseAssetsStyles.greyBox} />
+              <div
+                className={containerStyles.flexColumnStartStart}
+                style={{ width: '100%' }}
+              >
+                <Heading size="3" as="h3">
+                  Chart Title
+                </Heading>
+                <div className={analyseAssetsStyles.greyBox} />
+              </div>
+              <div
+                className={containerStyles.flexColumnStartStart}
+                style={{ width: '100%' }}
+              >
+                <Heading size="3" as="h3">
+                  Chart Title
+                </Heading>
+                <div className={analyseAssetsStyles.greyBox} />
+              </div>
             </div>
-            <div
-              className={containerStyles.flexColumnStartStart}
-              style={{ width: '100%' }}
+            <div className={containerStyles.flexRowSpaceBetweenCenter}>
+              <TextField.Root placeholder="Search">
+                <TextField.Slot>
+                  <SearchIcon />
+                </TextField.Slot>
+              </TextField.Root>
+              <IconButtonOverride variant="soft">
+                <FilterIcon />
+              </IconButtonOverride>
+            </div>
+            <Table.Root
+              variant="surface"
+              className={analyseAssetsStyles.tableWrapper}
             >
-              <Heading size="3" as="h3">
-                Chart Title
-              </Heading>
-              <div className={analyseAssetsStyles.greyBox} />
+              <Table.Header>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <Table.Row key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <Table.ColumnHeaderCell
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        // @ts-expect-error - meta allows for any property
+                        justify={header.column.columnDef.meta?.justify}
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </Table.ColumnHeaderCell>
+                    ))}
+                  </Table.Row>
+                ))}
+              </Table.Header>
+              <Table.Body>
+                {table.getRowModel().rows.map((row) => (
+                  <Table.Row key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <Table.Cell
+                        key={cell.id}
+                        // @ts-expect-error - meta allows for any property
+                        justify={cell.column.columnDef.meta?.justify}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </Table.Cell>
+                    ))}
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
+            <div className={containerStyles.flexRowEndCenter}>
+              <PageSelector
+                currentPageIndex={table.getState().pagination.pageIndex}
+                nextDisabled={!table.getCanNextPage()}
+                onGoToPage={table.setPageIndex}
+                onNextClick={table.nextPage}
+                onPreviousClick={table.previousPage}
+                pageCount={table.getPageCount()}
+                previousDisabled={!table.getCanPreviousPage()}
+              />
             </div>
-          </div>
-          <div className={containerStyles.flexRowSpaceBetweenCenter}>
-            <TextField.Root placeholder="Search">
-              <TextField.Slot>
-                <SearchIcon />
-              </TextField.Slot>
-            </TextField.Root>
-            <IconButtonOverride variant="soft">
-              <FilterIcon />
-            </IconButtonOverride>
-          </div>
-          <Table.Root
-            variant="surface"
-            className={analyseAssetsStyles.tableWrapper}
-          >
-            <Table.Header>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <Table.Row key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <Table.ColumnHeaderCell
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      // @ts-expect-error - meta allows for any property
-                      justify={header.column.columnDef.meta?.justify}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </Table.ColumnHeaderCell>
-                  ))}
-                </Table.Row>
-              ))}
-            </Table.Header>
-            <Table.Body>
-              {table.getRowModel().rows.map((row) => (
-                <Table.Row key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <Table.Cell
-                      key={cell.id}
-                      // @ts-expect-error - meta allows for any property
-                      justify={cell.column.columnDef.meta?.justify}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </Table.Cell>
-                  ))}
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Root>
-          <div className={containerStyles.flexRowEndCenter}>
-            <PageSelector
-              currentPageIndex={table.getState().pagination.pageIndex}
-              nextDisabled={!table.getCanNextPage()}
-              onGoToPage={table.setPageIndex}
-              onNextClick={table.nextPage}
-              onPreviousClick={table.previousPage}
-              pageCount={table.getPageCount()}
-              previousDisabled={!table.getCanPreviousPage()}
-            />
-          </div>
-        </Tabs.Content>
+          </Tabs.Content>
 
-        <Tabs.Content value="section2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis pretium
-          lorem eget risus venenatis efficitur. Duis nec mi sed nibh congue
-          vestibulum ac at magna.
-        </Tabs.Content>
+          <Tabs.Content value="section2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+            pretium lorem eget risus venenatis efficitur. Duis nec mi sed nibh
+            congue vestibulum ac at magna.
+          </Tabs.Content>
 
-        <Tabs.Content value="section3">
-          Sed non nunc orci. Sed a ullamcorper metus. In tempor tincidunt urna
-          eget vestibulum. Sed malesuada sapien sapien, gravida vulputate orci
-          blandit a.
-        </Tabs.Content>
+          <Tabs.Content value="section3">
+            Sed non nunc orci. Sed a ullamcorper metus. In tempor tincidunt urna
+            eget vestibulum. Sed malesuada sapien sapien, gravida vulputate orci
+            blandit a.
+          </Tabs.Content>
 
-        <Tabs.Content value="section4">
-          Mauris est quam, malesuada sed velit vitae, laoreet egestas leo.
-          Phasellus sagittis tincidunt vestibulum. Pellentesque porta ex eget
-          viverra porttitor.
-        </Tabs.Content>
-      </Box>
-    </Tabs.Root>
+          <Tabs.Content value="section4">
+            Mauris est quam, malesuada sed velit vitae, laoreet egestas leo.
+            Phasellus sagittis tincidunt vestibulum. Pellentesque porta ex eget
+            viverra porttitor.
+          </Tabs.Content>
+        </Box>
+      </Tabs.Root>
+    </div>
   )
 
   return (

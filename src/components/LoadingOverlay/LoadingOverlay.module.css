@@ -12,5 +12,5 @@
 }
 .spinner {
   height: 60px;
-  color: #fff;
+  color: var(--white);
 }

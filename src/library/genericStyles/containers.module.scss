@@ -31,3 +31,6 @@
 .flexColumnEndCenter {
   @include containers.flexColumnEndCenter;
 }
+.sidebarContent {
+  @include containers.sidebarContent;
+}

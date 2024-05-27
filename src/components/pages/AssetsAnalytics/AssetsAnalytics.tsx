@@ -29,6 +29,7 @@ import {
 } from '../../AssetVulnerabilityBadge/AssetVulnerabilityBadge'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
+import fakeChartImagePath from '../../../localAssets/fakeBarChart.jpeg'
 
 export interface FakeAnalyticsDataForTable {
   assetType: string
@@ -131,18 +132,24 @@ export const AssetsAnalytics = () => {
                 style={{ width: '100%' }}
               >
                 <Heading size="3" as="h3">
-                  Chart Title
+                  Chart (Placeholder Only)
                 </Heading>
-                <div className={analyseAssetsStyles.greyBox} />
+                <img
+                  src={fakeChartImagePath}
+                  className={analyseAssetsStyles.fakeChart}
+                />
               </div>
               <div
                 className={containerStyles.flexColumnStartStart}
                 style={{ width: '100%' }}
               >
                 <Heading size="3" as="h3">
-                  Chart Title
+                  Chart (Placeholder Only)
                 </Heading>
-                <div className={analyseAssetsStyles.greyBox} />
+                <img
+                  src={fakeChartImagePath}
+                  className={analyseAssetsStyles.fakeChart}
+                />
               </div>
             </div>
             <div className={containerStyles.flexRowSpaceBetweenCenter}>

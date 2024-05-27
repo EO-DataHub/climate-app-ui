@@ -1,4 +1,7 @@
 import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
+import { RasterTileSource } from 'maplibre-gl'
+import { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import {
   climateModelOptions,
@@ -9,14 +12,14 @@ import {
 import { AssetsSelect } from '../../AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { LoadingContext } from '../../../context/LoadingContext'
+import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { RasterTileSource } from 'maplibre-gl'
-import { useContext, useEffect, useState } from 'react'
+import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
-import { useNavigate } from 'react-router-dom'
 import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 import hazardsStyles from './Hazards.module.scss'
+import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 
 enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
@@ -34,7 +37,21 @@ export const Hazards = () => {
   const { updateSelectedAssetsOnMap } = useUpdateUserAssetsInMap({ mapRef })
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
-
+  const { hazardMetadata, isHazardMetadataError, isHazardMetadataLoading } =
+    useHazardMetadata({
+      climateModel,
+      hazardIndicator,
+      hazardType,
+      scenario,
+      year,
+    })
+  const hazardDetail = isHazardMetadataError ? (
+    <>The data requested is currently unavailable.</>
+  ) : (
+    <IndicatorDetailsFormatter
+      indicatorDetails={hazardMetadata?.properties['osc-hazard:description']}
+    />
+  )
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
@@ -191,19 +208,9 @@ export const Hazards = () => {
 
         <div className={hazardsStyles.indicatorDetails}>
           <Heading size="4" as="h2">
-            Indicator Detail (placeholder for demo)
+            Indicator Detail
           </Heading>
-          <Text>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris
-              velit nisi, condimentum nec arcu.
-            </p>
-
-            <p>
-              Aliquam consequat, odio sed euismod bibendum, ipsum ligula sodales
-              augue, vitae hendrerit turpis justo at elit.
-            </p>
-          </Text>
+          {isHazardMetadataLoading ? <LoadingIndicator /> : hazardDetail}
         </div>
       </div>
 

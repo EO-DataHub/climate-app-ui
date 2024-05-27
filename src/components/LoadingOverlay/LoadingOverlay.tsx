@@ -1,5 +1,5 @@
+import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator'
 import loadingOverlayStyles from './LoadingOverlay.module.css'
-import { Spinner } from '@radix-ui/themes'
 
 export const LoadingOverlay = ({
   isVisible = false,
@@ -8,7 +8,7 @@ export const LoadingOverlay = ({
 }) => {
   return isVisible ? (
     <div className={loadingOverlayStyles.overlay}>
-      <Spinner className={loadingOverlayStyles.spinner} />
+      <LoadingIndicator light />
     </div>
   ) : null
 }

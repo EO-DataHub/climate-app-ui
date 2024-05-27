@@ -13,9 +13,13 @@
 }
 .indicatorDetails {
   overflow-y: auto;
+  width: 100%;
+  height: 100%;
 }
 .sidepanelMidSection {
   @include containers.flexColumnStartStart;
+  width: 100%;
+  height: 100%;
   overflow-y: hidden;
 }
 .hazardTilesForm {

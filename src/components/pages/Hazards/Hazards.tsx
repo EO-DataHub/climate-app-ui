@@ -78,7 +78,7 @@ export const Hazards = () => {
         MapSourceIds.HAZARD_DATA,
       ) as RasterTileSource
 
-      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard-test-titiler-xarray/hazard.zarr/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap_name=ylorrd&maxzoom10=`
+      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap_name=ylorrd&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARD_DATA, {

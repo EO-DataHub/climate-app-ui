@@ -1,4 +1,4 @@
-import { Navigate, createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
 import { AssetsSpeculativeJunkDrawer } from '../pages/AssetsSpeculativeJunkDrawer'
 import { AppLayout } from '../Layout/AppLayout'
 import { NotFound } from '../pages/404'
@@ -6,6 +6,7 @@ import { Assets } from '../pages/Assets/Assets'
 import { Hazards } from '../pages/Hazards/Hazards'
 import { AssetsAnalytics } from '../pages/AssetsAnalytics/AssetsAnalytics'
 import { Observations } from '../pages/Observations/Observations'
+import { About } from '../pages/About/About'
 
 export const router = createBrowserRouter(
   [
@@ -14,7 +15,7 @@ export const router = createBrowserRouter(
       children: [
         {
           path: '/',
-          element: <Navigate to="/assets" />,
+          element: <About />,
         },
         {
           path: '/assets',

@@ -7,6 +7,6 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [svgr(), react()],
-    base: `${env.VITE_BASE_PATH}/`,
+    base: `${env.VITE_BASE_PATH}`,
   }
 })

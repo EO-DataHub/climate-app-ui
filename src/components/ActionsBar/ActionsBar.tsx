@@ -16,8 +16,13 @@ import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
 export const ActionsBar = () => {
   return (
     <div className={actionBarStyles.actionsWrapper}>
-      <SparkgeoLogo className={actionBarStyles.logo} />
       <nav className={actionBarStyles.nav1}>
+        <TooltipForNav content="About">
+          <NavLink to="/" className={actionBarStyles.homeLink}>
+            <SparkgeoLogo className={actionBarStyles.logo} />
+          </NavLink>
+        </TooltipForNav>
+
         <TooltipForNav content="Hazards">
           <NavLink to="/hazards">
             <HazardsIcon />

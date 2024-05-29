@@ -20,6 +20,16 @@
     display: flex;
   }
 
+  & .homeLink {
+    & svg {
+      width: 30px;
+      height: auto;
+      fill: var(--white);
+    }
+    padding: 5px;
+    margin-bottom: var(--space-6);
+  }
+
   & :global(a.active) svg,
   a:hover svg {
     fill: var(--white);
@@ -33,11 +43,4 @@
   @include containers.flexColumnStartCenter;
   flex-grow: 1;
   width: 100%;
-}
-.logo {
-  width: 40px;
-  height: 40px;
-  padding: 2px;
-  fill: var(--white);
-  margin-bottom: var(--space-6);
 }

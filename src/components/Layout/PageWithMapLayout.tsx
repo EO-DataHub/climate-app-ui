@@ -19,7 +19,7 @@ export const PageWithMapLayout = ({
   legend?: ReactNode
 }) => {
   return (
-    <div className={pageWithMapStyles.layoutWrapper}>
+    <main className={pageWithMapStyles.layoutWrapper}>
       <div
         className={pageWithMapStyles.sidebar}
         style={{ flexBasis: sidebarWidth }}
@@ -35,6 +35,6 @@ export const PageWithMapLayout = ({
       </div>
       {map}
       {legend ? <div className={pageWithMapStyles.legend}>{legend}</div> : null}
-    </div>
+    </main>
   )
 }

@@ -30,37 +30,33 @@ import {
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import fakeChartImagePath from '../../../localAssets/fakeBarChart.jpeg'
+import {
+  UserAssetsForTable,
+  convertGeoJSONToDataForTable,
+} from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
 
-export interface FakeAnalyticsDataForTable {
-  assetType: string
-  latitude: number
-  longitude: number
-  country: string
-  vulnerability: string
-}
-
-const columnHelper = createColumnHelper<FakeAnalyticsDataForTable>()
+const columnHelper = createColumnHelper<UserAssetsForTable>()
 
 const columns = [
   columnHelper.accessor('assetType', { header: 'Asset ID' }),
   columnHelper.accessor('latitude', {
     header: 'Latitude',
     meta: { justify: 'end' },
-    cell: (cellContent: CellContext<FakeAnalyticsDataForTable, number>) => (
+    cell: (cellContent: CellContext<UserAssetsForTable, number>) => (
       <>{`${cellContent.row.original.latitude}°`}</>
     ),
   }),
   columnHelper.accessor('longitude', {
     header: 'Longitude',
     meta: { justify: 'end' },
-    cell: (cellContent: CellContext<FakeAnalyticsDataForTable, number>) => (
+    cell: (cellContent: CellContext<UserAssetsForTable, number>) => (
       <>{`${cellContent.row.original.longitude}°`}</>
     ),
   }),
   columnHelper.accessor('country', { header: 'Country' }),
   columnHelper.accessor('vulnerability', {
     header: 'Vulnerability',
-    cell: (cellContent: CellContext<FakeAnalyticsDataForTable, string>) => (
+    cell: (cellContent: CellContext<UserAssetsForTable, string>) => (
       <AssetVulnerabilityBadge
         vulnerability={
           cellContent.row.original.vulnerability as AssetVulnerability
@@ -69,18 +65,6 @@ const columns = [
     ),
   }),
 ]
-
-const convertGeoJSONToDataForTable = (
-  geoJSON: FakeAnalyticsData,
-): FakeAnalyticsDataForTable[] => {
-  return geoJSON.features.map((feature) => ({
-    latitude: feature.geometry.coordinates[1],
-    longitude: feature.geometry.coordinates[0],
-    assetType: feature.properties.assetType,
-    country: feature.properties.country,
-    vulnerability: feature.properties.vulnerability,
-  }))
-}
 
 export const AssetsAnalytics = () => {
   const [fakeAssetData] = useState(() => fakeAnalyticsData as FakeAnalyticsData)

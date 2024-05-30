@@ -1,10 +1,9 @@
 import { Button, Dialog, Link, Spinner, Text } from '@radix-ui/themes'
-import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
 import { Map as MaplibreMap } from 'maplibre-gl'
 import { useCallback, useContext, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import { UserAssetsContext } from '../../context/UserAssetsContext'
+import { UserAssets, UserAssetsContext } from '../../context/UserAssetsContext'
 import { useUpdateUserAssetsInMap } from '../../library/userAssets/useUpdateUserAssetsInMap'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
 
@@ -17,10 +16,7 @@ export const UploadButtonAndDialog = ({
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isFileLoading, setIsFileLoading] = useState(false)
   const [isFileParseError, setIsFileParseError] = useState(false)
-  const [parsedAssets, setParsedAssets] = useState<FeatureCollection<
-    Geometry,
-    GeoJsonProperties
-  > | null>(null)
+  const [parsedAssets, setParsedAssets] = useState<UserAssets | null>(null)
   const { parseAssetsIntoGeoJson, setUserAssets } =
     useContext(UserAssetsContext)
   const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({ mapRef })

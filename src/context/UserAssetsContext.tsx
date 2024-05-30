@@ -1,6 +1,6 @@
 // @ts-expect-error - no types available
 import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
-import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson'
+import { FeatureCollection, Point } from 'geojson'
 import { useEffect, useState } from 'react'
 import { ReactNode, createContext } from 'react'
 import {
@@ -10,7 +10,13 @@ import {
 } from '@turf/turf'
 import { getIsFileCsv, getIsFileGeoJson } from '../library/fileTypes'
 
-export type UserAssets = FeatureCollection<Geometry, GeoJsonProperties> | null
+interface UserAssetsProperties {
+  assetType: string
+  country?: string
+  vulnerability?: string
+}
+
+export type UserAssets = FeatureCollection<Point, UserAssetsProperties> | null
 
 export type ParseAssetsIntoGeoJson = (uploadedFile: File) => Promise<UserAssets>
 
@@ -84,7 +90,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
               if (!data || error) {
                 reject(error)
               }
-              resolve(data)
+              resolve(data as UserAssets)
             },
           )
         }

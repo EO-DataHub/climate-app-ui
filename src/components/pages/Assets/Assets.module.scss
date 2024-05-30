@@ -8,3 +8,19 @@
   @include containers.flexRowEndCenter;
   width: 100%;
 }
+
+.selectPortfolioRow {
+  @include containers.flexRowStartCenter;
+  width: 100%;
+
+  & > * {
+    flex-grow: 1;
+  }
+}
+
+.tableWrapper {
+  width: 100%;
+}
+.table {
+  margin: var(--space-2) 0;
+}

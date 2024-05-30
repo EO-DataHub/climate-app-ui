@@ -3,27 +3,31 @@ import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { Button, Table } from '@radix-ui/themes'
-import { useContext, useMemo } from 'react'
+import { Button, Table, TextField } from '@radix-ui/themes'
+import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
+import { useContext, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import FilterIcon from '@material-design-icons/svg/filled/filter_list.svg?react'
 
+import {
+  UserAssetsForTable,
+  convertGeoJSONToDataForTable,
+} from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
 import { AssetsSelect } from '../../AssetsSelect'
 import { Map } from '../../Map/Map'
+import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
 import { useMap } from '../../Map/useMap'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
-import {
-  UserAssetsForTable,
-  convertGeoJSONToDataForTable,
-} from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
-import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
+import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 
 export const Assets = () => {
   const { mapContainer, mapRef } = useMap()
@@ -33,6 +37,7 @@ export const Assets = () => {
     () => convertGeoJSONToDataForTable(userAssets),
     [userAssets],
   )
+  const [globalFilter, setGlobalFilter] = useState('')
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetsForTable>()
@@ -62,10 +67,16 @@ export const Assets = () => {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onGlobalFilterChange: setGlobalFilter,
+    // globalFilterFn: 'auto',
     initialState: {
       pagination: {
         pageSize: 4,
       },
+    },
+    state: {
+      globalFilter,
     },
   })
   const sidebarContent = (
@@ -76,6 +87,22 @@ export const Assets = () => {
       </div>
       {userAssetsForTable.length ? (
         <div className={assetStyles.tableWrapper}>
+          <div className={containerStyles.flexRowSpaceBetweenCenter}>
+            <TextField.Root
+              placeholder="Search"
+              value={globalFilter ?? ''}
+              onChange={(event) => {
+                setGlobalFilter(event.target.value)
+              }}
+            >
+              <TextField.Slot>
+                <SearchIcon />
+              </TextField.Slot>
+            </TextField.Root>
+            <IconButtonOverride variant="soft">
+              <FilterIcon />
+            </IconButtonOverride>
+          </div>
           <Table.Root variant="surface" className={assetStyles.table}>
             <Table.Header>
               {table.getHeaderGroups().map((headerGroup) => (

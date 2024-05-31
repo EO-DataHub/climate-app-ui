@@ -1,23 +1,22 @@
 import { UserAssets } from '../../context/UserAssetsContext'
 
-export interface UserAssetsForTable {
+export interface UserAssetForTable {
   assetType: string
   latitude: number
   longitude: number
   country?: string
   vulnerability?: string
+  [x: string]: unknown
 }
 
 export const convertGeoJSONToDataForTable = (
   userAssets?: UserAssets,
-): UserAssetsForTable[] => {
+): UserAssetForTable[] => {
   if (!userAssets) return []
 
   return userAssets.features.map((feature) => ({
     latitude: feature.geometry.coordinates[1],
     longitude: feature.geometry.coordinates[0],
-    assetType: feature.properties.assetType,
-    country: feature.properties.country,
-    vulnerability: feature.properties.vulnerability,
+    ...feature.properties,
   }))
 }

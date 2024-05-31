@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom'
 import FilterIcon from '@material-design-icons/svg/filled/filter_list.svg?react'
 
 import {
-  UserAssetsForTable,
+  UserAssetForTable,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
 import { AssetsSelect } from '../../AssetsSelect'
@@ -40,26 +40,43 @@ export const Assets = () => {
   const [globalFilter, setGlobalFilter] = useState('')
 
   const columns = useMemo(() => {
-    const columnHelper = createColumnHelper<UserAssetsForTable>()
+    const columnHelper = createColumnHelper<UserAssetForTable>()
+    const getUniqueColumnNames = (
+      previousValue: string[],
+      currentValue: UserAssetForTable,
+    ) => {
+      return [
+        ...new Set([...previousValue, ...Object.keys(currentValue)]),
+      ] as string[]
+    }
+    const extraColumnNames = userAssetsForTable
+      .reduce(getUniqueColumnNames, [])
+      .filter((columnName) => {
+        return !['latitude', 'longitude', 'assetType', ''].includes(columnName)
+      })
+    const extraTableColumnSpecifications = extraColumnNames.map((columnName) =>
+      columnHelper.accessor(columnName, {}),
+    )
 
     return [
       columnHelper.accessor('assetType', { header: 'Asset ID' }),
       columnHelper.accessor('latitude', {
         header: 'Latitude',
         meta: { justify: 'end' },
-        cell: (cellContent: CellContext<UserAssetsForTable, number>) => (
+        cell: (cellContent: CellContext<UserAssetForTable, number>) => (
           <>{`${cellContent.row.original.latitude}°`}</>
         ),
       }),
       columnHelper.accessor('longitude', {
         header: 'Longitude',
         meta: { justify: 'end' },
-        cell: (cellContent: CellContext<UserAssetsForTable, number>) => (
+        cell: (cellContent: CellContext<UserAssetForTable, number>) => (
           <>{`${cellContent.row.original.longitude}°`}</>
         ),
       }),
+      ...extraTableColumnSpecifications,
     ]
-  }, [])
+  }, [userAssetsForTable])
 
   const table = useReactTable({
     data: userAssetsForTable,
@@ -69,10 +86,10 @@ export const Assets = () => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
-    // globalFilterFn: 'auto',
+    globalFilterFn: 'auto',
     initialState: {
       pagination: {
-        pageSize: 4,
+        pageSize: 10,
       },
     },
     state: {
@@ -81,104 +98,108 @@ export const Assets = () => {
   })
   const sidebarContent = (
     <div className={assetStyles.sidebarContent}>
-      <div className={assetStyles.selectPortfolioRow}>
-        <AssetsSelect />
-        <UploadButtonAndDialog mapRef={mapRef} />
-      </div>
-      {userAssetsForTable.length ? (
-        <div className={assetStyles.tableWrapper}>
-          <div className={containerStyles.flexRowSpaceBetweenCenter}>
-            <TextField.Root
-              placeholder="Search"
-              value={globalFilter ?? ''}
-              onChange={(event) => {
-                setGlobalFilter(event.target.value)
-              }}
-            >
-              <TextField.Slot>
-                <SearchIcon />
-              </TextField.Slot>
-            </TextField.Root>
-            <IconButtonOverride variant="soft">
-              <FilterIcon />
-            </IconButtonOverride>
-          </div>
-          <Table.Root variant="surface" className={assetStyles.table}>
-            <Table.Header>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <Table.Row key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <Table.ColumnHeaderCell
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      // @ts-expect-error - meta allows for any property
-                      justify={header.column.columnDef.meta?.justify}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          className={
-                            header.column.getCanSort()
-                              ? 'cursor-pointer select-none'
-                              : ''
-                          }
-                          onClick={header.column.getToggleSortingHandler()}
-                          title={
-                            header.column.getCanSort()
-                              ? header.column.getNextSortingOrder() === 'asc'
-                                ? 'Sort ascending'
-                                : header.column.getNextSortingOrder() === 'desc'
-                                  ? 'Sort descending'
-                                  : 'Clear sort'
-                              : undefined
-                          }
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                          {{
-                            asc: ' 🔼',
-                            desc: ' 🔽',
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )}
-                    </Table.ColumnHeaderCell>
-                  ))}
-                </Table.Row>
-              ))}
-            </Table.Header>
-            <Table.Body>
-              {table.getRowModel().rows.map((row) => (
-                <Table.Row key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <Table.Cell
-                      key={cell.id}
-                      // @ts-expect-error - meta allows for any property
-                      justify={cell.column.columnDef.meta?.justify}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </Table.Cell>
-                  ))}
-                </Table.Row>
-              ))}
-            </Table.Body>
-          </Table.Root>
-          <div className={containerStyles.flexRowEndCenter}>
-            <PageSelector
-              currentPageIndex={table.getState().pagination.pageIndex}
-              nextDisabled={!table.getCanNextPage()}
-              onGoToPage={table.setPageIndex}
-              onNextClick={table.nextPage}
-              onPreviousClick={table.previousPage}
-              pageCount={table.getPageCount()}
-              previousDisabled={!table.getCanPreviousPage()}
-            />
-          </div>
+      <div className={assetStyles.sidebarTopSection}>
+        <div className={assetStyles.selectPortfolioRow}>
+          <AssetsSelect />
+          <UploadButtonAndDialog mapRef={mapRef} />
         </div>
-      ) : null}
+        {userAssetsForTable.length ? (
+          <div className={assetStyles.tableWrapper}>
+            <div className={containerStyles.flexRowSpaceBetweenCenter}>
+              <TextField.Root
+                placeholder="Search"
+                value={globalFilter ?? ''}
+                onChange={(event) => {
+                  setGlobalFilter(event.target.value)
+                }}
+              >
+                <TextField.Slot>
+                  <SearchIcon />
+                </TextField.Slot>
+              </TextField.Root>
+              <IconButtonOverride variant="soft">
+                <FilterIcon />
+              </IconButtonOverride>
+            </div>
+            <Table.Root variant="surface" className={assetStyles.table}>
+              <Table.Header>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <Table.Row key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <Table.ColumnHeaderCell
+                        key={header.id}
+                        colSpan={header.colSpan}
+                        // @ts-expect-error - meta allows for any property
+                        justify={header.column.columnDef.meta?.justify}
+                      >
+                        {header.isPlaceholder ? null : (
+                          <div
+                            className={
+                              header.column.getCanSort()
+                                ? 'cursor-pointer select-none'
+                                : ''
+                            }
+                            onClick={header.column.getToggleSortingHandler()}
+                            title={
+                              header.column.getCanSort()
+                                ? header.column.getNextSortingOrder() === 'asc'
+                                  ? 'Sort ascending'
+                                  : header.column.getNextSortingOrder() ===
+                                      'desc'
+                                    ? 'Sort descending'
+                                    : 'Clear sort'
+                                : undefined
+                            }
+                          >
+                            {flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                            {{
+                              asc: ' 🔼',
+                              desc: ' 🔽',
+                            }[header.column.getIsSorted() as string] ?? null}
+                          </div>
+                        )}
+                      </Table.ColumnHeaderCell>
+                    ))}
+                  </Table.Row>
+                ))}
+              </Table.Header>
+              <Table.Body>
+                {table.getRowModel().rows.map((row) => (
+                  <Table.Row key={row.id}>
+                    {row.getVisibleCells().map((cell) => (
+                      <Table.Cell
+                        key={cell.id}
+                        // @ts-expect-error - meta allows for any property
+                        justify={cell.column.columnDef.meta?.justify}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </Table.Cell>
+                    ))}
+                  </Table.Row>
+                ))}
+              </Table.Body>
+            </Table.Root>
+            <div className={containerStyles.flexRowEndCenter}>
+              <PageSelector
+                currentPageIndex={table.getState().pagination.pageIndex}
+                nextDisabled={!table.getCanNextPage()}
+                onGoToPage={table.setPageIndex}
+                onNextClick={table.nextPage}
+                onPreviousClick={table.previousPage}
+                pageCount={table.getPageCount()}
+                previousDisabled={!table.getCanPreviousPage()}
+              />
+            </div>
+          </div>
+        ) : null}
+      </div>
+
       <div className={assetStyles.analyseButtonRow}>
         {userAssets ? (
           <Button

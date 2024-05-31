@@ -31,32 +31,32 @@ import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import fakeChartImagePath from '../../../localAssets/fakeBarChart.jpeg'
 import {
-  UserAssetsForTable,
+  UserAssetForTable,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
 
-const columnHelper = createColumnHelper<UserAssetsForTable>()
+const columnHelper = createColumnHelper<UserAssetForTable>()
 
 const columns = [
   columnHelper.accessor('assetType', { header: 'Asset ID' }),
   columnHelper.accessor('latitude', {
     header: 'Latitude',
     meta: { justify: 'end' },
-    cell: (cellContent: CellContext<UserAssetsForTable, number>) => (
+    cell: (cellContent: CellContext<UserAssetForTable, number>) => (
       <>{`${cellContent.row.original.latitude}°`}</>
     ),
   }),
   columnHelper.accessor('longitude', {
     header: 'Longitude',
     meta: { justify: 'end' },
-    cell: (cellContent: CellContext<UserAssetsForTable, number>) => (
+    cell: (cellContent: CellContext<UserAssetForTable, number>) => (
       <>{`${cellContent.row.original.longitude}°`}</>
     ),
   }),
   columnHelper.accessor('country', { header: 'Country' }),
   columnHelper.accessor('vulnerability', {
     header: 'Vulnerability',
-    cell: (cellContent: CellContext<UserAssetsForTable, string>) => (
+    cell: (cellContent: CellContext<UserAssetForTable, string>) => (
       <AssetVulnerabilityBadge
         vulnerability={
           cellContent.row.original.vulnerability as AssetVulnerability

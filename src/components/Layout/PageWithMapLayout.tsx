@@ -22,7 +22,7 @@ export const PageWithMapLayout = ({
     <main className={pageWithMapStyles.layoutWrapper}>
       <div
         className={pageWithMapStyles.sidebar}
-        style={{ flexBasis: sidebarWidth }}
+        style={{ flexBasis: sidebarWidth, maxWidth: sidebarWidth }}
       >
         <div className={pageWithMapStyles.titlesContainer}>
           <Heading as="h1" size="7">

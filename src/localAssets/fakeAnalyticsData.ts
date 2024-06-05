@@ -13,149 +13,147 @@ export type FakeAnalyticsData = FeatureCollection<
 
 export const fakeAnalyticsData = {
   type: 'FeatureCollection',
+  name: 'eodh_example_data',
   features: [
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-1.357346, 52.24427347],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Low',
       },
+      geometry: { type: 'Point', coordinates: [-1.357346, 52.24427347] },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-2.02442523, 54.14552343],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'High',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-2.042681417314753, 54.106784357239846],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-3.733253, 52.32235252],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'High',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-2.986802889157208, 53.042925537681619],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [1.56325235, 52.6823523523],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Low',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [1.549439014158009, 52.639626102906796],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-5.132523523, 57.883252352],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Medium',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-5.159703842278001, 57.897892980327512],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-4.723523523, 53.023523523],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Medium',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-3.951715574096755, 51.61785070262939],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [1.023523523, 50.2223523523],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'High',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-0.089309372361854, 51.489596472440148],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.01235235, 55.18956856],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Medium',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-1.583615189578083, 54.961822995857382],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-6.01235235, 56.41976956],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Low',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-6.05510373644144, 56.381324282820444],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [1.043634, 50.224363463],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'High',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [0.295954311292617, 50.784198206399203],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.01, 55.1],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Medium',
       },
+      geometry: {
+        type: 'Point',
+        coordinates: [-3.211341728191422, 55.945147176732505],
+      },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-6.0134634, 56.4436734634],
-      },
       properties: {
         assetType: 'Building',
         country: 'United Kingdom',
         vulnerability: 'Low',
+      },
+      geometry: {
+        type: 'Point',
+        coordinates: [-5.948861889998041, 56.515872238661096],
       },
     },
   ],

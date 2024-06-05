@@ -64,14 +64,14 @@ export const Assets = () => {
         header: 'Latitude',
         meta: { justify: 'end' },
         cell: (cellContent: CellContext<UserAssetForTable, number>) => (
-          <>{`${cellContent.row.original.latitude}°`}</>
+          <>{`${cellContent.row.original.latitude.toFixed(4)}°`}</>
         ),
       }),
       columnHelper.accessor('longitude', {
         header: 'Longitude',
         meta: { justify: 'end' },
         cell: (cellContent: CellContext<UserAssetForTable, number>) => (
-          <>{`${cellContent.row.original.longitude}°`}</>
+          <>{`${cellContent.row.original.longitude.toFixed(4)}°`}</>
         ),
       }),
       ...extraTableColumnSpecifications,

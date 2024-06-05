@@ -191,6 +191,14 @@ export const Hazards = () => {
             </InputLabelContainer>
           </div>
         </form>
+
+        <div className={hazardsStyles.indicatorDetails}>
+          <Heading size="4" as="h2">
+            Indicator Detail
+          </Heading>
+          {isHazardMetadataLoading ? <LoadingIndicator /> : hazardDetail}
+        </div>
+
         <Separator size="4" />
 
         <div className={hazardsStyles.portfolioSelectWrapper}>
@@ -204,13 +212,6 @@ export const Hazards = () => {
               onValueChange={updateSelectedAssetsOnMap}
             />
           </InputLabelContainer>
-        </div>
-
-        <div className={hazardsStyles.indicatorDetails}>
-          <Heading size="4" as="h2">
-            Indicator Detail
-          </Heading>
-          {isHazardMetadataLoading ? <LoadingIndicator /> : hazardDetail}
         </div>
       </div>
 

@@ -23,6 +23,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 
+const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
+
 enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
 }
@@ -91,7 +93,7 @@ export const AssetsSpeculativeJunkDrawer = () => {
   } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      axios.get('http://54.170.128.128:8000/mock').then((res) => {
+      axios.get(`${EDOH_BASE_URL}/mock`).then((res) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return res.data
       }),

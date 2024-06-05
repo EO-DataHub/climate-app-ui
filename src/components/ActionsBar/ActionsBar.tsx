@@ -11,7 +11,7 @@ import AnalyticsIcon from '@material-design-icons/svg/filled/leaderboard.svg?rea
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.scss'
 import containerStyles from '../../library/genericStyles/containers.module.scss'
-import SparkgeoLogo from '../../localAssets/sparkgeo-logo.svg?react'
+import SparkgeoLogo from '../../../public/sparkgeo-logo.svg?react'
 
 export const ActionsBar = () => {
   return (

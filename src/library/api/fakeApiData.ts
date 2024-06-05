@@ -1,15 +1,15 @@
 export const indicatorOptions = [
   {
     value: 'days_tas_above_20c',
-    label: 'Maximum temperature will be above 20°C',
+    label: 'Days with average temperature above 20°C',
   },
   {
     value: 'days_tas_above_28c',
-    label: 'Maximum temperature will be above 28°C',
+    label: 'Days with average temperature above 28°C',
   },
   {
     value: 'days_tas_above_32c',
-    label: 'Maximum temperature will be above 32°C',
+    label: 'Days with average temperature above 32°C',
   },
   {
     value: 'mean_degree_days_v2_above_28c',

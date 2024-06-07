@@ -28,6 +28,7 @@ import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
+import { useDebouncedCallback } from 'use-debounce'
 
 export const Assets = () => {
   const { mapContainer, mapRef } = useMap()
@@ -37,7 +38,12 @@ export const Assets = () => {
     () => convertGeoJSONToDataForTable(userAssets),
     [userAssets],
   )
+  const [tableSearchValue, setTableSearchValue] = useState('')
   const [globalFilter, setGlobalFilter] = useState('')
+
+  const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
+    setGlobalFilter(value)
+  }, 500)
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetForTable>()
@@ -108,9 +114,13 @@ export const Assets = () => {
             <div className={containerStyles.flexRowSpaceBetweenCenter}>
               <TextField.Root
                 placeholder="Search"
-                value={globalFilter ?? ''}
+                value={tableSearchValue ?? ''}
                 onChange={(event) => {
-                  setGlobalFilter(event.target.value)
+                  const { value } = event.target
+                  setTableSearchValue(value)
+                  if (value.length >= 3) {
+                    debouncedSetGlobalFilter(value)
+                  }
                 }}
               >
                 <TextField.Slot>

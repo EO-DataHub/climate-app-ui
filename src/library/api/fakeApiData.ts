@@ -1,3 +1,8 @@
+export interface LegendParameters {
+  intervalRgbaColor: string[]
+  intervals: number[][]
+}
+
 export const indicatorOptions = [
   {
     value: 'days_tas_above_20c',
@@ -31,3 +36,48 @@ export const scenarioOptions = [
   { value: 'ssp585', label: 'SSP5-8.5' },
 ]
 export const yearOptions = ['2070', '2080']
+
+export const legendParameters = {
+  daysWithAverageTemperatureAbove: {
+    intervalRgbaColor: [
+      '254,229,217',
+      '252,187,161',
+      '252,146,114',
+      '251,106,74',
+      '239,59,44',
+      '203,24,29',
+      '153,0,13',
+    ],
+    intervals: [
+      [0, 50],
+      [50, 100],
+      [100, 150],
+      [150, 200],
+      [200, 250],
+      [250, 300],
+      [300, 365],
+    ],
+  },
+  meanDegreeDaysAbove: {
+    intervalRgbaColor: [
+      '255,245,240',
+      '254,224,210',
+      '252,187,161',
+      '252,146,114',
+      '251,106,74',
+      '239,59,44',
+      '203,24,29',
+      '153,0,13',
+    ],
+    intervals: [
+      [0, 50],
+      [50, 100],
+      [100, 150],
+      [150, 200],
+      [200, 250],
+      [250, 300],
+      [300, 350],
+      [350, 400],
+    ],
+  },
+}

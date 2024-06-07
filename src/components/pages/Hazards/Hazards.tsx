@@ -1,16 +1,18 @@
 import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
   climateModelOptions,
   indicatorOptions,
+  legendParameters,
   scenarioOptions,
   yearOptions,
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
+import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
@@ -29,6 +31,10 @@ export const Hazards = () => {
   const [hazardIndicator, setHazardIndicator] = useState(
     indicatorOptions[0].value,
   )
+  const hazardIndicatorLabel = indicatorOptions.find(
+    (option) => option.value === hazardIndicator,
+  )?.label
+
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
@@ -52,20 +58,35 @@ export const Hazards = () => {
       indicatorDetails={hazardMetadata?.properties['osc-hazard:description']}
     />
   )
+  const hazardOpacity = useMemo(
+    () =>
+      Number(
+        window
+          .getComputedStyle(document.body)
+          .getPropertyValue('--hazard-raster-opacity'),
+      ),
+    [],
+  )
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
 
+  // this is not scalable, but a temporary solution for the demo
+  const legendParametersToUse = hazardIndicator.includes('days_tas_above')
+    ? legendParameters.daysWithAverageTemperatureAbove
+    : legendParameters.meanDegreeDaysAbove
+
   useEffect(
     function updateHazardMapTiles() {
       if (
-        !mapRef.current ||
-        !setIsLoading ||
-        !hazardIndicator ||
         !climateModel ||
+        !hazardIndicator ||
+        !isMapLoaded ||
+        !legendParametersToUse ||
+        !mapRef.current ||
         !scenario ||
-        !year ||
-        !isMapLoaded
+        !setIsLoading ||
+        !year
       ) {
         return
       }
@@ -78,7 +99,16 @@ export const Hazards = () => {
         MapSourceIds.HAZARD_DATA,
       ) as RasterTileSource
 
-      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap_name=ylorrd&maxzoom10=`
+      const titilerColormap = JSON.stringify(
+        legendParametersToUse.intervals.map((interval, index) => {
+          return [
+            interval,
+            legendParametersToUse.intervalRgbaColor[index].split(','),
+          ]
+        }),
+      )
+
+      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARD_DATA, {
@@ -99,7 +129,7 @@ export const Hazards = () => {
             type: 'raster',
             source: MapSourceIds.HAZARD_DATA,
             paint: {
-              'raster-opacity': 0.5,
+              'raster-opacity': hazardOpacity,
             },
           },
           firstLabelsLayerId,
@@ -110,7 +140,9 @@ export const Hazards = () => {
       climateModel,
       firstLabelsLayerId,
       hazardIndicator,
+      hazardOpacity,
       isMapLoaded,
+      legendParametersToUse,
       mapRef,
       scenario,
       setIsLoading,
@@ -224,7 +256,12 @@ export const Hazards = () => {
     </div>
   )
 
-  const legend = <>Legend Placeholder</>
+  const legend = (
+    <IntervalLegend
+      title={hazardIndicatorLabel}
+      legendParameters={legendParametersToUse}
+    />
+  )
 
   return (
     <PageWithMapLayout

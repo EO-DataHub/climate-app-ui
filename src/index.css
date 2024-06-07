@@ -20,6 +20,7 @@ body {
   --button-svg-fill: var(--indigo-11);
   --button-svg-fill-disabled: var(--gray-a8);
   --white: #fff;
+  --hazard-raster-opacity: 0.6;
 }
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;

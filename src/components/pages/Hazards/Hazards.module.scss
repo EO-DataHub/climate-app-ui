@@ -1,4 +1,17 @@
 @use '../../../library/genericStyles/containers';
+@use '../../../library/genericStyles/forms';
+
+.locationInfoWrapper {
+  font-size: var(--font-size-3);
+  font-weight: var(--font-weight-medium);
+  & > h3 {
+    @include forms.formLabel;
+    margin: var(--space-1) 0;
+  }
+  & > p {
+    margin: 0 0 var(--space-1) 0;
+  }
+}
 
 .sidebarContent {
   @include containers.sidebarContent;

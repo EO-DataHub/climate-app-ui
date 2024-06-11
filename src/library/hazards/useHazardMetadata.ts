@@ -3,7 +3,10 @@ import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
 export interface HazardMetadata {
-  properties: { ['osc-hazard:description']: string }
+  properties: {
+    ['osc-hazard:description']: string
+    ['osc-hazard:units']: string
+  }
 }
 
 export const useHazardMetadata = ({

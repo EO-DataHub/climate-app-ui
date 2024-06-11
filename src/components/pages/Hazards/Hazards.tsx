@@ -1,4 +1,11 @@
-import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
+import {
+  Button,
+  Heading,
+  Select,
+  Separator,
+  Spinner,
+  Text,
+} from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -19,9 +26,13 @@ import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
+import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
+import axios from 'axios'
+
+const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
 enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
@@ -31,10 +42,9 @@ export const Hazards = () => {
   const [hazardIndicator, setHazardIndicator] = useState(
     indicatorOptions[0].value,
   )
-  const hazardIndicatorLabel = indicatorOptions.find(
-    (option) => option.value === hazardIndicator,
-  )?.label
-
+  const [hazardMarkerValue, setHazardMarkerValue] = useState<
+    number | string | null
+  >(null)
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
@@ -51,8 +61,19 @@ export const Hazards = () => {
       scenario,
       year,
     })
+  const { markerCoordinates, isMarkerOnMap } =
+    useMapClickToUpdateDraggableMarker({
+      isMapLoaded,
+      mapRef,
+    })
+  const hazardUnits = hazardMetadata?.properties['osc-hazard:units']
+  const hazardIndicatorLabel = indicatorOptions.find(
+    (option) => option.value === hazardIndicator,
+  )?.label
+  const zarrPath = `s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
+
   const hazardDetail = isHazardMetadataError ? (
-    <>The data requested is currently unavailable.</>
+    <>Hazard indicator details are currently unavailable.</>
   ) : (
     <IndicatorDetailsFormatter
       indicatorDetails={hazardMetadata?.properties['osc-hazard:description']}
@@ -75,6 +96,39 @@ export const Hazards = () => {
   const legendParametersToUse = hazardIndicator.includes('days_tas_above')
     ? legendParameters.daysWithAverageTemperatureAbove
     : legendParameters.meanDegreeDaysAbove
+
+  useEffect(
+    function getHazardValueAtLocation() {
+      const queryHazardValueByCoordinates = () => {
+        if (!markerCoordinates?.lat || !markerCoordinates?.lng) return
+
+        const axiosController = new AbortController()
+
+        setHazardMarkerValue(null)
+
+        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
+        axios
+          .get(url, { signal: axiosController.signal })
+          .then((res) => {
+            setHazardMarkerValue(res.data.hazard_value)
+          })
+          .catch((error) => {
+            if (error.code !== 'ERR_CANCELED') {
+              setHazardMarkerValue('unknown')
+            }
+          })
+
+        return axiosController
+      }
+
+      const queryController = queryHazardValueByCoordinates()
+
+      return () => {
+        queryController?.abort()
+      }
+    },
+    [markerCoordinates, zarrPath],
+  )
 
   useEffect(
     function updateHazardMapTiles() {
@@ -108,7 +162,7 @@ export const Hazards = () => {
         }),
       )
 
-      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray&variable=data&rescale=0%2C200&colormap=${titilerColormap}&maxzoom10=`
+      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&rescale=0%2C200&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARD_DATA, {
@@ -147,7 +201,27 @@ export const Hazards = () => {
       scenario,
       setIsLoading,
       year,
+      zarrPath,
     ],
+  )
+
+  const hazardLocationInfo = (
+    <div className={hazardsStyles.locationInfoWrapper}>
+      <h3>Location</h3>
+      <p>
+        {markerCoordinates?.lat.toFixed(4)}°,{' '}
+        {markerCoordinates?.lng.toFixed(4)}°
+      </p>
+      <p>
+        Indicator value is{' '}
+        {hazardMarkerValue === null ? (
+          <Spinner style={{ display: 'inline-block' }} />
+        ) : (
+          Number(hazardMarkerValue).toFixed(0)
+        )}{' '}
+        {hazardUnits ?? 'unknown units'}
+      </p>
+    </div>
   )
 
   const sidebarContent = (
@@ -226,8 +300,9 @@ export const Hazards = () => {
 
         <div className={hazardsStyles.indicatorDetails}>
           <Heading size="4" as="h2">
-            Indicator Detail
+            {hazardIndicatorLabel}
           </Heading>
+          {isMarkerOnMap ? hazardLocationInfo : undefined}
           {isHazardMetadataLoading ? <LoadingIndicator /> : hazardDetail}
         </div>
 

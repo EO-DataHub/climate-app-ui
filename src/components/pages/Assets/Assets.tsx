@@ -118,9 +118,7 @@ export const Assets = () => {
                 onChange={(event) => {
                   const { value } = event.target
                   setTableSearchValue(value)
-                  if (value.length >= 3) {
-                    debouncedSetGlobalFilter(value)
-                  }
+                  debouncedSetGlobalFilter(value)
                 }}
               >
                 <TextField.Slot>

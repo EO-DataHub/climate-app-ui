@@ -1,9 +1,4 @@
-import {
-  LngLatBoundsLike,
-  MapLayerMouseEvent,
-  Map as MaplibreMap,
-  Popup,
-} from 'maplibre-gl'
+import { MapLayerMouseEvent, Map as MaplibreMap, Popup } from 'maplibre-gl'
 // @ts-expect-error  turf has an issue delaring its types
 import { bbox as turfBbox } from '@turf/turf'
 import { useCallback, useContext } from 'react'
@@ -15,6 +10,7 @@ import { UserAssets, UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsPopupStyles from './AssetsPopup.module.scss'
 import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../../constants'
 import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
+import { areBoundsValid } from '../maplibre/isGeometryValid'
 
 export const useUpdateUserAssetsInMap = ({
   mapRef,
@@ -51,7 +47,7 @@ export const useUpdateUserAssetsInMap = ({
         setIsLoading(false)
       })
 
-      const userAssetBounds = turfBbox(userAssets) as LngLatBoundsLike
+      const userAssetBounds = turfBbox(userAssets)
       const userAssetsSource = mapRef.current.getSource(
         'userAssets',
       ) as maplibregl.GeoJSONSource
@@ -171,7 +167,14 @@ export const useUpdateUserAssetsInMap = ({
         '--high-asset-risk-color',
       )
 
-      mapRef.current.fitBounds(userAssetBounds)
+      const areUserAssetBoundsValid = areBoundsValid(userAssetBounds)
+      if (areUserAssetBoundsValid) {
+        mapRef.current.fitBounds(userAssetBounds)
+      }
+      if (!areUserAssetBoundsValid) {
+        mapRef.current.setZoom(1)
+        mapRef.current.setCenter([0, 0])
+      }
 
       if (userAssetsSource) {
         userAssetsSource.setData(userAssets)

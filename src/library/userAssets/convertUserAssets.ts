@@ -20,3 +20,22 @@ export const convertGeoJSONToDataForTable = (
     ...feature.properties,
   }))
 }
+
+export const convertDataForTableToGeoJSON = (
+  tableAssets: UserAssetForTable[],
+): UserAssets => {
+  return {
+    type: 'FeatureCollection',
+    features: tableAssets.map((tableAsset) => {
+      const { latitude, longitude, ...properties } = tableAsset
+      return {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [longitude, latitude],
+        },
+        properties: properties,
+      }
+    }),
+  }
+}

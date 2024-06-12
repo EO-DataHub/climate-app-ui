@@ -33,7 +33,7 @@ import fakeChartImagePath from '../../../localAssets/fakeBarChart.jpeg'
 import {
   UserAssetForTable,
   convertGeoJSONToDataForTable,
-} from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
+} from '../../../library/userAssets/convertUserAssets'
 
 const columnHelper = createColumnHelper<UserAssetForTable>()
 

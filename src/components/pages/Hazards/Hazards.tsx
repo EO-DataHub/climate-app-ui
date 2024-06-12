@@ -103,10 +103,10 @@ export const Hazards = () => {
         if (!markerCoordinates?.lat || !markerCoordinates?.lng) return
 
         const axiosController = new AbortController()
+        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
 
         setHazardMarkerValue(null)
 
-        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
         axios
           .get(url, { signal: axiosController.signal })
           .then((res) => {

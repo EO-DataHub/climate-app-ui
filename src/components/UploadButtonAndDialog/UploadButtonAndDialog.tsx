@@ -1,17 +1,11 @@
 import { Button, Dialog, Link, Spinner, Text } from '@radix-ui/themes'
-import { Map as MaplibreMap } from 'maplibre-gl'
 import { useCallback, useContext, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { UserAssets, UserAssetsContext } from '../../context/UserAssetsContext'
-import { useUpdateUserAssetsInMap } from '../../library/userAssets/useUpdateUserAssetsInMap'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
 
-export const UploadButtonAndDialog = ({
-  mapRef,
-}: {
-  mapRef: React.MutableRefObject<MaplibreMap | undefined>
-}) => {
+export const UploadButtonAndDialog = () => {
   const [chosenUnparsedFiles, setChosenUnparsedFiles] = useState<File[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isFileLoading, setIsFileLoading] = useState(false)
@@ -19,7 +13,6 @@ export const UploadButtonAndDialog = ({
   const [parsedAssets, setParsedAssets] = useState<UserAssets | null>(null)
   const { parseAssetsIntoGeoJson, setUserAssets } =
     useContext(UserAssetsContext)
-  const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({ mapRef })
 
   const formatAssets = useCallback(
     (acceptedFiles: File[]) => {
@@ -80,7 +73,6 @@ export const UploadButtonAndDialog = ({
 
   const handleLoadAssetsClick = () => {
     setUserAssets?.(parsedAssets)
-    updateUserAssetsInMap(parsedAssets)
     setIsDialogOpen(false)
   }
 

@@ -10,14 +10,15 @@ import {
 } from '@tanstack/react-table'
 import { Button, Table, TextField } from '@radix-ui/themes'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FilterIcon from '@material-design-icons/svg/filled/filter_list.svg?react'
 
 import {
   UserAssetForTable,
+  convertDataForTableToGeoJSON,
   convertGeoJSONToDataForTable,
-} from '../../../library/userAssets/convertUserAssetsGeoJsonToTableReadyData'
+} from '../../../library/userAssets/convertUserAssets'
 import { AssetsSelect } from '../../AssetsSelect'
 import { Map } from '../../Map/Map'
 import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
@@ -29,9 +30,13 @@ import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { useDebouncedCallback } from 'use-debounce'
+import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 
 export const Assets = () => {
-  const { mapContainer, mapRef } = useMap()
+  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({
+    mapRef,
+  })
   const { userAssets } = useContext(UserAssetsContext)
   const navigate = useNavigate()
   const userAssetsForTable = useMemo(
@@ -102,12 +107,29 @@ export const Assets = () => {
       globalFilter,
     },
   })
+  const filteredRows = table.getFilteredRowModel().rows
+
+  useEffect(
+    function syncMapWithTableFilter() {
+      if (!userAssetsForTable.length || !isMapLoaded) return
+
+      const filteredRowsOriginal = filteredRows.map((row) => row.original)
+
+      updateUserAssetsInMap(convertDataForTableToGeoJSON(filteredRowsOriginal))
+    },
+    [
+      filteredRows,
+      isMapLoaded,
+      updateUserAssetsInMap,
+      userAssetsForTable.length,
+    ],
+  )
   const sidebarContent = (
     <div className={assetStyles.sidebarContent}>
       <div className={assetStyles.sidebarTopSection}>
         <div className={assetStyles.selectPortfolioRow}>
           <AssetsSelect />
-          <UploadButtonAndDialog mapRef={mapRef} />
+          <UploadButtonAndDialog />
         </div>
         {userAssetsForTable.length ? (
           <div className={assetStyles.tableWrapper}>
@@ -118,9 +140,7 @@ export const Assets = () => {
                 onChange={(event) => {
                   const { value } = event.target
                   setTableSearchValue(value)
-                  if (value.length >= 3) {
-                    debouncedSetGlobalFilter(value)
-                  }
+                  debouncedSetGlobalFilter(value)
                 }}
               >
                 <TextField.Slot>

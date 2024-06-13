@@ -10,7 +10,6 @@ import AnalyticsIcon from '@material-design-icons/svg/filled/leaderboard.svg?rea
 
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.scss'
-import containerStyles from '../../library/genericStyles/containers.module.scss'
 import SparkgeoLogo from '../../../public/sparkgeo-logo.svg?react'
 
 export const ActionsBar = () => {
@@ -28,14 +27,19 @@ export const ActionsBar = () => {
             <HazardsIcon />
           </NavLink>
         </TooltipForNav>
+        <TooltipForNav content="Observations">
+          <NavLink to="/observations">
+            <ObservationsIcon />
+          </NavLink>
+        </TooltipForNav>
         <TooltipForNav content="Assets">
           <NavLink to="/assets">
             <AssetsIcon />
           </NavLink>
         </TooltipForNav>
-        <TooltipForNav content="Observations">
-          <NavLink to="/observations">
-            <ObservationsIcon />
+        <TooltipForNav content="Portfolios">
+          <NavLink to="/portfolios">
+            <PortfolioIcon />
           </NavLink>
         </TooltipForNav>
         <TooltipForNav content="Analytics">
@@ -43,15 +47,9 @@ export const ActionsBar = () => {
             <AnalyticsIcon />
           </NavLink>
         </TooltipForNav>
-
-        <TooltipForNav content="Portfolios">
-          <NavLink to="/portfolios">
-            <PortfolioIcon />
-          </NavLink>
-        </TooltipForNav>
       </nav>
 
-      <nav className={containerStyles.flexColumnEndCenter}>
+      <nav className={actionBarStyles.nav2}>
         <TooltipForNav content="Notifications">
           <NavLink to="/notifications">
             <NotificationsIcon />

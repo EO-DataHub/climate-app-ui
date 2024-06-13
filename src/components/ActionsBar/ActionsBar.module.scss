@@ -41,6 +41,11 @@
 }
 .nav1 {
   @include containers.flexColumnStartCenter;
+  gap: var(--space-4);
   flex-grow: 1;
   width: 100%;
+}
+.nav2 {
+  @include containers.flexColumnEndCenter;
+  gap: var(--space-4);
 }

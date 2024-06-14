@@ -8,6 +8,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import {
+  Table as TanstackTable,
+  Row as TanstackRow,
+} from '@tanstack/table-core'
 import { Button, Table, TextField } from '@radix-ui/themes'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useMemo, useState } from 'react'
@@ -20,19 +24,23 @@ import {
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsSelect } from '../../AssetsSelect'
+import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
+import { IndeterminateCheckbox } from '../../IndeterminateCheckbox/IndeterminateCheckbox'
 import { Map } from '../../Map/Map'
 import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
+import { useDebouncedCallback } from 'use-debounce'
 import { useMap } from '../../Map/useMap'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
-import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
-import { useDebouncedCallback } from 'use-debounce'
-import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 
 export const Assets = () => {
+  const [globalFilter, setGlobalFilter] = useState('')
+  const [rowSelection, setRowSelection] = useState({})
+  const [tableSearchValue, setTableSearchValue] = useState('')
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({
     mapRef,
@@ -43,9 +51,6 @@ export const Assets = () => {
     () => convertGeoJSONToDataForTable(userAssets),
     [userAssets],
   )
-  const [tableSearchValue, setTableSearchValue] = useState('')
-  const [globalFilter, setGlobalFilter] = useState('')
-
   const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
     setGlobalFilter(value)
   }, 500)
@@ -70,6 +75,31 @@ export const Assets = () => {
     )
 
     return [
+      {
+        id: 'select',
+        header: ({ table }: { table: TanstackTable<UserAssetForTable> }) => {
+          const indeterminateValue = table.getIsSomeRowsSelected()
+            ? 'indeterminate'
+            : false
+          return (
+            <IndeterminateCheckbox
+              checked={table?.getIsAllRowsSelected() || indeterminateValue}
+              onCheckedChange={
+                table.toggleAllRowsSelected as (checked: boolean) => void
+              }
+            />
+          )
+        },
+
+        cell: ({ row }: { row: TanstackRow<UserAssetForTable> }) => (
+          <div className="px-1">
+            <IndeterminateCheckbox
+              checked={row?.getIsSelected()}
+              onCheckedChange={row?.getToggleSelectedHandler()}
+            />
+          </div>
+        ),
+      },
       columnHelper.accessor('assetType', { header: 'Asset ID' }),
       columnHelper.accessor('latitude', {
         header: 'Latitude',
@@ -98,6 +128,8 @@ export const Assets = () => {
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: 'auto',
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: {
         pageSize: 10,
@@ -105,7 +137,9 @@ export const Assets = () => {
     },
     state: {
       globalFilter,
+      rowSelection,
     },
+    debugTable: true,
   })
   const filteredRows = table.getFilteredRowModel().rows
 

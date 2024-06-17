@@ -49,7 +49,7 @@ export const legendParameters = {
       '153,0,13',
     ],
     intervals: [
-      [0, 50],
+      [1, 50],
       [50, 100],
       [100, 150],
       [150, 200],
@@ -70,7 +70,7 @@ export const legendParameters = {
       '153,0,13',
     ],
     intervals: [
-      [0, 50],
+      [1, 50],
       [50, 100],
       [100, 150],
       [150, 200],

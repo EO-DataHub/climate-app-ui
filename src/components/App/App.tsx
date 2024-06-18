@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import './App.module.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import authenticationService from '../../library/api/authentication'
+// import authenticationService from '../../library/api/authentication'
 import { RouterProvider } from 'react-router-dom'
 import { UserAssetsProvider } from '../../context/UserAssetsContext'
 import { router } from './router'
@@ -20,7 +20,7 @@ const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',
 }
 
-authenticationService.initialize()
+// authenticationService.initialize()
 
 // const authenticatedAxios = axiosService.getAuthenticatedAxios(
 //   authenticationService,

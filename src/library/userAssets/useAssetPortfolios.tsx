@@ -1,4 +1,4 @@
-import { MapLayerMouseEvent, Map as MaplibreMap, Popup } from 'maplibre-gl'
+import { MapLayerMouseEvent, Popup } from 'maplibre-gl'
 // @ts-expect-error  turf has an issue delaring its types
 import { bbox as turfBbox } from '@turf/turf'
 import { useCallback, useContext } from 'react'
@@ -6,16 +6,25 @@ import { useCallback, useContext } from 'react'
 import { Badge, Button, DataList, Text } from '@radix-ui/themes'
 import { LoadingContext } from '../../context/LoadingContext'
 import { renderToString } from 'react-dom/server'
-import { UserAssets, UserAssetsContext } from '../../context/UserAssetsContext'
+import { UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsPopupStyles from './AssetsPopup.module.scss'
-import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../../constants'
+import {
+  MAPLIBRE_FIT_BOUNDS_PADDING,
+  MapLayerIds,
+  MapSourceIds,
+  UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT,
+} from '../../constants'
 import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
 import { areBoundsValid } from '../maplibre/isGeometryValid'
+import { MapRef } from '../../components/Map/useMap'
+import { UserAssets } from './userAssetTypes'
 
-export const useUpdateUserAssetsInMap = ({
+export const useAssetPortfolios = ({
   mapRef,
+  isMapLoaded,
 }: {
-  mapRef: React.MutableRefObject<MaplibreMap | undefined>
+  mapRef: MapRef
+  isMapLoaded: boolean
 }) => {
   const { setIsLoading } = useContext(LoadingContext)
   const { userAssets } = useContext(UserAssetsContext)
@@ -29,15 +38,16 @@ export const useUpdateUserAssetsInMap = ({
       setIsLoading(false)
     })
 
-    mapRef.current.removeSource('userAssets')
+    mapRef.current.removeSource(MapSourceIds.USER_ASSETS)
     mapRef.current.removeLayer('userAssetsClusters')
-    mapRef.current.removeLayer('userAssetsUnclustered')
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_UNCLUSTERED)
     mapRef.current.removeLayer('clusterCount')
   }, [setIsLoading, mapRef])
 
   const updateUserAssetsInMap = useCallback(
     (userAssets: UserAssets) => {
-      if (!mapRef.current || !userAssets || !setIsLoading) return
+      if (!mapRef.current || !userAssets || !setIsLoading || !isMapLoaded)
+        return
 
       const cssStyles = window.getComputedStyle(document.body)
 
@@ -49,12 +59,12 @@ export const useUpdateUserAssetsInMap = ({
 
       const userAssetBounds = turfBbox(userAssets)
       const userAssetsSource = mapRef.current.getSource(
-        'userAssets',
+        MapSourceIds.USER_ASSETS,
       ) as maplibregl.GeoJSONSource
       const userAssetsClustersLayer =
         mapRef.current.getLayer('userAssetsClusters')
       const userAssetsUnclusteredLayer = mapRef.current.getLayer(
-        'userAssetsUnclustered',
+        MapLayerIds.USER_ASSETS_UNCLUSTERED,
       )
       const userAssetsCountLayer = mapRef.current.getLayer('clusterCount')
       const handleMarkerClusterClick = (event: MapLayerMouseEvent) => {
@@ -65,7 +75,11 @@ export const useUpdateUserAssetsInMap = ({
         const clusterId = feature.properties.cluster_id
 
         userAssetsSource ??
-          (mapRef.current!.getSource('userAssets') as maplibregl.GeoJSONSource)
+          (
+            mapRef.current!.getSource(
+              MapSourceIds.USER_ASSETS,
+            ) as maplibregl.GeoJSONSource
+          )
             .getClusterExpansionZoom(clusterId)
             .then((zoom: number) => {
               mapRef.current!.easeTo({
@@ -83,10 +97,12 @@ export const useUpdateUserAssetsInMap = ({
             })
       }
       const handleMarkerClick = (event: MapLayerMouseEvent) => {
+        if (!mapRef.current) return
         // @ts-expect-error - maplibre-gl types are contradictory with docs
         const coordinates = event.features?.[0].geometry.coordinates.slice()
         const assetVulnerability = event.features?.[0].properties.vulnerability
         const assetType = event.features?.[0].properties.assetType
+        const itemId = event.features?.[0].properties.id
 
         // Ensure popup appears over correct world 'copy'
         while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
@@ -104,6 +120,10 @@ export const useUpdateUserAssetsInMap = ({
             <DataList.Root
               orientation={{ initial: 'vertical', sm: 'horizontal' }}
             >
+              <DataList.Item>
+                <DataList.Label>Item Id</DataList.Label>
+                <DataList.Value>{itemId}</DataList.Value>
+              </DataList.Item>
               <DataList.Item>
                 <DataList.Label>Asset Vulnerability</DataList.Label>
                 <DataList.Value>
@@ -132,7 +152,7 @@ export const useUpdateUserAssetsInMap = ({
         new Popup()
           .setLngLat(coordinates)
           .setHTML(renderToString(popupContent))
-          .addTo(mapRef.current!)
+          .addTo(mapRef.current)
       }
       const handleMarkerMouseEnter = () => {
         mapRef.current!.getCanvas().style.cursor = 'pointer'
@@ -156,6 +176,10 @@ export const useUpdateUserAssetsInMap = ({
         '--marker-stroke-color',
       )
 
+      const markerStrokeColorSelected = cssStyles.getPropertyValue(
+        '--marker-stroke-color-selected',
+      )
+
       const lowAssetRiskColor = cssStyles.getPropertyValue(
         '--low-asset-risk-color',
       )
@@ -169,7 +193,9 @@ export const useUpdateUserAssetsInMap = ({
 
       const areUserAssetBoundsValid = areBoundsValid(userAssetBounds)
       if (areUserAssetBoundsValid) {
-        mapRef.current.fitBounds(userAssetBounds)
+        mapRef.current.fitBounds(userAssetBounds, {
+          padding: MAPLIBRE_FIT_BOUNDS_PADDING,
+        })
       }
       if (!areUserAssetBoundsValid) {
         mapRef.current.setZoom(1)
@@ -181,12 +207,13 @@ export const useUpdateUserAssetsInMap = ({
       }
 
       if (!userAssetsSource) {
-        mapRef.current.addSource('userAssets', {
+        mapRef.current.addSource(MapSourceIds.USER_ASSETS, {
           type: 'geojson',
           data: userAssets,
           cluster: true,
           clusterMaxZoom: 14,
           clusterRadius: 50,
+          promoteId: 'id', // necessary to use for table selection styling via setFeatureState
         })
       }
 
@@ -194,7 +221,7 @@ export const useUpdateUserAssetsInMap = ({
         mapRef.current.addLayer({
           id: 'userAssetsClusters',
           type: 'circle',
-          source: 'userAssets',
+          source: MapSourceIds.USER_ASSETS,
           paint: {
             'circle-color': [
               'step',
@@ -229,7 +256,7 @@ export const useUpdateUserAssetsInMap = ({
         mapRef.current.addLayer({
           id: 'clusterCount',
           type: 'symbol',
-          source: 'userAssets',
+          source: MapSourceIds.USER_ASSETS,
           filter: ['has', 'point_count'],
           layout: {
             'text-field': ['get', 'point_count_abbreviated'],
@@ -241,15 +268,24 @@ export const useUpdateUserAssetsInMap = ({
 
       if (!userAssetsUnclusteredLayer) {
         mapRef.current.addLayer({
-          id: 'userAssetsUnclustered',
+          id: MapLayerIds.USER_ASSETS_UNCLUSTERED,
           type: 'circle',
-          source: 'userAssets',
+          source: MapSourceIds.USER_ASSETS,
           filter: ['!', ['has', 'point_count']],
           paint: {
-            // 'circle-color': unclusteredColor,
-            'circle-radius': 4,
+            'circle-radius': [
+              'case',
+              ['==', ['feature-state', 'isSelected'], true],
+              4.5,
+              4,
+            ],
             'circle-stroke-width': 1,
-            'circle-stroke-color': markerStrokeColor,
+            'circle-stroke-color': [
+              'case',
+              ['==', ['feature-state', 'isSelected'], true],
+              markerStrokeColorSelected,
+              markerStrokeColor,
+            ],
             'circle-color': [
               'match',
               ['get', 'vulnerability'],
@@ -264,30 +300,37 @@ export const useUpdateUserAssetsInMap = ({
           },
         })
 
-        mapRef.current.on('click', 'userAssetsUnclustered', handleMarkerClick)
+        mapRef.current.on(
+          'click',
+          MapLayerIds.USER_ASSETS_UNCLUSTERED,
+          handleMarkerClick,
+        )
         mapRef.current.on(
           'mouseenter',
-          'userAssetsUnclustered',
+          MapLayerIds.USER_ASSETS_UNCLUSTERED,
           handleMarkerMouseEnter,
         )
         mapRef.current.on(
           'mouseleave',
-          'userAssetsUnclustered',
+          MapLayerIds.USER_ASSETS_UNCLUSTERED,
           handleMarkerMouseLeave,
         )
       }
     },
-    [mapRef, setIsLoading],
+    [isMapLoaded, mapRef, setIsLoading],
   )
 
-  const updateSelectedAssetsOnMap = useCallback(
+  const updateCurrentPortfolioShown = useCallback(
     (portfolioName: string) => {
       if (!portfolioName) {
         removeUserAssetsFromMap()
         return
       }
 
-      if (userAssets && portfolioName == ASSET_SELSECT_UNSAVED_ASSETS_VALUE) {
+      if (
+        userAssets &&
+        portfolioName == UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT
+      ) {
         // right now we only have one possible portfolio called userAssets that come from a file the user just opened. We'll figure out better naming later.
         updateUserAssetsInMap(userAssets)
       }
@@ -298,6 +341,6 @@ export const useUpdateUserAssetsInMap = ({
   return {
     updateUserAssetsInMap,
     removeUserAssetsFromMap,
-    updateSelectedAssetsOnMap,
+    updateCurrentPortfolioShown,
   }
 }

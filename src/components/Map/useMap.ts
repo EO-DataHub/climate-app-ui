@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import Maplibregl, { Map as MaplibreMap } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 const PROTON_MAPS_API_KEY = import.meta.env.VITE_PROTON_MAPS_API_KEY as string
+
+export type MapRef = MutableRefObject<MaplibreMap | null | undefined>
 
 export const useMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null)

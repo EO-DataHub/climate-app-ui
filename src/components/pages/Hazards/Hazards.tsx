@@ -27,16 +27,13 @@ import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
-import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import axios from 'axios'
+import { MapSourceIds } from '../../../constants'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
-
-enum MapSourceIds {
-  HAZARD_DATA = 'hazard-data',
-}
 
 export const Hazards = () => {
   const [hazardIndicator, setHazardIndicator] = useState(
@@ -50,7 +47,10 @@ export const Hazards = () => {
   const [year, setYear] = useState(yearOptions[0])
   const { mapContainer, mapRef, isMapLoaded, firstLabelsLayerId } = useMap()
   const { setIsLoading } = useContext(LoadingContext)
-  const { updateSelectedAssetsOnMap } = useUpdateUserAssetsInMap({ mapRef })
+  const { updateCurrentPortfolioShown } = useAssetPortfolios({
+    mapRef,
+    isMapLoaded,
+  })
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
   const { hazardMetadata, isHazardMetadataError, isHazardMetadataLoading } =
@@ -316,7 +316,7 @@ export const Hazards = () => {
             <label htmlFor="year">Portfolios</label>
             <AssetsSelect
               showUnsaved
-              onValueChange={updateSelectedAssetsOnMap}
+              onValueChange={updateCurrentPortfolioShown}
             />
           </InputLabelContainer>
         </div>

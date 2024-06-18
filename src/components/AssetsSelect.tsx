@@ -1,7 +1,7 @@
 import { Select } from '@radix-ui/themes'
 import { useContext } from 'react'
 import { UserAssetsContext } from '../context/UserAssetsContext'
-import { ASSET_SELSECT_UNSAVED_ASSETS_VALUE } from '../constants'
+import { UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT } from '../constants'
 
 export const AssetsSelect = ({
   onValueChange,
@@ -32,7 +32,7 @@ export const AssetsSelect = ({
           <>
             <Select.Group>
               <Select.Label>Private Portfolios (Unsaved)</Select.Label>
-              <Select.Item value={ASSET_SELSECT_UNSAVED_ASSETS_VALUE}>
+              <Select.Item value={UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT}>
                 Portfolio 1
               </Select.Item>
             </Select.Group>

@@ -6,12 +6,15 @@ import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useMap } from '../../Map/useMap'
-import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import observationsStyles from './Observations.module.scss'
 
 export const Observations = () => {
-  const { mapContainer, mapRef } = useMap()
-  const { updateSelectedAssetsOnMap } = useUpdateUserAssetsInMap({ mapRef })
+  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { updateCurrentPortfolioShown } = useAssetPortfolios({
+    mapRef,
+    isMapLoaded,
+  })
   const navigate = useNavigate()
 
   const handleSelectAssetsClick = () => {
@@ -90,7 +93,7 @@ export const Observations = () => {
             <label htmlFor="year">Portfolios</label>
             <AssetsSelect
               showUnsaved
-              onValueChange={updateSelectedAssetsOnMap}
+              onValueChange={updateCurrentPortfolioShown}
             />
           </InputLabelContainer>
         </div>

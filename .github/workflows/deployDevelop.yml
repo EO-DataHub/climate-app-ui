@@ -2,7 +2,8 @@ name: Deploy demo branch build
 
 on:
   push:
-    branches: ['develop', 'demo']
+    branches:
+      ['develop', 'demo', '178-github-actiion-for-different-deployments']
 
 permissions:
   contents: read
@@ -78,7 +79,7 @@ jobs:
       output_build_s3: ${{needs.build.outputs.output_build_s3}}
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/178-github-actiion-for-different-deployments'
     steps:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -96,7 +97,11 @@ jobs:
 
       - name: CDK Deploy
         if: github.event_name == 'push' && contains(github.event.head_commit.modified, 'iac/')
-        run: cd iac && cdk deploy --require-approval never
+        run: cd iac && cdk deploy --require-approval never     
 
-      - name: Copy website to S3
-        run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME }}
+      - name: Download artifacts and copy website to S3
+        uses: actions/download-artifact@v4
+        with:
+          path: ./dist
+          name: s3_build      
+      - run: aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME }}

@@ -21,8 +21,7 @@ import {
 } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
 import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
-import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
-import { UserAssets } from '../../../context/UserAssetsContext'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import {
   AssetVulnerability,
   AssetVulnerabilityBadge,
@@ -34,6 +33,7 @@ import {
   UserAssetForTable,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssets'
+import { UserAssets } from '../../../library/userAssets/userAssetTypes'
 
 const columnHelper = createColumnHelper<UserAssetForTable>()
 
@@ -72,7 +72,7 @@ export const AssetsAnalytics = () => {
     convertGeoJSONToDataForTable(fakeAssetData),
   )
   const { mapContainer, mapRef, isMapLoaded } = useMap()
-  const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({ mapRef })
+  const { updateUserAssetsInMap } = useAssetPortfolios({ mapRef, isMapLoaded })
   const legend = <>Legend Placeholder</>
 
   useEffect(() => {

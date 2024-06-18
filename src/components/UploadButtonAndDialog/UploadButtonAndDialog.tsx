@@ -1,44 +1,44 @@
 import { Button, Dialog, Link, Spinner, Text } from '@radix-ui/themes'
-import { useCallback, useContext, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
-import { UserAssets, UserAssetsContext } from '../../context/UserAssetsContext'
+import { parseUploadedAssetsIntoGeoJson } from '../../library/userAssets/parseUploadedAssetsIntoGeoJson'
+import { UserAssets } from '../../library/userAssets/userAssetTypes'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
 
-export const UploadButtonAndDialog = () => {
+export const UploadButtonAndDialog = ({
+  onLoadAssets,
+}: {
+  onLoadAssets: (parsedAssets: UserAssets) => void
+}) => {
   const [chosenUnparsedFiles, setChosenUnparsedFiles] = useState<File[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [isFileLoading, setIsFileLoading] = useState(false)
   const [isFileParseError, setIsFileParseError] = useState(false)
   const [parsedAssets, setParsedAssets] = useState<UserAssets | null>(null)
-  const { parseAssetsIntoGeoJson, setUserAssets } =
-    useContext(UserAssetsContext)
 
-  const formatAssets = useCallback(
-    (acceptedFiles: File[]) => {
-      if (acceptedFiles.length < 0) return
+  const formatAssets = useCallback((acceptedFiles: File[]) => {
+    if (acceptedFiles.length < 0) return
 
-      setIsFileParseError(false)
-      setIsFileLoading(true)
+    setIsFileParseError(false)
+    setIsFileLoading(true)
 
-      parseAssetsIntoGeoJson?.(acceptedFiles?.[0])
-        .then((response) => {
-          setIsFileLoading(false)
+    parseUploadedAssetsIntoGeoJson?.(acceptedFiles?.[0])
+      .then((response) => {
+        setIsFileLoading(false)
 
-          if (!response?.features.length) {
-            setIsFileParseError(true)
-          }
-          if (response?.features.length) {
-            setParsedAssets(response)
-          }
-        })
-        .catch(() => {
+        if (!response?.features.length) {
           setIsFileParseError(true)
-          setIsFileLoading(false)
-        })
-    },
-    [parseAssetsIntoGeoJson],
-  )
+        }
+        if (response?.features.length) {
+          setParsedAssets(response)
+        }
+      })
+      .catch(() => {
+        setIsFileParseError(true)
+        setIsFileLoading(false)
+      })
+  }, [])
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -72,8 +72,8 @@ export const UploadButtonAndDialog = () => {
   }
 
   const handleLoadAssetsClick = () => {
-    setUserAssets?.(parsedAssets)
     setIsDialogOpen(false)
+    onLoadAssets(parsedAssets)
   }
 
   const chosenFile = chosenUnparsedFiles?.[0]

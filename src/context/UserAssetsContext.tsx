@@ -1,6 +1,4 @@
-// @ts-expect-error - no types available
-import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
-import { FeatureCollection, Point } from 'geojson'
+import { FeatureCollection } from 'geojson'
 import { useEffect, useState } from 'react'
 import { ReactNode, createContext } from 'react'
 import {
@@ -8,21 +6,10 @@ import {
   featureCollection as getFeatureCollection,
   // @ts-expect-error - no types available
 } from '@turf/turf'
-import { getIsFileCsv, getIsFileGeoJson } from '../library/fileTypes'
-
-interface UserAssetsProperties {
-  assetType: string
-  country?: string
-  vulnerability?: string
-}
-
-export type UserAssets = FeatureCollection<Point, UserAssetsProperties> | null
-
-export type ParseAssetsIntoGeoJson = (uploadedFile: File) => Promise<UserAssets>
+import { UserAssets } from '../library/userAssets/userAssetTypes'
 
 interface UserAssetsContextValue {
   userAssets?: UserAssets
-  parseAssetsIntoGeoJson?: ParseAssetsIntoGeoJson
   setUserAssets?: React.Dispatch<React.SetStateAction<UserAssets>>
 }
 
@@ -47,61 +34,6 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
     return getFeatureCollection(stacFeatures) as FeatureCollection
   }
 
-  const parseAssetsIntoGeoJson = (uploadedFile: File) => {
-    return new Promise<UserAssets>((resolve, reject) => {
-      const isCsv = getIsFileCsv(uploadedFile)
-      const isGeoJson = getIsFileGeoJson(uploadedFile)
-
-      const fileReader = new FileReader()
-
-      fileReader.onload = function () {
-        const fileContents = fileReader.result as string
-        if (typeof fileContents !== 'string' || !fileContents) {
-          reject('Error reading file contents')
-        }
-
-        if (isGeoJson) {
-          try {
-            const newUserAssets = JSON.parse(fileContents)
-            resolve(newUserAssets)
-          } catch (error) {
-            reject(error)
-          }
-        }
-        if (isCsv) {
-          const headers = fileContents
-            ?.slice(0, fileContents?.indexOf('\n'))
-            .split(',')
-
-          if (!headers.includes('latitude') || !headers.includes('longitude')) {
-            reject(
-              "CSV file must contain 'latitude' and 'longitude' columns with coordinate information",
-            )
-          }
-
-          getGeojsonFromCsv(
-            fileContents,
-            {
-              latfield: 'latitude',
-              lonfield: 'longitude',
-              delimiter: ',',
-            },
-            function (error: Error | null, data: FeatureCollection | null) {
-              if (!data || error) {
-                reject(error)
-              }
-              resolve(data as UserAssets)
-            },
-          )
-        }
-
-        reject('Unsupported file type')
-      }
-
-      fileReader.readAsText(uploadedFile)
-    })
-  }
-
   useEffect(
     function doSomethingWithNewUserAssets() {
       if (!userAssets) return
@@ -115,9 +47,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   )
 
   return (
-    <UserAssetsContext.Provider
-      value={{ userAssets, parseAssetsIntoGeoJson, setUserAssets }}
-    >
+    <UserAssetsContext.Provider value={{ userAssets, setUserAssets }}>
       {children}
     </UserAssetsContext.Provider>
   )

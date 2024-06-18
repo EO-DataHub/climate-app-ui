@@ -1,6 +1,7 @@
-import { UserAssets } from '../../context/UserAssetsContext'
+import { UserAssets } from './userAssetTypes'
 
 export interface UserAssetForTable {
+  id: string | number
   assetType: string
   latitude: number
   longitude: number
@@ -34,7 +35,7 @@ export const convertDataForTableToGeoJSON = (
           type: 'Point',
           coordinates: [longitude, latitude],
         },
-        properties: properties,
+        properties,
       }
     }),
   }

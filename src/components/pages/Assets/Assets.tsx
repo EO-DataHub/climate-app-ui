@@ -8,47 +8,59 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
+import {
+  Table as TanstackTable,
+  Row as TanstackRow,
+} from '@tanstack/table-core'
 import { Button, Table, TextField } from '@radix-ui/themes'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FilterIcon from '@material-design-icons/svg/filled/filter_list.svg?react'
 
 import {
   UserAssetForTable,
-  convertDataForTableToGeoJSON,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsSelect } from '../../AssetsSelect'
+import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
+import { IndeterminateCheckbox } from '../../IndeterminateCheckbox/IndeterminateCheckbox'
 import { Map } from '../../Map/Map'
 import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
+import { useDebouncedCallback } from 'use-debounce'
 import { useMap } from '../../Map/useMap'
+import { UserAssets } from '../../../library/userAssets/userAssetTypes'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { useSyncAssetsTableFilterWithMapAssets } from '../../../library/userAssets/useSyncAssetsTableFilterWithMapAssets'
+import { useSyncAssetsTableSelectionWithMapAssets } from '../../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
-import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
-import { useDebouncedCallback } from 'use-debounce'
-import { useUpdateUserAssetsInMap } from '../../../library/userAssets/useUpdateUserAssetsInMap'
 
 export const Assets = () => {
+  const [globalFilter, setGlobalFilter] = useState('')
+  const [tableSearchValue, setTableSearchValue] = useState('')
   const { mapContainer, mapRef, isMapLoaded } = useMap()
-  const { updateUserAssetsInMap } = useUpdateUserAssetsInMap({
-    mapRef,
-  })
-  const { userAssets } = useContext(UserAssetsContext)
+  const { userAssets, setUserAssets } = useContext(UserAssetsContext)
   const navigate = useNavigate()
   const userAssetsForTable = useMemo(
     () => convertGeoJSONToDataForTable(userAssets),
     [userAssets],
   )
-  const [tableSearchValue, setTableSearchValue] = useState('')
-  const [globalFilter, setGlobalFilter] = useState('')
-
   const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
     setGlobalFilter(value)
   }, 500)
+  const {
+    rowSelection,
+    setRowSelection,
+    toggleAllMapAssetsSelection,
+    toggleMapAssetSelection,
+  } = useSyncAssetsTableSelectionWithMapAssets({
+    isMapLoaded,
+    mapRef,
+    userAssetsForTable,
+  })
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetForTable>()
@@ -63,14 +75,51 @@ export const Assets = () => {
     const extraColumnNames = userAssetsForTable
       .reduce(getUniqueColumnNames, [])
       .filter((columnName) => {
-        return !['latitude', 'longitude', 'assetType', ''].includes(columnName)
+        return !['latitude', 'longitude', 'assetType', 'id', ''].includes(
+          columnName,
+        )
       })
     const extraTableColumnSpecifications = extraColumnNames.map((columnName) =>
       columnHelper.accessor(columnName, {}),
     )
 
     return [
-      columnHelper.accessor('assetType', { header: 'Asset ID' }),
+      {
+        id: 'select',
+        header: ({ table }: { table: TanstackTable<UserAssetForTable> }) => {
+          const indeterminateValue = table.getIsSomeRowsSelected()
+            ? 'indeterminate'
+            : false
+          return (
+            <IndeterminateCheckbox
+              checked={table?.getIsAllRowsSelected() || indeterminateValue}
+              onCheckedChange={(isSelected: boolean) => {
+                table.toggleAllRowsSelected(isSelected)
+                toggleAllMapAssetsSelection(isSelected)
+              }}
+            />
+          )
+        },
+
+        cell: ({ row }: { row: TanstackRow<UserAssetForTable> }) => {
+          const handleAssetSelection = (isSelected: boolean) => {
+            toggleMapAssetSelection({
+              isSelected,
+              id: String(row.original.id),
+            })
+            row?.getToggleSelectedHandler()(isSelected)
+          }
+
+          return (
+            <IndeterminateCheckbox
+              checked={row?.getIsSelected()}
+              onCheckedChange={handleAssetSelection}
+            />
+          )
+        },
+      },
+      columnHelper.accessor('id', { header: 'Item ID' }),
+      columnHelper.accessor('assetType', { header: 'Asset Type' }),
       columnHelper.accessor('latitude', {
         header: 'Latitude',
         meta: { justify: 'end' },
@@ -87,7 +136,7 @@ export const Assets = () => {
       }),
       ...extraTableColumnSpecifications,
     ]
-  }, [userAssetsForTable])
+  }, [toggleAllMapAssetsSelection, toggleMapAssetSelection, userAssetsForTable])
 
   const table = useReactTable({
     data: userAssetsForTable,
@@ -98,6 +147,9 @@ export const Assets = () => {
     getFilteredRowModel: getFilteredRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: 'auto',
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
+    getRowId: (row) => String(row.id),
     initialState: {
       pagination: {
         pageSize: 10,
@@ -105,31 +157,28 @@ export const Assets = () => {
     },
     state: {
       globalFilter,
+      rowSelection,
     },
   })
-  const filteredRows = table.getFilteredRowModel().rows
 
-  useEffect(
-    function syncMapWithTableFilter() {
-      if (!userAssetsForTable.length || !isMapLoaded) return
+  useSyncAssetsTableFilterWithMapAssets({
+    isMapLoaded,
+    mapRef,
+    table,
+    userAssetsForTable,
+  })
 
-      const filteredRowsOriginal = filteredRows.map((row) => row.original)
+  const handleLoadAssets = (parsedAssets: UserAssets) => {
+    setRowSelection({})
+    setUserAssets?.(parsedAssets)
+  }
 
-      updateUserAssetsInMap(convertDataForTableToGeoJSON(filteredRowsOriginal))
-    },
-    [
-      filteredRows,
-      isMapLoaded,
-      updateUserAssetsInMap,
-      userAssetsForTable.length,
-    ],
-  )
   const sidebarContent = (
     <div className={assetStyles.sidebarContent}>
       <div className={assetStyles.sidebarTopSection}>
         <div className={assetStyles.selectPortfolioRow}>
           <AssetsSelect />
-          <UploadButtonAndDialog />
+          <UploadButtonAndDialog onLoadAssets={handleLoadAssets} />
         </div>
         {userAssetsForTable.length ? (
           <div className={assetStyles.tableWrapper}>
@@ -198,7 +247,14 @@ export const Assets = () => {
               </Table.Header>
               <Table.Body>
                 {table.getRowModel().rows.map((row) => (
-                  <Table.Row key={row.id}>
+                  <Table.Row
+                    key={row.id}
+                    className={
+                      row.getIsSelected()
+                        ? assetStyles.selectedTableRow
+                        : undefined
+                    }
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <Table.Cell
                         key={cell.id}

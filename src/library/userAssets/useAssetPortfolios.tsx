@@ -39,9 +39,9 @@ export const useAssetPortfolios = ({
     })
 
     mapRef.current.removeSource(MapSourceIds.USER_ASSETS)
-    mapRef.current.removeLayer('userAssetsClusters')
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_CLUSTERED)
     mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_UNCLUSTERED)
-    mapRef.current.removeLayer('clusterCount')
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_CLUSTER_COUNT)
   }, [setIsLoading, mapRef])
 
   const updateUserAssetsInMap = useCallback(
@@ -61,12 +61,15 @@ export const useAssetPortfolios = ({
       const userAssetsSource = mapRef.current.getSource(
         MapSourceIds.USER_ASSETS,
       ) as maplibregl.GeoJSONSource
-      const userAssetsClustersLayer =
-        mapRef.current.getLayer('userAssetsClusters')
+      const userAssetsClustersLayer = mapRef.current.getLayer(
+        MapLayerIds.USER_ASSETS_CLUSTERED,
+      )
       const userAssetsUnclusteredLayer = mapRef.current.getLayer(
         MapLayerIds.USER_ASSETS_UNCLUSTERED,
       )
-      const userAssetsCountLayer = mapRef.current.getLayer('clusterCount')
+      const userAssetsCountLayer = mapRef.current.getLayer(
+        MapLayerIds.USER_ASSETS_CLUSTER_COUNT,
+      )
       const handleMarkerClusterClick = (event: MapLayerMouseEvent) => {
         const feature = event.features?.[0]
 
@@ -219,7 +222,7 @@ export const useAssetPortfolios = ({
 
       if (!userAssetsClustersLayer) {
         mapRef.current.addLayer({
-          id: 'userAssetsClusters',
+          id: MapLayerIds.USER_ASSETS_CLUSTERED,
           type: 'circle',
           source: MapSourceIds.USER_ASSETS,
           paint: {
@@ -248,13 +251,13 @@ export const useAssetPortfolios = ({
         })
         mapRef.current.on(
           'click',
-          'userAssetsClusters',
+          MapLayerIds.USER_ASSETS_CLUSTERED,
           handleMarkerClusterClick,
         )
       }
       if (!userAssetsCountLayer) {
         mapRef.current.addLayer({
-          id: 'clusterCount',
+          id: MapLayerIds.USER_ASSETS_CLUSTER_COUNT,
           type: 'symbol',
           source: MapSourceIds.USER_ASSETS,
           filter: ['has', 'point_count'],

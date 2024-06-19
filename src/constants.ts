@@ -1,10 +1,17 @@
 export enum MapSourceIds {
   HAZARD_DATA = 'hazard-data',
   USER_ASSETS = 'user-assets',
+  BASEMAP = 'basemap',
+  BASEMAP_OVERLAY_BOUNDARIES_LABELS = 'basemap-overlay-boundaries-labels',
 }
+
+export const MAP_MAX_ZOOM = 18
 
 export enum MapLayerIds {
   USER_ASSETS_UNCLUSTERED = 'user-assets-unclustered',
+  USER_ASSETS_CLUSTERED = 'user-assets-clustered',
+  USER_ASSETS_CLUSTER_COUNT = 'user-assets-cluster-count',
+  BASEMAP_OVERLAY_BOUNDARIES_LABELS = 'basemap-overlay-boundaries-labels',
 }
 
 export const UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT = 'unsavedAssets'

@@ -31,7 +31,7 @@ import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfoli
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import axios from 'axios'
-import { MapSourceIds } from '../../../constants'
+import { MapLayerIds, MapSourceIds } from '../../../constants'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
@@ -45,7 +45,7 @@ export const Hazards = () => {
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
-  const { mapContainer, mapRef, isMapLoaded, firstLabelsLayerId } = useMap()
+  const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { setIsLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
@@ -186,13 +186,12 @@ export const Hazards = () => {
               'raster-opacity': hazardOpacity,
             },
           },
-          firstLabelsLayerId,
+          MapLayerIds.BASEMAP_OVERLAY_BOUNDARIES_LABELS,
         )
       }
     },
     [
       climateModel,
-      firstLabelsLayerId,
       hazardIndicator,
       hazardOpacity,
       isMapLoaded,

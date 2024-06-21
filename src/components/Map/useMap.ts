@@ -2,7 +2,7 @@ import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import Maplibregl, { Map as MaplibreMap, StyleSpecification } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
-import { MAP_MAX_ZOOM, MapLayerIds, MapSourceIds } from '../../constants'
+import { MAP_MAX_ZOOM, MapSourceIds } from '../../constants'
 
 export type MapRef = MutableRefObject<MaplibreMap | null | undefined>
 
@@ -15,7 +15,7 @@ const mapStyleSpec: StyleSpecification = {
     [MapSourceIds.BASEMAP]: {
       type: 'raster',
       tiles: [
-        'http://s2maps-tiles.eu/wmts/1.0.0/terrain-light_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg',
+        'http://s2maps-tiles.eu/wmts/1.0.0/osm_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg',
       ],
       tileSize: 256,
     },
@@ -52,29 +52,8 @@ export const useMap = () => {
     function initializeMap() {
       if (!mapRef.current) return
 
-      const addBasemapOverlays = () => {
-        if (!mapRef.current) return
-
-        mapRef.current.addSource(
-          MapSourceIds.BASEMAP_OVERLAY_BOUNDARIES_LABELS,
-          {
-            type: 'raster',
-            tiles: [
-              'http://s2maps-tiles.eu/wmts/1.0.0/overlay_base_bright_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg',
-            ],
-          },
-        )
-
-        mapRef.current.addLayer({
-          id: MapLayerIds.BASEMAP_OVERLAY_BOUNDARIES_LABELS,
-          type: 'raster',
-          source: MapSourceIds.BASEMAP_OVERLAY_BOUNDARIES_LABELS,
-        })
-      }
-
       const handleMapLoad = () => {
         setIsMapLoaded(true)
-        addBasemapOverlays()
       }
 
       mapRef.current?.on('load', handleMapLoad)

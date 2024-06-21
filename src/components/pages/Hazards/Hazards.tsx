@@ -31,7 +31,7 @@ import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfoli
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import axios from 'axios'
-import { MapLayerIds, MapSourceIds } from '../../../constants'
+import { MapSourceIds } from '../../../constants'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
@@ -177,17 +177,14 @@ export const Hazards = () => {
 
       const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARD_DATA)
       if (!hazardLayer) {
-        mapRef.current.addLayer(
-          {
-            id: MapSourceIds.HAZARD_DATA,
-            type: 'raster',
-            source: MapSourceIds.HAZARD_DATA,
-            paint: {
-              'raster-opacity': hazardOpacity,
-            },
+        mapRef.current.addLayer({
+          id: MapSourceIds.HAZARD_DATA,
+          type: 'raster',
+          source: MapSourceIds.HAZARD_DATA,
+          paint: {
+            'raster-opacity': hazardOpacity,
           },
-          MapLayerIds.BASEMAP_OVERLAY_BOUNDARIES_LABELS,
-        )
+        })
       }
     },
     [

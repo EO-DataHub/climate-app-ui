@@ -2,16 +2,6 @@
 @use '../../library/genericStyles/forms';
 
 .container {
-  @include containers.flexColumnStartStart;
+  @include forms.inputLabelContainer;
   width: 100%;
-  gap: var(--space-1);
-
-  & label {
-    @include forms.formLabel;
-  }
-
-  & button {
-    /* we will add other input types as needed */
-    width: 100%;
-  }
 }

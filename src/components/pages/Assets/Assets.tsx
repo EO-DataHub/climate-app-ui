@@ -22,7 +22,7 @@ import {
   UserAssetForTable,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssets'
-import { AssetsSelect } from '../../AssetsSelect'
+import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { IndeterminateCheckbox } from '../../IndeterminateCheckbox/IndeterminateCheckbox'
 import { Map } from '../../Map/Map'

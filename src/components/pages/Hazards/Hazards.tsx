@@ -17,7 +17,7 @@ import {
   scenarioOptions,
   yearOptions,
 } from '../../../library/api/fakeApiData'
-import { AssetsSelect } from '../../AssetsSelect'
+import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
 import { LoadingContext } from '../../../context/LoadingContext'
@@ -312,7 +312,6 @@ export const Hazards = () => {
             View Assets on Map
           </Text>
           <InputLabelContainer>
-            <label htmlFor="year">Portfolios</label>
             <AssetsSelect
               showUnsaved
               onValueChange={updateCurrentPortfolioShown}

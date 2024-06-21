@@ -11,7 +11,7 @@
 }
 
 .selectPortfolioRow {
-  @include containers.flexRowStartCenter;
+  @include containers.flexRowStartLastBaseline;
   width: 100%;
   margin-bottom: var(--space-8);
   & > * {

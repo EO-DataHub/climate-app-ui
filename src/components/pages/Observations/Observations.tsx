@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
-import { AssetsSelect } from '../../AssetsSelect'
+import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { Map } from '../../Map/Map'
@@ -90,7 +90,6 @@ export const Observations = () => {
             View Assets on Map
           </Text>
           <InputLabelContainer>
-            <label htmlFor="year">Portfolios</label>
             <AssetsSelect
               showUnsaved
               onValueChange={updateCurrentPortfolioShown}

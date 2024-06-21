@@ -19,6 +19,12 @@
   gap: var(--space-5);
 }
 
+@mixin flexRowStartLastBaseline {
+  display: flex;
+  align-items: last baseline;
+  gap: var(--space-5);
+}
+
 @mixin flexRowEndCenter {
   display: flex;
   align-items: center;

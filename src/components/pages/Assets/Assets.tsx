@@ -12,11 +12,12 @@ import {
   Table as TanstackTable,
   Row as TanstackRow,
 } from '@tanstack/table-core'
-import { Button, Table, TextField } from '@radix-ui/themes'
+import { Button, Table, TextField, Tooltip } from '@radix-ui/themes'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
-import { useContext, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import FilterIcon from '@material-design-icons/svg/filled/filter_list.svg?react'
+import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
+import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
 
 import {
   UserAssetForTable,
@@ -39,8 +40,10 @@ import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 
 export const Assets = () => {
+  const [columnVisibility, setColumnVisibility] = useState({})
   const [globalFilter, setGlobalFilter] = useState('')
   const [tableSearchValue, setTableSearchValue] = useState('')
+  const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { userAssets, setUserAssets } = useContext(UserAssetsContext)
   const navigate = useNavigate()
@@ -61,24 +64,51 @@ export const Assets = () => {
     mapRef,
     userAssetsForTable,
   })
+  const toggleAreExtraColumnsVisible = () => {
+    setAreExtraColumnsVisible(!areExtraColumnsVisible)
+  }
+  const getUniqueColumnNames = (
+    previousValue: string[],
+    currentValue: UserAssetForTable,
+  ) => {
+    return [
+      ...new Set([...previousValue, ...Object.keys(currentValue)]),
+    ] as string[]
+  }
+  const extraColumnNames = useMemo(() => {
+    return userAssetsForTable
+      .reduce(getUniqueColumnNames, [])
+      .filter((columnName) => {
+        return ![
+          'latitude',
+          'longitude',
+          'assetType',
+          'assetCategory',
+          'id',
+          '',
+        ].includes(columnName)
+      })
+  }, [userAssetsForTable])
+
+  useEffect(
+    function updateColumnVisibility() {
+      if (!extraColumnNames.length) return
+
+      const newColumnVisibilityState = extraColumnNames.reduce(
+        (acc, columnName) => {
+          return { ...acc, [columnName]: areExtraColumnsVisible }
+        },
+        {},
+      )
+
+      setColumnVisibility(newColumnVisibilityState)
+    },
+    [areExtraColumnsVisible, extraColumnNames],
+  )
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetForTable>()
-    const getUniqueColumnNames = (
-      previousValue: string[],
-      currentValue: UserAssetForTable,
-    ) => {
-      return [
-        ...new Set([...previousValue, ...Object.keys(currentValue)]),
-      ] as string[]
-    }
-    const extraColumnNames = userAssetsForTable
-      .reduce(getUniqueColumnNames, [])
-      .filter((columnName) => {
-        return !['latitude', 'longitude', 'assetType', 'id', ''].includes(
-          columnName,
-        )
-      })
+
     const extraTableColumnSpecifications = extraColumnNames.map((columnName) =>
       columnHelper.accessor(columnName, {}),
     )
@@ -118,8 +148,13 @@ export const Assets = () => {
           )
         },
       },
-      columnHelper.accessor('id', { header: 'Item ID' }),
-      columnHelper.accessor('assetType', { header: 'Asset Type' }),
+      columnHelper.accessor('id', { header: 'ID', enableHiding: false }),
+      columnHelper.accessor('assetType', {
+        header: 'Asset Type',
+      }),
+      columnHelper.accessor('assetCategory', {
+        header: 'Asset Category',
+      }),
       columnHelper.accessor('latitude', {
         header: 'Latitude',
         meta: { justify: 'end' },
@@ -136,28 +171,30 @@ export const Assets = () => {
       }),
       ...extraTableColumnSpecifications,
     ]
-  }, [toggleAllMapAssetsSelection, toggleMapAssetSelection, userAssetsForTable])
+  }, [extraColumnNames, toggleAllMapAssetsSelection, toggleMapAssetSelection])
 
   const table = useReactTable({
-    data: userAssetsForTable,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
-    globalFilterFn: 'auto',
+    data: userAssetsForTable,
     enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     getRowId: (row) => String(row.id),
+    getSortedRowModel: getSortedRowModel(),
+    globalFilterFn: 'auto',
     initialState: {
       pagination: {
         pageSize: 10,
       },
     },
+    onColumnVisibilityChange: setColumnVisibility,
+    onGlobalFilterChange: setGlobalFilter,
+    onRowSelectionChange: setRowSelection,
     state: {
       globalFilter,
       rowSelection,
+      columnVisibility,
     },
   })
 
@@ -172,6 +209,16 @@ export const Assets = () => {
     setRowSelection({})
     setUserAssets?.(parsedAssets)
   }
+
+  const toggleAreExtraColumnsVisibleButton = (
+    <Tooltip
+      content={areExtraColumnsVisible ? 'Hide Fields' : 'View all Fields'}
+    >
+      <IconButtonOverride variant="soft" onClick={toggleAreExtraColumnsVisible}>
+        {areExtraColumnsVisible ? <EyeClosedIcon /> : <EyeOpenIcon />}
+      </IconButtonOverride>
+    </Tooltip>
+  )
 
   const sidebarContent = (
     <div className={assetStyles.sidebarContent}>
@@ -196,9 +243,9 @@ export const Assets = () => {
                   <SearchIcon />
                 </TextField.Slot>
               </TextField.Root>
-              <IconButtonOverride variant="soft">
-                <FilterIcon />
-              </IconButtonOverride>
+              {extraColumnNames.length
+                ? toggleAreExtraColumnsVisibleButton
+                : null}
             </div>
             <Table.Root variant="surface" className={assetStyles.table}>
               <Table.Header>
@@ -271,7 +318,7 @@ export const Assets = () => {
                 ))}
               </Table.Body>
             </Table.Root>
-            <div className={containerStyles.flexRowEndCenter}>
+            <div className={containerStyles.flexRowStartCenter}>
               <PageSelector
                 currentPageIndex={table.getState().pagination.pageIndex}
                 nextDisabled={!table.getCanNextPage()}

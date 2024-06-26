@@ -55,10 +55,13 @@ $tick-height: 3px;
   font-size: var(--font-size-1);
   width: 100%;
   line-height: $tick-label-line-height;
+  position: relative; // so we can anchor .lastTickLabel to the right
 }
 .tickLabel {
   transform: translateX(-50%);
 }
 .lastTickLabel {
   transform: translateX(50%);
+  position: absolute;
+  right: 0;
 }

@@ -15,7 +15,7 @@ const mapStyleSpec: StyleSpecification = {
     [MapSourceIds.BASEMAP]: {
       type: 'raster',
       tiles: [
-        'http://s2maps-tiles.eu/wmts/1.0.0/osm_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg',
+        'https://s2maps-tiles.eu/wmts/1.0.0/osm_3857/default/GoogleMapsCompatible/{z}/{y}/{x}.jpg',
       ],
       tileSize: 256,
     },

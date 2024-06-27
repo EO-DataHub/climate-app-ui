@@ -35,3 +35,33 @@
   padding: var(--space-5);
   box-sizing: border-box;
 }
+
+.teamLogoWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: start;
+  justify-items: start;
+  gap: var(--space-5);
+  margin-top: var(--space-7);
+
+  & strong {
+    font-weight: 500;
+  }
+  & p {
+    margin: 0;
+  }
+  & img {
+    max-width: 100%;
+    max-height: 61px;
+    justify-self: start;
+    align-self: center;
+  }
+}
+.sparkgeoLogo {
+  width: 175px;
+}
+
+.impactList {
+  margin-bottom: 0;
+}

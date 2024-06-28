@@ -1,12 +1,15 @@
+import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+// @ts-expect-error - no types for this library
+import proj4 from 'proj4'
 
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { useMap } from '../../Map/useMap'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
+import { useMap } from '../../Map/useMap'
 import observationsStyles from './Observations.module.scss'
 
 export const Observations = () => {
@@ -20,6 +23,42 @@ export const Observations = () => {
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
+
+  useEffect(
+    function hackAddATempLayerForDemo() {
+      if (!isMapLoaded || !mapRef.current) return
+
+      const minX = -68996.83625055255834
+      const minY = 6690426.534493731335
+      const maxX = 61017.57335940352641
+      const maxY = 6722213.296263525262
+
+      const rasterNorthWest = proj4('EPSG:3857', 'EPSG:4326', [minX, maxY])
+      const rasterNorthEast = proj4('EPSG:3857', 'EPSG:4326', [maxX, maxY])
+      const rasterSouthEast = proj4('EPSG:3857', 'EPSG:4326', [maxX, minY])
+      const rasterSouthWest = proj4('EPSG:3857', 'EPSG:4326', [minX, minY])
+
+      const tileUrl = `https://dev.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=${minX},${minY},${maxX},${maxY}&CRS=EPSG:3857&WIDTH=1587&HEIGHT=388&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE&styles=viridis`
+
+      mapRef.current.addSource('demo', {
+        type: 'image',
+        url: tileUrl,
+        coordinates: [
+          rasterNorthWest,
+          rasterNorthEast,
+          rasterSouthEast,
+          rasterSouthWest,
+        ],
+      })
+
+      mapRef.current.addLayer({
+        id: 'demo',
+        type: 'raster',
+        source: 'demo',
+      })
+    },
+    [isMapLoaded, mapRef],
+  )
 
   const sidebarContent = (
     <div className={observationsStyles.sidebarContent}>

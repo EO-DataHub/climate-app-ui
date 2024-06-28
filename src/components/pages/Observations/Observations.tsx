@@ -28,10 +28,10 @@ export const Observations = () => {
     function hackAddATempLayerForDemo() {
       if (!isMapLoaded || !mapRef.current) return
 
-      const minX = -68996.83625055255834
-      const minY = 6690426.534493731335
-      const maxX = 61017.57335940352641
-      const maxY = 6722213.296263525262
+      const minX = -311137.9892962570302188
+      const minY = 6540149.9521725047379732
+      const maxX = 249578.2873153906257357
+      const maxY = 6948850.7707961332052946
 
       const rasterNorthWest = proj4('EPSG:3857', 'EPSG:4326', [minX, maxY])
       const rasterNorthEast = proj4('EPSG:3857', 'EPSG:4326', [maxX, maxY])
@@ -55,6 +55,7 @@ export const Observations = () => {
         id: 'demo',
         type: 'raster',
         source: 'demo',
+        paint: { 'raster-opacity': 0.9 },
       })
     },
     [isMapLoaded, mapRef],

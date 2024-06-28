@@ -38,7 +38,7 @@ export const Observations = () => {
       const rasterSouthEast = proj4('EPSG:3857', 'EPSG:4326', [maxX, minY])
       const rasterSouthWest = proj4('EPSG:3857', 'EPSG:4326', [minX, minY])
 
-      const tileUrl = `https://dev.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=${minX},${minY},${maxX},${maxY}&CRS=EPSG:3857&WIDTH=1587&HEIGHT=388&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE&styles=viridis`
+      const tileUrl = `https://dev.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=${minX},${minY},${maxX},${maxY}&CRS=EPSG:3857&WIDTH=1587&HEIGHT=388&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE&styles=rainbow`
 
       mapRef.current.addSource('demo', {
         type: 'image',

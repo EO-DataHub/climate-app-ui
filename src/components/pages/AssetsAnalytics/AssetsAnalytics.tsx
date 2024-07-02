@@ -5,12 +5,7 @@ import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { Map } from '../../Map/Map'
 import { useMap } from '../../Map/useMap'
 
-import analyseAssetsStyles from './AssetsAnalytics.module.scss'
-import containerStyles from '../../../library/genericStyles/containers.module.scss'
-import {
-  FakeAnalyticsData,
-  fakeAnalyticsData,
-} from '../../../localAssets/fakeAnalyticsData'
+import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import {
   CellContext,
   createColumnHelper,
@@ -20,20 +15,25 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { useEffect, useState } from 'react'
-import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
-import {
-  AssetVulnerability,
-  AssetVulnerabilityBadge,
-} from '../../AssetVulnerabilityBadge/AssetVulnerabilityBadge'
-import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
-import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
-import fakeChartImagePath from '../../../localAssets/fakeBarChart.jpeg'
+import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import {
   UserAssetForTable,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssets'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { UserAssets } from '../../../library/userAssets/userAssetTypes'
+import {
+  FakeAnalyticsData,
+  fakeAnalyticsData,
+} from '../../../localAssets/fakeAnalyticsData'
+import fakeChartImagePath from '../../../localAssets/fakeBarChart.jpeg'
+import {
+  AssetVulnerability,
+  AssetVulnerabilityBadge,
+} from '../../AssetVulnerabilityBadge/AssetVulnerabilityBadge'
+import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
+import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
+import analyseAssetsStyles from './AssetsAnalytics.module.scss'
 
 const columnHelper = createColumnHelper<UserAssetForTable>()
 
@@ -100,10 +100,10 @@ export const AssetsAnalytics = () => {
         className={analyseAssetsStyles.tabsRoot}
       >
         <Tabs.List>
-          <Tabs.Trigger value="section1">Section 1</Tabs.Trigger>
-          <Tabs.Trigger value="section2">Section 2</Tabs.Trigger>
-          <Tabs.Trigger value="section3">Section 3</Tabs.Trigger>
-          <Tabs.Trigger value="section4">Section 4</Tabs.Trigger>
+          <Tabs.Trigger value="section1">Heating and cooling needs</Tabs.Trigger>
+          <Tabs.Trigger value="section2">Workforce productivity</Tabs.Trigger>
+          <Tabs.Trigger value="section3">Thermal power generation</Tabs.Trigger>
+          <Tabs.Trigger value="section4">Innundation</Tabs.Trigger>
         </Tabs.List>
         <Box pt="3">
           <Tabs.Content value="section1">
@@ -163,9 +163,9 @@ export const AssetsAnalytics = () => {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
                       </Table.ColumnHeaderCell>
                     ))}
                   </Table.Row>

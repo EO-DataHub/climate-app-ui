@@ -10,6 +10,9 @@ import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import axios from 'axios'
+import { MapSourceIds } from '../../../constants'
+import { LoadingContext } from '../../../context/LoadingContext'
 import {
   climateModelOptions,
   indicatorOptions,
@@ -17,21 +20,18 @@ import {
   scenarioOptions,
   yearOptions,
 } from '../../../library/api/fakeApiData'
+import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
-import { LoadingContext } from '../../../context/LoadingContext'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
-import axios from 'axios'
-import { MapSourceIds } from '../../../constants'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
@@ -103,7 +103,10 @@ export const Hazards = () => {
         if (!markerCoordinates?.lat || !markerCoordinates?.lng) return
 
         const axiosController = new AbortController()
-        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
+
+        // Bodge to use version of the zarrs which are quicker to load for getting value at a point
+        const sgZarrPath = zarrPath.replace('ukri-eodh-hazard-tiles-test', 'ukri-eodh-hazard-tiles-sg')
+        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${sgZarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
 
         setHazardMarkerValue(null)
 

@@ -22,6 +22,9 @@ export const Observations = () => {
     navigate('/assets')
   }
 
+  const min_temp = 295
+  const max_temp = 322
+
   useEffect(
     function hackAddATempLayerForDemo() {
       if (!isMapLoaded || !mapRef.current) return
@@ -30,14 +33,16 @@ export const Observations = () => {
 
       //const wmtsTemplateUrl = "https://test.eodatahub.org.uk/vs/cache/ows/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=LST_COLLECTION__LST_VISUALIZATION&STYLE=default&FORMAT=image%2Fjpgpng&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX={z}&time=2024-06-18T13%3A22%3A03Z%2F2024-07-08T12%3A40%3A47Z&TILEROW={y}&TILECOL={x}"
 
-      const titilerUrl =
-        'https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif&rescale=22%2C49&colormap_name=jet'
+      const cog_url =
+        'https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/kelvin.tif'
+
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${cog_url}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
       mapRef.current.addSource('demo', {
         type: 'raster',
         tiles: [titilerUrl],
         tileSize: 256,
-        //bounds: [-1.38, 50.53, 2.25, 52.82], //[-154288, 6540200, 249532, 6948850],
+        bounds: [-1.38, 50.53, 2.25, 52.82], //[-154288, 6540200, 249532, 6948850],
       })
 
       mapRef.current.addLayer({
@@ -108,7 +113,35 @@ export const Observations = () => {
     </div>
   )
 
-  const legend = <>Legend Placeholder</>
+  const legend = (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        fontSize: `12px`,
+      }}
+    >
+      <div style={{ width: '100%', textAlign: 'left', marginBottom: '5px' }}>
+        Degrees Kelvin
+      </div>
+      <img
+        src="https://titiler.xyz/colorMaps/jet?format=png"
+        alt="Color Map Legend"
+        style={{ width: '100%', height: 'auto' }}
+      />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+        }}
+      >
+        <span>{min_temp}</span>
+        <span>{max_temp}</span>
+      </div>
+    </div>
+  )
 
   return (
     <PageWithMapLayout

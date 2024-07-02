@@ -105,7 +105,10 @@ export const Hazards = () => {
         const axiosController = new AbortController()
 
         // Bodge to use version of the zarrs which are quicker to load for getting value at a point
-        const sgZarrPath = zarrPath.replace('ukri-eodh-hazard-tiles-test', 'ukri-eodh-hazard-tiles-sg')
+        const sgZarrPath = zarrPath.replace(
+          'ukri-eodh-hazard-tiles-test',
+          'ukri-eodh-hazard-tiles-sg',
+        )
         const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${sgZarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
 
         setHazardMarkerValue(null)

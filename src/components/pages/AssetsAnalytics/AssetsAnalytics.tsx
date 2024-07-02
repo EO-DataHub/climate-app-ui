@@ -100,7 +100,9 @@ export const AssetsAnalytics = () => {
         className={analyseAssetsStyles.tabsRoot}
       >
         <Tabs.List>
-          <Tabs.Trigger value="section1">Heating and cooling needs</Tabs.Trigger>
+          <Tabs.Trigger value="section1">
+            Heating and cooling needs
+          </Tabs.Trigger>
           <Tabs.Trigger value="section2">Workforce productivity</Tabs.Trigger>
           <Tabs.Trigger value="section3">Thermal power generation</Tabs.Trigger>
           <Tabs.Trigger value="section4">Innundation</Tabs.Trigger>
@@ -163,9 +165,9 @@ export const AssetsAnalytics = () => {
                         {header.isPlaceholder
                           ? null
                           : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
                       </Table.ColumnHeaderCell>
                     ))}
                   </Table.Row>

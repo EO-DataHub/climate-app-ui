@@ -10,16 +10,19 @@ import { Map } from '../../Map/Map'
 import { useMap } from '../../Map/useMap'
 import observationsStyles from './Observations.module.scss'
 
-
 export const Observations = () => {
   interface ClickInfoState {
-    lat: number | null;
-    lon: number | null;
-    value: number | null; // Allow value to be number or null
+    lat: number | null
+    lon: number | null
+    value: number | null // Allow value to be number or null
   }
 
   // Use the type with useState
-  const [clickInfo, setClickInfo] = useState<ClickInfoState>({ lat: null, lon: null, value: null });
+  const [clickInfo, setClickInfo] = useState<ClickInfoState>({
+    lat: null,
+    lon: null,
+    value: null,
+  })
 
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
@@ -38,7 +41,7 @@ export const Observations = () => {
   useEffect(
     function hackAddATempLayerForDemo() {
       if (!isMapLoaded || !mapRef.current) {
-        return;
+        return
       }
 
       //const tileUrl = `https://test.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&CRS=EPSG:3857&WIDTH=256&HEIGHT=256&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72&TRANSPARENT=TRUE&styles=rainbow`
@@ -49,7 +52,6 @@ export const Observations = () => {
         'https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif'
 
       const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${cog_url}&rescale=${min_temp},${max_temp}&colormap_name=jet`
-
 
       mapRef.current.addSource('demo', {
         type: 'raster',
@@ -63,34 +65,31 @@ export const Observations = () => {
         type: 'raster',
         source: 'demo',
         paint: { 'raster-opacity': 0.9 },
-      });
+      })
 
       // Add click event listener
       mapRef.current.on('click', (e) => {
-
-        const lon = e.lngLat.lng;
-        const lat = e.lngLat.lat;
-        const queryUrl = `https://titiler.xyz/cog/point/${lon},${lat}?url=${cog_url}`;
+        const lon = e.lngLat.lng
+        const lat = e.lngLat.lat
+        const queryUrl = `https://titiler.xyz/cog/point/${lon},${lat}?url=${cog_url}`
         // Fetch the data from the queryUrl
         fetch(queryUrl)
-          .then(response => {
+          .then((response) => {
             if (response.status === 500) {
-              throw new Error('Server error: 500');
+              throw new Error('Server error: 500')
             }
-            return response.json();
+            return response.json()
           })
-          .then(data => {
-
-            const temp = parseFloat(data.values);
-            if (temp !== -3.4028234663852886e+38) {
-              setClickInfo({ lat, lon, value: temp });
+          .then((data) => {
+            const temp = parseFloat(data.values)
+            if (temp !== -3.4028234663852886e38) {
+              setClickInfo({ lat, lon, value: temp })
             }
           })
           .catch(() => {
             setClickInfo({ lat, lon, value: null })
-          });
-      });
-
+          })
+      })
     },
     [isMapLoaded, mapRef],
   )
@@ -134,11 +133,14 @@ export const Observations = () => {
         {clickInfo.lat && clickInfo.lon && clickInfo.value !== null && (
           <Text size="2" style={{ marginTop: '10px' }}>
             <h3>Location</h3>
-            <p style={{ fontSize: '16px', fontWeight: '500' }}>{clickInfo.lat.toFixed(2)}, {clickInfo.lon.toFixed(2)}</p>
-            <p style={{ fontSize: '16px', fontWeight: '500' }}>Temperature {clickInfo.value.toFixed(2)}°C</p>
+            <p style={{ fontSize: '16px', fontWeight: '500' }}>
+              {clickInfo.lat.toFixed(2)}, {clickInfo.lon.toFixed(2)}
+            </p>
+            <p style={{ fontSize: '16px', fontWeight: '500' }}>
+              Temperature {clickInfo.value.toFixed(2)}°C
+            </p>
           </Text>
         )}
-
 
         <Separator size="4" />
         <div className={observationsStyles.portfolioSelectWrapper}>

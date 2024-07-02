@@ -1,14 +1,12 @@
 import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-// @ts-expect-error - no types for this library
-import proj4 from 'proj4'
 
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
-import { Map } from '../../Map/Map'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
+import { Map } from '../../Map/Map'
 import { useMap } from '../../Map/useMap'
 import observationsStyles from './Observations.module.scss'
 
@@ -28,27 +26,15 @@ export const Observations = () => {
     function hackAddATempLayerForDemo() {
       if (!isMapLoaded || !mapRef.current) return
 
-      const minX = -311137.9892962570302188
-      const minY = 6540149.9521725047379732
-      const maxX = 249578.2873153906257357
-      const maxY = 6948850.7707961332052946
+      //const tileUrl = `https://test.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&CRS=EPSG:3857&WIDTH=256&HEIGHT=256&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72&TRANSPARENT=TRUE&styles=rainbow`
 
-      const rasterNorthWest = proj4('EPSG:3857', 'EPSG:4326', [minX, maxY])
-      const rasterNorthEast = proj4('EPSG:3857', 'EPSG:4326', [maxX, maxY])
-      const rasterSouthEast = proj4('EPSG:3857', 'EPSG:4326', [maxX, minY])
-      const rasterSouthWest = proj4('EPSG:3857', 'EPSG:4326', [minX, minY])
-
-      const tileUrl = `https://dev.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX=${minX},${minY},${maxX},${maxY}&CRS=EPSG:3857&WIDTH=1587&HEIGHT=388&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=96&MAP_RESOLUTION=96&FORMAT_OPTIONS=dpi:96&TRANSPARENT=TRUE&styles=rainbow`
+      const titilerUrl = 'https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif&rescale=22%2C49&colormap_name=jet'
 
       mapRef.current.addSource('demo', {
-        type: 'image',
-        url: tileUrl,
-        coordinates: [
-          rasterNorthWest,
-          rasterNorthEast,
-          rasterSouthEast,
-          rasterSouthWest,
-        ],
+        type: 'raster',
+        tiles: [titilerUrl],
+        tileSize: 256,
+        bounds: [-1.38, 50.53, 2.25, 52.82], //[-154288, 6540200, 249532, 6948850],
       })
 
       mapRef.current.addLayer({

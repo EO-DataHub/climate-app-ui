@@ -3,7 +3,9 @@ name: Deploy demo branch build
 on:
   push:
     branches:
-      ['develop', 'demo', '178-github-actiion-for-different-deployments']
+      - develop
+      - demo
+      - 178-github-actiion-for-different-deployments
 
 permissions:
   contents: read
@@ -11,8 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+  group: ui-deployment-${{ github.ref }}
 
 jobs:
   build:
@@ -36,24 +37,29 @@ jobs:
         with:
           cmd: install
 
-      - name: Build project
+      - name: Build for develop
         uses: borales/actions-yarn@v5
+        if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/178-github-actiion-for-different-deployments')
         with:
           cmd: build
         env:
           VITE_KEYCLOAK_URL: ${{ secrets.VITE_KEYCLOAK_URL }}
           VITE_KEYCLOAK_REALM: ${{ secrets.VITE_KEYCLOAK_REALM }}
           VITE_KEYCLOAK_CLIENT_ID: ${{ secrets.VITE_KEYCLOAK_CLIENT_ID }}
-          VITE_BASE_PATH: ${{ secrets.VITE_BASE_PATH }}
-          VITE_EODH_BASE_URL: ${{ secrets.VITE_EODH_BASE_URL }}
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+          VITE_EODH_BASE_URL: ${{ vars.VITE_EODH_BASE_URL }}
 
-      - name: Copy index.html to 404.html to satisfy GitHub Pages + front-end routing
-        run: cp dist/index.html dist/404.html
-
-      - name: Upload build files for gh pages
-        uses: actions/upload-pages-artifact@v3
+      - name: Build for demo
+        uses: borales/actions-yarn@v5
+        if: startsWith(github.ref, 'refs/heads/demo')
         with:
-          path: ./dist
+          cmd: build
+        env:
+          VITE_KEYCLOAK_URL: ${{ secrets.VITE_KEYCLOAK_URL }}
+          VITE_KEYCLOAK_REALM: ${{ secrets.VITE_KEYCLOAK_REALM }}
+          VITE_KEYCLOAK_CLIENT_ID: ${{ secrets.VITE_KEYCLOAK_CLIENT_ID }}
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+          VITE_EODH_BASE_URL: ${{ vars.VITE_EODH_BASE_URL }}
 
       - name: Upload build files for s3
         uses: actions/upload-artifact@v4
@@ -62,26 +68,13 @@ jobs:
           name: s3_build
           path: ./dist
 
-  deploy_pages:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/demo'
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
   deploy_s3:
     env:
       output_build_s3: ${{needs.build.outputs.output_build_s3}}
     runs-on: ubuntu-latest
     needs: build
-    if: github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/178-github-actiion-for-different-deployments'
     steps:
-      - name: Configure AWS Credentials
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -91,19 +84,39 @@ jobs:
       - name: Install AWS CDK
         run: npm install -g aws-cdk
 
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Install Deploy Requirements
-        if: github.event_name == 'push' && contains(github.event.head_commit.modified, 'iac/')
         run: pip install -r iac/requirements.txt
 
       - name: CDK Deploy
         if: github.event_name == 'push' && contains(github.event.head_commit.modified, 'iac/')
-        run: cd iac && cdk deploy --require-approval never
+        run: cd iac && cdk deploy --all --require-approval never
 
-      - name: Download artifacts and copy website to S3
+      - name: Download artifacts and copy website to S3 if develop branch
+        if: startsWith(github.ref, 'refs/heads/develop')
         uses: actions/download-artifact@v4
         with:
           path: ./dist
           name: s3_build
-      - run: |
-          aws s3 sync ./dist s3://${{ secrets.AWS_BUCKET_NAME }}
-          aws s3 sync ./dist/assets s3://${{ secrets.AWS_BUCKET_NAME }}/${{ secrets.VITE_BASE_PATH }}
+
+      - name: List files in ./dist for debugging
+        if: startsWith(github.ref, 'refs/heads/develop')
+        run: ls -la ./dist
+
+      - name: transfer to S3
+        if: startsWith(github.ref, 'refs/heads/develop')
+        run: |
+          aws s3 sync ./dist s3://develop-eodh-website-files
+
+      - name: Download artifacts and copy website to S3 if demo branch
+        if: startsWith(github.ref, 'refs/heads/demo') || startsWith(github.ref, 'refs/heads/178-github-actiion-for-different-deployments')
+        uses: actions/download-artifact@v4
+        with:
+          path: ./dist
+          name: s3_build
+
+      - name: transfer to s3
+        if: startsWith(github.ref, 'refs/heads/demo') || startsWith(github.ref, 'refs/heads/178-github-actiion-for-different-deployments')
+        run: aws s3 sync ./dist s3://demo-eodh-website-files

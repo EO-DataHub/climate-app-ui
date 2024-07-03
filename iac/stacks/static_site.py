@@ -19,6 +19,7 @@ class StaticSiteStack(Stack):
         bucket = s3.Bucket(
             self,
             f"{config.environment}-{config.project}-website",
+            bucket_name=f"{config.environment}-{config.project}-website-files",
             public_read_access=False,
             block_public_access=s3.BlockPublicAccess.BLOCK_ALL,
         )
@@ -36,13 +37,16 @@ class StaticSiteStack(Stack):
             )
         )
     
-        hosted_zone = route53.HostedZone(self, "HostedZone",
+        # Check if the hosted zone already exists
+        hosted_zone = route53.HostedZone(
+            self, "HostedZone",
             zone_name=f"{config.project}.sparkgeo.dev",
             comment="Hosted Zone for EODH website"
         )
+
         cert = acm.Certificate(self, "Certificate",
             domain_name=f"*.{config.project}.sparkgeo.dev",
-            certificate_name=f"{config.project}-developmment",
+            certificate_name=f"{config.project}-certificate",
             validation=acm.CertificateValidation.from_dns(hosted_zone)
         )
 

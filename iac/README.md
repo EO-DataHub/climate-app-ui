@@ -1,8 +1,14 @@
-# Welcome to your CDK Python project!
+# IAC for EOdatahub UI
 
-This is a blank project for CDK development with Python.
+This is a CDK development project with Python.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+***
+This process requires some manual intervention the first time it is run.
+- You will need to add the NS (nameserver) urls to the appropriate root url for DNS resolution. In this case `*.eodh.sparkgeo.dev` in a different AWS organization.
+- You will need to add the output bucket as a github secret so that the `dist` folder created bu `yarn build` can be copied to the S3 Bucket.
+***
+
+The `cdk.json` file tells the CDK Toolkit how to execute the applications.
 
 This project is set up like a standard Python project. The initialization
 process also creates a virtualenv within this project, stored under the `.venv`

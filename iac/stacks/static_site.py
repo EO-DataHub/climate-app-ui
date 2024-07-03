@@ -3,10 +3,12 @@ from aws_cdk import aws_cloudfront as cf
 from aws_cdk import aws_cloudfront_origins as cf_origins
 from aws_cdk import aws_iam as iam
 from aws_cdk import aws_s3 as s3
+from aws_cdk import aws_route53 as route53
+from aws_cdk import aws_route53_targets as route53_targets
+from aws_cdk import aws_certificatemanager as acm
 from constructs import Construct
 
 from configs import ProjectConfig
-
 
 class StaticSiteStack(Stack):
     def __init__(
@@ -33,6 +35,16 @@ class StaticSiteStack(Stack):
                 principals=[cfoai_principal],
             )
         )
+    
+        hosted_zone = route53.HostedZone(self, "HostedZone",
+            zone_name=f"{config.project}.sparkgeo.dev",
+            comment="Hosted Zone for EODH website"
+        )
+        cert = acm.Certificate(self, "Certificate",
+            domain_name=f"*.{config.project}.sparkgeo.dev",
+            certificate_name=f"{config.project}-developmment",
+            validation=acm.CertificateValidation.from_dns(hosted_zone)
+        )
 
         behaviour_options = cf.BehaviorOptions(
             cache_policy=cf.CachePolicy.CACHING_OPTIMIZED,
@@ -41,15 +53,22 @@ class StaticSiteStack(Stack):
             viewer_protocol_policy=cf.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         )
 
-        # domain_names = [BUCKET_NAME]
-
         distribution = cf.Distribution(
             self,
             f"{config.environment}-{config.project}-website-distribution",
             minimum_protocol_version=cf.SecurityPolicyProtocol.TLS_V1_2_2021,
-            # domain_names=domain_names,
+            domain_names=[f"{config.environment}.{config.project}.sparkgeo.dev"],
+            certificate=cert,
             default_behavior=behaviour_options,
             default_root_object="index.html",
+        )
+
+        a_record = route53.ARecord(
+            self, 
+            "ARecord",
+            zone=hosted_zone,
+            record_name=f"{config.environment}",
+            target=route53.RecordTarget.from_alias(route53_targets.CloudFrontTarget(distribution))
         )
 
         CfnOutput(

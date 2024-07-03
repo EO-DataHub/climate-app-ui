@@ -94,6 +94,17 @@ export const Observations = () => {
     [isMapLoaded, mapRef],
   )
 
+  const observationLocationInfo = (
+    <div className={observationsStyles.locationInfoWrapper}>
+      <h3>Location</h3>
+      <p style={{ fontSize: '16px', fontWeight: '500' }}>
+        {clickInfo?.lat?.toFixed(4) ?? 'N/A'}°,{' '}
+        {clickInfo?.lon?.toFixed(4) ?? 'N/A'}°
+      </p>
+      <p>Temperature {clickInfo.value?.toFixed(2) ?? 'N/A'}°C</p>
+    </div>
+  )
+
   const sidebarContent = (
     <div className={observationsStyles.sidebarContent}>
       <div className={observationsStyles.sidepanelMidSection}>
@@ -121,26 +132,27 @@ export const Observations = () => {
           </InputLabelContainer>
         </form>
         <Text size="3">
-          <strong>Credit</strong>: University of Leicester, Surface Temperature
-          Group, NCEO
-          <br />
-          <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J, Ghent, D,
-          Veal, K. L, Göttsche, F, A new inverse method for the retrieval of
-          Land Surface Temperature and Emissivity from the ASTER instrument, AGU
-          Earth and Space Science, (in review 2024)
+          <p>
+            Land Surface Temperature means radiative temperature of the
+            outermost “skin” layer of a given surface. It is related to
+            blackbody radiation at a given temperature, modified by spectral
+            emissivity component.
+          </p>
+          <p>
+            <strong>Credit</strong>: University of Leicester, Surface
+            Temperature Group, NCEO
+          </p>
+          <p>
+            <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J, Ghent, D,
+            Veal, K. L, Göttsche, F, A new inverse method for the retrieval of
+            Land Surface Temperature and Emissivity from the ASTER instrument,
+            AGU Earth and Space Science, (in review 2024)
+          </p>
         </Text>
-        {/* Conditionally render this part */}
-        {clickInfo.lat && clickInfo.lon && clickInfo.value !== null && (
-          <Text size="2" style={{ marginTop: '10px' }}>
-            <h3>Location</h3>
-            <p style={{ fontSize: '16px', fontWeight: '500' }}>
-              {clickInfo.lat.toFixed(2)}, {clickInfo.lon.toFixed(2)}
-            </p>
-            <p style={{ fontSize: '16px', fontWeight: '500' }}>
-              Temperature {clickInfo.value.toFixed(2)}°C
-            </p>
-          </Text>
-        )}
+        {clickInfo.lat &&
+          clickInfo.lon &&
+          clickInfo.value !== null &&
+          observationLocationInfo}
 
         <Separator size="4" />
         <div className={observationsStyles.portfolioSelectWrapper}>

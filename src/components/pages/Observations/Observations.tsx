@@ -187,7 +187,7 @@ export const Observations = () => {
       }}
     >
       <div style={{ width: '100%', textAlign: 'left', marginBottom: '5px' }}>
-        Degrees Kelvin
+        Degrees Celsius
       </div>
       <img
         src="https://titiler.xyz/colorMaps/jet?format=png"

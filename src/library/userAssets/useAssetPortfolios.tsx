@@ -244,7 +244,7 @@ export const useAssetPortfolios = ({
               750,
               40,
             ],
-            'circle-stroke-width': 1,
+            'circle-stroke-width': 2,
             'circle-stroke-color': markerStrokeColor,
           },
           filter: ['has', 'point_count'],
@@ -282,7 +282,7 @@ export const useAssetPortfolios = ({
               4.5,
               4,
             ],
-            'circle-stroke-width': 1,
+            'circle-stroke-width': 2,
             'circle-stroke-color': [
               'case',
               ['==', ['feature-state', 'isSelected'], true],

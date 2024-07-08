@@ -9,10 +9,10 @@ body {
 :root {
   /* not all Radix tokens are available in this scope, such as --accent-x */
   --error-color: var(--red-11);
-  --large-marker-cluster-color: #bbb;
-  --medium-marker-cluster-color: #aaa;
-  --small-marker-cluster-color: #999;
-  --unclustered-marker-color: #666;
+  --large-marker-cluster-color: var(--indigo-9);
+  --medium-marker-cluster-color: var(--indigo-9);
+  --small-marker-cluster-color: var(--indigo-9);
+  --unclustered-marker-color: var(--indigo-9);
   --marker-stroke-color: #eeeeeeee;
   --marker-stroke-color-selected: rgba(0, 0, 0, 0.75);
   --high-asset-risk-color: #ce2c31;

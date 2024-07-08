@@ -1,5 +1,5 @@
-import { Button, Heading, Select, Separator, Text } from '@radix-ui/themes'
-import { useEffect } from 'react'
+import { Button, Select, Separator, Text } from '@radix-ui/themes'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
@@ -11,6 +11,19 @@ import { useMap } from '../../Map/useMap'
 import observationsStyles from './Observations.module.scss'
 
 export const Observations = () => {
+  interface ClickInfoState {
+    lat: number | null
+    lon: number | null
+    value: number | null // Allow value to be number or null
+  }
+
+  // Use the type with useState
+  const [clickInfo, setClickInfo] = useState<ClickInfoState>({
+    lat: null,
+    lon: null,
+    value: null,
+  })
+
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
@@ -22,13 +35,23 @@ export const Observations = () => {
     navigate('/assets')
   }
 
+  const min_temp = 22
+  const max_temp = 47
+
   useEffect(
     function hackAddATempLayerForDemo() {
-      if (!isMapLoaded || !mapRef.current) return
+      if (!isMapLoaded || !mapRef.current) {
+        return
+      }
 
       //const tileUrl = `https://test.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&CRS=EPSG:3857&WIDTH=256&HEIGHT=256&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72&TRANSPARENT=TRUE&styles=rainbow`
 
-      const titilerUrl = 'https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif&rescale=22%2C49&colormap_name=jet'
+      //const wmtsTemplateUrl = "https://test.eodatahub.org.uk/vs/cache/ows/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=LST_COLLECTION__LST_VISUALIZATION&STYLE=default&FORMAT=image%2Fjpgpng&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX={z}&time=2024-06-18T13%3A22%3A03Z%2F2024-07-08T12%3A40%3A47Z&TILEROW={y}&TILECOL={x}"
+
+      const cog_url =
+        'https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif'
+
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${cog_url}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
       mapRef.current.addSource('demo', {
         type: 'raster',
@@ -43,8 +66,43 @@ export const Observations = () => {
         source: 'demo',
         paint: { 'raster-opacity': 0.9 },
       })
+
+      // Add click event listener
+      mapRef.current.on('click', (e) => {
+        const lon = e.lngLat.lng
+        const lat = e.lngLat.lat
+        const queryUrl = `https://titiler.xyz/cog/point/${lon},${lat}?url=${cog_url}`
+        // Fetch the data from the queryUrl
+        fetch(queryUrl)
+          .then((response) => {
+            if (response.status === 500) {
+              throw new Error('Server error: 500')
+            }
+            return response.json()
+          })
+          .then((data) => {
+            const temp = parseFloat(data.values)
+            if (temp !== -3.4028234663852886e38) {
+              setClickInfo({ lat, lon, value: temp })
+            }
+          })
+          .catch(() => {
+            setClickInfo({ lat, lon, value: null })
+          })
+      })
     },
     [isMapLoaded, mapRef],
+  )
+
+  const observationLocationInfo = (
+    <div className={observationsStyles.locationInfoWrapper}>
+      <h3>Location</h3>
+      <p style={{ fontSize: '16px', fontWeight: '500' }}>
+        {clickInfo?.lat?.toFixed(4) ?? 'N/A'}°,{' '}
+        {clickInfo?.lon?.toFixed(4) ?? 'N/A'}°
+      </p>
+      <p>Temperature {clickInfo.value?.toFixed(2) ?? 'N/A'}°C</p>
+    </div>
   )
 
   const sidebarContent = (
@@ -52,64 +110,50 @@ export const Observations = () => {
       <div className={observationsStyles.sidepanelMidSection}>
         <form className={observationsStyles.observationsForm}>
           <InputLabelContainer>
-            <label htmlFor="filter-1">Filter 1</label>
+            <label htmlFor="filter-1">Observation Type</label>
             <Select.Root>
               <Select.Trigger placeholder="Select" />
               <Select.Content id="filter-1">
-                <Select.Item value="x">Value 1</Select.Item>
-                <Select.Item value="y">Value 2</Select.Item>
-                <Select.Item value="z">Value 3</Select.Item>
+                <Select.Item value="x">Land Surface Temperature</Select.Item>
+                <Select.Item value="y">Flooding</Select.Item>
               </Select.Content>
             </Select.Root>
           </InputLabelContainer>
           <InputLabelContainer>
-            <label htmlFor="filter-2">Filter 2</label>
+            <label htmlFor="filter-2">Date</label>
             <Select.Root>
               <Select.Trigger placeholder="Select" />
               <Select.Content id="filter-2">
-                <Select.Item value="x">Value 1</Select.Item>
-                <Select.Item value="y">Value 2</Select.Item>
-                <Select.Item value="z">Value 3</Select.Item>
+                <Select.Item value="x">10th July 2022</Select.Item>
+                <Select.Item value="y">15th June 2022</Select.Item>
+                <Select.Item value="z">11th August 2022</Select.Item>
               </Select.Content>
             </Select.Root>
           </InputLabelContainer>
-
-          <div className={observationsStyles.multiInputRow}>
-            <InputLabelContainer>
-              <label htmlFor="filter-3">Filter 3</label>
-              <Select.Root>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="filter-3">
-                  <Select.Item value="x">Value 1</Select.Item>
-                  <Select.Item value="y">Value 2</Select.Item>
-                  <Select.Item value="z">Value 3</Select.Item>
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-            <InputLabelContainer>
-              <label htmlFor="filter-4">Filter 4</label>
-              <Select.Root>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="filter-4">
-                  <Select.Item value="x">Value 1</Select.Item>
-                  <Select.Item value="y">Value 2</Select.Item>
-                  <Select.Item value="z">Value 3</Select.Item>
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-            <InputLabelContainer>
-              <label htmlFor="filter-5">Filter 5</label>
-              <Select.Root>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="filter-5">
-                  <Select.Item value="x">Value 1</Select.Item>
-                  <Select.Item value="y">Value 2</Select.Item>
-                  <Select.Item value="z">Value 3</Select.Item>
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-          </div>
         </form>
+        <Text size="3">
+          <p>
+            Land Surface Temperature means radiative temperature of the
+            outermost “skin” layer of a given surface. It is related to
+            blackbody radiation at a given temperature, modified by spectral
+            emissivity component.
+          </p>
+          <p>
+            <strong>Credit</strong>: University of Leicester, Surface
+            Temperature Group, NCEO
+          </p>
+          <p>
+            <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J, Ghent, D,
+            Veal, K. L, Göttsche, F, A new inverse method for the retrieval of
+            Land Surface Temperature and Emissivity from the ASTER instrument,
+            AGU Earth and Space Science, (in review 2024)
+          </p>
+        </Text>
+        {clickInfo.lat &&
+          clickInfo.lon &&
+          clickInfo.value !== null &&
+          observationLocationInfo}
+
         <Separator size="4" />
         <div className={observationsStyles.portfolioSelectWrapper}>
           <Text size="3" weight="bold">
@@ -122,15 +166,6 @@ export const Observations = () => {
             />
           </InputLabelContainer>
         </div>
-        <div style={{ width: '100%' }}>
-          <Heading as="h2" size="5">
-            Heading Here
-          </Heading>
-          <Text size="3">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          </Text>
-          <div className={observationsStyles.greyBox}></div>
-        </div>
       </div>
 
       <Button
@@ -142,14 +177,42 @@ export const Observations = () => {
     </div>
   )
 
-  const legend = <>Legend Placeholder</>
+  const legend = (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        fontSize: `12px`,
+      }}
+    >
+      <div style={{ width: '100%', textAlign: 'left', marginBottom: '5px' }}>
+        Degrees Celsius
+      </div>
+      <img
+        src="https://titiler.xyz/colorMaps/jet?format=png"
+        alt="Color Map Legend"
+        style={{ width: '100%', height: 'auto' }}
+      />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          width: '100%',
+        }}
+      >
+        <span>{min_temp}</span>
+        <span>{max_temp}</span>
+      </div>
+    </div>
+  )
 
   return (
     <PageWithMapLayout
       map={<Map mapContainer={mapContainer} />}
       sidebarContent={sidebarContent}
       title="Observations"
-      subtitle="Lorem ipsum dolor sit amet, consectetur elit."
+      subtitle="Earth Observation Data can be used to provide additional insight into local variation in asset risk."
       sidebarWidth="542px"
       legend={legend}
     />

@@ -9,17 +9,17 @@ body {
 :root {
   /* not all Radix tokens are available in this scope, such as --accent-x */
   --error-color: var(--red-11);
-  --large-marker-cluster-color: var(--indigo-9);
-  --medium-marker-cluster-color: var(--indigo-9);
-  --small-marker-cluster-color: var(--indigo-9);
-  --unclustered-marker-color: var(--indigo-9);
+  --large-marker-cluster-color: var(--indigo-9, #3e63dd);
+  --medium-marker-cluster-color: var(--indigo-9, #3e63dd);
+  --small-marker-cluster-color: var(--indigo-9, #3e63dd);
+  --unclustered-marker-color: var(--indigo-9, #3e63dd);
   --marker-stroke-color: #eeeeeeee;
   --marker-stroke-color-selected: rgba(0, 0, 0, 0.75);
   --high-asset-risk-color: #ce2c31;
   --medium-asset-risk-color: #f76b15;
   --low-asset-risk-color: #218358;
-  --button-svg-fill: var(--indigo-11);
-  --button-svg-fill-disabled: var(--gray-a8);
+  --button-svg-fill: var(--indigo-11, #3a5bc7);
+  --button-svg-fill-disabled: var(--gray-a8, #00083046);
   --white: #fff;
   --hazard-raster-opacity: 0.6;
 }

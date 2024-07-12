@@ -8,7 +8,9 @@ import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { Map } from '../../Map/Map'
 import { useMap } from '../../Map/useMap'
+import { ObservationsMenu } from '../../ObservationsMenu/ObservationsMenu'
 import observationsStyles from './Observations.module.scss'
+
 
 export const Observations = () => {
   interface ClickInfoState {
@@ -16,6 +18,7 @@ export const Observations = () => {
     lon: number | null
     value: number | null // Allow value to be number or null
   }
+
 
   // Use the type with useState
   const [clickInfo, setClickInfo] = useState<ClickInfoState>({
@@ -121,14 +124,7 @@ export const Observations = () => {
           </InputLabelContainer>
           <InputLabelContainer>
             <label htmlFor="filter-2">Date</label>
-            <Select.Root>
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="filter-2">
-                <Select.Item value="x">10th July 2022</Select.Item>
-                <Select.Item value="y">15th June 2022</Select.Item>
-                <Select.Item value="z">11th August 2022</Select.Item>
-              </Select.Content>
-            </Select.Root>
+            <ObservationsMenu />
           </InputLabelContainer>
         </form>
         <Text size="3">

@@ -1,5 +1,6 @@
-import { Select } from '@radix-ui/themes'
-import { useEffect, useState } from 'react'
+import { Select } from '@radix-ui/themes';
+import { useEffect, useState } from 'react';
+
 
 interface Option {
   value: string
@@ -7,11 +8,15 @@ interface Option {
 }
 
 export const ObservationsMenu = () => {
-  const [options, setOptions] = useState<Option[]>([])
-  const [selected, setSelected] = useState('')
+  const [options, setOptions] = useState<Option[]>([]);
+  const [selected, setSelected] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setError('');
       try {
         const response = await fetch('./lst_files.json')
         if (!response.ok) {
@@ -19,20 +24,16 @@ export const ObservationsMenu = () => {
         }
         const data = await response.json()
         const formattedOptions = Object.keys(data).map((timestamp) => {
-          const year = parseInt(timestamp.substring(0, 4), 10)
-          const month = parseInt(timestamp.substring(4, 6), 10) - 1
-          const day = parseInt(timestamp.substring(6, 8), 10)
-
-          const date = new Date(year, month, day)
-          const formattedDate = `${date.getDate()}th ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
-
-          return { value: timestamp, label: formattedDate }
-        })
+          return { value: timestamp, label: timestamp };
+        });
         setOptions(formattedOptions)
+        if (formattedOptions.length > 0) {
+          setSelected(formattedOptions[0].value); // Select the first option by default
+        }
       } catch (error) {
-        const message =
-          error instanceof Error ? error.message : 'Error loading data'
-        throw new Error(message)
+        setError(error instanceof Error ? error.message : 'Error loading data');
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -42,6 +43,9 @@ export const ObservationsMenu = () => {
       throw new Error(message)
     })
   }, [])
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <Select.Root value={selected} onValueChange={setSelected}>

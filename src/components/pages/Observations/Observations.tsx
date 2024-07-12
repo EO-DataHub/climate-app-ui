@@ -18,9 +18,7 @@ export const Observations = () => {
     value: number | null // Allow value to be number or null
   }
 
-
   const [selected, setSelected] = useState('')
-
 
   // Use the type with useState
   const [clickInfo, setClickInfo] = useState<ClickInfoState>({
@@ -29,7 +27,10 @@ export const Observations = () => {
     value: null,
   })
 
-  const { mapContainer, mapRef, isMapLoaded } = useMap({ center: [0, 51.5], zoom: 7 })
+  const { mapContainer, mapRef, isMapLoaded } = useMap({
+    center: [0, 51.5],
+    zoom: 7,
+  })
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
@@ -48,8 +49,6 @@ export const Observations = () => {
       if (!isMapLoaded || !mapRef.current) {
         return
       }
-
-
 
       const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selected}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 

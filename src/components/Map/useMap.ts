@@ -31,25 +31,31 @@ const mapStyleSpec: StyleSpecification = {
   ],
 }
 
-export const useMap = (initialConfig?: { center?: [number, number]; zoom?: number }) => {
+export const useMap = (initialConfig?: {
+  center?: [number, number]
+  zoom?: number
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MaplibreMap>()
   const [isMapLoaded, setIsMapLoaded] = useState(false)
 
-  useEffect(function initializeMap() {
-    if (mapRef.current) return // stops map from intializing more than once
+  useEffect(
+    function initializeMap() {
+      if (mapRef.current) return // stops map from intializing more than once
 
-    const center = initialConfig?.center ?? [0, 0] // Default center
-    const zoom = initialConfig?.zoom ?? 1 // Default zoom
+      const center = initialConfig?.center ?? [0, 0] // Default center
+      const zoom = initialConfig?.zoom ?? 1 // Default zoom
 
-    mapRef.current = new Maplibregl.Map({
-      container: mapContainer.current as HTMLElement,
-      style: mapStyleSpec,
-      center: center,
-      zoom: zoom,
-      maxZoom: MAP_MAX_ZOOM,
-    })
-  }, [initialConfig])
+      mapRef.current = new Maplibregl.Map({
+        container: mapContainer.current as HTMLElement,
+        style: mapStyleSpec,
+        center: center,
+        zoom: zoom,
+        maxZoom: MAP_MAX_ZOOM,
+      })
+    },
+    [initialConfig],
+  )
 
   useEffect(
     function initializeMap() {

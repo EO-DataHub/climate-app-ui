@@ -11,7 +11,10 @@ interface ObservationsMenuProps {
   setSelected: (value: string) => void
 }
 
-export const ObservationsMenu = ({ selected, setSelected }: ObservationsMenuProps) => {
+export const ObservationsMenu = ({
+  selected,
+  setSelected,
+}: ObservationsMenuProps) => {
   const [options, setOptions] = useState<Option[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')

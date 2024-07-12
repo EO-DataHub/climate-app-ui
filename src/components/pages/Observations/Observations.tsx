@@ -11,14 +11,12 @@ import { useMap } from '../../Map/useMap'
 import { ObservationsMenu } from '../../ObservationsMenu/ObservationsMenu'
 import observationsStyles from './Observations.module.scss'
 
-
 export const Observations = () => {
   interface ClickInfoState {
     lat: number | null
     lon: number | null
     value: number | null // Allow value to be number or null
   }
-
 
   // Use the type with useState
   const [clickInfo, setClickInfo] = useState<ClickInfoState>({

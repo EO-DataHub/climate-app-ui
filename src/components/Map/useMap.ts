@@ -1,6 +1,6 @@
-import { MutableRefObject, useEffect, useRef, useState } from 'react'
 import Maplibregl, { Map as MaplibreMap, StyleSpecification } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 import { MAP_MAX_ZOOM, MapSourceIds } from '../../constants'
 
@@ -31,7 +31,7 @@ const mapStyleSpec: StyleSpecification = {
   ],
 }
 
-export const useMap = () => {
+export const useMap = (initialConfig?: { center?: [number, number]; zoom?: number }) => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<MaplibreMap>()
   const [isMapLoaded, setIsMapLoaded] = useState(false)
@@ -39,14 +39,17 @@ export const useMap = () => {
   useEffect(function initializeMap() {
     if (mapRef.current) return // stops map from intializing more than once
 
+    const center = initialConfig?.center ?? [0, 0] // Default center
+    const zoom = initialConfig?.zoom ?? 1 // Default zoom
+
     mapRef.current = new Maplibregl.Map({
       container: mapContainer.current as HTMLElement,
       style: mapStyleSpec,
-      center: [0, 0],
-      zoom: 1,
+      center: center,
+      zoom: zoom,
       maxZoom: MAP_MAX_ZOOM,
     })
-  }, [])
+  }, [initialConfig])
 
   useEffect(
     function initializeMap() {

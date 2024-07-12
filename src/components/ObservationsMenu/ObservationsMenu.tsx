@@ -6,9 +6,13 @@ interface Option {
   label: string
 }
 
-export const ObservationsMenu = () => {
+interface ObservationsMenuProps {
+  selected: string
+  setSelected: (value: string) => void
+}
+
+export const ObservationsMenu = ({ selected, setSelected }: ObservationsMenuProps) => {
   const [options, setOptions] = useState<Option[]>([])
-  const [selected, setSelected] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
@@ -22,8 +26,8 @@ export const ObservationsMenu = () => {
           throw new Error('Network response was not ok')
         }
         const data = await response.json()
-        const formattedOptions = Object.keys(data).map((timestamp) => {
-          return { value: timestamp, label: timestamp }
+        const formattedOptions = Object.keys(data).map((cog_label) => {
+          return { value: data[cog_label], label: cog_label }
         })
         setOptions(formattedOptions)
         if (formattedOptions.length > 0) {
@@ -41,7 +45,7 @@ export const ObservationsMenu = () => {
         error instanceof Error ? error.message : 'Error in fetchData'
       throw new Error(message)
     })
-  }, [])
+  }, [setSelected])
 
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error: {error}</div>

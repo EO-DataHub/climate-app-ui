@@ -1,6 +1,5 @@
-import { Select } from '@radix-ui/themes';
-import { useEffect, useState } from 'react';
-
+import { Select } from '@radix-ui/themes'
+import { useEffect, useState } from 'react'
 
 interface Option {
   value: string
@@ -8,15 +7,15 @@ interface Option {
 }
 
 export const ObservationsMenu = () => {
-  const [options, setOptions] = useState<Option[]>([]);
-  const [selected, setSelected] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [options, setOptions] = useState<Option[]>([])
+  const [selected, setSelected] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
-      setError('');
+      setLoading(true)
+      setError('')
       try {
         const response = await fetch('./lst_files.json')
         if (!response.ok) {
@@ -24,16 +23,16 @@ export const ObservationsMenu = () => {
         }
         const data = await response.json()
         const formattedOptions = Object.keys(data).map((timestamp) => {
-          return { value: timestamp, label: timestamp };
-        });
+          return { value: timestamp, label: timestamp }
+        })
         setOptions(formattedOptions)
         if (formattedOptions.length > 0) {
-          setSelected(formattedOptions[0].value); // Select the first option by default
+          setSelected(formattedOptions[0].value) // Select the first option by default
         }
       } catch (error) {
-        setError(error instanceof Error ? error.message : 'Error loading data');
+        setError(error instanceof Error ? error.message : 'Error loading data')
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     }
 
@@ -44,8 +43,8 @@ export const ObservationsMenu = () => {
     })
   }, [])
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
 
   return (
     <Select.Root value={selected} onValueChange={setSelected}>

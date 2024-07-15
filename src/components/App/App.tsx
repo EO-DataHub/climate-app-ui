@@ -1,9 +1,9 @@
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import '@radix-ui/themes/styles.css'
 import {
   Theme as RadixTheme,
   ThemeProps as RadixThemeProps,
 } from '@radix-ui/themes'
+import '@radix-ui/themes/styles.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import './App.module.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'

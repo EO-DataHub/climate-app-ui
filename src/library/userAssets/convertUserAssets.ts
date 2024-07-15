@@ -1,13 +1,8 @@
-import { UserAssets } from './userAssetTypes'
+import { UserAssets, UserAssetsProperties } from './userAssetTypes'
 
-export interface UserAssetForTable {
-  id: string | number
-  assetType: string
+export interface UserAssetForTable extends UserAssetsProperties {
   latitude: number
   longitude: number
-  country?: string
-  vulnerability?: string
-  [x: string]: unknown
 }
 
 export const convertGeoJSONToDataForTable = (

@@ -15,7 +15,6 @@ import {
 import { Button, Table, TextField, Tooltip } from '@radix-ui/themes'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
 import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
 
@@ -23,6 +22,7 @@ import {
   UserAssetForTable,
   convertGeoJSONToDataForTable,
 } from '../../../library/userAssets/convertUserAssets'
+import { analyseAssets } from '../../../library/userAssets/analyseAssets'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { IndeterminateCheckbox } from '../../IndeterminateCheckbox/IndeterminateCheckbox'
@@ -38,15 +38,21 @@ import { useSyncAssetsTableFilterWithMapAssets } from '../../../library/userAsse
 import { useSyncAssetsTableSelectionWithMapAssets } from '../../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
+import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 export const Assets = () => {
+  const [analysisResultsBearerToken, setAnalysisResultsBearerToken] =
+    useState('') // temporary until we have better IAM
+  const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState({})
   const [globalFilter, setGlobalFilter] = useState('')
+  const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
   const [tableSearchValue, setTableSearchValue] = useState('')
-  const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
   const { mapContainer, mapRef, isMapLoaded } = useMap()
-  const { userAssets, setUserAssets } = useContext(UserAssetsContext)
-  const navigate = useNavigate()
+  const { setAnalysedUserAssets, setUserAssets, userAssets } =
+    useContext(UserAssetsContext)
+
   const userAssetsForTable = useMemo(
     () => convertGeoJSONToDataForTable(userAssets),
     [userAssets],
@@ -82,8 +88,8 @@ export const Assets = () => {
         return ![
           'latitude',
           'longitude',
-          'assetType',
-          'assetCategory',
+          'type',
+          'asset_class',
           'id',
           '',
         ].includes(columnName)
@@ -149,7 +155,7 @@ export const Assets = () => {
         },
       },
       columnHelper.accessor('id', { header: 'ID', enableHiding: false }),
-      columnHelper.accessor('assetType', {
+      columnHelper.accessor('type', {
         header: 'Asset Type',
       }),
       columnHelper.accessor('assetCategory', {
@@ -210,6 +216,43 @@ export const Assets = () => {
     setUserAssets?.(parsedAssets)
   }
 
+  const handleAnalyseAssets = () => {
+    if (!userAssets) {
+      throw new Error('handleAnalyseAssets has a missing userAssets parameter')
+    }
+    if (!setAnalysedUserAssets) {
+      throw new Error(
+        'handleAnalyseAssets has a missing setAnalysedUserAssets parameter',
+      )
+    }
+
+    toast.dismiss()
+    setIsAnalysisRunning(true)
+    analyseAssets({
+      userAssets,
+      analysisResultsBearerToken,
+    })
+      .then((results) => {
+        setAnalysedUserAssets(results)
+        // eslint-disable-next-line no-console
+        console.log('Risk analysis results:', results)
+        toast(
+          <div className={containerStyles.flexRowSpaceBetweenCenter}>
+            <div>Analysis complete</div>
+            <Button asChild>
+              <Link to="/analytics">View Results</Link>
+            </Button>
+          </div>,
+        )
+      })
+      .catch(() => {
+        toast.error('An error occurred during the analysis. Please try again.')
+      })
+      .finally(() => {
+        setIsAnalysisRunning(false)
+      })
+  }
+
   const toggleAreExtraColumnsVisibleButton = (
     <Tooltip
       content={areExtraColumnsVisible ? 'Hide Fields' : 'View all Fields'}
@@ -229,7 +272,7 @@ export const Assets = () => {
         </div>
         {userAssetsForTable.length ? (
           <div className={assetStyles.tableWrapper}>
-            <div className={containerStyles.flexRowSpaceBetweenCenter}>
+            <form className={containerStyles.flexRowSpaceBetweenCenter}>
               <TextField.Root
                 placeholder="Search"
                 value={tableSearchValue ?? ''}
@@ -246,7 +289,7 @@ export const Assets = () => {
               {extraColumnNames.length
                 ? toggleAreExtraColumnsVisibleButton
                 : null}
-            </div>
+            </form>
             <Table.Root variant="surface" className={assetStyles.table}>
               <Table.Header>
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -335,13 +378,21 @@ export const Assets = () => {
 
       <div className={assetStyles.analyseButtonRow}>
         {userAssets ? (
-          <Button
-            onClick={() => {
-              navigate('/analytics')
-            }}
-          >
-            Analyse Assets
-          </Button>
+          <>
+            <form style={{ width: '100%' }}>
+              <TextField.Root
+                placeholder="Results bearer token (temporary and required for analysis)"
+                value={analysisResultsBearerToken}
+                onChange={(event) => {
+                  const { value } = event.target
+                  setAnalysisResultsBearerToken(value)
+                }}
+              ></TextField.Root>
+            </form>
+            <Button onClick={handleAnalyseAssets} disabled={isAnalysisRunning}>
+              Analyse Assets
+            </Button>
+          </>
         ) : null}
       </div>
     </div>

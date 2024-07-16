@@ -50,6 +50,11 @@ export const Observations = () => {
         return
       }
 
+      if (mapRef.current.getLayer(selected)) {
+        mapRef.current.removeLayer(selected)
+        mapRef.current.removeSource(selected)
+      }
+
       const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selected}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
       mapRef.current.addSource(selected, {

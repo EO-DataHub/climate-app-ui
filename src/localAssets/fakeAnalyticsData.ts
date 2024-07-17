@@ -1,11 +1,7 @@
 import { FeatureCollection, Point } from 'geojson'
+import { UserAssetsProperties } from '../library/userAssets/userAssetTypes'
 
-interface FakeAnalyticsDataProperties {
-  id: string | number
-  assetType: string
-  country: string
-  vulnerability: string
-}
+type FakeAnalyticsDataProperties = UserAssetsProperties
 
 export type FakeAnalyticsData = FeatureCollection<
   Point,
@@ -20,9 +16,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 1,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Low',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: { type: 'Point', coordinates: [-1.357346, 52.24427347] },
     },
@@ -30,9 +26,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 2,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'High',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -43,9 +39,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 3,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'High',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -56,9 +52,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 4,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Low',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -69,9 +65,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 5,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Medium',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -82,9 +78,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 6,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Medium',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -95,9 +91,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 7,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'High',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -108,9 +104,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 8,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Medium',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -121,9 +117,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 9,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Low',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -134,9 +130,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 10,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'High',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -147,9 +143,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 11,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Medium',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',
@@ -160,9 +156,9 @@ export const fakeAnalyticsData = {
       type: 'Feature',
       properties: {
         id: 12,
-        assetType: 'Building',
-        country: 'United Kingdom',
-        vulnerability: 'Low',
+        type: 'Building',
+        location: 'United Kingdom',
+        asset_class: 'IndustrialActivity',
       },
       geometry: {
         type: 'Point',

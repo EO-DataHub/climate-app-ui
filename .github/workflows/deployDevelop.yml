@@ -5,7 +5,6 @@ on:
     branches:
       - develop
       - demo
-      - 178-github-actiion-for-different-deployments
 
 permissions:
   contents: read
@@ -13,7 +12,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: ui-deployment-${{ github.ref }}
+  group: ui-deployment-${{ github.ref_name }}
 
 jobs:
   build:
@@ -21,10 +20,11 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       output_build_s3: ${{ steps.artifact-upload-step.outputs.artifact-id }}
-
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -37,9 +37,8 @@ jobs:
         with:
           cmd: install
 
-      - name: Build for develop
+      - name: Build
         uses: borales/actions-yarn@v5
-        if: startsWith(github.ref, 'refs/heads/develop') || startsWith(github.ref, 'refs/heads/178-github-actiion-for-different-deployments')
         with:
           cmd: build
         env:
@@ -49,19 +48,7 @@ jobs:
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
           VITE_EODH_BASE_URL: ${{ vars.VITE_EODH_BASE_URL }}
 
-      - name: Build for demo
-        uses: borales/actions-yarn@v5
-        if: startsWith(github.ref, 'refs/heads/demo')
-        with:
-          cmd: build
-        env:
-          VITE_KEYCLOAK_URL: ${{ secrets.VITE_KEYCLOAK_URL }}
-          VITE_KEYCLOAK_REALM: ${{ secrets.VITE_KEYCLOAK_REALM }}
-          VITE_KEYCLOAK_CLIENT_ID: ${{ secrets.VITE_KEYCLOAK_CLIENT_ID }}
-          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
-          VITE_EODH_BASE_URL: ${{ vars.VITE_EODH_BASE_URL }}
-
-      - name: Upload build files for s3
+      - name: Stage build files for upload to s3
         uses: actions/upload-artifact@v4
         id: artifact-upload-step
         with:
@@ -69,6 +56,7 @@ jobs:
           path: ./dist
 
   deploy_s3:
+    name: Deploy to S3
     env:
       output_build_s3: ${{needs.build.outputs.output_build_s3}}
     runs-on: ubuntu-latest
@@ -94,29 +82,15 @@ jobs:
         if: github.event_name == 'push' && contains(github.event.head_commit.modified, 'iac/')
         run: cd iac && cdk deploy --all --require-approval never
 
-      - name: Download artifacts and copy website to S3 if develop branch
-        if: startsWith(github.ref, 'refs/heads/develop')
+      - name: Download artifacts and copy website to s3
         uses: actions/download-artifact@v4
         with:
           path: ./dist
           name: s3_build
 
       - name: List files in ./dist for debugging
-        if: startsWith(github.ref, 'refs/heads/develop')
         run: ls -la ./dist
 
       - name: transfer to S3
-        if: startsWith(github.ref, 'refs/heads/develop')
         run: |
-          aws s3 sync ./dist s3://develop-eodh-website-files
-
-      - name: Download artifacts and copy website to S3 if demo branch
-        if: startsWith(github.ref, 'refs/heads/demo') || startsWith(github.ref, 'refs/heads/178-github-actiion-for-different-deployments')
-        uses: actions/download-artifact@v4
-        with:
-          path: ./dist
-          name: s3_build
-
-      - name: transfer to s3
-        if: startsWith(github.ref, 'refs/heads/demo') || startsWith(github.ref, 'refs/heads/178-github-actiion-for-different-deployments')
-        run: aws s3 sync ./dist s3://demo-eodh-website-files
+          aws s3 sync ./dist s3://${{ github.ref_name }}-eodh-website-files

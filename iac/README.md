@@ -7,7 +7,7 @@ This is a CDK development project with Python.
 This process requires some manual intervention the first time it is run.
 
 - You will need to add the NS (nameserver) urls to the appropriate root url for DNS resolution. In this case `*.eodh.sparkgeo.dev` in a different AWS organization.
-- You will need to add the output bucket as a github secret so that the `dist` folder created bu `yarn build` can be copied to the S3 Bucket.
+- You will need to add the output bucket as a github secret so that the `dist` folder created by `yarn build` can be copied to the S3 Bucket.
 
 ---
 

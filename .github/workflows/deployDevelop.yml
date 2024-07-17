@@ -94,3 +94,8 @@ jobs:
       - name: transfer to S3
         run: |
           aws s3 sync ./dist s3://${{ github.ref_name }}-eodh-website-files
+
+      - name: invalidate cloudfront
+        run: |
+          DISTRIBUTION_ID=$(aws cloudfront list-distributions --query "DistributionList.Items[?contains(Aliases.Items, '${{ github.ref_name }}.eodh.sparkgeo.dev')].Id" --output text)
+          aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"

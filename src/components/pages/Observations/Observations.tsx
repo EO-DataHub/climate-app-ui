@@ -41,8 +41,8 @@ export const Observations = () => {
     navigate('/assets')
   }
 
-  const min_temp = 22
-  const max_temp = 47
+  const min_temp = 10
+  const max_temp = 45
 
   useEffect(
     function hackAddATempLayerForDemo() {

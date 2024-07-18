@@ -8,6 +8,7 @@ import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { Map } from '../../Map/Map'
 import { useMap } from '../../Map/useMap'
+import { ObservationsMenu } from '../../ObservationsMenu/ObservationsMenu'
 import observationsStyles from './Observations.module.scss'
 
 export const Observations = () => {
@@ -17,6 +18,8 @@ export const Observations = () => {
     value: number | null // Allow value to be number or null
   }
 
+  const [selected, setSelected] = useState('')
+
   // Use the type with useState
   const [clickInfo, setClickInfo] = useState<ClickInfoState>({
     lat: null,
@@ -24,7 +27,10 @@ export const Observations = () => {
     value: null,
   })
 
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { mapContainer, mapRef, isMapLoaded } = useMap({
+    center: [0, 51.5],
+    zoom: 7,
+  })
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
@@ -35,8 +41,8 @@ export const Observations = () => {
     navigate('/assets')
   }
 
-  const min_temp = 22
-  const max_temp = 47
+  const min_temp = 10
+  const max_temp = 45
 
   useEffect(
     function hackAddATempLayerForDemo() {
@@ -44,16 +50,14 @@ export const Observations = () => {
         return
       }
 
-      //const tileUrl = `https://test.eodatahub.org.uk/vs/ows?SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&BBOX={bbox-epsg-3857}&CRS=EPSG:3857&WIDTH=256&HEIGHT=256&LAYERS=LST_COLLECTION__LST_VISUALIZATION&STYLES=&FORMAT=image/png&DPI=72&MAP_RESOLUTION=72&FORMAT_OPTIONS=dpi:72&TRANSPARENT=TRUE&styles=rainbow`
+      if (mapRef.current.getLayer('observation-layer')) {
+        mapRef.current.removeLayer('observation-layer')
+        mapRef.current.removeSource('observation-layer')
+      }
 
-      //const wmtsTemplateUrl = "https://test.eodatahub.org.uk/vs/cache/ows/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=LST_COLLECTION__LST_VISUALIZATION&STYLE=default&FORMAT=image%2Fjpgpng&TILEMATRIXSET=GoogleMapsCompatible&TILEMATRIX={z}&time=2024-06-18T13%3A22%3A03Z%2F2024-07-08T12%3A40%3A47Z&TILEROW={y}&TILECOL={x}"
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selected}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
-      const cog_url =
-        'https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif'
-
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${cog_url}&rescale=${min_temp},${max_temp}&colormap_name=jet`
-
-      mapRef.current.addSource('demo', {
+      mapRef.current.addSource('observation-layer', {
         type: 'raster',
         tiles: [titilerUrl],
         tileSize: 256,
@@ -61,9 +65,9 @@ export const Observations = () => {
       })
 
       mapRef.current.addLayer({
-        id: 'demo',
+        id: 'observation-layer',
         type: 'raster',
-        source: 'demo',
+        source: 'observation-layer',
         paint: { 'raster-opacity': 0.9 },
       })
 
@@ -71,7 +75,7 @@ export const Observations = () => {
       mapRef.current.on('click', (e) => {
         const lon = e.lngLat.lng
         const lat = e.lngLat.lat
-        const queryUrl = `https://titiler.xyz/cog/point/${lon},${lat}?url=${cog_url}`
+        const queryUrl = `https://titiler.xyz/cog/point/${lon},${lat}?url=${selected}`
         // Fetch the data from the queryUrl
         fetch(queryUrl)
           .then((response) => {
@@ -91,7 +95,7 @@ export const Observations = () => {
           })
       })
     },
-    [isMapLoaded, mapRef],
+    [isMapLoaded, mapRef, selected],
   )
 
   const observationLocationInfo = (
@@ -121,14 +125,7 @@ export const Observations = () => {
           </InputLabelContainer>
           <InputLabelContainer>
             <label htmlFor="filter-2">Date</label>
-            <Select.Root>
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="filter-2">
-                <Select.Item value="x">10th July 2022</Select.Item>
-                <Select.Item value="y">15th June 2022</Select.Item>
-                <Select.Item value="z">11th August 2022</Select.Item>
-              </Select.Content>
-            </Select.Root>
+            <ObservationsMenu selected={selected} setSelected={setSelected} />
           </InputLabelContainer>
         </form>
         <Text size="3">

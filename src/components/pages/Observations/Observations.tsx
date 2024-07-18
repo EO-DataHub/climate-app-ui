@@ -55,11 +55,9 @@ export const Observations = () => {
         mapRef.current.removeSource('observation-layer')
       }
 
-      const cog_url =
-        'https://ukri-eodh-hazard-tiles-sg2.s3.eu-west-1.amazonaws.com/centigrade.tif'
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selected}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${cog_url}&rescale=${min_temp},${max_temp}&colormap_name=jet`
-      mapRef.current.addSource('demo', {
+      mapRef.current.addSource('observation-layer', {
         type: 'raster',
         tiles: [titilerUrl],
         tileSize: 256,

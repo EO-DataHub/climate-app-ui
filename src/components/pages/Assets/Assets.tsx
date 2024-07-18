@@ -158,7 +158,7 @@ export const Assets = () => {
       columnHelper.accessor('type', {
         header: 'Asset Type',
       }),
-      columnHelper.accessor('assetCategory', {
+      columnHelper.accessor('asset_class', {
         header: 'Asset Category',
       }),
       columnHelper.accessor('latitude', {

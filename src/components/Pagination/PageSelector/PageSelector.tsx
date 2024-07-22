@@ -72,13 +72,13 @@ export const PageSelector = ({
       const buttons = []
 
       for (let page = 1; page <= pageCount; page += 1) {
-        const buttonProps = {
-          ...pageButtonPropsThatChangeLess,
-          pageIndex: page - 1,
-          key: `pagination-button-${page}`,
-        }
-
-        buttons.push(<PageButton {...buttonProps} />)
+        buttons.push(
+          <PageButton
+            {...pageButtonPropsThatChangeLess}
+            pageIndex={page - 1}
+            key={`pagination-button-${page}`}
+          />,
+        )
       }
 
       return buttons

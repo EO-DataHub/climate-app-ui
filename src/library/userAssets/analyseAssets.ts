@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { AxiosInstance } from 'axios'
 
 import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
 
@@ -14,7 +14,13 @@ const RISK_ANALYSIS_WORKFLOW_INSTRUCTIONS = {
 
 Object.freeze(RISK_ANALYSIS_WORKFLOW_INSTRUCTIONS)
 
-const initiateAssetsRiskAnalysis = async (userAssets: UserAssets) => {
+const initiateAssetsRiskAnalysis = async ({
+  userAssets,
+  axios,
+}: {
+  userAssets: UserAssets
+  axios: AxiosInstance
+}) => {
   const userAssetsWithAnalysisInstructions = {
     ...userAssets,
     ...RISK_ANALYSIS_WORKFLOW_INSTRUCTIONS,
@@ -45,11 +51,13 @@ const getIsDataReady = (status: string) => {
 }
 
 const getData = async ({
-  jobId,
   analysisResultsBearerToken,
+  axios,
+  jobId,
 }: {
-  jobId: string
   analysisResultsBearerToken: string
+  axios: AxiosInstance
+  jobId: string
 }) => {
   const resultsUrl = `https://ddowding.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
   return axios
@@ -64,13 +72,13 @@ const getData = async ({
 }
 
 async function getAssetsRiskResults({
-  url,
-
   analysisResultsBearerToken,
+  axios,
+  url,
 }: {
-  url: string
-
   analysisResultsBearerToken: string
+  axios: AxiosInstance
+  url: string
 }) {
   const pollForAnalysisResults = async (
     resolve: (data: AnalysedUserAssets) => void,
@@ -82,7 +90,7 @@ async function getAssetsRiskResults({
       } = await axios.get(url)
       const isDataReady = getIsDataReady(status)
       if (isDataReady) {
-        const data = await getData({ jobId, analysisResultsBearerToken })
+        const data = await getData({ jobId, analysisResultsBearerToken, axios })
         resolve(data)
       } else {
         setTimeout(() => {
@@ -99,19 +107,26 @@ async function getAssetsRiskResults({
 
 export const analyseAssets = ({
   analysisResultsBearerToken,
+  axios,
   userAssets,
 }: {
   analysisResultsBearerToken: string
+  axios?: AxiosInstance
   userAssets: UserAssets
 }) => {
-  return initiateAssetsRiskAnalysis(userAssets).then((response) => {
+  if (!axios) {
+    throw new Error('axios is required')
+  }
+
+  return initiateAssetsRiskAnalysis({ userAssets, axios }).then((response) => {
     const statusPollingUrl = response.data.links.find(
       (link: { title: string }) => link.title === 'Status location',
     ).href
 
     return getAssetsRiskResults({
-      url: statusPollingUrl,
       analysisResultsBearerToken,
+      axios,
+      url: statusPollingUrl,
     })
   })
 }

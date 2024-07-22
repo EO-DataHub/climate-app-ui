@@ -12,6 +12,7 @@ import {
   Table as TanstackTable,
   Row as TanstackRow,
 } from '@tanstack/table-core'
+import axios from 'axios'
 import { Button, Table, TextField, Tooltip } from '@radix-ui/themes'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useMemo, useState } from 'react'
@@ -40,6 +41,7 @@ import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import { AuthenticationContext } from '../../../context/AuthenticationContext'
 
 export const Assets = () => {
   const [analysisResultsBearerToken, setAnalysisResultsBearerToken] =
@@ -52,6 +54,7 @@ export const Assets = () => {
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { setAnalysedUserAssets, setUserAssets, userAssets } =
     useContext(UserAssetsContext)
+  const { isAuthenticated, login } = useContext(AuthenticationContext)
 
   const userAssetsForTable = useMemo(
     () => convertGeoJSONToDataForTable(userAssets),
@@ -226,11 +229,16 @@ export const Assets = () => {
       )
     }
 
+    if (!isAuthenticated) {
+      void login()
+      return
+    }
     toast.dismiss()
     setIsAnalysisRunning(true)
     analyseAssets({
       userAssets,
       analysisResultsBearerToken,
+      axios,
     })
       .then((results) => {
         setAnalysedUserAssets(results)

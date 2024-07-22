@@ -6,64 +6,28 @@ import '@radix-ui/themes/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import './App.module.css'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import authenticationService from '../../library/api/authentication'
 import { RouterProvider } from 'react-router-dom'
 import { UserAssetsProvider } from '../../context/UserAssetsContext'
 import { router } from './router'
 import { LoadingContextProvider } from '../../context/LoadingContext'
-
-// import axiosService from '../../services/axios'
+import { AuthenticationContextProvider } from '../../context/AuthenticationContext'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',
 }
 
-authenticationService.initialize()
-
-// const authenticatedAxios = axiosService.getAuthenticatedAxios(
-//   authenticationService,
-// )
-
-// const handleLogin = () => {
-//   authenticationService
-//     .login()
-//     .then(() => {
-//       console.log('logged in')
-//     })
-//     .catch((err) => {
-//       console.error(err)
-//     })
-// }
-
-// const handleLogout = () => {
-//   authenticationService
-//     .logout()
-//     .then(() => {
-//       console.log('logged out')
-//     })
-//     .catch((err) => {
-//       console.error(err)
-//     })
-// }
-
 function App() {
-  const queryClient = new QueryClient()
-
   return (
-    <LoadingContextProvider>
-      <QueryClientProvider client={queryClient}>
+    <AuthenticationContextProvider>
+      <LoadingContextProvider>
         <RadixTheme {...RADIX_THEME_PROPS}>
           <UserAssetsProvider>
             <RouterProvider router={router} />
           </UserAssetsProvider>
         </RadixTheme>
-
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
-        {/* will only show in dev environments */}
-      </QueryClientProvider>
-    </LoadingContextProvider>
+      </LoadingContextProvider>
+    </AuthenticationContextProvider>
   )
 }
 

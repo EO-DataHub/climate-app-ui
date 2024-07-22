@@ -1,5 +1,4 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { AssetsSpeculativeJunkDrawer } from '../pages/AssetsSpeculativeJunkDrawer'
 import { AppLayout } from '../Layout/AppLayout'
 import { NotFound } from '../pages/404'
 import { Assets } from '../pages/Assets/Assets'
@@ -24,10 +23,6 @@ export const router = createBrowserRouter(
         {
           path: '/hazards',
           element: <Hazards />,
-        },
-        {
-          path: '/junk-drawer',
-          element: <AssetsSpeculativeJunkDrawer />,
         },
         {
           path: '/analytics',

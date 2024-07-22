@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT } from '../../constants'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsSelectStyles from './AssetsSelect.module.scss'
+import { AuthenticationContext } from '../../context/AuthenticationContext'
 
 export const AssetsSelect = ({
   onValueChange,
@@ -13,10 +14,21 @@ export const AssetsSelect = ({
   showUnsaved?: boolean
 }) => {
   const { userAssets } = useContext(UserAssetsContext)
+  const { isAuthenticated, login } = useContext(AuthenticationContext)
+
+  const handleOnOpenChange = (isOpen: boolean) => {
+    if (!isAuthenticated && isOpen) {
+      void login()
+      return
+    }
+  }
   return (
     <div className={assetsSelectStyles.assetsSelectWrapper}>
       <label>Portfolios</label>
-      <Select.Root onValueChange={onValueChange}>
+      <Select.Root
+        onValueChange={onValueChange}
+        onOpenChange={handleOnOpenChange}
+      >
         <Select.Trigger placeholder="Select Portfolio" />
         <Select.Content position="popper">
           <Select.Group>

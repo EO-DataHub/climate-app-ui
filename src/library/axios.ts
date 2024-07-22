@@ -1,14 +1,14 @@
 import axios from 'axios'
-import { AuthenticationService } from './api/authentication'
 
 const authenticatedAxios = axios.create()
 
-const getAuthenticatedAxios = (
-  authenticationService: AuthenticationService,
-) => {
+export const getAuthenticatedAxios = (token: string | undefined) => {
+  if (!token)
+    throw new Error(
+      'Token is required to create an authenticated axios instance',
+    )
   authenticatedAxios.interceptors.request.use(
     (config) => {
-      const token = authenticationService.getToken()
       if (token) {
         config.headers.Authorization = `Bearer ${token}`
       }
@@ -19,5 +19,3 @@ const getAuthenticatedAxios = (
 
   return authenticatedAxios
 }
-
-export default { getAuthenticatedAxios }

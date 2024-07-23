@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect } from 'react'
 // @ts-expect-error - no types for this library
 import { bbox as turfBbox } from '@turf/turf'
 
@@ -14,18 +14,18 @@ export const useSyncAssetsTableSelectionWithMapAssets = ({
   isMapLoaded,
   mapRef,
   userAssetsForTable,
+  rowSelection,
 }: {
-  isMapLoaded: boolean
-  mapRef: MapRef
+  isMapLoaded?: boolean
+  mapRef?: MapRef
   userAssetsForTable: UserAssetForTable[]
+  rowSelection: RowSelection
 }) => {
   const { userAssets } = useContext(UserAssetsContext)
 
-  const [rowSelection, setRowSelection] = useState<RowSelection>({})
-
   const zoomToSelectedAssets = useDebouncedCallback(
     useCallback(() => {
-      if (!isMapLoaded || !mapRef.current || !userAssets) return
+      if (!isMapLoaded || !mapRef?.current || !userAssets) return
       const rowSelectionIds = Object.keys(rowSelection)
 
       const selectedAssetFeatures = userAssets.features.filter(
@@ -54,7 +54,7 @@ export const useSyncAssetsTableSelectionWithMapAssets = ({
 
   const toggleMapAssetSelection = useCallback(
     ({ isSelected, id }: { isSelected: boolean; id: string }) => {
-      if (!mapRef.current || !isMapLoaded) return
+      if (!mapRef?.current || !isMapLoaded) return
       mapRef.current.setFeatureState(
         {
           source: MapSourceIds.USER_ASSETS,
@@ -81,8 +81,6 @@ export const useSyncAssetsTableSelectionWithMapAssets = ({
   )
 
   return {
-    rowSelection,
-    setRowSelection,
     toggleAllMapAssetsSelection,
     toggleMapAssetSelection,
   }

@@ -23,14 +23,14 @@ export const useAssetPortfolios = ({
   mapRef,
   isMapLoaded,
 }: {
-  mapRef: MapRef
-  isMapLoaded: boolean
+  mapRef?: MapRef
+  isMapLoaded?: boolean
 }) => {
   const { setIsLoading } = useContext(LoadingContext)
   const { userAssets } = useContext(UserAssetsContext)
 
   const removeUserAssetsFromMap = useCallback(() => {
-    if (!mapRef.current || !setIsLoading) return
+    if (!mapRef?.current || !setIsLoading) return
 
     setIsLoading(true)
 
@@ -46,7 +46,7 @@ export const useAssetPortfolios = ({
 
   const updateUserAssetsInMap = useCallback(
     (userAssets: UserAssets) => {
-      if (!mapRef.current || !userAssets || !setIsLoading || !isMapLoaded)
+      if (!mapRef?.current || !userAssets || !setIsLoading || !isMapLoaded)
         return
 
       const cssStyles = window.getComputedStyle(document.body)

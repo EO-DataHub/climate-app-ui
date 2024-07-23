@@ -14,8 +14,8 @@ export const useSyncAssetsTableFilterWithMapAssets = ({
   table,
   userAssetsForTable,
 }: {
-  isMapLoaded: boolean
-  mapRef: MapRef
+  isMapLoaded?: boolean
+  mapRef?: MapRef
   table: TanstackTable<UserAssetForTable>
   userAssetsForTable: UserAssetForTable[]
 }) => {

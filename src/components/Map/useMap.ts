@@ -1,4 +1,8 @@
-import Maplibregl, { Map as MaplibreMap, StyleSpecification } from 'maplibre-gl'
+import Maplibregl, {
+  Map as MaplibreMap,
+  NavigationControl,
+  StyleSpecification,
+} from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
@@ -40,7 +44,7 @@ export const useMap = (initialConfig?: {
   const [isMapLoaded, setIsMapLoaded] = useState(false)
 
   useEffect(
-    function initializeMap() {
+    function initializeMapInstance() {
       if (mapRef.current) return // stops map from intializing more than once
 
       const center = initialConfig?.center ?? [0, 0] // Default center
@@ -53,12 +57,14 @@ export const useMap = (initialConfig?: {
         zoom: zoom,
         maxZoom: MAP_MAX_ZOOM,
       })
+
+      mapRef.current.addControl(new NavigationControl())
     },
     [initialConfig],
   )
 
   useEffect(
-    function initializeMap() {
+    function initializeIsMapLoaded() {
       if (!mapRef.current) return
 
       const handleMapLoad = () => {

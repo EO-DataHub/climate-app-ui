@@ -1,10 +1,10 @@
 import { Heading, Link } from '@radix-ui/themes'
 
 import aboutStyles from './About.module.scss'
-import heroPath from '../../../localAssets/aboutHero.png'
-import sparkgeoFullWordLogo from '../../../../public/sparkgeo-full-word-logo.png'
-import oscLogo from '../../../../public/osc-logo.png'
 import devSeedDeploySolutionsLogo from '../../../../public/devseed-deploysolutions-logo.jpeg'
+import heroPath from '../../../localAssets/aboutHero.jpg'
+import oscLogo from '../../../../public/osc-logo.png'
+import sparkgeoFullWordLogo from '../../../../public/sparkgeo-full-word-logo.png'
 
 export const About = () => {
   return (
@@ -165,18 +165,27 @@ export const About = () => {
             <strong>The CLARAT application team consists of:</strong>
           </p>
           <div className={aboutStyles.teamLogoWrapper}>
-            <img
-              src={sparkgeoFullWordLogo}
-              alt="Sparkgeo"
-              className={aboutStyles.sparkgeoLogo}
-            />
+            <a href="https://sparkgeo.com/" target="_blank" rel="noreferrer">
+              <img
+                src={sparkgeoFullWordLogo}
+                alt="Sparkgeo"
+                className={aboutStyles.sparkgeoLogo}
+              />
+            </a>
+            <a href="https://os-climate.org/" target="_blank" rel="noreferrer">
+              <img src={oscLogo} alt="OS Climate" />
+            </a>
 
-            <img src={oscLogo} alt="OS Climate" />
-
-            <img
-              src={devSeedDeploySolutionsLogo}
-              alt="DevelopmentSeed / Deploy Solutions"
-            />
+            <a
+              href="https://developmentseed.org/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                src={devSeedDeploySolutionsLogo}
+                alt="DevelopmentSeed / Deploy Solutions"
+              />
+            </a>
 
             <div>
               <p>

@@ -2,18 +2,6 @@ import { AxiosInstance } from 'axios'
 
 import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
 
-const RISK_ANALYSIS_WORKFLOW_INSTRUCTIONS = {
-  properties: {
-    include_asset_level: true,
-    include_calc_details: true,
-    include_measures: true,
-    years: [2030, 2040, 2050],
-    scenarios: ['ssp126', 'ssp245', 'ssp585'],
-  }, // ideally we send this via request parameters, but the current API needs it appended to the geojson asset data and we have tight timelines'
-}
-
-Object.freeze(RISK_ANALYSIS_WORKFLOW_INSTRUCTIONS)
-
 const initiateAssetsRiskAnalysis = async ({
   userAssets,
   axios,
@@ -21,17 +9,12 @@ const initiateAssetsRiskAnalysis = async ({
   userAssets: UserAssets
   axios: AxiosInstance
 }) => {
-  const userAssetsWithAnalysisInstructions = {
-    ...userAssets,
-    ...RISK_ANALYSIS_WORKFLOW_INSTRUCTIONS,
-  }
-
   return axios.post(
-    'https://test.eodatahub.org.uk/ades/eric/ogc-api/processes/get-asset-impact-workflow-batch/execution',
+    'https://test.eodatahub.org.uk/ades/eric/ogc-api/processes/get-asset-impact-workflow/execution',
     {
       inputs: {
         workspace: 'ddowding',
-        json_string: JSON.stringify(userAssetsWithAnalysisInstructions),
+        json_string: JSON.stringify(userAssets),
       },
     },
     {

@@ -26,35 +26,35 @@ export const useAssetPortfolios = ({
   mapRef?: MapRef
   isMapLoaded?: boolean
 }) => {
-  const { setIsLoading } = useContext(LoadingContext)
+  const { setIsMapLoading } = useContext(LoadingContext)
   const { userAssets } = useContext(UserAssetsContext)
 
   const removeUserAssetsFromMap = useCallback(() => {
-    if (!mapRef?.current || !setIsLoading) return
+    if (!mapRef?.current || !setIsMapLoading) return
 
-    setIsLoading(true)
+    setIsMapLoading(true)
 
     void mapRef.current.once('idle', () => {
-      setIsLoading(false)
+      setIsMapLoading(false)
     })
 
     mapRef.current.removeSource(MapSourceIds.USER_ASSETS)
     mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_CLUSTERED)
     mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_UNCLUSTERED)
     mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_CLUSTER_COUNT)
-  }, [setIsLoading, mapRef])
+  }, [setIsMapLoading, mapRef])
 
   const updateUserAssetsInMap = useCallback(
     (userAssets: UserAssets) => {
-      if (!mapRef?.current || !userAssets || !setIsLoading || !isMapLoaded)
+      if (!mapRef?.current || !userAssets || !setIsMapLoading || !isMapLoaded)
         return
 
       const cssStyles = window.getComputedStyle(document.body)
 
-      setIsLoading(true)
+      setIsMapLoading(true)
 
       void mapRef.current.once('idle', () => {
-        setIsLoading(false)
+        setIsMapLoading(false)
       })
 
       const userAssetBounds = turfBbox(userAssets)
@@ -320,7 +320,7 @@ export const useAssetPortfolios = ({
         )
       }
     },
-    [isMapLoaded, mapRef, setIsLoading],
+    [isMapLoaded, mapRef, setIsMapLoading],
   )
 
   const updateCurrentPortfolioShown = useCallback(

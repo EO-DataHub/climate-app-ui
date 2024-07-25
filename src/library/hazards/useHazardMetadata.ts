@@ -27,12 +27,12 @@ export const useHazardMetadata = ({
   >()
   const [isHazardMetadataError, setIsHazardMetadataError] = useState(false)
   const [isHazardMetadataLoading, setIsHazardMetadataLoading] = useState(false)
-  const { setIsLoading } = useContext(LoadingContext)
+  const { setIsMapLoading } = useContext(LoadingContext)
 
   useEffect(
     function getHazardMetadata() {
       if (
-        !setIsLoading ||
+        !setIsMapLoading ||
         !hazardIndicator ||
         !hazardType ||
         !climateModel ||
@@ -61,7 +61,14 @@ export const useHazardMetadata = ({
           setIsHazardMetadataLoading(false)
         })
     },
-    [climateModel, hazardIndicator, hazardType, scenario, setIsLoading, year],
+    [
+      climateModel,
+      hazardIndicator,
+      hazardType,
+      scenario,
+      setIsMapLoading,
+      year,
+    ],
   )
 
   return { isHazardMetadataError, isHazardMetadataLoading, hazardMetadata }

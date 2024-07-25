@@ -2,11 +2,11 @@ import { useState } from 'react'
 import { ReactNode, createContext } from 'react'
 
 interface LoadingContextValue {
-  isLoading: boolean
-  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>
+  isMapLoading: boolean
+  setIsMapLoading?: React.Dispatch<React.SetStateAction<boolean>>
 }
 export const LoadingContext = createContext<LoadingContextValue>({
-  isLoading: false,
+  isMapLoading: false,
 })
 
 export const LoadingContextProvider = ({
@@ -14,10 +14,10 @@ export const LoadingContextProvider = ({
 }: {
   children: ReactNode
 }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isMapLoading, setIsMapLoading] = useState(false)
 
   return (
-    <LoadingContext.Provider value={{ isLoading, setIsLoading }}>
+    <LoadingContext.Provider value={{ isMapLoading, setIsMapLoading }}>
       {children}
     </LoadingContext.Provider>
   )

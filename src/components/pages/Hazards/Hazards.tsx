@@ -46,7 +46,7 @@ export const Hazards = () => {
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
   const [year, setYear] = useState(yearOptions[0])
   const { mapContainer, mapRef, isMapLoaded } = useMap()
-  const { setIsLoading } = useContext(LoadingContext)
+  const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
@@ -145,15 +145,15 @@ export const Hazards = () => {
         !legendParametersToUse ||
         !mapRef.current ||
         !scenario ||
-        !setIsLoading ||
+        !setIsMapLoading ||
         !year
       ) {
         return
       }
 
-      setIsLoading(true)
+      setIsMapLoading(true)
 
-      void mapRef.current.once('idle', () => setIsLoading(false))
+      void mapRef.current.once('idle', () => setIsMapLoading(false))
 
       const hazardSource = mapRef.current.getSource(
         MapSourceIds.HAZARD_DATA,
@@ -201,7 +201,7 @@ export const Hazards = () => {
       legendParametersToUse,
       mapRef,
       scenario,
-      setIsLoading,
+      setIsMapLoading,
       year,
       zarrPath,
     ],

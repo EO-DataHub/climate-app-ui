@@ -238,11 +238,11 @@ export const useAssetPortfolios = ({
             'circle-radius': [
               'step',
               ['get', 'point_count'],
-              20,
-              100,
               30,
-              750,
+              100,
               40,
+              750,
+              50,
             ],
             'circle-stroke-width': 2,
             'circle-stroke-color': markerStrokeColor,
@@ -263,8 +263,14 @@ export const useAssetPortfolios = ({
           filter: ['has', 'point_count'],
           layout: {
             'text-field': ['get', 'point_count_abbreviated'],
-            'text-font': ['Noto Sans Regular'],
+            'text-font': ['Noto Sans Medium'],
             'text-size': 12,
+          },
+          paint: {
+            'text-color': markerStrokeColor,
+            'text-halo-color': markerStrokeColor,
+            'text-halo-width': 0.3, // to achieve 'bold'
+            'text-halo-blur': 0,
           },
         })
       }
@@ -279,8 +285,8 @@ export const useAssetPortfolios = ({
             'circle-radius': [
               'case',
               ['==', ['feature-state', 'isSelected'], true],
-              4.5,
-              4,
+              12.5,
+              12,
             ],
             'circle-stroke-width': 2,
             'circle-stroke-color': [

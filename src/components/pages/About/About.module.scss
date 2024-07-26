@@ -41,7 +41,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  align-items: start;
   justify-items: start;
   gap: var(--space-5);
   margin-top: var(--space-7);
@@ -67,4 +66,8 @@
 
 .impactList {
   margin-bottom: 0;
+}
+.devSeedDeploySolutionsLogoContainer {
+  @include containers.flexRowStartCenter;
+  gap: var(--space-4);
 }

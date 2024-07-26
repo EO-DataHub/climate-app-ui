@@ -27,7 +27,11 @@ export const PageWithMapLayout = ({
       >
         <div className={pageWithMapStyles.titlesContainer}>
           <PageTitle>{title}</PageTitle>
-          {subtitle ? <Text size="3">{subtitle}</Text> : null}
+          {subtitle ? (
+            <Text weight="bold" as="p">
+              {subtitle}
+            </Text>
+          ) : null}
         </div>
 
         {sidebarContent}

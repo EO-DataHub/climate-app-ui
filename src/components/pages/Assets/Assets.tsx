@@ -1,24 +1,24 @@
 import axios from 'axios'
-import { Button, TextField } from '@radix-ui/themes'
+import { Button, Heading, Link, TextField } from '@radix-ui/themes'
 import { useContext, useState } from 'react'
 
-import { analyseAssets } from '../../../library/userAssets/analyseAssets'
-import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { Map } from '../../Map/Map'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
-import { useMap } from '../../Map/useMap'
 import {
   RowSelection,
   UserAssets,
 } from '../../../library/userAssets/userAssetTypes'
+import { analyseAssets } from '../../../library/userAssets/analyseAssets'
+import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
+import { AssetsTable } from '../../AssetsTable/AssetsTable'
+import { AuthenticationContext } from '../../../context/AuthenticationContext'
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Map } from '../../Map/Map'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
+import { toast } from 'react-toastify'
+import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
+import { useMap } from '../../Map/useMap'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
-import { toast } from 'react-toastify'
-import { Link } from 'react-router-dom'
-import { AuthenticationContext } from '../../../context/AuthenticationContext'
-import { AssetsTable } from '../../AssetsTable/AssetsTable'
 
 export const Assets = () => {
   const [analysisResultsBearerToken, setAnalysisResultsBearerToken] =
@@ -64,7 +64,7 @@ export const Assets = () => {
           <div className={containerStyles.flexRowSpaceBetweenCenter}>
             <div>Analysis complete</div>
             <Button asChild>
-              <Link to="/analytics">View Results</Link>
+              <ReactRouterLink to="/analytics">View Results</ReactRouterLink>
             </Button>
           </div>,
         )
@@ -84,6 +84,33 @@ export const Assets = () => {
           <AssetsSelect />
           <UploadButtonAndDialog onLoadAssets={handleLoadAssets} />
         </div>
+        {!userAssets ? (
+          <div className={assetStyles.uploadGuildelinesWrapper}>
+            <Heading as="h3" size="3">
+              Please adhere to these guidelines before adding a file:
+            </Heading>
+            <Heading as="h4" size="3">
+              File types accepted
+            </Heading>
+            <p>CSV or GeoJSON FeatureCollection</p>
+            <Heading as="h4" size="3">
+              File attributes must include
+            </Heading>
+            <p>id, latitude, and longitude</p>
+            <Heading as="h4" size="3">
+              Note
+            </Heading>
+            <p>
+              Specific asset analysis workflows may require further attributes
+            </p>
+            <p>
+              You can also download a csv template{' '}
+              <Link href="/template.csv" download>
+                here
+              </Link>
+            </p>
+          </div>
+        ) : null}
         <AssetsTable
           isMapLoaded={isMapLoaded}
           mapRef={mapRef}

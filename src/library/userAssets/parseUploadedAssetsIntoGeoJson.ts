@@ -1,24 +1,19 @@
 // @ts-expect-error - no types available
 import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
-import { FeatureCollection } from 'geojson'
+import { FeatureCollection, Point } from 'geojson'
 
 import { getIsFileCsv, getIsFileGeoJson } from '../fileTypes'
 import { UserAssets } from './userAssetTypes'
-
-const getAssetsEnsuringIdsExist = (assets: UserAssets) => {
-  if (!assets) throw new Error('No assets found')
-  const assetFeaturesWithIds = assets.features.map((feature, index) => {
-    if (feature.properties.id) return feature
-    return {
-      ...feature,
-      properties: {
-        ...feature.properties,
-        id: index,
-      },
-    }
+const doesGeoJsonContainRequiredProperties = (
+  geoJson: FeatureCollection<Point>,
+) =>
+  geoJson.features.every((feature) => {
+    return (
+      !!feature.properties?.id &&
+      typeof feature.geometry?.coordinates?.[0] === 'number' &&
+      typeof feature.geometry?.coordinates?.[1] === 'number'
+    )
   })
-  return { ...assets, features: assetFeaturesWithIds } as UserAssets
-}
 
 export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
   return new Promise<UserAssets>((resolve, reject) => {
@@ -35,10 +30,13 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
 
       if (isGeoJson) {
         try {
-          const newUserAssets = getAssetsEnsuringIdsExist(
-            JSON.parse(fileContents),
-          )
-          resolve(newUserAssets)
+          const parsedFileContents = JSON.parse(fileContents)
+          if (!doesGeoJsonContainRequiredProperties(parsedFileContents)) {
+            reject(
+              "GeoJSON file must contain an 'id' field within each feature's properties object",
+            )
+          }
+          resolve(parsedFileContents)
         } catch (error) {
           reject(error)
         }
@@ -48,10 +46,12 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
           ?.slice(0, fileContents?.indexOf('\n'))
           .split(',')
 
-        if (!headers.includes('latitude') || !headers.includes('longitude')) {
-          reject(
-            "CSV file must contain 'latitude' and 'longitude' columns with coordinate information",
-          )
+        if (
+          !headers.includes('id') ||
+          !headers.includes('latitude') ||
+          !headers.includes('longitude')
+        ) {
+          reject("CSV file must contain 'id','latitude', and 'longitude'")
         }
 
         getGeojsonFromCsv(
@@ -65,7 +65,7 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
             if (!data || error) {
               reject(error)
             }
-            resolve(getAssetsEnsuringIdsExist(data as UserAssets))
+            resolve(data as UserAssets)
           },
         )
       }

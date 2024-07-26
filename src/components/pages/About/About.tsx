@@ -1,7 +1,8 @@
 import { Heading, Link } from '@radix-ui/themes'
 
 import aboutStyles from './About.module.scss'
-import devSeedDeploySolutionsLogo from '../../../../public/devseed-deploysolutions-logo.jpeg'
+import deploySolutionsLogo from '../../../../public/deploysolutions-logo.jpeg'
+import devSeedLogo from '../../../../public/devseed-logo.jpeg'
 import heroPath from '../../../localAssets/aboutHero.jpg'
 import oscLogo from '../../../../public/osc-logo.png'
 import sparkgeoFullWordLogo from '../../../../public/sparkgeo-full-word-logo.png'
@@ -175,17 +176,22 @@ export const About = () => {
             <a href="https://os-climate.org/" target="_blank" rel="noreferrer">
               <img src={oscLogo} alt="OS Climate" />
             </a>
-
-            <a
-              href="https://developmentseed.org/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <img
-                src={devSeedDeploySolutionsLogo}
-                alt="DevelopmentSeed / Deploy Solutions"
-              />
-            </a>
+            <div className={aboutStyles.devSeedDeploySolutionsLogoContainer}>
+              <a
+                href="https://developmentseed.org/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={devSeedLogo} alt="Development Seed" />
+              </a>
+              <a
+                href="https://www.deploy.solutions/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img src={deploySolutionsLogo} alt="Development Seed" />
+              </a>
+            </div>
 
             <div>
               <p>

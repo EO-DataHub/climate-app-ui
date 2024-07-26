@@ -6,7 +6,19 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
 
   return {
-    plugins: [svgr(), react()],
+    plugins: [
+      svgr(),
+      react(),
+      {
+        name: 'markdown-loader',
+        transform(code, id) {
+          if (id.endsWith('.md')) {
+            // For .md files, get the raw content
+            return `export default ${JSON.stringify(code)};`
+          }
+        },
+      },
+    ],
     base: `${env.VITE_BASE_PATH}`,
   }
 })

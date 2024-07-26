@@ -22,3 +22,14 @@
 .sidebarTopSection {
   width: 100%;
 }
+
+.uploadGuildelinesWrapper {
+  & > p {
+    margin: 0;
+  }
+  & h3,
+  h4,
+  p:last-of-type {
+    margin-top: 1em;
+  }
+}

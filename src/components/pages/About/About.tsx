@@ -6,16 +6,14 @@ import devSeedLogo from '../../../../public/devseed-logo.jpeg'
 import heroPath from '../../../localAssets/aboutHero.jpg'
 import oscLogo from '../../../../public/osc-logo.png'
 import sparkgeoFullWordLogo from '../../../../public/sparkgeo-full-word-logo.png'
+import { PageTitle } from '../../PageTitle'
 
 export const About = () => {
   return (
     <div className={aboutStyles.pageWrapper}>
       <img src={heroPath} className={aboutStyles.hero} />
       <main className={aboutStyles.main}>
-        <Heading as="h1" size="7">
-          Climate Asset Risk Analysis Tool
-        </Heading>
-
+        <PageTitle>Climate Asset Risk Analysis Tool</PageTitle>
         <section>
           <Heading as="h2">Overview</Heading>
           <p>

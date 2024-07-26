@@ -1,7 +1,8 @@
-import { Heading, Text } from '@radix-ui/themes'
+import { Text } from '@radix-ui/themes'
 import { ReactNode } from 'react'
 
 import pageWithMapStyles from './PageWithMapLayout.module.css'
+import { PageTitle } from '../PageTitle'
 
 export const PageWithMapLayout = ({
   map,
@@ -25,10 +26,12 @@ export const PageWithMapLayout = ({
         style={{ flexBasis: sidebarWidth, maxWidth: sidebarWidth }}
       >
         <div className={pageWithMapStyles.titlesContainer}>
-          <Heading as="h1" size="7">
-            {title}
-          </Heading>
-          {subtitle ? <Text size="3">{subtitle}</Text> : null}
+          <PageTitle>{title}</PageTitle>
+          {subtitle ? (
+            <Text weight="bold" as="p">
+              {subtitle}
+            </Text>
+          ) : null}
         </div>
 
         {sidebarContent}

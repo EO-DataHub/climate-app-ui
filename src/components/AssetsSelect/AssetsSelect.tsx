@@ -1,7 +1,7 @@
 import { Select } from '@radix-ui/themes'
 import { useContext } from 'react'
 
-import { UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT } from '../../constants'
+import { UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT } from '../../configuration/constants'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsSelectStyles from './AssetsSelect.module.scss'
 import { AuthenticationContext } from '../../context/AuthenticationContext'

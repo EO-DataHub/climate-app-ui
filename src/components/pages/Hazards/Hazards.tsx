@@ -11,7 +11,7 @@ import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
-import { MapSourceIds } from '../../../constants'
+import { MapSourceIds } from '../../../configuration/constants'
 import { LoadingContext } from '../../../context/LoadingContext'
 import {
   climateModelOptions,

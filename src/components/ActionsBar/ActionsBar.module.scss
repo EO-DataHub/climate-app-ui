@@ -2,18 +2,24 @@
 
 .actionsWrapper {
   @include containers.flexColumnSpaceBetweenCenter;
-  background-color: #333132;
+  background-color: var(--app-background-dark);
   height: 100%;
   padding: var(--space-5) var(--space-2);
   box-sizing: border-box;
 
-  & a svg {
+  button {
+    all: unset;
+  }
+
+  & a svg,
+  button svg {
     height: 18px;
     width: 18px;
     fill: var(--accent-6);
   }
 
-  & a {
+  & a,
+  button {
     padding: 11px;
     border-radius: var(--radius-4);
     transition: background-color 0.4s;
@@ -31,11 +37,13 @@
   }
 
   & :global(a.active) svg,
-  a:hover svg {
+  a:hover svg,
+  button:hover svg {
     fill: var(--white);
   }
   & :global(a.active),
-  a:hover {
+  a:hover,
+  button:hover {
     background-color: var(--accent-9);
   }
 }

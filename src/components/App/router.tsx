@@ -9,6 +9,7 @@ import { About } from '../pages/About/About'
 import { Portfolios } from '../pages/Portfolios'
 import { Information } from '../pages/Information'
 import { Notifications } from '../pages/Notifications'
+import { Settings } from '../pages/Settings'
 
 export const router = createBrowserRouter(
   [
@@ -38,6 +39,7 @@ export const router = createBrowserRouter(
         { path: '/portfolios', element: <Portfolios /> },
         { path: '/information', element: <Information /> },
         { path: '/notifications', element: <Notifications /> },
+        { path: '/settings', element: <Settings /> },
         { path: '*', element: <NotFound /> },
       ],
     },

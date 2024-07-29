@@ -6,7 +6,7 @@ import Maplibregl, {
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
-import { MAP_MAX_ZOOM, MapSourceIds } from '../../constants'
+import { MAP_MAX_ZOOM, MapSourceIds } from '../../configuration/constants'
 
 export type MapRef = MutableRefObject<MaplibreMap | null | undefined>
 

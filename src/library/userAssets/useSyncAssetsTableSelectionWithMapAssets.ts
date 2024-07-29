@@ -3,7 +3,10 @@ import { useCallback, useContext, useEffect } from 'react'
 import { bbox as turfBbox } from '@turf/turf'
 
 import { MapRef } from '../../components/Map/useMap'
-import { MAPLIBRE_FIT_BOUNDS_PADDING, MapSourceIds } from '../../constants'
+import {
+  MAPLIBRE_FIT_BOUNDS_PADDING,
+  MapSourceIds,
+} from '../../configuration/constants'
 import { UserAssetForTable } from './convertUserAssets'
 import { RowSelection } from './userAssetTypes'
 import { UserAssetsContext } from '../../context/UserAssetsContext'

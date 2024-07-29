@@ -4,12 +4,23 @@ import Keycloak, { KeycloakOnLoad } from 'keycloak-js'
 import { getAuthenticatedAxios } from '../library/axios'
 import { AxiosInstance } from 'axios'
 
+export interface KeycloakUserInfo {
+  sub?: string
+  email_verified?: boolean
+  name?: string
+  preferred_username?: string
+  given_name?: string
+  family_name?: string
+  email?: string
+}
+
 interface AuthenticationContextValue {
   isAuthenticated: boolean
   isAuthenticating: boolean
   login: () => Promise<void>
   logout: () => Promise<void>
   authenticatedAxios?: AxiosInstance
+  userInfo?: KeycloakUserInfo
 }
 
 const initOptions = {
@@ -37,9 +48,11 @@ const ensureLogoutDoesNotRedirect = () => {
 const initializeAuthentication = ({
   setIsAuthenticated,
   setIsAuthenticating,
+  setUserInfo,
 }: {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
   setIsAuthenticating: React.Dispatch<React.SetStateAction<boolean>>
+  setUserInfo: React.Dispatch<React.SetStateAction<KeycloakUserInfo>>
 }) => {
   // @ts-expect-error - didInitialize isnt technically a public property, but ticket accepted to make it so https://github.com/keycloak/keycloak/issues/27040
   if (authenticationInstance.didInitialize) return // this ensures vite HMR keeps working in development
@@ -54,9 +67,15 @@ const initializeAuthentication = ({
     .then((auth) => {
       setIsAuthenticated(auth)
       setIsAuthenticating(false)
+
       if (auth) {
         ensureLogoutDoesNotRedirect()
       }
+
+      return authenticationInstance.loadUserInfo()
+    })
+    .then((userInfo) => {
+      setUserInfo(userInfo)
     })
     .catch(() => {
       // eslint-disable-next-line no-console
@@ -81,6 +100,7 @@ export const AuthenticationContextProvider = ({
   const [authenticatedAxios, setAuthenticatedAxios] = useState<
     AxiosInstance | undefined
   >()
+  const [userInfo, setUserInfo] = useState<KeycloakUserInfo>({})
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()
@@ -91,7 +111,11 @@ export const AuthenticationContextProvider = ({
   }
 
   useEffect(() => {
-    initializeAuthentication({ setIsAuthenticated, setIsAuthenticating })
+    initializeAuthentication({
+      setIsAuthenticated,
+      setIsAuthenticating,
+      setUserInfo,
+    })
   }, [])
 
   useEffect(
@@ -121,6 +145,7 @@ export const AuthenticationContextProvider = ({
         logout,
         authenticatedAxios,
         isAuthenticating,
+        userInfo,
       }}
     >
       {children}

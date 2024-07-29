@@ -1,7 +1,5 @@
-import { Button } from '@radix-ui/themes'
 import { NavLink } from 'react-router-dom'
-import { useContext } from 'react'
-import AccountIcon from '@material-design-icons/svg/filled/account_circle.svg?react'
+import { useState } from 'react'
 import AnalyticsIcon from '@material-design-icons/svg/filled/leaderboard.svg?react'
 import AssetsIcon from '@material-design-icons/svg/filled/category.svg?react'
 import HazardsIcon from '@material-design-icons/svg/filled/public.svg?react'
@@ -10,15 +8,13 @@ import NotificationsIcon from '@material-design-icons/svg/filled/notifications.s
 import ObservationsIcon from '@material-design-icons/svg/filled/view_timeline.svg?react'
 import PortfolioIcon from '@material-design-icons/svg/filled/folder.svg?react'
 
-import { AuthenticationContext } from '../../context/AuthenticationContext'
 import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.scss'
 import SparkgeoLogo from '../../../public/sparkgeo-logo.svg?react'
+import { UserMenu } from './UserMenu'
 
 export const ActionsBar = () => {
-  const { login, logout, isAuthenticated, isAuthenticating } = useContext(
-    AuthenticationContext,
-  )
+  const [isUserMenuOpen, setUserIsMenuOpen] = useState(false)
 
   return (
     <div className={actionBarStyles.actionsWrapper}>
@@ -55,17 +51,6 @@ export const ActionsBar = () => {
           </NavLink>
         </TooltipForNav>
       </nav>
-
-      {isAuthenticated ? (
-        <Button onClick={logout} loading={isAuthenticating}>
-          Logout
-        </Button>
-      ) : null}
-      {!isAuthenticated ? (
-        <Button onClick={login} loading={isAuthenticating}>
-          Login
-        </Button>
-      ) : null}
       <nav className={actionBarStyles.nav2}>
         <TooltipForNav content="Notifications">
           <NavLink to="/notifications">
@@ -77,11 +62,10 @@ export const ActionsBar = () => {
             <InformationIcon />
           </NavLink>
         </TooltipForNav>
-        <TooltipForNav content="Account settings">
-          <NavLink to="/account">
-            <AccountIcon />
-          </NavLink>
-        </TooltipForNav>
+        <UserMenu
+          setIsUserMenuOpen={setUserIsMenuOpen}
+          isUserMenuOpen={isUserMenuOpen}
+        />
       </nav>
     </div>
   )

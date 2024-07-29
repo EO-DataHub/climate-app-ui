@@ -13,7 +13,7 @@ import {
   MapLayerIds,
   MapSourceIds,
   UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT,
-} from '../../constants'
+} from '../../configuration/constants'
 import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
 import { areBoundsValid } from '../maplibre/isGeometryValid'
 import { MapRef } from '../../components/Map/useMap'

@@ -17,8 +17,14 @@ export const UserMenu = ({
   isUserMenuOpen: boolean
   setIsUserMenuOpen: (isOpen: boolean) => void
 }) => {
-  const { isAuthenticated, login, logout, userInfo, isAuthenticating } =
-    useContext(AuthenticationContext)
+  const {
+    isAuthenticated,
+    isAuthenticating,
+    isAuthenticationServiceError,
+    login,
+    logout,
+    userInfo,
+  } = useContext(AuthenticationContext)
   const firstInitial = userInfo?.given_name?.charAt(0)
   const lastInitial = userInfo?.family_name?.charAt(0)
 
@@ -36,14 +42,24 @@ export const UserMenu = ({
         sideOffset={25}
         className={userMenuStyles.dropdownContent}
       >
-        {isAuthenticating ? <LoadingIndicator /> : null}
-        {!isAuthenticated && !isAuthenticating ? (
+        {isAuthenticationServiceError ? (
+          <>
+            Account services including logging in are not available right now.
+            To try again later, click the browser refresh button.
+          </>
+        ) : null}
+        {isAuthenticating && !isAuthenticationServiceError ? (
+          <LoadingIndicator />
+        ) : null}
+        {!isAuthenticated &&
+        !isAuthenticating &&
+        !isAuthenticationServiceError ? (
           <DropdownMenu.Item onClick={login}>
             <LoginIcon />
             Log in
           </DropdownMenu.Item>
         ) : null}
-        {isAuthenticated ? (
+        {isAuthenticated && !isAuthenticating ? (
           <>
             <div className={userMenuStyles.userInfo}>
               <div className={userMenuStyles.userIcon}>

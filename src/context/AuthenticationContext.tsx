@@ -15,11 +15,12 @@ export interface KeycloakUserInfo {
 }
 
 interface AuthenticationContextValue {
+  authenticatedAxios?: AxiosInstance
   isAuthenticated: boolean
   isAuthenticating: boolean
+  isAuthenticationServiceError: boolean
   login: () => Promise<void>
   logout: () => Promise<void>
-  authenticatedAxios?: AxiosInstance
   userInfo?: KeycloakUserInfo
 }
 
@@ -49,10 +50,12 @@ const initializeAuthentication = ({
   setIsAuthenticated,
   setIsAuthenticating,
   setUserInfo,
+  setIsAuthenticationServiceError,
 }: {
   setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
   setIsAuthenticating: React.Dispatch<React.SetStateAction<boolean>>
   setUserInfo: React.Dispatch<React.SetStateAction<KeycloakUserInfo>>
+  setIsAuthenticationServiceError: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   // @ts-expect-error - didInitialize isnt technically a public property, but ticket accepted to make it so https://github.com/keycloak/keycloak/issues/27040
   if (authenticationInstance.didInitialize) return // this ensures vite HMR keeps working in development
@@ -66,26 +69,27 @@ const initializeAuthentication = ({
     })
     .then((auth) => {
       setIsAuthenticated(auth)
-      setIsAuthenticating(false)
 
       if (auth) {
         ensureLogoutDoesNotRedirect()
+        return authenticationInstance.loadUserInfo()
       }
-
-      return authenticationInstance.loadUserInfo()
     })
     .then((userInfo) => {
-      setUserInfo(userInfo)
+      setUserInfo(userInfo as KeycloakUserInfo)
     })
     .catch(() => {
-      // eslint-disable-next-line no-console
-      console.error('Authenticated Failed')
+      setIsAuthenticationServiceError(true)
+    })
+    .finally(() => {
+      setIsAuthenticating(false)
     })
 }
 
 export const AuthenticationContext = createContext<AuthenticationContextValue>({
   isAuthenticated: false,
   isAuthenticating: false,
+  isAuthenticationServiceError: false,
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
 })
@@ -97,6 +101,8 @@ export const AuthenticationContextProvider = ({
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false)
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false)
+  const [isAuthenticationServiceError, setIsAuthenticationServiceError] =
+    useState<boolean>(false)
   const [authenticatedAxios, setAuthenticatedAxios] = useState<
     AxiosInstance | undefined
   >()
@@ -114,6 +120,7 @@ export const AuthenticationContextProvider = ({
     initializeAuthentication({
       setIsAuthenticated,
       setIsAuthenticating,
+      setIsAuthenticationServiceError,
       setUserInfo,
     })
   }, [])
@@ -140,11 +147,12 @@ export const AuthenticationContextProvider = ({
   return (
     <AuthenticationContext.Provider
       value={{
+        authenticatedAxios,
         isAuthenticated,
+        isAuthenticating,
+        isAuthenticationServiceError,
         login,
         logout,
-        authenticatedAxios,
-        isAuthenticating,
         userInfo,
       }}
     >

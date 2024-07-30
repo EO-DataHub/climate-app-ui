@@ -6,51 +6,51 @@ export interface LegendParameters {
 export const indicatorOptions = [
   {
     value: 'days_tas_above_20c',
-    label: 'Days with average temperature above 20°C',
+    label: 'Days a year with average temperature above 20°C',
   },
   {
     value: 'days_tas_above_25c',
-    label: 'Days with average temperature above 25°C',
+    label: 'Days a year with average temperature above 25°C',
   },
   {
     value: 'days_tas_above_28c',
-    label: 'Days with average temperature above 28°C',
+    label: 'Days a year with average temperature above 28°C',
   },
   {
     value: 'days_tas_above_30c',
-    label: 'Days with average temperature above 30°C',
+    label: 'Days a year with average temperature above 30°C',
   },
   {
     value: 'days_tas_above_32c',
-    label: 'Days with average temperature above 32°C',
+    label: 'Days a year with average temperature above 32°C',
   },
   {
     value: 'days_tas_above_35c',
-    label: 'Days with average temperature above 35°C',
+    label: 'Days a year with average temperature above 35°C',
   },
   {
     value: 'days_tas_above_40c',
-    label: 'Days with average temperature above 40°C',
+    label: 'Days a year with average temperature above 40°C',
   },
   {
     value: 'days_tas_above_45c',
-    label: 'Days with average temperature above 45°C',
+    label: 'Days a year with average temperature above 45°C',
   },
   {
     value: 'days_tas_above_50c',
-    label: 'Days with average temperature above 50°C',
+    label: 'Days a year with average temperature above 50°C',
   },
   {
     value: 'days_tas_above_55c',
-    label: 'Days with average temperature above 55°C',
+    label: 'Days a year with average temperature above 55°C',
   },
   {
     value: 'mean_degree_days_v2_above_28c',
-    label: 'Mean degree days above 28°C',
+    label: 'Mean degree days a year above 28°C',
   },
   {
     value: 'mean_degree_days_v2_above_32c',
-    label: 'Mean degree days above 32°C',
+    label: 'Mean degree days a year above 32°C',
   },
 ]
 

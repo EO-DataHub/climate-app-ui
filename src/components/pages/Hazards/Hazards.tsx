@@ -1,9 +1,8 @@
-import { Button, Heading, Select, Spinner, Tabs, Text } from '@radix-ui/themes'
+import { Button, Heading, Select, Tabs, Text } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import axios from 'axios'
 import { MapSourceIds } from '../../../configuration/constants'
 import { LoadingContext } from '../../../context/LoadingContext'
 import {
@@ -14,6 +13,7 @@ import {
   yearOptions,
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
+import { HazardRiskValueOverview } from './HazardRiskValueOverview'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
@@ -22,22 +22,20 @@ import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
-import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
-
-const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
 export const Hazards = () => {
   const [hazardIndicator, setHazardIndicator] = useState(
     indicatorOptions[0].value,
   )
-  const [hazardMarkerValue, setHazardMarkerValue] = useState<
-    number | string | null
-  >(null)
+
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState(scenarioOptions[0].value)
+  const scenarioLabel = scenarioOptions.find(
+    (option) => option.value === scenario,
+  )?.label
   const [year, setYear] = useState(yearOptions[0])
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { setIsMapLoading } = useContext(LoadingContext)
@@ -55,12 +53,7 @@ export const Hazards = () => {
       scenario,
       year,
     })
-  const { markerCoordinates, isMarkerOnMap } =
-    useMapClickToUpdateDraggableMarker({
-      isMapLoaded,
-      mapRef,
-    })
-  const hazardUnits = hazardMetadata?.properties['osc-hazard:units']
+
   const hazardIndicatorLabel = indicatorOptions.find(
     (option) => option.value === hazardIndicator,
   )?.label
@@ -90,45 +83,6 @@ export const Hazards = () => {
   const legendParametersToUse = hazardIndicator.includes('days_tas_above')
     ? legendParameters.daysWithAverageTemperatureAbove
     : legendParameters.meanDegreeDaysAbove
-
-  useEffect(
-    function getHazardValueAtLocation() {
-      const queryHazardValueByCoordinates = () => {
-        if (!markerCoordinates?.lat || !markerCoordinates?.lng) return
-
-        const axiosController = new AbortController()
-
-        // Bodge to use version of the zarrs which are quicker to load for getting value at a point
-        const sgZarrPath = zarrPath.replace(
-          'ukri-eodh-hazard-tiles-test',
-          'ukri-eodh-hazard-tiles-sg',
-        )
-        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${sgZarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
-
-        setHazardMarkerValue(null)
-
-        axios
-          .get(url, { signal: axiosController.signal })
-          .then((res) => {
-            setHazardMarkerValue(res.data.hazard_value)
-          })
-          .catch((error) => {
-            if (error.code !== 'ERR_CANCELED') {
-              setHazardMarkerValue('unknown')
-            }
-          })
-
-        return axiosController
-      }
-
-      const queryController = queryHazardValueByCoordinates()
-
-      return () => {
-        queryController?.abort()
-      }
-    },
-    [markerCoordinates, zarrPath],
-  )
 
   useEffect(
     function updateHazardMapTiles() {
@@ -199,25 +153,6 @@ export const Hazards = () => {
       year,
       zarrPath,
     ],
-  )
-
-  const hazardLocationInfo = (
-    <div className={hazardsStyles.locationInfoWrapper}>
-      <h3>Location</h3>
-      <p>
-        {markerCoordinates?.lat.toFixed(4)}°,{' '}
-        {markerCoordinates?.lng.toFixed(4)}°
-      </p>
-      <p>
-        Indicator value is{' '}
-        {hazardMarkerValue === null ? (
-          <Spinner style={{ display: 'inline-block' }} />
-        ) : (
-          Number(hazardMarkerValue).toFixed(0)
-        )}{' '}
-        {hazardUnits ?? 'unknown units'}
-      </p>
-    </div>
   )
 
   const sidebarContent = (
@@ -303,10 +238,14 @@ export const Hazards = () => {
           </Tabs.List>
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
-              {!isMarkerOnMap ? (
-                <>Select location on map to view details.</>
-              ) : null}
-              {isMarkerOnMap ? hazardLocationInfo : undefined}
+              <HazardRiskValueOverview
+                hazardIndicator={hazardIndicatorLabel}
+                isMapLoaded={isMapLoaded}
+                mapRef={mapRef}
+                scenario={scenarioLabel}
+                year={year}
+                zarrPath={zarrPath}
+              />
             </Tabs.Content>
 
             <Tabs.Content value="Methodology">

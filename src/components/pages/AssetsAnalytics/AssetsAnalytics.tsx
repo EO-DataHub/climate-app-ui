@@ -34,6 +34,7 @@ import {
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
 import analyseAssetsStyles from './AssetsAnalytics.module.scss'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
 
 const columnHelper = createColumnHelper<UserAssetForTable>()
 
@@ -94,7 +95,7 @@ export const AssetsAnalytics = () => {
   })
 
   const sidebarContent = (
-    <div className={containerStyles.sidebarContent}>
+    <div className={sidebarStyles.content}>
       <Tabs.Root
         defaultValue="section1"
         className={analyseAssetsStyles.tabsRoot}

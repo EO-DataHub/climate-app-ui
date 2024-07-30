@@ -13,35 +13,7 @@
   }
 }
 
-.sidebarContent {
-  @include containers.sidebarContent;
-}
-.selectAssetsButton {
-  width: 100%;
-}
-
-.scenarioYearRow {
+.multipleInputsRow {
   @include containers.flexRowSpaceBetweenCenter;
-  width: 100%;
-}
-.indicatorDetails {
-  overflow-y: auto;
-  width: 100%;
-  height: 100%;
-}
-.sidepanelMidSection {
-  @include containers.flexColumnStartStart;
-  width: 100%;
-  height: 100%;
-  overflow-y: hidden;
-}
-.hazardTilesForm {
-  @include containers.flexColumnStartStart;
-  width: 100%;
-  box-sizing: border-box;
-}
-.portfolioSelectWrapper {
-  @include containers.flexColumnSpaceBetweenStart;
-  gap: var(--space-3);
   width: 100%;
 }

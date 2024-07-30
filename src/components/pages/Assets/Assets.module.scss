@@ -1,9 +1,5 @@
 @use '../../../library/genericStyles/containers';
-
-.sidebarContent {
-  @include containers.sidebarContent;
-  overflow-y: auto;
-}
+@use '../../../library/genericStyles/forms';
 
 .analyseButtonRow {
   @include containers.flexRowEndCenter;
@@ -32,4 +28,7 @@
   p:last-of-type {
     margin-top: 1em;
   }
+}
+.assetsSelectWrapper {
+  @include forms.inputLabelContainer;
 }

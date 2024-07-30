@@ -10,6 +10,7 @@ import { Map } from '../../Map/Map'
 import { useMap } from '../../Map/useMap'
 import { ObservationsMenu } from '../../ObservationsMenu/ObservationsMenu'
 import observationsStyles from './Observations.module.scss'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
 
 export const Observations = () => {
   interface ClickInfoState {
@@ -110,9 +111,9 @@ export const Observations = () => {
   )
 
   const sidebarContent = (
-    <div className={observationsStyles.sidebarContent}>
-      <div className={observationsStyles.sidepanelMidSection}>
-        <form className={observationsStyles.observationsForm}>
+    <div className={sidebarStyles.content}>
+      <div className={sidebarStyles.contentMidSection}>
+        <form className={sidebarStyles.contentForm}>
           <InputLabelContainer>
             <label htmlFor="filter-1">Observation Type</label>
             <Select.Root>
@@ -152,7 +153,7 @@ export const Observations = () => {
           observationLocationInfo}
 
         <Separator size="4" />
-        <div className={observationsStyles.portfolioSelectWrapper}>
+        <div className={sidebarStyles.portfolioSelectWrapper}>
           <Text size="3" weight="bold">
             View Assets on Map
           </Text>

@@ -1,11 +1,4 @@
-import {
-  Button,
-  Heading,
-  Select,
-  Separator,
-  Spinner,
-  Text,
-} from '@radix-ui/themes'
+import { Button, Heading, Select, Spinner, Tabs, Text } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -20,18 +13,19 @@ import {
   scenarioOptions,
   yearOptions,
 } from '../../../library/api/fakeApiData'
-import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
+import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
@@ -227,37 +221,39 @@ export const Hazards = () => {
   )
 
   const sidebarContent = (
-    <div className={hazardsStyles.sidebarContent}>
-      <div className={hazardsStyles.sidepanelMidSection}>
-        <form className={hazardsStyles.hazardTilesForm}>
-          <InputLabelContainer>
-            <label htmlFor="hazard-type">Hazard Type</label>
-            <Select.Root value={hazardType}>
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="hazard-type">
-                <Select.Item value={hazardType}>Chronic Heat</Select.Item>
-              </Select.Content>
-            </Select.Root>
-          </InputLabelContainer>
+    <div className={sidebarStyles.content}>
+      <div className={sidebarStyles.contentMidSection}>
+        <form className={sidebarStyles.contentForm}>
+          <div className={hazardsStyles.multipleInputsRow}>
+            <InputLabelContainer>
+              <label htmlFor="hazard-type">Hazard Type</label>
+              <Select.Root value={hazardType}>
+                <Select.Trigger placeholder="Select" />
+                <Select.Content id="hazard-type">
+                  <Select.Item value={hazardType}>Chronic Heat</Select.Item>
+                </Select.Content>
+              </Select.Root>
+            </InputLabelContainer>
 
-          <InputLabelContainer>
-            <label htmlFor="hazard-indicator">Hazard Indicator</label>
-            <Select.Root
-              value={hazardIndicator}
-              onValueChange={setHazardIndicator}
-            >
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="hazard-indicator">
-                {indicatorOptions.map(({ value, label }) => (
-                  <Select.Item key={value} value={value}>
-                    {label}
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Root>
-          </InputLabelContainer>
+            <InputLabelContainer>
+              <label htmlFor="hazard-indicator">Hazard Indicator</label>
+              <Select.Root
+                value={hazardIndicator}
+                onValueChange={setHazardIndicator}
+              >
+                <Select.Trigger placeholder="Select" />
+                <Select.Content id="hazard-indicator">
+                  {indicatorOptions.map(({ value, label }) => (
+                    <Select.Item key={value} value={value}>
+                      {label}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            </InputLabelContainer>
+          </div>
 
-          <div className={hazardsStyles.scenarioYearRow}>
+          <div className={hazardsStyles.multipleInputsRow}>
             <InputLabelContainer>
               <label htmlFor="climateModel">Climate Model</label>
               <Select.Root value={climateModel} onValueChange={setClimateModel}>
@@ -300,35 +296,48 @@ export const Hazards = () => {
           </div>
         </form>
 
-        <div className={hazardsStyles.indicatorDetails}>
-          <Heading size="4" as="h2">
-            {hazardIndicatorLabel}
-          </Heading>
-          {isMarkerOnMap ? hazardLocationInfo : undefined}
-          {isHazardMetadataLoading ? <LoadingIndicator /> : hazardDetail}
-        </div>
+        <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
+          <Tabs.List>
+            <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+            <Tabs.Trigger value="Methodology">Methodology</Tabs.Trigger>
+          </Tabs.List>
+          <div className={sidebarStyles.tabsContentWrapper}>
+            <Tabs.Content value="overview">
+              {!isMarkerOnMap ? (
+                <>Select location on map to view details.</>
+              ) : null}
+              {isMarkerOnMap ? hazardLocationInfo : undefined}
+            </Tabs.Content>
 
-        <Separator size="4" />
+            <Tabs.Content value="Methodology">
+              <Heading size="4" as="h2">
+                {hazardIndicatorLabel}
+              </Heading>
 
-        <div className={hazardsStyles.portfolioSelectWrapper}>
-          <Text size="3" weight="bold">
-            View Assets on Map
-          </Text>
-          <InputLabelContainer>
-            <AssetsSelect
-              showUnsaved
-              onValueChange={updateCurrentPortfolioShown}
-            />
-          </InputLabelContainer>
+              {isHazardMetadataLoading ? <LoadingIndicator /> : hazardDetail}
+            </Tabs.Content>
+          </div>
+        </Tabs.Root>
+
+        <div className={sidebarStyles.contentBottomButtonRow}>
+          <div className={sidebarStyles.portfolioSelectWrapper}>
+            <Text size="3" weight="bold">
+              View Assets on Map
+            </Text>
+            <InputLabelContainer>
+              <AssetsSelect
+                showUnsaved
+                onValueChange={updateCurrentPortfolioShown}
+              />
+            </InputLabelContainer>
+          </div>
+          <div className={sidebarStyles.selectAssetsButtonWrapper}>
+            <Button onClick={handleSelectAssetsClick}>
+              Select Assets for Analysis
+            </Button>
+          </div>
         </div>
       </div>
-
-      <Button
-        className={hazardsStyles.selectAssetsButton}
-        onClick={handleSelectAssetsClick}
-      >
-        Select Assets for Analysis
-      </Button>
     </div>
   )
 
@@ -345,7 +354,7 @@ export const Hazards = () => {
       sidebarContent={sidebarContent}
       title="Hazards"
       subtitle="Explore hazard scenarios or analyze assets."
-      sidebarWidth="542px"
+      sidebarWidth="40%"
       legend={legend}
     />
   )

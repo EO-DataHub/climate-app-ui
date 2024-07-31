@@ -11,7 +11,7 @@ export const useMapClickToUpdateDraggableMarker = ({
 }) => {
   const [coordinates, setCoordinates] = useState<LngLat | undefined>()
   const isMarkerOnMap = useRef(false)
-  const marker = useRef(new Marker({ draggable: true }))
+  const marker = useRef(new Marker({ draggable: true, color: '#3e63dd' }))
 
   useEffect(
     function initializeMarkerAndClicking() {

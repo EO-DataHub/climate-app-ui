@@ -34,10 +34,14 @@
 }
 .dialogContent {
   max-width: 500px;
+
+  & svg {
+    height: 48px;
+    width: 48px;
+    fill: var(--slate-11);
+  }
 }
-.uploadButton {
-  width: 100%;
-}
+
 .fileRejectedError {
   color: var(--error-color);
   font-size: var(--font-size-2);

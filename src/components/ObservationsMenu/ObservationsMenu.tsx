@@ -21,7 +21,7 @@ export const ObservationsMenu = ({
   return (
     <Select.Root value={selected} onValueChange={setSelected}>
       <Select.Trigger placeholder="Select" />
-      <Select.Content id="filter-2">
+      <Select.Content id="observation-date">
         {options.map((option) => (
           <Select.Item key={option.value} value={option.value}>
             {option.label}

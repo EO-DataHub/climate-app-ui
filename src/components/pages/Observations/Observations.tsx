@@ -1,16 +1,22 @@
-import { Button, Select, Separator, Text } from '@radix-ui/themes'
+import { Button, Select, Tabs, Text } from '@radix-ui/themes'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { Map } from '../../Map/Map'
-import { useMap } from '../../Map/useMap'
 import { ObservationsMenu } from '../../ObservationsMenu/ObservationsMenu'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
+import { useMap } from '../../Map/useMap'
+import formStyles from '../../../library/genericStyles/forms.module.scss'
 import observationsStyles from './Observations.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import {
+  observationDatePopupContent,
+  observationTypePopupContent,
+} from '../../../configuration/infoPopupContentObservations'
+import { InfoPopover } from '../../InfoPopover/InfoPopover'
 
 export const Observations = () => {
   interface ClickInfoState {
@@ -115,44 +121,66 @@ export const Observations = () => {
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
           <InputLabelContainer>
-            <label htmlFor="filter-1">Observation Type</label>
+            <div className={formStyles.labelWithInfoPopoverRow}>
+              <label htmlFor="observation-type">Observation Type</label>
+              <InfoPopover>{observationTypePopupContent}</InfoPopover>
+            </div>
+
             <Select.Root>
               <Select.Trigger placeholder="Select" />
-              <Select.Content id="filter-1">
+              <Select.Content id="observation-type">
                 <Select.Item value="x">Land Surface Temperature</Select.Item>
                 <Select.Item value="y">Flooding</Select.Item>
               </Select.Content>
             </Select.Root>
           </InputLabelContainer>
           <InputLabelContainer>
-            <label htmlFor="filter-2">Date</label>
+            <div className={formStyles.labelWithInfoPopoverRow}>
+              <label htmlFor="observation-date">Date</label>
+              <InfoPopover>{observationDatePopupContent}</InfoPopover>
+            </div>
             <ObservationsMenu selected={selected} setSelected={setSelected} />
           </InputLabelContainer>
         </form>
-        <Text size="3">
-          <p>
-            Land Surface Temperature means radiative temperature of the
-            outermost “skin” layer of a given surface. It is related to
-            blackbody radiation at a given temperature, modified by spectral
-            emissivity component.
-          </p>
-          <p>
-            <strong>Credit</strong>: University of Leicester, Surface
-            Temperature Group, NCEO
-          </p>
-          <p>
-            <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J, Ghent, D,
-            Veal, K. L, Göttsche, F, A new inverse method for the retrieval of
-            Land Surface Temperature and Emissivity from the ASTER instrument,
-            AGU Earth and Space Science, (in review 2024)
-          </p>
-        </Text>
-        {clickInfo.lat &&
-          clickInfo.lon &&
-          clickInfo.value !== null &&
-          observationLocationInfo}
+        <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
+          <Tabs.List>
+            <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
+            <Tabs.Trigger value="Methodology">Methodology</Tabs.Trigger>
+          </Tabs.List>
+          <div className={sidebarStyles.tabsContentWrapper}>
+            <Tabs.Content value="overview">
+              {clickInfo.lat &&
+                clickInfo.lon &&
+                clickInfo.value !== null &&
+                observationLocationInfo}
+            </Tabs.Content>
 
-        <Separator size="4" />
+            <Tabs.Content value="Methodology">
+              <Text size="3">
+                <p>
+                  Land Surface Temperature means radiative temperature of the
+                  outermost “skin” layer of a given surface. It is related to
+                  blackbody radiation at a given temperature, modified by
+                  spectral emissivity component.
+                </p>
+                <p>
+                  <strong>Credit</strong>: University of Leicester, Surface
+                  Temperature Group, NCEO
+                </p>
+                <p>
+                  <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J,
+                  Ghent, D, Veal, K. L, Göttsche, F, A new inverse method for
+                  the retrieval of Land Surface Temperature and Emissivity from
+                  the ASTER instrument, AGU Earth and Space Science, (in review
+                  2024)
+                </p>
+              </Text>
+            </Tabs.Content>
+          </div>
+        </Tabs.Root>
+      </div>
+
+      <div className={sidebarStyles.contentBottomButtonRow}>
         <div className={sidebarStyles.portfolioSelectWrapper}>
           <Text size="3" weight="bold">
             View Assets on Map
@@ -164,14 +192,12 @@ export const Observations = () => {
             />
           </InputLabelContainer>
         </div>
+        <div className={sidebarStyles.selectAssetsButtonWrapper}>
+          <Button onClick={handleSelectAssetsClick}>
+            Select Assets for Analysis
+          </Button>
+        </div>
       </div>
-
-      <Button
-        className={observationsStyles.selectAssetsButton}
-        onClick={handleSelectAssetsClick}
-      >
-        Select Assets for Analysis
-      </Button>
     </div>
   )
 
@@ -211,7 +237,7 @@ export const Observations = () => {
       sidebarContent={sidebarContent}
       title="Observations"
       subtitle="Earth Observation Data can be used to provide additional insight into local variation in asset risk."
-      sidebarWidth="542px"
+      sidebarWidth="40%"
       legend={legend}
     />
   )

@@ -4,7 +4,10 @@ import { useDropzone } from 'react-dropzone'
 
 import { parseUploadedAssetsIntoGeoJson } from '../../library/userAssets/parseUploadedAssetsIntoGeoJson'
 import { UserAssets } from '../../library/userAssets/userAssetTypes'
+import containerStyles from '../../library/genericStyles/containers.module.scss'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
+import UploadIcon from '@material-design-icons/svg/filled/upload_file.svg?react'
+import UploadCompleteIcon from '@material-design-icons/svg/filled/check_circle.svg?react'
 
 export const UploadButtonAndDialog = ({
   onLoadAssets,
@@ -76,6 +79,11 @@ export const UploadButtonAndDialog = ({
     onLoadAssets(parsedAssets)
   }
 
+  const cancelUpload = () => {
+    setParsedAssets(null)
+    setIsDialogOpen(false)
+  }
+
   const chosenFile = chosenUnparsedFiles?.[0]
   const dropzoneClassNameToUse = isDragActive
     ? `${uploadButtonAndDialogStyles.dropzone} ${uploadButtonAndDialogStyles.dropzoneActive}`
@@ -91,12 +99,6 @@ export const UploadButtonAndDialog = ({
       </tbody>
     </table>
   ) : null
-
-  const assetsFileFinePrint = (
-    <Text size="1" className={uploadButtonAndDialogStyles.assetsFileFinePrint}>
-      Fine print for file parameters
-    </Text>
-  )
 
   return (
     <Dialog.Root open={isDialogOpen} onOpenChange={handleDialogOpenChange}>
@@ -126,18 +128,24 @@ export const UploadButtonAndDialog = ({
             </>
           ) : null}
           {!isFileLoading && !parsedAssets ? (
-            <Text weight="bold">
-              Drag and drop csv or geojson here or
-              <br />
-              <Link asChild>
-                <button onClick={openFileBrowser}>Choose File</button>
-              </Link>
-            </Text>
+            <>
+              <UploadIcon />
+              <Text weight="bold">
+                Drag and drop csv or geojson file or
+                <br />
+                <Link asChild>
+                  <button onClick={openFileBrowser}>Choose File</button>
+                </Link>
+              </Text>
+            </>
           ) : null}
           {parsedAssets && !isFileLoading ? (
-            <Text weight="bold">File opened</Text>
+            <>
+              <UploadCompleteIcon />
+              <Text weight="bold">File opened</Text>
+            </>
           ) : null}
-          {assetsFileFinePrint}
+
           {fileRejections.length > 0 ? (
             <Text className={uploadButtonAndDialogStyles.fileRejectedError}>
               Unsupported file type. Please choose a .csv or .geojson file.
@@ -150,14 +158,14 @@ export const UploadButtonAndDialog = ({
             </Text>
           ) : null}
         </div>
-
-        <Button
-          className={uploadButtonAndDialogStyles.uploadButton}
-          onClick={handleLoadAssetsClick}
-          disabled={!parsedAssets}
-        >
-          Load Assets
-        </Button>
+        <div className={containerStyles.flexRowEndCenter}>
+          <Button variant="soft" onClick={cancelUpload}>
+            Cancel
+          </Button>
+          <Button onClick={handleLoadAssetsClick} disabled={!parsedAssets}>
+            Load Assets
+          </Button>
+        </div>
       </Dialog.Content>
     </Dialog.Root>
   )

@@ -9,7 +9,7 @@ import {
   hazardTypePopupContent,
   scenarioPopupContent,
   yearPopupContent,
-} from '../../../configuration/hazardPopupContent'
+} from '../../../configuration/infoPopupContentHazards'
 import {
   climateModelOptions,
   indicatorOptions,
@@ -30,6 +30,7 @@ import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
+import formStyles from '../../../library/genericStyles/forms.module.scss'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
@@ -169,7 +170,7 @@ export const Hazards = () => {
         <form className={sidebarStyles.contentForm}>
           <div className={hazardsStyles.multipleInputsRow}>
             <InputLabelContainer>
-              <div className={hazardsStyles.labelRow}>
+              <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="hazard-type">Hazard Type</label>
                 <InfoPopover>{hazardTypePopupContent}</InfoPopover>
               </div>
@@ -183,7 +184,7 @@ export const Hazards = () => {
             </InputLabelContainer>
 
             <InputLabelContainer>
-              <div className={hazardsStyles.labelRow}>
+              <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="hazard-indicator">Hazard Indicator</label>
                 <InfoPopover>{hazardIndicatorPopupContent}</InfoPopover>
               </div>
@@ -206,7 +207,7 @@ export const Hazards = () => {
 
           <div className={hazardsStyles.multipleInputsRow}>
             <InputLabelContainer>
-              <div className={hazardsStyles.labelRow}>
+              <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="climateModel">Climate Model</label>
                 <InfoPopover>{climateModelPopupContent}</InfoPopover>
               </div>
@@ -223,7 +224,7 @@ export const Hazards = () => {
               </Select.Root>
             </InputLabelContainer>
             <InputLabelContainer>
-              <div className={hazardsStyles.labelRow}>
+              <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="scenario">Scenario</label>
                 <InfoPopover>{scenarioPopupContent}</InfoPopover>
               </div>
@@ -239,7 +240,7 @@ export const Hazards = () => {
               </Select.Root>
             </InputLabelContainer>
             <InputLabelContainer>
-              <div className={hazardsStyles.labelRow}>
+              <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="year">Year</label>
                 <InfoPopover>{yearPopupContent}</InfoPopover>
               </div>

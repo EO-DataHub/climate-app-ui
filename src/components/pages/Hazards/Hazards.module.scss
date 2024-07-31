@@ -4,10 +4,3 @@
   @include containers.flexRowSpaceBetweenCenter;
   width: 100%;
 }
-.labelRow {
-  @include containers.flexRowStartCenter;
-  gap: var(--space-1);
-  & label {
-    text-wrap: nowrap;
-  }
-}

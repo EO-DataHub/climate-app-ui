@@ -1,0 +1,9 @@
+@use '../../library/genericStyles/containers';
+
+.labelWithInfoPopoverRow {
+  @include containers.flexRowStartCenter;
+  gap: var(--space-1);
+  & label {
+    text-wrap: nowrap;
+  }
+}

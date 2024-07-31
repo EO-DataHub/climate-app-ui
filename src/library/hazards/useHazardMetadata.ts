@@ -2,12 +2,14 @@ import { LoadingContext } from '../../context/LoadingContext'
 import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 
-export interface HazardMetadata {
+interface _HazardMetadata {
   properties: {
     ['osc-hazard:description']: string
     ['osc-hazard:units']: string
   }
 }
+
+export type HazardMetadata = _HazardMetadata | undefined | null
 
 export const useHazardMetadata = ({
   climateModel,
@@ -22,9 +24,7 @@ export const useHazardMetadata = ({
   scenario: string
   year: string
 }) => {
-  const [hazardMetadata, setHazardMetadata] = useState<
-    HazardMetadata | undefined | null
-  >()
+  const [hazardMetadata, setHazardMetadata] = useState<HazardMetadata>()
   const [isHazardMetadataError, setIsHazardMetadataError] = useState(false)
   const [isHazardMetadataLoading, setIsHazardMetadataLoading] = useState(false)
   const { setIsMapLoading } = useContext(LoadingContext)

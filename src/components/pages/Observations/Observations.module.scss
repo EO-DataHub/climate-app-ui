@@ -1,28 +1,6 @@
 @use '../../../library/genericStyles/containers';
 
-.sidebarContent {
-  @include containers.sidebarContent;
-}
-.sidepanelMidSection {
-  @include containers.flexColumnStartStart;
-  overflow-y: hidden;
-  width: 100%;
-}
 .selectAssetsButton {
-  width: 100%;
-}
-.observationsForm {
-  @include containers.flexColumnStartStart;
-  width: 100%;
-  box-sizing: border-box;
-}
-.portfolioSelectWrapper {
-  @include containers.flexColumnSpaceBetweenStart;
-  gap: var(--space-3);
-  width: 100%;
-}
-.multiInputRow {
-  @include containers.flexRowSpaceBetweenCenter;
   width: 100%;
 }
 .greyBox {

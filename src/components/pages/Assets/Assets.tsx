@@ -19,6 +19,7 @@ import { useMap } from '../../Map/useMap'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import assetStyles from './Assets.module.scss'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
 
 export const Assets = () => {
   const [analysisResultsBearerToken, setAnalysisResultsBearerToken] =
@@ -78,10 +79,13 @@ export const Assets = () => {
   }
 
   const sidebarContent = (
-    <div className={assetStyles.sidebarContent}>
+    <div className={sidebarStyles.content}>
       <div className={assetStyles.sidebarTopSection}>
         <div className={assetStyles.selectPortfolioRow}>
-          <AssetsSelect />
+          <div className={assetStyles.assetsSelectWrapper}>
+            <label>Portfolios</label>
+            <AssetsSelect />
+          </div>
           <UploadButtonAndDialog onLoadAssets={handleLoadAssets} />
         </div>
         {!userAssets ? (

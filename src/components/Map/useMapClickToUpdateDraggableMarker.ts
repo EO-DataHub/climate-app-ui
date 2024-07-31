@@ -1,12 +1,13 @@
-import { LngLat, MapMouseEvent, Map as MaplibreMap, Marker } from 'maplibre-gl'
+import { LngLat, MapMouseEvent, Marker } from 'maplibre-gl'
 import { useEffect, useRef, useState } from 'react'
+import { MapRef } from './useMap'
 
 export const useMapClickToUpdateDraggableMarker = ({
   isMapLoaded,
   mapRef,
 }: {
   isMapLoaded: boolean
-  mapRef: React.MutableRefObject<MaplibreMap | undefined>
+  mapRef: MapRef
 }) => {
   const [coordinates, setCoordinates] = useState<LngLat | undefined>()
   const isMarkerOnMap = useRef(false)

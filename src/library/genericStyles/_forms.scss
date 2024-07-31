@@ -14,8 +14,7 @@
     @include formLabel;
   }
 
-  & button {
-    /* we will add other input types as needed */
+  button:not(:global(.iconButton)) {
     width: 100%;
   }
 }

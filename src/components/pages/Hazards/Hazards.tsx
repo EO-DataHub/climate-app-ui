@@ -3,8 +3,13 @@ import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { MapSourceIds } from '../../../configuration/constants'
-import { LoadingContext } from '../../../context/LoadingContext'
+import {
+  climateModelPopupContent,
+  hazardIndicatorPopupContent,
+  hazardTypePopupContent,
+  scenarioPopupContent,
+  yearPopupContent,
+} from '../../../configuration/hazardPopupContent'
 import {
   climateModelOptions,
   indicatorOptions,
@@ -14,10 +19,13 @@ import {
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { HazardRiskValueOverview } from './HazardRiskValueOverview'
+import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
+import { LoadingContext } from '../../../context/LoadingContext'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
+import { MapSourceIds } from '../../../configuration/constants'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
@@ -161,7 +169,11 @@ export const Hazards = () => {
         <form className={sidebarStyles.contentForm}>
           <div className={hazardsStyles.multipleInputsRow}>
             <InputLabelContainer>
-              <label htmlFor="hazard-type">Hazard Type</label>
+              <div className={hazardsStyles.labelRow}>
+                <label htmlFor="hazard-type">Hazard Type</label>
+                <InfoPopover>{hazardTypePopupContent}</InfoPopover>
+              </div>
+
               <Select.Root value={hazardType}>
                 <Select.Trigger placeholder="Select" />
                 <Select.Content id="hazard-type">
@@ -171,7 +183,11 @@ export const Hazards = () => {
             </InputLabelContainer>
 
             <InputLabelContainer>
-              <label htmlFor="hazard-indicator">Hazard Indicator</label>
+              <div className={hazardsStyles.labelRow}>
+                <label htmlFor="hazard-indicator">Hazard Indicator</label>
+                <InfoPopover>{hazardIndicatorPopupContent}</InfoPopover>
+              </div>
+
               <Select.Root
                 value={hazardIndicator}
                 onValueChange={setHazardIndicator}
@@ -190,7 +206,11 @@ export const Hazards = () => {
 
           <div className={hazardsStyles.multipleInputsRow}>
             <InputLabelContainer>
-              <label htmlFor="climateModel">Climate Model</label>
+              <div className={hazardsStyles.labelRow}>
+                <label htmlFor="climateModel">Climate Model</label>
+                <InfoPopover>{climateModelPopupContent}</InfoPopover>
+              </div>
+
               <Select.Root value={climateModel} onValueChange={setClimateModel}>
                 <Select.Trigger placeholder="Select" />
                 <Select.Content id="climateModel">
@@ -203,7 +223,10 @@ export const Hazards = () => {
               </Select.Root>
             </InputLabelContainer>
             <InputLabelContainer>
-              <label htmlFor="scenario">Scenario</label>
+              <div className={hazardsStyles.labelRow}>
+                <label htmlFor="scenario">Scenario</label>
+                <InfoPopover>{scenarioPopupContent}</InfoPopover>
+              </div>
               <Select.Root value={scenario} onValueChange={setScenario}>
                 <Select.Trigger placeholder="Select" />
                 <Select.Content id="scenario">
@@ -216,7 +239,10 @@ export const Hazards = () => {
               </Select.Root>
             </InputLabelContainer>
             <InputLabelContainer>
-              <label htmlFor="year">Year</label>
+              <div className={hazardsStyles.labelRow}>
+                <label htmlFor="year">Year</label>
+                <InfoPopover>{yearPopupContent}</InfoPopover>
+              </div>
               <Select.Root value={year} onValueChange={setYear}>
                 <Select.Trigger placeholder="Select" />
                 <Select.Content id="year">

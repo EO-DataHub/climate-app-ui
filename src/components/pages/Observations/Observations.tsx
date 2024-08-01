@@ -20,7 +20,7 @@ import { useGetObservationValueByMapclick } from './useGetObservationValueByMapC
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
 export const Observations = () => {
-  const [selectedObservationLayerId, setSelectedObservationLayerId] =
+  const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
     useState('')
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
@@ -44,7 +44,7 @@ export const Observations = () => {
     useGetObservationValueByMapclick({
       isMapLoaded,
       mapRef,
-      selectedObservationLayerId,
+      selectedObservationLayerUrl,
     })
 
   useEffect(
@@ -58,7 +58,7 @@ export const Observations = () => {
         mapRef.current.removeSource('observation-layer')
       }
 
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerId}&rescale=${min_temp},${max_temp}&colormap_name=jet`
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
       mapRef.current.addSource('observation-layer', {
         type: 'raster',
@@ -74,7 +74,7 @@ export const Observations = () => {
         paint: { 'raster-opacity': 0.9 },
       })
     },
-    [isMapLoaded, mapRef, selectedObservationLayerId],
+    [isMapLoaded, mapRef, selectedObservationLayerUrl],
   )
 
   const sidebarContent = (
@@ -101,8 +101,8 @@ export const Observations = () => {
               <InfoPopover>{observationDatePopupContent}</InfoPopover>
             </div>
             <ObservationsMenu
-              selectedObservationLayerId={selectedObservationLayerId}
-              setSelectedObservationLayerId={setSelectedObservationLayerId}
+              selectedObservationLayerUrl={selectedObservationLayerUrl}
+              setSelectedObservationLayerUrl={setSelectedObservationLayerUrl}
             />
           </InputLabelContainer>
         </form>

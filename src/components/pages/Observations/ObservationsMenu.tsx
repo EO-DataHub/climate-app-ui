@@ -8,20 +8,20 @@ interface Option {
 }
 
 interface ObservationsMenuProps {
-  selectedObservationLayerId: string
-  setSelectedObservationLayerId: (value: string) => void
+  selectedObservationLayerUrl: string
+  setSelectedObservationLayerUrl: (value: string) => void
 }
 
 export const ObservationsMenu = ({
-  selectedObservationLayerId,
-  setSelectedObservationLayerId,
+  selectedObservationLayerUrl,
+  setSelectedObservationLayerUrl,
 }: ObservationsMenuProps) => {
   const [options] = useState<Option[]>(observationMenuItems)
 
   return (
     <Select.Root
-      value={selectedObservationLayerId}
-      onValueChange={setSelectedObservationLayerId}
+      value={selectedObservationLayerUrl}
+      onValueChange={setSelectedObservationLayerUrl}
     >
       <Select.Trigger placeholder="Select" />
       <Select.Content id="observation-date">

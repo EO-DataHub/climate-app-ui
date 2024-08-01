@@ -1,4 +1,5 @@
 @use '../../library/genericStyles/containers';
+@use '../../library/genericStyles/forms';
 
 .content {
   @include containers.flexColumnSpaceBetweenStart;
@@ -35,6 +36,12 @@
   height: 100%;
   & > button {
     width: 100%;
+  }
+}
+
+.selectAssetsWrapper {
+  & label {
+    @include forms.formLabel;
   }
 }
 

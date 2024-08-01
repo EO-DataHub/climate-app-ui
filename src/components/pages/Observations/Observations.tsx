@@ -147,10 +147,8 @@ export const Observations = () => {
       </div>
 
       <div className={sidebarStyles.contentBottomButtonRow}>
-        <div className={sidebarStyles.portfolioSelectWrapper}>
-          <Text size="3" weight="bold">
-            View Assets on Map
-          </Text>
+        <div className={sidebarStyles.selectAssetsWrapper}>
+          <label>View Assets on Map</label>
           <InputLabelContainer>
             <AssetsSelect
               showUnsaved

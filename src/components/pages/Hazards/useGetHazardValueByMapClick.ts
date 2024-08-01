@@ -1,25 +1,17 @@
-import { MapRef } from '../../Map/useMap'
 import { useEffect, useState } from 'react'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
+import { MapRef } from '../../Map/useMap'
 import axios from 'axios'
-
-import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
-export const HazardLocationValueOverview = ({
-  hazardIndicatorLabel,
+export const useGetHazardValueByMapClick = ({
   isMapLoaded,
   mapRef,
-  scenario,
-  year,
   zarrPath,
 }: {
-  hazardIndicatorLabel: string | undefined
   isMapLoaded: boolean
   mapRef: MapRef
-  scenario: string | undefined
-  year: string | undefined
   zarrPath: string
 }) => {
   const [hazardMarkerValue, setHazardMarkerValue] = useState<
@@ -51,11 +43,14 @@ export const HazardLocationValueOverview = ({
         axios
           .get(url, { signal: axiosController.signal })
           .then((res) => {
-            setHazardMarkerValue(res.data.hazard_value)
+            const hazardValue = res.data.hazard_value
+            setHazardMarkerValue(
+              hazardValue ? Number(hazardValue).toFixed(0) : 'Unknown',
+            )
           })
           .catch((error) => {
             if (error.code !== 'ERR_CANCELED') {
-              setHazardMarkerValue('unknown')
+              setHazardMarkerValue('Unknown')
             }
           })
 
@@ -71,18 +66,5 @@ export const HazardLocationValueOverview = ({
     [markerCoordinates, zarrPath],
   )
 
-  return (
-    <>
-      {!isMarkerOnMap ? <>Select location on map to view details.</> : null}
-      {isMarkerOnMap ? (
-        <LocationValueOverview
-          layerLabel={hazardIndicatorLabel}
-          locationValue={hazardMarkerValue}
-          markerCoordinates={markerCoordinates}
-          scenario={scenario}
-          year={year}
-        />
-      ) : null}
-    </>
-  )
+  return { hazardMarkerValue, isMarkerOnMap, markerCoordinates }
 }

@@ -18,7 +18,6 @@ import {
   yearOptions,
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { HazardLocationValueOverview } from './HazardLocationValueOverview'
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
@@ -34,6 +33,8 @@ import formStyles from '../../../library/genericStyles/forms.module.scss'
 import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
+import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
 export const Hazards = () => {
   const [hazardIndicator, setHazardIndicator] = useState(
@@ -67,6 +68,13 @@ export const Hazards = () => {
     (option) => option.value === hazardIndicator,
   )?.label
   const zarrPath = `s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
+
+  const { isMarkerOnMap, hazardMarkerValue, markerCoordinates } =
+    useGetHazardValueByMapClick({
+      isMapLoaded,
+      mapRef,
+      zarrPath,
+    })
 
   const hazardDetail = isHazardMetadataError ? (
     <>Hazard indicator details are currently unavailable.</>
@@ -265,13 +273,13 @@ export const Hazards = () => {
           </Tabs.List>
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
-              <HazardLocationValueOverview
-                hazardIndicatorLabel={hazardIndicatorLabel}
-                isMapLoaded={isMapLoaded}
-                mapRef={mapRef}
+              <LocationValueOverview
+                isMarkerOnMap={isMarkerOnMap}
+                layerLabel={hazardIndicatorLabel}
+                locationValue={hazardMarkerValue}
+                markerCoordinates={markerCoordinates}
                 scenario={scenarioLabel}
                 year={year}
-                zarrPath={zarrPath}
               />
             </Tabs.Content>
 

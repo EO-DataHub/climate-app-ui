@@ -4,36 +4,38 @@ import locationValueStyles from './LocationValueOverview.module.scss'
 import { LngLat } from 'maplibre-gl'
 
 export const LocationValueOverview = ({
+  isMarkerOnMap,
   layerLabel,
   locationValue,
   markerCoordinates,
   scenario,
   year,
 }: {
+  isMarkerOnMap: boolean
   layerLabel: string | undefined
   locationValue: number | string | null
   markerCoordinates: LngLat | undefined
   scenario?: string
   year?: string
 }) => {
-  return (
-    <>
-      {locationValue === null ? (
-        <div className={locationValueStyles.overviewLoading}>
-          <Spinner />
+  const locationInformation =
+    locationValue === null ? (
+      <div className={locationValueStyles.overviewLoading}>
+        <Spinner />
+      </div>
+    ) : (
+      <div className={locationValueStyles.overview}>
+        <div className={containerStyles.flexColumnStartStart}>
+          <Text size="9" weight="bold">
+            {locationValue}
+          </Text>
+          <Text size="4" weight="bold">
+            {layerLabel}
+          </Text>
         </div>
-      ) : (
-        <div className={locationValueStyles.overview}>
-          <div className={containerStyles.flexColumnStartStart}>
-            <Text size="9" weight="bold">
-              {Number(locationValue).toFixed(0)}
-            </Text>
-            <Text size="4" weight="bold">
-              {layerLabel}
-            </Text>
-          </div>
-          <div>
-            <table>
+        <div>
+          <table>
+            <tbody>
               <tr>
                 <th>Latitude:</th>
                 <td>{markerCoordinates?.lat.toFixed(4)}°</td>
@@ -54,10 +56,15 @@ export const LocationValueOverview = ({
                   <td>{scenario}</td>
                 </tr>
               ) : null}
-            </table>
-          </div>
+            </tbody>
+          </table>
         </div>
-      )}
+      </div>
+    )
+  return (
+    <>
+      {!isMarkerOnMap ? <>Select location on map to view details.</> : null}
+      {isMarkerOnMap ? locationInformation : null}
     </>
   )
 }

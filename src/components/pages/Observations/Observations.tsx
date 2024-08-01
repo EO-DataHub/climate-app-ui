@@ -16,7 +16,8 @@ import {
   observationTypePopupContent,
 } from '../../../configuration/infoPopupContentObservations'
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
-import { ObservationLocationValueOverview } from './ObservationLocationValueOverview'
+import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
+import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
 export const Observations = () => {
   const [selectedObservationLayerId, setSelectedObservationLayerId] =
@@ -38,6 +39,13 @@ export const Observations = () => {
 
   const min_temp = 10
   const max_temp = 45
+
+  const { markerCoordinates, observationMarkerValue, isMarkerOnMap } =
+    useGetObservationValueByMapclick({
+      isMapLoaded,
+      mapRef,
+      selectedObservationLayerId,
+    })
 
   useEffect(
     function hackAddATempLayerForDemo() {
@@ -105,11 +113,11 @@ export const Observations = () => {
           </Tabs.List>
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
-              <ObservationLocationValueOverview
-                isMapLoaded={isMapLoaded}
-                mapRef={mapRef}
-                selectedObservationLayerId={selectedObservationLayerId}
-                selectedObservationLayerLabel={''}
+              <LocationValueOverview
+                isMarkerOnMap={isMarkerOnMap}
+                layerLabel={''}
+                locationValue={observationMarkerValue}
+                markerCoordinates={markerCoordinates}
               />
             </Tabs.Content>
 

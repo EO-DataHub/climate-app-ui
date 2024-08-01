@@ -5,34 +5,22 @@ import { useNavigate } from 'react-router-dom'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { Map } from '../../Map/Map'
-import { ObservationsMenu } from '../../ObservationsMenu/ObservationsMenu'
+import { ObservationsMenu } from './ObservationsMenu'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useMap } from '../../Map/useMap'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
-import observationsStyles from './Observations.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import {
   observationDatePopupContent,
   observationTypePopupContent,
 } from '../../../configuration/infoPopupContentObservations'
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
+import { ObservationLocationValueOverview } from './ObservationLocationValueOverview'
 
 export const Observations = () => {
-  interface ClickInfoState {
-    lat: number | null
-    lon: number | null
-    value: number | null // Allow value to be number or null
-  }
-
-  const [selected, setSelected] = useState('')
-
-  // Use the type with useState
-  const [clickInfo, setClickInfo] = useState<ClickInfoState>({
-    lat: null,
-    lon: null,
-    value: null,
-  })
+  const [selectedObservationLayerId, setSelectedObservationLayerId] =
+    useState('')
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: [0, 51.5],
@@ -62,7 +50,7 @@ export const Observations = () => {
         mapRef.current.removeSource('observation-layer')
       }
 
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selected}&rescale=${min_temp},${max_temp}&colormap_name=jet`
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerId}&rescale=${min_temp},${max_temp}&colormap_name=jet`
 
       mapRef.current.addSource('observation-layer', {
         type: 'raster',
@@ -77,43 +65,8 @@ export const Observations = () => {
         source: 'observation-layer',
         paint: { 'raster-opacity': 0.9 },
       })
-
-      // Add click event listener
-      mapRef.current.on('click', (e) => {
-        const lon = e.lngLat.lng
-        const lat = e.lngLat.lat
-        const queryUrl = `https://titiler.xyz/cog/point/${lon},${lat}?url=${selected}`
-        // Fetch the data from the queryUrl
-        fetch(queryUrl)
-          .then((response) => {
-            if (response.status === 500) {
-              throw new Error('Server error: 500')
-            }
-            return response.json()
-          })
-          .then((data) => {
-            const temp = parseFloat(data.values)
-            if (temp !== -3.4028234663852886e38) {
-              setClickInfo({ lat, lon, value: temp })
-            }
-          })
-          .catch(() => {
-            setClickInfo({ lat, lon, value: null })
-          })
-      })
     },
-    [isMapLoaded, mapRef, selected],
-  )
-
-  const observationLocationInfo = (
-    <div className={observationsStyles.locationInfoWrapper}>
-      <h3>Location</h3>
-      <p style={{ fontSize: '16px', fontWeight: '500' }}>
-        {clickInfo?.lat?.toFixed(4) ?? 'N/A'}°,{' '}
-        {clickInfo?.lon?.toFixed(4) ?? 'N/A'}°
-      </p>
-      <p>Temperature {clickInfo.value?.toFixed(2) ?? 'N/A'}°C</p>
-    </div>
+    [isMapLoaded, mapRef, selectedObservationLayerId],
   )
 
   const sidebarContent = (
@@ -139,7 +92,10 @@ export const Observations = () => {
               <label htmlFor="observation-date">Date</label>
               <InfoPopover>{observationDatePopupContent}</InfoPopover>
             </div>
-            <ObservationsMenu selected={selected} setSelected={setSelected} />
+            <ObservationsMenu
+              selectedObservationLayerId={selectedObservationLayerId}
+              setSelectedObservationLayerId={setSelectedObservationLayerId}
+            />
           </InputLabelContainer>
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
@@ -149,10 +105,12 @@ export const Observations = () => {
           </Tabs.List>
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
-              {clickInfo.lat &&
-                clickInfo.lon &&
-                clickInfo.value !== null &&
-                observationLocationInfo}
+              <ObservationLocationValueOverview
+                isMapLoaded={isMapLoaded}
+                mapRef={mapRef}
+                selectedObservationLayerId={selectedObservationLayerId}
+                selectedObservationLayerLabel={''}
+              />
             </Tabs.Content>
 
             <Tabs.Content value="Methodology">

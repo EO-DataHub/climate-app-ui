@@ -1,23 +1,21 @@
-import { useEffect, useState } from 'react'
 import { MapRef } from '../../Map/useMap'
+import { useEffect, useState } from 'react'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import axios from 'axios'
-import { Spinner, Text } from '@radix-ui/themes'
 
-import riskValueStyles from './HazardRiskValueOverview.module.scss'
-import containerStyles from '../../../library/genericStyles/containers.module.scss'
+import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
-export const HazardRiskValueOverview = ({
-  hazardIndicator,
+export const HazardLocationValueOverview = ({
+  hazardIndicatorLabel,
   isMapLoaded,
   mapRef,
   scenario,
   year,
   zarrPath,
 }: {
-  hazardIndicator: string | undefined
+  hazardIndicatorLabel: string | undefined
   isMapLoaded: boolean
   mapRef: MapRef
   scenario: string | undefined
@@ -73,48 +71,18 @@ export const HazardRiskValueOverview = ({
     [markerCoordinates, zarrPath],
   )
 
-  const hazardLocationInfo =
-    hazardMarkerValue === null ? (
-      <div className={riskValueStyles.overviewLoading}>
-        <Spinner />
-      </div>
-    ) : (
-      <div className={riskValueStyles.overview}>
-        <div className={containerStyles.flexColumnStartStart}>
-          <Text size="9" weight="bold">
-            {Number(hazardMarkerValue).toFixed(0)}
-          </Text>
-          <Text size="4" weight="bold">
-            {hazardIndicator}
-          </Text>
-        </div>
-        <div>
-          <table>
-            <tr>
-              <th>Latitude:</th>
-              <td>{markerCoordinates?.lat.toFixed(4)}°</td>
-            </tr>
-            <tr>
-              <th>Longitude:</th>
-              <td>{markerCoordinates?.lng.toFixed(4)}°</td>
-            </tr>
-            <tr>
-              <th>Year:</th>
-              <td>{year}</td>
-            </tr>
-            <tr>
-              <th>Scenario:</th>
-              <td>{scenario}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-    )
-
   return (
     <>
       {!isMarkerOnMap ? <>Select location on map to view details.</> : null}
-      {isMarkerOnMap ? hazardLocationInfo : null}
+      {isMarkerOnMap ? (
+        <LocationValueOverview
+          layerLabel={hazardIndicatorLabel}
+          locationValue={hazardMarkerValue}
+          markerCoordinates={markerCoordinates}
+          scenario={scenario}
+          year={year}
+        />
+      ) : null}
     </>
   )
 }

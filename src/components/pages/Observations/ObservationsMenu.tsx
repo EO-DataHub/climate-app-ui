@@ -1,6 +1,6 @@
 import { Select } from '@radix-ui/themes'
 import { useState } from 'react'
-import { observationMenuItems } from '../../library/api/fakeApiData'
+import { observationMenuItems } from '../../../library/api/fakeApiData'
 
 interface Option {
   value: string
@@ -8,18 +8,21 @@ interface Option {
 }
 
 interface ObservationsMenuProps {
-  selected: string
-  setSelected: (value: string) => void
+  selectedObservationLayerId: string
+  setSelectedObservationLayerId: (value: string) => void
 }
 
 export const ObservationsMenu = ({
-  selected,
-  setSelected,
+  selectedObservationLayerId,
+  setSelectedObservationLayerId,
 }: ObservationsMenuProps) => {
   const [options] = useState<Option[]>(observationMenuItems)
 
   return (
-    <Select.Root value={selected} onValueChange={setSelected}>
+    <Select.Root
+      value={selectedObservationLayerId}
+      onValueChange={setSelectedObservationLayerId}
+    >
       <Select.Trigger placeholder="Select" />
       <Select.Content id="observation-date">
         {options.map((option) => (

@@ -1,4 +1,4 @@
-import { Button, Heading, Select, Tabs, Text } from '@radix-ui/themes'
+import { Button, Heading, Select, Tabs } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -294,10 +294,8 @@ export const Hazards = () => {
         </Tabs.Root>
 
         <div className={sidebarStyles.contentBottomButtonRow}>
-          <div className={sidebarStyles.portfolioSelectWrapper}>
-            <Text size="3" weight="bold">
-              View Assets on Map
-            </Text>
+          <div className={sidebarStyles.selectAssetsWrapper}>
+            <label>View Assets on Map</label>
             <InputLabelContainer>
               <AssetsSelect
                 showUnsaved

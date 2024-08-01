@@ -1,20 +1,16 @@
-import { MapRef } from '../../Map/useMap'
-import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
-
 import { useEffect, useState } from 'react'
+import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
+import { MapRef } from '../../Map/useMap'
 import axios from 'axios'
-import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
-export const ObservationLocationValueOverview = ({
+export const useGetObservationValueByMapclick = ({
   isMapLoaded,
   mapRef,
   selectedObservationLayerId,
-  selectedObservationLayerLabel,
 }: {
   isMapLoaded: boolean
   mapRef: MapRef
   selectedObservationLayerId: string
-  selectedObservationLayerLabel: string
 }) => {
   const [observationMarkerValue, setObservationMarkerValue] = useState<
     number | string | null
@@ -39,11 +35,14 @@ export const ObservationLocationValueOverview = ({
         .get(queryUrl, { signal: axiosController.signal })
 
         .then((response) => {
-          setObservationMarkerValue(response.data.values[0])
+          const observationValue = response.data.values[0]
+          setObservationMarkerValue(
+            observationValue ? Number(observationValue).toFixed(0) : 'Unknown',
+          )
         })
         .catch((error) => {
           if (error.code !== 'ERR_CANCELED') {
-            setObservationMarkerValue('unknown')
+            setObservationMarkerValue('Unknown')
           }
         })
 
@@ -57,16 +56,5 @@ export const ObservationLocationValueOverview = ({
     }
   }, [markerCoordinates, selectedObservationLayerId])
 
-  return (
-    <>
-      {!isMarkerOnMap ? <>Select location on map to view details.</> : null}
-      {isMarkerOnMap ? (
-        <LocationValueOverview
-          markerCoordinates={markerCoordinates}
-          locationValue={observationMarkerValue}
-          layerLabel={selectedObservationLayerLabel}
-        />
-      ) : null}
-    </>
-  )
+  return { markerCoordinates, observationMarkerValue, isMarkerOnMap }
 }

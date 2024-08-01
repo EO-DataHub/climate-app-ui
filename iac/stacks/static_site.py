@@ -56,13 +56,24 @@ class StaticSiteStack(Stack):
             allowed_methods=cf.AllowedMethods.ALLOW_GET_HEAD_OPTIONS,
             viewer_protocol_policy=cf.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
         )
-
         distribution = cf.Distribution(
             self,
             f"{config.environment}-{config.project}-website-distribution",
             minimum_protocol_version=cf.SecurityPolicyProtocol.TLS_V1_2_2021,
             domain_names=[f"{config.environment}.{config.project}.sparkgeo.dev"],
             certificate=cert,
+            error_responses=[
+            cf.ErrorResponse(
+                http_status=404,
+                response_page_path="/index.html",
+                response_http_status=200,
+            ),
+            cf.ErrorResponse(
+                http_status=403,
+                response_page_path="/index.html",
+                response_http_status=200,
+            ),
+            ],
             default_behavior=behaviour_options,
             default_root_object="index.html",
         )

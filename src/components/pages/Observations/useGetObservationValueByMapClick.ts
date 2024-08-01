@@ -6,11 +6,11 @@ import axios from 'axios'
 export const useGetObservationValueByMapclick = ({
   isMapLoaded,
   mapRef,
-  selectedObservationLayerId,
+  selectedObservationLayerUrl,
 }: {
   isMapLoaded: boolean
   mapRef: MapRef
-  selectedObservationLayerId: string
+  selectedObservationLayerUrl: string
 }) => {
   const [observationMarkerValue, setObservationMarkerValue] = useState<
     number | string | null
@@ -27,7 +27,7 @@ export const useGetObservationValueByMapclick = ({
     const queryObservationLayerByCoordinates = () => {
       const axiosController = new AbortController()
 
-      const queryUrl = `https://titiler.xyz/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerId}`
+      const queryUrl = `https://titiler.xyz/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
 
       setObservationMarkerValue(null)
 
@@ -54,7 +54,7 @@ export const useGetObservationValueByMapclick = ({
     return () => {
       queryController.abort()
     }
-  }, [markerCoordinates, selectedObservationLayerId])
+  }, [markerCoordinates, selectedObservationLayerUrl])
 
   return { markerCoordinates, observationMarkerValue, isMarkerOnMap }
 }

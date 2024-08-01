@@ -18,7 +18,7 @@ import {
   yearOptions,
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { HazardRiskValueOverview } from './HazardRiskValueOverview'
+import { HazardLocationValueOverview } from './HazardLocationValueOverview'
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
@@ -265,8 +265,8 @@ export const Hazards = () => {
           </Tabs.List>
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
-              <HazardRiskValueOverview
-                hazardIndicator={hazardIndicatorLabel}
+              <HazardLocationValueOverview
+                hazardIndicatorLabel={hazardIndicatorLabel}
                 isMapLoaded={isMapLoaded}
                 mapRef={mapRef}
                 scenario={scenarioLabel}

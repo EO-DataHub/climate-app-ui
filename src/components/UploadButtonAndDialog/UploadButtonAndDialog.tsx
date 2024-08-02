@@ -131,7 +131,7 @@ export const UploadButtonAndDialog = ({
             <>
               <UploadIcon />
               <Text weight="bold">
-                Drag and drop csv or geojson file or
+                Drag and drop CSV or GeoJSON file or
                 <br />
                 <Link asChild>
                   <button onClick={openFileBrowser}>Choose File</button>

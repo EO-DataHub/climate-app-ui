@@ -116,7 +116,13 @@ export const Observations = () => {
               <LocationValueOverview
                 isMarkerOnMap={isMarkerOnMap}
                 layerLabel={''}
-                locationValue={observationMarkerValue}
+                locationValue={
+                  observationMarkerValue === null
+                    ? null
+                    : observationMarkerValue === 'Unknown'
+                      ? 'Unknown'
+                      : `${observationMarkerValue} °C`
+                }
                 markerCoordinates={markerCoordinates}
               />
             </Tabs.Content>

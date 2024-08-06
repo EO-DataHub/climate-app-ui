@@ -13,34 +13,31 @@ export const AssetsSelect = ({
   showUnsaved?: boolean
 }) => {
   const { userAssets } = useContext(UserAssetsContext)
-  const { isAuthenticated, login } = useContext(AuthenticationContext)
+  const { isAuthenticated } = useContext(AuthenticationContext)
 
-  const handleOnOpenChange = (isOpen: boolean) => {
-    if (!isAuthenticated && isOpen) {
-      void login()
-      return
-    }
-  }
   return (
-    <Select.Root
-      onValueChange={onValueChange}
-      onOpenChange={handleOnOpenChange}
-    >
+    <Select.Root onValueChange={onValueChange}>
       <Select.Trigger placeholder="Select Portfolio" />
       <Select.Content position="popper">
-        <Select.Group>
-          <Select.Label>My Portfolios</Select.Label>
-          <Select.Item value="#" disabled>
-            Portfolio 1
-          </Select.Item>
-          <Select.Item value="#" disabled>
-            Portfolio 2
-          </Select.Item>
-          <Select.Item value="#" disabled>
-            Portfolio 3
-          </Select.Item>
-        </Select.Group>
-        <Select.Separator />
+        {isAuthenticated ? (
+          <>
+            {' '}
+            <Select.Group>
+              <Select.Label>My Portfolios</Select.Label>
+              <Select.Item value="#" disabled>
+                Portfolio 1
+              </Select.Item>
+              <Select.Item value="#" disabled>
+                Portfolio 2
+              </Select.Item>
+              <Select.Item value="#" disabled>
+                Portfolio 3
+              </Select.Item>
+            </Select.Group>
+            <Select.Separator />
+          </>
+        ) : null}
+
         {showUnsaved && userAssets ? (
           <>
             <Select.Group>

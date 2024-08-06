@@ -32,3 +32,11 @@
 .assetsSelectWrapper {
   @include forms.inputLabelContainer;
 }
+.analysisSuccessToastMessageAndButtonWrapper {
+  @include containers.flexRowSpaceBetweenEnd;
+  gap: 0;
+}
+.analysisSuccessToastMessage {
+  @include containers.flexColumnStartStart;
+  gap: 0;
+}

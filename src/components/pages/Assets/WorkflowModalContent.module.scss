@@ -1,0 +1,23 @@
+@use '../../../library/genericStyles/containers';
+
+.workflowList {
+  @include containers.flexColumnStartStart;
+  all: unset;
+  list-style-type: none;
+
+  & li {
+    margin-bottom: var(--space-5);
+    border-radius: var(--radius-3);
+    padding: var(--space-3);
+  }
+  & li:hover {
+    background-color: var(--accent-a2);
+  }
+  & li p {
+    margin-top: 0;
+    margin-bottom: var(--space-2);
+  }
+  & li > p:first-of-type {
+    font-weight: bold;
+  }
+}

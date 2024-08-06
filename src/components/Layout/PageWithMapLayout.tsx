@@ -15,7 +15,7 @@ export const PageWithMapLayout = ({
   map: ReactNode
   sidebarContent: ReactNode
   sidebarWidth?: string
-  subtitle?: string
+  subtitle?: string | ReactNode
   title: string
   legend?: ReactNode
 }) => {
@@ -27,11 +27,12 @@ export const PageWithMapLayout = ({
       >
         <div className={pageWithMapStyles.titlesContainer}>
           <PageTitle>{title}</PageTitle>
-          {subtitle ? (
+          {typeof subtitle === 'string' ? (
             <Text weight="bold" as="p">
               {subtitle}
             </Text>
           ) : null}
+          {subtitle && typeof subtitle !== 'string' ? subtitle : null}
         </div>
 
         {sidebarContent}

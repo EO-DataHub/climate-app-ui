@@ -3,6 +3,9 @@
 .flexRowSpaceBetweenCenter {
   @include containers.flexRowSpaceBetweenCenter;
 }
+.flexRowSpaceBetweenCenter {
+  @include containers.flexRowSpaceBetweenEnd;
+}
 .flexRowStartCenter {
   @include containers.flexRowStartCenter;
 }
@@ -30,4 +33,10 @@
 }
 .flexColumnEndCenter {
   @include containers.flexColumnEndCenter;
+}
+.modalTopRow {
+  @include containers.flexRowSpaceBetweenCenter;
+  & button:global(.close) {
+    align-self: flex-start;
+  }
 }

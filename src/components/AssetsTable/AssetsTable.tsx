@@ -13,7 +13,7 @@ import {
   Row as TanstackRow,
 } from '@tanstack/table-core'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
-import { Table, TextField, Tooltip } from '@radix-ui/themes'
+import { Table, TextField, Tooltip, Text } from '@radix-ui/themes'
 import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
 import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
 import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
@@ -51,12 +51,14 @@ export const AssetsTable = ({
   rowSelection,
   setRowSelection,
   userAssets,
+  title = 'Assets',
 }: {
   isMapLoaded: boolean
   mapRef?: MapRef
   rowSelection: RowSelection
   setRowSelection: Dispatch<SetStateAction<RowSelection>>
   userAssets: UserAssets | undefined
+  title?: string
 }) => {
   const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState({})
@@ -231,24 +233,28 @@ export const AssetsTable = ({
     <>
       {userAssetsForTable.length ? (
         <div className={tableStyles.tableWrapper}>
-          <form className={containerStyles.flexRowSpaceBetweenCenter}>
-            <TextField.Root
-              placeholder="Search"
-              value={tableSearchValue ?? ''}
-              onChange={(event) => {
-                const { value } = event.target
-                setTableSearchValue(value)
-                debouncedSetGlobalFilter(value)
-              }}
-            >
-              <TextField.Slot>
-                <SearchIcon />
-              </TextField.Slot>
-            </TextField.Root>
-            {extraColumnNames.length
-              ? toggleAreExtraColumnsVisibleButton
-              : null}
-          </form>
+          <div className={containerStyles.flexRowSpaceBetweenCenter}>
+            <Text weight="bold">{title}</Text>
+            <div className={tableStyles.tableInputWrapper}>
+              <TextField.Root
+                placeholder="Search"
+                value={tableSearchValue ?? ''}
+                onChange={(event) => {
+                  const { value } = event.target
+                  setTableSearchValue(value)
+                  debouncedSetGlobalFilter(value)
+                }}
+              >
+                <TextField.Slot>
+                  <SearchIcon />
+                </TextField.Slot>
+              </TextField.Root>
+              {extraColumnNames.length
+                ? toggleAreExtraColumnsVisibleButton
+                : null}
+            </div>
+          </div>
+
           <Table.Root variant="surface" className={tableStyles.table}>
             <Table.Header>
               {table.getHeaderGroups().map((headerGroup) => (

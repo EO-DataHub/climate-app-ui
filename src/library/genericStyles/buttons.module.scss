@@ -1,3 +1,5 @@
+@use '../genericStyles/containers';
+
 .iconButton {
   & svg {
     fill: var(--button-svg-fill);
@@ -9,4 +11,8 @@
   & svg {
     fill: var(--button-svg-fill-disabled);
   }
+}
+.buttonWrapperFlexEnd {
+  @include containers.flexRowEndCenter;
+  gap: var(--space-4);
 }

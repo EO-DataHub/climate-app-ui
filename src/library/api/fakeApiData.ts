@@ -584,3 +584,20 @@ export const observationMenuItems = [
       's3://lst-cogs/london/ESACCI-LST-L2P-LST-LNDST8-LONDON-20231024105845-fv1.00.tif',
   },
 ]
+
+export const workflowOptions = [
+  {
+    title: 'OS Climate Physical Risk',
+    nickName: 'OS-Climate',
+    requiredColumns: ['ID', 'latitude', 'longitude', 'asset_type', 'location'],
+    description:
+      'The OS Climate physical risk workflow will undertake a risk analysis on your asset portfolio of the potential impacts of climate change. According to the type of your asset, the workflow will analyse risks from chronic head, inundation.',
+  },
+  {
+    title: 'Land Surface Temperature (LST)',
+    nickName: 'LST',
+    description:
+      'The Land Surface Temperature workflow will report on observed land surface temperature observations from your assets.',
+    requiredColumns: ['ID', 'latitude', 'longitude'],
+  },
+]

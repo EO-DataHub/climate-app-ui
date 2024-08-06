@@ -1,5 +1,12 @@
 import axios from 'axios'
-import { Button, Heading, Link, TextField } from '@radix-ui/themes'
+import {
+  Button,
+  Heading,
+  Link,
+  TextField,
+  Text,
+  Dialog,
+} from '@radix-ui/themes'
 import { useContext, useState } from 'react'
 
 import {
@@ -18,25 +25,46 @@ import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonA
 import { useMap } from '../../Map/useMap'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import assetStyles from './Assets.module.scss'
-import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import { WorkflowModalContent } from './WorkflowModalContent'
 
 export const Assets = () => {
   const [analysisResultsBearerToken, setAnalysisResultsBearerToken] =
     useState('') // temporary until we have better IAM
+  const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
+    string | undefined
+  >()
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
+  const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
   const { isAuthenticated, login } = useContext(AuthenticationContext)
   const { mapContainer, mapRef, isMapLoaded } = useMap()
-  const { setAnalysedUserAssets, setUserAssets, userAssets } =
-    useContext(UserAssetsContext)
+  const {
+    setAnalysedUserAssets,
+    setUserAssets,
+    userAssets,
+    setUploadedFileName,
+    uploadedFileName,
+  } = useContext(UserAssetsContext)
 
-  const handleLoadAssets = (parsedAssets: UserAssets) => {
+  const handleLoadAssets = ({
+    fileName,
+    parsedAssets,
+  }: {
+    fileName: string
+    parsedAssets: UserAssets
+  }) => {
+    setCurrentWorkflowTitle(undefined)
     setRowSelection({})
     setUserAssets?.(parsedAssets)
+    setUploadedFileName?.(fileName)
   }
 
-  const handleAnalyseAssets = () => {
+  const handleAnalyseAssets = ({
+    workflowTitle,
+  }: {
+    workflowTitle: string
+  }) => {
     if (!userAssets) {
       throw new Error('handleAnalyseAssets has a missing userAssets parameter')
     }
@@ -51,6 +79,16 @@ export const Assets = () => {
       return
     }
     toast.dismiss()
+
+    toast(
+      <>
+        <strong>Analysis in Progress</strong>
+        <br />
+        You will receive a notification when it&apos;s ready.
+      </>,
+    )
+    setCurrentWorkflowTitle(workflowTitle)
+    setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
     analyseAssets({
       userAssets,
@@ -61,16 +99,27 @@ export const Assets = () => {
         setAnalysedUserAssets(results)
         // eslint-disable-next-line no-console
         console.log('Risk analysis results:', results)
+        toast.dismiss()
         toast(
-          <div className={containerStyles.flexRowSpaceBetweenCenter}>
-            <div>Analysis complete</div>
-            <Button asChild>
-              <ReactRouterLink to="/analytics">View Results</ReactRouterLink>
+          <div
+            className={assetStyles.analysisSuccessToastMessageAndButtonWrapper}
+          >
+            <div className={assetStyles.analysisSuccessToastMessage}>
+              <strong>
+                {workflowTitle} Analysis complete{' '}
+                {uploadedFileName ? <>for</> : null}
+              </strong>
+              {uploadedFileName ? uploadedFileName : null}
+            </div>
+
+            <Button asChild variant="soft">
+              <ReactRouterLink to="/analytics">View Analysis</ReactRouterLink>
             </Button>
           </div>,
         )
       })
       .catch(() => {
+        toast.dismiss()
         toast.error('An error occurred during the analysis. Please try again.')
       })
       .finally(() => {
@@ -137,13 +186,32 @@ export const Assets = () => {
                 }}
               ></TextField.Root>
             </form>
-            <Button onClick={handleAnalyseAssets} disabled={isAnalysisRunning}>
-              Analyse Assets
-            </Button>
+
+            <Dialog.Root
+              open={isWorkflowModalOpen}
+              onOpenChange={setIsWorkflowModalOpen}
+            >
+              <Dialog.Trigger>
+                <Button disabled={isAnalysisRunning}>Analyse Assets</Button>
+              </Dialog.Trigger>
+
+              <Dialog.Content maxWidth="500px">
+                <WorkflowModalContent
+                  handleAnalyseAssets={handleAnalyseAssets}
+                />
+              </Dialog.Content>
+            </Dialog.Root>
           </>
         ) : null}
       </div>
     </div>
+  )
+
+  const portfolioWorkflowInfo = (
+    <Text as="p">
+      Portfolio: {uploadedFileName}
+      {currentWorkflowTitle ? <> | Workflow: {currentWorkflowTitle}</> : null}
+    </Text>
   )
 
   return (
@@ -151,7 +219,14 @@ export const Assets = () => {
       map={<Map mapContainer={mapContainer} />}
       sidebarContent={sidebarContent}
       title="Assets"
-      subtitle="Choose an existing portfolio or open a new file for analysis"
+      subtitle={
+        <>
+          <Text weight="bold" as="p">
+            Choose an existing portfolio or open a new file for analysis
+          </Text>
+          {uploadedFileName ? portfolioWorkflowInfo : null}
+        </>
+      }
       sidebarWidth="900px"
     />
   )

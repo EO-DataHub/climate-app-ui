@@ -4,7 +4,7 @@ import { useDropzone } from 'react-dropzone'
 
 import { parseUploadedAssetsIntoGeoJson } from '../../library/userAssets/parseUploadedAssetsIntoGeoJson'
 import { UserAssets } from '../../library/userAssets/userAssetTypes'
-import containerStyles from '../../library/genericStyles/containers.module.scss'
+import buttonStyles from '../../library/genericStyles/buttons.module.scss'
 import uploadButtonAndDialogStyles from './UploadButtonAndDialog.module.scss'
 import UploadIcon from '@material-design-icons/svg/filled/upload_file.svg?react'
 import UploadCompleteIcon from '@material-design-icons/svg/filled/check_circle.svg?react'
@@ -12,7 +12,10 @@ import UploadCompleteIcon from '@material-design-icons/svg/filled/check_circle.s
 export const UploadButtonAndDialog = ({
   onLoadAssets,
 }: {
-  onLoadAssets: (parsedAssets: UserAssets) => void
+  onLoadAssets: (parameters: {
+    parsedAssets: UserAssets
+    fileName: string
+  }) => void
 }) => {
   const [chosenUnparsedFiles, setChosenUnparsedFiles] = useState<File[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -76,7 +79,7 @@ export const UploadButtonAndDialog = ({
 
   const handleLoadAssetsClick = () => {
     setIsDialogOpen(false)
-    onLoadAssets(parsedAssets)
+    onLoadAssets({ parsedAssets, fileName: chosenUnparsedFiles?.[0]?.name })
   }
 
   const cancelUpload = () => {
@@ -158,7 +161,7 @@ export const UploadButtonAndDialog = ({
             </Text>
           ) : null}
         </div>
-        <div className={containerStyles.flexRowEndCenter}>
+        <div className={buttonStyles.buttonWrapperFlexEnd}>
           <Button variant="soft" onClick={cancelUpload}>
             Cancel
           </Button>

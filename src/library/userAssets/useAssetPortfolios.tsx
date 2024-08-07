@@ -1,30 +1,35 @@
-import { MapLayerMouseEvent, Popup } from 'maplibre-gl'
+import { Badge, DataList, Link, Separator } from '@radix-ui/themes'
 // @ts-expect-error  turf has an issue delaring its types
 import { bbox as turfBbox } from '@turf/turf'
+import { MapLayerMouseEvent, Popup } from 'maplibre-gl'
 import { useCallback, useContext } from 'react'
+import ReactDOM from 'react-dom/client'
 
-import { Badge, Button, DataList, Text } from '@radix-ui/themes'
-import { LoadingContext } from '../../context/LoadingContext'
-import { renderToString } from 'react-dom/server'
-import { UserAssetsContext } from '../../context/UserAssetsContext'
-import assetsPopupStyles from './AssetsPopup.module.scss'
 import {
   MAPLIBRE_FIT_BOUNDS_PADDING,
   MapLayerIds,
   MapSourceIds,
   UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT,
 } from '../../configuration/constants'
-import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
+
 import { areBoundsValid } from '../maplibre/isGeometryValid'
+import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
+import { LoadingContext } from '../../context/LoadingContext'
 import { MapRef } from '../../components/Map/useMap'
 import { UserAssets } from './userAssetTypes'
+import { UserAssetsContext } from '../../context/UserAssetsContext'
+import assetsPopupStyles from './AssetsPopup.module.scss'
 
 export const useAssetPortfolios = ({
-  mapRef,
   isMapLoaded,
+  mapRef,
+  onHighlightInTableClick,
+  onMapMarkerPopupClose,
 }: {
-  mapRef?: MapRef
   isMapLoaded?: boolean
+  mapRef?: MapRef
+  onHighlightInTableClick?: (id: string) => void
+  onMapMarkerPopupClose?: () => void
 }) => {
   const { setIsMapLoading } = useContext(LoadingContext)
   const { userAssets } = useContext(UserAssetsContext)
@@ -105,33 +110,30 @@ export const useAssetPortfolios = ({
         const coordinates = event.features?.[0].geometry.coordinates.slice()
         const assetVulnerability = event.features?.[0].properties.vulnerability
         const assetType = event.features?.[0].properties.assetType
+        const assetCategory = event.features?.[0].properties.assetCategory
         const itemId = event.features?.[0].properties.id
 
+        const adjustedCoordinates = [...coordinates]
         // Ensure popup appears over correct world 'copy'
-        while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
-          coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360
+        while (Math.abs(event.lngLat.lng - adjustedCoordinates[0]) > 180) {
+          adjustedCoordinates[0] +=
+            event.lngLat.lng > adjustedCoordinates[0] ? 360 : -360
         }
 
         const popupContent = (
           <div className={assetsPopupStyles.assetsPopupContent}>
-            {!assetVulnerability ? (
-              <Text size="2">
-                Data for this asset is currently being processed or is
-                unavailable.
-              </Text>
-            ) : null}
             <DataList.Root
               orientation={{ initial: 'vertical', sm: 'horizontal' }}
             >
-              <DataList.Item>
-                <DataList.Label>Item Id</DataList.Label>
-                <DataList.Value>{itemId}</DataList.Value>
-              </DataList.Item>
               <DataList.Item>
                 <DataList.Label>Asset Vulnerability</DataList.Label>
                 <DataList.Value>
                   <AssetVulnerabilityBadge vulnerability={assetVulnerability} />
                 </DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>ID</DataList.Label>
+                <DataList.Value>{itemId}</DataList.Value>
               </DataList.Item>
               <DataList.Item>
                 <DataList.Label>Asset Type</DataList.Label>
@@ -145,17 +147,60 @@ export const useAssetPortfolios = ({
                   )}
                 </DataList.Value>
               </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Asset Category</DataList.Label>
+                <DataList.Value>
+                  {assetCategory ? (
+                    assetCategory
+                  ) : (
+                    <Badge variant="soft" color="gray">
+                      Data Unavailable
+                    </Badge>
+                  )}
+                </DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Latitude</DataList.Label>
+                <DataList.Value>
+                  {adjustedCoordinates[1].toFixed(4)}°
+                </DataList.Value>
+              </DataList.Item>
+              <DataList.Item>
+                <DataList.Label>Longitude</DataList.Label>
+                <DataList.Value>
+                  {adjustedCoordinates[0].toFixed(4)}°
+                </DataList.Value>
+              </DataList.Item>
             </DataList.Root>
-            {!assetVulnerability ? (
-              <Button disabled>View Detailed Analysis</Button>
+
+            {onHighlightInTableClick ? (
+              <>
+                <Separator size="4" />
+                <div className={assetsPopupStyles.assetsPopupActionRow}>
+                  <Link asChild>
+                    <button
+                      onClick={() => {
+                        onHighlightInTableClick(itemId)
+                      }}
+                    >
+                      Highlight in Table
+                    </button>
+                  </Link>{' '}
+                </div>
+              </>
             ) : null}
           </div>
         )
 
+        const popupContentHack = document.createElement('div')
+        ReactDOM.createRoot(popupContentHack).render(popupContent)
         new Popup()
+          .setDOMContent(popupContentHack)
           .setLngLat(coordinates)
-          .setHTML(renderToString(popupContent))
           .addTo(mapRef.current)
+          .on('close', () => {
+            onMapMarkerPopupClose?.()
+          })
       }
       const handleMarkerMouseEnter = () => {
         mapRef.current!.getCanvas().style.cursor = 'pointer'
@@ -326,7 +371,13 @@ export const useAssetPortfolios = ({
         )
       }
     },
-    [isMapLoaded, mapRef, setIsMapLoading],
+    [
+      isMapLoaded,
+      mapRef,
+      onHighlightInTableClick,
+      onMapMarkerPopupClose,
+      setIsMapLoading,
+    ],
   )
 
   const updateCurrentPortfolioShown = useCallback(

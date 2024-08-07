@@ -9,3 +9,8 @@
     width: 100%;
   }
 }
+
+.assetsPopupActionRow {
+  @include containers.flexRowEndCenter;
+  width: 100%;
+}

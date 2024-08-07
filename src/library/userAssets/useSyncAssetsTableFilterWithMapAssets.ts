@@ -5,24 +5,21 @@ import {
   UserAssetForTable,
   convertDataForTableToGeoJSON,
 } from './convertUserAssets'
-import { useAssetPortfolios } from './useAssetPortfolios'
 import { MapRef } from '../../components/Map/useMap'
+import { UserAssets } from './userAssetTypes'
 
 export const useSyncAssetsTableFilterWithMapAssets = ({
   isMapLoaded,
-  mapRef,
   table,
   userAssetsForTable,
+  updateUserAssetsInMap,
 }: {
   isMapLoaded?: boolean
   mapRef?: MapRef
   table: TanstackTable<UserAssetForTable>
   userAssetsForTable: UserAssetForTable[]
+  updateUserAssetsInMap: (assets: UserAssets) => void
 }) => {
-  const { updateUserAssetsInMap } = useAssetPortfolios({
-    isMapLoaded,
-    mapRef,
-  })
   const filteredRows = table.getFilteredRowModel().rows
 
   const filteredAssetsForMap = useMemo(() => {

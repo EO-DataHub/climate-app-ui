@@ -14,7 +14,14 @@ import {
 } from '@tanstack/table-core'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 import { Table, TextField, Tooltip, Text } from '@radix-ui/themes'
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
 import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
 
@@ -35,6 +42,8 @@ import { useSyncAssetsTableFilterWithMapAssets } from '../../library/userAssets/
 import { useSyncAssetsTableSelectionWithMapAssets } from '../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 import containerStyles from '../../library/genericStyles/containers.module.scss'
 import tableStyles from './AssetsTable.module.scss'
+import { useAssetPortfolios } from '../../library/userAssets/useAssetPortfolios'
+import { getTablePageIndexByRowId } from '../../library/tanStackTable/getTablePageIndexByRowId'
 
 const getUniqueColumnNames = (
   previousValue: string[],
@@ -63,6 +72,7 @@ export const AssetsTable = ({
   const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState({})
   const [globalFilter, setGlobalFilter] = useState('')
+  const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null)
   const [tableSearchValue, setTableSearchValue] = useState('')
 
   const userAssetsForTable = useMemo(
@@ -203,11 +213,31 @@ export const AssetsTable = ({
       columnVisibility,
     },
   })
+  const highlightTableRow = useCallback(
+    (id: string) => {
+      setHighlightedRowId(id)
+      const pageIndexForHighlightedRow = getTablePageIndexByRowId({ id, table })
+      if (!pageIndexForHighlightedRow) return
+      table.setPageIndex(pageIndexForHighlightedRow)
+    },
+    [table],
+  )
+
+  const onMapMarkerPopupClose = useCallback(() => {
+    setHighlightedRowId(null)
+  }, [])
+
+  const { updateUserAssetsInMap } = useAssetPortfolios({
+    isMapLoaded,
+    mapRef,
+    onHighlightInTableClick: highlightTableRow,
+    onMapMarkerPopupClose,
+  })
 
   useSyncAssetsTableFilterWithMapAssets({
     isMapLoaded,
-    mapRef,
     table,
+    updateUserAssetsInMap,
     userAssetsForTable,
   })
 
@@ -300,29 +330,33 @@ export const AssetsTable = ({
               ))}
             </Table.Header>
             <Table.Body>
-              {table.getRowModel().rows.map((row) => (
-                <Table.Row
-                  key={row.id}
-                  className={
-                    row.getIsSelected()
-                      ? tableStyles.selectedTableRow
-                      : undefined
-                  }
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <Table.Cell
-                      key={cell.id}
-                      // @ts-expect-error - meta allows for any property
-                      justify={cell.column.columnDef.meta?.justify}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </Table.Cell>
-                  ))}
-                </Table.Row>
-              ))}
+              {table.getRowModel().rows.map((row) => {
+                const classNameHighlighted =
+                  row.id === highlightedRowId
+                    ? tableStyles.highlightedTableRow
+                    : undefined
+                const classNameSelected = row.getIsSelected()
+                  ? tableStyles.selectedTableRow
+                  : undefined
+
+                const className = classNameHighlighted ?? classNameSelected
+                return (
+                  <Table.Row key={row.id} className={className}>
+                    {row.getVisibleCells().map((cell) => (
+                      <Table.Cell
+                        key={cell.id}
+                        // @ts-expect-error - meta allows for any property
+                        justify={cell.column.columnDef.meta?.justify}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </Table.Cell>
+                    ))}
+                  </Table.Row>
+                )
+              })}
             </Table.Body>
           </Table.Root>
           <div className={containerStyles.flexRowStartCenter}>

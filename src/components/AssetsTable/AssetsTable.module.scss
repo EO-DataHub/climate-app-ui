@@ -8,6 +8,9 @@
 .selectedTableRow {
   background-color: var(--accent-a3);
 }
+.highlightedTableRow {
+  background-color: var(--accent-a6);
+}
 .tableInputWrapper {
   @include containers.flexRowEndCenter;
   gap: var(--space-4);

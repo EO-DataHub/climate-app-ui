@@ -62,7 +62,7 @@ export const AssetsTable = ({
   userAssets,
   title = 'Assets',
 }: {
-  isMapLoaded: boolean
+  isMapLoaded?: boolean
   mapRef?: MapRef
   rowSelection: RowSelection
   setRowSelection: Dispatch<SetStateAction<RowSelection>>

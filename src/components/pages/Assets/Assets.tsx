@@ -1,12 +1,4 @@
-import axios from 'axios'
-import {
-  Button,
-  Heading,
-  Link,
-  TextField,
-  Text,
-  Dialog,
-} from '@radix-ui/themes'
+import { Button, Heading, Link, Text, Dialog } from '@radix-ui/themes'
 import { useContext, useState } from 'react'
 
 import {
@@ -29,15 +21,15 @@ import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { WorkflowModalContent } from './WorkflowModalContent'
 
 export const Assets = () => {
-  const [analysisResultsBearerToken, setAnalysisResultsBearerToken] =
-    useState('') // temporary until we have better IAM
   const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
     string | undefined
   >()
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
-  const { isAuthenticated, login } = useContext(AuthenticationContext)
+  const { isAuthenticated, login, userInfo, authenticatedAxios } = useContext(
+    AuthenticationContext,
+  )
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const {
     setAnalysedUserAssets,
@@ -73,6 +65,13 @@ export const Assets = () => {
         'handleAnalyseAssets has a missing setAnalysedUserAssets parameter',
       )
     }
+    if (!userInfo || !authenticatedAxios) {
+      toast.error(
+        'User info from a logged in user session is required to run an analysis. Logging out and loggign in again and if the problem doesnt resolve, contact an administrator.',
+      )
+
+      return
+    }
 
     if (!isAuthenticated) {
       void login()
@@ -92,8 +91,8 @@ export const Assets = () => {
     setIsAnalysisRunning(true)
     analyseAssets({
       userAssets,
-      analysisResultsBearerToken,
-      axios,
+      axios: authenticatedAxios,
+      userInfo,
     })
       .then((results) => {
         setAnalysedUserAssets(results)
@@ -175,33 +174,18 @@ export const Assets = () => {
 
       <div className={assetStyles.analyseButtonRow}>
         {userAssets ? (
-          <>
-            <form style={{ width: '100%' }}>
-              <TextField.Root
-                placeholder="Results bearer token (temporary and required for analysis)"
-                value={analysisResultsBearerToken}
-                onChange={(event) => {
-                  const { value } = event.target
-                  setAnalysisResultsBearerToken(value)
-                }}
-              ></TextField.Root>
-            </form>
+          <Dialog.Root
+            open={isWorkflowModalOpen}
+            onOpenChange={setIsWorkflowModalOpen}
+          >
+            <Dialog.Trigger>
+              <Button disabled={isAnalysisRunning}>Analyse Assets</Button>
+            </Dialog.Trigger>
 
-            <Dialog.Root
-              open={isWorkflowModalOpen}
-              onOpenChange={setIsWorkflowModalOpen}
-            >
-              <Dialog.Trigger>
-                <Button disabled={isAnalysisRunning}>Analyse Assets</Button>
-              </Dialog.Trigger>
-
-              <Dialog.Content maxWidth="500px">
-                <WorkflowModalContent
-                  handleAnalyseAssets={handleAnalyseAssets}
-                />
-              </Dialog.Content>
-            </Dialog.Root>
-          </>
+            <Dialog.Content maxWidth="500px">
+              <WorkflowModalContent handleAnalyseAssets={handleAnalyseAssets} />
+            </Dialog.Content>
+          </Dialog.Root>
         ) : null}
       </div>
     </div>

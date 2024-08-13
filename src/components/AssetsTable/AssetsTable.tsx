@@ -394,6 +394,7 @@ export const AssetsTable = ({
                         key={cell.id}
                         // @ts-expect-error - meta allows for any property
                         justify={cell.column.columnDef.meta?.justify}
+                        className={tableStyles.tableCell}
                       >
                         {flexRender(
                           cell.column.columnDef.cell,

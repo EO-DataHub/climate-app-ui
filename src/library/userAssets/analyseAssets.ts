@@ -1,19 +1,22 @@
 import { AxiosInstance } from 'axios'
 
 import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
+import { KeycloakUserInfo } from '../../context/AuthenticationContext'
 
 const initiateAssetsRiskAnalysis = async ({
-  userAssets,
   axios,
+  userAssets,
+  workspaceUserName,
 }: {
-  userAssets: UserAssets
   axios: AxiosInstance
+  userAssets: UserAssets
+  workspaceUserName: string
 }) => {
   return axios.post(
-    'https://test.eodatahub.org.uk/ades/eric/ogc-api/processes/get-asset-impact-workflow/execution',
+    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/get-asset-impact-workflow/execution`,
     {
       inputs: {
-        workspace: 'ddowding',
+        workspace: workspaceUserName,
         json_string: JSON.stringify(userAssets),
       },
     },
@@ -34,34 +37,28 @@ const getIsDataReady = (status: string) => {
 }
 
 const getData = async ({
-  analysisResultsBearerToken,
   axios,
   jobId,
+  workspaceUserName,
 }: {
-  analysisResultsBearerToken: string
   axios: AxiosInstance
   jobId: string
+  workspaceUserName: string
 }) => {
-  const resultsUrl = `https://ddowding.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
-  return axios
-    .get(resultsUrl, {
-      headers: {
-        Authorization: `Bearer ${analysisResultsBearerToken}`,
-      },
-    })
-    .then((response) => {
-      return response.data as AnalysedUserAssets
-    })
+  const resultsUrl = `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
+  return axios.get(resultsUrl).then((response) => {
+    return response.data as AnalysedUserAssets
+  })
 }
 
 async function getAssetsRiskResults({
-  analysisResultsBearerToken,
   axios,
   url,
+  workspaceUserName,
 }: {
-  analysisResultsBearerToken: string
   axios: AxiosInstance
   url: string
+  workspaceUserName: string
 }) {
   const pollForAnalysisResults = async (
     resolve: (data: AnalysedUserAssets) => void,
@@ -73,7 +70,11 @@ async function getAssetsRiskResults({
       } = await axios.get(url)
       const isDataReady = getIsDataReady(status)
       if (isDataReady) {
-        const data = await getData({ jobId, analysisResultsBearerToken, axios })
+        const data = await getData({
+          axios,
+          jobId,
+          workspaceUserName,
+        })
         resolve(data)
       } else {
         setTimeout(() => {
@@ -89,27 +90,36 @@ async function getAssetsRiskResults({
 }
 
 export const analyseAssets = ({
-  analysisResultsBearerToken,
   axios,
   userAssets,
+  userInfo,
 }: {
-  analysisResultsBearerToken: string
   axios?: AxiosInstance
   userAssets: UserAssets
+  userInfo: KeycloakUserInfo
 }) => {
+  const workspaceUserName = userInfo.preferred_username?.replace('-', '_')
+
   if (!axios) {
     throw new Error('axios is required')
   }
+  if (!workspaceUserName) {
+    throw new Error('The user must be logged in and have a username')
+  }
 
-  return initiateAssetsRiskAnalysis({ userAssets, axios }).then((response) => {
+  return initiateAssetsRiskAnalysis({
+    userAssets,
+    axios,
+    workspaceUserName,
+  }).then((response) => {
     const statusPollingUrl = response.data.links.find(
       (link: { title: string }) => link.title === 'Status location',
     ).href
 
     return getAssetsRiskResults({
-      analysisResultsBearerToken,
       axios,
       url: statusPollingUrl,
+      workspaceUserName,
     })
   })
 }

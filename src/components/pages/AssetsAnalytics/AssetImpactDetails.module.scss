@@ -1,0 +1,43 @@
+@use '../../../library/genericStyles/containers';
+
+.detailsWrapper {
+  @include containers.flexColumnStartStart;
+  height: 100%;
+}
+.chartAndMapWrapper {
+  @include containers.flexRowSpaceBetweenStart;
+  height: 100%;
+  width: 100%;
+}
+.tabsRoot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 770px;
+  height: 100%;
+}
+.tabsList {
+  background-color: var(--slate-4);
+  box-shadow: none;
+
+  & button {
+    all: unset;
+    padding: var(--space-3);
+    font-size: var(--font-size-1);
+  }
+
+  & button[data-state='active'] {
+    background-color: var(--slate-11);
+    color: var(--white);
+  }
+  & button:hover:not([data-state='active']) {
+    background-color: var(--slate-5);
+  }
+}
+.tabsContentWrapper {
+  @include containers.flexColumnCenterCenter;
+  border: solid thin var(--slate-5);
+  height: 100%;
+  font-weight: bold;
+  color: var(--slate-a11);
+}

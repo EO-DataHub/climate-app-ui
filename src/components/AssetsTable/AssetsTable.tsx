@@ -13,7 +13,7 @@ import {
   Row as TanstackRow,
 } from '@tanstack/table-core'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
-import { Table, TextField, Tooltip, Text } from '@radix-ui/themes'
+import { Table, TextField, Tooltip, Text, Link } from '@radix-ui/themes'
 import {
   Dispatch,
   SetStateAction,
@@ -59,15 +59,27 @@ export const AssetsTable = ({
   mapRef,
   rowSelection,
   setRowSelection,
-  userAssets,
+  showExtraColumnsToggle = true,
+  showPageSelector = true,
+  showSearch = true,
+  showSelectBoxes = true,
+  showViewDetailsButton = false,
   title = 'Assets',
+  userAssets,
+  onViewDetailsClick,
 }: {
   isMapLoaded?: boolean
   mapRef?: MapRef
+  onViewDetailsClick?: (id: string | number) => void
   rowSelection: RowSelection
   setRowSelection: Dispatch<SetStateAction<RowSelection>>
-  userAssets: UserAssets | undefined
+  showExtraColumnsToggle?: boolean
+  showPageSelector?: boolean
+  showSearch?: boolean
+  showSelectBoxes?: boolean
+  showViewDetailsButton?: boolean
   title?: string
+  userAssets: UserAssets | undefined
 }) => {
   const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
   const [columnVisibility, setColumnVisibility] = useState({})
@@ -128,9 +140,10 @@ export const AssetsTable = ({
     const extraTableColumnSpecifications = extraColumnNames.map((columnName) =>
       columnHelper.accessor(columnName, {}),
     )
-
-    return [
-      {
+    const preDefaultColumns = []
+    const postDefaultColumns = []
+    if (showSelectBoxes) {
+      preDefaultColumns.push({
         id: 'select',
         header: ({ table }: { table: TanstackTable<UserAssetForTable> }) => {
           const indeterminateValue = table.getIsSomeRowsSelected()
@@ -163,7 +176,9 @@ export const AssetsTable = ({
             />
           )
         },
-      },
+      })
+    }
+    const defaultColumns = [
       columnHelper.accessor('id', { header: 'ID', enableHiding: false }),
       columnHelper.accessor('type', {
         header: 'Asset Type',
@@ -185,9 +200,38 @@ export const AssetsTable = ({
           <>{`${cellContent.row.original.longitude.toFixed(4)}°`}</>
         ),
       }),
+    ]
+    if (showViewDetailsButton) {
+      postDefaultColumns.push({
+        id: 'select',
+
+        meta: { justify: 'end' },
+        cell: ({ row }: { row: TanstackRow<UserAssetForTable> }) => {
+          return (
+            <Link asChild>
+              <button onClick={() => onViewDetailsClick?.(row.original.id)}>
+                View Details
+              </button>
+            </Link>
+          )
+        },
+      })
+    }
+
+    return [
+      ...preDefaultColumns,
+      ...defaultColumns,
+      ...postDefaultColumns,
       ...extraTableColumnSpecifications,
     ]
-  }, [extraColumnNames, toggleAllMapAssetsSelection, toggleMapAssetSelection])
+  }, [
+    extraColumnNames,
+    onViewDetailsClick,
+    showSelectBoxes,
+    showViewDetailsButton,
+    toggleAllMapAssetsSelection,
+    toggleMapAssetSelection,
+  ])
 
   const table = useReactTable({
     columns,
@@ -266,20 +310,23 @@ export const AssetsTable = ({
           <div className={containerStyles.flexRowSpaceBetweenCenter}>
             <Text weight="bold">{title}</Text>
             <div className={tableStyles.tableInputWrapper}>
-              <TextField.Root
-                placeholder="Search"
-                value={tableSearchValue ?? ''}
-                onChange={(event) => {
-                  const { value } = event.target
-                  setTableSearchValue(value)
-                  debouncedSetGlobalFilter(value)
-                }}
-              >
-                <TextField.Slot>
-                  <SearchIcon />
-                </TextField.Slot>
-              </TextField.Root>
-              {extraColumnNames.length
+              {showSearch ? (
+                <TextField.Root
+                  placeholder="Search"
+                  value={tableSearchValue ?? ''}
+                  onChange={(event) => {
+                    const { value } = event.target
+                    setTableSearchValue(value)
+                    debouncedSetGlobalFilter(value)
+                  }}
+                >
+                  <TextField.Slot>
+                    <SearchIcon />
+                  </TextField.Slot>
+                </TextField.Root>
+              ) : null}
+
+              {extraColumnNames.length && showExtraColumnsToggle
                 ? toggleAreExtraColumnsVisibleButton
                 : null}
             </div>
@@ -359,17 +406,19 @@ export const AssetsTable = ({
               })}
             </Table.Body>
           </Table.Root>
-          <div className={containerStyles.flexRowStartCenter}>
-            <PageSelector
-              currentPageIndex={table.getState().pagination.pageIndex}
-              nextDisabled={!table.getCanNextPage()}
-              onGoToPage={table.setPageIndex}
-              onNextClick={table.nextPage}
-              onPreviousClick={table.previousPage}
-              pageCount={table.getPageCount()}
-              previousDisabled={!table.getCanPreviousPage()}
-            />
-          </div>
+          {showPageSelector ? (
+            <div className={containerStyles.flexRowStartCenter}>
+              <PageSelector
+                currentPageIndex={table.getState().pagination.pageIndex}
+                nextDisabled={!table.getCanNextPage()}
+                onGoToPage={table.setPageIndex}
+                onNextClick={table.nextPage}
+                onPreviousClick={table.previousPage}
+                pageCount={table.getPageCount()}
+                previousDisabled={!table.getCanPreviousPage()}
+              />
+            </div>
+          ) : null}
         </div>
       ) : null}
     </>

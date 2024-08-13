@@ -19,6 +19,7 @@ import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import assetStyles from './Assets.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { WorkflowModalContent } from './WorkflowModalContent'
+import { PageSubtitle } from '../../PageSubtitle'
 
 export const Assets = () => {
   const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
@@ -205,9 +206,9 @@ export const Assets = () => {
       title="Assets"
       subtitle={
         <>
-          <Text weight="bold" as="p">
+          <PageSubtitle>
             Choose an existing portfolio or open a new file for analysis
-          </Text>
+          </PageSubtitle>
           {uploadedFileName ? portfolioWorkflowInfo : null}
         </>
       }

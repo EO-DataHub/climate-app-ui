@@ -25,11 +25,15 @@ export const useAssetPortfolios = ({
   mapRef,
   onHighlightInTableClick,
   onMapMarkerPopupClose,
+  onAssetMarkerClick,
+  zoomToUserAssets = true,
 }: {
-  isMapLoaded?: boolean
-  mapRef?: MapRef
+  isMapLoaded: boolean | undefined
+  mapRef: MapRef | undefined
   onHighlightInTableClick?: (id: string) => void
   onMapMarkerPopupClose?: () => void
+  onAssetMarkerClick?: (event: MapLayerMouseEvent) => void
+  zoomToUserAssets?: boolean
 }) => {
   const { setIsMapLoading } = useContext(LoadingContext)
   const { userAssets } = useContext(UserAssetsContext)
@@ -240,12 +244,12 @@ export const useAssetPortfolios = ({
       )
 
       const areUserAssetBoundsValid = areBoundsValid(userAssetBounds)
-      if (areUserAssetBoundsValid) {
+      if (areUserAssetBoundsValid && zoomToUserAssets) {
         mapRef.current.fitBounds(userAssetBounds, {
           padding: MAPLIBRE_FIT_BOUNDS_PADDING,
         })
       }
-      if (!areUserAssetBoundsValid) {
+      if (!areUserAssetBoundsValid && zoomToUserAssets) {
         mapRef.current.setZoom(1)
         mapRef.current.setCenter([0, 0])
       }
@@ -354,10 +358,11 @@ export const useAssetPortfolios = ({
           },
         })
 
+        const markerClickHandlerToUse = onAssetMarkerClick ?? handleMarkerClick
         mapRef.current.on(
           'click',
           MapLayerIds.USER_ASSETS_UNCLUSTERED,
-          handleMarkerClick,
+          markerClickHandlerToUse,
         )
         mapRef.current.on(
           'mouseenter',
@@ -374,9 +379,11 @@ export const useAssetPortfolios = ({
     [
       isMapLoaded,
       mapRef,
+      onAssetMarkerClick,
       onHighlightInTableClick,
       onMapMarkerPopupClose,
       setIsMapLoading,
+      zoomToUserAssets,
     ],
   )
 

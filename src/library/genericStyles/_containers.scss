@@ -1,20 +1,22 @@
-@mixin flexColumnSpaceBetweenStart {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-5);
-}
-
 @mixin flexRowSpaceBetweenCenter {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: var(--space-5);
 }
 
+@mixin flexRowSpaceBetweenStart {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
 @mixin flexRowSpaceBetweenEnd {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: flex-end;
   gap: var(--space-5);
@@ -22,6 +24,7 @@
 
 @mixin flexRowCenterCenter {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: var(--space-5);
@@ -29,18 +32,21 @@
 
 @mixin flexRowStartCenter {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: var(--space-5);
 }
 
 @mixin flexRowStartLastBaseline {
   display: flex;
+  flex-direction: row;
   align-items: last baseline;
   gap: var(--space-5);
 }
 
 @mixin flexRowEndCenter {
   display: flex;
+  flex-direction: row;
   align-items: center;
   gap: var(--space-5);
   justify-content: flex-end;
@@ -48,7 +54,16 @@
 
 @mixin flexRowStartStart {
   display: flex;
+  flex-direction: row;
   align-items: start;
+  gap: var(--space-5);
+}
+
+@mixin flexColumnSpaceBetweenStart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: var(--space-5);
 }
 

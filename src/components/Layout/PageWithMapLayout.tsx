@@ -1,8 +1,8 @@
-import { Text } from '@radix-ui/themes'
 import { ReactNode } from 'react'
 
 import pageWithMapStyles from './PageWithMapLayout.module.css'
 import { PageTitle } from '../PageTitle'
+import { PageSubtitle } from '../PageSubtitle'
 
 export const PageWithMapLayout = ({
   map,
@@ -28,9 +28,7 @@ export const PageWithMapLayout = ({
         <div className={pageWithMapStyles.titlesContainer}>
           <PageTitle>{title}</PageTitle>
           {typeof subtitle === 'string' ? (
-            <Text weight="bold" as="p">
-              {subtitle}
-            </Text>
+            <PageSubtitle>{subtitle}</PageSubtitle>
           ) : null}
           {subtitle && typeof subtitle !== 'string' ? subtitle : null}
         </div>

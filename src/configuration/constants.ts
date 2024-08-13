@@ -14,3 +14,8 @@ export enum MapLayerIds {
 
 export const UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT = 'unsavedAssets'
 export const MAPLIBRE_FIT_BOUNDS_PADDING = 100
+
+export enum AssetImpactViewOptions {
+  LIST = 'list',
+  DETAILS = 'details',
+}

@@ -15,3 +15,6 @@
   @include containers.flexRowEndCenter;
   gap: var(--space-4);
 }
+.tableCell {
+  text-wrap: nowrap;
+}

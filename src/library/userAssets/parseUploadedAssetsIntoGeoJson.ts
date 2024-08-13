@@ -1,6 +1,6 @@
 // @ts-expect-error - no types available
 import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
-import { FeatureCollection, Point } from 'geojson'
+import { FeatureCollection, GeoJsonProperties, Point } from 'geojson'
 
 import { getIsFileCsv, getIsFileGeoJson } from '../fileTypes'
 import { UserAssets } from './userAssetTypes'
@@ -14,6 +14,19 @@ const doesGeoJsonContainRequiredProperties = (
       typeof feature.geometry?.coordinates?.[1] === 'number'
     )
   })
+
+const copyUppercaseIdToLowercaseId = (geoJson: FeatureCollection<Point>) => {
+  return {
+    ...geoJson,
+    features: geoJson.features.map((feature) => ({
+      ...feature,
+      properties: {
+        ...feature.properties,
+        id: feature.properties?.ID || feature.properties?.id,
+      },
+    })),
+  }
+}
 
 export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
   return new Promise<UserAssets>((resolve, reject) => {
@@ -31,12 +44,17 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
       if (isGeoJson) {
         try {
           const parsedFileContents = JSON.parse(fileContents)
-          if (!doesGeoJsonContainRequiredProperties(parsedFileContents)) {
+          const reformattedParsedFileContents =
+            copyUppercaseIdToLowercaseId(parsedFileContents)
+
+          if (
+            !doesGeoJsonContainRequiredProperties(reformattedParsedFileContents)
+          ) {
             reject(
               "GeoJSON file must contain an 'id' field within each feature's properties object",
             )
           }
-          resolve(parsedFileContents)
+          resolve(reformattedParsedFileContents as UserAssets)
         } catch (error) {
           reject(error)
         }
@@ -47,25 +65,34 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
           .split(',')
 
         if (
-          !headers.includes('id') ||
-          !headers.includes('latitude') ||
-          !headers.includes('longitude')
+          !(headers.includes('id') || headers.includes('ID')) ||
+          !(headers.includes('latitude') || headers.includes('LATITUDE')) ||
+          !(headers.includes('longitude') || headers.includes('LONGITUDE'))
         ) {
           reject("CSV file must contain 'id','latitude', and 'longitude'")
         }
 
+        const latfield = headers.includes('latitude') ? 'latitude' : 'LATITUDE'
+        const lonfield = headers.includes('longitude')
+          ? 'longitude'
+          : 'LONGITUDE'
+
         getGeojsonFromCsv(
           fileContents,
           {
-            latfield: 'latitude',
-            lonfield: 'longitude',
+            latfield,
+            lonfield,
             delimiter: ',',
           },
           function (error: Error | null, data: FeatureCollection | null) {
             if (!data || error) {
               reject(error)
             }
-            resolve(data as UserAssets)
+            resolve(
+              copyUppercaseIdToLowercaseId(
+                data as FeatureCollection<Point, GeoJsonProperties>,
+              ) as UserAssets,
+            )
           },
         )
       }

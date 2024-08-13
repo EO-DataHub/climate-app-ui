@@ -591,7 +591,7 @@ export const workflowOptions = [
     nickName: 'OS-Climate',
     requiredColumns: ['ID', 'latitude', 'longitude', 'asset_type', 'location'],
     description:
-      'The OS Climate physical risk workflow will undertake a risk analysis on your asset portfolio of the potential impacts of climate change. According to the type of your asset, the workflow will analyse risks from chronic head, inundation.',
+      'The OS Climate physical risk workflow will undertake a risk analysis on your asset portfolio of the potential impacts of climate change. According to the type of your asset, the workflow will analyse risks from chronic heat, inundation.',
   },
   {
     title: 'Land Surface Temperature (LST)',

@@ -1,12 +1,11 @@
-export const hazardTypePopupContent = <>Definition to be determined.</>
-
-export const hazardIndicatorPopupContent = <>Definition to be determined.</>
-export const climateModelPopupContent = <>Definition to be determined.</>
+export const hazardTypePopupContent = <>Hazards are potential occurences of climate related-physical phenomenon that present a risk to assets.</>
+export const hazardIndicatorPopupContent = <>Hazard indicators are datasets derived from climate models that provide metrics useful for risk asessments.</>
+export const climateModelPopupContent = <>Climate models are computer similulations of changes to the Earth's climate system.</>
 export const scenarioPopupContent = (
   <>
-    <strong>Shared Socioeconomic Pathways (SSPs)</strong> are scenarios used in
-    climate research to project and analyze future global changes based on
-    different socioeconomic factors.
+    Climate change scenarios represent hypothetical futures based sets of key driving forces.
+    <strong>Representive Concentration Pathways (RCP's)</strong> are projections of future greenhouse gas concentrations.  
+    <strong>Shared Socio-economic Pathways (SSP's)</strong> include a backdrop of socio-economic development scenarios on how those concentrations are reached.
   </>
 )
-export const yearPopupContent = <>Definition to be determined.</>
+export const yearPopupContent = <>The year is the midpoint of a 20 year period over which the indicator data is derived.</>

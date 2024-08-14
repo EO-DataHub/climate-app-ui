@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios'
 
-import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
 import { KeycloakUserInfo } from '../../context/AuthenticationContext'
+import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
 
 const initiateAssetsRiskAnalysis = async ({
   axios,
@@ -21,7 +21,7 @@ const initiateAssetsRiskAnalysis = async ({
       },
     },
     {
-      headers: { prefer: 'respond-async' },
+      headers: {},
     },
   )
 }

@@ -23,9 +23,6 @@ import { PageSubtitle } from '../../PageSubtitle'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
 
 export const Assets = () => {
-  const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
-    string | undefined
-  >()
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
@@ -39,6 +36,8 @@ export const Assets = () => {
     userAssets,
     setUploadedFileName,
     uploadedFileName,
+    setCurrentWorkflowNickname,
+    currentWorkflowNickname,
   } = useContext(UserAssetsContext)
 
   const handleLoadAssets = ({
@@ -48,7 +47,7 @@ export const Assets = () => {
     fileName: string
     parsedAssets: UserAssets
   }) => {
-    setCurrentWorkflowTitle(undefined)
+    setCurrentWorkflowNickname?.(undefined)
     setRowSelection({})
     setUserAssets?.(parsedAssets)
     setUploadedFileName?.(fileName)
@@ -88,7 +87,7 @@ export const Assets = () => {
         You will receive a notification when it&apos;s ready.
       </>,
     )
-    setCurrentWorkflowTitle(workflowTitle)
+    setCurrentWorkflowNickname?.(workflowTitle)
     setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
     analyseAssets({
@@ -203,7 +202,9 @@ export const Assets = () => {
   const portfolioWorkflowInfo = (
     <Text as="p">
       Portfolio: {uploadedFileName}
-      {currentWorkflowTitle ? <> | Workflow: {currentWorkflowTitle}</> : null}
+      {currentWorkflowNickname ? (
+        <> | Workflow: {currentWorkflowNickname}</>
+      ) : null}
     </Text>
   )
 

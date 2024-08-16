@@ -1,9 +1,15 @@
 import { RadioGroup, Select } from '@radix-ui/themes'
 import { useEffect, useMemo, useState } from 'react'
 
-import { AssetImpactViewOptions } from '../../../configuration/constants'
+import {
+  AssetImpactViewOptions,
+  CurrentHubWorkflowNicknames,
+} from '../../../configuration/constants'
 import { AssetsTable } from '../../AssetsTable/AssetsTable'
-import { fakeOscResultsData } from '../../../library/api/fakeApiData'
+import {
+  fakeLstResultsData,
+  fakeOscResultsData,
+} from '../../../library/api/fakeApiData'
 import { PageLayout } from '../../Layout/PageLayout'
 import { PageSubtitle } from '../../PageSubtitle'
 import { PageTitle } from '../../PageTitle'
@@ -15,7 +21,11 @@ import analyticsStyles from './AssetsAnalytics.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import { AssetImpactsDetails } from './AssetImpactsDetails'
 import { toast } from 'react-toastify'
-import { getOscResultsTableData } from '../../../library/userAssets/convertUserAssets'
+import {
+  AnalysedOscUserAssetForTable,
+  getLstResultsTableData,
+  getOscResultsTableData,
+} from '../../../library/userAssets/convertUserAssets'
 
 export const AssetsAnalytics = () => {
   const [assetToDetailId, setAssetToDetailId] = useState<
@@ -32,17 +42,27 @@ export const AssetsAnalytics = () => {
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
-  const userAssets = fakeOscResultsData as unknown as UserAssets
+  const currentWorkflowNickname = CurrentHubWorkflowNicknames.OSC as string
+
+  const userAssets = (
+    currentWorkflowNickname === (CurrentHubWorkflowNicknames.OSC as string)
+      ? fakeOscResultsData
+      : fakeLstResultsData
+  ) as UserAssets
 
   const uploadedFileName = 'fakeFileName.csv'
 
   const userAssetsForTable = useMemo(
-    () => getOscResultsTableData(userAssets),
-    [userAssets],
+    () =>
+      currentWorkflowNickname === (CurrentHubWorkflowNicknames.OSC as string)
+        ? getOscResultsTableData(userAssets)
+        : getLstResultsTableData(userAssets),
+
+    [currentWorkflowNickname, userAssets],
   )
   const filteredUserAssetsForTable = useMemo(() => {
     return userAssetsForTable.filter(
-      (asset) =>
+      (asset: AnalysedOscUserAssetForTable) =>
         (yearFilterValue ? asset.year === yearFilterValue : true) &&
         (scenarioFilterValue ? asset.scenario === scenarioFilterValue : true) &&
         (indicatorFilterValue
@@ -61,7 +81,9 @@ export const AssetsAnalytics = () => {
       const years: string[] = []
       const scenarios: string[] = []
       const indicators: string[] = []
-      userAssetsForTable.forEach(({ year, scenario, indicator }) => {
+      const analysedOscUserAssetForTable =
+        userAssetsForTable as AnalysedOscUserAssetForTable[]
+      analysedOscUserAssetForTable.forEach(({ year, scenario, indicator }) => {
         if (year && year.toLowerCase() !== 'none') {
           years.push(year)
         }
@@ -127,57 +149,67 @@ export const AssetsAnalytics = () => {
 
   const oscFilters = (
     <>
-      <div className={analyticsStyles.filterInputWrapper}>
-        <label htmlFor="indicator-filter" className={formStyles.formLabel}>
-          Indicator
-        </label>
-        <Select.Root
-          value={indicatorFilterValue}
-          onValueChange={setIndicatorFilterValue}
-        >
-          <Select.Trigger id="indicator-filter" />
-          <Select.Content>
-            {indicatorFilterOptions?.map((option) => (
-              <Select.Item value={option} key={option}>
-                {option}
-              </Select.Item>
-            ))}
-          </Select.Content>
-        </Select.Root>
-      </div>
-      <div className={analyticsStyles.filterInputWrapper}>
-        <label htmlFor="scenario-filter" className={formStyles.formLabel}>
-          Scenario
-        </label>
-        <Select.Root
-          value={scenarioFilterValue}
-          onValueChange={setScenarioFilterValue}
-        >
-          <Select.Trigger id="scenario-filter" />
-          <Select.Content>
-            {scenarioFilterOptions?.map((option) => (
-              <Select.Item value={option} key={option}>
-                {option}
-              </Select.Item>
-            ))}
-          </Select.Content>
-        </Select.Root>
-      </div>
-      <div className={analyticsStyles.filterInputWrapper}>
-        <label htmlFor="year-filter" className={formStyles.formLabel}>
-          Year
-        </label>
-        <Select.Root value={yearFilterValue} onValueChange={setYearFilterValue}>
-          <Select.Trigger id="year-filter" />
-          <Select.Content>
-            {yearFilterOptions?.map((option) => (
-              <Select.Item value={option} key={option}>
-                {option}
-              </Select.Item>
-            ))}
-          </Select.Content>
-        </Select.Root>
-      </div>
+      {indicatorFilterOptions?.length ? (
+        <div className={analyticsStyles.filterInputWrapper}>
+          <label htmlFor="indicator-filter" className={formStyles.formLabel}>
+            Indicator
+          </label>
+          <Select.Root
+            value={indicatorFilterValue}
+            onValueChange={setIndicatorFilterValue}
+          >
+            <Select.Trigger id="indicator-filter" />
+            <Select.Content>
+              {indicatorFilterOptions?.map((option) => (
+                <Select.Item value={option} key={option}>
+                  {option}
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
+        </div>
+      ) : null}
+      {scenarioFilterOptions?.length ? (
+        <div className={analyticsStyles.filterInputWrapper}>
+          <label htmlFor="scenario-filter" className={formStyles.formLabel}>
+            Scenario
+          </label>
+          <Select.Root
+            value={scenarioFilterValue}
+            onValueChange={setScenarioFilterValue}
+          >
+            <Select.Trigger id="scenario-filter" />
+            <Select.Content>
+              {scenarioFilterOptions?.map((option) => (
+                <Select.Item value={option} key={option}>
+                  {option}
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
+        </div>
+      ) : null}
+
+      {yearFilterOptions?.length ? (
+        <div className={analyticsStyles.filterInputWrapper}>
+          <label htmlFor="year-filter" className={formStyles.formLabel}>
+            Year
+          </label>
+          <Select.Root
+            value={yearFilterValue}
+            onValueChange={setYearFilterValue}
+          >
+            <Select.Trigger id="year-filter" />
+            <Select.Content>
+              {yearFilterOptions?.map((option) => (
+                <Select.Item value={option} key={option}>
+                  {option}
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
+        </div>
+      ) : null}
     </>
   )
 

@@ -15,6 +15,10 @@ interface UserAssetsContextValue {
   >
   uploadedFileName?: string | null
   setUploadedFileName?: React.Dispatch<React.SetStateAction<string | null>>
+  currentWorkflowNickname?: string | undefined
+  setCurrentWorkflowNickname?: React.Dispatch<
+    React.SetStateAction<string | undefined>
+  >
 }
 
 export const UserAssetsContext = createContext<UserAssetsContextValue>({})
@@ -24,6 +28,9 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [userAssets, setUserAssets] = useState<UserAssets>(null)
   const [analysedUserAssets, setAnalysedUserAssets] =
     useState<AnalysedUserAssets>(null)
+  const [currentWorkflowNickname, setCurrentWorkflowNickname] = useState<
+    string | undefined
+  >()
 
   return (
     <UserAssetsContext.Provider
@@ -34,6 +41,8 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
         setAnalysedUserAssets,
         uploadedFileName,
         setUploadedFileName,
+        currentWorkflowNickname,
+        setCurrentWorkflowNickname,
       }}
     >
       {children}

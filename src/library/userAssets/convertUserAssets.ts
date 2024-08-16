@@ -7,9 +7,9 @@ export interface UserAssetForTable extends UserAssetsProperties {
 }
 
 export interface AnalysedOscUserAssetForTable extends UserAssetForTable {
-  year: string
-  scenario: string
-  indicator: string
+  year?: string
+  scenario?: string
+  indicator?: string
 }
 
 export const convertSimpleGeoJSONToDataForTable = (
@@ -108,4 +108,22 @@ export const getOscResultsTableData = (
     .flat()
 
   return featuresWithFlattenedRiskMeasures as unknown as AnalysedOscUserAssetForTable[]
+}
+
+export const getLstResultsTableData = (
+  analysedUserAssets: UserAssets | undefined,
+) => {
+  if (!analysedUserAssets) return []
+
+  return analysedUserAssets.features.map((feature) => {
+    const [longitude, latitude] = feature.geometry.coordinates
+    const { returned_values, ...restOfProperties } = feature.properties
+
+    return {
+      latitude,
+      longitude,
+      ...restOfProperties,
+      ...(returned_values as object),
+    }
+  })
 }

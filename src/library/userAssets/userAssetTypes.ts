@@ -12,7 +12,7 @@ export interface UserAssetsProperties {
 export type UserAssets = FeatureCollection<Point, UserAssetsProperties> | null
 export type AnalysedUserAssets = FeatureCollection<
   Point,
-  UserAssetsProperties // for now the API returns invalid GeoJson (attributes outside of the properties object), so this type is a bit of a lie
+  UserAssetsProperties //the schema between workflows is variable, so we dont really have a type for this yet
 > | null
 
 export type parseUploadedAssetsIntoGeoJson = (

@@ -22,28 +22,25 @@ import {
   useMemo,
   useState,
 } from 'react'
-import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
-import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
 
-import {
-  RowSelection,
-  UserAssets,
-} from '../../library/userAssets/userAssetTypes'
-import {
-  UserAssetForTable,
-  convertGeoJSONToDataForTable,
-} from '../../library/userAssets/convertUserAssets'
+import { getTablePageIndexByRowId } from '../../library/tanStackTable/getTablePageIndexByRowId'
 import { IconButtonOverride } from '../IconButtonOverride/IconButtonOverride'
 import { IndeterminateCheckbox } from '../IndeterminateCheckbox/IndeterminateCheckbox'
 import { MapRef } from '../Map/useMap'
 import { PageSelector } from '../Pagination/PageSelector/PageSelector'
+import { RowSelection } from '../../library/userAssets/userAssetTypes'
+import { useAssetPortfolios } from '../../library/userAssets/useAssetPortfolios'
 import { useDebouncedCallback } from 'use-debounce'
+import {
+  AnalysedOscUserAssetForTable,
+  UserAssetForTable,
+} from '../../library/userAssets/convertUserAssets'
 import { useSyncAssetsTableFilterWithMapAssets } from '../../library/userAssets/useSyncAssetsTableFilterWithMapAssets'
 import { useSyncAssetsTableSelectionWithMapAssets } from '../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 import containerStyles from '../../library/genericStyles/containers.module.scss'
+import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
+import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
 import tableStyles from './AssetsTable.module.scss'
-import { useAssetPortfolios } from '../../library/userAssets/useAssetPortfolios'
-import { getTablePageIndexByRowId } from '../../library/tanStackTable/getTablePageIndexByRowId'
 
 const getUniqueColumnNames = (
   previousValue: string[],
@@ -55,8 +52,10 @@ const getUniqueColumnNames = (
 }
 
 export const AssetsTable = ({
+  areExtraColumnsVisibleInitially = false,
   isMapLoaded,
   mapRef,
+  onViewDetailsClick,
   rowSelection,
   setRowSelection,
   showExtraColumnsToggle = true,
@@ -65,9 +64,10 @@ export const AssetsTable = ({
   showSelectBoxes = true,
   showViewDetailsButton = false,
   title = 'Assets',
-  userAssets,
-  onViewDetailsClick,
+  upperRightTitleRowSlot,
+  userAssetsForTable,
 }: {
+  areExtraColumnsVisibleInitially?: boolean
   isMapLoaded?: boolean
   mapRef?: MapRef
   onViewDetailsClick?: (id: string | number) => void
@@ -79,18 +79,16 @@ export const AssetsTable = ({
   showSelectBoxes?: boolean
   showViewDetailsButton?: boolean
   title?: string
-  userAssets: UserAssets | undefined
+  upperRightTitleRowSlot?: React.ReactNode
+  userAssetsForTable: UserAssetForTable[] | AnalysedOscUserAssetForTable[]
 }) => {
-  const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(false)
+  const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(
+    areExtraColumnsVisibleInitially,
+  )
   const [columnVisibility, setColumnVisibility] = useState({})
   const [globalFilter, setGlobalFilter] = useState('')
   const [highlightedRowId, setHighlightedRowId] = useState<string | null>(null)
   const [tableSearchValue, setTableSearchValue] = useState('')
-
-  const userAssetsForTable = useMemo(
-    () => convertGeoJSONToDataForTable(userAssets),
-    [userAssets],
-  )
 
   const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
     setGlobalFilter(value)
@@ -325,10 +323,10 @@ export const AssetsTable = ({
                   </TextField.Slot>
                 </TextField.Root>
               ) : null}
-
               {extraColumnNames.length && showExtraColumnsToggle
                 ? toggleAreExtraColumnsVisibleButton
                 : null}
+              {upperRightTitleRowSlot ? upperRightTitleRowSlot : null}
             </div>
           </div>
 
@@ -388,7 +386,10 @@ export const AssetsTable = ({
 
                 const className = classNameHighlighted ?? classNameSelected
                 return (
-                  <Table.Row key={row.id} className={className}>
+                  <Table.Row
+                    key={`${String(row.id)}-${String(row.original.scenario)}-${String(row.original.indicator)}-${String(row.original.year)}`}
+                    className={className}
+                  >
                     {row.getVisibleCells().map((cell) => (
                       <Table.Cell
                         key={cell.id}

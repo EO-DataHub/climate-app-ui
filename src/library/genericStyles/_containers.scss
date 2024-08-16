@@ -52,6 +52,14 @@
   justify-content: flex-end;
 }
 
+@mixin flexRowEndEnd {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: var(--space-5);
+  justify-content: flex-end;
+}
+
 @mixin flexRowStartStart {
   display: flex;
   flex-direction: row;

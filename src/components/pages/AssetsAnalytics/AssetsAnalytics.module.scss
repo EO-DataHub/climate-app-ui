@@ -5,3 +5,7 @@
   gap: var(--space-6);
   margin: var(--space-5) 0;
 }
+.filterInputWrapper {
+  @include containers.flexColumnStartStart;
+  gap: var(--space-1);
+}

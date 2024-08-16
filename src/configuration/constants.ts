@@ -19,3 +19,7 @@ export enum AssetImpactViewOptions {
   LIST = 'list',
   DETAILS = 'details',
 }
+
+export enum OscRiskResultIndicatorValues {
+  chronicHeat = 'ChronicHeat',
+}

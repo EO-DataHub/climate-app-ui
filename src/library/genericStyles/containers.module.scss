@@ -15,6 +15,9 @@
 .flexRowEndCenter {
   @include containers.flexRowEndCenter;
 }
+.flexRowEndEnd {
+  @include containers.flexRowEndEnd;
+}
 .flexColumnSpaceBetweenCenter {
   display: flex;
   flex-direction: column;

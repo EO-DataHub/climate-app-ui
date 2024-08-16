@@ -12,7 +12,7 @@
   background-color: var(--accent-a6);
 }
 .tableInputWrapper {
-  @include containers.flexRowEndCenter;
+  @include containers.flexRowEndEnd;
   gap: var(--space-4);
 }
 .tableCell {

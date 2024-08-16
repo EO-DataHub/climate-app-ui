@@ -1,6 +1,13 @@
 // @ts-expect-error  turf has an issue delaring its types
 import { bbox as turfBbox } from '@turf/turf'
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+} from 'react'
 import * as Tabs from '@radix-ui/react-tabs'
 
 import {
@@ -15,27 +22,50 @@ import detailStyles from './AssetImpactDetails.module.scss'
 import { checkAndFitBounds } from '../../../library/maplibre/checkAndFitBounds'
 import { MapLayerMouseEvent } from 'maplibre-gl'
 import { MapSourceIds } from '../../../configuration/constants'
+import {
+  AnalysedOscUserAssetForTable,
+  UserAssetForTable,
+} from '../../../library/userAssets/convertUserAssets'
 
 export const AssetImpactsDetails = ({
-  analysedUserAssets,
+  userAssets,
+  userAssetsForTable,
+  assetToDetailId,
   rowSelection,
-  assetToDetail,
-  setRowSelection,
   setAssetToDetailId,
+  setRowSelection,
 }: {
-  analysedUserAssets: UserAssets
+  userAssets: UserAssets
+  userAssetsForTable: UserAssetForTable[] | AnalysedOscUserAssetForTable[]
   rowSelection: RowSelection
-  assetToDetail: UserAssets
+  assetToDetailId: string | number | undefined
   setRowSelection: Dispatch<SetStateAction<RowSelection>>
   setAssetToDetailId: Dispatch<SetStateAction<string | number | undefined>>
 }) => {
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const haveAssetsBeenAddedToMap = useRef(false)
 
+  const assetToDetail = useMemo(() => {
+    const assetsToDetailFeature = userAssets?.features.find(
+      (feature) => feature.properties.id === assetToDetailId,
+    )
+
+    return assetsToDetailFeature
+      ? ({
+          type: 'FeatureCollection',
+          features: [assetsToDetailFeature],
+        } as unknown as UserAssets)
+      : undefined
+  }, [assetToDetailId, userAssets?.features])
+
+  const userAssetForTable = userAssetsForTable.find(
+    (asset) => asset.id === assetToDetailId,
+  )
+
   const showMarkerSelectedSymbology = useCallback(
     (id: number | string | undefined) => {
       if (!id) return
-      analysedUserAssets?.features.forEach((feature) => {
+      userAssets?.features.forEach((feature) => {
         mapRef.current?.setFeatureState(
           {
             source: MapSourceIds.USER_ASSETS,
@@ -47,7 +77,7 @@ export const AssetImpactsDetails = ({
         )
       })
     },
-    [analysedUserAssets?.features, mapRef],
+    [userAssets?.features, mapRef],
   )
 
   const onAssetMarkerClick = useCallback(
@@ -68,7 +98,7 @@ export const AssetImpactsDetails = ({
   useEffect(
     function addAssetsToMapOnce() {
       if (
-        !analysedUserAssets ||
+        !userAssets ||
         !updateUserAssetsInMap ||
         !isMapLoaded ||
         !mapRef.current ||
@@ -76,7 +106,7 @@ export const AssetImpactsDetails = ({
       ) {
         return
       }
-      updateUserAssetsInMap(analysedUserAssets)
+      updateUserAssetsInMap(userAssets)
       const userAssetBounds = turfBbox(assetToDetail)
       checkAndFitBounds({
         map: mapRef.current,
@@ -87,7 +117,7 @@ export const AssetImpactsDetails = ({
       haveAssetsBeenAddedToMap.current = true
     },
     [
-      analysedUserAssets,
+      userAssets,
       assetToDetail,
       isMapLoaded,
       mapRef,
@@ -100,7 +130,7 @@ export const AssetImpactsDetails = ({
     <div className={detailStyles.detailsWrapper}>
       {assetToDetail ? (
         <AssetsTable
-          userAssets={assetToDetail}
+          userAssetsForTable={[userAssetForTable] as UserAssetForTable[]}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
           showPageSelector={false}
@@ -108,6 +138,7 @@ export const AssetImpactsDetails = ({
           showExtraColumnsToggle={false}
           showSelectBoxes={false}
           showViewDetailsButton={false}
+          areExtraColumnsVisibleInitially={true}
         />
       ) : null}
       <div className={detailStyles.chartAndMapWrapper}>

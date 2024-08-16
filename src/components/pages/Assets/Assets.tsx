@@ -1,5 +1,5 @@
 import { Button, Heading, Link, Text, Dialog } from '@radix-ui/themes'
-import { useContext, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 
 import {
   RowSelection,
@@ -20,6 +20,7 @@ import assetStyles from './Assets.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { WorkflowModalContent } from './WorkflowModalContent'
 import { PageSubtitle } from '../../PageSubtitle'
+import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
 
 export const Assets = () => {
   const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
@@ -127,6 +128,11 @@ export const Assets = () => {
       })
   }
 
+  const userAssetsForTable = useMemo(
+    () => convertSimpleGeoJSONToDataForTable(userAssets),
+    [userAssets],
+  )
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={assetStyles.sidebarTopSection}>
@@ -167,7 +173,7 @@ export const Assets = () => {
         <AssetsTable
           isMapLoaded={isMapLoaded}
           mapRef={mapRef}
-          userAssets={userAssets}
+          userAssetsForTable={userAssetsForTable}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
         />

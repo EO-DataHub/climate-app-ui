@@ -602,6 +602,162 @@ export const workflowOptions = [
   },
 ]
 
+export const fakeLstResultsData = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [-0.077, 51.482],
+      },
+      properties: {
+        id: 'xTicWhe8',
+        original_id: 0,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 37.019989013671875,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.295, 51.926],
+      },
+      properties: {
+        id: '8FEPzugc',
+        original_id: 1,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 32.07000732421875,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.04, 51.286],
+      },
+      properties: {
+        id: 'zVzWtZ9h',
+        original_id: 2,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 31.089996337890625,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [-0.247, 51.765],
+      },
+      properties: {
+        id: 'XfJtVmes',
+        original_id: 3,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 37.20001220703125,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.478, 51.732],
+      },
+      properties: {
+        id: 'T2q8a8YT',
+        original_id: 4,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 40.239990234375,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.449, 51.058],
+      },
+      properties: {
+        id: '2EkRkJTY',
+        original_id: 5,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 32.510009765625,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.232, 51.865],
+      },
+      properties: {
+        id: 'KRWsbJYJ',
+        original_id: 6,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 28.029998779296875,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.278, 51.074],
+      },
+      properties: {
+        id: 'gD2wvDGT',
+        original_id: 7,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 30.529998779296875,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.302, 51.471],
+      },
+      properties: {
+        id: 'Jvkstybn',
+        original_id: 8,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': null,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [0.222, 51.557],
+      },
+      properties: {
+        id: '2oHrvhwy',
+        original_id: 9,
+        returned_values: {
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 38.79998779296875,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+        },
+      },
+    },
+  ],
+}
+
 export const fakeOscResultsData = {
   type: 'FeatureCollection',
   features: [

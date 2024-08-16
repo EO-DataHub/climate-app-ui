@@ -20,6 +20,7 @@ export enum AssetImpactViewOptions {
   DETAILS = 'details',
 }
 
-export enum OscRiskResultIndicatorValues {
-  chronicHeat = 'ChronicHeat',
+export enum CurrentHubWorkflowNicknames {
+  OSC = 'OS-Climate',
+  LST = 'LST',
 }

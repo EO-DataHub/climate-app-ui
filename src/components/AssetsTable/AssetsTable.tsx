@@ -302,127 +302,120 @@ export const AssetsTable = ({
   )
 
   return (
-    <>
-      {userAssetsForTable.length ? (
-        <div className={tableStyles.tableWrapper}>
-          <div className={containerStyles.flexRowSpaceBetweenCenter}>
-            <Text weight="bold">{title}</Text>
-            <div className={tableStyles.tableInputWrapper}>
-              {showSearch ? (
-                <TextField.Root
-                  placeholder="Search"
-                  value={tableSearchValue ?? ''}
-                  onChange={(event) => {
-                    const { value } = event.target
-                    setTableSearchValue(value)
-                    debouncedSetGlobalFilter(value)
-                  }}
-                >
-                  <TextField.Slot>
-                    <SearchIcon />
-                  </TextField.Slot>
-                </TextField.Root>
-              ) : null}
-              {extraColumnNames.length && showExtraColumnsToggle
-                ? toggleAreExtraColumnsVisibleButton
-                : null}
-              {upperRightTitleRowSlot ? upperRightTitleRowSlot : null}
-            </div>
-          </div>
-
-          <Table.Root variant="surface" className={tableStyles.table}>
-            <Table.Header>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <Table.Row key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <Table.ColumnHeaderCell
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      // @ts-expect-error - meta allows for any property
-                      justify={header.column.columnDef.meta?.justify}
-                    >
-                      {header.isPlaceholder ? null : (
-                        <div
-                          className={
-                            header.column.getCanSort()
-                              ? 'cursor-pointer select-none'
-                              : ''
-                          }
-                          onClick={header.column.getToggleSortingHandler()}
-                          title={
-                            header.column.getCanSort()
-                              ? header.column.getNextSortingOrder() === 'asc'
-                                ? 'Sort ascending'
-                                : header.column.getNextSortingOrder() === 'desc'
-                                  ? 'Sort descending'
-                                  : 'Clear sort'
-                              : undefined
-                          }
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                          {{
-                            asc: ' 🔼',
-                            desc: ' 🔽',
-                          }[header.column.getIsSorted() as string] ?? null}
-                        </div>
-                      )}
-                    </Table.ColumnHeaderCell>
-                  ))}
-                </Table.Row>
-              ))}
-            </Table.Header>
-            <Table.Body>
-              {table.getRowModel().rows.map((row) => {
-                const classNameHighlighted =
-                  row.id === highlightedRowId
-                    ? tableStyles.highlightedTableRow
-                    : undefined
-                const classNameSelected = row.getIsSelected()
-                  ? tableStyles.selectedTableRow
-                  : undefined
-
-                const className = classNameHighlighted ?? classNameSelected
-                return (
-                  <Table.Row
-                    key={`${String(row.id)}-${String(row.original.scenario)}-${String(row.original.indicator)}-${String(row.original.year)}`}
-                    className={className}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <Table.Cell
-                        key={cell.id}
-                        // @ts-expect-error - meta allows for any property
-                        justify={cell.column.columnDef.meta?.justify}
-                        className={tableStyles.tableCell}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </Table.Cell>
-                    ))}
-                  </Table.Row>
-                )
-              })}
-            </Table.Body>
-          </Table.Root>
-          {showPageSelector ? (
-            <div className={containerStyles.flexRowStartCenter}>
-              <PageSelector
-                currentPageIndex={table.getState().pagination.pageIndex}
-                nextDisabled={!table.getCanNextPage()}
-                onGoToPage={table.setPageIndex}
-                onNextClick={table.nextPage}
-                onPreviousClick={table.previousPage}
-                pageCount={table.getPageCount()}
-                previousDisabled={!table.getCanPreviousPage()}
-              />
-            </div>
+    <div className={tableStyles.tableWrapper}>
+      <div className={containerStyles.flexRowSpaceBetweenCenter}>
+        <Text weight="bold">{title}</Text>
+        <div className={tableStyles.tableInputWrapper}>
+          {showSearch ? (
+            <TextField.Root
+              placeholder="Search"
+              value={tableSearchValue ?? ''}
+              onChange={(event) => {
+                const { value } = event.target
+                setTableSearchValue(value)
+                debouncedSetGlobalFilter(value)
+              }}
+            >
+              <TextField.Slot>
+                <SearchIcon />
+              </TextField.Slot>
+            </TextField.Root>
           ) : null}
+          {extraColumnNames.length && showExtraColumnsToggle
+            ? toggleAreExtraColumnsVisibleButton
+            : null}
+          {upperRightTitleRowSlot ? upperRightTitleRowSlot : null}
+        </div>
+      </div>
+
+      <Table.Root variant="surface" className={tableStyles.table}>
+        <Table.Header>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <Table.Row key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <Table.ColumnHeaderCell
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  // @ts-expect-error - meta allows for any property
+                  justify={header.column.columnDef.meta?.justify}
+                >
+                  {header.isPlaceholder ? null : (
+                    <div
+                      className={
+                        header.column.getCanSort()
+                          ? 'cursor-pointer select-none'
+                          : ''
+                      }
+                      onClick={header.column.getToggleSortingHandler()}
+                      title={
+                        header.column.getCanSort()
+                          ? header.column.getNextSortingOrder() === 'asc'
+                            ? 'Sort ascending'
+                            : header.column.getNextSortingOrder() === 'desc'
+                              ? 'Sort descending'
+                              : 'Clear sort'
+                          : undefined
+                      }
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                      {{
+                        asc: ' 🔼',
+                        desc: ' 🔽',
+                      }[header.column.getIsSorted() as string] ?? null}
+                    </div>
+                  )}
+                </Table.ColumnHeaderCell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Header>
+        <Table.Body>
+          {table.getRowModel().rows.map((row) => {
+            const classNameHighlighted =
+              row.id === highlightedRowId
+                ? tableStyles.highlightedTableRow
+                : undefined
+            const classNameSelected = row.getIsSelected()
+              ? tableStyles.selectedTableRow
+              : undefined
+
+            const className = classNameHighlighted ?? classNameSelected
+            return (
+              <Table.Row
+                key={`${String(row.id)}-${String(row.original.scenario)}-${String(row.original.indicator)}-${String(row.original.year)}`}
+                className={className}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <Table.Cell
+                    key={cell.id}
+                    // @ts-expect-error - meta allows for any property
+                    justify={cell.column.columnDef.meta?.justify}
+                    className={tableStyles.tableCell}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Table.Cell>
+                ))}
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
+      </Table.Root>
+      {showPageSelector ? (
+        <div className={containerStyles.flexRowStartCenter}>
+          <PageSelector
+            currentPageIndex={table.getState().pagination.pageIndex}
+            nextDisabled={!table.getCanNextPage()}
+            onGoToPage={table.setPageIndex}
+            onNextClick={table.nextPage}
+            onPreviousClick={table.previousPage}
+            pageCount={table.getPageCount()}
+            previousDisabled={!table.getCanPreviousPage()}
+          />
         </div>
       ) : null}
-    </>
+    </div>
   )
 }

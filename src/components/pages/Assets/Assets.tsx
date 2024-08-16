@@ -170,13 +170,15 @@ export const Assets = () => {
             </p>
           </div>
         ) : null}
-        <AssetsTable
-          isMapLoaded={isMapLoaded}
-          mapRef={mapRef}
-          userAssetsForTable={userAssetsForTable}
-          rowSelection={rowSelection}
-          setRowSelection={setRowSelection}
-        />
+        {userAssets ? (
+          <AssetsTable
+            isMapLoaded={isMapLoaded}
+            mapRef={mapRef}
+            userAssetsForTable={userAssetsForTable}
+            rowSelection={rowSelection}
+            setRowSelection={setRowSelection}
+          />
+        ) : null}
       </div>
 
       <div className={assetStyles.analyseButtonRow}>

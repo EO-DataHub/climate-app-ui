@@ -31,9 +31,10 @@ export const AssetsAnalytics = () => {
   const [assetToDetailId, setAssetToDetailId] = useState<
     string | number | undefined
   >()
-  const [indicatorFilterOptions, setIndicatorFilterOptions] =
-    useState<string[]>()
-  const [indicatorFilterValue, setIndicatorFilterValue] = useState<string>()
+  const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
+    string[]
+  >(['ChronicHeat'])
+  const [hazardTypeFilterValue, setHazardTypeFilterValue] = useState<string>()
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
   const [scenarioFilterOptions, setScenarioFilterOptions] = useState<string[]>()
   const [scenarioFilterValue, setScenarioFilterValue] = useState<string>()
@@ -65,12 +66,12 @@ export const AssetsAnalytics = () => {
       (asset: AnalysedOscUserAssetForTable) =>
         (yearFilterValue ? asset.year === yearFilterValue : true) &&
         (scenarioFilterValue ? asset.scenario === scenarioFilterValue : true) &&
-        (indicatorFilterValue
-          ? asset.indicator === indicatorFilterValue
+        (hazardTypeFilterValue
+          ? asset.hazardType === hazardTypeFilterValue
           : true),
     )
   }, [
-    indicatorFilterValue,
+    hazardTypeFilterValue,
     scenarioFilterValue,
     userAssetsForTable,
     yearFilterValue,
@@ -80,27 +81,29 @@ export const AssetsAnalytics = () => {
     function generateOscFilterOptions() {
       const years: string[] = []
       const scenarios: string[] = []
-      const indicators: string[] = []
+      const hazardTypes: string[] = []
+
       const analysedOscUserAssetForTable =
         userAssetsForTable as AnalysedOscUserAssetForTable[]
-      analysedOscUserAssetForTable.forEach(({ year, scenario, indicator }) => {
+      analysedOscUserAssetForTable.forEach(({ year, scenario, hazardType }) => {
         if (year && year.toLowerCase() !== 'none') {
           years.push(year)
         }
         if (scenario && scenario.toLowerCase() !== 'historical') {
           scenarios.push(scenario)
         }
-        if (indicator) {
-          indicators.push(indicator)
+        if (hazardType) {
+          hazardTypes.push(hazardType)
         }
       })
 
       const uniqueYears = [...new Set(years)]
       const uniqueScenarios = [...new Set(scenarios)]
-      const uniqueIndicators = [...new Set(indicators)]
+      const uniqueHazardTypes = [...new Set(hazardTypes)]
+
       setYearFilterOptions(uniqueYears.sort())
       setScenarioFilterOptions(uniqueScenarios.sort())
-      setIndicatorFilterOptions(uniqueIndicators.sort())
+      setHazardTypeFilterOptions(uniqueHazardTypes.sort())
     },
     [userAssetsForTable],
   )
@@ -136,31 +139,31 @@ export const AssetsAnalytics = () => {
   useEffect(
     function initiateIndicatorFilter() {
       if (
-        !indicatorFilterOptions?.length ||
-        !setIndicatorFilterValue ||
-        !indicatorFilterOptions
+        !hazardTypeFilterOptions?.length ||
+        !setHazardTypeFilterValue ||
+        !hazardTypeFilterOptions
       )
         return
 
-      setIndicatorFilterValue(indicatorFilterOptions[0])
+      setHazardTypeFilterValue(hazardTypeFilterOptions[0])
     },
-    [indicatorFilterOptions, setIndicatorFilterValue],
+    [hazardTypeFilterOptions, setHazardTypeFilterValue],
   )
 
   const oscFilters = (
     <>
-      {indicatorFilterOptions?.length ? (
+      {hazardTypeFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="indicator-filter" className={formStyles.formLabel}>
-            Indicator
+          <label htmlFor="hazard-type-filter" className={formStyles.formLabel}>
+            Hazard Type
           </label>
           <Select.Root
-            value={indicatorFilterValue}
-            onValueChange={setIndicatorFilterValue}
+            value={hazardTypeFilterValue}
+            onValueChange={setHazardTypeFilterValue}
           >
-            <Select.Trigger id="indicator-filter" />
+            <Select.Trigger id="hazard-type-filter" />
             <Select.Content>
-              {indicatorFilterOptions?.map((option) => (
+              {hazardTypeFilterOptions?.map((option) => (
                 <Select.Item value={option} key={option}>
                   {option}
                 </Select.Item>

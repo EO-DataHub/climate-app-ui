@@ -1,11 +1,8 @@
-import { RadioGroup, Select } from '@radix-ui/themes'
+import { Select, Tabs } from '@radix-ui/themes'
 import { useEffect, useMemo, useState } from 'react'
 
-import {
-  AssetImpactViewOptions,
-  CurrentHubWorkflowNicknames,
-} from '../../../configuration/constants'
-import { AssetsTable } from '../../AssetsTable/AssetsTable'
+import { CurrentHubWorkflowNicknames } from '../../../configuration/constants'
+
 import {
   fakeLstResultsData,
   fakeOscResultsData,
@@ -13,33 +10,24 @@ import {
 import { PageLayout } from '../../Layout/PageLayout'
 import { PageSubtitle } from '../../PageSubtitle'
 import { PageTitle } from '../../PageTitle'
-import {
-  RowSelection,
-  UserAssets,
-} from '../../../library/userAssets/userAssetTypes'
+import { UserAssets } from '../../../library/userAssets/userAssetTypes'
 import analyticsStyles from './AssetsAnalytics.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
-import { AssetImpactsDetails } from './AssetImpactsDetails'
-import { toast } from 'react-toastify'
 import {
   AnalysedOscUserAssetForTable,
   getLstResultsTableData,
   getOscResultsTableData,
 } from '../../../library/userAssets/convertUserAssets'
+import { AssetsImpacts } from './AssetImpacts/AssetImpacts'
+import { PortfolioImpacts } from './PortfolioImpacts/PortfolioImpacts'
 
 export const AssetsAnalytics = () => {
-  const [assetToDetailId, setAssetToDetailId] = useState<
-    string | number | undefined
-  >()
   const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
     string[]
   >(['ChronicHeat'])
   const [hazardTypeFilterValue, setHazardTypeFilterValue] = useState<string>()
-  const [rowSelection, setRowSelection] = useState<RowSelection>({})
   const [scenarioFilterOptions, setScenarioFilterOptions] = useState<string[]>()
   const [scenarioFilterValue, setScenarioFilterValue] = useState<string>()
-  const [selectedAssetImpactView, setSelectedAssetImpactView] =
-    useState<AssetImpactViewOptions>(AssetImpactViewOptions.LIST)
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
@@ -221,55 +209,33 @@ export const AssetsAnalytics = () => {
       <PageLayout>
         <PageTitle>Analysis</PageTitle>
         <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${userAssets?.features.length}`}</PageSubtitle>
-        <RadioGroup.Root
-          value={selectedAssetImpactView}
-          onValueChange={(value) => {
-            setSelectedAssetImpactView(value as AssetImpactViewOptions)
-
-            if (
-              value === (AssetImpactViewOptions.DETAILS as string) &&
-              !assetToDetailId
-            ) {
-              toast(
-                'Please click "View Details" on an asset to see its details.',
-              )
-            }
-          }}
-          name="example"
-          className={analyticsStyles.impactsListDetailSelector}
+        <Tabs.Root
+          defaultValue="portfolioImpacts"
+          className={analyticsStyles.tabsRoot}
         >
-          <RadioGroup.Item value={AssetImpactViewOptions.LIST}>
-            Asset List
-          </RadioGroup.Item>
-          <RadioGroup.Item value={AssetImpactViewOptions.DETAILS}>
-            Asset Details
-          </RadioGroup.Item>
-        </RadioGroup.Root>
-        {selectedAssetImpactView === AssetImpactViewOptions.DETAILS &&
-        assetToDetailId ? (
-          <AssetImpactsDetails
-            userAssets={userAssets}
-            userAssetsForTable={filteredUserAssetsForTable}
-            rowSelection={rowSelection}
-            assetToDetailId={assetToDetailId}
-            setRowSelection={setRowSelection}
-            setAssetToDetailId={setAssetToDetailId}
-          />
-        ) : (
-          <AssetsTable
-            areExtraColumnsVisibleInitially={false}
-            userAssetsForTable={filteredUserAssetsForTable}
-            rowSelection={rowSelection}
-            setRowSelection={setRowSelection}
-            showSelectBoxes={false}
-            showViewDetailsButton={true}
-            onViewDetailsClick={(id) => {
-              setAssetToDetailId(id)
-              setSelectedAssetImpactView(AssetImpactViewOptions.DETAILS)
-            }}
-            upperRightTitleRowSlot={oscFilters}
-          />
-        )}
+          <Tabs.List>
+            <Tabs.Trigger value="portfolioImpacts">
+              Portfolio Impacts
+            </Tabs.Trigger>
+
+            <Tabs.Trigger value="assetImpacts">Asset Impacts</Tabs.Trigger>
+          </Tabs.List>
+
+          <Tabs.Content value="portfolioImpacts">
+            <PortfolioImpacts />
+          </Tabs.Content>
+
+          <Tabs.Content
+            value="assetImpacts"
+            className={analyticsStyles.tabsContent}
+          >
+            <AssetsImpacts
+              oscFilters={oscFilters}
+              userAssets={userAssets}
+              filteredUserAssetsForTable={filteredUserAssetsForTable}
+            />
+          </Tabs.Content>
+        </Tabs.Root>
       </PageLayout>
     </>
   )

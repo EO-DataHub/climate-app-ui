@@ -13,19 +13,19 @@ import * as Tabs from '@radix-ui/react-tabs'
 import {
   RowSelection,
   UserAssets,
-} from '../../../library/userAssets/userAssetTypes'
-import { AssetsTable } from '../../AssetsTable/AssetsTable'
-import { Map } from '../../Map/Map'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
-import { useMap } from '../../Map/useMap'
+} from '../../../../library/userAssets/userAssetTypes'
+import { AssetsTable } from '../../../AssetsTable/AssetsTable'
+import { Map } from '../../../Map/Map'
+import { useAssetPortfolios } from '../../../../library/userAssets/useAssetPortfolios'
+import { useMap } from '../../../Map/useMap'
 import detailStyles from './AssetImpactDetails.module.scss'
-import { checkAndFitBounds } from '../../../library/maplibre/checkAndFitBounds'
+import { checkAndFitBounds } from '../../../../library/maplibre/checkAndFitBounds'
 import { MapLayerMouseEvent } from 'maplibre-gl'
-import { MapSourceIds } from '../../../configuration/constants'
+import { MapSourceIds } from '../../../../configuration/constants'
 import {
   AnalysedOscUserAssetForTable,
   UserAssetForTable,
-} from '../../../library/userAssets/convertUserAssets'
+} from '../../../../library/userAssets/convertUserAssets'
 
 export const AssetImpactsDetails = ({
   userAssets,

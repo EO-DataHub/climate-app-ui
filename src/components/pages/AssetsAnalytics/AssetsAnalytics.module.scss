@@ -1,11 +1,15 @@
 @use '../../../library/genericStyles/containers';
 
-.impactsListDetailSelector {
-  @include containers.flexRowStartStart;
-  gap: var(--space-6);
-  margin: var(--space-5) 0;
-}
 .filterInputWrapper {
   @include containers.flexColumnStartStart;
   gap: var(--space-1);
+}
+.tabsRoot {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.tabsContent {
+  height: 100%;
+  width: 100%;
 }

@@ -138,7 +138,7 @@ export const AssetImpactsDetails = ({
           showExtraColumnsToggle={false}
           showSelectBoxes={false}
           showViewDetailsButton={false}
-          areExtraColumnsVisibleInitially={true}
+          areExtraColumnsVisibleInitially={false}
         />
       ) : null}
       <div className={detailStyles.chartAndMapWrapper}>

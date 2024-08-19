@@ -257,7 +257,7 @@ export const AssetsAnalytics = () => {
           />
         ) : (
           <AssetsTable
-            areExtraColumnsVisibleInitially={true}
+            areExtraColumnsVisibleInitially={false}
             userAssetsForTable={filteredUserAssetsForTable}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}

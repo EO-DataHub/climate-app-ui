@@ -321,10 +321,10 @@ export const AssetsTable = ({
               </TextField.Slot>
             </TextField.Root>
           ) : null}
+          {upperRightTitleRowSlot ? upperRightTitleRowSlot : null}
           {extraColumnNames.length && showExtraColumnsToggle
             ? toggleAreExtraColumnsVisibleButton
             : null}
-          {upperRightTitleRowSlot ? upperRightTitleRowSlot : null}
         </div>
       </div>
 

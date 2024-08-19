@@ -9,7 +9,7 @@ export interface UserAssetForTable extends UserAssetsProperties {
 export interface AnalysedOscUserAssetForTable extends UserAssetForTable {
   year?: string
   scenario?: string
-  indicator?: string
+  hazardType?: string
 }
 
 export const convertSimpleGeoJSONToDataForTable = (
@@ -54,10 +54,10 @@ export const flattenOscRootFeatureProperty = ({
   const rootLevelFeatureProperty = feature[rootLevelPropertyName]
   const [longitude, latitude] = feature.geometry.coordinates
   const { id } = feature.properties
-  const indicators = Object.keys(rootLevelFeatureProperty)
-  return indicators
-    .map((indicator) => {
-      const scenarioLevelinformation = rootLevelFeatureProperty[indicator]
+  const hazardTypes = Object.keys(rootLevelFeatureProperty)
+  return hazardTypes
+    .map((hazardType) => {
+      const scenarioLevelinformation = rootLevelFeatureProperty[hazardType]
 
       const scenarioNames = Object.keys(scenarioLevelinformation)
 
@@ -80,7 +80,7 @@ export const flattenOscRootFeatureProperty = ({
                 longitude,
                 year,
                 scenario,
-                indicator,
+                hazardType,
                 ...restOfProperties,
               }
             },

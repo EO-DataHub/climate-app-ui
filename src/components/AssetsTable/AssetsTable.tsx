@@ -41,6 +41,7 @@ import containerStyles from '../../library/genericStyles/containers.module.scss'
 import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
 import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
 import tableStyles from './AssetsTable.module.scss'
+import { DEFAULT_USER_ASSET_COLUMNS } from '../../configuration/constants'
 
 const getUniqueColumnNames = (
   previousValue: string[],
@@ -98,14 +99,7 @@ export const AssetsTable = ({
     return userAssetsForTable
       .reduce(getUniqueColumnNames, [])
       .filter((columnName) => {
-        return ![
-          'latitude',
-          'longitude',
-          'type',
-          'asset_class',
-          'id',
-          '',
-        ].includes(columnName)
+        return !DEFAULT_USER_ASSET_COLUMNS.includes(columnName)
       })
   }, [userAssetsForTable])
 

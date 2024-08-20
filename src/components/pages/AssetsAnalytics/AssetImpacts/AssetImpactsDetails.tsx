@@ -21,7 +21,10 @@ import { useMap } from '../../../Map/useMap'
 import detailStyles from './AssetImpactDetails.module.scss'
 import { checkAndFitBounds } from '../../../../library/maplibre/checkAndFitBounds'
 import { MapLayerMouseEvent } from 'maplibre-gl'
-import { MapSourceIds } from '../../../../configuration/constants'
+import {
+  DEFAULT_USER_ASSET_COLUMNS,
+  MapSourceIds,
+} from '../../../../configuration/constants'
 import {
   AnalysedOscUserAssetForTable,
   UserAssetForTable,
@@ -128,6 +131,22 @@ export const AssetImpactsDetails = ({
     ],
   )
 
+  const removeDefaultColumnInfo = (
+    analysedUserAssetForTable: UserAssetForTable | undefined,
+  ) => {
+    if (!analysedUserAssetForTable) return {}
+
+    const analysedUserAssetForTableCopy = { ...analysedUserAssetForTable }
+    DEFAULT_USER_ASSET_COLUMNS.forEach((columnName) => {
+      delete analysedUserAssetForTableCopy[columnName]
+    })
+
+    return analysedUserAssetForTableCopy
+  }
+
+  const extraPropertiesList = analysedUserAssetForTable
+    ? Object.entries(removeDefaultColumnInfo(analysedUserAssetForTable))
+    : []
   return (
     <div className={detailStyles.detailsWrapper}>
       {assetToDetail ? (
@@ -155,7 +174,21 @@ export const AssetImpactsDetails = ({
           </Tabs.List>
 
           <div className={detailStyles.tabsContentWrapper}>
-            <Tabs.Content value="chart1">Data Visualization Here</Tabs.Content>
+            <Tabs.Content
+              value="chart1"
+              className={detailStyles.verticalProperties}
+            >
+              <table>
+                <tbody>
+                  {extraPropertiesList.map(([key, value]) => (
+                    <tr key={key}>
+                      <th>{key}</th>
+                      <td>{value as string | number}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Tabs.Content>
             <Tabs.Content value="chart2">Data Visualization Here</Tabs.Content>
             <Tabs.Content value="chart3">Data Visualization Here</Tabs.Content>
             <Tabs.Content value="chart4">Data Visualization Here</Tabs.Content>

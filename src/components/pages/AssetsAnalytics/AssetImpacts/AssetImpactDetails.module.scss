@@ -1,4 +1,4 @@
-@use '../../../library/genericStyles/containers';
+@use '../../../../library/genericStyles/containers';
 
 .detailsWrapper {
   @include containers.flexColumnStartStart;

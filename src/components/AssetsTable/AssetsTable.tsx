@@ -139,7 +139,7 @@ export const AssetsTable = ({
       columnHelper.accessor(columnName, {}),
     )
     const preDefaultColumns = []
-    const postDefaultColumns = []
+    const endColumns = []
     if (showSelectBoxes) {
       preDefaultColumns.push({
         id: 'select',
@@ -200,7 +200,7 @@ export const AssetsTable = ({
       }),
     ]
     if (showViewDetailsButton) {
-      postDefaultColumns.push({
+      endColumns.push({
         id: 'select',
 
         meta: { justify: 'end' },
@@ -219,8 +219,8 @@ export const AssetsTable = ({
     return [
       ...preDefaultColumns,
       ...defaultColumns,
-      ...postDefaultColumns,
       ...extraTableColumnSpecifications,
+      ...endColumns,
     ]
   }, [
     extraColumnNames,

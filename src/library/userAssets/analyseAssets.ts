@@ -53,7 +53,7 @@ const getData = async ({
 }) => {
   const resultsUrl = `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
   return axios.get(resultsUrl).then((response) => {
-    return response.data as AnalysedUserAssets
+    return response.data.data as AnalysedUserAssets
   })
 }
 

@@ -1,3 +1,5 @@
+import { HubWorkflowNicknames } from '../../configuration/constants'
+
 export interface LegendParameters {
   intervalRgbaColor: string[]
   intervals: number[][]
@@ -588,14 +590,14 @@ export const observationMenuItems = [
 export const workflowOptions = [
   {
     title: 'OS Climate Physical Risk',
-    nickName: 'OS-Climate',
+    nickName: HubWorkflowNicknames.OSC,
     requiredColumns: ['ID', 'latitude', 'longitude', 'asset_type', 'location'],
     description:
       'The OS Climate physical risk workflow will undertake a risk analysis on your asset portfolio of the potential impacts of climate change. According to the type of your asset, the workflow will analyse risks from chronic heat, inundation.',
   },
   {
     title: 'Land Surface Temperature (LST)',
-    nickName: 'LST',
+    nickName: HubWorkflowNicknames.LST,
     description:
       'The Land Surface Temperature workflow will report on observed land surface temperature observations from your assets.',
     requiredColumns: ['ID', 'latitude', 'longitude'],

@@ -20,7 +20,14 @@ export enum AssetImpactViewOptions {
   DETAILS = 'details',
 }
 
-export enum CurrentHubWorkflowNicknames {
+export enum HubWorkflowNicknames {
   OSC = 'OS-Climate',
   LST = 'LST',
+}
+
+export type HubWorkflowNicknamesType = `${HubWorkflowNicknames}`
+
+export const workflowHubNames = {
+  [HubWorkflowNicknames.OSC]: 'get-asset-impact-workflow-sparkgeouser',
+  [HubWorkflowNicknames.LST]: 'get-asset-values-workflow-sparkgeouser',
 }

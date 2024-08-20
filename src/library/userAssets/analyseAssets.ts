@@ -2,18 +2,24 @@ import { AxiosInstance } from 'axios'
 
 import { KeycloakUserInfo } from '../../context/AuthenticationContext'
 import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
+import {
+  HubWorkflowNicknamesType,
+  workflowHubNames,
+} from '../../configuration/constants'
 
 const initiateAssetsRiskAnalysis = async ({
   axios,
+  currentWorkflowNickname,
   userAssets,
   workspaceUserName,
 }: {
   axios: AxiosInstance
+  currentWorkflowNickname: HubWorkflowNicknamesType
   userAssets: UserAssets
   workspaceUserName: string
 }) => {
   return axios.post(
-    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/get-asset-impact-workflow-sparkgeouser/execution`,
+    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/${workflowHubNames[currentWorkflowNickname]}/execution`,
     {
       inputs: {
         workspace: workspaceUserName,
@@ -21,7 +27,7 @@ const initiateAssetsRiskAnalysis = async ({
       },
     },
     {
-      headers: { prefer: 'respond-async'},
+      headers: { prefer: 'respond-async' },
     },
   )
 }
@@ -91,10 +97,12 @@ async function getAssetsRiskResults({
 
 export const analyseAssets = ({
   axios,
+  currentWorkflowNickname,
   userAssets,
   userInfo,
 }: {
   axios?: AxiosInstance
+  currentWorkflowNickname: HubWorkflowNicknamesType
   userAssets: UserAssets
   userInfo: KeycloakUserInfo
 }) => {
@@ -108,8 +116,9 @@ export const analyseAssets = ({
   }
 
   return initiateAssetsRiskAnalysis({
-    userAssets,
     axios,
+    currentWorkflowNickname,
+    userAssets,
     workspaceUserName,
   }).then((response) => {
     const statusPollingUrl = response.data.links.find(

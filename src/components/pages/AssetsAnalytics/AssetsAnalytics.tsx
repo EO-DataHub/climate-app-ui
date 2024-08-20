@@ -3,14 +3,9 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { HubWorkflowNicknames } from '../../../configuration/constants'
 
-import {
-  fakeLstResultsData,
-  fakeOscResultsData,
-} from '../../../library/api/fakeApiData'
 import { PageLayout } from '../../Layout/PageLayout'
 import { PageSubtitle } from '../../PageSubtitle'
 import { PageTitle } from '../../PageTitle'
-import { UserAssets } from '../../../library/userAssets/userAssetTypes'
 import analyticsStyles from './AssetsAnalytics.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import {
@@ -20,6 +15,11 @@ import {
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsImpacts } from './AssetImpacts/AssetImpacts'
 import { PortfolioImpacts } from './PortfolioImpacts/PortfolioImpacts'
+import {
+  fakeLstResultsData,
+  fakeOscResultsData,
+} from '../../../library/api/fakeApiData'
+import { UserAssets } from '../../../library/userAssets/userAssetTypes'
 
 export const AssetsAnalytics = () => {
   const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
@@ -31,14 +31,21 @@ export const AssetsAnalytics = () => {
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
+  // uncomment the following code when hub workflows succesfully return data
+  // const { currentWorkflowNickname, analysedUserAssets, uploadedFileName } =
+  //   useContext(UserAssetsContext)
+
+  // remove the following code when hub workflows succesfully return data
   const currentWorkflowNickname = HubWorkflowNicknames.OSC as string
 
+  // remove the following code when hub workflows succesfully return data
   const analysedUserAssets = (
     currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
       ? fakeOscResultsData
       : fakeLstResultsData
   ) as UserAssets
 
+  // remove the following code when hub workflows succesfully return data
   const uploadedFileName = 'fakeFileName.csv'
 
   const analysedUserAssetsForTable = useMemo(
@@ -203,41 +210,49 @@ export const AssetsAnalytics = () => {
       ) : null}
     </>
   )
-
+  const noAnalysisView = (
+    <>Please run an assets workflow first to review results</>
+  )
   return (
     <>
       <PageLayout>
         <PageTitle>Analysis</PageTitle>
-        <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
-        <Tabs.Root
-          defaultValue="portfolioImpacts"
-          className={analyticsStyles.tabsRoot}
-        >
-          <Tabs.List>
-            <Tabs.Trigger value="portfolioImpacts">
-              Portfolio Impacts
-            </Tabs.Trigger>
+        {analysedUserAssets ? (
+          <>
+            <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
+            <Tabs.Root
+              defaultValue="portfolioImpacts"
+              className={analyticsStyles.tabsRoot}
+            >
+              <Tabs.List>
+                <Tabs.Trigger value="portfolioImpacts">
+                  Portfolio Impacts
+                </Tabs.Trigger>
 
-            <Tabs.Trigger value="assetImpacts">Asset Impacts</Tabs.Trigger>
-          </Tabs.List>
+                <Tabs.Trigger value="assetImpacts">Asset Impacts</Tabs.Trigger>
+              </Tabs.List>
 
-          <Tabs.Content value="portfolioImpacts">
-            <PortfolioImpacts />
-          </Tabs.Content>
+              <Tabs.Content value="portfolioImpacts">
+                <PortfolioImpacts />
+              </Tabs.Content>
 
-          <Tabs.Content
-            value="assetImpacts"
-            className={analyticsStyles.tabsContent}
-          >
-            <AssetsImpacts
-              oscFilters={oscFilters}
-              analysedUserAssets={analysedUserAssets}
-              filteredAnalysedUserAssetsForTable={
-                filteredAnalysedUserAssetsForTable
-              }
-            />
-          </Tabs.Content>
-        </Tabs.Root>
+              <Tabs.Content
+                value="assetImpacts"
+                className={analyticsStyles.tabsContent}
+              >
+                <AssetsImpacts
+                  oscFilters={oscFilters}
+                  analysedUserAssets={analysedUserAssets}
+                  filteredAnalysedUserAssetsForTable={
+                    filteredAnalysedUserAssetsForTable
+                  }
+                />
+              </Tabs.Content>
+            </Tabs.Root>
+          </>
+        ) : (
+          noAnalysisView
+        )}
       </PageLayout>
     </>
   )

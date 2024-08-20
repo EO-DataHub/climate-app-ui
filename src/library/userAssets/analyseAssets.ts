@@ -13,7 +13,7 @@ const initiateAssetsRiskAnalysis = async ({
   workspaceUserName: string
 }) => {
   return axios.post(
-    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/get-asset-impact-workflow/execution`,
+    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/get-asset-impact-workflow-sparkgeouser/execution`,
     {
       inputs: {
         workspace: workspaceUserName,
@@ -21,7 +21,7 @@ const initiateAssetsRiskAnalysis = async ({
       },
     },
     {
-      headers: {},
+      headers: { prefer: 'respond-async'},
     },
   )
 }

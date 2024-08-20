@@ -1,7 +1,7 @@
 import { Select, Tabs } from '@radix-ui/themes'
 import { useEffect, useMemo, useState } from 'react'
 
-import { CurrentHubWorkflowNicknames } from '../../../configuration/constants'
+import { HubWorkflowNicknames } from '../../../configuration/constants'
 
 import {
   fakeLstResultsData,
@@ -31,10 +31,10 @@ export const AssetsAnalytics = () => {
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
-  const currentWorkflowNickname = CurrentHubWorkflowNicknames.OSC as string
+  const currentWorkflowNickname = HubWorkflowNicknames.OSC as string
 
   const userAssets = (
-    currentWorkflowNickname === (CurrentHubWorkflowNicknames.OSC as string)
+    currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
       ? fakeOscResultsData
       : fakeLstResultsData
   ) as UserAssets
@@ -43,7 +43,7 @@ export const AssetsAnalytics = () => {
 
   const userAssetsForTable = useMemo(
     () =>
-      currentWorkflowNickname === (CurrentHubWorkflowNicknames.OSC as string)
+      currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
         ? getOscResultsTableData(userAssets)
         : getLstResultsTableData(userAssets),
 

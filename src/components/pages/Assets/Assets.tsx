@@ -21,6 +21,7 @@ import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { WorkflowModalContent } from './WorkflowModalContent'
 import { PageSubtitle } from '../../PageSubtitle'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
+import { HubWorkflowNicknamesType } from '../../../configuration/constants'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -31,13 +32,13 @@ export const Assets = () => {
   )
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const {
-    setAnalysedUserAssets,
-    setUserAssets,
-    userAssets,
-    setUploadedFileName,
-    uploadedFileName,
-    setCurrentWorkflowNickname,
     currentWorkflowNickname,
+    setAnalysedUserAssets,
+    setCurrentWorkflowNickname,
+    setUploadedFileName,
+    setUserAssets,
+    uploadedFileName,
+    userAssets,
   } = useContext(UserAssetsContext)
 
   const handleLoadAssets = ({
@@ -56,7 +57,7 @@ export const Assets = () => {
   const handleAnalyseAssets = ({
     workflowTitle,
   }: {
-    workflowTitle: string
+    workflowTitle: HubWorkflowNicknamesType
   }) => {
     if (!userAssets) {
       throw new Error('handleAnalyseAssets has a missing userAssets parameter')
@@ -91,8 +92,9 @@ export const Assets = () => {
     setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
     analyseAssets({
-      userAssets,
       axios: authenticatedAxios,
+      currentWorkflowNickname: workflowTitle,
+      userAssets,
       userInfo,
     })
       .then((results) => {

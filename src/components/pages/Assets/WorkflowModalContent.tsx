@@ -5,11 +5,16 @@ import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { workflowOptions } from '../../../library/api/fakeApiData'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import modalStyles from './WorkflowModalContent.module.scss'
+import { HubWorkflowNicknamesType } from '../../../configuration/constants'
 
 export const WorkflowModalContent = ({
   handleAnalyseAssets,
 }: {
-  handleAnalyseAssets: ({ workflowTitle }: { workflowTitle: string }) => void
+  handleAnalyseAssets: ({
+    workflowTitle,
+  }: {
+    workflowTitle: HubWorkflowNicknamesType
+  }) => void
 }) => {
   return (
     <>

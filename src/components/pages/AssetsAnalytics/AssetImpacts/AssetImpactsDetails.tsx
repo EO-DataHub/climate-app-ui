@@ -28,15 +28,17 @@ import {
 } from '../../../../library/userAssets/convertUserAssets'
 
 export const AssetImpactsDetails = ({
-  userAssets,
-  userAssetsForTable,
+  analysedUserAssets,
+  analysedUserAssetsForTable,
   assetToDetailId,
   rowSelection,
   setAssetToDetailId,
   setRowSelection,
 }: {
-  userAssets: UserAssets
-  userAssetsForTable: UserAssetForTable[] | AnalysedOscUserAssetForTable[]
+  analysedUserAssets: UserAssets
+  analysedUserAssetsForTable:
+    | UserAssetForTable[]
+    | AnalysedOscUserAssetForTable[]
   rowSelection: RowSelection
   assetToDetailId: string | number | undefined
   setRowSelection: Dispatch<SetStateAction<RowSelection>>
@@ -46,7 +48,7 @@ export const AssetImpactsDetails = ({
   const haveAssetsBeenAddedToMap = useRef(false)
 
   const assetToDetail = useMemo(() => {
-    const assetsToDetailFeature = userAssets?.features.find(
+    const assetsToDetailFeature = analysedUserAssets?.features.find(
       (feature) => feature.properties.id === assetToDetailId,
     )
 
@@ -56,16 +58,16 @@ export const AssetImpactsDetails = ({
           features: [assetsToDetailFeature],
         } as unknown as UserAssets)
       : undefined
-  }, [assetToDetailId, userAssets?.features])
+  }, [assetToDetailId, analysedUserAssets?.features])
 
-  const userAssetForTable = userAssetsForTable.find(
+  const analysedUserAssetForTable = analysedUserAssetsForTable.find(
     (asset) => asset.id === assetToDetailId,
   )
 
   const showMarkerSelectedSymbology = useCallback(
     (id: number | string | undefined) => {
       if (!id) return
-      userAssets?.features.forEach((feature) => {
+      analysedUserAssets?.features.forEach((feature) => {
         mapRef.current?.setFeatureState(
           {
             source: MapSourceIds.USER_ASSETS,
@@ -77,7 +79,7 @@ export const AssetImpactsDetails = ({
         )
       })
     },
-    [userAssets?.features, mapRef],
+    [analysedUserAssets?.features, mapRef],
   )
 
   const onAssetMarkerClick = useCallback(
@@ -98,7 +100,7 @@ export const AssetImpactsDetails = ({
   useEffect(
     function addAssetsToMapOnce() {
       if (
-        !userAssets ||
+        !analysedUserAssets ||
         !updateUserAssetsInMap ||
         !isMapLoaded ||
         !mapRef.current ||
@@ -106,7 +108,7 @@ export const AssetImpactsDetails = ({
       ) {
         return
       }
-      updateUserAssetsInMap(userAssets)
+      updateUserAssetsInMap(analysedUserAssets)
       const userAssetBounds = turfBbox(assetToDetail)
       checkAndFitBounds({
         map: mapRef.current,
@@ -117,7 +119,7 @@ export const AssetImpactsDetails = ({
       haveAssetsBeenAddedToMap.current = true
     },
     [
-      userAssets,
+      analysedUserAssets,
       assetToDetail,
       isMapLoaded,
       mapRef,
@@ -130,7 +132,9 @@ export const AssetImpactsDetails = ({
     <div className={detailStyles.detailsWrapper}>
       {assetToDetail ? (
         <AssetsTable
-          userAssetsForTable={[userAssetForTable] as UserAssetForTable[]}
+          userAssetsForTable={
+            [analysedUserAssetForTable] as UserAssetForTable[]
+          }
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
           showPageSelector={false}

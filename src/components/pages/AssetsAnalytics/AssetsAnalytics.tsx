@@ -33,7 +33,7 @@ export const AssetsAnalytics = () => {
 
   const currentWorkflowNickname = HubWorkflowNicknames.OSC as string
 
-  const userAssets = (
+  const analysedUserAssets = (
     currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
       ? fakeOscResultsData
       : fakeLstResultsData
@@ -41,16 +41,16 @@ export const AssetsAnalytics = () => {
 
   const uploadedFileName = 'fakeFileName.csv'
 
-  const userAssetsForTable = useMemo(
+  const analysedUserAssetsForTable = useMemo(
     () =>
       currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
-        ? getOscResultsTableData(userAssets)
-        : getLstResultsTableData(userAssets),
+        ? getOscResultsTableData(analysedUserAssets)
+        : getLstResultsTableData(analysedUserAssets),
 
-    [currentWorkflowNickname, userAssets],
+    [currentWorkflowNickname, analysedUserAssets],
   )
-  const filteredUserAssetsForTable = useMemo(() => {
-    return userAssetsForTable.filter(
+  const filteredAnalysedUserAssetsForTable = useMemo(() => {
+    return analysedUserAssetsForTable.filter(
       (asset: AnalysedOscUserAssetForTable) =>
         (yearFilterValue ? asset.year === yearFilterValue : true) &&
         (scenarioFilterValue ? asset.scenario === scenarioFilterValue : true) &&
@@ -61,7 +61,7 @@ export const AssetsAnalytics = () => {
   }, [
     hazardTypeFilterValue,
     scenarioFilterValue,
-    userAssetsForTable,
+    analysedUserAssetsForTable,
     yearFilterValue,
   ])
 
@@ -72,7 +72,7 @@ export const AssetsAnalytics = () => {
       const hazardTypes: string[] = []
 
       const analysedOscUserAssetForTable =
-        userAssetsForTable as AnalysedOscUserAssetForTable[]
+        analysedUserAssetsForTable as AnalysedOscUserAssetForTable[]
       analysedOscUserAssetForTable.forEach(({ year, scenario, hazardType }) => {
         if (year && year.toLowerCase() !== 'none') {
           years.push(year)
@@ -93,7 +93,7 @@ export const AssetsAnalytics = () => {
       setScenarioFilterOptions(uniqueScenarios.sort())
       setHazardTypeFilterOptions(uniqueHazardTypes.sort())
     },
-    [userAssetsForTable],
+    [analysedUserAssetsForTable],
   )
 
   useEffect(
@@ -208,7 +208,7 @@ export const AssetsAnalytics = () => {
     <>
       <PageLayout>
         <PageTitle>Analysis</PageTitle>
-        <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${userAssets?.features.length}`}</PageSubtitle>
+        <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
         <Tabs.Root
           defaultValue="portfolioImpacts"
           className={analyticsStyles.tabsRoot}
@@ -231,8 +231,10 @@ export const AssetsAnalytics = () => {
           >
             <AssetsImpacts
               oscFilters={oscFilters}
-              userAssets={userAssets}
-              filteredUserAssetsForTable={filteredUserAssetsForTable}
+              analysedUserAssets={analysedUserAssets}
+              filteredAnalysedUserAssetsForTable={
+                filteredAnalysedUserAssetsForTable
+              }
             />
           </Tabs.Content>
         </Tabs.Root>

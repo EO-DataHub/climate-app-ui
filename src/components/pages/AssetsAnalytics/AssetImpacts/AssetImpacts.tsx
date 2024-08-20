@@ -14,12 +14,12 @@ import { UserAssetForTable } from '../../../../library/userAssets/convertUserAss
 
 export const AssetsImpacts = ({
   oscFilters,
-  userAssets,
-  filteredUserAssetsForTable,
+  analysedUserAssets,
+  filteredAnalysedUserAssetsForTable,
 }: {
   oscFilters: ReactNode
-  userAssets: UserAssets
-  filteredUserAssetsForTable: UserAssetForTable[]
+  analysedUserAssets: UserAssets
+  filteredAnalysedUserAssetsForTable: UserAssetForTable[]
 }) => {
   const [assetToDetailId, setAssetToDetailId] = useState<
     string | number | undefined
@@ -55,8 +55,8 @@ export const AssetsImpacts = ({
       {selectedAssetImpactView === AssetImpactViewOptions.DETAILS &&
       assetToDetailId ? (
         <AssetImpactsDetails
-          userAssets={userAssets}
-          userAssetsForTable={filteredUserAssetsForTable}
+          analysedUserAssets={analysedUserAssets}
+          analysedUserAssetsForTable={filteredAnalysedUserAssetsForTable}
           rowSelection={rowSelection}
           assetToDetailId={assetToDetailId}
           setRowSelection={setRowSelection}
@@ -65,7 +65,7 @@ export const AssetsImpacts = ({
       ) : (
         <AssetsTable
           areExtraColumnsVisibleInitially={false}
-          userAssetsForTable={filteredUserAssetsForTable}
+          userAssetsForTable={filteredAnalysedUserAssetsForTable}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}
           showSelectBoxes={false}

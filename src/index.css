@@ -23,6 +23,7 @@ body {
   --white: #fff;
   --hazard-raster-opacity: 0.6;
   --app-background-dark: #333132;
+  --dark-text: var(--gray-12);
 }
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;

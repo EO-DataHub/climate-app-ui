@@ -32,11 +32,4 @@ export const workflowHubNames = {
   [HubWorkflowNicknames.LST]: 'get-asset-values-workflow-sparkgeouser',
 }
 
-export const DEFAULT_USER_ASSET_COLUMNS = [
-  'latitude',
-  'longitude',
-  'type',
-  'asset_class',
-  'id',
-  '',
-]
+export const DEFAULT_USER_ASSET_COLUMNS = ['latitude', 'longitude', 'id', '']

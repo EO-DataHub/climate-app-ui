@@ -172,12 +172,6 @@ export const AssetsTable = ({
     }
     const defaultColumns = [
       columnHelper.accessor('id', { header: 'ID', enableHiding: false }),
-      columnHelper.accessor('type', {
-        header: 'Asset Type',
-      }),
-      columnHelper.accessor('asset_class', {
-        header: 'Asset Category',
-      }),
       columnHelper.accessor('latitude', {
         header: 'Latitude',
         meta: { justify: 'end' },

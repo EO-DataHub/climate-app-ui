@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT } from '../../configuration/constants'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import { AuthenticationContext } from '../../context/AuthenticationContext'
+import { temporarySamplePortfolios } from '../../library/api/fakeApiData'
 
 export const AssetsSelect = ({
   onValueChange,
@@ -51,15 +52,11 @@ export const AssetsSelect = ({
         ) : null}
         <Select.Group>
           <Select.Label>Sample Portfolios</Select.Label>
-          <Select.Item value="#" disabled>
-            Sample Portfolio 1
-          </Select.Item>
-          <Select.Item value="#" disabled>
-            Sample Portfolio 2
-          </Select.Item>
-          <Select.Item value="#" disabled>
-            Sample Portfolio 3
-          </Select.Item>
+          {temporarySamplePortfolios.map(({ id, name }) => (
+            <Select.Item value={id} key={id}>
+              {name}
+            </Select.Item>
+          ))}
         </Select.Group>
       </Select.Content>
     </Select.Root>

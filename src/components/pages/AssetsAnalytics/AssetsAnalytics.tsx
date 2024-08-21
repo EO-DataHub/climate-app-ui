@@ -1,5 +1,5 @@
 import { Select, Tabs } from '@radix-ui/themes'
-import { useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { HubWorkflowNicknames } from '../../../configuration/constants'
 
@@ -14,12 +14,7 @@ import {
   getOscResultsTableData,
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsImpacts } from './AssetImpacts/AssetImpacts'
-import { PortfolioImpacts } from './PortfolioImpacts/PortfolioImpacts'
-import {
-  fakeLstResultsData,
-  fakeOscResultsData,
-} from '../../../library/api/fakeApiData'
-import { UserAssets } from '../../../library/userAssets/userAssetTypes'
+import { UserAssetsContext } from '../../../context/UserAssetsContext'
 
 export const AssetsAnalytics = () => {
   const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
@@ -31,22 +26,8 @@ export const AssetsAnalytics = () => {
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
-  // uncomment the following code when hub workflows succesfully return data
-  // const { currentWorkflowNickname, analysedUserAssets, uploadedFileName } =
-  //   useContext(UserAssetsContext)
-
-  // remove the following code when hub workflows succesfully return data
-  const currentWorkflowNickname = HubWorkflowNicknames.OSC as string
-
-  // remove the following code when hub workflows succesfully return data
-  const analysedUserAssets = (
-    currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
-      ? fakeOscResultsData
-      : fakeLstResultsData
-  ) as UserAssets
-
-  // remove the following code when hub workflows succesfully return data
-  const uploadedFileName = 'fakeFileName.csv'
+  const { currentWorkflowNickname, analysedUserAssets, uploadedFileName } =
+    useContext(UserAssetsContext)
 
   const analysedUserAssetsForTable = useMemo(
     () =>
@@ -211,7 +192,10 @@ export const AssetsAnalytics = () => {
     </>
   )
   const noAnalysisView = (
-    <>Please run an assets workflow first to review results</>
+    <>
+      Please run an assets analysis first from the assets page to view analysis
+      results.
+    </>
   )
   return (
     <>
@@ -221,20 +205,12 @@ export const AssetsAnalytics = () => {
           <>
             <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
             <Tabs.Root
-              defaultValue="portfolioImpacts"
+              defaultValue="assetImpacts"
               className={analyticsStyles.tabsRoot}
             >
               <Tabs.List>
-                <Tabs.Trigger value="portfolioImpacts">
-                  Portfolio Impacts
-                </Tabs.Trigger>
-
                 <Tabs.Trigger value="assetImpacts">Asset Impacts</Tabs.Trigger>
               </Tabs.List>
-
-              <Tabs.Content value="portfolioImpacts">
-                <PortfolioImpacts />
-              </Tabs.Content>
 
               <Tabs.Content
                 value="assetImpacts"

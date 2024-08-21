@@ -39,7 +39,9 @@ export const AssetsImpacts = ({
             value === (AssetImpactViewOptions.DETAILS as string) &&
             !assetToDetailId
           ) {
-            toast('Please click "View Details" on an asset to see its details.')
+            toast.info(
+              'Please click "View Details" on an asset to see its details.',
+            )
           }
         }}
         name="example"

@@ -1,5 +1,153 @@
 import { HubWorkflowNicknames } from '../../configuration/constants'
 
+// this is unlikely to be a practical data format for a real implementation, but will do the job for now
+export const temporarySamplePortfolios = [
+  {
+    name: 'Sample Portfolio 1',
+    id: '1',
+    data: {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {
+            id: 'F',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [20.08984374999838, 49.741612498831614],
+            type: 'Point',
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {
+            id: 'G',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [54.98046874999886, 28.61345942400426],
+            type: 'Point',
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {
+            id: 'H',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [68.69140624999824, 27.52775820686128],
+            type: 'Point',
+          },
+        },
+      ],
+    },
+  },
+  {
+    name: 'Sample Portfolio 2',
+    id: '2',
+    data: {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {
+            id: 'F',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [70.08984374999838, 20.741612498831614],
+            type: 'Point',
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {
+            id: 'G',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [54.98046874999886, 28.61345942400426],
+            type: 'Point',
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {
+            id: 'H',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [68.69140624999824, 27.52775820686128],
+            type: 'Point',
+          },
+        },
+      ],
+    },
+  },
+  {
+    name: 'Sample Portfolio 3',
+    id: '3',
+    data: {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {
+            id: 'F',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [-110.08984374999838, 30.741612498831614],
+            type: 'Point',
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {
+            id: 'G',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [54.98046874999886, 28.61345942400426],
+            type: 'Point',
+          },
+        },
+        {
+          type: 'Feature',
+          properties: {
+            id: 'H',
+            type: 'Construction',
+            asset_class: 'IndustrialActivity',
+            location: 'Asia',
+          },
+          geometry: {
+            coordinates: [68.69140624999824, 27.52775820686128],
+            type: 'Point',
+          },
+        },
+      ],
+    },
+  },
+]
+
 export interface LegendParameters {
   intervalRgbaColor: string[]
   intervals: number[][]

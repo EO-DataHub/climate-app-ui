@@ -19,6 +19,7 @@ import { MapRef } from '../../components/Map/useMap'
 import { UserAssets } from './userAssetTypes'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsPopupStyles from './AssetsPopup.module.scss'
+import { temporarySamplePortfolios } from '../api/fakeApiData'
 
 export const useAssetPortfolios = ({
   isMapLoaded,
@@ -400,7 +401,15 @@ export const useAssetPortfolios = ({
       ) {
         // right now we only have one possible portfolio called userAssets that come from a file the user just opened. We'll figure out better naming later.
         updateUserAssetsInMap(userAssets)
+        return
       }
+
+      // this is temporary for MVP
+      const selectedPortfolio = temporarySamplePortfolios.find(
+        (samplePortfolio) => samplePortfolio.id === portfolioName,
+      )
+
+      updateUserAssetsInMap(selectedPortfolio?.data as UserAssets)
     },
     [removeUserAssetsFromMap, updateUserAssetsInMap, userAssets],
   )

@@ -22,6 +22,7 @@ import { WorkflowModalContent } from './WorkflowModalContent'
 import { PageSubtitle } from '../../PageSubtitle'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
 import { HubWorkflowNicknamesType } from '../../../configuration/constants'
+import { temporarySamplePortfolios } from '../../../library/api/fakeApiData'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -134,13 +135,24 @@ export const Assets = () => {
     [userAssets],
   )
 
+  const usePortfolioData = (id: string) => {
+    const selectedPortfolio = temporarySamplePortfolios.find(
+      (portfolio) => portfolio.id === id,
+    )
+
+    if (selectedPortfolio) {
+      setUploadedFileName?.(selectedPortfolio.name)
+      setUserAssets?.(selectedPortfolio.data as UserAssets)
+    }
+  }
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={assetStyles.sidebarTopSection}>
         <div className={assetStyles.selectPortfolioRow}>
           <div className={assetStyles.assetsSelectWrapper}>
             <label>Portfolios</label>
-            <AssetsSelect />
+            <AssetsSelect onValueChange={usePortfolioData} />
           </div>
           <UploadButtonAndDialog onLoadAssets={handleLoadAssets} />
         </div>

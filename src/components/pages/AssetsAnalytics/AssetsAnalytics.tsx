@@ -14,7 +14,6 @@ import {
   getOscResultsTableData,
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsImpacts } from './AssetImpacts/AssetImpacts'
-import { PortfolioImpacts } from './PortfolioImpacts/PortfolioImpacts'
 import {
   fakeLstResultsData,
   fakeOscResultsData,
@@ -221,20 +220,12 @@ export const AssetsAnalytics = () => {
           <>
             <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
             <Tabs.Root
-              defaultValue="portfolioImpacts"
+              defaultValue="assetImpacts"
               className={analyticsStyles.tabsRoot}
             >
               <Tabs.List>
-                <Tabs.Trigger value="portfolioImpacts">
-                  Portfolio Impacts
-                </Tabs.Trigger>
-
                 <Tabs.Trigger value="assetImpacts">Asset Impacts</Tabs.Trigger>
               </Tabs.List>
-
-              <Tabs.Content value="portfolioImpacts">
-                <PortfolioImpacts />
-              </Tabs.Content>
 
               <Tabs.Content
                 value="assetImpacts"

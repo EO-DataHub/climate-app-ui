@@ -82,7 +82,7 @@ export const Assets = () => {
     }
     toast.dismiss()
 
-    toast(
+    toast.success(
       <>
         <strong>Analysis in Progress</strong>
         <br />
@@ -103,7 +103,7 @@ export const Assets = () => {
         // eslint-disable-next-line no-console
         console.log('Risk analysis results:', results)
         toast.dismiss()
-        toast(
+        toast.success(
           <div
             className={assetStyles.analysisSuccessToastMessageAndButtonWrapper}
           >

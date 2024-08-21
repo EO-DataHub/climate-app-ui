@@ -24,6 +24,8 @@ body {
   --hazard-raster-opacity: 0.6;
   --app-background-dark: #333132;
   --dark-text: var(--gray-12);
+  --toastify-color-info: var(--indigo-9);
+  --toastify-color-success: var(--green-11);
 }
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;

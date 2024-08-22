@@ -260,6 +260,26 @@ export const legendParameters = {
       [4500, 5000],
     ],
   },
+  ukDaysWithAverageTemperatureAbove: {
+    intervalRgbaColor: [
+      '254,229,217',
+      '252,187,161',
+      '252,146,114',
+      '251,106,74',
+      '239,59,44',
+      '203,24,29',
+      '153,0,13',
+    ],
+    intervals: [
+      [1, 15],
+      [15, 30],
+      [30, 45],
+      [45, 60],
+      [60, 75],
+      [75, 90],
+      [90, 105],
+    ],
+  },
 }
 
 export const observationMenuItems = [

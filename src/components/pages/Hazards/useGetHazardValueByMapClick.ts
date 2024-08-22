@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
-import { MapRef } from '../../Map/useMap'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { MapRef } from '../../Map/useMap'
+import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 
 const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
 
@@ -31,12 +31,7 @@ export const useGetHazardValueByMapClick = ({
 
         const axiosController = new AbortController()
 
-        // Bodge to use version of the zarrs which are quicker to load for getting value at a point
-        const sgZarrPath = zarrPath.replace(
-          'ukri-eodh-hazard-tiles-test',
-          'ukri-eodh-hazard-tiles-sg',
-        )
-        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${sgZarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
+        const url = `${EDOH_BASE_URL}/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
 
         setHazardMarkerValue(null)
 

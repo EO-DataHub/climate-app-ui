@@ -40,7 +40,9 @@ export const useGetHazardValueByMapClick = ({
           .then((res) => {
             const hazardValue = res.data.hazard_value
             setHazardMarkerValue(
-              hazardValue ? Number(hazardValue).toFixed(0) : 'Unknown',
+              hazardValue !== null && hazardValue !== undefined
+                ? Number(hazardValue).toFixed(0)
+                : 'Unknown',
             )
           })
           .catch((error) => {

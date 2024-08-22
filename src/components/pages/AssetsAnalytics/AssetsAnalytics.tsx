@@ -1,4 +1,4 @@
-import { Select, Tabs } from '@radix-ui/themes'
+import { Select, Tabs, Text } from '@radix-ui/themes'
 import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { HubWorkflowNicknames } from '../../../configuration/constants'
@@ -26,8 +26,12 @@ export const AssetsAnalytics = () => {
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
-  const { currentWorkflowNickname, analysedUserAssets, uploadedFileName } =
-    useContext(UserAssetsContext)
+  const {
+    currentWorkflowNickname,
+    analysedUserAssets,
+    uploadedFileName,
+    analysisRunDate,
+  } = useContext(UserAssetsContext)
 
   const analysedUserAssetsForTable = useMemo(
     () =>
@@ -203,7 +207,21 @@ export const AssetsAnalytics = () => {
         <PageTitle>Analysis</PageTitle>
         {analysedUserAssets ? (
           <>
-            <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
+            <PageSubtitle>
+              {uploadedFileName ? <>Portfolio: {uploadedFileName}</> : null}
+              {analysisRunDate && uploadedFileName ? (
+                <> | Analysis Run: {analysisRunDate}</>
+              ) : null}
+              {analysedUserAssets.features.length && uploadedFileName ? (
+                <> | Assets: {analysedUserAssets?.features.length}</>
+              ) : null}
+            </PageSubtitle>
+            <Text as="p" className={analyticsStyles.subSubtitle}>
+              {currentWorkflowNickname ? (
+                <> Workflow: {currentWorkflowNickname}</>
+              ) : null}
+            </Text>
+
             <Tabs.Root
               defaultValue="assetImpacts"
               className={analyticsStyles.tabsRoot}

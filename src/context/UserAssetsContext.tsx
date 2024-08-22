@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
 import { ReactNode, createContext } from 'react'
 
 import {
@@ -7,18 +7,16 @@ import {
 } from '../library/userAssets/userAssetTypes'
 
 interface UserAssetsContextValue {
-  userAssets?: UserAssets
-  setUserAssets?: React.Dispatch<React.SetStateAction<UserAssets>>
   analysedUserAssets?: AnalysedUserAssets
-  setAnalysedUserAssets?: React.Dispatch<
-    React.SetStateAction<AnalysedUserAssets>
-  >
-  uploadedFileName?: string | null
-  setUploadedFileName?: React.Dispatch<React.SetStateAction<string | null>>
+  analysisRunDate?: string
   currentWorkflowNickname?: string | undefined
-  setCurrentWorkflowNickname?: React.Dispatch<
-    React.SetStateAction<string | undefined>
-  >
+  setAnalysedUserAssets?: Dispatch<SetStateAction<AnalysedUserAssets>>
+  setAnalysisRunDate?: Dispatch<SetStateAction<string | undefined>>
+  setCurrentWorkflowNickname?: Dispatch<SetStateAction<string | undefined>>
+  setUploadedFileName?: Dispatch<SetStateAction<string | null>>
+  setUserAssets?: Dispatch<SetStateAction<UserAssets>>
+  uploadedFileName?: string | null
+  userAssets?: UserAssets
 }
 
 export const UserAssetsContext = createContext<UserAssetsContextValue>({})
@@ -31,18 +29,21 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [currentWorkflowNickname, setCurrentWorkflowNickname] = useState<
     string | undefined
   >()
+  const [analysisRunDate, setAnalysisRunDate] = useState<string>()
 
   return (
     <UserAssetsContext.Provider
       value={{
-        userAssets,
-        setUserAssets,
         analysedUserAssets,
-        setAnalysedUserAssets,
-        uploadedFileName,
-        setUploadedFileName,
+        analysisRunDate,
         currentWorkflowNickname,
+        setAnalysedUserAssets,
+        setAnalysisRunDate,
         setCurrentWorkflowNickname,
+        setUploadedFileName,
+        setUserAssets,
+        uploadedFileName,
+        userAssets,
       }}
     >
       {children}

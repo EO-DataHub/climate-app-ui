@@ -1,4 +1,5 @@
 import Maplibregl, {
+  FullscreenControl,
   Map as MaplibreMap,
   NavigationControl,
   StyleSpecification,
@@ -59,6 +60,7 @@ export const useMap = (initialConfig?: {
       })
 
       mapRef.current.addControl(new NavigationControl())
+      mapRef.current.addControl(new FullscreenControl())
     },
     [initialConfig],
   )

@@ -7,12 +7,18 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
+  Header,
 } from '@tanstack/react-table'
 import {
   Table as TanstackTable,
   Row as TanstackRow,
 } from '@tanstack/table-core'
-import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
+import {
+  MagnifyingGlassIcon as SearchIcon,
+  TriangleDownIcon,
+  TriangleUpIcon,
+} from '@radix-ui/react-icons'
+
 import { Table, TextField, Tooltip, Text, Link } from '@radix-ui/themes'
 import {
   Dispatch,
@@ -125,6 +131,23 @@ export const AssetsTable = ({
       userAssetsForTable,
       rowSelection,
     })
+
+  const getHeaderSortIcon = (header: Header<UserAssetForTable, unknown>) => {
+    return (
+      {
+        asc: (
+          <span className={tableStyles.sortIconWrapper}>
+            <TriangleDownIcon />
+          </span>
+        ),
+        desc: (
+          <span className={tableStyles.sortIconWrapper}>
+            <TriangleUpIcon />
+          </span>
+        ),
+      }[header.column.getIsSorted() as string] ?? null
+    )
+  }
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetForTable>()
@@ -349,10 +372,7 @@ export const AssetsTable = ({
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
-                      {{
-                        asc: ' 🔼',
-                        desc: ' 🔽',
-                      }[header.column.getIsSorted() as string] ?? null}
+                      {getHeaderSortIcon(header)}
                     </div>
                   )}
                 </Table.ColumnHeaderCell>

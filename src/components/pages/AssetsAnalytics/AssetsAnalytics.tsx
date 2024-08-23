@@ -16,6 +16,12 @@ import {
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsImpacts } from './AssetImpacts/AssetImpacts'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { InfoPopover } from '../../InfoPopover/InfoPopover'
+import {
+  hazardTypePopupContent,
+  scenarioPopupContent,
+  yearPopupContent,
+} from '../../../configuration/infoPopupContentHazards'
 
 export const AssetsAnalytics = () => {
   const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
@@ -140,9 +146,15 @@ export const AssetsAnalytics = () => {
     <>
       {hazardTypeFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="hazard-type-filter" className={formStyles.formLabel}>
-            Hazard Type
-          </label>
+          <div className={formStyles.labelWithInfoPopoverRow}>
+            <label
+              htmlFor="hazard-type-filter"
+              className={formStyles.formLabel}
+            >
+              Hazard Type
+            </label>
+            <InfoPopover>{hazardTypePopupContent}</InfoPopover>
+          </div>
           <Select.Root
             value={hazardTypeFilterValue}
             onValueChange={setHazardTypeFilterValue}
@@ -160,9 +172,12 @@ export const AssetsAnalytics = () => {
       ) : null}
       {scenarioFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="scenario-filter" className={formStyles.formLabel}>
-            Scenario
-          </label>
+          <div className={formStyles.labelWithInfoPopoverRow}>
+            <label htmlFor="scenario-filter" className={formStyles.formLabel}>
+              Scenario
+            </label>
+            <InfoPopover>{scenarioPopupContent}</InfoPopover>
+          </div>
           <Select.Root
             value={scenarioFilterValue}
             onValueChange={setScenarioFilterValue}
@@ -181,9 +196,12 @@ export const AssetsAnalytics = () => {
 
       {yearFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="year-filter" className={formStyles.formLabel}>
-            Year
-          </label>
+          <div className={formStyles.labelWithInfoPopoverRow}>
+            <label htmlFor="year-filter" className={formStyles.formLabel}>
+              Year
+            </label>
+            <InfoPopover>{yearPopupContent}</InfoPopover>
+          </div>
           <Select.Root
             value={yearFilterValue}
             onValueChange={setYearFilterValue}

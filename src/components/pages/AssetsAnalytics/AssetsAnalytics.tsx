@@ -1,4 +1,4 @@
-import { Select, Tabs, Text } from '@radix-ui/themes'
+import { Button, Select, Tabs, Text } from '@radix-ui/themes'
 import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { HubWorkflowNicknames } from '../../../configuration/constants'
@@ -8,6 +8,7 @@ import { PageSubtitle } from '../../PageSubtitle'
 import { PageTitle } from '../../PageTitle'
 import analyticsStyles from './AssetsAnalytics.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
+import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import {
   AnalysedOscUserAssetForTable,
   getLstResultsTableData,
@@ -32,6 +33,11 @@ export const AssetsAnalytics = () => {
     uploadedFileName,
     analysisRunDate,
   } = useContext(UserAssetsContext)
+
+  const downloadFile = new Blob([JSON.stringify(analysedUserAssets)], {
+    type: 'text/json;charset=utf-8',
+  })
+  const downloadUrl = URL.createObjectURL(downloadFile)
 
   const analysedUserAssetsForTable = useMemo(
     () =>
@@ -204,7 +210,20 @@ export const AssetsAnalytics = () => {
   return (
     <>
       <PageLayout>
-        <PageTitle>Analysis</PageTitle>
+        <div className={containerStyles.flexRowSpaceBetweenStart}>
+          <PageTitle>Analysis</PageTitle>
+          {analysedUserAssets ? (
+            <Button asChild>
+              <a
+                download={`${uploadedFileName}_${currentWorkflowNickname}_${analysisRunDate}.geojson`}
+                href={downloadUrl}
+              >
+                Download Analysis
+              </a>
+            </Button>
+          ) : null}
+        </div>
+
         {analysedUserAssets ? (
           <>
             <PageSubtitle>

@@ -78,7 +78,7 @@ export const Hazards = () => {
   const hazardIndicatorLabel = indicatorOptions.find(
     (option) => option.value === hazardIndicator,
   )?.label
-  const zarrPath = `s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
+  const zarrPath = `s3://ukri-eodh-hazard-tiles-us-west-2/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
   const { isMarkerOnMap, hazardMarkerValue, markerCoordinates } =
     useGetHazardValueByMapClick({
@@ -109,8 +109,12 @@ export const Hazards = () => {
 
   // this is not scalable, but a temporary solution for the demo
   const legendParametersToUse = hazardIndicator.includes('days_tas_above')
-    ? legendParameters.daysWithAverageTemperatureAbove
-    : legendParameters.meanDegreeDaysAbove
+    ? climateModel.includes('uk_')
+      ? legendParameters.ukDaysWithAverageTemperatureAbove
+      : legendParameters.daysWithAverageTemperatureAbove
+    : climateModel.includes('uk_')
+      ? legendParameters.ukMeanDegreeDaysAbove
+      : legendParameters.meanDegreeDaysAbove
 
   useEffect(
     function updateHazardMapTiles() {

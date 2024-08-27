@@ -1,4 +1,4 @@
-import { Select, Tabs } from '@radix-ui/themes'
+import { Button, Select, Tabs, Text } from '@radix-ui/themes'
 import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { HubWorkflowNicknames } from '../../../configuration/constants'
@@ -8,6 +8,7 @@ import { PageSubtitle } from '../../PageSubtitle'
 import { PageTitle } from '../../PageTitle'
 import analyticsStyles from './AssetsAnalytics.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
+import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import {
   AnalysedOscUserAssetForTable,
   getLstResultsTableData,
@@ -15,6 +16,12 @@ import {
 } from '../../../library/userAssets/convertUserAssets'
 import { AssetsImpacts } from './AssetImpacts/AssetImpacts'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { InfoPopover } from '../../InfoPopover/InfoPopover'
+import {
+  hazardTypePopupContent,
+  scenarioPopupContent,
+  yearPopupContent,
+} from '../../../configuration/infoPopupContentHazards'
 
 export const AssetsAnalytics = () => {
   const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
@@ -26,8 +33,17 @@ export const AssetsAnalytics = () => {
   const [yearFilterOptions, setYearFilterOptions] = useState<string[]>()
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
-  const { currentWorkflowNickname, analysedUserAssets, uploadedFileName } =
-    useContext(UserAssetsContext)
+  const {
+    currentWorkflowNickname,
+    analysedUserAssets,
+    uploadedFileName,
+    analysisRunDate,
+  } = useContext(UserAssetsContext)
+
+  const downloadFile = new Blob([JSON.stringify(analysedUserAssets)], {
+    type: 'text/json;charset=utf-8',
+  })
+  const downloadUrl = URL.createObjectURL(downloadFile)
 
   const analysedUserAssetsForTable = useMemo(
     () =>
@@ -130,9 +146,15 @@ export const AssetsAnalytics = () => {
     <>
       {hazardTypeFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="hazard-type-filter" className={formStyles.formLabel}>
-            Hazard Type
-          </label>
+          <div className={formStyles.labelWithInfoPopoverRow}>
+            <label
+              htmlFor="hazard-type-filter"
+              className={formStyles.formLabel}
+            >
+              Hazard Type
+            </label>
+            <InfoPopover>{hazardTypePopupContent}</InfoPopover>
+          </div>
           <Select.Root
             value={hazardTypeFilterValue}
             onValueChange={setHazardTypeFilterValue}
@@ -150,9 +172,12 @@ export const AssetsAnalytics = () => {
       ) : null}
       {scenarioFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="scenario-filter" className={formStyles.formLabel}>
-            Scenario
-          </label>
+          <div className={formStyles.labelWithInfoPopoverRow}>
+            <label htmlFor="scenario-filter" className={formStyles.formLabel}>
+              Scenario
+            </label>
+            <InfoPopover>{scenarioPopupContent}</InfoPopover>
+          </div>
           <Select.Root
             value={scenarioFilterValue}
             onValueChange={setScenarioFilterValue}
@@ -171,9 +196,12 @@ export const AssetsAnalytics = () => {
 
       {yearFilterOptions?.length ? (
         <div className={analyticsStyles.filterInputWrapper}>
-          <label htmlFor="year-filter" className={formStyles.formLabel}>
-            Year
-          </label>
+          <div className={formStyles.labelWithInfoPopoverRow}>
+            <label htmlFor="year-filter" className={formStyles.formLabel}>
+              Year
+            </label>
+            <InfoPopover>{yearPopupContent}</InfoPopover>
+          </div>
           <Select.Root
             value={yearFilterValue}
             onValueChange={setYearFilterValue}
@@ -200,10 +228,37 @@ export const AssetsAnalytics = () => {
   return (
     <>
       <PageLayout>
-        <PageTitle>Analysis</PageTitle>
+        <div className={containerStyles.flexRowSpaceBetweenStart}>
+          <PageTitle>Analysis</PageTitle>
+          {analysedUserAssets ? (
+            <Button asChild>
+              <a
+                download={`${uploadedFileName}_${currentWorkflowNickname}_${analysisRunDate}.geojson`}
+                href={downloadUrl}
+              >
+                Download Analysis
+              </a>
+            </Button>
+          ) : null}
+        </div>
+
         {analysedUserAssets ? (
           <>
-            <PageSubtitle>{`Portfolio: ${uploadedFileName} | Assets: ${analysedUserAssets?.features.length}`}</PageSubtitle>
+            <PageSubtitle>
+              {uploadedFileName ? <>Portfolio: {uploadedFileName}</> : null}
+              {analysisRunDate && uploadedFileName ? (
+                <> | Analysis Run: {analysisRunDate}</>
+              ) : null}
+              {analysedUserAssets.features.length && uploadedFileName ? (
+                <> | Assets: {analysedUserAssets?.features.length}</>
+              ) : null}
+            </PageSubtitle>
+            <Text as="p" className={analyticsStyles.subSubtitle}>
+              {currentWorkflowNickname ? (
+                <> Workflow: {currentWorkflowNickname}</>
+              ) : null}
+            </Text>
+
             <Tabs.Root
               defaultValue="assetImpacts"
               className={analyticsStyles.tabsRoot}

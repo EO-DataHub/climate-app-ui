@@ -3,8 +3,11 @@
 .flexRowSpaceBetweenCenter {
   @include containers.flexRowSpaceBetweenCenter;
 }
-.flexRowSpaceBetweenCenter {
+.flexRowSpaceBetweenEnd {
   @include containers.flexRowSpaceBetweenEnd;
+}
+.flexRowSpaceBetweenStart {
+  @include containers.flexRowSpaceBetweenStart;
 }
 .flexRowStartCenter {
   @include containers.flexRowStartCenter;

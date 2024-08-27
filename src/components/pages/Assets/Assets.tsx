@@ -35,6 +35,7 @@ export const Assets = () => {
   const {
     currentWorkflowNickname,
     setAnalysedUserAssets,
+    setAnalysisRunDate,
     setCurrentWorkflowNickname,
     setUploadedFileName,
     setUserAssets,
@@ -100,6 +101,8 @@ export const Assets = () => {
     })
       .then((results) => {
         setAnalysedUserAssets(results)
+        setAnalysisRunDate?.(new Date().toLocaleDateString())
+
         // eslint-disable-next-line no-console
         console.log('Risk analysis results:', results)
         toast.dismiss()

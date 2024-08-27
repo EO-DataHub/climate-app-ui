@@ -207,13 +207,32 @@ export const indicatorOptions = [
 export const climateModelOptions = [
   { value: 'ACCESS-CM2', label: 'CMIP6: ACCESS-CM2' },
   { value: 'NorESM2-MM', label: 'CMIP6: NorESM2-MM' },
+  { value: 'ukcp18', label: 'UKCP18' },
 ]
 
 export const scenarioOptions = [
   { value: 'ssp126', label: 'SSP1-2.6' },
   { value: 'ssp585', label: 'SSP5-8.5' },
 ]
+
+export const ukcpScenarioOptions = [{ value: 'rcp85', label: 'RCP-8.5' }]
+
 export const yearOptions = ['2070', '2080']
+
+export const ukcpYearOptions = ['2030', '2040', '2050', '2060', '2070']
+
+export const getOptionsByClimateModel = (climateModel: string) => {
+  if (climateModel === 'ukcp18') {
+    return {
+      scenarioOptions: ukcpScenarioOptions,
+      yearOptions: ukcpYearOptions,
+    }
+  }
+  return {
+    scenarioOptions,
+    yearOptions,
+  }
+}
 
 export const legendParameters = {
   daysWithAverageTemperatureAbove: {
@@ -258,26 +277,6 @@ export const legendParameters = {
       [3500, 4000],
       [4000, 4500],
       [4500, 5000],
-    ],
-  },
-  ukDaysWithAverageTemperatureAbove: {
-    intervalRgbaColor: [
-      '254,229,217',
-      '252,187,161',
-      '252,146,114',
-      '251,106,74',
-      '239,59,44',
-      '203,24,29',
-      '153,0,13',
-    ],
-    intervals: [
-      [1, 15],
-      [15, 30],
-      [30, 45],
-      [45, 60],
-      [60, 75],
-      [75, 90],
-      [90, 105],
     ],
   },
 }

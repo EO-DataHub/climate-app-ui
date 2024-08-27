@@ -12,10 +12,9 @@ import {
 } from '../../../configuration/infoPopupContentHazards'
 import {
   climateModelOptions,
+  getOptionsByClimateModel,
   indicatorOptions,
   legendParameters,
-  scenarioOptions,
-  yearOptions,
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
@@ -42,17 +41,29 @@ export const Hazards = () => {
   )
 
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
-  const [scenario, setScenario] = useState(scenarioOptions[0].value)
-  const scenarioLabel = scenarioOptions.find(
-    (option) => option.value === scenario,
-  )?.label
-  const [year, setYear] = useState(yearOptions[0])
+  const [scenario, setScenario] = useState('')
+
+  const [year, setYear] = useState('')
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
   })
+
+  useEffect(() => {
+    const { scenarioOptions, yearOptions } =
+      getOptionsByClimateModel(climateModel)
+    setScenario(scenarioOptions[0].value)
+    setYear(yearOptions[0])
+  }, [climateModel])
+
+  const { scenarioOptions, yearOptions } =
+    getOptionsByClimateModel(climateModel)
+  const scenarioLabel = scenarioOptions.find(
+    (option) => option.value === scenario,
+  )?.label
+
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
   const { hazardMetadata, isHazardMetadataError, isHazardMetadataLoading } =

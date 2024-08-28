@@ -12,10 +12,9 @@ import {
 } from '../../../configuration/infoPopupContentHazards'
 import {
   climateModelOptions,
+  getOptionsByClimateModel,
   indicatorOptions,
   legendParameters,
-  scenarioOptions,
-  yearOptions,
 } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
@@ -42,17 +41,29 @@ export const Hazards = () => {
   )
 
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
-  const [scenario, setScenario] = useState(scenarioOptions[0].value)
-  const scenarioLabel = scenarioOptions.find(
-    (option) => option.value === scenario,
-  )?.label
-  const [year, setYear] = useState(yearOptions[0])
+  const [scenario, setScenario] = useState('')
+
+  const [year, setYear] = useState('')
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
   })
+
+  useEffect(() => {
+    const { scenarioOptions, yearOptions } =
+      getOptionsByClimateModel(climateModel)
+    setScenario(scenarioOptions[0].value)
+    setYear(yearOptions[0])
+  }, [climateModel])
+
+  const { scenarioOptions, yearOptions } =
+    getOptionsByClimateModel(climateModel)
+  const scenarioLabel = scenarioOptions.find(
+    (option) => option.value === scenario,
+  )?.label
+
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
   const { hazardMetadata, isHazardMetadataError, isHazardMetadataLoading } =
@@ -67,7 +78,7 @@ export const Hazards = () => {
   const hazardIndicatorLabel = indicatorOptions.find(
     (option) => option.value === hazardIndicator,
   )?.label
-  const zarrPath = `s3://ukri-eodh-hazard-tiles-test/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
+  const zarrPath = `s3://ukri-eodh-hazard-tiles-us-west-2/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
   const { isMarkerOnMap, hazardMarkerValue, markerCoordinates } =
     useGetHazardValueByMapClick({
@@ -98,8 +109,12 @@ export const Hazards = () => {
 
   // this is not scalable, but a temporary solution for the demo
   const legendParametersToUse = hazardIndicator.includes('days_tas_above')
-    ? legendParameters.daysWithAverageTemperatureAbove
-    : legendParameters.meanDegreeDaysAbove
+    ? climateModel.includes('uk_')
+      ? legendParameters.ukDaysWithAverageTemperatureAbove
+      : legendParameters.daysWithAverageTemperatureAbove
+    : climateModel.includes('uk_')
+      ? legendParameters.ukMeanDegreeDaysAbove
+      : legendParameters.meanDegreeDaysAbove
 
   useEffect(
     function updateHazardMapTiles() {

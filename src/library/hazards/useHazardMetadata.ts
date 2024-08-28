@@ -47,7 +47,8 @@ export const useHazardMetadata = ({
       // We will convert to use environment var when we start using APIs for real
       // and their baseUrls present themselves.
       // Directly accessing S3 is only temporary.
-      const metadataUrlForHazard = `https://ukri-eodh-hazard-tiles-test.s3.amazonaws.com/hazard/${hazardType}_osc_v2_${hazardIndicator}_${climateModel}_${scenario}_${year}.json`
+      const metadataUrlForHazard = `https://ukri-eodh-hazard-tiles-us-west-2.s3.amazonaws.com/hazard/${hazardType}_osc_v2_${hazardIndicator}_${climateModel}_${scenario}_${year}.json`
+
       axios
         .get(metadataUrlForHazard)
         .then((res) => {

@@ -211,6 +211,7 @@ export const climateModelOptions = [
   { value: 'ukcp18_uk_5km', label: 'UKCP18 UK 5km' },
   { value: 'ukcp18_uk_2_2km', label: 'UKCP18 UK 2.2km' },
   { value: 'ukcp18_global_60km', label: 'UKCP18 Global 60km' },
+  { value: 'ukcp18_eur_12km', label: 'UKCP18 Europe 12km' },
 ]
 
 export const scenarioOptions = [

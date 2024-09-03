@@ -21,7 +21,7 @@ body {
   --button-svg-fill: #3a5bc7;
   --button-svg-fill-disabled: #00083046;
   --white: #fff;
-  --hazard-raster-opacity: 0.6;
+  --hazard-raster-opacity: 0.8;
   --app-background-dark: #333132;
   --dark-text: var(--gray-12);
   --toastify-color-info: var(--indigo-9);

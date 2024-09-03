@@ -24,9 +24,8 @@ import {
 } from '../../../configuration/infoPopupContentHazards'
 
 export const AssetsAnalytics = () => {
-  const [hazardTypeFilterOptions, setHazardTypeFilterOptions] = useState<
-    string[]
-  >(['ChronicHeat'])
+  const [hazardTypeFilterOptions, setHazardTypeFilterOptions] =
+    useState<string[]>()
   const [hazardTypeFilterValue, setHazardTypeFilterValue] = useState<string>()
   const [scenarioFilterOptions, setScenarioFilterOptions] = useState<string[]>()
   const [scenarioFilterValue, setScenarioFilterValue] = useState<string>()
@@ -39,6 +38,17 @@ export const AssetsAnalytics = () => {
     uploadedFileName,
     analysisRunDate,
   } = useContext(UserAssetsContext)
+
+  useEffect(
+    function initializeFiltersForCurrentWorkflow() {
+      setHazardTypeFilterOptions(
+        currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
+          ? ['ChronicHeat']
+          : undefined,
+      )
+    },
+    [currentWorkflowNickname],
+  )
 
   const downloadFile = new Blob([JSON.stringify(analysedUserAssets)], {
     type: 'text/json;charset=utf-8',

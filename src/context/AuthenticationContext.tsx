@@ -129,10 +129,18 @@ export const AuthenticationContextProvider = ({
     function initializeAuthenticatedAxios() {
       if (isAuthenticated) {
         const token = authenticationInstance.token
+        const getUpdatedToken = async () => {
+          await authenticationInstance.updateToken()
+
+          return authenticationInstance.token
+        }
 
         if (!token) return
 
-        const authenticatedAxios = getAuthenticatedAxios(token)
+        const authenticatedAxios = getAuthenticatedAxios({
+          token,
+          getUpdatedToken,
+        })
 
         setAuthenticatedAxios(() => {
           // because axios is a function, we have to use a function to add it to state

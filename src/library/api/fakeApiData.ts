@@ -17,7 +17,7 @@ export const temporarySamplePortfolios = [
             location: 'Asia',
           },
           geometry: {
-            coordinates: [20.08984374999838, 49.741612498831614],
+            coordinates: [-0.14991735518407268, 51.51455102197443],
             type: 'Point',
           },
         },
@@ -30,7 +30,7 @@ export const temporarySamplePortfolios = [
             location: 'Asia',
           },
           geometry: {
-            coordinates: [54.98046874999886, 28.61345942400426],
+            coordinates: [-0.09146449447479199, 51.49609938535792],
             type: 'Point',
           },
         },
@@ -43,7 +43,7 @@ export const temporarySamplePortfolios = [
             location: 'Asia',
           },
           geometry: {
-            coordinates: [68.69140624999824, 27.52775820686128],
+            coordinates: [-0.1257721698287071, 51.513052623207415],
             type: 'Point',
           },
         },

@@ -90,8 +90,9 @@ export const Observations = () => {
             <Select.Root>
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-type">
-                <Select.Item value="x">Land Surface Temperature</Select.Item>
-                <Select.Item value="y">Flooding</Select.Item>
+                <Select.Item value="x">
+                  Land Surface Temperature (London 100m resolution)
+                </Select.Item>
               </Select.Content>
             </Select.Root>
           </InputLabelContainer>

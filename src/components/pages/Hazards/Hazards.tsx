@@ -172,6 +172,30 @@ export const Hazards = () => {
           },
         })
       }
+
+      // Add the countries boundaries GeoJSON source if it doesn't exist
+      const ukSource = mapRef.current.getSource('uk')
+      if (!ukSource) {
+        mapRef.current.addSource('uk', {
+          type: 'geojson',
+          data: './geojson/uk.geojson',
+        })
+      }
+
+      // Add the countries boundaries layer if it doesn't exist
+      const ukLayer = mapRef.current.getLayer('uk-boundaries')
+      if (!ukLayer) {
+        mapRef.current.addLayer({
+          id: 'uk-boundaries',
+          type: 'line',
+          source: 'uk',
+          paint: {
+            'line-color': '#000',
+            'line-width': 1,
+            'line-opacity': 0.3,
+          },
+        })
+      }
     },
     [
       climateModel,

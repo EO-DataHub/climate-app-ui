@@ -60,8 +60,12 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
         }
       }
       if (isCsv) {
-        const headers = fileContents
-          ?.slice(0, fileContents?.indexOf('\n'))
+        const fileContentsWithCarriageReturnRemoved = fileContents.replace(
+          '\r',
+          '',
+        )
+        const headers = fileContentsWithCarriageReturnRemoved
+          ?.slice(0, fileContentsWithCarriageReturnRemoved?.indexOf('\n'))
           .split(',')
 
         if (
@@ -78,7 +82,7 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
           : 'LONGITUDE'
 
         getGeojsonFromCsv(
-          fileContents,
+          fileContentsWithCarriageReturnRemoved,
           {
             latfield,
             lonfield,

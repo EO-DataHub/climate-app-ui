@@ -66,7 +66,7 @@ export const AssetsImpacts = ({
         />
       ) : (
         <AssetsTable
-          areExtraColumnsVisibleInitially={false}
+          areExtraColumnsVisibleInitially={true}
           userAssetsForTable={filteredAnalysedUserAssetsForTable}
           rowSelection={rowSelection}
           setRowSelection={setRowSelection}

@@ -90,6 +90,7 @@ export const Assets = () => {
         You will receive a notification when it&apos;s ready.
       </>,
     )
+    setAnalysedUserAssets(null)
     setCurrentWorkflowNickname?.(workflowTitle)
     setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
@@ -101,7 +102,9 @@ export const Assets = () => {
     })
       .then((results) => {
         setAnalysedUserAssets(results)
-        setAnalysisRunDate?.(new Date().toLocaleDateString())
+        setAnalysisRunDate?.(
+          ` ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+        )
 
         // eslint-disable-next-line no-console
         console.log('Risk analysis results:', results)
@@ -144,6 +147,7 @@ export const Assets = () => {
     )
 
     if (selectedPortfolio) {
+      setCurrentWorkflowNickname?.(undefined)
       setUploadedFileName?.(selectedPortfolio.name)
       setUserAssets?.(selectedPortfolio.data as UserAssets)
     }

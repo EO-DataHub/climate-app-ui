@@ -156,7 +156,7 @@ export const AssetsTable = ({
       columnHelper.accessor(columnName, {}),
     )
     const preDefaultColumns = []
-    const endColumns = []
+
     if (showSelectBoxes) {
       preDefaultColumns.push({
         id: 'select',
@@ -193,6 +193,20 @@ export const AssetsTable = ({
         },
       })
     }
+    if (showViewDetailsButton) {
+      preDefaultColumns.push({
+        id: 'select',
+        cell: ({ row }: { row: TanstackRow<UserAssetForTable> }) => {
+          return (
+            <Link asChild>
+              <button onClick={() => onViewDetailsClick?.(row.original.id)}>
+                View Details
+              </button>
+            </Link>
+          )
+        },
+      })
+    }
     const defaultColumns = [
       columnHelper.accessor('id', { header: 'ID', enableHiding: false }),
       columnHelper.accessor('latitude', {
@@ -210,28 +224,11 @@ export const AssetsTable = ({
         ),
       }),
     ]
-    if (showViewDetailsButton) {
-      endColumns.push({
-        id: 'select',
-
-        meta: { justify: 'end' },
-        cell: ({ row }: { row: TanstackRow<UserAssetForTable> }) => {
-          return (
-            <Link asChild>
-              <button onClick={() => onViewDetailsClick?.(row.original.id)}>
-                View Details
-              </button>
-            </Link>
-          )
-        },
-      })
-    }
 
     return [
       ...preDefaultColumns,
       ...defaultColumns,
       ...extraTableColumnSpecifications,
-      ...endColumns,
     ]
   }, [
     extraColumnNames,

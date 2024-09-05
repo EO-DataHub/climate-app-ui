@@ -121,7 +121,7 @@ export const Assets = () => {
               {uploadedFileName ? uploadedFileName : null}
             </div>
 
-            <Button asChild variant="soft">
+            <Button asChild variant="surface">
               <ReactRouterLink to="/analytics">View Analysis</ReactRouterLink>
             </Button>
           </div>,

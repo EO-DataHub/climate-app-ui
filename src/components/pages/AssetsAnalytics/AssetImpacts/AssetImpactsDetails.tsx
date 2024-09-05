@@ -167,10 +167,8 @@ export const AssetImpactsDetails = ({
       <div className={detailStyles.chartAndMapWrapper}>
         <Tabs.Root defaultValue="chart1" className={detailStyles.tabsRoot}>
           <Tabs.List className={detailStyles.tabsList}>
-            <Tabs.Trigger value="chart1">Chart Title 1</Tabs.Trigger>
-            <Tabs.Trigger value="chart2">Chart Title 2</Tabs.Trigger>
-            <Tabs.Trigger value="chart3">Chart Title 3</Tabs.Trigger>
-            <Tabs.Trigger value="chart4">Chart Title 4</Tabs.Trigger>
+            <Tabs.Trigger value="chart1">Asset Analysis Results</Tabs.Trigger>
+            <Tabs.Trigger value="chart2">Visualisation</Tabs.Trigger>
           </Tabs.List>
 
           <div className={detailStyles.tabsContentWrapper}>
@@ -190,8 +188,6 @@ export const AssetImpactsDetails = ({
               </table>
             </Tabs.Content>
             <Tabs.Content value="chart2">Data Visualization Here</Tabs.Content>
-            <Tabs.Content value="chart3">Data Visualization Here</Tabs.Content>
-            <Tabs.Content value="chart4">Data Visualization Here</Tabs.Content>
           </div>
         </Tabs.Root>
         <Map mapContainer={mapContainer} />

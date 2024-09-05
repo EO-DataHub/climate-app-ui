@@ -29,7 +29,7 @@ export type HubWorkflowNicknamesType = `${HubWorkflowNicknames}`
 
 export const workflowHubNames = {
   [HubWorkflowNicknames.OSC]: 'get-asset-impact-workflow-sparkgeouser',
-  [HubWorkflowNicknames.LST]: 'get-asset-values-workflow-sparkgeouser',
+  [HubWorkflowNicknames.LST]: 'get-asset-values-workflow-nostac',
 }
 
 export const DEFAULT_USER_ASSET_COLUMNS = ['latitude', 'longitude', 'id', '']

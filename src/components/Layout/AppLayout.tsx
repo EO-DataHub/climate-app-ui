@@ -7,7 +7,11 @@ import { ToastContainer } from 'react-toastify'
 export const AppLayout = () => {
   return (
     <div className={appLayoutStyles.layoutWrapper}>
-      <ToastContainer autoClose={false} theme="colored" />
+      <ToastContainer
+        autoClose={false}
+        theme="colored"
+        position="bottom-right"
+      />
       <ActionsBar />
       <Outlet />
     </div>

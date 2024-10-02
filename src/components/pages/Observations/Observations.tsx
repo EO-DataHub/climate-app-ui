@@ -20,8 +20,14 @@ import { useGetObservationValueByMapclick } from './useGetObservationValueByMapC
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 
 export const Observations = () => {
+  const [selectedObservationType, setSelectedObservationType] = useState('')
+
   const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
     useState('')
+
+  const handleObservationTypeChange = (value: string) => {
+    setSelectedObservationType(value)
+  }
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: [0, 51.5],
@@ -87,11 +93,14 @@ export const Observations = () => {
               <InfoPopover>{observationTypePopupContent}</InfoPopover>
             </div>
 
-            <Select.Root>
+            <Select.Root onValueChange={handleObservationTypeChange}>
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-type">
-                <Select.Item value="x">
+                <Select.Item value="london">
                   Land Surface Temperature (London 100m resolution)
+                </Select.Item>
+                <Select.Item value="uk">
+                  Land Surface Temperature (UK)
                 </Select.Item>
               </Select.Content>
             </Select.Root>
@@ -104,6 +113,7 @@ export const Observations = () => {
             <ObservationsMenu
               selectedObservationLayerUrl={selectedObservationLayerUrl}
               setSelectedObservationLayerUrl={setSelectedObservationLayerUrl}
+              observationType={selectedObservationType} // Pass the selected observation type
             />
           </InputLabelContainer>
         </form>

@@ -70,7 +70,6 @@ export const Observations = () => {
         type: 'raster',
         tiles: [titilerUrl],
         tileSize: 256,
-        bounds: [-1.38, 50.53, 2.25, 52.82], //[-154288, 6540200, 249532, 6948850],
       })
 
       mapRef.current.addLayer({

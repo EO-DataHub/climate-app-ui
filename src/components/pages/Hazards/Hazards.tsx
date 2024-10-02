@@ -55,7 +55,9 @@ interface HazardFormData {
 }
 
 export const Hazards = () => {
-  const [hazardIndicator, setHazardIndicator] = useState(indicatorOptions[0].value)
+  const [hazardIndicator, setHazardIndicator] = useState(
+    indicatorOptions[0].value,
+  )
 
   const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState('')
@@ -249,7 +251,6 @@ export const Hazards = () => {
     setScenario(formData?.scenario)
     setYear(formData?.year)
   }, [formData])
-
 
   const sidebarContent = (
     <div className={sidebarStyles.content}>

@@ -36,7 +36,10 @@ function ObjectFieldTemplate(props: ObjectFieldTemplateProps) {
       {props.title}
       {props.description}
       {props.properties.map((element) => (
-        <div className={inputLabelContainerStyles.container} key={element.content.key}>
+        <div
+          className={inputLabelContainerStyles.container}
+          key={element.content.key}
+        >
           {element.content}
         </div>
       ))}
@@ -45,18 +48,16 @@ function ObjectFieldTemplate(props: ObjectFieldTemplateProps) {
 }
 
 interface HazardFormData {
-  indicator_model: string;
-  scenario: string;
-  year: string;
-  climate_model: string;
+  indicator_model: string
+  scenario: string
+  year: string
+  climate_model: string
 }
 
 export const Hazards = () => {
-  const [hazardIndicator] = useState(
-    indicatorOptions[0].value,
-  )
+  const [hazardIndicator, setHazardIndicator] = useState(indicatorOptions[0].value)
 
-  const [climateModel] = useState(climateModelOptions[0].value)
+  const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState('')
 
   const [year, setYear] = useState('')
@@ -80,8 +81,7 @@ export const Hazards = () => {
     setYear(yearOptions[0])
   }, [climateModel])
 
-  const { scenarioOptions } =
-    getOptionsByClimateModel(climateModel)
+  const { scenarioOptions } = getOptionsByClimateModel(climateModel)
   const scenarioLabel = scenarioOptions.find(
     (option) => option.value === scenario,
   )?.label
@@ -157,11 +157,11 @@ export const Hazards = () => {
 
       void mapRef.current.once('idle', () => setIsMapLoading(false))
       void mapRef.current.once('error', () => {
-        setIsMapLoading(false);
+        setIsMapLoading(false)
         if (mapRef.current?.getLayer(MapSourceIds.HAZARD_DATA)) {
-          mapRef.current?.removeLayer(MapSourceIds.HAZARD_DATA);
+          mapRef.current?.removeLayer(MapSourceIds.HAZARD_DATA)
         }
-      });
+      })
 
       const hazardSource = mapRef.current.getSource(
         MapSourceIds.HAZARD_DATA,
@@ -237,23 +237,32 @@ export const Hazards = () => {
     ],
   )
 
- const uiSchema: UiSchema = {
+  const uiSchema: UiSchema = {
     'ui:submitButtonOptions': {
       norender: true,
     },
   }
 
+  useEffect(() => {
+    setHazardIndicator(formData?.indicator_model)
+    setClimateModel(formData?.climate_model)
+    setScenario(formData?.scenario)
+    setYear(formData?.year)
+  }, [formData])
+
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
-        <Form schema={chronicHeatSchema}
-              uiSchema={uiSchema}
-              formData={formData}
-              templates={{ ObjectFieldTemplate }}
-              className={hazardsStyles.hazardTilesForm}
-              onChange={(e) => setFormData(e.formData)}
-              // onChange={(e) => console.log(e)}
-              validator={validator} />
+        <Form
+          schema={chronicHeatSchema}
+          uiSchema={uiSchema}
+          formData={formData}
+          templates={{ ObjectFieldTemplate }}
+          className={hazardsStyles.hazardTilesForm}
+          onChange={(e) => setFormData(e.formData)}
+          validator={validator}
+        />
 
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
           <Tabs.List>

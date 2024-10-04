@@ -23,16 +23,18 @@ export const ObservationsMenu = ({
 }: ObservationsMenuProps) => {
   const [options, setOptions] = useState<Option[]>([])
 
-  useEffect(() => {
-    // Update options based on the observationType
-    if (observationType === 'london') {
-      setOptions(observationMenuItems)
-    } else if (observationType === 'uk') {
-      setOptions(observationMenuItemsUK)
-    } else {
-      setOptions([])
-    }
-  }, [observationType])
+  useEffect(
+    function updateDateOptionsDependingOnObservationType() {
+      if (observationType === 'london') {
+        setOptions(observationMenuItems)
+      } else if (observationType === 'uk') {
+        setOptions(observationMenuItemsUK)
+      } else {
+        setOptions([])
+      }
+    },
+    [observationType],
+  )
   return (
     <Select.Root
       value={selectedObservationLayerUrl}

@@ -18,12 +18,14 @@ import {
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
+import { observationMenuItems } from '../../../library/api/fakeApiData'
 
 export const Observations = () => {
-  const [selectedObservationType, setSelectedObservationType] = useState('')
+  const [selectedObservationType, setSelectedObservationType] =
+    useState('london')
 
   const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
-    useState('')
+    useState(observationMenuItems[0].value)
 
   const handleObservationTypeChange = (value: string) => {
     setSelectedObservationType(value)
@@ -92,7 +94,10 @@ export const Observations = () => {
               <InfoPopover>{observationTypePopupContent}</InfoPopover>
             </div>
 
-            <Select.Root onValueChange={handleObservationTypeChange}>
+            <Select.Root
+              onValueChange={handleObservationTypeChange}
+              value={selectedObservationType}
+            >
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-type">
                 <Select.Item value="london">

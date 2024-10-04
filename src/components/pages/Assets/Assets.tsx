@@ -70,9 +70,7 @@ export const Assets = () => {
       )
     }
     if (!userInfo || !authenticatedAxios) {
-      toast.error(
-        'User info from a logged in user session is required to run an analysis. Logging out and loggign in again and if the problem doesnt resolve, contact an administrator.',
-      )
+      toast.error('Please log in to run an analysis.')
 
       return
     }

@@ -119,11 +119,19 @@ export const getLstResultsTableData = (
     const [longitude, latitude] = feature.geometry.coordinates
     const { returned_values, ...restOfProperties } = feature.properties
 
+    const simplifiedReturnedValues: { [s: string]: number } = {}
+
+    Object.entries(
+      returned_values as { [s: string]: { value: number } },
+    ).forEach(([key, value]) => {
+      simplifiedReturnedValues[key] = value.value
+    })
+
     return {
       latitude,
       longitude,
       ...restOfProperties,
-      ...(returned_values as object),
+      ...(simplifiedReturnedValues as object),
     }
   })
 }

@@ -5830,152 +5830,1457 @@ export const fakeLstResultsData = {
   features: [
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [-0.077, 51.482],
-      },
       properties: {
-        id: 'xTicWhe8',
-        original_id: 0,
+        id: 'F',
+        type: 'Construction',
+        asset_class: 'IndustrialActivity',
+        location: 'Asia',
         returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 37.019989013671875,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130505110023-fv1-00': {
+            value: null,
+            datetime: '2013-05-05T11:00:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130606110036-fv1-00': {
+            value: 31.420013427734375,
+            datetime: '2013-06-06T11:00:36Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130615105422-fv1-00': {
+            value: 24.600006103515625,
+            datetime: '2013-06-15T10:54:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130701105422-fv1-00': {
+            value: 31.6199951171875,
+            datetime: '2013-07-01T10:54:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130708110034-fv1-00': {
+            value: 37.610015869140625,
+            datetime: '2013-07-08T11:00:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130724110032-fv1-00': {
+            value: 28.1099853515625,
+            datetime: '2013-07-24T11:00:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130926110026-fv1-00': {
+            value: null,
+            datetime: '2013-09-26T11:00:26Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20131122105358-fv1-00': {
+            value: null,
+            datetime: '2013-11-22T10:53:58Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20131208105400-fv1-00': {
+            value: null,
+            datetime: '2013-12-08T10:54:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140116105943-fv1-00': {
+            value: 8.95001220703125,
+            datetime: '2014-01-16T10:59:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140201105938-fv1-00': {
+            value: null,
+            datetime: '2014-02-01T10:59:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140305105908-fv1-00': {
+            value: 10.910003662109375,
+            datetime: '2014-03-05T10:59:08Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140321105858-fv1-00': {
+            value: 15.269989013671875,
+            datetime: '2014-03-21T10:58:58Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140609105815-fv1-00': {
+            value: null,
+            datetime: '2014-06-09T10:58:15Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140625105817-fv1-00': {
+            value: null,
+            datetime: '2014-06-25T10:58:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140727105829-fv1-00': {
+            value: 27.389984130859375,
+            datetime: '2014-07-27T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140922105229-fv1-00': {
+            value: null,
+            datetime: '2014-09-22T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150119105834-fv1-00': {
+            value: null,
+            datetime: '2015-01-19T10:58:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150204105830-fv1-00': {
+            value: 6.399993896484375,
+            datetime: '2015-02-04T10:58:30Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150301105209-fv1-00': {
+            value: null,
+            datetime: '2015-03-01T10:52:09Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150308105815-fv1-00': {
+            value: null,
+            datetime: '2015-03-08T10:58:15Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150324105806-fv1-00': {
+            value: null,
+            datetime: '2015-03-24T10:58:06Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150409105756-fv1-00': {
+            value: 24.45001220703125,
+            datetime: '2015-04-09T10:57:56Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150418105146-fv1-00': {
+            value: null,
+            datetime: '2015-04-18T10:51:46Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150527105738-fv1-00': {
+            value: 31.089996337890625,
+            datetime: '2015-05-27T10:57:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150605105134-fv1-00': {
+            value: null,
+            datetime: '2015-06-05T10:51:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150621105142-fv1-00': {
+            value: null,
+            datetime: '2015-06-21T10:51:42Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150707105152-fv1-00': {
+            value: null,
+            datetime: '2015-07-07T10:51:52Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150815105817-fv1-00': {
+            value: 23.769989013671875,
+            datetime: '2015-08-15T10:58:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150925105223-fv1-00': {
+            value: null,
+            datetime: '2015-09-25T10:52:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151002105835-fv1-00': {
+            value: 22.80999755859375,
+            datetime: '2015-10-02T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151011105224-fv1-00': {
+            value: null,
+            datetime: '2015-10-11T10:52:24Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151112105229-fv1-00': {
+            value: null,
+            datetime: '2015-11-12T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160207105835-fv1-00': {
+            value: 8.470001220703125,
+            datetime: '2016-02-07T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160223105828-fv1-00': {
+            value: 12.149993896484375,
+            datetime: '2016-02-23T10:58:28Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160404105202-fv1-00': {
+            value: null,
+            datetime: '2016-04-04T10:52:02Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160427105807-fv1-00': {
+            value: null,
+            datetime: '2016-04-27T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160716105832-fv1-00': {
+            value: null,
+            datetime: '2016-07-16T10:58:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160817105839-fv1-00': {
+            value: 34.1300048828125,
+            datetime: '2016-08-17T10:58:39Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20161004105850-fv1-00': {
+            value: 21.17999267578125,
+            datetime: '2016-10-04T10:58:50Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20161020105855-fv1-00': {
+            value: null,
+            datetime: '2016-10-20T10:58:55Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170124105840-fv1-00': {
+            value: 7.019989013671875,
+            datetime: '2017-01-24T10:58:40Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170626105209-fv1-00': {
+            value: 32.44000244140625,
+            datetime: '2017-06-26T10:52:09Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170626105233-fv1-00': {
+            value: null,
+            datetime: '2017-06-26T10:52:33Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170712105212-fv1-00': {
+            value: null,
+            datetime: '2017-07-12T10:52:12Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170804105833-fv1-00': {
+            value: null,
+            datetime: '2017-08-04T10:58:33Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170820105838-fv1-00': {
+            value: null,
+            datetime: '2017-08-20T10:58:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170829105229-fv1-00': {
+            value: 30.350006103515625,
+            datetime: '2017-08-29T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180212105823-fv1-00': {
+            value: null,
+            datetime: '2018-02-12T10:58:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180316105807-fv1-00': {
+            value: null,
+            datetime: '2018-03-16T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180417105752-fv1-00': {
+            value: null,
+            datetime: '2018-04-17T10:57:52Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180503105743-fv1-00': {
+            value: null,
+            datetime: '2018-05-03T10:57:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180519105732-fv1-00': {
+            value: 32.220001220703125,
+            datetime: '2018-05-19T10:57:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180917105201-fv1-00': {
+            value: 29.55999755859375,
+            datetime: '2018-09-17T10:52:01Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180917105225-fv1-00': {
+            value: null,
+            datetime: '2018-09-17T10:52:25Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20181026105828-fv1-00': {
+            value: null,
+            datetime: '2018-10-26T10:58:28Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20181111105830-fv1-00': {
+            value: null,
+            datetime: '2018-11-11T10:58:30Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20190420105800-fv1-00': {
+            value: 30.399993896484375,
+            datetime: '2019-04-20T10:58:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200218105835-fv1-00': {
+            value: 5.739990234375,
+            datetime: '2020-02-18T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200321105822-fv1-00': {
+            value: 13.25,
+            datetime: '2020-03-21T10:58:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200406105813-fv1-00': {
+            value: null,
+            datetime: '2020-04-06T10:58:13Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200422105807-fv1-00': {
+            value: 27.730010986328125,
+            datetime: '2020-04-22T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210220105837-fv1-00': {
+            value: 12.160003662109375,
+            datetime: '2021-02-20T10:58:37Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210301105222-fv1-00': {
+            value: null,
+            datetime: '2021-03-01T10:52:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210425105810-fv1-00': {
+            value: null,
+            datetime: '2021-04-25T10:58:10Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210527105816-fv1-00': {
+            value: 25.45001220703125,
+            datetime: '2021-05-27T10:58:16Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210612105823-fv1-00': {
+            value: 34.04998779296875,
+            datetime: '2021-06-12T10:58:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210714105829-fv1-00': {
+            value: null,
+            datetime: '2021-07-14T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210723105222-fv1-00': {
+            value: 35.709991455078125,
+            datetime: '2021-07-23T10:52:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210815105843-fv1-00': {
+            value: null,
+            datetime: '2021-08-15T10:58:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210824105234-fv1-00': {
+            value: 25.769989013671875,
+            datetime: '2021-08-24T10:52:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210916105851-fv1-00': {
+            value: null,
+            datetime: '2021-09-16T10:58:51Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20211103105859-fv1-00': {
+            value: null,
+            datetime: '2021-11-03T10:58:59Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220131105232-fv1-00': {
+            value: 9,
+            datetime: '2022-01-31T10:52:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220207105841-fv1-00': {
+            value: 9.389984130859375,
+            datetime: '2022-02-07T10:58:41Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220216105227-fv1-00': {
+            value: 12.470001220703125,
+            datetime: '2022-02-16T10:52:27Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220320105216-fv1-00': {
+            value: 18.70001220703125,
+            datetime: '2022-03-20T10:52:16Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220421105212-fv1-00': {
+            value: 21.45001220703125,
+            datetime: '2022-04-21T10:52:12Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220421105236-fv1-00': {
+            value: null,
+            datetime: '2022-04-21T10:52:36Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220514105829-fv1-00': {
+            value: 31.730010986328125,
+            datetime: '2022-05-14T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220615105845-fv1-00': {
+            value: 34.010009765625,
+            datetime: '2022-06-15T10:58:45Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': {
+            value: 39.410003662109375,
+            datetime: '2022-07-10T10:52:37Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220717105849-fv1-00': {
+            value: 38.660003662109375,
+            datetime: '2022-07-17T10:58:49Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220811105254-fv1-00': {
+            value: 40.420013427734375,
+            datetime: '2022-08-11T10:52:54Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220811105317-fv1-00': {
+            value: null,
+            datetime: '2022-08-11T10:53:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220827105255-fv1-00': {
+            value: null,
+            datetime: '2022-08-27T10:52:55Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220912105300-fv1-00': {
+            value: null,
+            datetime: '2022-09-12T10:53:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220928105302-fv1-00': {
+            value: null,
+            datetime: '2022-09-28T10:53:02Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221122105907-fv1-00': {
+            value: null,
+            datetime: '2022-11-22T10:59:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230109105857-fv1-00': {
+            value: null,
+            datetime: '2023-01-09T10:58:57Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230226105838-fv1-00': {
+            value: null,
+            datetime: '2023-02-26T10:58:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230314105832-fv1-00': {
+            value: null,
+            datetime: '2023-03-14T10:58:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230330105822-fv1-00': {
+            value: null,
+            datetime: '2023-03-30T10:58:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20231024105845-fv1-00': {
+            value: 14.29998779296875,
+            datetime: '2023-10-24T10:58:45Z',
+            unit: '°C',
+          },
         },
+      },
+      geometry: {
+        coordinates: [-0.14991735518407268, 51.51455102197443],
+        type: 'Point',
       },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.295, 51.926],
-      },
       properties: {
-        id: '8FEPzugc',
-        original_id: 1,
+        id: 'G',
+        type: 'Construction',
+        asset_class: 'IndustrialActivity',
+        location: 'Asia',
         returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 32.07000732421875,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130505110023-fv1-00': {
+            value: null,
+            datetime: '2013-05-05T11:00:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130606110036-fv1-00': {
+            value: 31.420013427734375,
+            datetime: '2013-06-06T11:00:36Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130615105422-fv1-00': {
+            value: 26.32000732421875,
+            datetime: '2013-06-15T10:54:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130701105422-fv1-00': {
+            value: null,
+            datetime: '2013-07-01T10:54:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130708110034-fv1-00': {
+            value: 36.239990234375,
+            datetime: '2013-07-08T11:00:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130724110032-fv1-00': {
+            value: null,
+            datetime: '2013-07-24T11:00:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130926110026-fv1-00': {
+            value: null,
+            datetime: '2013-09-26T11:00:26Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20131122105358-fv1-00': {
+            value: null,
+            datetime: '2013-11-22T10:53:58Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20131208105400-fv1-00': {
+            value: null,
+            datetime: '2013-12-08T10:54:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140116105943-fv1-00': {
+            value: 7.910003662109375,
+            datetime: '2014-01-16T10:59:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140201105938-fv1-00': {
+            value: 6.94000244140625,
+            datetime: '2014-02-01T10:59:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140305105908-fv1-00': {
+            value: null,
+            datetime: '2014-03-05T10:59:08Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140321105858-fv1-00': {
+            value: 16.139984130859375,
+            datetime: '2014-03-21T10:58:58Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140609105815-fv1-00': {
+            value: null,
+            datetime: '2014-06-09T10:58:15Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140625105817-fv1-00': {
+            value: 19.160003662109375,
+            datetime: '2014-06-25T10:58:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140727105829-fv1-00': {
+            value: 19.989990234375,
+            datetime: '2014-07-27T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140922105229-fv1-00': {
+            value: null,
+            datetime: '2014-09-22T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150119105834-fv1-00': {
+            value: 4.339996337890625,
+            datetime: '2015-01-19T10:58:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150204105830-fv1-00': {
+            value: null,
+            datetime: '2015-02-04T10:58:30Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150301105209-fv1-00': {
+            value: 13.010009765625,
+            datetime: '2015-03-01T10:52:09Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150308105815-fv1-00': {
+            value: null,
+            datetime: '2015-03-08T10:58:15Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150324105806-fv1-00': {
+            value: null,
+            datetime: '2015-03-24T10:58:06Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150409105756-fv1-00': {
+            value: 22.920013427734375,
+            datetime: '2015-04-09T10:57:56Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150418105146-fv1-00': {
+            value: 20.170013427734375,
+            datetime: '2015-04-18T10:51:46Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150527105738-fv1-00': {
+            value: 29.980010986328125,
+            datetime: '2015-05-27T10:57:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150605105134-fv1-00': {
+            value: null,
+            datetime: '2015-06-05T10:51:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150621105142-fv1-00': {
+            value: 26.8599853515625,
+            datetime: '2015-06-21T10:51:42Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150707105152-fv1-00': {
+            value: null,
+            datetime: '2015-07-07T10:51:52Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150815105817-fv1-00': {
+            value: 19.6099853515625,
+            datetime: '2015-08-15T10:58:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150925105223-fv1-00': {
+            value: 16.660003662109375,
+            datetime: '2015-09-25T10:52:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151002105835-fv1-00': {
+            value: 21.1300048828125,
+            datetime: '2015-10-02T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151011105224-fv1-00': {
+            value: 14.69000244140625,
+            datetime: '2015-10-11T10:52:24Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151112105229-fv1-00': {
+            value: null,
+            datetime: '2015-11-12T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160207105835-fv1-00': {
+            value: null,
+            datetime: '2016-02-07T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160223105828-fv1-00': {
+            value: 9.040008544921875,
+            datetime: '2016-02-23T10:58:28Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160404105202-fv1-00': {
+            value: null,
+            datetime: '2016-04-04T10:52:02Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160427105807-fv1-00': {
+            value: 14.8800048828125,
+            datetime: '2016-04-27T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160716105832-fv1-00': {
+            value: 29.5,
+            datetime: '2016-07-16T10:58:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160817105839-fv1-00': {
+            value: 33.360015869140625,
+            datetime: '2016-08-17T10:58:39Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20161004105850-fv1-00': {
+            value: 19.170013427734375,
+            datetime: '2016-10-04T10:58:50Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20161020105855-fv1-00': {
+            value: 14.010009765625,
+            datetime: '2016-10-20T10:58:55Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170124105840-fv1-00': {
+            value: 5.5,
+            datetime: '2017-01-24T10:58:40Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170626105209-fv1-00': {
+            value: 33.029998779296875,
+            datetime: '2017-06-26T10:52:09Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170626105233-fv1-00': {
+            value: null,
+            datetime: '2017-06-26T10:52:33Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170712105212-fv1-00': {
+            value: null,
+            datetime: '2017-07-12T10:52:12Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170804105833-fv1-00': {
+            value: null,
+            datetime: '2017-08-04T10:58:33Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170820105838-fv1-00': {
+            value: null,
+            datetime: '2017-08-20T10:58:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170829105229-fv1-00': {
+            value: 30.649993896484375,
+            datetime: '2017-08-29T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180212105823-fv1-00': {
+            value: 6.54998779296875,
+            datetime: '2018-02-12T10:58:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180316105807-fv1-00': {
+            value: null,
+            datetime: '2018-03-16T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180417105752-fv1-00': {
+            value: 17.839996337890625,
+            datetime: '2018-04-17T10:57:52Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180503105743-fv1-00': {
+            value: null,
+            datetime: '2018-05-03T10:57:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180519105732-fv1-00': {
+            value: 31.760009765625,
+            datetime: '2018-05-19T10:57:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180917105201-fv1-00': {
+            value: 27.32000732421875,
+            datetime: '2018-09-17T10:52:01Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180917105225-fv1-00': {
+            value: null,
+            datetime: '2018-09-17T10:52:25Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20181026105828-fv1-00': {
+            value: null,
+            datetime: '2018-10-26T10:58:28Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20181111105830-fv1-00': {
+            value: null,
+            datetime: '2018-11-11T10:58:30Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20190420105800-fv1-00': {
+            value: 29.329986572265625,
+            datetime: '2019-04-20T10:58:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200218105835-fv1-00': {
+            value: 7.079986572265625,
+            datetime: '2020-02-18T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200321105822-fv1-00': {
+            value: 13,
+            datetime: '2020-03-21T10:58:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200406105813-fv1-00': {
+            value: null,
+            datetime: '2020-04-06T10:58:13Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200422105807-fv1-00': {
+            value: 26.3699951171875,
+            datetime: '2020-04-22T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210220105837-fv1-00': {
+            value: 10.290008544921875,
+            datetime: '2021-02-20T10:58:37Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210301105222-fv1-00': {
+            value: null,
+            datetime: '2021-03-01T10:52:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210425105810-fv1-00': {
+            value: null,
+            datetime: '2021-04-25T10:58:10Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210527105816-fv1-00': {
+            value: null,
+            datetime: '2021-05-27T10:58:16Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210612105823-fv1-00': {
+            value: 34,
+            datetime: '2021-06-12T10:58:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210714105829-fv1-00': {
+            value: null,
+            datetime: '2021-07-14T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210723105222-fv1-00': {
+            value: 33.980010986328125,
+            datetime: '2021-07-23T10:52:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210815105843-fv1-00': {
+            value: 27.019989013671875,
+            datetime: '2021-08-15T10:58:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210824105234-fv1-00': {
+            value: null,
+            datetime: '2021-08-24T10:52:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210916105851-fv1-00': {
+            value: 26.92999267578125,
+            datetime: '2021-09-16T10:58:51Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20211103105859-fv1-00': {
+            value: null,
+            datetime: '2021-11-03T10:58:59Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220131105232-fv1-00': {
+            value: 7.790008544921875,
+            datetime: '2022-01-31T10:52:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220207105841-fv1-00': {
+            value: 8.600006103515625,
+            datetime: '2022-02-07T10:58:41Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220216105227-fv1-00': {
+            value: 13.910003662109375,
+            datetime: '2022-02-16T10:52:27Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220320105216-fv1-00': {
+            value: null,
+            datetime: '2022-03-20T10:52:16Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220421105212-fv1-00': {
+            value: 23.05999755859375,
+            datetime: '2022-04-21T10:52:12Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220421105236-fv1-00': {
+            value: null,
+            datetime: '2022-04-21T10:52:36Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220514105829-fv1-00': {
+            value: 31.720001220703125,
+            datetime: '2022-05-14T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220615105845-fv1-00': {
+            value: 36.1199951171875,
+            datetime: '2022-06-15T10:58:45Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': {
+            value: 39.45001220703125,
+            datetime: '2022-07-10T10:52:37Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220717105849-fv1-00': {
+            value: 34.70001220703125,
+            datetime: '2022-07-17T10:58:49Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220811105254-fv1-00': {
+            value: 40.329986572265625,
+            datetime: '2022-08-11T10:52:54Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220811105317-fv1-00': {
+            value: null,
+            datetime: '2022-08-11T10:53:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220827105255-fv1-00': {
+            value: null,
+            datetime: '2022-08-27T10:52:55Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220912105300-fv1-00': {
+            value: null,
+            datetime: '2022-09-12T10:53:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220928105302-fv1-00': {
+            value: null,
+            datetime: '2022-09-28T10:53:02Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221122105907-fv1-00': {
+            value: 8.589996337890625,
+            datetime: '2022-11-22T10:59:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230109105857-fv1-00': {
+            value: null,
+            datetime: '2023-01-09T10:58:57Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230226105838-fv1-00': {
+            value: 9.94000244140625,
+            datetime: '2023-02-26T10:58:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230314105832-fv1-00': {
+            value: null,
+            datetime: '2023-03-14T10:58:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230330105822-fv1-00': {
+            value: null,
+            datetime: '2023-03-30T10:58:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20231024105845-fv1-00': {
+            value: 12.8699951171875,
+            datetime: '2023-10-24T10:58:45Z',
+            unit: '°C',
+          },
         },
+      },
+      geometry: {
+        coordinates: [-0.09146449447479199, 51.49609938535792],
+        type: 'Point',
       },
     },
     {
       type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.04, 51.286],
-      },
       properties: {
-        id: 'zVzWtZ9h',
-        original_id: 2,
+        id: 'H',
+        type: 'Construction',
+        asset_class: 'IndustrialActivity',
+        location: 'Asia',
         returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 31.089996337890625,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130505110023-fv1-00': {
+            value: 20.6099853515625,
+            datetime: '2013-05-05T11:00:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130606110036-fv1-00': {
+            value: 32.360015869140625,
+            datetime: '2013-06-06T11:00:36Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130615105422-fv1-00': {
+            value: 26.329986572265625,
+            datetime: '2013-06-15T10:54:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130701105422-fv1-00': {
+            value: null,
+            datetime: '2013-07-01T10:54:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130708110034-fv1-00': {
+            value: 38.470001220703125,
+            datetime: '2013-07-08T11:00:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130724110032-fv1-00': {
+            value: null,
+            datetime: '2013-07-24T11:00:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20130926110026-fv1-00': {
+            value: null,
+            datetime: '2013-09-26T11:00:26Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20131122105358-fv1-00': {
+            value: null,
+            datetime: '2013-11-22T10:53:58Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20131208105400-fv1-00': {
+            value: null,
+            datetime: '2013-12-08T10:54:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140116105943-fv1-00': {
+            value: 8.3800048828125,
+            datetime: '2014-01-16T10:59:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140201105938-fv1-00': {
+            value: null,
+            datetime: '2014-02-01T10:59:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140305105908-fv1-00': {
+            value: 12.17999267578125,
+            datetime: '2014-03-05T10:59:08Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140321105858-fv1-00': {
+            value: 15.899993896484375,
+            datetime: '2014-03-21T10:58:58Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140609105815-fv1-00': {
+            value: null,
+            datetime: '2014-06-09T10:58:15Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140625105817-fv1-00': {
+            value: null,
+            datetime: '2014-06-25T10:58:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140727105829-fv1-00': {
+            value: 27.589996337890625,
+            datetime: '2014-07-27T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20140922105229-fv1-00': {
+            value: null,
+            datetime: '2014-09-22T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150119105834-fv1-00': {
+            value: null,
+            datetime: '2015-01-19T10:58:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150204105830-fv1-00': {
+            value: 6.170013427734375,
+            datetime: '2015-02-04T10:58:30Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150301105209-fv1-00': {
+            value: 12.3800048828125,
+            datetime: '2015-03-01T10:52:09Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150308105815-fv1-00': {
+            value: null,
+            datetime: '2015-03-08T10:58:15Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150324105806-fv1-00': {
+            value: null,
+            datetime: '2015-03-24T10:58:06Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150409105756-fv1-00': {
+            value: 25.079986572265625,
+            datetime: '2015-04-09T10:57:56Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150418105146-fv1-00': {
+            value: null,
+            datetime: '2015-04-18T10:51:46Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150527105738-fv1-00': {
+            value: 31.94000244140625,
+            datetime: '2015-05-27T10:57:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150605105134-fv1-00': {
+            value: null,
+            datetime: '2015-06-05T10:51:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150621105142-fv1-00': {
+            value: null,
+            datetime: '2015-06-21T10:51:42Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150707105152-fv1-00': {
+            value: null,
+            datetime: '2015-07-07T10:51:52Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150815105817-fv1-00': {
+            value: 22.32000732421875,
+            datetime: '2015-08-15T10:58:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20150925105223-fv1-00': {
+            value: null,
+            datetime: '2015-09-25T10:52:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151002105835-fv1-00': {
+            value: 23.040008544921875,
+            datetime: '2015-10-02T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151011105224-fv1-00': {
+            value: null,
+            datetime: '2015-10-11T10:52:24Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20151112105229-fv1-00': {
+            value: null,
+            datetime: '2015-11-12T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160207105835-fv1-00': {
+            value: null,
+            datetime: '2016-02-07T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160223105828-fv1-00': {
+            value: 11.160003662109375,
+            datetime: '2016-02-23T10:58:28Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160404105202-fv1-00': {
+            value: null,
+            datetime: '2016-04-04T10:52:02Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160427105807-fv1-00': {
+            value: null,
+            datetime: '2016-04-27T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160716105832-fv1-00': {
+            value: 25.829986572265625,
+            datetime: '2016-07-16T10:58:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20160817105839-fv1-00': {
+            value: 35.290008544921875,
+            datetime: '2016-08-17T10:58:39Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20161004105850-fv1-00': {
+            value: null,
+            datetime: '2016-10-04T10:58:50Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20161020105855-fv1-00': {
+            value: null,
+            datetime: '2016-10-20T10:58:55Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170124105840-fv1-00': {
+            value: 7.739990234375,
+            datetime: '2017-01-24T10:58:40Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170626105209-fv1-00': {
+            value: 35.6199951171875,
+            datetime: '2017-06-26T10:52:09Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170626105233-fv1-00': {
+            value: null,
+            datetime: '2017-06-26T10:52:33Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170712105212-fv1-00': {
+            value: 21.769989013671875,
+            datetime: '2017-07-12T10:52:12Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170804105833-fv1-00': {
+            value: null,
+            datetime: '2017-08-04T10:58:33Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170820105838-fv1-00': {
+            value: null,
+            datetime: '2017-08-20T10:58:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20170829105229-fv1-00': {
+            value: 29.019989013671875,
+            datetime: '2017-08-29T10:52:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180212105823-fv1-00': {
+            value: null,
+            datetime: '2018-02-12T10:58:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180316105807-fv1-00': {
+            value: null,
+            datetime: '2018-03-16T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180417105752-fv1-00': {
+            value: null,
+            datetime: '2018-04-17T10:57:52Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180503105743-fv1-00': {
+            value: null,
+            datetime: '2018-05-03T10:57:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180519105732-fv1-00': {
+            value: 33.160003662109375,
+            datetime: '2018-05-19T10:57:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180917105201-fv1-00': {
+            value: 30.209991455078125,
+            datetime: '2018-09-17T10:52:01Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20180917105225-fv1-00': {
+            value: null,
+            datetime: '2018-09-17T10:52:25Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20181026105828-fv1-00': {
+            value: null,
+            datetime: '2018-10-26T10:58:28Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20181111105830-fv1-00': {
+            value: null,
+            datetime: '2018-11-11T10:58:30Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20190420105800-fv1-00': {
+            value: 31.57000732421875,
+            datetime: '2019-04-20T10:58:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200218105835-fv1-00': {
+            value: null,
+            datetime: '2020-02-18T10:58:35Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200321105822-fv1-00': {
+            value: 14.29998779296875,
+            datetime: '2020-03-21T10:58:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200406105813-fv1-00': {
+            value: null,
+            datetime: '2020-04-06T10:58:13Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20200422105807-fv1-00': {
+            value: 28.720001220703125,
+            datetime: '2020-04-22T10:58:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210220105837-fv1-00': {
+            value: 12.540008544921875,
+            datetime: '2021-02-20T10:58:37Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210301105222-fv1-00': {
+            value: null,
+            datetime: '2021-03-01T10:52:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210425105810-fv1-00': {
+            value: null,
+            datetime: '2021-04-25T10:58:10Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210527105816-fv1-00': {
+            value: 23.019989013671875,
+            datetime: '2021-05-27T10:58:16Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210612105823-fv1-00': {
+            value: null,
+            datetime: '2021-06-12T10:58:23Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210714105829-fv1-00': {
+            value: null,
+            datetime: '2021-07-14T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210723105222-fv1-00': {
+            value: 36.980010986328125,
+            datetime: '2021-07-23T10:52:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210815105843-fv1-00': {
+            value: 29.329986572265625,
+            datetime: '2021-08-15T10:58:43Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210824105234-fv1-00': {
+            value: 24.55999755859375,
+            datetime: '2021-08-24T10:52:34Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20210916105851-fv1-00': {
+            value: 28.519989013671875,
+            datetime: '2021-09-16T10:58:51Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20211103105859-fv1-00': {
+            value: null,
+            datetime: '2021-11-03T10:58:59Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220131105232-fv1-00': {
+            value: 9.399993896484375,
+            datetime: '2022-01-31T10:52:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220207105841-fv1-00': {
+            value: 9.959991455078125,
+            datetime: '2022-02-07T10:58:41Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220216105227-fv1-00': {
+            value: null,
+            datetime: '2022-02-16T10:52:27Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220320105216-fv1-00': {
+            value: null,
+            datetime: '2022-03-20T10:52:16Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220421105212-fv1-00': {
+            value: 20.779998779296875,
+            datetime: '2022-04-21T10:52:12Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220421105236-fv1-00': {
+            value: null,
+            datetime: '2022-04-21T10:52:36Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220514105829-fv1-00': {
+            value: 33.54998779296875,
+            datetime: '2022-05-14T10:58:29Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220615105845-fv1-00': {
+            value: 36.959991455078125,
+            datetime: '2022-06-15T10:58:45Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': {
+            value: 41.459991455078125,
+            datetime: '2022-07-10T10:52:37Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220717105849-fv1-00': {
+            value: 39.279998779296875,
+            datetime: '2022-07-17T10:58:49Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220811105254-fv1-00': {
+            value: 41.54998779296875,
+            datetime: '2022-08-11T10:52:54Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220811105317-fv1-00': {
+            value: null,
+            datetime: '2022-08-11T10:53:17Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220827105255-fv1-00': {
+            value: null,
+            datetime: '2022-08-27T10:52:55Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220912105300-fv1-00': {
+            value: null,
+            datetime: '2022-09-12T10:53:00Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220928105302-fv1-00': {
+            value: null,
+            datetime: '2022-09-28T10:53:02Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221122105907-fv1-00': {
+            value: null,
+            datetime: '2022-11-22T10:59:07Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230109105857-fv1-00': {
+            value: null,
+            datetime: '2023-01-09T10:58:57Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230226105838-fv1-00': {
+            value: null,
+            datetime: '2023-02-26T10:58:38Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230314105832-fv1-00': {
+            value: null,
+            datetime: '2023-03-14T10:58:32Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20230330105822-fv1-00': {
+            value: null,
+            datetime: '2023-03-30T10:58:22Z',
+            unit: '°C',
+          },
+          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20231024105845-fv1-00': {
+            value: 15.459991455078125,
+            datetime: '2023-10-24T10:58:45Z',
+            unit: '°C',
+          },
         },
       },
-    },
-    {
-      type: 'Feature',
       geometry: {
+        coordinates: [-0.1257721698287071, 51.513052623207415],
         type: 'Point',
-        coordinates: [-0.247, 51.765],
-      },
-      properties: {
-        id: 'XfJtVmes',
-        original_id: 3,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 37.20001220703125,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
-      },
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.478, 51.732],
-      },
-      properties: {
-        id: 'T2q8a8YT',
-        original_id: 4,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 40.239990234375,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
-      },
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.449, 51.058],
-      },
-      properties: {
-        id: '2EkRkJTY',
-        original_id: 5,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 32.510009765625,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
-      },
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.232, 51.865],
-      },
-      properties: {
-        id: 'KRWsbJYJ',
-        original_id: 6,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 28.029998779296875,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
-      },
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.278, 51.074],
-      },
-      properties: {
-        id: 'gD2wvDGT',
-        original_id: 7,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 30.529998779296875,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
-      },
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.302, 51.471],
-      },
-      properties: {
-        id: 'Jvkstybn',
-        original_id: 8,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': null,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
-      },
-    },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [0.222, 51.557],
-      },
-      properties: {
-        id: '2oHrvhwy',
-        original_id: 9,
-        returned_values: {
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20220710105237-fv1-00': 38.79998779296875,
-          'ESACCI-LST-L2P-LST-LNDST8-LONDON-20221030105326-fv1-00': null,
-        },
       },
     },
   ],

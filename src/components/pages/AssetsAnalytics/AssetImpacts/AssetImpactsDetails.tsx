@@ -11,6 +11,7 @@ import {
 import * as Tabs from '@radix-ui/react-tabs'
 
 import {
+  AnalysedUserAssets,
   RowSelection,
   UserAssets,
 } from '../../../../library/userAssets/userAssetTypes'
@@ -29,6 +30,7 @@ import {
   AnalysedOscUserAssetForTable,
   UserAssetForTable,
 } from '../../../../library/userAssets/convertUserAssets'
+import { ResultsVisualisation } from './ResultsVisualisation'
 
 export const AssetImpactsDetails = ({
   analysedUserAssets,
@@ -165,29 +167,39 @@ export const AssetImpactsDetails = ({
         />
       ) : null}
       <div className={detailStyles.chartAndMapWrapper}>
-        <Tabs.Root defaultValue="chart1" className={detailStyles.tabsRoot}>
+        <Tabs.Root defaultValue="valuesList" className={detailStyles.tabsRoot}>
           <Tabs.List className={detailStyles.tabsList}>
-            <Tabs.Trigger value="chart1">Asset Analysis Results</Tabs.Trigger>
-            <Tabs.Trigger value="chart2">Visualisation</Tabs.Trigger>
+            <Tabs.Trigger value="valuesList">
+              Asset Analysis Results
+            </Tabs.Trigger>
+            <Tabs.Trigger value="visualisation">Visualisation</Tabs.Trigger>
           </Tabs.List>
-
           <div className={detailStyles.tabsContentWrapper}>
             <Tabs.Content
-              value="chart1"
-              className={detailStyles.verticalProperties}
+              value="valuesList"
+              className={detailStyles.tabContent}
             >
-              <table>
-                <tbody>
-                  {extraPropertiesList.map(([key, value]) => (
-                    <tr key={key}>
-                      <th>{key}</th>
-                      <td>{value as string | number}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div className={detailStyles.verticalProperties}>
+                <table>
+                  <tbody>
+                    {extraPropertiesList.map(([key, value]) => (
+                      <tr key={key}>
+                        <th>{key}</th>
+                        <td>{value as string | number}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </Tabs.Content>
-            <Tabs.Content value="chart2">Data Visualization Here</Tabs.Content>
+            <Tabs.Content
+              value="visualisation"
+              className={detailStyles.tabContent}
+            >
+              <ResultsVisualisation
+                assetToDetail={assetToDetail as AnalysedUserAssets}
+              />
+            </Tabs.Content>
           </div>
         </Tabs.Root>
         <Map mapContainer={mapContainer} />

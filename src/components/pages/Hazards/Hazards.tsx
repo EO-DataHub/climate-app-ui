@@ -1,6 +1,6 @@
 import { Button, Heading, Select, Tabs } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -34,29 +34,26 @@ import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
+import { HazardContext } from '../../../context/HazardsContext'
 
 export const Hazards = () => {
-  const [hazardIndicator, setHazardIndicator] = useState(
-    indicatorOptions[0].value,
-  )
+  const {
+    climateModel,
+    hazardIndicator,
+    scenario,
+    setClimateModel,
+    setHazardIndicator,
+    setScenario,
+    setYear,
+    year,
+  } = useContext(HazardContext)
 
-  const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
-  const [scenario, setScenario] = useState('')
-
-  const [year, setYear] = useState('')
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
   })
-
-  useEffect(() => {
-    const { scenarioOptions, yearOptions } =
-      getOptionsByClimateModel(climateModel)
-    setScenario(scenarioOptions[0].value)
-    setYear(yearOptions[0])
-  }, [climateModel])
 
   const { scenarioOptions, yearOptions } =
     getOptionsByClimateModel(climateModel)

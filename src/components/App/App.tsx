@@ -12,6 +12,7 @@ import { UserAssetsProvider } from '../../context/UserAssetsContext'
 import { router } from './router'
 import { LoadingContextProvider } from '../../context/LoadingContext'
 import { AuthenticationContextProvider } from '../../context/AuthenticationContext'
+import { HazardContextProvider } from '../../context/HazardsContext'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',
@@ -23,7 +24,9 @@ function App() {
       <LoadingContextProvider>
         <RadixTheme {...RADIX_THEME_PROPS}>
           <UserAssetsProvider>
-            <RouterProvider router={router} />
+            <HazardContextProvider>
+              <RouterProvider router={router} />
+            </HazardContextProvider>
           </UserAssetsProvider>
         </RadixTheme>
       </LoadingContextProvider>

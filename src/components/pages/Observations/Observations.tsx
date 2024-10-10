@@ -1,5 +1,5 @@
 import { Button, Select, Tabs, Text } from '@radix-ui/themes'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
@@ -19,10 +19,17 @@ import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { observationMenuItems } from '../../../library/api/fakeApiData'
+import { ObservationsContext } from '../../../context/ObservationsContext'
 
 export const Observations = () => {
   const [selectedObservationType, setSelectedObservationType] =
     useState('london')
+  const {
+    persistedMapCenter,
+    setPersistedMapCenter,
+    persistedMapZoom,
+    setPersistedMapZoom,
+  } = useContext(ObservationsContext)
 
   const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
     useState(observationMenuItems[0].value)
@@ -32,8 +39,10 @@ export const Observations = () => {
   }
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
-    center: [0, 51.5],
-    zoom: 7,
+    center: persistedMapCenter ?? [0, 51.5],
+    zoom: persistedMapZoom ?? 7,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
   })
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,

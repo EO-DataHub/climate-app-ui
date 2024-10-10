@@ -13,6 +13,7 @@ import { router } from './router'
 import { LoadingContextProvider } from '../../context/LoadingContext'
 import { AuthenticationContextProvider } from '../../context/AuthenticationContext'
 import { HazardContextProvider } from '../../context/HazardsContext'
+import { ObservationsContextProvider } from '../../context/ObservationsContext'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',
@@ -25,7 +26,9 @@ function App() {
         <RadixTheme {...RADIX_THEME_PROPS}>
           <UserAssetsProvider>
             <HazardContextProvider>
-              <RouterProvider router={router} />
+              <ObservationsContextProvider>
+                <RouterProvider router={router} />
+              </ObservationsContextProvider>
             </HazardContextProvider>
           </UserAssetsProvider>
         </RadixTheme>

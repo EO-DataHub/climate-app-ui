@@ -53,8 +53,8 @@ export const useMap = (config?: {
   const {
     center: initialCenter,
     zoom: initialZoom,
-    setPersistedMapCenter,
-    setPersistedMapZoom,
+    setPersistedMapCenter, // if setPersistedMapCenter and setPersistedMapZoom are provided, the map will store its position in the associated state variables
+    setPersistedMapZoom, // if setPersistedMapCenter and setPersistedMapZoom are provided, the map will store its position in the associated state variables
   } = config ?? {}
   const [isMapLoaded, setIsMapLoaded] = useState(false)
   const mapContainer = useRef<HTMLDivElement>(null)

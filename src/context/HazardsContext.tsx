@@ -1,18 +1,30 @@
-import { useEffect, useState, ReactNode, createContext } from 'react'
+import {
+  useEffect,
+  useState,
+  ReactNode,
+  createContext,
+  Dispatch,
+  SetStateAction,
+} from 'react'
 import {
   climateModelOptions,
   getOptionsByClimateModel,
   indicatorOptions,
 } from '../library/api/fakeApiData'
+import { LngLat } from 'maplibre-gl'
 
 interface HazardContextValue {
   climateModel: string
   hazardIndicator: string
+  persistedMapCenter: LngLat | undefined
+  persistedMapZoom: number | undefined
   scenario: string
-  setClimateModel?: React.Dispatch<React.SetStateAction<string>>
-  setHazardIndicator?: React.Dispatch<React.SetStateAction<string>>
-  setScenario?: React.Dispatch<React.SetStateAction<string>>
-  setYear?: React.Dispatch<React.SetStateAction<string>>
+  setClimateModel?: Dispatch<SetStateAction<string>>
+  setHazardIndicator?: Dispatch<SetStateAction<string>>
+  setPersistedMapZoom?: Dispatch<SetStateAction<number | undefined>>
+  setPersistedMapCenter?: Dispatch<SetStateAction<LngLat | undefined>>
+  setScenario?: Dispatch<SetStateAction<string>>
+  setYear?: Dispatch<SetStateAction<string>>
   year: string
 }
 export const HazardContext = createContext<HazardContextValue>({
@@ -20,6 +32,8 @@ export const HazardContext = createContext<HazardContextValue>({
   hazardIndicator: '',
   scenario: '',
   year: '',
+  persistedMapCenter: undefined,
+  persistedMapZoom: undefined,
 })
 
 export const HazardContextProvider = ({
@@ -27,14 +41,14 @@ export const HazardContextProvider = ({
 }: {
   children: ReactNode
 }) => {
+  const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [hazardIndicator, setHazardIndicator] = useState(
     indicatorOptions[0].value,
   )
-
-  const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
   const [scenario, setScenario] = useState('')
-
   const [year, setYear] = useState('')
+  const [persistedMapCenter, setPersistedMapCenter] = useState<LngLat>()
+  const [persistedMapZoom, setPersistedMapZoom] = useState<number>()
 
   useEffect(
     function setScenrioAndYearDefaultFromClimateModel() {
@@ -50,9 +64,13 @@ export const HazardContextProvider = ({
       value={{
         climateModel,
         hazardIndicator,
+        persistedMapCenter,
+        persistedMapZoom,
         scenario,
         setClimateModel,
         setHazardIndicator,
+        setPersistedMapCenter,
+        setPersistedMapZoom,
         setScenario,
         setYear,
         year,

@@ -40,15 +40,24 @@ export const Hazards = () => {
   const {
     climateModel,
     hazardIndicator,
+    persistedMapCenter,
+    persistedMapZoom,
     scenario,
     setClimateModel,
     setHazardIndicator,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
     setScenario,
     setYear,
     year,
   } = useContext(HazardContext)
 
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const { mapContainer, mapRef, isMapLoaded } = useMap({
+    center: persistedMapCenter,
+    zoom: persistedMapZoom,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
+  })
   const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,

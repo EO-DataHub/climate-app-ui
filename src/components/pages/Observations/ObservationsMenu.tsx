@@ -4,7 +4,7 @@ import {
   observationMenuItems,
   observationMenuItemsUK,
 } from '../../../library/api/fakeApiData'
-import { ObservationsContext } from '../../../context/ObservationsContext'
+import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 
 interface Option {
   value: string
@@ -16,7 +16,7 @@ export const ObservationsMenu = () => {
     selectedObservationLayerUrl,
     selectedObservationType,
     setSelectedObservationLayerUrl,
-  } = useContext(ObservationsContext)
+  } = useContext(ObservationsPageContext)
   const [options, setOptions] = useState<Option[]>([])
 
   useEffect(

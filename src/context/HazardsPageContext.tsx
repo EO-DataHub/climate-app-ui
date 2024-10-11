@@ -13,7 +13,7 @@ import {
 } from '../library/api/fakeApiData'
 import { LngLat } from 'maplibre-gl'
 
-interface HazardContextValue {
+interface HazardsContextValue {
   climateModel: string
   hazardIndicator: string
   persistedMapCenter: LngLat | undefined
@@ -27,7 +27,7 @@ interface HazardContextValue {
   setYear?: Dispatch<SetStateAction<string>>
   year: string
 }
-export const HazardContext = createContext<HazardContextValue>({
+export const HazardsPageContext = createContext<HazardsContextValue>({
   climateModel: '',
   hazardIndicator: '',
   scenario: '',
@@ -60,7 +60,7 @@ export const HazardContextProvider = ({
     [climateModel],
   )
   return (
-    <HazardContext.Provider
+    <HazardsPageContext.Provider
       value={{
         climateModel,
         hazardIndicator,
@@ -77,6 +77,6 @@ export const HazardContextProvider = ({
       }}
     >
       {children}
-    </HazardContext.Provider>
+    </HazardsPageContext.Provider>
   )
 }

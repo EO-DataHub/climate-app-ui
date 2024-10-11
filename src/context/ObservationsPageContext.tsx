@@ -18,7 +18,7 @@ interface ObservationContextValue {
   setSelectedObservationLayerUrl?: Dispatch<SetStateAction<string>>
   setSelectedObservationType?: Dispatch<SetStateAction<string>>
 }
-export const ObservationsContext = createContext<ObservationContextValue>({
+export const ObservationsPageContext = createContext<ObservationContextValue>({
   persistedMapCenter: undefined,
   persistedMapZoom: undefined,
   selectedObservationLayerUrl: observationMenuItems[0].value,
@@ -38,7 +38,7 @@ export const ObservationsContextProvider = ({
     useState(observationMenuItems[0].value)
 
   return (
-    <ObservationsContext.Provider
+    <ObservationsPageContext.Provider
       value={{
         persistedMapCenter,
         persistedMapZoom,
@@ -51,6 +51,6 @@ export const ObservationsContextProvider = ({
       }}
     >
       {children}
-    </ObservationsContext.Provider>
+    </ObservationsPageContext.Provider>
   )
 }

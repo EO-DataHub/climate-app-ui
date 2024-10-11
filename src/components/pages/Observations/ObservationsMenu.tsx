@@ -1,39 +1,35 @@
 import { Select } from '@radix-ui/themes'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import {
   observationMenuItems,
   observationMenuItemsUK,
 } from '../../../library/api/fakeApiData'
+import { ObservationsContext } from '../../../context/ObservationsContext'
 
 interface Option {
   value: string
   label: string
 }
 
-interface ObservationsMenuProps {
-  selectedObservationLayerUrl: string
-  setSelectedObservationLayerUrl: (value: string) => void
-  observationType: string
-}
-
-export const ObservationsMenu = ({
-  selectedObservationLayerUrl,
-  setSelectedObservationLayerUrl,
-  observationType,
-}: ObservationsMenuProps) => {
+export const ObservationsMenu = () => {
+  const {
+    selectedObservationLayerUrl,
+    selectedObservationType,
+    setSelectedObservationLayerUrl,
+  } = useContext(ObservationsContext)
   const [options, setOptions] = useState<Option[]>([])
 
   useEffect(
     function updateDateOptionsDependingOnObservationType() {
-      if (observationType === 'london') {
+      if (selectedObservationType === 'london') {
         setOptions(observationMenuItems)
-      } else if (observationType === 'uk') {
+      } else if (selectedObservationType === 'uk') {
         setOptions(observationMenuItemsUK)
       } else {
         setOptions([])
       }
     },
-    [observationType],
+    [selectedObservationType],
   )
   return (
     <Select.Root

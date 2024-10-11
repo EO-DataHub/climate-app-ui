@@ -1,5 +1,5 @@
 import { Button, Select, Tabs, Text } from '@radix-ui/themes'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
@@ -18,24 +18,21 @@ import {
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { observationMenuItems } from '../../../library/api/fakeApiData'
 import { ObservationsContext } from '../../../context/ObservationsContext'
 
 export const Observations = () => {
-  const [selectedObservationType, setSelectedObservationType] =
-    useState('london')
   const {
     persistedMapCenter,
     setPersistedMapCenter,
     persistedMapZoom,
     setPersistedMapZoom,
+    selectedObservationLayerUrl,
+    setSelectedObservationType,
+    selectedObservationType,
   } = useContext(ObservationsContext)
 
-  const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
-    useState(observationMenuItems[0].value)
-
-  const handleObservationTypeChange = (value: string) => {
-    setSelectedObservationType(value)
+  const handleSelectObservationType = (value: string) => {
+    setSelectedObservationType?.(value)
   }
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
@@ -104,7 +101,7 @@ export const Observations = () => {
             </div>
 
             <Select.Root
-              onValueChange={handleObservationTypeChange}
+              onValueChange={handleSelectObservationType}
               value={selectedObservationType}
             >
               <Select.Trigger placeholder="Select" />
@@ -123,11 +120,7 @@ export const Observations = () => {
               <label htmlFor="observation-date">Date</label>
               <InfoPopover>{observationDatePopupContent}</InfoPopover>
             </div>
-            <ObservationsMenu
-              selectedObservationLayerUrl={selectedObservationLayerUrl}
-              setSelectedObservationLayerUrl={setSelectedObservationLayerUrl}
-              observationType={selectedObservationType} // Pass the selected observation type
-            />
+            <ObservationsMenu />
           </InputLabelContainer>
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>

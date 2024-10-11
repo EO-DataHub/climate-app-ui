@@ -34,7 +34,7 @@ import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { HazardContext } from '../../../context/HazardsContext'
+import { HazardsPageContext } from '../../../context/HazardsPageContext'
 
 export const Hazards = () => {
   const {
@@ -50,7 +50,7 @@ export const Hazards = () => {
     setScenario,
     setYear,
     year,
-  } = useContext(HazardContext)
+  } = useContext(HazardsPageContext)
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: persistedMapCenter,

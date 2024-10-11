@@ -12,8 +12,8 @@ import { UserAssetsProvider } from '../../context/UserAssetsContext'
 import { router } from './router'
 import { LoadingContextProvider } from '../../context/LoadingContext'
 import { AuthenticationContextProvider } from '../../context/AuthenticationContext'
-import { HazardContextProvider } from '../../context/HazardsContext'
-import { ObservationsContextProvider } from '../../context/ObservationsContext'
+import { HazardContextProvider } from '../../context/HazardsPageContext'
+import { ObservationsContextProvider } from '../../context/ObservationsPageContext'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',

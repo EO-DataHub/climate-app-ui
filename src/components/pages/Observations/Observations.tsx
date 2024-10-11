@@ -18,7 +18,7 @@ import {
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { ObservationsContext } from '../../../context/ObservationsContext'
+import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 
 export const Observations = () => {
   const {
@@ -29,7 +29,7 @@ export const Observations = () => {
     selectedObservationLayerUrl,
     setSelectedObservationType,
     selectedObservationType,
-  } = useContext(ObservationsContext)
+  } = useContext(ObservationsPageContext)
 
   const handleSelectObservationType = (value: string) => {
     setSelectedObservationType?.(value)

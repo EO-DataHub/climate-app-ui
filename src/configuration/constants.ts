@@ -1,5 +1,6 @@
 export enum MapSourceIds {
-  HAZARD_DATA = 'hazard-data',
+  HAZARDS = 'hazard',
+  OBSERVATIONS = 'observations',
   USER_ASSETS = 'user-assets',
   BASEMAP = 'basemap',
 }

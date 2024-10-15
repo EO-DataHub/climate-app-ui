@@ -78,9 +78,6 @@ jobs:
       - name: Create vitrual environment
         run: python3 -m venv .venv
 
-      - name: activate virtual environment
-        run: source .venv/bin/activate
-
       - name: Install Deploy Requirements
         run: .venv/bin/pip install -r iac/requirements.txt
 

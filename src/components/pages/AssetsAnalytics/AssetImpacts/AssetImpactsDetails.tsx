@@ -24,6 +24,7 @@ import { checkAndFitBounds } from '../../../../library/maplibre/checkAndFitBound
 import { MapLayerMouseEvent } from 'maplibre-gl'
 import {
   DEFAULT_USER_ASSET_COLUMNS,
+  MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
   MapSourceIds,
 } from '../../../../configuration/constants'
 import {
@@ -118,7 +119,7 @@ export const AssetImpactsDetails = ({
       checkAndFitBounds({
         map: mapRef.current,
         bounds: userAssetBounds,
-        options: { maxZoom: 10 },
+        options: { maxZoom: MAPLIBRE_FIT_BOUNDS_MAX_ZOOM },
       })
       showMarkerSelectedSymbology(assetToDetail?.features[0].properties.id)
       haveAssetsBeenAddedToMap.current = true

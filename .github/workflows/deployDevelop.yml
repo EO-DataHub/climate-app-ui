@@ -82,7 +82,7 @@ jobs:
         run: source .venv/bin/activate
 
       - name: Install Deploy Requirements
-        run: pip install -r iac/requirements.txt
+        run: .venv/bin/pip install -r iac/requirements.txt
 
       - name: CDK Deploy
         if: github.event_name == 'push' && contains(github.event.head_commit.modified, 'iac/')

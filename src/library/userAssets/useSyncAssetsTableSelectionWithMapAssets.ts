@@ -5,6 +5,7 @@ import { bbox as turfBbox } from '@turf/turf'
 import { MapRef } from '../../components/Map/useMap'
 import {
   MAPLIBRE_FIT_BOUNDS_PADDING,
+  MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
   MapSourceIds,
 } from '../../configuration/constants'
 import { UserAssetForTable } from './convertUserAssets'
@@ -42,6 +43,7 @@ export const useSyncAssetsTableSelectionWithMapAssets = ({
       if (areBoundsValid(selectedAssetsBbox)) {
         mapRef.current.fitBounds(selectedAssetsBbox, {
           padding: MAPLIBRE_FIT_BOUNDS_PADDING,
+          maxZoom: MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
         })
       }
     }, [isMapLoaded, mapRef, rowSelection, userAssets]),

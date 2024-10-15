@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom/client'
 import {
   MAPLIBRE_FIT_BOUNDS_PADDING,
   MapLayerIds,
+  MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
   MapSourceIds,
   UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT,
 } from '../../configuration/constants'
@@ -248,6 +249,7 @@ export const useAssetPortfolios = ({
       if (areUserAssetBoundsValid && zoomToUserAssets) {
         mapRef.current.fitBounds(userAssetBounds, {
           padding: MAPLIBRE_FIT_BOUNDS_PADDING,
+          maxZoom: MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
         })
       }
       if (!areUserAssetBoundsValid && zoomToUserAssets) {

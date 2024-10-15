@@ -34,7 +34,7 @@ const getGeoJsonWithPropertyIdStoredOnLowercaseIdProperty = (
         id: feature.properties?.[actualIdKeyName ?? 'ID'],
       }
 
-      if (actualIdKeyName) {
+      if (actualIdKeyName && actualIdKeyName !== 'id') {
         delete newProperties[actualIdKeyName]
       }
 

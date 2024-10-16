@@ -142,7 +142,7 @@ export const Hazards = () => {
       void mapRef.current.once('idle', () => setIsMapLoading(false))
 
       const hazardSource = mapRef.current.getSource(
-        MapSourceIds.HAZARD_DATA,
+        MapSourceIds.HAZARDS,
       ) as RasterTileSource
 
       const titilerColormap = JSON.stringify(
@@ -157,7 +157,7 @@ export const Hazards = () => {
       const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
-        mapRef.current.addSource(MapSourceIds.HAZARD_DATA, {
+        mapRef.current.addSource(MapSourceIds.HAZARDS, {
           type: 'raster',
           tiles: [tileUrlToUse],
         })
@@ -167,16 +167,25 @@ export const Hazards = () => {
         hazardSource.setTiles([tileUrlToUse])
       }
 
-      const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARD_DATA)
+      const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARDS)
+      const userAssetsLayer = mapRef.current.getLayer(MapSourceIds.USER_ASSETS)
+
+      const layerIdToLoadObservationsBelow = userAssetsLayer
+        ? userAssetsLayer.id
+        : undefined
+
       if (!hazardLayer) {
-        mapRef.current.addLayer({
-          id: MapSourceIds.HAZARD_DATA,
-          type: 'raster',
-          source: MapSourceIds.HAZARD_DATA,
-          paint: {
-            'raster-opacity': hazardOpacity,
+        mapRef.current.addLayer(
+          {
+            id: MapSourceIds.HAZARDS,
+            type: 'raster',
+            source: MapSourceIds.HAZARDS,
+            paint: {
+              'raster-opacity': hazardOpacity,
+            },
           },
-        })
+          layerIdToLoadObservationsBelow,
+        )
       }
 
       // Add the countries boundaries GeoJSON source if it doesn't exist

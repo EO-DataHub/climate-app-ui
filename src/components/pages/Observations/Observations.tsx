@@ -19,6 +19,9 @@ import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
+import { MapSourceIds } from '../../../configuration/constants'
+import { LoadingContext } from '../../../context/LoadingContext'
+import { RasterTileSource } from 'maplibre-gl'
 
 export const Observations = () => {
   const {
@@ -30,6 +33,8 @@ export const Observations = () => {
     setSelectedObservationType,
     selectedObservationType,
   } = useContext(ObservationsPageContext)
+
+  const { setIsMapLoading } = useContext(LoadingContext)
 
   const handleSelectObservationType = (value: string) => {
     setSelectedObservationType?.(value)
@@ -62,32 +67,54 @@ export const Observations = () => {
     })
 
   useEffect(
-    function hackAddATempLayerForDemo() {
-      if (!isMapLoaded || !mapRef.current) {
+    function updateObservationsMapTiles() {
+      if (!isMapLoaded || !mapRef.current || !setIsMapLoading) {
         return
       }
 
-      if (mapRef.current.getLayer('observation-layer')) {
-        mapRef.current.removeLayer('observation-layer')
-        mapRef.current.removeSource('observation-layer')
-      }
+      setIsMapLoading(true)
+
+      void mapRef.current.once('idle', () => setIsMapLoading(false))
+
+      const observationsSource = mapRef.current.getSource(
+        MapSourceIds.OBSERVATIONS,
+      ) as RasterTileSource
 
       const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${min_temp},${max_temp}&colormap_name=jet`
+      if (!observationsSource) {
+        mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
+          type: 'raster',
+          tiles: [titilerUrl],
+          tileSize: 256,
+        })
+      }
 
-      mapRef.current.addSource('observation-layer', {
-        type: 'raster',
-        tiles: [titilerUrl],
-        tileSize: 256,
-      })
+      if (observationsSource) {
+        observationsSource.setTiles([titilerUrl])
+      }
 
-      mapRef.current.addLayer({
-        id: 'observation-layer',
-        type: 'raster',
-        source: 'observation-layer',
-        paint: { 'raster-opacity': 0.9 },
-      })
+      const observationsLayer = mapRef.current.getLayer(
+        MapSourceIds.OBSERVATIONS,
+      )
+      const userAssetsLayer = mapRef.current.getLayer(MapSourceIds.USER_ASSETS)
+
+      const layerIdToLoadObservationsBelow = userAssetsLayer
+        ? userAssetsLayer.id
+        : undefined
+
+      if (!observationsLayer) {
+        mapRef.current.addLayer(
+          {
+            id: MapSourceIds.OBSERVATIONS,
+            type: 'raster',
+            source: MapSourceIds.OBSERVATIONS,
+            paint: { 'raster-opacity': 0.9 },
+          },
+          layerIdToLoadObservationsBelow,
+        )
+      }
     },
-    [isMapLoaded, mapRef, selectedObservationLayerUrl],
+    [isMapLoaded, mapRef, selectedObservationLayerUrl, setIsMapLoading],
   )
 
   const sidebarContent = (

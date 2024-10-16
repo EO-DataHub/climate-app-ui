@@ -2661,9 +2661,9 @@
   dependencies:
     "@types/unist" "*"
 
-"@types/json-schema@^7.0.12":
+"@types/json-schema@*", "@types/json-schema@^7.0.12":
   version "7.0.15"
-  resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz"
+  resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.15.tgz#596a1747233694d50f6ad8a7869fcb6f56cf5841"
   integrity sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==
 
 "@types/junit-report-builder@^3.0.2":
@@ -2739,6 +2739,14 @@
   resolved "https://registry.npmjs.org/@types/react-dom/-/react-dom-18.2.22.tgz"
   integrity sha512-fHkBXPeNtfvri6gdsMYyW+dW7RXFo6Ad09nLFK0VQWR7yGLai/Cyvyj696gbwYvBnhGtevUG9cET0pmUbMtoPQ==
   dependencies:
+    "@types/react" "*"
+
+"@types/react-jsonschema-form@^1.7.13":
+  version "1.7.13"
+  resolved "https://registry.yarnpkg.com/@types/react-jsonschema-form/-/react-jsonschema-form-1.7.13.tgz#5cc48fc46c77297beed054c3ba61bd1085a871bb"
+  integrity sha512-C2jgO7/ow76oCSfUK++jKKox17R0A7ryMYNE5hJ2dR1Ske9jhuvjIlurvzMePh+Xjk8wey0nzB2C7HFKe2pRdg==
+  dependencies:
+    "@types/json-schema" "*"
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^18.2.66":

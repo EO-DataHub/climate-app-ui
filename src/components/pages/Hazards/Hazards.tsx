@@ -1,13 +1,11 @@
+import Form, { IChangeEvent } from '@rjsf/core'
+import validator from '@rjsf/validator-ajv8'
 import { Button, Heading, Tabs } from '@radix-ui/themes'
+import { GenericObjectType } from '@rjsf/utils'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  climateModelOptions,
-  getOptionsByClimateModel,
-  indicatorOptions,
-  legendParameters,
-} from '../../../library/api/fakeApiData'
+import { legendParameters } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
@@ -19,74 +17,50 @@ import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
-import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
-import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import hazardStyles from './Hazards.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { ObjectFieldTemplateProps, UiSchema } from '@rjsf/utils'
-import Form from '@rjsf/core'
-import validator from '@rjsf/validator-ajv8'
-import { chronicHeatSchema } from '../../../library/api/rjsfChronicHeat.ts'
-import inputLabelContainerStyles from '../../Form/InputLabelContainer.module.scss'
+import { chronicHeatSchema, chronicHeatUiSchema } from '../../../library/api/rjsfChronicHeat.ts'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import { RJSFRadixSelectWidget } from './RJSFRadixSelectWidget.tsx'
 
-function ObjectFieldTemplate(props: ObjectFieldTemplateProps) {
-  return (
-    <div>
-      {props.title}
-      {props.description}
-      {props.properties.map((element) => (
-        <div
-          className={inputLabelContainerStyles.container}
-          key={element.content.key}
-        >
-          {element.content}
-        </div>
-      ))}
-    </div>
-  )
+const customWidgets = {
+  customSelect: RJSFRadixSelectWidget,
 }
 
 interface HazardFormData {
-  indicator_model: string
   scenario: string
   year: string
   climate_model: string
+  indicator: string
+}
+
+// There must be a type defined for this in RJSF, but I can't find it. I hate TypeScript more than I hate JavaScript.
+interface SelectItem {
+  title: string
+  const: string
 }
 
 export const Hazards = () => {
-  const [hazardIndicator, setHazardIndicator] = useState(
-    indicatorOptions[0].value,
-  )
-
-  const [climateModel, setClimateModel] = useState(climateModelOptions[0].value)
+  const [hazardIndicator, setHazardIndicator] = useState('')
+  const [hazardIndicatorLabel, setHazardIndicatorLabel] = useState('')
+  const [climateModel, setClimateModel] = useState('')
   const [scenario, setScenario] = useState('')
-
+  const [scenarioLabel, setScenarioLabel] = useState('')
   const [year, setYear] = useState('')
   const { mapContainer, mapRef, isMapLoaded } = useMap()
   const [formData, setFormData] = useState<HazardFormData>({
-    indicator_model: indicatorOptions[0].value,
     year: year,
-    climate_model: climateModelOptions[0].value,
+    climate_model: climateModel,
     scenario: scenario,
+    indicator: hazardIndicator,
   })
   const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
     isMapLoaded,
   })
-
-  useEffect(() => {
-    const { scenarioOptions, yearOptions } =
-      getOptionsByClimateModel(climateModel)
-    setScenario(scenarioOptions[0].value)
-    setYear(yearOptions[0])
-  }, [climateModel])
-
-  const { scenarioOptions } = getOptionsByClimateModel(climateModel)
-  const scenarioLabel = scenarioOptions.find(
-    (option) => option.value === scenario,
-  )?.label
 
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
@@ -99,9 +73,6 @@ export const Hazards = () => {
       year,
     })
 
-  const hazardIndicatorLabel = indicatorOptions.find(
-    (option) => option.value === hazardIndicator,
-  )?.label
   const zarrPath = `s3://ukri-eodh-hazard-tiles-us-west-2/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
   const { isMarkerOnMap, hazardMarkerValue, markerCoordinates } =
@@ -155,6 +126,10 @@ export const Hazards = () => {
         return
       }
 
+      // console.log(hazardIndicator)
+      // console.log(climateModel)
+      // console.log(scenario)
+      // console.log(year)
       setIsMapLoading(true)
 
       void mapRef.current.once('idle', () => setIsMapLoading(false))
@@ -239,38 +214,45 @@ export const Hazards = () => {
     ],
   )
 
-  const uiSchema: UiSchema = {
-    'ui:submitButtonOptions': {
-      norender: true,
-    },
-  }
-
   useEffect(() => {
-    setHazardIndicator(formData?.indicator_model)
+    // console.log(formData)
+    setHazardIndicator(formData?.indicator)
     setClimateModel(formData?.climate_model)
     setScenario(formData?.scenario)
     setYear(formData?.year)
   }, [formData])
 
   const sidebarContent = (
-    <div className={sidebarStyles.content}>
-      <div className={sidebarStyles.contentMidSection}>
+    <div className={hazardStyles.content}>
+      <div className={hazardStyles.contentMidSection}>
         <Form
           schema={chronicHeatSchema}
-          uiSchema={uiSchema}
-          formData={formData}
-          templates={{ ObjectFieldTemplate }}
-          className={hazardsStyles.hazardTilesForm}
-          onChange={(e) => setFormData(e.formData)}
+          className={sidebarStyles.contentForm}
+          uiSchema={chronicHeatUiSchema}
+          widgets={customWidgets}
           validator={validator}
+          formData={formData}
+          onChange={(e: IChangeEvent, idx) => {
+            if (idx === "root_indicator") {
+              // Remove the magic and treat the data as a Plain Old Object so we don't get the linter moaning about "oneOf".
+              const poo: GenericObjectType = Object.assign({}, e.schema.properties);
+              const res: SelectItem = poo.indicator.oneOf.find((item: SelectItem) => item.const === e.formData?.indicator);
+              setHazardIndicatorLabel(res ? res.title : ' ');
+            } else if (idx === "root_scenario") {
+              // Scenarios don't have pretty labels in inventory.json, so we just have to use the value.
+              setScenarioLabel(e.formData.scenario);
+            }
+
+            setFormData(e.formData)
+          }}
         />
 
-        <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
+        <Tabs.Root defaultValue="overview" className={hazardStyles.tabsRoot}>
           <Tabs.List>
             <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
             <Tabs.Trigger value="Methodology">Methodology</Tabs.Trigger>
           </Tabs.List>
-          <div className={sidebarStyles.tabsContentWrapper}>
+          <div className={hazardStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
               <LocationValueOverview
                 isMarkerOnMap={isMarkerOnMap}
@@ -291,22 +273,22 @@ export const Hazards = () => {
             </Tabs.Content>
           </div>
         </Tabs.Root>
+      </div>
 
-        <div className={sidebarStyles.contentBottomButtonRow}>
-          <div className={sidebarStyles.selectAssetsWrapper}>
-            <label>View Assets on Map</label>
-            <InputLabelContainer>
-              <AssetsSelect
-                showUnsaved
-                onValueChange={updateCurrentPortfolioShown}
-              />
-            </InputLabelContainer>
-          </div>
-          <div className={sidebarStyles.selectAssetsButtonWrapper}>
-            <Button onClick={handleSelectAssetsClick}>
-              Select Assets for Analysis
-            </Button>
-          </div>
+      <div className={hazardStyles.contentBottomButtonRow}>
+        <div className={hazardStyles.selectAssetsWrapper}>
+          <label>View Assets on Map</label>
+          <InputLabelContainer>
+            <AssetsSelect
+              showUnsaved
+              onValueChange={updateCurrentPortfolioShown}
+            />
+          </InputLabelContainer>
+        </div>
+        <div className={hazardStyles.selectAssetsButtonWrapper}>
+          <Button onClick={handleSelectAssetsClick}>
+            Select Assets for Analysis
+          </Button>
         </div>
       </div>
     </div>

@@ -1,6 +1,11 @@
 @use '../../../library/genericStyles/containers';
+@use '../../Layout/Sidebar.module';
 
 .multipleInputsRow {
   @include containers.flexRowSpaceBetweenCenter;
+  width: 100%;
+}
+
+form > div {
   width: 100%;
 }

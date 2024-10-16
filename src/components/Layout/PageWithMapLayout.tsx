@@ -10,14 +10,12 @@ export const PageWithMapLayout = ({
   sidebarWidth = '50%',
   subtitle,
   title,
-  legend,
 }: {
   map: ReactNode
   sidebarContent: ReactNode
   sidebarWidth?: string
   subtitle?: string | ReactNode
   title: string
-  legend?: ReactNode
 }) => {
   return (
     <main className={pageWithMapStyles.layoutWrapper}>
@@ -36,7 +34,6 @@ export const PageWithMapLayout = ({
         {sidebarContent}
       </div>
       {map}
-      {legend ? <div className={pageWithMapStyles.legend}>{legend}</div> : null}
     </main>
   )
 }

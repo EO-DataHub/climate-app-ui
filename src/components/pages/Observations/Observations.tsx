@@ -19,9 +19,16 @@ import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
-import { MapSourceIds } from '../../../configuration/constants'
+import {
+  MapSourceIds,
+  OBSERVATIONS_LAYER_INITIAL_OPACITY,
+} from '../../../configuration/constants'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { RasterTileSource } from 'maplibre-gl'
+import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
+
+const MIN_TEMP = 10
+const MAX_TEMP = 45
 
 export const Observations = () => {
   const {
@@ -56,9 +63,6 @@ export const Observations = () => {
     navigate('/assets')
   }
 
-  const min_temp = 10
-  const max_temp = 45
-
   const { markerCoordinates, observationMarkerValue, isMarkerOnMap } =
     useGetObservationValueByMapclick({
       isMapLoaded,
@@ -80,7 +84,8 @@ export const Observations = () => {
         MapSourceIds.OBSERVATIONS,
       ) as RasterTileSource
 
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${min_temp},${max_temp}&colormap_name=jet`
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${MIN_TEMP},${MAX_TEMP}&colormap_name=jet`
+
       if (!observationsSource) {
         mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
           type: 'raster',
@@ -108,7 +113,7 @@ export const Observations = () => {
             id: MapSourceIds.OBSERVATIONS,
             type: 'raster',
             source: MapSourceIds.OBSERVATIONS,
-            paint: { 'raster-opacity': 0.9 },
+            paint: { 'raster-opacity': OBSERVATIONS_LAYER_INITIAL_OPACITY },
           },
           layerIdToLoadObservationsBelow,
         )
@@ -239,20 +244,33 @@ export const Observations = () => {
           width: '100%',
         }}
       >
-        <span>{min_temp}</span>
-        <span>{max_temp}</span>
+        <span>{MIN_TEMP}</span>
+        <span>{MAX_TEMP}</span>
       </div>
     </div>
   )
 
   return (
     <PageWithMapLayout
-      map={<Map mapContainer={mapContainer} />}
+      map={
+        <Map
+          mapContainer={mapContainer}
+          additionalControls={
+            <RasterLayerOpacityControl
+              initialOpacity={OBSERVATIONS_LAYER_INITIAL_OPACITY}
+              isMapLoaded={isMapLoaded}
+              layerId={MapSourceIds.OBSERVATIONS}
+              mapRef={mapRef}
+              sliderLabel="Adjust Observations Layer Opacity"
+            />
+          }
+          legend={legend}
+        />
+      }
       sidebarContent={sidebarContent}
       title="Observations"
       subtitle="Earth Observation Data can be used to provide additional insight into local variation in asset risk."
       sidebarWidth="40%"
-      legend={legend}
     />
   )
 }

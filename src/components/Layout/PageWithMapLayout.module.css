@@ -17,12 +17,3 @@
 .titlesContainer {
   margin-bottom: var(--space-6);
 }
-.legend {
-  position: fixed;
-  right: var(--space-3);
-  bottom: var(--space-7);
-  background-color: var(--white);
-  padding: var(--space-2);
-  border-radius: var(--radius-4);
-  box-shadow: var(--shadow-3);
-}

@@ -6,6 +6,8 @@ export enum MapSourceIds {
 }
 
 export const MAP_MAX_ZOOM = 18
+export const OBSERVATIONS_LAYER_INITIAL_OPACITY = 1
+export const HAZARDS_LAYER_INITIAL_OPACITY = 1
 
 export enum MapLayerIds {
   USER_ASSETS_UNCLUSTERED = 'user-assets-unclustered',

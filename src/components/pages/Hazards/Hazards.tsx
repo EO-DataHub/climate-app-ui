@@ -23,7 +23,10 @@ import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
-import { MapSourceIds } from '../../../configuration/constants'
+import {
+  HAZARDS_LAYER_INITIAL_OPACITY,
+  MapSourceIds,
+} from '../../../configuration/constants'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
@@ -35,6 +38,7 @@ import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { HazardsPageContext } from '../../../context/HazardsPageContext'
+import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
 
 export const Hazards = () => {
   const {
@@ -376,12 +380,25 @@ export const Hazards = () => {
 
   return (
     <PageWithMapLayout
-      map={<Map mapContainer={mapContainer} />}
+      map={
+        <Map
+          mapContainer={mapContainer}
+          legend={legend}
+          additionalControls={
+            <RasterLayerOpacityControl
+              initialOpacity={HAZARDS_LAYER_INITIAL_OPACITY}
+              isMapLoaded={isMapLoaded}
+              layerId={MapSourceIds.HAZARDS}
+              mapRef={mapRef}
+              sliderLabel="Adjust Hazards Layer Opacity"
+            />
+          }
+        />
+      }
       sidebarContent={sidebarContent}
       title="Hazards"
       subtitle="Explore hazard scenarios or analyze assets."
       sidebarWidth="40%"
-      legend={legend}
     />
   )
 }

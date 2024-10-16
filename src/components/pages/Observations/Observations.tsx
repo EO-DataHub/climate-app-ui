@@ -32,13 +32,14 @@ const MAX_TEMP = 45
 
 export const Observations = () => {
   const {
+    observationTypeConfigs,
     persistedMapCenter,
-    setPersistedMapCenter,
     persistedMapZoom,
-    setPersistedMapZoom,
     selectedObservationLayerUrl,
-    setSelectedObservationType,
     selectedObservationType,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
+    setSelectedObservationType,
   } = useContext(ObservationsPageContext)
 
   const { setIsMapLoading } = useContext(LoadingContext)
@@ -138,12 +139,11 @@ export const Observations = () => {
             >
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-type">
-                <Select.Item value="london">
-                  Land Surface Temperature (London 100m resolution)
-                </Select.Item>
-                <Select.Item value="uk">
-                  Land Surface Temperature (UK)
-                </Select.Item>
+                {observationTypeConfigs?.map(({ value, label }) => (
+                  <Select.Item value={value} key={value}>
+                    {label}
+                  </Select.Item>
+                ))}
               </Select.Content>
             </Select.Root>
           </InputLabelContainer>

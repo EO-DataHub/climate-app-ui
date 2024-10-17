@@ -21,7 +21,10 @@ import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import hazardStyles from './Hazards.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { chronicHeatSchema, chronicHeatUiSchema } from '../../../library/api/rjsfChronicHeat.ts'
+import {
+  chronicHeatSchema,
+  chronicHeatUiSchema,
+} from '../../../library/api/rjsfChronicHeat.ts'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { RJSFRadixSelectWidget } from './RJSFRadixSelectWidget.tsx'
 
@@ -233,14 +236,19 @@ export const Hazards = () => {
           validator={validator}
           formData={formData}
           onChange={(e: IChangeEvent, idx) => {
-            if (idx === "root_indicator") {
+            if (idx === 'root_indicator') {
               // Remove the magic and treat the data as a Plain Old Object so we don't get the linter moaning about "oneOf".
-              const poo: GenericObjectType = Object.assign({}, e.schema.properties);
-              const res: SelectItem = poo.indicator.oneOf.find((item: SelectItem) => item.const === e.formData?.indicator);
-              setHazardIndicatorLabel(res ? res.title : ' ');
-            } else if (idx === "root_scenario") {
+              const poo: GenericObjectType = Object.assign(
+                {},
+                e.schema.properties,
+              )
+              const res: SelectItem = poo.indicator.oneOf.find(
+                (item: SelectItem) => item.const === e.formData?.indicator,
+              )
+              setHazardIndicatorLabel(res ? res.title : ' ')
+            } else if (idx === 'root_scenario') {
               // Scenarios don't have pretty labels in inventory.json, so we just have to use the value.
-              setScenarioLabel(e.formData.scenario);
+              setScenarioLabel(e.formData.scenario)
             }
 
             setFormData(e.formData)

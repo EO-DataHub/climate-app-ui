@@ -10,7 +10,7 @@ export const RJSFRadixSelectWidget = ({
   onChange,
   label,
 }: WidgetProps) => {
-  const { enumOptions } = options;
+  const { enumOptions } = options
 
   return (
     <InputLabelContainer>
@@ -19,7 +19,7 @@ export const RJSFRadixSelectWidget = ({
         <InfoPopover>{options.description}</InfoPopover>
       </div>
       <Select.Root onValueChange={(val) => onChange(val)}>
-        <Select.Trigger placeholder="Select"/>
+        <Select.Trigger placeholder="Select" />
 
         <Select.Content id={id}>
           {enumOptions?.map((option) => (
@@ -30,5 +30,5 @@ export const RJSFRadixSelectWidget = ({
         </Select.Content>
       </Select.Root>
     </InputLabelContainer>
-  );
-};
+  )
+}

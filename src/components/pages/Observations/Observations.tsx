@@ -1,5 +1,5 @@
 import { Button, Select, Tabs, Text } from '@radix-ui/themes'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
@@ -18,20 +18,40 @@ import {
 import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
+import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
+import {
+  MapSourceIds,
+  OBSERVATIONS_LAYER_INITIAL_OPACITY,
+} from '../../../configuration/constants'
+import { LoadingContext } from '../../../context/LoadingContext'
+import { RasterTileSource } from 'maplibre-gl'
+import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
+
+const MIN_TEMP = 10
+const MAX_TEMP = 45
 
 export const Observations = () => {
-  const [selectedObservationType, setSelectedObservationType] = useState('')
+  const {
+    persistedMapCenter,
+    setPersistedMapCenter,
+    persistedMapZoom,
+    setPersistedMapZoom,
+    selectedObservationLayerUrl,
+    setSelectedObservationType,
+    selectedObservationType,
+  } = useContext(ObservationsPageContext)
 
-  const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
-    useState('')
+  const { setIsMapLoading } = useContext(LoadingContext)
 
-  const handleObservationTypeChange = (value: string) => {
-    setSelectedObservationType(value)
+  const handleSelectObservationType = (value: string) => {
+    setSelectedObservationType?.(value)
   }
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
-    center: [0, 51.5],
-    zoom: 7,
+    center: persistedMapCenter ?? [0, 51.5],
+    zoom: persistedMapZoom ?? 7,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
   })
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
     mapRef,
@@ -43,9 +63,6 @@ export const Observations = () => {
     navigate('/assets')
   }
 
-  const min_temp = 10
-  const max_temp = 45
-
   const { markerCoordinates, observationMarkerValue, isMarkerOnMap } =
     useGetObservationValueByMapclick({
       isMapLoaded,
@@ -54,33 +71,55 @@ export const Observations = () => {
     })
 
   useEffect(
-    function hackAddATempLayerForDemo() {
-      if (!isMapLoaded || !mapRef.current) {
+    function updateObservationsMapTiles() {
+      if (!isMapLoaded || !mapRef.current || !setIsMapLoading) {
         return
       }
 
-      if (mapRef.current.getLayer('observation-layer')) {
-        mapRef.current.removeLayer('observation-layer')
-        mapRef.current.removeSource('observation-layer')
+      setIsMapLoading(true)
+
+      void mapRef.current.once('idle', () => setIsMapLoading(false))
+
+      const observationsSource = mapRef.current.getSource(
+        MapSourceIds.OBSERVATIONS,
+      ) as RasterTileSource
+
+      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${MIN_TEMP},${MAX_TEMP}&colormap_name=jet`
+
+      if (!observationsSource) {
+        mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
+          type: 'raster',
+          tiles: [titilerUrl],
+          tileSize: 256,
+        })
       }
 
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${min_temp},${max_temp}&colormap_name=jet`
+      if (observationsSource) {
+        observationsSource.setTiles([titilerUrl])
+      }
 
-      mapRef.current.addSource('observation-layer', {
-        type: 'raster',
-        tiles: [titilerUrl],
-        tileSize: 256,
-        bounds: [-1.38, 50.53, 2.25, 52.82], //[-154288, 6540200, 249532, 6948850],
-      })
+      const observationsLayer = mapRef.current.getLayer(
+        MapSourceIds.OBSERVATIONS,
+      )
+      const userAssetsLayer = mapRef.current.getLayer(MapSourceIds.USER_ASSETS)
 
-      mapRef.current.addLayer({
-        id: 'observation-layer',
-        type: 'raster',
-        source: 'observation-layer',
-        paint: { 'raster-opacity': 0.9 },
-      })
+      const layerIdToLoadObservationsBelow = userAssetsLayer
+        ? userAssetsLayer.id
+        : undefined
+
+      if (!observationsLayer) {
+        mapRef.current.addLayer(
+          {
+            id: MapSourceIds.OBSERVATIONS,
+            type: 'raster',
+            source: MapSourceIds.OBSERVATIONS,
+            paint: { 'raster-opacity': OBSERVATIONS_LAYER_INITIAL_OPACITY },
+          },
+          layerIdToLoadObservationsBelow,
+        )
+      }
     },
-    [isMapLoaded, mapRef, selectedObservationLayerUrl],
+    [isMapLoaded, mapRef, selectedObservationLayerUrl, setIsMapLoading],
   )
 
   const sidebarContent = (
@@ -93,7 +132,10 @@ export const Observations = () => {
               <InfoPopover>{observationTypePopupContent}</InfoPopover>
             </div>
 
-            <Select.Root onValueChange={handleObservationTypeChange}>
+            <Select.Root
+              onValueChange={handleSelectObservationType}
+              value={selectedObservationType}
+            >
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-type">
                 <Select.Item value="london">
@@ -110,11 +152,7 @@ export const Observations = () => {
               <label htmlFor="observation-date">Date</label>
               <InfoPopover>{observationDatePopupContent}</InfoPopover>
             </div>
-            <ObservationsMenu
-              selectedObservationLayerUrl={selectedObservationLayerUrl}
-              setSelectedObservationLayerUrl={setSelectedObservationLayerUrl}
-              observationType={selectedObservationType} // Pass the selected observation type
-            />
+            <ObservationsMenu />
           </InputLabelContainer>
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
@@ -206,20 +244,33 @@ export const Observations = () => {
           width: '100%',
         }}
       >
-        <span>{min_temp}</span>
-        <span>{max_temp}</span>
+        <span>{MIN_TEMP}</span>
+        <span>{MAX_TEMP}</span>
       </div>
     </div>
   )
 
   return (
     <PageWithMapLayout
-      map={<Map mapContainer={mapContainer} />}
+      map={
+        <Map
+          mapContainer={mapContainer}
+          additionalControls={
+            <RasterLayerOpacityControl
+              initialOpacity={OBSERVATIONS_LAYER_INITIAL_OPACITY}
+              isMapLoaded={isMapLoaded}
+              layerId={MapSourceIds.OBSERVATIONS}
+              mapRef={mapRef}
+              sliderLabel="Adjust Observations Layer Opacity"
+            />
+          }
+          legend={legend}
+        />
+      }
       sidebarContent={sidebarContent}
       title="Observations"
       subtitle="Earth Observation Data can be used to provide additional insight into local variation in asset risk."
       sidebarWidth="40%"
-      legend={legend}
     />
   )
 }

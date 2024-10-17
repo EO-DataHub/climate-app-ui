@@ -12,7 +12,10 @@ import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { Map } from '../../Map/Map'
-import { MapSourceIds } from '../../../configuration/constants'
+import {
+  HAZARDS_LAYER_INITIAL_OPACITY,
+  MapSourceIds,
+} from '../../../configuration/constants'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
@@ -21,6 +24,8 @@ import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import hazardStyles from './Hazards.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
+import { HazardsPageContext } from '../../../context/HazardsPageContext'
+import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
 import {
   chronicHeatSchema,
   chronicHeatUiSchema,
@@ -46,18 +51,35 @@ interface SelectItem {
 }
 
 export const Hazards = () => {
-  const [hazardIndicator, setHazardIndicator] = useState('')
   const [hazardIndicatorLabel, setHazardIndicatorLabel] = useState('')
-  const [climateModel, setClimateModel] = useState('')
-  const [scenario, setScenario] = useState('')
   const [scenarioLabel, setScenarioLabel] = useState('')
-  const [year, setYear] = useState('')
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const {
+    climateModel,
+    hazardIndicator,
+    persistedMapCenter,
+    persistedMapZoom,
+    scenario,
+    setClimateModel,
+    setHazardIndicator,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
+    setScenario,
+    setYear,
+    year,
+  } = useContext(HazardsPageContext)
+
   const [formData, setFormData] = useState<HazardFormData>({
     year: year,
     climate_model: climateModel,
     scenario: scenario,
     indicator: hazardIndicator,
+  })
+
+  const { mapContainer, mapRef, isMapLoaded } = useMap({
+    center: persistedMapCenter,
+    zoom: persistedMapZoom,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
   })
   const { setIsMapLoading } = useContext(LoadingContext)
   const { updateCurrentPortfolioShown } = useAssetPortfolios({
@@ -129,22 +151,18 @@ export const Hazards = () => {
         return
       }
 
-      // console.log(hazardIndicator)
-      // console.log(climateModel)
-      // console.log(scenario)
-      // console.log(year)
       setIsMapLoading(true)
 
       void mapRef.current.once('idle', () => setIsMapLoading(false))
       void mapRef.current.once('error', () => {
         setIsMapLoading(false)
-        if (mapRef.current?.getLayer(MapSourceIds.HAZARD_DATA)) {
-          mapRef.current?.removeLayer(MapSourceIds.HAZARD_DATA)
+        if (mapRef.current?.getLayer(MapSourceIds.HAZARDS)) {
+          mapRef.current?.removeLayer(MapSourceIds.HAZARDS)
         }
       })
 
       const hazardSource = mapRef.current.getSource(
-        MapSourceIds.HAZARD_DATA,
+        MapSourceIds.HAZARDS,
       ) as RasterTileSource
 
       const titilerColormap = JSON.stringify(
@@ -159,7 +177,7 @@ export const Hazards = () => {
       const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
-        mapRef.current.addSource(MapSourceIds.HAZARD_DATA, {
+        mapRef.current.addSource(MapSourceIds.HAZARDS, {
           type: 'raster',
           tiles: [tileUrlToUse],
         })
@@ -167,16 +185,25 @@ export const Hazards = () => {
         hazardSource.setTiles([tileUrlToUse])
       }
 
-      const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARD_DATA)
+      const hazardLayer = mapRef.current.getLayer(MapSourceIds.HAZARDS)
+      const userAssetsLayer = mapRef.current.getLayer(MapSourceIds.USER_ASSETS)
+
+      const layerIdToLoadObservationsBelow = userAssetsLayer
+        ? userAssetsLayer.id
+        : undefined
+
       if (!hazardLayer) {
-        mapRef.current.addLayer({
-          id: MapSourceIds.HAZARD_DATA,
-          type: 'raster',
-          source: MapSourceIds.HAZARD_DATA,
-          paint: {
-            'raster-opacity': hazardOpacity,
+        mapRef.current.addLayer(
+          {
+            id: MapSourceIds.HAZARDS,
+            type: 'raster',
+            source: MapSourceIds.HAZARDS,
+            paint: {
+              'raster-opacity': hazardOpacity,
+            },
           },
-        })
+          layerIdToLoadObservationsBelow,
+        )
       }
 
       // Add the countries boundaries GeoJSON source if it doesn't exist
@@ -218,12 +245,11 @@ export const Hazards = () => {
   )
 
   useEffect(() => {
-    // console.log(formData)
-    setHazardIndicator(formData?.indicator)
-    setClimateModel(formData?.climate_model)
-    setScenario(formData?.scenario)
-    setYear(formData?.year)
-  }, [formData])
+    if (setHazardIndicator) setHazardIndicator(formData.indicator);
+    if (setClimateModel) setClimateModel(formData.climate_model);
+    if (setScenario) setScenario(formData.scenario);
+    if (setYear) setYear(formData.year);
+  }, [formData, setHazardIndicator, setClimateModel, setScenario, setYear])
 
   const sidebarContent = (
     <div className={hazardStyles.content}>
@@ -248,7 +274,7 @@ export const Hazards = () => {
               setHazardIndicatorLabel(res ? res.title : ' ')
             } else if (idx === 'root_scenario') {
               // Scenarios don't have pretty labels in inventory.json, so we just have to use the value.
-              setScenarioLabel(e.formData.scenario)
+              setScenarioLabel(e.formData.scenario);
             }
 
             setFormData(e.formData)
@@ -311,12 +337,25 @@ export const Hazards = () => {
 
   return (
     <PageWithMapLayout
-      map={<Map mapContainer={mapContainer} />}
+      map={
+        <Map
+          mapContainer={mapContainer}
+          legend={legend}
+          additionalControls={
+            <RasterLayerOpacityControl
+              initialOpacity={HAZARDS_LAYER_INITIAL_OPACITY}
+              isMapLoaded={isMapLoaded}
+              layerId={MapSourceIds.HAZARDS}
+              mapRef={mapRef}
+              sliderLabel="Adjust Hazards Layer Opacity"
+            />
+          }
+        />
+      }
       sidebarContent={sidebarContent}
       title="Hazards"
       subtitle="Explore hazard scenarios or analyze assets."
       sidebarWidth="40%"
-      legend={legend}
     />
   )
 }

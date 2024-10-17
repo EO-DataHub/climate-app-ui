@@ -26,6 +26,7 @@ body {
   --dark-text: var(--gray-12);
   --toastify-color-info: var(--indigo-9);
   --toastify-color-success: var(--green-11);
+  --maplibre-control-color: #333333;
 }
 .radix-themes {
   --default-font-family: 'Roboto', sans-serif;

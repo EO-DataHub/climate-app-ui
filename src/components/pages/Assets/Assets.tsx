@@ -23,6 +23,7 @@ import { PageSubtitle } from '../../PageSubtitle'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
 import { HubWorkflowNicknamesType } from '../../../configuration/constants'
 import { temporarySamplePortfolios } from '../../../library/api/fakeApiData'
+import { AssetsPageContext } from '../../../context/AssetsPageContext'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -31,7 +32,19 @@ export const Assets = () => {
   const { isAuthenticated, login, userInfo, authenticatedAxios } = useContext(
     AuthenticationContext,
   )
-  const { mapContainer, mapRef, isMapLoaded } = useMap()
+  const {
+    persistedMapCenter,
+    persistedMapZoom,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
+  } = useContext(AssetsPageContext)
+
+  const { mapContainer, mapRef, isMapLoaded } = useMap({
+    center: persistedMapCenter,
+    setPersistedMapCenter,
+    zoom: persistedMapZoom,
+    setPersistedMapZoom,
+  })
   const {
     currentWorkflowNickname,
     setAnalysedUserAssets,
@@ -70,9 +83,7 @@ export const Assets = () => {
       )
     }
     if (!userInfo || !authenticatedAxios) {
-      toast.error(
-        'User info from a logged in user session is required to run an analysis. Logging out and loggign in again and if the problem doesnt resolve, contact an administrator.',
-      )
+      toast.error('Please log in to run an analysis.')
 
       return
     }

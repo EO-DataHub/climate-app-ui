@@ -1,10 +1,13 @@
 export enum MapSourceIds {
-  HAZARD_DATA = 'hazard-data',
+  HAZARDS = 'hazard',
+  OBSERVATIONS = 'observations',
   USER_ASSETS = 'user-assets',
   BASEMAP = 'basemap',
 }
 
 export const MAP_MAX_ZOOM = 18
+export const OBSERVATIONS_LAYER_INITIAL_OPACITY = 1
+export const HAZARDS_LAYER_INITIAL_OPACITY = 1
 
 export enum MapLayerIds {
   USER_ASSETS_UNCLUSTERED = 'user-assets-unclustered',
@@ -14,6 +17,7 @@ export enum MapLayerIds {
 
 export const UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT = 'unsavedAssets'
 export const MAPLIBRE_FIT_BOUNDS_PADDING = 100
+export const MAPLIBRE_FIT_BOUNDS_MAX_ZOOM = 10
 
 export enum AssetImpactViewOptions {
   LIST = 'list',

@@ -1,9 +1,12 @@
 // @ts-expect-error - no types available
 import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
 import { FeatureCollection, GeoJsonProperties, Point } from 'geojson'
+import { toast } from 'react-toastify'
 
 import { getIsFileCsv, getIsFileGeoJson } from '../fileTypes'
+import { getObjectKeyNameFromCaseInsensitiveKeyName } from '../objects/getObjectKeyNameFromCaseInsensitiveKeyName'
 import { UserAssets } from './userAssetTypes'
+
 const doesGeoJsonContainRequiredProperties = (
   geoJson: FeatureCollection<Point>,
 ) =>
@@ -15,16 +18,31 @@ const doesGeoJsonContainRequiredProperties = (
     )
   })
 
-const copyUppercaseIdToLowercaseId = (geoJson: FeatureCollection<Point>) => {
+const getGeoJsonWithPropertyIdStoredOnLowercaseIdProperty = (
+  geoJson: FeatureCollection<Point>,
+) => {
   return {
     ...geoJson,
-    features: geoJson.features.map((feature) => ({
-      ...feature,
-      properties: {
+    features: geoJson.features.map((feature) => {
+      const actualIdKeyName = getObjectKeyNameFromCaseInsensitiveKeyName({
+        searchObject: feature.properties ?? {},
+        key: 'id',
+      })
+
+      const newProperties: { [key: string]: unknown } = {
         ...feature.properties,
-        id: feature.properties?.ID || feature.properties?.id,
-      },
-    })),
+        id: feature.properties?.[actualIdKeyName ?? 'ID'],
+      }
+
+      if (actualIdKeyName && actualIdKeyName !== 'id') {
+        delete newProperties[actualIdKeyName]
+      }
+
+      return {
+        ...feature,
+        properties: newProperties,
+      }
+    }),
   }
 }
 
@@ -32,6 +50,11 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
   return new Promise<UserAssets>((resolve, reject) => {
     const isCsv = getIsFileCsv(uploadedFile)
     const isGeoJson = getIsFileGeoJson(uploadedFile)
+
+    if (!isGeoJson && !isCsv) {
+      toast.error('File upload is limited to CSV and GeoJSON file types.')
+      reject('Unsupported file type')
+    }
 
     const fileReader = new FileReader()
 
@@ -45,11 +68,16 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
         try {
           const parsedFileContents = JSON.parse(fileContents)
           const reformattedParsedFileContents =
-            copyUppercaseIdToLowercaseId(parsedFileContents)
+            getGeoJsonWithPropertyIdStoredOnLowercaseIdProperty(
+              parsedFileContents,
+            )
 
           if (
             !doesGeoJsonContainRequiredProperties(reformattedParsedFileContents)
           ) {
+            toast.error(
+              'GeoJSON file must contain an "id" field within each feature\'s properties object',
+            )
             reject(
               "GeoJSON file must contain an 'id' field within each feature's properties object",
             )
@@ -68,18 +96,21 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
           ?.slice(0, fileContentsWithCarriageReturnRemoved?.indexOf('\n'))
           .split(',')
 
+        const lowerCaseHeaders = headers.map((header) => header.toLowerCase())
+
         if (
-          !(headers.includes('id') || headers.includes('ID')) ||
-          !(headers.includes('latitude') || headers.includes('LATITUDE')) ||
-          !(headers.includes('longitude') || headers.includes('LONGITUDE'))
+          !lowerCaseHeaders.includes('id') ||
+          !lowerCaseHeaders.includes('latitude') ||
+          !lowerCaseHeaders.includes('longitude')
         ) {
+          toast.error(
+            'CSV file must contain "id","latitude", and "longitude" fields. These fields are case insensitive.',
+          )
           reject("CSV file must contain 'id','latitude', and 'longitude'")
         }
 
-        const latfield = headers.includes('latitude') ? 'latitude' : 'LATITUDE'
-        const lonfield = headers.includes('longitude')
-          ? 'longitude'
-          : 'LONGITUDE'
+        const latfield = headers[lowerCaseHeaders.indexOf('latitude')]
+        const lonfield = headers[lowerCaseHeaders.indexOf('longitude')]
 
         getGeojsonFromCsv(
           fileContentsWithCarriageReturnRemoved,
@@ -92,16 +123,15 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
             if (!data || error) {
               reject(error)
             }
+
             resolve(
-              copyUppercaseIdToLowercaseId(
+              getGeoJsonWithPropertyIdStoredOnLowercaseIdProperty(
                 data as FeatureCollection<Point, GeoJsonProperties>,
               ) as UserAssets,
             )
           },
-        )
+        ) as UserAssets
       }
-
-      reject('Unsupported file type')
     }
 
     fileReader.readAsText(uploadedFile)

@@ -12,6 +12,11 @@
 .flexRowStartCenter {
   @include containers.flexRowStartCenter;
 }
+.flexRowCenterCenterFullDimensions {
+  @include containers.flexRowCenterCenter;
+  width: 100%;
+  height: 100%;
+}
 .flexRowStartStart {
   @include containers.flexRowStartStart;
 }

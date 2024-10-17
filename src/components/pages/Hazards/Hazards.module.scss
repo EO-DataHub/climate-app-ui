@@ -1,6 +1,0 @@
-@use '../../../library/genericStyles/containers';
-
-.multipleInputsRow {
-  @include containers.flexRowSpaceBetweenCenter;
-  width: 100%;
-}

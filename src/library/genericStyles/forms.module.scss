@@ -12,3 +12,8 @@
 .formLabel {
   @include forms.formLabel;
 }
+
+.multipleInputsRow {
+  @include containers.flexRowSpaceBetweenCenter;
+  width: 100%;
+}

@@ -32,7 +32,6 @@ import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfoli
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
-import hazardsStyles from './Hazards.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
@@ -234,7 +233,7 @@ export const Hazards = () => {
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
-          <div className={hazardsStyles.multipleInputsRow}>
+          <div className={formStyles.multipleInputsRow}>
             <InputLabelContainer>
               <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="hazard-type">Hazard Type</label>
@@ -271,7 +270,7 @@ export const Hazards = () => {
             </InputLabelContainer>
           </div>
 
-          <div className={hazardsStyles.multipleInputsRow}>
+          <div className={formStyles.multipleInputsRow}>
             <InputLabelContainer>
               <div className={formStyles.labelWithInfoPopoverRow}>
                 <label htmlFor="climateModel">Climate Model</label>

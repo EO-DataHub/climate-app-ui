@@ -1,53 +1,58 @@
 import { Button, Select, Tabs, Text } from '@radix-ui/themes'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { InputLabelContainer } from '../../Form/InputLabelContainer'
-import { Map } from '../../Map/Map'
-import { ObservationsMenu } from './ObservationsMenu'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
-import { useMap } from '../../Map/useMap'
-import formStyles from '../../../library/genericStyles/forms.module.scss'
-import sidebarStyles from '../../Layout/Sidebar.module.scss'
-import {
-  observationDatePopupContent,
-  observationTypePopupContent,
-} from '../../../configuration/infoPopupContentObservations'
-import { InfoPopover } from '../../InfoPopover/InfoPopover'
-import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
-import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 import {
   MapSourceIds,
   OBSERVATIONS_LAYER_INITIAL_OPACITY,
 } from '../../../configuration/constants'
+import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
+import { InfoPopover } from '../../InfoPopover/InfoPopover'
+import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { LoadingContext } from '../../../context/LoadingContext'
-import { RasterTileSource } from 'maplibre-gl'
+import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
+import { Map } from '../../Map/Map'
+import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
+import {
+  observationSensorPopupContent,
+  observationTypePopupContent,
+} from '../../../configuration/infoPopupContentObservations'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
+import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
+import { useMap } from '../../Map/useMap'
+import { useUpdateObservationsMapTiles } from './useUpdateObservationsMapTiles'
+import formStyles from '../../../library/genericStyles/forms.module.scss'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import { useObservationsFilter } from './useObservationsFilter'
 
 const MIN_TEMP = 10
 const MAX_TEMP = 45
 
 export const Observations = () => {
+  const navigate = useNavigate()
+  const { setIsMapLoading } = useContext(LoadingContext)
   const {
     observationTypeConfigs,
     persistedMapCenter,
     persistedMapZoom,
     selectedObservationLayerUrl,
     selectedObservationType,
+    selectedObservationTypeConfig,
     setPersistedMapCenter,
     setPersistedMapZoom,
+    setSelectedObservationLayerUrl,
     setSelectedObservationType,
   } = useContext(ObservationsPageContext)
 
-  const { setIsMapLoading } = useContext(LoadingContext)
-
-  const handleSelectObservationType = (value: string) => {
-    setSelectedObservationType?.(value)
-  }
-
+  const {
+    sensorFilterOptions,
+    isSensorFilterUsed,
+    selectedSensor,
+    setSelectedSensor,
+    filteredDatasetOptions,
+  } = useObservationsFilter({ selectedObservationTypeConfig })
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: persistedMapCenter ?? [0, 51.5],
     zoom: persistedMapZoom ?? 7,
@@ -58,12 +63,6 @@ export const Observations = () => {
     mapRef,
     isMapLoaded,
   })
-  const navigate = useNavigate()
-
-  const handleSelectAssetsClick = () => {
-    navigate('/assets')
-  }
-
   const { markerCoordinates, observationMarkerValue, isMarkerOnMap } =
     useGetObservationValueByMapclick({
       isMapLoaded,
@@ -71,88 +70,90 @@ export const Observations = () => {
       selectedObservationLayerUrl,
     })
 
-  useEffect(
-    function updateObservationsMapTiles() {
-      if (!isMapLoaded || !mapRef.current || !setIsMapLoading) {
-        return
-      }
+  useUpdateObservationsMapTiles({
+    isMapLoaded,
+    mapRef,
+    maxTemp: MAX_TEMP,
+    minTemp: MIN_TEMP,
+    selectedObservationLayerUrl,
+    setIsMapLoading,
+  })
 
-      setIsMapLoading(true)
+  const handleSelectObservationType = (value: string) => {
+    setSelectedObservationType?.(value)
+  }
 
-      void mapRef.current.once('idle', () => setIsMapLoading(false))
-
-      const observationsSource = mapRef.current.getSource(
-        MapSourceIds.OBSERVATIONS,
-      ) as RasterTileSource
-
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${MIN_TEMP},${MAX_TEMP}&colormap_name=jet`
-
-      if (!observationsSource) {
-        mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
-          type: 'raster',
-          tiles: [titilerUrl],
-          tileSize: 256,
-        })
-      }
-
-      if (observationsSource) {
-        observationsSource.setTiles([titilerUrl])
-      }
-
-      const observationsLayer = mapRef.current.getLayer(
-        MapSourceIds.OBSERVATIONS,
-      )
-      const userAssetsLayer = mapRef.current.getLayer(MapSourceIds.USER_ASSETS)
-
-      const layerIdToLoadObservationsBelow = userAssetsLayer
-        ? userAssetsLayer.id
-        : undefined
-
-      if (!observationsLayer) {
-        mapRef.current.addLayer(
-          {
-            id: MapSourceIds.OBSERVATIONS,
-            type: 'raster',
-            source: MapSourceIds.OBSERVATIONS,
-            paint: { 'raster-opacity': OBSERVATIONS_LAYER_INITIAL_OPACITY },
-          },
-          layerIdToLoadObservationsBelow,
-        )
-      }
-    },
-    [isMapLoaded, mapRef, selectedObservationLayerUrl, setIsMapLoading],
-  )
+  const handleSelectAssetsClick = () => {
+    navigate('/assets')
+  }
 
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
+          <div className={formStyles.multipleInputsRow}>
+            <InputLabelContainer>
+              <div className={formStyles.labelWithInfoPopoverRow}>
+                <label htmlFor="observation-type">Observation Type</label>
+                <InfoPopover>{observationTypePopupContent}</InfoPopover>
+              </div>
+
+              <Select.Root
+                onValueChange={handleSelectObservationType}
+                value={selectedObservationType}
+              >
+                <Select.Trigger placeholder="Select" />
+                <Select.Content id="observation-type">
+                  {observationTypeConfigs?.map(({ value, label }) => (
+                    <Select.Item value={value} key={value}>
+                      {label}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            </InputLabelContainer>
+
+            {isSensorFilterUsed ? (
+              <InputLabelContainer>
+                <div className={formStyles.labelWithInfoPopoverRow}>
+                  <label htmlFor="sensor">Sensor</label>
+                  <InfoPopover>{observationSensorPopupContent}</InfoPopover>
+                </div>
+
+                <Select.Root
+                  onValueChange={setSelectedSensor}
+                  value={selectedSensor}
+                >
+                  <Select.Trigger placeholder="Select" />
+                  <Select.Content id="sensor">
+                    {sensorFilterOptions.map((option) => (
+                      <Select.Item value={option} key={option}>
+                        {option}
+                      </Select.Item>
+                    ))}
+                  </Select.Content>
+                </Select.Root>
+              </InputLabelContainer>
+            ) : null}
+          </div>
+
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-type">Observation Type</label>
-              <InfoPopover>{observationTypePopupContent}</InfoPopover>
+              <label htmlFor="observation-date">Datasets Available</label>
             </div>
-
             <Select.Root
-              onValueChange={handleSelectObservationType}
-              value={selectedObservationType}
+              value={selectedObservationLayerUrl}
+              onValueChange={setSelectedObservationLayerUrl}
             >
               <Select.Trigger placeholder="Select" />
-              <Select.Content id="observation-type">
-                {observationTypeConfigs?.map(({ value, label }) => (
-                  <Select.Item value={value} key={value}>
-                    {label}
+              <Select.Content id="observation-date">
+                {filteredDatasetOptions.map((option) => (
+                  <Select.Item key={option.value} value={option.value}>
+                    {option.label}
                   </Select.Item>
                 ))}
               </Select.Content>
             </Select.Root>
-          </InputLabelContainer>
-          <InputLabelContainer>
-            <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-date">Date</label>
-              <InfoPopover>{observationDatePopupContent}</InfoPopover>
-            </div>
-            <ObservationsMenu />
           </InputLabelContainer>
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>

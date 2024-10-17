@@ -245,10 +245,10 @@ export const Hazards = () => {
   )
 
   useEffect(() => {
-    if (setHazardIndicator) setHazardIndicator(formData.indicator);
-    if (setClimateModel) setClimateModel(formData.climate_model);
-    if (setScenario) setScenario(formData.scenario);
-    if (setYear) setYear(formData.year);
+    if (setHazardIndicator) setHazardIndicator(formData.indicator)
+    if (setClimateModel) setClimateModel(formData.climate_model)
+    if (setScenario) setScenario(formData.scenario)
+    if (setYear) setYear(formData.year)
   }, [formData, setHazardIndicator, setClimateModel, setScenario, setYear])
 
   const sidebarContent = (
@@ -274,7 +274,7 @@ export const Hazards = () => {
               setHazardIndicatorLabel(res ? res.title : ' ')
             } else if (idx === 'root_scenario') {
               // Scenarios don't have pretty labels in inventory.json, so we just have to use the value.
-              setScenarioLabel(e.formData.scenario);
+              setScenarioLabel(e.formData.scenario)
             }
 
             setFormData(e.formData)

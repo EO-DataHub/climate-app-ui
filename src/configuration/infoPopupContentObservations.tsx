@@ -1,4 +1,2 @@
-export const observationTypePopupContent = <>The category of the observation.</>
-export const observationDatePopupContent = (
-  <>The date on which the observation was made.</>
-)
+export const observationTypePopupContent = <>TBC</>
+export const observationSensorPopupContent = <>TBC</>

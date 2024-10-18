@@ -1,5 +1,51 @@
 import { HubWorkflowNicknames } from '../../configuration/constants'
 
+interface ObservationDatasetOption {
+  value: string
+  label: string
+  date: string
+  time?: string
+  sensor?: string
+  day_night?: string
+}
+export interface ObservationTypeConfig {
+  value: string
+  label: string
+  datasetOptions: [ObservationDatasetOption]
+}
+
+// const observationTypeConfigsJsonSchema = {
+//   // this is to demonstrate that we can map this to server requirements which may use JSON Schema
+//   $schema: 'https://json-schema.org/draft/2020-12/schema',
+//   // $id: 'some url',
+//   title: 'ObservationTypeConfigs',
+//   description: 'A list of datasets for different observation types',
+//   type: 'array',
+//   items: {
+//     type: 'object',
+//     properties: {
+//       value: { type: 'string' },
+//       label: { type: 'string' },
+//       datasetOptions: {
+//         type: 'array',
+//         items: {
+//           type: 'object',
+//           properties: {
+//             value: { type: 'string' },
+//             label: { type: 'string' },
+//             date: { type: 'string' },
+//             time: { type: 'string' },
+//             sensor: { type: 'string' },
+//             day_night: { type: 'string' },
+//           },
+//         },
+//       },
+//     },
+//     required: ['value', 'label', 'date'],
+//   },
+//   required: ['value', 'label', 'datasetOptions'],
+// }
+
 // this is unlikely to be a practical data format for a real implementation, but will do the job for now
 export const temporarySamplePortfolios = [
   {
@@ -8321,9 +8367,9 @@ export const observationMenuItemsUK = [
     sensor: 'S3B',
     day_night: 'NIGHT',
   },
-]
+] as unknown as [ObservationDatasetOption]
 
-export const observationMenuItems = [
+export const observationMenuItemsLondon = [
   {
     label: '2013 05 05 11:00:23',
     value:
@@ -8982,7 +9028,20 @@ export const observationMenuItems = [
     date: '2023_10_24',
     time: '10:58:45',
   },
-]
+] as unknown as [ObservationDatasetOption]
+
+export const observationTypeConfigs = [
+  {
+    value: 'london',
+    label: 'Land Surface Temperature (London 100m resolution)',
+    datasetOptions: observationMenuItemsLondon,
+  },
+  {
+    value: 'uk',
+    label: 'Land Surface Temperature (UK)',
+    datasetOptions: observationMenuItemsUK,
+  },
+] as unknown as [ObservationTypeConfig]
 
 export const workflowOptions = [
   {

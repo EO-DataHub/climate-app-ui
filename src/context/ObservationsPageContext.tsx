@@ -6,7 +6,11 @@ import {
   SetStateAction,
 } from 'react'
 import { LngLat } from 'maplibre-gl'
-import { observationMenuItems } from '../library/api/fakeApiData'
+import {
+  observationTypeConfigs,
+  observationMenuItemsLondon,
+  ObservationTypeConfig,
+} from '../library/api/fakeApiData'
 
 interface ObservationContextValue {
   persistedMapCenter: LngLat | undefined
@@ -17,11 +21,13 @@ interface ObservationContextValue {
   setPersistedMapZoom?: Dispatch<SetStateAction<number | undefined>>
   setSelectedObservationLayerUrl?: Dispatch<SetStateAction<string>>
   setSelectedObservationType?: Dispatch<SetStateAction<string>>
+  selectedObservationTypeConfig?: ObservationTypeConfig | undefined
+  observationTypeConfigs?: ObservationTypeConfig[] | undefined
 }
 export const ObservationsPageContext = createContext<ObservationContextValue>({
   persistedMapCenter: undefined,
   persistedMapZoom: undefined,
-  selectedObservationLayerUrl: observationMenuItems[0].value,
+  selectedObservationLayerUrl: observationMenuItemsLondon[0].value,
   selectedObservationType: 'london',
 })
 
@@ -32,10 +38,16 @@ export const ObservationsContextProvider = ({
 }) => {
   const [persistedMapCenter, setPersistedMapCenter] = useState<LngLat>()
   const [persistedMapZoom, setPersistedMapZoom] = useState<number>()
-  const [selectedObservationType, setSelectedObservationType] =
-    useState('london')
+  const [selectedObservationType, setSelectedObservationType] = useState(
+    observationTypeConfigs[0].value,
+  )
   const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
-    useState(observationMenuItems[0].value)
+    useState(observationTypeConfigs[0].datasetOptions[0].value)
+
+  const selectedObservationTypeConfig = observationTypeConfigs.find(
+    (observationTypeConfig) =>
+      observationTypeConfig.value === selectedObservationType,
+  )
 
   return (
     <ObservationsPageContext.Provider
@@ -48,6 +60,8 @@ export const ObservationsContextProvider = ({
         setPersistedMapZoom,
         setSelectedObservationLayerUrl,
         setSelectedObservationType,
+        selectedObservationTypeConfig,
+        observationTypeConfigs,
       }}
     >
       {children}

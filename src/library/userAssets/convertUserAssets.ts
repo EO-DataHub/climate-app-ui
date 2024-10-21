@@ -17,7 +17,7 @@ export const convertSimpleGeoJSONToDataForTable = (
 ): UserAssetForTable[] => {
   if (!userAssets) return []
 
-  return userAssets.features.map((feature) => ({
+  return userAssets.features?.map((feature) => ({
     latitude: feature.geometry.coordinates[1],
     longitude: feature.geometry.coordinates[0],
     ...feature.properties,
@@ -99,7 +99,7 @@ export const getOscResultsTableData = (
   if (!analysedUserAssets) return []
 
   const featuresWithFlattenedRiskMeasures = analysedUserAssets.features
-    .map((feature) => {
+    ?.map((feature) => {
       return flattenOscRootFeatureProperty({
         feature,
         rootLevelPropertyName: 'asset_impacts',
@@ -115,7 +115,7 @@ export const getLstResultsTableData = (
 ) => {
   if (!analysedUserAssets) return []
 
-  return analysedUserAssets.features.map((feature) => {
+  return analysedUserAssets.features?.map((feature) => {
     const [longitude, latitude] = feature.geometry.coordinates
     const { returned_values, ...restOfProperties } = feature.properties
 

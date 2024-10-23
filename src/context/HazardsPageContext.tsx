@@ -13,27 +13,33 @@ import {
 } from '../library/api/fakeApiData'
 import { LngLat } from 'maplibre-gl'
 
-interface HazardsContextValue {
+export type HazardMarkerValue = number | string | null
+export interface HazardsPageContextValue {
   climateModel: string
   hazardIndicator: string
+  markerCoordinates?: LngLat | undefined
   persistedMapCenter: LngLat | undefined
   persistedMapZoom: number | undefined
   scenario: string
   setClimateModel?: Dispatch<SetStateAction<string>>
   setHazardIndicator?: Dispatch<SetStateAction<string>>
-  setPersistedMapZoom?: Dispatch<SetStateAction<number | undefined>>
+  setMarkerCoordinates?: Dispatch<SetStateAction<LngLat | undefined>>
   setPersistedMapCenter?: Dispatch<SetStateAction<LngLat | undefined>>
+  setPersistedMapZoom?: Dispatch<SetStateAction<number | undefined>>
   setScenario?: Dispatch<SetStateAction<string>>
   setYear?: Dispatch<SetStateAction<string>>
   year: string
+  hazardMarkerValue: HazardMarkerValue
+  setHazardMarkerValue?: Dispatch<SetStateAction<HazardMarkerValue>>
 }
-export const HazardsPageContext = createContext<HazardsContextValue>({
+export const HazardsPageContext = createContext<HazardsPageContextValue>({
   climateModel: '',
   hazardIndicator: '',
   scenario: '',
   year: '',
   persistedMapCenter: undefined,
   persistedMapZoom: undefined,
+  hazardMarkerValue: null,
 })
 
 export const HazardContextProvider = ({
@@ -49,6 +55,12 @@ export const HazardContextProvider = ({
   const [year, setYear] = useState('')
   const [persistedMapCenter, setPersistedMapCenter] = useState<LngLat>()
   const [persistedMapZoom, setPersistedMapZoom] = useState<number>()
+  const [markerCoordinates, setMarkerCoordinates] = useState<
+    LngLat | undefined
+  >()
+  const [hazardMarkerValue, setHazardMarkerValue] = useState<
+    number | string | null
+  >(null)
 
   useEffect(
     function setScenrioAndYearDefaultFromClimateModel() {
@@ -64,16 +76,20 @@ export const HazardContextProvider = ({
       value={{
         climateModel,
         hazardIndicator,
+        markerCoordinates,
         persistedMapCenter,
         persistedMapZoom,
         scenario,
         setClimateModel,
         setHazardIndicator,
+        setMarkerCoordinates,
         setPersistedMapCenter,
         setPersistedMapZoom,
         setScenario,
         setYear,
         year,
+        hazardMarkerValue,
+        setHazardMarkerValue,
       }}
     >
       {children}

@@ -25,7 +25,6 @@ import { useMap } from '../../Map/useMap'
 import { useUpdateObservationsMapTiles } from './useUpdateObservationsMapTiles'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
-import { useObservationsFilter } from './useObservationsFilter'
 
 const MIN_TEMP = 10
 const MAX_TEMP = 45
@@ -39,20 +38,19 @@ export const Observations = () => {
     persistedMapZoom,
     selectedObservationLayerUrl,
     selectedObservationType,
-    selectedObservationTypeConfig,
     setPersistedMapCenter,
     setPersistedMapZoom,
     setSelectedObservationLayerUrl,
     setSelectedObservationType,
-  } = useContext(ObservationsPageContext)
-
-  const {
+    markerCoordinates,
+    observationMarkerValue,
     sensorFilterOptions,
     isSensorFilterUsed,
     selectedSensor,
     setSelectedSensor,
     filteredDatasetOptions,
-  } = useObservationsFilter({ selectedObservationTypeConfig })
+  } = useContext(ObservationsPageContext)
+
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: persistedMapCenter ?? [0, 51.5],
     zoom: persistedMapZoom ?? 7,
@@ -63,12 +61,10 @@ export const Observations = () => {
     mapRef,
     isMapLoaded,
   })
-  const { markerCoordinates, observationMarkerValue, isMarkerOnMap } =
-    useGetObservationValueByMapclick({
-      isMapLoaded,
-      mapRef,
-      selectedObservationLayerUrl,
-    })
+  useGetObservationValueByMapclick({
+    isMapLoaded,
+    mapRef,
+  })
 
   useUpdateObservationsMapTiles({
     isMapLoaded,
@@ -164,7 +160,7 @@ export const Observations = () => {
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
               <LocationValueOverview
-                isMarkerOnMap={isMarkerOnMap}
+                isMarkerOnMap={!!markerCoordinates}
                 layerLabel={''}
                 locationValue={
                   observationMarkerValue === null

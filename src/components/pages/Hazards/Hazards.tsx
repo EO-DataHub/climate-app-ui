@@ -53,6 +53,8 @@ export const Hazards = () => {
     setScenario,
     setYear,
     year,
+    hazardMarkerValue,
+    markerCoordinates,
   } = useContext(HazardsPageContext)
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
@@ -89,12 +91,11 @@ export const Hazards = () => {
   )?.label
   const zarrPath = `s3://ukri-eodh-hazard-tiles-us-west-2/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
-  const { isMarkerOnMap, hazardMarkerValue, markerCoordinates } =
-    useGetHazardValueByMapClick({
-      isMapLoaded,
-      mapRef,
-      zarrPath,
-    })
+  useGetHazardValueByMapClick({
+    isMapLoaded,
+    mapRef,
+    zarrPath,
+  })
 
   const hazardDetail = isHazardMetadataError ? (
     <>Hazard indicator details are currently unavailable.</>
@@ -331,7 +332,7 @@ export const Hazards = () => {
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
               <LocationValueOverview
-                isMarkerOnMap={isMarkerOnMap}
+                isMarkerOnMap={!!markerCoordinates}
                 layerLabel={hazardIndicatorLabel}
                 locationValue={hazardMarkerValue}
                 markerCoordinates={markerCoordinates}

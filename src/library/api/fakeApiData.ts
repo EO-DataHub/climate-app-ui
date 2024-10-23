@@ -404,7 +404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240101000000-fv4.00.tif',
     label: '2024-01-01 S3A DAY',
     date: '2024-01-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -412,7 +412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240101000000-fv4.00.tif',
     label: '2024-01-01 S3A NIGHT',
     date: '2024-01-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -420,7 +420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240101000000-fv4.00.tif',
     label: '2024-01-01 S3B DAY',
     date: '2024-01-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -428,7 +428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240101000000-fv4.00.tif',
     label: '2024-01-01 S3B NIGHT',
     date: '2024-01-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -436,7 +436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240102000000-fv4.00.tif',
     label: '2024-01-02 S3A DAY',
     date: '2024-01-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -444,7 +444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240102000000-fv4.00.tif',
     label: '2024-01-02 S3A NIGHT',
     date: '2024-01-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -452,7 +452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240102000000-fv4.00.tif',
     label: '2024-01-02 S3B DAY',
     date: '2024-01-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -460,7 +460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240102000000-fv4.00.tif',
     label: '2024-01-02 S3B NIGHT',
     date: '2024-01-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -468,7 +468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240103000000-fv4.00.tif',
     label: '2024-01-03 S3A DAY',
     date: '2024-01-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -476,7 +476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240103000000-fv4.00.tif',
     label: '2024-01-03 S3A NIGHT',
     date: '2024-01-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -484,7 +484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240103000000-fv4.00.tif',
     label: '2024-01-03 S3B DAY',
     date: '2024-01-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -492,7 +492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240103000000-fv4.00.tif',
     label: '2024-01-03 S3B NIGHT',
     date: '2024-01-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -500,7 +500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240104000000-fv4.00.tif',
     label: '2024-01-04 S3A DAY',
     date: '2024-01-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -508,7 +508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240104000000-fv4.00.tif',
     label: '2024-01-04 S3A NIGHT',
     date: '2024-01-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -516,7 +516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240104000000-fv4.00.tif',
     label: '2024-01-04 S3B DAY',
     date: '2024-01-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -524,7 +524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240104000000-fv4.00.tif',
     label: '2024-01-04 S3B NIGHT',
     date: '2024-01-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -532,7 +532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240105000000-fv4.00.tif',
     label: '2024-01-05 S3A DAY',
     date: '2024-01-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -540,7 +540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240105000000-fv4.00.tif',
     label: '2024-01-05 S3A NIGHT',
     date: '2024-01-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -548,7 +548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240105000000-fv4.00.tif',
     label: '2024-01-05 S3B DAY',
     date: '2024-01-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -556,7 +556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240105000000-fv4.00.tif',
     label: '2024-01-05 S3B NIGHT',
     date: '2024-01-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -564,7 +564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240106000000-fv4.00.tif',
     label: '2024-01-06 S3A DAY',
     date: '2024-01-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -572,7 +572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240106000000-fv4.00.tif',
     label: '2024-01-06 S3A NIGHT',
     date: '2024-01-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -580,7 +580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240106000000-fv4.00.tif',
     label: '2024-01-06 S3B DAY',
     date: '2024-01-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -588,7 +588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240106000000-fv4.00.tif',
     label: '2024-01-06 S3B NIGHT',
     date: '2024-01-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -596,7 +596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240107000000-fv4.00.tif',
     label: '2024-01-07 S3A DAY',
     date: '2024-01-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -604,7 +604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240107000000-fv4.00.tif',
     label: '2024-01-07 S3A NIGHT',
     date: '2024-01-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -612,7 +612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240107000000-fv4.00.tif',
     label: '2024-01-07 S3B DAY',
     date: '2024-01-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -620,7 +620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240107000000-fv4.00.tif',
     label: '2024-01-07 S3B NIGHT',
     date: '2024-01-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -628,7 +628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240108000000-fv4.00.tif',
     label: '2024-01-08 S3A DAY',
     date: '2024-01-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -636,7 +636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240108000000-fv4.00.tif',
     label: '2024-01-08 S3A NIGHT',
     date: '2024-01-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -644,7 +644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240108000000-fv4.00.tif',
     label: '2024-01-08 S3B DAY',
     date: '2024-01-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -652,7 +652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240108000000-fv4.00.tif',
     label: '2024-01-08 S3B NIGHT',
     date: '2024-01-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -660,7 +660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240109000000-fv4.00.tif',
     label: '2024-01-09 S3A DAY',
     date: '2024-01-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -668,7 +668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240109000000-fv4.00.tif',
     label: '2024-01-09 S3A NIGHT',
     date: '2024-01-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -676,7 +676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240109000000-fv4.00.tif',
     label: '2024-01-09 S3B DAY',
     date: '2024-01-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -684,7 +684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240109000000-fv4.00.tif',
     label: '2024-01-09 S3B NIGHT',
     date: '2024-01-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -692,7 +692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240110000000-fv4.00.tif',
     label: '2024-01-10 S3A DAY',
     date: '2024-01-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -700,7 +700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240110000000-fv4.00.tif',
     label: '2024-01-10 S3A NIGHT',
     date: '2024-01-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -708,7 +708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240110000000-fv4.00.tif',
     label: '2024-01-10 S3B DAY',
     date: '2024-01-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -716,7 +716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240110000000-fv4.00.tif',
     label: '2024-01-10 S3B NIGHT',
     date: '2024-01-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -724,7 +724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240111000000-fv4.00.tif',
     label: '2024-01-11 S3A DAY',
     date: '2024-01-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -732,7 +732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240111000000-fv4.00.tif',
     label: '2024-01-11 S3A NIGHT',
     date: '2024-01-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -740,7 +740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240111000000-fv4.00.tif',
     label: '2024-01-11 S3B DAY',
     date: '2024-01-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -748,7 +748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240111000000-fv4.00.tif',
     label: '2024-01-11 S3B NIGHT',
     date: '2024-01-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -756,7 +756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240112000000-fv4.00.tif',
     label: '2024-01-12 S3A DAY',
     date: '2024-01-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -764,7 +764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240112000000-fv4.00.tif',
     label: '2024-01-12 S3A NIGHT',
     date: '2024-01-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -772,7 +772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240112000000-fv4.00.tif',
     label: '2024-01-12 S3B DAY',
     date: '2024-01-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -780,7 +780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240112000000-fv4.00.tif',
     label: '2024-01-12 S3B NIGHT',
     date: '2024-01-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -788,7 +788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240113000000-fv4.00.tif',
     label: '2024-01-13 S3A DAY',
     date: '2024-01-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -796,7 +796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240113000000-fv4.00.tif',
     label: '2024-01-13 S3A NIGHT',
     date: '2024-01-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -804,7 +804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240113000000-fv4.00.tif',
     label: '2024-01-13 S3B DAY',
     date: '2024-01-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -812,7 +812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240113000000-fv4.00.tif',
     label: '2024-01-13 S3B NIGHT',
     date: '2024-01-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -820,7 +820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240114000000-fv4.00.tif',
     label: '2024-01-14 S3A DAY',
     date: '2024-01-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -828,7 +828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240114000000-fv4.00.tif',
     label: '2024-01-14 S3A NIGHT',
     date: '2024-01-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -836,7 +836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240114000000-fv4.00.tif',
     label: '2024-01-14 S3B DAY',
     date: '2024-01-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -844,7 +844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240114000000-fv4.00.tif',
     label: '2024-01-14 S3B NIGHT',
     date: '2024-01-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -852,7 +852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240115000000-fv4.00.tif',
     label: '2024-01-15 S3A DAY',
     date: '2024-01-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -860,7 +860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240115000000-fv4.00.tif',
     label: '2024-01-15 S3A NIGHT',
     date: '2024-01-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -868,7 +868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240115000000-fv4.00.tif',
     label: '2024-01-15 S3B DAY',
     date: '2024-01-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -876,7 +876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240115000000-fv4.00.tif',
     label: '2024-01-15 S3B NIGHT',
     date: '2024-01-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -884,7 +884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240116000000-fv4.00.tif',
     label: '2024-01-16 S3A DAY',
     date: '2024-01-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -892,7 +892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240116000000-fv4.00.tif',
     label: '2024-01-16 S3A NIGHT',
     date: '2024-01-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -900,7 +900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240116000000-fv4.00.tif',
     label: '2024-01-16 S3B DAY',
     date: '2024-01-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -908,7 +908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240116000000-fv4.00.tif',
     label: '2024-01-16 S3B NIGHT',
     date: '2024-01-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -916,7 +916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240117000000-fv4.00.tif',
     label: '2024-01-17 S3A DAY',
     date: '2024-01-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -924,7 +924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240117000000-fv4.00.tif',
     label: '2024-01-17 S3A NIGHT',
     date: '2024-01-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -932,7 +932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240117000000-fv4.00.tif',
     label: '2024-01-17 S3B DAY',
     date: '2024-01-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -940,7 +940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240117000000-fv4.00.tif',
     label: '2024-01-17 S3B NIGHT',
     date: '2024-01-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -948,7 +948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240118000000-fv4.00.tif',
     label: '2024-01-18 S3A DAY',
     date: '2024-01-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -956,7 +956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240118000000-fv4.00.tif',
     label: '2024-01-18 S3A NIGHT',
     date: '2024-01-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -964,7 +964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240118000000-fv4.00.tif',
     label: '2024-01-18 S3B DAY',
     date: '2024-01-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -972,7 +972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240118000000-fv4.00.tif',
     label: '2024-01-18 S3B NIGHT',
     date: '2024-01-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -980,7 +980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240119000000-fv4.00.tif',
     label: '2024-01-19 S3A DAY',
     date: '2024-01-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -988,7 +988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240119000000-fv4.00.tif',
     label: '2024-01-19 S3A NIGHT',
     date: '2024-01-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -996,7 +996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240119000000-fv4.00.tif',
     label: '2024-01-19 S3B DAY',
     date: '2024-01-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1004,7 +1004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240119000000-fv4.00.tif',
     label: '2024-01-19 S3B NIGHT',
     date: '2024-01-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1012,7 +1012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240120000000-fv4.00.tif',
     label: '2024-01-20 S3A DAY',
     date: '2024-01-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1020,7 +1020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240120000000-fv4.00.tif',
     label: '2024-01-20 S3A NIGHT',
     date: '2024-01-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1028,7 +1028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240120000000-fv4.00.tif',
     label: '2024-01-20 S3B DAY',
     date: '2024-01-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1036,7 +1036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240120000000-fv4.00.tif',
     label: '2024-01-20 S3B NIGHT',
     date: '2024-01-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1044,7 +1044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240121000000-fv4.00.tif',
     label: '2024-01-21 S3A DAY',
     date: '2024-01-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1052,7 +1052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240121000000-fv4.00.tif',
     label: '2024-01-21 S3A NIGHT',
     date: '2024-01-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1060,7 +1060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240121000000-fv4.00.tif',
     label: '2024-01-21 S3B DAY',
     date: '2024-01-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1068,7 +1068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240121000000-fv4.00.tif',
     label: '2024-01-21 S3B NIGHT',
     date: '2024-01-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1076,7 +1076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240122000000-fv4.00.tif',
     label: '2024-01-22 S3A DAY',
     date: '2024-01-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1084,7 +1084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240122000000-fv4.00.tif',
     label: '2024-01-22 S3A NIGHT',
     date: '2024-01-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1092,7 +1092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240122000000-fv4.00.tif',
     label: '2024-01-22 S3B DAY',
     date: '2024-01-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1100,7 +1100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240122000000-fv4.00.tif',
     label: '2024-01-22 S3B NIGHT',
     date: '2024-01-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1108,7 +1108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240123000000-fv4.00.tif',
     label: '2024-01-23 S3A DAY',
     date: '2024-01-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1116,7 +1116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240123000000-fv4.00.tif',
     label: '2024-01-23 S3A NIGHT',
     date: '2024-01-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1124,7 +1124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240123000000-fv4.00.tif',
     label: '2024-01-23 S3B DAY',
     date: '2024-01-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1132,7 +1132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240123000000-fv4.00.tif',
     label: '2024-01-23 S3B NIGHT',
     date: '2024-01-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1140,7 +1140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240124000000-fv4.00.tif',
     label: '2024-01-24 S3A DAY',
     date: '2024-01-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1148,7 +1148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240124000000-fv4.00.tif',
     label: '2024-01-24 S3A NIGHT',
     date: '2024-01-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1156,7 +1156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240124000000-fv4.00.tif',
     label: '2024-01-24 S3B DAY',
     date: '2024-01-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1164,7 +1164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240124000000-fv4.00.tif',
     label: '2024-01-24 S3B NIGHT',
     date: '2024-01-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1172,7 +1172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240125000000-fv4.00.tif',
     label: '2024-01-25 S3A DAY',
     date: '2024-01-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1180,7 +1180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240125000000-fv4.00.tif',
     label: '2024-01-25 S3A NIGHT',
     date: '2024-01-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1188,7 +1188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240125000000-fv4.00.tif',
     label: '2024-01-25 S3B DAY',
     date: '2024-01-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1196,7 +1196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240125000000-fv4.00.tif',
     label: '2024-01-25 S3B NIGHT',
     date: '2024-01-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1204,7 +1204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240126000000-fv4.00.tif',
     label: '2024-01-26 S3A DAY',
     date: '2024-01-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1212,7 +1212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240126000000-fv4.00.tif',
     label: '2024-01-26 S3A NIGHT',
     date: '2024-01-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1220,7 +1220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240126000000-fv4.00.tif',
     label: '2024-01-26 S3B DAY',
     date: '2024-01-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1228,7 +1228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240126000000-fv4.00.tif',
     label: '2024-01-26 S3B NIGHT',
     date: '2024-01-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1236,7 +1236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240127000000-fv4.00.tif',
     label: '2024-01-27 S3A DAY',
     date: '2024-01-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1244,7 +1244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240127000000-fv4.00.tif',
     label: '2024-01-27 S3A NIGHT',
     date: '2024-01-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1252,7 +1252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240127000000-fv4.00.tif',
     label: '2024-01-27 S3B DAY',
     date: '2024-01-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1260,7 +1260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240127000000-fv4.00.tif',
     label: '2024-01-27 S3B NIGHT',
     date: '2024-01-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1268,7 +1268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240128000000-fv4.00.tif',
     label: '2024-01-28 S3A DAY',
     date: '2024-01-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1276,7 +1276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240128000000-fv4.00.tif',
     label: '2024-01-28 S3A NIGHT',
     date: '2024-01-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1284,7 +1284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240128000000-fv4.00.tif',
     label: '2024-01-28 S3B DAY',
     date: '2024-01-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1292,7 +1292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240128000000-fv4.00.tif',
     label: '2024-01-28 S3B NIGHT',
     date: '2024-01-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1300,7 +1300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240129000000-fv4.00.tif',
     label: '2024-01-29 S3A DAY',
     date: '2024-01-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1308,7 +1308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240129000000-fv4.00.tif',
     label: '2024-01-29 S3A NIGHT',
     date: '2024-01-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1316,7 +1316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240129000000-fv4.00.tif',
     label: '2024-01-29 S3B DAY',
     date: '2024-01-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1324,7 +1324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240129000000-fv4.00.tif',
     label: '2024-01-29 S3B NIGHT',
     date: '2024-01-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1332,7 +1332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240130000000-fv4.00.tif',
     label: '2024-01-30 S3A DAY',
     date: '2024-01-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1340,7 +1340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240130000000-fv4.00.tif',
     label: '2024-01-30 S3A NIGHT',
     date: '2024-01-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1348,7 +1348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240130000000-fv4.00.tif',
     label: '2024-01-30 S3B DAY',
     date: '2024-01-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1356,7 +1356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240130000000-fv4.00.tif',
     label: '2024-01-30 S3B NIGHT',
     date: '2024-01-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1364,7 +1364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240131000000-fv4.00.tif',
     label: '2024-01-31 S3A DAY',
     date: '2024-01-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1372,7 +1372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240131000000-fv4.00.tif',
     label: '2024-01-31 S3A NIGHT',
     date: '2024-01-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1380,7 +1380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240131000000-fv4.00.tif',
     label: '2024-01-31 S3B DAY',
     date: '2024-01-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1388,7 +1388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240131000000-fv4.00.tif',
     label: '2024-01-31 S3B NIGHT',
     date: '2024-01-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1396,7 +1396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240201000000-fv4.00.tif',
     label: '2024-02-01 S3A DAY',
     date: '2024-02-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1404,7 +1404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240201000000-fv4.00.tif',
     label: '2024-02-01 S3A NIGHT',
     date: '2024-02-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1412,7 +1412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240201000000-fv4.00.tif',
     label: '2024-02-01 S3B DAY',
     date: '2024-02-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1420,7 +1420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240201000000-fv4.00.tif',
     label: '2024-02-01 S3B NIGHT',
     date: '2024-02-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1428,7 +1428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240202000000-fv4.00.tif',
     label: '2024-02-02 S3A DAY',
     date: '2024-02-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1436,7 +1436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240202000000-fv4.00.tif',
     label: '2024-02-02 S3A NIGHT',
     date: '2024-02-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1444,7 +1444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240202000000-fv4.00.tif',
     label: '2024-02-02 S3B DAY',
     date: '2024-02-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1452,7 +1452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240202000000-fv4.00.tif',
     label: '2024-02-02 S3B NIGHT',
     date: '2024-02-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1460,7 +1460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240203000000-fv4.00.tif',
     label: '2024-02-03 S3A DAY',
     date: '2024-02-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1468,7 +1468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240203000000-fv4.00.tif',
     label: '2024-02-03 S3A NIGHT',
     date: '2024-02-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1476,7 +1476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240203000000-fv4.00.tif',
     label: '2024-02-03 S3B DAY',
     date: '2024-02-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1484,7 +1484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240203000000-fv4.00.tif',
     label: '2024-02-03 S3B NIGHT',
     date: '2024-02-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1492,7 +1492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240204000000-fv4.00.tif',
     label: '2024-02-04 S3A DAY',
     date: '2024-02-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1500,7 +1500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240204000000-fv4.00.tif',
     label: '2024-02-04 S3A NIGHT',
     date: '2024-02-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1508,7 +1508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240204000000-fv4.00.tif',
     label: '2024-02-04 S3B DAY',
     date: '2024-02-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1516,7 +1516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240204000000-fv4.00.tif',
     label: '2024-02-04 S3B NIGHT',
     date: '2024-02-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1524,7 +1524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240205000000-fv4.00.tif',
     label: '2024-02-05 S3A DAY',
     date: '2024-02-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1532,7 +1532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240205000000-fv4.00.tif',
     label: '2024-02-05 S3A NIGHT',
     date: '2024-02-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1540,7 +1540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240205000000-fv4.00.tif',
     label: '2024-02-05 S3B DAY',
     date: '2024-02-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1548,7 +1548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240205000000-fv4.00.tif',
     label: '2024-02-05 S3B NIGHT',
     date: '2024-02-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1556,7 +1556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240206000000-fv4.00.tif',
     label: '2024-02-06 S3A DAY',
     date: '2024-02-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1564,7 +1564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240206000000-fv4.00.tif',
     label: '2024-02-06 S3A NIGHT',
     date: '2024-02-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1572,7 +1572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240206000000-fv4.00.tif',
     label: '2024-02-06 S3B DAY',
     date: '2024-02-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1580,7 +1580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240206000000-fv4.00.tif',
     label: '2024-02-06 S3B NIGHT',
     date: '2024-02-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1588,7 +1588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240207000000-fv4.00.tif',
     label: '2024-02-07 S3A DAY',
     date: '2024-02-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1596,7 +1596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240207000000-fv4.00.tif',
     label: '2024-02-07 S3A NIGHT',
     date: '2024-02-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1604,7 +1604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240207000000-fv4.00.tif',
     label: '2024-02-07 S3B DAY',
     date: '2024-02-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1612,7 +1612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240207000000-fv4.00.tif',
     label: '2024-02-07 S3B NIGHT',
     date: '2024-02-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1620,7 +1620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240208000000-fv4.00.tif',
     label: '2024-02-08 S3A DAY',
     date: '2024-02-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1628,7 +1628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240208000000-fv4.00.tif',
     label: '2024-02-08 S3A NIGHT',
     date: '2024-02-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1636,7 +1636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240208000000-fv4.00.tif',
     label: '2024-02-08 S3B DAY',
     date: '2024-02-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1644,7 +1644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240208000000-fv4.00.tif',
     label: '2024-02-08 S3B NIGHT',
     date: '2024-02-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1652,7 +1652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240209000000-fv4.00.tif',
     label: '2024-02-09 S3A DAY',
     date: '2024-02-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1660,7 +1660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240209000000-fv4.00.tif',
     label: '2024-02-09 S3A NIGHT',
     date: '2024-02-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1668,7 +1668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240209000000-fv4.00.tif',
     label: '2024-02-09 S3B DAY',
     date: '2024-02-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1676,7 +1676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240209000000-fv4.00.tif',
     label: '2024-02-09 S3B NIGHT',
     date: '2024-02-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1684,7 +1684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240210000000-fv4.00.tif',
     label: '2024-02-10 S3A DAY',
     date: '2024-02-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1692,7 +1692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240210000000-fv4.00.tif',
     label: '2024-02-10 S3A NIGHT',
     date: '2024-02-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1700,7 +1700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240210000000-fv4.00.tif',
     label: '2024-02-10 S3B DAY',
     date: '2024-02-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1708,7 +1708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240210000000-fv4.00.tif',
     label: '2024-02-10 S3B NIGHT',
     date: '2024-02-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1716,7 +1716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240211000000-fv4.00.tif',
     label: '2024-02-11 S3A DAY',
     date: '2024-02-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1724,7 +1724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240211000000-fv4.00.tif',
     label: '2024-02-11 S3A NIGHT',
     date: '2024-02-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1732,7 +1732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240211000000-fv4.00.tif',
     label: '2024-02-11 S3B DAY',
     date: '2024-02-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1740,7 +1740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240211000000-fv4.00.tif',
     label: '2024-02-11 S3B NIGHT',
     date: '2024-02-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1748,7 +1748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240212000000-fv4.00.tif',
     label: '2024-02-12 S3A DAY',
     date: '2024-02-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1756,7 +1756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240212000000-fv4.00.tif',
     label: '2024-02-12 S3A NIGHT',
     date: '2024-02-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1764,7 +1764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240212000000-fv4.00.tif',
     label: '2024-02-12 S3B DAY',
     date: '2024-02-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1772,7 +1772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240212000000-fv4.00.tif',
     label: '2024-02-12 S3B NIGHT',
     date: '2024-02-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1780,7 +1780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240213000000-fv4.00.tif',
     label: '2024-02-13 S3A DAY',
     date: '2024-02-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1788,7 +1788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240213000000-fv4.00.tif',
     label: '2024-02-13 S3A NIGHT',
     date: '2024-02-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1796,7 +1796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240213000000-fv4.00.tif',
     label: '2024-02-13 S3B DAY',
     date: '2024-02-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1804,7 +1804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240213000000-fv4.00.tif',
     label: '2024-02-13 S3B NIGHT',
     date: '2024-02-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1812,7 +1812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240214000000-fv4.00.tif',
     label: '2024-02-14 S3A DAY',
     date: '2024-02-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1820,7 +1820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240214000000-fv4.00.tif',
     label: '2024-02-14 S3A NIGHT',
     date: '2024-02-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1828,7 +1828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240214000000-fv4.00.tif',
     label: '2024-02-14 S3B DAY',
     date: '2024-02-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1836,7 +1836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240214000000-fv4.00.tif',
     label: '2024-02-14 S3B NIGHT',
     date: '2024-02-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1844,7 +1844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240215000000-fv4.00.tif',
     label: '2024-02-15 S3A DAY',
     date: '2024-02-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1852,7 +1852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240215000000-fv4.00.tif',
     label: '2024-02-15 S3A NIGHT',
     date: '2024-02-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1860,7 +1860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240215000000-fv4.00.tif',
     label: '2024-02-15 S3B DAY',
     date: '2024-02-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1868,7 +1868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240215000000-fv4.00.tif',
     label: '2024-02-15 S3B NIGHT',
     date: '2024-02-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1876,7 +1876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240216000000-fv4.00.tif',
     label: '2024-02-16 S3A DAY',
     date: '2024-02-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1884,7 +1884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240216000000-fv4.00.tif',
     label: '2024-02-16 S3A NIGHT',
     date: '2024-02-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1892,7 +1892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240216000000-fv4.00.tif',
     label: '2024-02-16 S3B DAY',
     date: '2024-02-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1900,7 +1900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240216000000-fv4.00.tif',
     label: '2024-02-16 S3B NIGHT',
     date: '2024-02-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1908,7 +1908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240217000000-fv4.00.tif',
     label: '2024-02-17 S3A DAY',
     date: '2024-02-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1916,7 +1916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240217000000-fv4.00.tif',
     label: '2024-02-17 S3A NIGHT',
     date: '2024-02-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1924,7 +1924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240217000000-fv4.00.tif',
     label: '2024-02-17 S3B DAY',
     date: '2024-02-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1932,7 +1932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240217000000-fv4.00.tif',
     label: '2024-02-17 S3B NIGHT',
     date: '2024-02-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1940,7 +1940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240218000000-fv4.00.tif',
     label: '2024-02-18 S3A DAY',
     date: '2024-02-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1948,7 +1948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240218000000-fv4.00.tif',
     label: '2024-02-18 S3A NIGHT',
     date: '2024-02-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1956,7 +1956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240218000000-fv4.00.tif',
     label: '2024-02-18 S3B DAY',
     date: '2024-02-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1964,7 +1964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240218000000-fv4.00.tif',
     label: '2024-02-18 S3B NIGHT',
     date: '2024-02-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -1972,7 +1972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240219000000-fv4.00.tif',
     label: '2024-02-19 S3A DAY',
     date: '2024-02-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -1980,7 +1980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240219000000-fv4.00.tif',
     label: '2024-02-19 S3A NIGHT',
     date: '2024-02-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -1988,7 +1988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240219000000-fv4.00.tif',
     label: '2024-02-19 S3B DAY',
     date: '2024-02-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -1996,7 +1996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240219000000-fv4.00.tif',
     label: '2024-02-19 S3B NIGHT',
     date: '2024-02-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2004,7 +2004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240220000000-fv4.00.tif',
     label: '2024-02-20 S3A DAY',
     date: '2024-02-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2012,7 +2012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240220000000-fv4.00.tif',
     label: '2024-02-20 S3A NIGHT',
     date: '2024-02-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2020,7 +2020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240220000000-fv4.00.tif',
     label: '2024-02-20 S3B DAY',
     date: '2024-02-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2028,7 +2028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240220000000-fv4.00.tif',
     label: '2024-02-20 S3B NIGHT',
     date: '2024-02-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2036,7 +2036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240221000000-fv4.00.tif',
     label: '2024-02-21 S3A DAY',
     date: '2024-02-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2044,7 +2044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240221000000-fv4.00.tif',
     label: '2024-02-21 S3A NIGHT',
     date: '2024-02-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2052,7 +2052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240221000000-fv4.00.tif',
     label: '2024-02-21 S3B DAY',
     date: '2024-02-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2060,7 +2060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240221000000-fv4.00.tif',
     label: '2024-02-21 S3B NIGHT',
     date: '2024-02-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2068,7 +2068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240222000000-fv4.00.tif',
     label: '2024-02-22 S3A DAY',
     date: '2024-02-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2076,7 +2076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240222000000-fv4.00.tif',
     label: '2024-02-22 S3A NIGHT',
     date: '2024-02-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2084,7 +2084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240222000000-fv4.00.tif',
     label: '2024-02-22 S3B DAY',
     date: '2024-02-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2092,7 +2092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240222000000-fv4.00.tif',
     label: '2024-02-22 S3B NIGHT',
     date: '2024-02-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2100,7 +2100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240223000000-fv4.00.tif',
     label: '2024-02-23 S3A DAY',
     date: '2024-02-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2108,7 +2108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240223000000-fv4.00.tif',
     label: '2024-02-23 S3A NIGHT',
     date: '2024-02-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2116,7 +2116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240223000000-fv4.00.tif',
     label: '2024-02-23 S3B DAY',
     date: '2024-02-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2124,7 +2124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240223000000-fv4.00.tif',
     label: '2024-02-23 S3B NIGHT',
     date: '2024-02-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2132,7 +2132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240224000000-fv4.00.tif',
     label: '2024-02-24 S3A DAY',
     date: '2024-02-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2140,7 +2140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240224000000-fv4.00.tif',
     label: '2024-02-24 S3A NIGHT',
     date: '2024-02-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2148,7 +2148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240224000000-fv4.00.tif',
     label: '2024-02-24 S3B DAY',
     date: '2024-02-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2156,7 +2156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240224000000-fv4.00.tif',
     label: '2024-02-24 S3B NIGHT',
     date: '2024-02-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2164,7 +2164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240225000000-fv4.00.tif',
     label: '2024-02-25 S3A DAY',
     date: '2024-02-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2172,7 +2172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240225000000-fv4.00.tif',
     label: '2024-02-25 S3A NIGHT',
     date: '2024-02-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2180,7 +2180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240225000000-fv4.00.tif',
     label: '2024-02-25 S3B DAY',
     date: '2024-02-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2188,7 +2188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240225000000-fv4.00.tif',
     label: '2024-02-25 S3B NIGHT',
     date: '2024-02-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2196,7 +2196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240226000000-fv4.00.tif',
     label: '2024-02-26 S3A DAY',
     date: '2024-02-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2204,7 +2204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240226000000-fv4.00.tif',
     label: '2024-02-26 S3A NIGHT',
     date: '2024-02-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2212,7 +2212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240226000000-fv4.00.tif',
     label: '2024-02-26 S3B DAY',
     date: '2024-02-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2220,7 +2220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240226000000-fv4.00.tif',
     label: '2024-02-26 S3B NIGHT',
     date: '2024-02-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2228,7 +2228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240227000000-fv4.00.tif',
     label: '2024-02-27 S3A DAY',
     date: '2024-02-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2236,7 +2236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240227000000-fv4.00.tif',
     label: '2024-02-27 S3A NIGHT',
     date: '2024-02-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2244,7 +2244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240227000000-fv4.00.tif',
     label: '2024-02-27 S3B DAY',
     date: '2024-02-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2252,7 +2252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240227000000-fv4.00.tif',
     label: '2024-02-27 S3B NIGHT',
     date: '2024-02-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2260,7 +2260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240228000000-fv4.00.tif',
     label: '2024-02-28 S3A DAY',
     date: '2024-02-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2268,7 +2268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240228000000-fv4.00.tif',
     label: '2024-02-28 S3A NIGHT',
     date: '2024-02-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2276,7 +2276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240228000000-fv4.00.tif',
     label: '2024-02-28 S3B DAY',
     date: '2024-02-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2284,7 +2284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240228000000-fv4.00.tif',
     label: '2024-02-28 S3B NIGHT',
     date: '2024-02-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2292,7 +2292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240229000000-fv4.00.tif',
     label: '2024-02-29 S3A DAY',
     date: '2024-02-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2300,7 +2300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240229000000-fv4.00.tif',
     label: '2024-02-29 S3A NIGHT',
     date: '2024-02-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2308,7 +2308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240229000000-fv4.00.tif',
     label: '2024-02-29 S3B DAY',
     date: '2024-02-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2316,7 +2316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240229000000-fv4.00.tif',
     label: '2024-02-29 S3B NIGHT',
     date: '2024-02-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2324,7 +2324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240301000000-fv4.00.tif',
     label: '2024-03-01 S3A DAY',
     date: '2024-03-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2332,7 +2332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240301000000-fv4.00.tif',
     label: '2024-03-01 S3A NIGHT',
     date: '2024-03-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2340,7 +2340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240301000000-fv4.00.tif',
     label: '2024-03-01 S3B DAY',
     date: '2024-03-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2348,7 +2348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240301000000-fv4.00.tif',
     label: '2024-03-01 S3B NIGHT',
     date: '2024-03-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2356,7 +2356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240302000000-fv4.00.tif',
     label: '2024-03-02 S3A DAY',
     date: '2024-03-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2364,7 +2364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240302000000-fv4.00.tif',
     label: '2024-03-02 S3A NIGHT',
     date: '2024-03-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2372,7 +2372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240302000000-fv4.00.tif',
     label: '2024-03-02 S3B DAY',
     date: '2024-03-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2380,7 +2380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240302000000-fv4.00.tif',
     label: '2024-03-02 S3B NIGHT',
     date: '2024-03-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2388,7 +2388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240303000000-fv4.00.tif',
     label: '2024-03-03 S3A DAY',
     date: '2024-03-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2396,7 +2396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240303000000-fv4.00.tif',
     label: '2024-03-03 S3A NIGHT',
     date: '2024-03-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2404,7 +2404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240303000000-fv4.00.tif',
     label: '2024-03-03 S3B DAY',
     date: '2024-03-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2412,7 +2412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240303000000-fv4.00.tif',
     label: '2024-03-03 S3B NIGHT',
     date: '2024-03-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2420,7 +2420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240304000000-fv4.00.tif',
     label: '2024-03-04 S3A DAY',
     date: '2024-03-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2428,7 +2428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240304000000-fv4.00.tif',
     label: '2024-03-04 S3A NIGHT',
     date: '2024-03-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2436,7 +2436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240304000000-fv4.00.tif',
     label: '2024-03-04 S3B DAY',
     date: '2024-03-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2444,7 +2444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240304000000-fv4.00.tif',
     label: '2024-03-04 S3B NIGHT',
     date: '2024-03-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2452,7 +2452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240305000000-fv4.00.tif',
     label: '2024-03-05 S3A DAY',
     date: '2024-03-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2460,7 +2460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240305000000-fv4.00.tif',
     label: '2024-03-05 S3A NIGHT',
     date: '2024-03-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2468,7 +2468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240305000000-fv4.00.tif',
     label: '2024-03-05 S3B DAY',
     date: '2024-03-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2476,7 +2476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240305000000-fv4.00.tif',
     label: '2024-03-05 S3B NIGHT',
     date: '2024-03-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2484,7 +2484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240306000000-fv4.00.tif',
     label: '2024-03-06 S3A DAY',
     date: '2024-03-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2492,7 +2492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240306000000-fv4.00.tif',
     label: '2024-03-06 S3A NIGHT',
     date: '2024-03-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2500,7 +2500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240306000000-fv4.00.tif',
     label: '2024-03-06 S3B DAY',
     date: '2024-03-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2508,7 +2508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240306000000-fv4.00.tif',
     label: '2024-03-06 S3B NIGHT',
     date: '2024-03-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2516,7 +2516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240307000000-fv4.00.tif',
     label: '2024-03-07 S3A DAY',
     date: '2024-03-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2524,7 +2524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240307000000-fv4.00.tif',
     label: '2024-03-07 S3A NIGHT',
     date: '2024-03-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2532,7 +2532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240307000000-fv4.00.tif',
     label: '2024-03-07 S3B DAY',
     date: '2024-03-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2540,7 +2540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240307000000-fv4.00.tif',
     label: '2024-03-07 S3B NIGHT',
     date: '2024-03-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2548,7 +2548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240308000000-fv4.00.tif',
     label: '2024-03-08 S3A DAY',
     date: '2024-03-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2556,7 +2556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240308000000-fv4.00.tif',
     label: '2024-03-08 S3A NIGHT',
     date: '2024-03-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2564,7 +2564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240308000000-fv4.00.tif',
     label: '2024-03-08 S3B DAY',
     date: '2024-03-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2572,7 +2572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240308000000-fv4.00.tif',
     label: '2024-03-08 S3B NIGHT',
     date: '2024-03-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2580,7 +2580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240309000000-fv4.00.tif',
     label: '2024-03-09 S3A DAY',
     date: '2024-03-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2588,7 +2588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240309000000-fv4.00.tif',
     label: '2024-03-09 S3A NIGHT',
     date: '2024-03-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2596,7 +2596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240309000000-fv4.00.tif',
     label: '2024-03-09 S3B DAY',
     date: '2024-03-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2604,7 +2604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240309000000-fv4.00.tif',
     label: '2024-03-09 S3B NIGHT',
     date: '2024-03-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2612,7 +2612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240310000000-fv4.00.tif',
     label: '2024-03-10 S3A DAY',
     date: '2024-03-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2620,7 +2620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240310000000-fv4.00.tif',
     label: '2024-03-10 S3A NIGHT',
     date: '2024-03-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2628,7 +2628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240310000000-fv4.00.tif',
     label: '2024-03-10 S3B DAY',
     date: '2024-03-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2636,7 +2636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240310000000-fv4.00.tif',
     label: '2024-03-10 S3B NIGHT',
     date: '2024-03-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2644,7 +2644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240311000000-fv4.00.tif',
     label: '2024-03-11 S3A DAY',
     date: '2024-03-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2652,7 +2652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240311000000-fv4.00.tif',
     label: '2024-03-11 S3A NIGHT',
     date: '2024-03-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2660,7 +2660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240311000000-fv4.00.tif',
     label: '2024-03-11 S3B DAY',
     date: '2024-03-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2668,7 +2668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240311000000-fv4.00.tif',
     label: '2024-03-11 S3B NIGHT',
     date: '2024-03-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2676,7 +2676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240312000000-fv4.00.tif',
     label: '2024-03-12 S3A DAY',
     date: '2024-03-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2684,7 +2684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240312000000-fv4.00.tif',
     label: '2024-03-12 S3A NIGHT',
     date: '2024-03-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2692,7 +2692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240312000000-fv4.00.tif',
     label: '2024-03-12 S3B DAY',
     date: '2024-03-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2700,7 +2700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240312000000-fv4.00.tif',
     label: '2024-03-12 S3B NIGHT',
     date: '2024-03-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2708,7 +2708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240313000000-fv4.00.tif',
     label: '2024-03-13 S3A DAY',
     date: '2024-03-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2716,7 +2716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240313000000-fv4.00.tif',
     label: '2024-03-13 S3A NIGHT',
     date: '2024-03-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2724,7 +2724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240313000000-fv4.00.tif',
     label: '2024-03-13 S3B DAY',
     date: '2024-03-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2732,7 +2732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240313000000-fv4.00.tif',
     label: '2024-03-13 S3B NIGHT',
     date: '2024-03-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2740,7 +2740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240314000000-fv4.00.tif',
     label: '2024-03-14 S3A DAY',
     date: '2024-03-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2748,7 +2748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240314000000-fv4.00.tif',
     label: '2024-03-14 S3A NIGHT',
     date: '2024-03-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2756,7 +2756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240314000000-fv4.00.tif',
     label: '2024-03-14 S3B DAY',
     date: '2024-03-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2764,7 +2764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240314000000-fv4.00.tif',
     label: '2024-03-14 S3B NIGHT',
     date: '2024-03-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2772,7 +2772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240315000000-fv4.00.tif',
     label: '2024-03-15 S3A DAY',
     date: '2024-03-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2780,7 +2780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240315000000-fv4.00.tif',
     label: '2024-03-15 S3A NIGHT',
     date: '2024-03-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2788,7 +2788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240315000000-fv4.00.tif',
     label: '2024-03-15 S3B DAY',
     date: '2024-03-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2796,7 +2796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240315000000-fv4.00.tif',
     label: '2024-03-15 S3B NIGHT',
     date: '2024-03-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2804,7 +2804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240316000000-fv4.00.tif',
     label: '2024-03-16 S3A DAY',
     date: '2024-03-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2812,7 +2812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240316000000-fv4.00.tif',
     label: '2024-03-16 S3A NIGHT',
     date: '2024-03-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2820,7 +2820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240316000000-fv4.00.tif',
     label: '2024-03-16 S3B DAY',
     date: '2024-03-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2828,7 +2828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240316000000-fv4.00.tif',
     label: '2024-03-16 S3B NIGHT',
     date: '2024-03-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2836,7 +2836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240317000000-fv4.00.tif',
     label: '2024-03-17 S3A DAY',
     date: '2024-03-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2844,7 +2844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240317000000-fv4.00.tif',
     label: '2024-03-17 S3A NIGHT',
     date: '2024-03-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2852,7 +2852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240317000000-fv4.00.tif',
     label: '2024-03-17 S3B DAY',
     date: '2024-03-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2860,7 +2860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240317000000-fv4.00.tif',
     label: '2024-03-17 S3B NIGHT',
     date: '2024-03-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2868,7 +2868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240318000000-fv4.00.tif',
     label: '2024-03-18 S3A DAY',
     date: '2024-03-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2876,7 +2876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240318000000-fv4.00.tif',
     label: '2024-03-18 S3A NIGHT',
     date: '2024-03-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2884,7 +2884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240318000000-fv4.00.tif',
     label: '2024-03-18 S3B DAY',
     date: '2024-03-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2892,7 +2892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240318000000-fv4.00.tif',
     label: '2024-03-18 S3B NIGHT',
     date: '2024-03-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2900,7 +2900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240319000000-fv4.00.tif',
     label: '2024-03-19 S3A DAY',
     date: '2024-03-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2908,7 +2908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240319000000-fv4.00.tif',
     label: '2024-03-19 S3A NIGHT',
     date: '2024-03-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2916,7 +2916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240319000000-fv4.00.tif',
     label: '2024-03-19 S3B DAY',
     date: '2024-03-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2924,7 +2924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240319000000-fv4.00.tif',
     label: '2024-03-19 S3B NIGHT',
     date: '2024-03-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2932,7 +2932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240320000000-fv4.00.tif',
     label: '2024-03-20 S3A DAY',
     date: '2024-03-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2940,7 +2940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240320000000-fv4.00.tif',
     label: '2024-03-20 S3A NIGHT',
     date: '2024-03-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2948,7 +2948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240320000000-fv4.00.tif',
     label: '2024-03-20 S3B DAY',
     date: '2024-03-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2956,7 +2956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240320000000-fv4.00.tif',
     label: '2024-03-20 S3B NIGHT',
     date: '2024-03-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2964,7 +2964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240321000000-fv4.00.tif',
     label: '2024-03-21 S3A DAY',
     date: '2024-03-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -2972,7 +2972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240321000000-fv4.00.tif',
     label: '2024-03-21 S3A NIGHT',
     date: '2024-03-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -2980,7 +2980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240321000000-fv4.00.tif',
     label: '2024-03-21 S3B DAY',
     date: '2024-03-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -2988,7 +2988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240321000000-fv4.00.tif',
     label: '2024-03-21 S3B NIGHT',
     date: '2024-03-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -2996,7 +2996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240322000000-fv4.00.tif',
     label: '2024-03-22 S3A DAY',
     date: '2024-03-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3004,7 +3004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240322000000-fv4.00.tif',
     label: '2024-03-22 S3A NIGHT',
     date: '2024-03-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3012,7 +3012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240322000000-fv4.00.tif',
     label: '2024-03-22 S3B DAY',
     date: '2024-03-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3020,7 +3020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240322000000-fv4.00.tif',
     label: '2024-03-22 S3B NIGHT',
     date: '2024-03-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3028,7 +3028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240323000000-fv4.00.tif',
     label: '2024-03-23 S3A DAY',
     date: '2024-03-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3036,7 +3036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240323000000-fv4.00.tif',
     label: '2024-03-23 S3A NIGHT',
     date: '2024-03-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3044,7 +3044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240323000000-fv4.00.tif',
     label: '2024-03-23 S3B DAY',
     date: '2024-03-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3052,7 +3052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240323000000-fv4.00.tif',
     label: '2024-03-23 S3B NIGHT',
     date: '2024-03-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3060,7 +3060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240324000000-fv4.00.tif',
     label: '2024-03-24 S3A DAY',
     date: '2024-03-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3068,7 +3068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240324000000-fv4.00.tif',
     label: '2024-03-24 S3A NIGHT',
     date: '2024-03-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3076,7 +3076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240324000000-fv4.00.tif',
     label: '2024-03-24 S3B DAY',
     date: '2024-03-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3084,7 +3084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240324000000-fv4.00.tif',
     label: '2024-03-24 S3B NIGHT',
     date: '2024-03-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3092,7 +3092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240325000000-fv4.00.tif',
     label: '2024-03-25 S3A DAY',
     date: '2024-03-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3100,7 +3100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240325000000-fv4.00.tif',
     label: '2024-03-25 S3A NIGHT',
     date: '2024-03-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3108,7 +3108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240325000000-fv4.00.tif',
     label: '2024-03-25 S3B DAY',
     date: '2024-03-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3116,7 +3116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240325000000-fv4.00.tif',
     label: '2024-03-25 S3B NIGHT',
     date: '2024-03-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3124,7 +3124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240326000000-fv4.00.tif',
     label: '2024-03-26 S3A DAY',
     date: '2024-03-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3132,7 +3132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240326000000-fv4.00.tif',
     label: '2024-03-26 S3A NIGHT',
     date: '2024-03-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3140,7 +3140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240326000000-fv4.00.tif',
     label: '2024-03-26 S3B DAY',
     date: '2024-03-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3148,7 +3148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240326000000-fv4.00.tif',
     label: '2024-03-26 S3B NIGHT',
     date: '2024-03-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3156,7 +3156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240327000000-fv4.00.tif',
     label: '2024-03-27 S3A DAY',
     date: '2024-03-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3164,7 +3164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240327000000-fv4.00.tif',
     label: '2024-03-27 S3A NIGHT',
     date: '2024-03-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3172,7 +3172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240327000000-fv4.00.tif',
     label: '2024-03-27 S3B DAY',
     date: '2024-03-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3180,7 +3180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240327000000-fv4.00.tif',
     label: '2024-03-27 S3B NIGHT',
     date: '2024-03-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3188,7 +3188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240328000000-fv4.00.tif',
     label: '2024-03-28 S3A DAY',
     date: '2024-03-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3196,7 +3196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240328000000-fv4.00.tif',
     label: '2024-03-28 S3A NIGHT',
     date: '2024-03-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3204,7 +3204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240328000000-fv4.00.tif',
     label: '2024-03-28 S3B DAY',
     date: '2024-03-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3212,7 +3212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240328000000-fv4.00.tif',
     label: '2024-03-28 S3B NIGHT',
     date: '2024-03-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3220,7 +3220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240329000000-fv4.00.tif',
     label: '2024-03-29 S3A DAY',
     date: '2024-03-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3228,7 +3228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240329000000-fv4.00.tif',
     label: '2024-03-29 S3A NIGHT',
     date: '2024-03-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3236,7 +3236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240329000000-fv4.00.tif',
     label: '2024-03-29 S3B DAY',
     date: '2024-03-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3244,7 +3244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240329000000-fv4.00.tif',
     label: '2024-03-29 S3B NIGHT',
     date: '2024-03-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3252,7 +3252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240330000000-fv4.00.tif',
     label: '2024-03-30 S3A DAY',
     date: '2024-03-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3260,7 +3260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240330000000-fv4.00.tif',
     label: '2024-03-30 S3A NIGHT',
     date: '2024-03-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3268,7 +3268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240330000000-fv4.00.tif',
     label: '2024-03-30 S3B DAY',
     date: '2024-03-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3276,7 +3276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240330000000-fv4.00.tif',
     label: '2024-03-30 S3B NIGHT',
     date: '2024-03-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3284,7 +3284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240331000000-fv4.00.tif',
     label: '2024-03-31 S3A DAY',
     date: '2024-03-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3292,7 +3292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240331000000-fv4.00.tif',
     label: '2024-03-31 S3A NIGHT',
     date: '2024-03-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3300,7 +3300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240331000000-fv4.00.tif',
     label: '2024-03-31 S3B DAY',
     date: '2024-03-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3308,7 +3308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240331000000-fv4.00.tif',
     label: '2024-03-31 S3B NIGHT',
     date: '2024-03-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3316,7 +3316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240401000000-fv4.00.tif',
     label: '2024-04-01 S3A DAY',
     date: '2024-04-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3324,7 +3324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240401000000-fv4.00.tif',
     label: '2024-04-01 S3A NIGHT',
     date: '2024-04-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3332,7 +3332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240401000000-fv4.00.tif',
     label: '2024-04-01 S3B DAY',
     date: '2024-04-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3340,7 +3340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240401000000-fv4.00.tif',
     label: '2024-04-01 S3B NIGHT',
     date: '2024-04-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3348,7 +3348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240402000000-fv4.00.tif',
     label: '2024-04-02 S3A DAY',
     date: '2024-04-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3356,7 +3356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240402000000-fv4.00.tif',
     label: '2024-04-02 S3A NIGHT',
     date: '2024-04-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3364,7 +3364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240402000000-fv4.00.tif',
     label: '2024-04-02 S3B DAY',
     date: '2024-04-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3372,7 +3372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240402000000-fv4.00.tif',
     label: '2024-04-02 S3B NIGHT',
     date: '2024-04-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3380,7 +3380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240403000000-fv4.00.tif',
     label: '2024-04-03 S3A DAY',
     date: '2024-04-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3388,7 +3388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240403000000-fv4.00.tif',
     label: '2024-04-03 S3A NIGHT',
     date: '2024-04-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3396,7 +3396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240403000000-fv4.00.tif',
     label: '2024-04-03 S3B DAY',
     date: '2024-04-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3404,7 +3404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240403000000-fv4.00.tif',
     label: '2024-04-03 S3B NIGHT',
     date: '2024-04-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3412,7 +3412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240404000000-fv4.00.tif',
     label: '2024-04-04 S3A DAY',
     date: '2024-04-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3420,7 +3420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240404000000-fv4.00.tif',
     label: '2024-04-04 S3A NIGHT',
     date: '2024-04-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3428,7 +3428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240404000000-fv4.00.tif',
     label: '2024-04-04 S3B DAY',
     date: '2024-04-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3436,7 +3436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240404000000-fv4.00.tif',
     label: '2024-04-04 S3B NIGHT',
     date: '2024-04-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3444,7 +3444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240405000000-fv4.00.tif',
     label: '2024-04-05 S3A DAY',
     date: '2024-04-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3452,7 +3452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240405000000-fv4.00.tif',
     label: '2024-04-05 S3A NIGHT',
     date: '2024-04-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3460,7 +3460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240405000000-fv4.00.tif',
     label: '2024-04-05 S3B DAY',
     date: '2024-04-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3468,7 +3468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240405000000-fv4.00.tif',
     label: '2024-04-05 S3B NIGHT',
     date: '2024-04-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3476,7 +3476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240406000000-fv4.00.tif',
     label: '2024-04-06 S3A DAY',
     date: '2024-04-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3484,7 +3484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240406000000-fv4.00.tif',
     label: '2024-04-06 S3A NIGHT',
     date: '2024-04-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3492,7 +3492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240406000000-fv4.00.tif',
     label: '2024-04-06 S3B DAY',
     date: '2024-04-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3500,7 +3500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240406000000-fv4.00.tif',
     label: '2024-04-06 S3B NIGHT',
     date: '2024-04-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3508,7 +3508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240407000000-fv4.00.tif',
     label: '2024-04-07 S3A DAY',
     date: '2024-04-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3516,7 +3516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240407000000-fv4.00.tif',
     label: '2024-04-07 S3A NIGHT',
     date: '2024-04-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3524,7 +3524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240407000000-fv4.00.tif',
     label: '2024-04-07 S3B DAY',
     date: '2024-04-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3532,7 +3532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240407000000-fv4.00.tif',
     label: '2024-04-07 S3B NIGHT',
     date: '2024-04-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3540,7 +3540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240408000000-fv4.00.tif',
     label: '2024-04-08 S3A DAY',
     date: '2024-04-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3548,7 +3548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240408000000-fv4.00.tif',
     label: '2024-04-08 S3A NIGHT',
     date: '2024-04-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3556,7 +3556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240408000000-fv4.00.tif',
     label: '2024-04-08 S3B DAY',
     date: '2024-04-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3564,7 +3564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240408000000-fv4.00.tif',
     label: '2024-04-08 S3B NIGHT',
     date: '2024-04-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3572,7 +3572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240409000000-fv4.00.tif',
     label: '2024-04-09 S3A DAY',
     date: '2024-04-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3580,7 +3580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240409000000-fv4.00.tif',
     label: '2024-04-09 S3A NIGHT',
     date: '2024-04-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3588,7 +3588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240409000000-fv4.00.tif',
     label: '2024-04-09 S3B DAY',
     date: '2024-04-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3596,7 +3596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240409000000-fv4.00.tif',
     label: '2024-04-09 S3B NIGHT',
     date: '2024-04-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3604,7 +3604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240410000000-fv4.00.tif',
     label: '2024-04-10 S3A DAY',
     date: '2024-04-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3612,7 +3612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240410000000-fv4.00.tif',
     label: '2024-04-10 S3A NIGHT',
     date: '2024-04-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3620,7 +3620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240410000000-fv4.00.tif',
     label: '2024-04-10 S3B DAY',
     date: '2024-04-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3628,7 +3628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240410000000-fv4.00.tif',
     label: '2024-04-10 S3B NIGHT',
     date: '2024-04-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3636,7 +3636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240411000000-fv4.00.tif',
     label: '2024-04-11 S3A DAY',
     date: '2024-04-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3644,7 +3644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240411000000-fv4.00.tif',
     label: '2024-04-11 S3A NIGHT',
     date: '2024-04-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3652,7 +3652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240411000000-fv4.00.tif',
     label: '2024-04-11 S3B DAY',
     date: '2024-04-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3660,7 +3660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240411000000-fv4.00.tif',
     label: '2024-04-11 S3B NIGHT',
     date: '2024-04-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3668,7 +3668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240412000000-fv4.00.tif',
     label: '2024-04-12 S3A DAY',
     date: '2024-04-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3676,7 +3676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240412000000-fv4.00.tif',
     label: '2024-04-12 S3A NIGHT',
     date: '2024-04-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3684,7 +3684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240412000000-fv4.00.tif',
     label: '2024-04-12 S3B DAY',
     date: '2024-04-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3692,7 +3692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240412000000-fv4.00.tif',
     label: '2024-04-12 S3B NIGHT',
     date: '2024-04-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3700,7 +3700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240413000000-fv4.00.tif',
     label: '2024-04-13 S3A DAY',
     date: '2024-04-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3708,7 +3708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240413000000-fv4.00.tif',
     label: '2024-04-13 S3A NIGHT',
     date: '2024-04-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3716,7 +3716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240413000000-fv4.00.tif',
     label: '2024-04-13 S3B DAY',
     date: '2024-04-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3724,7 +3724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240413000000-fv4.00.tif',
     label: '2024-04-13 S3B NIGHT',
     date: '2024-04-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3732,7 +3732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240414000000-fv4.00.tif',
     label: '2024-04-14 S3A DAY',
     date: '2024-04-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3740,7 +3740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240414000000-fv4.00.tif',
     label: '2024-04-14 S3A NIGHT',
     date: '2024-04-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3748,7 +3748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240414000000-fv4.00.tif',
     label: '2024-04-14 S3B DAY',
     date: '2024-04-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3756,7 +3756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240414000000-fv4.00.tif',
     label: '2024-04-14 S3B NIGHT',
     date: '2024-04-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3764,7 +3764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240415000000-fv4.00.tif',
     label: '2024-04-15 S3A DAY',
     date: '2024-04-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3772,7 +3772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240415000000-fv4.00.tif',
     label: '2024-04-15 S3A NIGHT',
     date: '2024-04-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3780,7 +3780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240415000000-fv4.00.tif',
     label: '2024-04-15 S3B DAY',
     date: '2024-04-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3788,7 +3788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240415000000-fv4.00.tif',
     label: '2024-04-15 S3B NIGHT',
     date: '2024-04-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3796,7 +3796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240416000000-fv4.00.tif',
     label: '2024-04-16 S3A DAY',
     date: '2024-04-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3804,7 +3804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240416000000-fv4.00.tif',
     label: '2024-04-16 S3A NIGHT',
     date: '2024-04-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3812,7 +3812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240416000000-fv4.00.tif',
     label: '2024-04-16 S3B DAY',
     date: '2024-04-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3820,7 +3820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240416000000-fv4.00.tif',
     label: '2024-04-16 S3B NIGHT',
     date: '2024-04-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3828,7 +3828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240417000000-fv4.00.tif',
     label: '2024-04-17 S3A DAY',
     date: '2024-04-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3836,7 +3836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240417000000-fv4.00.tif',
     label: '2024-04-17 S3A NIGHT',
     date: '2024-04-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3844,7 +3844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240417000000-fv4.00.tif',
     label: '2024-04-17 S3B DAY',
     date: '2024-04-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3852,7 +3852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240417000000-fv4.00.tif',
     label: '2024-04-17 S3B NIGHT',
     date: '2024-04-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3860,7 +3860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240418000000-fv4.00.tif',
     label: '2024-04-18 S3A DAY',
     date: '2024-04-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3868,7 +3868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240418000000-fv4.00.tif',
     label: '2024-04-18 S3A NIGHT',
     date: '2024-04-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3876,7 +3876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240418000000-fv4.00.tif',
     label: '2024-04-18 S3B DAY',
     date: '2024-04-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3884,7 +3884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240418000000-fv4.00.tif',
     label: '2024-04-18 S3B NIGHT',
     date: '2024-04-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3892,7 +3892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240419000000-fv4.00.tif',
     label: '2024-04-19 S3A DAY',
     date: '2024-04-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3900,7 +3900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240419000000-fv4.00.tif',
     label: '2024-04-19 S3A NIGHT',
     date: '2024-04-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3908,7 +3908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240419000000-fv4.00.tif',
     label: '2024-04-19 S3B DAY',
     date: '2024-04-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3916,7 +3916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240419000000-fv4.00.tif',
     label: '2024-04-19 S3B NIGHT',
     date: '2024-04-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3924,7 +3924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240420000000-fv4.00.tif',
     label: '2024-04-20 S3A DAY',
     date: '2024-04-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3932,7 +3932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240420000000-fv4.00.tif',
     label: '2024-04-20 S3A NIGHT',
     date: '2024-04-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3940,7 +3940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240420000000-fv4.00.tif',
     label: '2024-04-20 S3B DAY',
     date: '2024-04-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3948,7 +3948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240420000000-fv4.00.tif',
     label: '2024-04-20 S3B NIGHT',
     date: '2024-04-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3956,7 +3956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240421000000-fv4.00.tif',
     label: '2024-04-21 S3A DAY',
     date: '2024-04-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3964,7 +3964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240421000000-fv4.00.tif',
     label: '2024-04-21 S3A NIGHT',
     date: '2024-04-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -3972,7 +3972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240421000000-fv4.00.tif',
     label: '2024-04-21 S3B DAY',
     date: '2024-04-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -3980,7 +3980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240421000000-fv4.00.tif',
     label: '2024-04-21 S3B NIGHT',
     date: '2024-04-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -3988,7 +3988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240422000000-fv4.00.tif',
     label: '2024-04-22 S3A DAY',
     date: '2024-04-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -3996,7 +3996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240422000000-fv4.00.tif',
     label: '2024-04-22 S3A NIGHT',
     date: '2024-04-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4004,7 +4004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240422000000-fv4.00.tif',
     label: '2024-04-22 S3B DAY',
     date: '2024-04-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4012,7 +4012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240422000000-fv4.00.tif',
     label: '2024-04-22 S3B NIGHT',
     date: '2024-04-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4020,7 +4020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240423000000-fv4.00.tif',
     label: '2024-04-23 S3A DAY',
     date: '2024-04-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4028,7 +4028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240423000000-fv4.00.tif',
     label: '2024-04-23 S3A NIGHT',
     date: '2024-04-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4036,7 +4036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240423000000-fv4.00.tif',
     label: '2024-04-23 S3B DAY',
     date: '2024-04-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4044,7 +4044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240423000000-fv4.00.tif',
     label: '2024-04-23 S3B NIGHT',
     date: '2024-04-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4052,7 +4052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240424000000-fv4.00.tif',
     label: '2024-04-24 S3A DAY',
     date: '2024-04-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4060,7 +4060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240424000000-fv4.00.tif',
     label: '2024-04-24 S3A NIGHT',
     date: '2024-04-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4068,7 +4068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240424000000-fv4.00.tif',
     label: '2024-04-24 S3B DAY',
     date: '2024-04-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4076,7 +4076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240424000000-fv4.00.tif',
     label: '2024-04-24 S3B NIGHT',
     date: '2024-04-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4084,7 +4084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240425000000-fv4.00.tif',
     label: '2024-04-25 S3A DAY',
     date: '2024-04-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4092,7 +4092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240425000000-fv4.00.tif',
     label: '2024-04-25 S3A NIGHT',
     date: '2024-04-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4100,7 +4100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240425000000-fv4.00.tif',
     label: '2024-04-25 S3B DAY',
     date: '2024-04-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4108,7 +4108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240425000000-fv4.00.tif',
     label: '2024-04-25 S3B NIGHT',
     date: '2024-04-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4116,7 +4116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240426000000-fv4.00.tif',
     label: '2024-04-26 S3A DAY',
     date: '2024-04-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4124,7 +4124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240426000000-fv4.00.tif',
     label: '2024-04-26 S3A NIGHT',
     date: '2024-04-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4132,7 +4132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240426000000-fv4.00.tif',
     label: '2024-04-26 S3B DAY',
     date: '2024-04-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4140,7 +4140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240426000000-fv4.00.tif',
     label: '2024-04-26 S3B NIGHT',
     date: '2024-04-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4148,7 +4148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240427000000-fv4.00.tif',
     label: '2024-04-27 S3A DAY',
     date: '2024-04-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4156,7 +4156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240427000000-fv4.00.tif',
     label: '2024-04-27 S3A NIGHT',
     date: '2024-04-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4164,7 +4164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240427000000-fv4.00.tif',
     label: '2024-04-27 S3B DAY',
     date: '2024-04-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4172,7 +4172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240427000000-fv4.00.tif',
     label: '2024-04-27 S3B NIGHT',
     date: '2024-04-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4180,7 +4180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240428000000-fv4.00.tif',
     label: '2024-04-28 S3A DAY',
     date: '2024-04-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4188,7 +4188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240428000000-fv4.00.tif',
     label: '2024-04-28 S3A NIGHT',
     date: '2024-04-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4196,7 +4196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240428000000-fv4.00.tif',
     label: '2024-04-28 S3B DAY',
     date: '2024-04-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4204,7 +4204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240428000000-fv4.00.tif',
     label: '2024-04-28 S3B NIGHT',
     date: '2024-04-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4212,7 +4212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240429000000-fv4.00.tif',
     label: '2024-04-29 S3A DAY',
     date: '2024-04-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4220,7 +4220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240429000000-fv4.00.tif',
     label: '2024-04-29 S3A NIGHT',
     date: '2024-04-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4228,7 +4228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240429000000-fv4.00.tif',
     label: '2024-04-29 S3B DAY',
     date: '2024-04-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4236,7 +4236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240429000000-fv4.00.tif',
     label: '2024-04-29 S3B NIGHT',
     date: '2024-04-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4244,7 +4244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240430000000-fv4.00.tif',
     label: '2024-04-30 S3A DAY',
     date: '2024-04-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4252,7 +4252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240430000000-fv4.00.tif',
     label: '2024-04-30 S3A NIGHT',
     date: '2024-04-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4260,7 +4260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240430000000-fv4.00.tif',
     label: '2024-04-30 S3B DAY',
     date: '2024-04-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4268,7 +4268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240430000000-fv4.00.tif',
     label: '2024-04-30 S3B NIGHT',
     date: '2024-04-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4276,7 +4276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240501000000-fv4.00.tif',
     label: '2024-05-01 S3A DAY',
     date: '2024-05-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4284,7 +4284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240501000000-fv4.00.tif',
     label: '2024-05-01 S3A NIGHT',
     date: '2024-05-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4292,7 +4292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240501000000-fv4.00.tif',
     label: '2024-05-01 S3B DAY',
     date: '2024-05-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4300,7 +4300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240501000000-fv4.00.tif',
     label: '2024-05-01 S3B NIGHT',
     date: '2024-05-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4308,7 +4308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240502000000-fv4.00.tif',
     label: '2024-05-02 S3A DAY',
     date: '2024-05-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4316,7 +4316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240502000000-fv4.00.tif',
     label: '2024-05-02 S3A NIGHT',
     date: '2024-05-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4324,7 +4324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240502000000-fv4.00.tif',
     label: '2024-05-02 S3B DAY',
     date: '2024-05-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4332,7 +4332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240502000000-fv4.00.tif',
     label: '2024-05-02 S3B NIGHT',
     date: '2024-05-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4340,7 +4340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240503000000-fv4.00.tif',
     label: '2024-05-03 S3A DAY',
     date: '2024-05-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4348,7 +4348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240503000000-fv4.00.tif',
     label: '2024-05-03 S3A NIGHT',
     date: '2024-05-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4356,7 +4356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240503000000-fv4.00.tif',
     label: '2024-05-03 S3B DAY',
     date: '2024-05-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4364,7 +4364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240503000000-fv4.00.tif',
     label: '2024-05-03 S3B NIGHT',
     date: '2024-05-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4372,7 +4372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240504000000-fv4.00.tif',
     label: '2024-05-04 S3A DAY',
     date: '2024-05-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4380,7 +4380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240504000000-fv4.00.tif',
     label: '2024-05-04 S3A NIGHT',
     date: '2024-05-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4388,7 +4388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240504000000-fv4.00.tif',
     label: '2024-05-04 S3B DAY',
     date: '2024-05-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4396,7 +4396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240504000000-fv4.00.tif',
     label: '2024-05-04 S3B NIGHT',
     date: '2024-05-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4404,7 +4404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240505000000-fv4.00.tif',
     label: '2024-05-05 S3A DAY',
     date: '2024-05-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4412,7 +4412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240505000000-fv4.00.tif',
     label: '2024-05-05 S3A NIGHT',
     date: '2024-05-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4420,7 +4420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240505000000-fv4.00.tif',
     label: '2024-05-05 S3B DAY',
     date: '2024-05-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4428,7 +4428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240505000000-fv4.00.tif',
     label: '2024-05-05 S3B NIGHT',
     date: '2024-05-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4436,7 +4436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240506000000-fv4.00.tif',
     label: '2024-05-06 S3A DAY',
     date: '2024-05-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4444,7 +4444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240506000000-fv4.00.tif',
     label: '2024-05-06 S3A NIGHT',
     date: '2024-05-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4452,7 +4452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240506000000-fv4.00.tif',
     label: '2024-05-06 S3B DAY',
     date: '2024-05-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4460,7 +4460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240506000000-fv4.00.tif',
     label: '2024-05-06 S3B NIGHT',
     date: '2024-05-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4468,7 +4468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240507000000-fv4.00.tif',
     label: '2024-05-07 S3A DAY',
     date: '2024-05-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4476,7 +4476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240507000000-fv4.00.tif',
     label: '2024-05-07 S3A NIGHT',
     date: '2024-05-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4484,7 +4484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240507000000-fv4.00.tif',
     label: '2024-05-07 S3B DAY',
     date: '2024-05-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4492,7 +4492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240507000000-fv4.00.tif',
     label: '2024-05-07 S3B NIGHT',
     date: '2024-05-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4500,7 +4500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240508000000-fv4.00.tif',
     label: '2024-05-08 S3A DAY',
     date: '2024-05-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4508,7 +4508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240508000000-fv4.00.tif',
     label: '2024-05-08 S3A NIGHT',
     date: '2024-05-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4516,7 +4516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240508000000-fv4.00.tif',
     label: '2024-05-08 S3B DAY',
     date: '2024-05-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4524,7 +4524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240508000000-fv4.00.tif',
     label: '2024-05-08 S3B NIGHT',
     date: '2024-05-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4532,7 +4532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240509000000-fv4.00.tif',
     label: '2024-05-09 S3A DAY',
     date: '2024-05-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4540,7 +4540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240509000000-fv4.00.tif',
     label: '2024-05-09 S3A NIGHT',
     date: '2024-05-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4548,7 +4548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240509000000-fv4.00.tif',
     label: '2024-05-09 S3B DAY',
     date: '2024-05-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4556,7 +4556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240509000000-fv4.00.tif',
     label: '2024-05-09 S3B NIGHT',
     date: '2024-05-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4564,7 +4564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240510000000-fv4.00.tif',
     label: '2024-05-10 S3A DAY',
     date: '2024-05-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4572,7 +4572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240510000000-fv4.00.tif',
     label: '2024-05-10 S3A NIGHT',
     date: '2024-05-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4580,7 +4580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240510000000-fv4.00.tif',
     label: '2024-05-10 S3B DAY',
     date: '2024-05-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4588,7 +4588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240510000000-fv4.00.tif',
     label: '2024-05-10 S3B NIGHT',
     date: '2024-05-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4596,7 +4596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240511000000-fv4.00.tif',
     label: '2024-05-11 S3A DAY',
     date: '2024-05-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4604,7 +4604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240511000000-fv4.00.tif',
     label: '2024-05-11 S3A NIGHT',
     date: '2024-05-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4612,7 +4612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240511000000-fv4.00.tif',
     label: '2024-05-11 S3B DAY',
     date: '2024-05-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4620,7 +4620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240511000000-fv4.00.tif',
     label: '2024-05-11 S3B NIGHT',
     date: '2024-05-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4628,7 +4628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240512000000-fv4.00.tif',
     label: '2024-05-12 S3A DAY',
     date: '2024-05-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4636,7 +4636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240512000000-fv4.00.tif',
     label: '2024-05-12 S3A NIGHT',
     date: '2024-05-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4644,7 +4644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240512000000-fv4.00.tif',
     label: '2024-05-12 S3B DAY',
     date: '2024-05-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4652,7 +4652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240512000000-fv4.00.tif',
     label: '2024-05-12 S3B NIGHT',
     date: '2024-05-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4660,7 +4660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240513000000-fv4.00.tif',
     label: '2024-05-13 S3A DAY',
     date: '2024-05-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4668,7 +4668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240513000000-fv4.00.tif',
     label: '2024-05-13 S3A NIGHT',
     date: '2024-05-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4676,7 +4676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240513000000-fv4.00.tif',
     label: '2024-05-13 S3B DAY',
     date: '2024-05-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4684,7 +4684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240513000000-fv4.00.tif',
     label: '2024-05-13 S3B NIGHT',
     date: '2024-05-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4692,7 +4692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240514000000-fv4.00.tif',
     label: '2024-05-14 S3A DAY',
     date: '2024-05-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4700,7 +4700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240514000000-fv4.00.tif',
     label: '2024-05-14 S3A NIGHT',
     date: '2024-05-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4708,7 +4708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240514000000-fv4.00.tif',
     label: '2024-05-14 S3B DAY',
     date: '2024-05-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4716,7 +4716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240514000000-fv4.00.tif',
     label: '2024-05-14 S3B NIGHT',
     date: '2024-05-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4724,7 +4724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240515000000-fv4.00.tif',
     label: '2024-05-15 S3A DAY',
     date: '2024-05-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4732,7 +4732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240515000000-fv4.00.tif',
     label: '2024-05-15 S3A NIGHT',
     date: '2024-05-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4740,7 +4740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240515000000-fv4.00.tif',
     label: '2024-05-15 S3B DAY',
     date: '2024-05-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4748,7 +4748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240515000000-fv4.00.tif',
     label: '2024-05-15 S3B NIGHT',
     date: '2024-05-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4756,7 +4756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240516000000-fv4.00.tif',
     label: '2024-05-16 S3A DAY',
     date: '2024-05-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4764,7 +4764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240516000000-fv4.00.tif',
     label: '2024-05-16 S3A NIGHT',
     date: '2024-05-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4772,7 +4772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240516000000-fv4.00.tif',
     label: '2024-05-16 S3B DAY',
     date: '2024-05-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4780,7 +4780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240516000000-fv4.00.tif',
     label: '2024-05-16 S3B NIGHT',
     date: '2024-05-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4788,7 +4788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240517000000-fv4.00.tif',
     label: '2024-05-17 S3A DAY',
     date: '2024-05-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4796,7 +4796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240517000000-fv4.00.tif',
     label: '2024-05-17 S3A NIGHT',
     date: '2024-05-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4804,7 +4804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240517000000-fv4.00.tif',
     label: '2024-05-17 S3B DAY',
     date: '2024-05-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4812,7 +4812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240517000000-fv4.00.tif',
     label: '2024-05-17 S3B NIGHT',
     date: '2024-05-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4820,7 +4820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240518000000-fv4.00.tif',
     label: '2024-05-18 S3A DAY',
     date: '2024-05-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4828,7 +4828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240518000000-fv4.00.tif',
     label: '2024-05-18 S3A NIGHT',
     date: '2024-05-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4836,7 +4836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240518000000-fv4.00.tif',
     label: '2024-05-18 S3B DAY',
     date: '2024-05-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4844,7 +4844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240518000000-fv4.00.tif',
     label: '2024-05-18 S3B NIGHT',
     date: '2024-05-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4852,7 +4852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240519000000-fv4.00.tif',
     label: '2024-05-19 S3A DAY',
     date: '2024-05-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4860,7 +4860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240519000000-fv4.00.tif',
     label: '2024-05-19 S3A NIGHT',
     date: '2024-05-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4868,7 +4868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240519000000-fv4.00.tif',
     label: '2024-05-19 S3B DAY',
     date: '2024-05-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4876,7 +4876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240519000000-fv4.00.tif',
     label: '2024-05-19 S3B NIGHT',
     date: '2024-05-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4884,7 +4884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240520000000-fv4.00.tif',
     label: '2024-05-20 S3A DAY',
     date: '2024-05-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4892,7 +4892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240520000000-fv4.00.tif',
     label: '2024-05-20 S3A NIGHT',
     date: '2024-05-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4900,7 +4900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240520000000-fv4.00.tif',
     label: '2024-05-20 S3B DAY',
     date: '2024-05-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4908,7 +4908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240520000000-fv4.00.tif',
     label: '2024-05-20 S3B NIGHT',
     date: '2024-05-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4916,7 +4916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240521000000-fv4.00.tif',
     label: '2024-05-21 S3A DAY',
     date: '2024-05-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4924,7 +4924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240521000000-fv4.00.tif',
     label: '2024-05-21 S3A NIGHT',
     date: '2024-05-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4932,7 +4932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240521000000-fv4.00.tif',
     label: '2024-05-21 S3B DAY',
     date: '2024-05-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4940,7 +4940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240521000000-fv4.00.tif',
     label: '2024-05-21 S3B NIGHT',
     date: '2024-05-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4948,7 +4948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240522000000-fv4.00.tif',
     label: '2024-05-22 S3A DAY',
     date: '2024-05-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4956,7 +4956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240522000000-fv4.00.tif',
     label: '2024-05-22 S3A NIGHT',
     date: '2024-05-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4964,7 +4964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240522000000-fv4.00.tif',
     label: '2024-05-22 S3B DAY',
     date: '2024-05-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -4972,7 +4972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240522000000-fv4.00.tif',
     label: '2024-05-22 S3B NIGHT',
     date: '2024-05-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -4980,7 +4980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240523000000-fv4.00.tif',
     label: '2024-05-23 S3A DAY',
     date: '2024-05-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -4988,7 +4988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240523000000-fv4.00.tif',
     label: '2024-05-23 S3A NIGHT',
     date: '2024-05-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -4996,7 +4996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240523000000-fv4.00.tif',
     label: '2024-05-23 S3B DAY',
     date: '2024-05-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5004,7 +5004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240523000000-fv4.00.tif',
     label: '2024-05-23 S3B NIGHT',
     date: '2024-05-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5012,7 +5012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240524000000-fv4.00.tif',
     label: '2024-05-24 S3A DAY',
     date: '2024-05-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5020,7 +5020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240524000000-fv4.00.tif',
     label: '2024-05-24 S3A NIGHT',
     date: '2024-05-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5028,7 +5028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240524000000-fv4.00.tif',
     label: '2024-05-24 S3B DAY',
     date: '2024-05-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5036,7 +5036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240524000000-fv4.00.tif',
     label: '2024-05-24 S3B NIGHT',
     date: '2024-05-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5044,7 +5044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240525000000-fv4.00.tif',
     label: '2024-05-25 S3A DAY',
     date: '2024-05-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5052,7 +5052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240525000000-fv4.00.tif',
     label: '2024-05-25 S3A NIGHT',
     date: '2024-05-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5060,7 +5060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240525000000-fv4.00.tif',
     label: '2024-05-25 S3B DAY',
     date: '2024-05-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5068,7 +5068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240525000000-fv4.00.tif',
     label: '2024-05-25 S3B NIGHT',
     date: '2024-05-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5076,7 +5076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240526000000-fv4.00.tif',
     label: '2024-05-26 S3A DAY',
     date: '2024-05-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5084,7 +5084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240526000000-fv4.00.tif',
     label: '2024-05-26 S3A NIGHT',
     date: '2024-05-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5092,7 +5092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240526000000-fv4.00.tif',
     label: '2024-05-26 S3B DAY',
     date: '2024-05-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5100,7 +5100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240526000000-fv4.00.tif',
     label: '2024-05-26 S3B NIGHT',
     date: '2024-05-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5108,7 +5108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240527000000-fv4.00.tif',
     label: '2024-05-27 S3A DAY',
     date: '2024-05-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5116,7 +5116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240527000000-fv4.00.tif',
     label: '2024-05-27 S3A NIGHT',
     date: '2024-05-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5124,7 +5124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240527000000-fv4.00.tif',
     label: '2024-05-27 S3B DAY',
     date: '2024-05-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5132,7 +5132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240527000000-fv4.00.tif',
     label: '2024-05-27 S3B NIGHT',
     date: '2024-05-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5140,7 +5140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240528000000-fv4.00.tif',
     label: '2024-05-28 S3A DAY',
     date: '2024-05-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5148,7 +5148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240528000000-fv4.00.tif',
     label: '2024-05-28 S3A NIGHT',
     date: '2024-05-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5156,7 +5156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240528000000-fv4.00.tif',
     label: '2024-05-28 S3B DAY',
     date: '2024-05-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5164,7 +5164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240528000000-fv4.00.tif',
     label: '2024-05-28 S3B NIGHT',
     date: '2024-05-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5172,7 +5172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240529000000-fv4.00.tif',
     label: '2024-05-29 S3A DAY',
     date: '2024-05-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5180,7 +5180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240529000000-fv4.00.tif',
     label: '2024-05-29 S3A NIGHT',
     date: '2024-05-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5188,7 +5188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240529000000-fv4.00.tif',
     label: '2024-05-29 S3B DAY',
     date: '2024-05-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5196,7 +5196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240529000000-fv4.00.tif',
     label: '2024-05-29 S3B NIGHT',
     date: '2024-05-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5204,7 +5204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240530000000-fv4.00.tif',
     label: '2024-05-30 S3A DAY',
     date: '2024-05-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5212,7 +5212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240530000000-fv4.00.tif',
     label: '2024-05-30 S3A NIGHT',
     date: '2024-05-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5220,7 +5220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240530000000-fv4.00.tif',
     label: '2024-05-30 S3B DAY',
     date: '2024-05-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5228,7 +5228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240530000000-fv4.00.tif',
     label: '2024-05-30 S3B NIGHT',
     date: '2024-05-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5236,7 +5236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240531000000-fv4.00.tif',
     label: '2024-05-31 S3A DAY',
     date: '2024-05-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5244,7 +5244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240531000000-fv4.00.tif',
     label: '2024-05-31 S3A NIGHT',
     date: '2024-05-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5252,7 +5252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240531000000-fv4.00.tif',
     label: '2024-05-31 S3B DAY',
     date: '2024-05-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5260,7 +5260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240531000000-fv4.00.tif',
     label: '2024-05-31 S3B NIGHT',
     date: '2024-05-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5268,7 +5268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240601000000-fv4.00.tif',
     label: '2024-06-01 S3A DAY',
     date: '2024-06-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5276,7 +5276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240601000000-fv4.00.tif',
     label: '2024-06-01 S3A NIGHT',
     date: '2024-06-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5284,7 +5284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240601000000-fv4.00.tif',
     label: '2024-06-01 S3B DAY',
     date: '2024-06-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5292,7 +5292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240601000000-fv4.00.tif',
     label: '2024-06-01 S3B NIGHT',
     date: '2024-06-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5300,7 +5300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240602000000-fv4.00.tif',
     label: '2024-06-02 S3A DAY',
     date: '2024-06-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5308,7 +5308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240602000000-fv4.00.tif',
     label: '2024-06-02 S3A NIGHT',
     date: '2024-06-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5316,7 +5316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240602000000-fv4.00.tif',
     label: '2024-06-02 S3B DAY',
     date: '2024-06-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5324,7 +5324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240602000000-fv4.00.tif',
     label: '2024-06-02 S3B NIGHT',
     date: '2024-06-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5332,7 +5332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240603000000-fv4.00.tif',
     label: '2024-06-03 S3A DAY',
     date: '2024-06-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5340,7 +5340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240603000000-fv4.00.tif',
     label: '2024-06-03 S3A NIGHT',
     date: '2024-06-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5348,7 +5348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240603000000-fv4.00.tif',
     label: '2024-06-03 S3B DAY',
     date: '2024-06-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5356,7 +5356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240603000000-fv4.00.tif',
     label: '2024-06-03 S3B NIGHT',
     date: '2024-06-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5364,7 +5364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240604000000-fv4.00.tif',
     label: '2024-06-04 S3A DAY',
     date: '2024-06-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5372,7 +5372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240604000000-fv4.00.tif',
     label: '2024-06-04 S3A NIGHT',
     date: '2024-06-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5380,7 +5380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240604000000-fv4.00.tif',
     label: '2024-06-04 S3B DAY',
     date: '2024-06-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5388,7 +5388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240604000000-fv4.00.tif',
     label: '2024-06-04 S3B NIGHT',
     date: '2024-06-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5396,7 +5396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240605000000-fv4.00.tif',
     label: '2024-06-05 S3A DAY',
     date: '2024-06-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5404,7 +5404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240605000000-fv4.00.tif',
     label: '2024-06-05 S3A NIGHT',
     date: '2024-06-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5412,7 +5412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240605000000-fv4.00.tif',
     label: '2024-06-05 S3B DAY',
     date: '2024-06-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5420,7 +5420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240605000000-fv4.00.tif',
     label: '2024-06-05 S3B NIGHT',
     date: '2024-06-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5428,7 +5428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240606000000-fv4.00.tif',
     label: '2024-06-06 S3A DAY',
     date: '2024-06-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5436,7 +5436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240606000000-fv4.00.tif',
     label: '2024-06-06 S3A NIGHT',
     date: '2024-06-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5444,7 +5444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240606000000-fv4.00.tif',
     label: '2024-06-06 S3B DAY',
     date: '2024-06-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5452,7 +5452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240606000000-fv4.00.tif',
     label: '2024-06-06 S3B NIGHT',
     date: '2024-06-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5460,7 +5460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240607000000-fv4.00.tif',
     label: '2024-06-07 S3A DAY',
     date: '2024-06-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5468,7 +5468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240607000000-fv4.00.tif',
     label: '2024-06-07 S3A NIGHT',
     date: '2024-06-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5476,7 +5476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240607000000-fv4.00.tif',
     label: '2024-06-07 S3B DAY',
     date: '2024-06-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5484,7 +5484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240607000000-fv4.00.tif',
     label: '2024-06-07 S3B NIGHT',
     date: '2024-06-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5492,7 +5492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240608000000-fv4.00.tif',
     label: '2024-06-08 S3A DAY',
     date: '2024-06-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5500,7 +5500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240608000000-fv4.00.tif',
     label: '2024-06-08 S3A NIGHT',
     date: '2024-06-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5508,7 +5508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240608000000-fv4.00.tif',
     label: '2024-06-08 S3B DAY',
     date: '2024-06-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5516,7 +5516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240608000000-fv4.00.tif',
     label: '2024-06-08 S3B NIGHT',
     date: '2024-06-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5524,7 +5524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240609000000-fv4.00.tif',
     label: '2024-06-09 S3A DAY',
     date: '2024-06-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5532,7 +5532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240609000000-fv4.00.tif',
     label: '2024-06-09 S3A NIGHT',
     date: '2024-06-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5540,7 +5540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240609000000-fv4.00.tif',
     label: '2024-06-09 S3B DAY',
     date: '2024-06-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5548,7 +5548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240609000000-fv4.00.tif',
     label: '2024-06-09 S3B NIGHT',
     date: '2024-06-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5556,7 +5556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240610000000-fv4.00.tif',
     label: '2024-06-10 S3A DAY',
     date: '2024-06-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5564,7 +5564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240610000000-fv4.00.tif',
     label: '2024-06-10 S3A NIGHT',
     date: '2024-06-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5572,7 +5572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240610000000-fv4.00.tif',
     label: '2024-06-10 S3B DAY',
     date: '2024-06-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5580,7 +5580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240610000000-fv4.00.tif',
     label: '2024-06-10 S3B NIGHT',
     date: '2024-06-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5588,7 +5588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240611000000-fv4.00.tif',
     label: '2024-06-11 S3A DAY',
     date: '2024-06-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5596,7 +5596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240611000000-fv4.00.tif',
     label: '2024-06-11 S3A NIGHT',
     date: '2024-06-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5604,7 +5604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240611000000-fv4.00.tif',
     label: '2024-06-11 S3B DAY',
     date: '2024-06-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5612,7 +5612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240611000000-fv4.00.tif',
     label: '2024-06-11 S3B NIGHT',
     date: '2024-06-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5620,7 +5620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240612000000-fv4.00.tif',
     label: '2024-06-12 S3A DAY',
     date: '2024-06-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5628,7 +5628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240612000000-fv4.00.tif',
     label: '2024-06-12 S3A NIGHT',
     date: '2024-06-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5636,7 +5636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240612000000-fv4.00.tif',
     label: '2024-06-12 S3B DAY',
     date: '2024-06-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5644,7 +5644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240612000000-fv4.00.tif',
     label: '2024-06-12 S3B NIGHT',
     date: '2024-06-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5652,7 +5652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240613000000-fv4.00.tif',
     label: '2024-06-13 S3A DAY',
     date: '2024-06-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5660,7 +5660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240613000000-fv4.00.tif',
     label: '2024-06-13 S3A NIGHT',
     date: '2024-06-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5668,7 +5668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240613000000-fv4.00.tif',
     label: '2024-06-13 S3B DAY',
     date: '2024-06-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5676,7 +5676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240613000000-fv4.00.tif',
     label: '2024-06-13 S3B NIGHT',
     date: '2024-06-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5684,7 +5684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240614000000-fv4.00.tif',
     label: '2024-06-14 S3A DAY',
     date: '2024-06-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5692,7 +5692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240614000000-fv4.00.tif',
     label: '2024-06-14 S3A NIGHT',
     date: '2024-06-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5700,7 +5700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240614000000-fv4.00.tif',
     label: '2024-06-14 S3B DAY',
     date: '2024-06-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5708,7 +5708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240614000000-fv4.00.tif',
     label: '2024-06-14 S3B NIGHT',
     date: '2024-06-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5716,7 +5716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240615000000-fv4.00.tif',
     label: '2024-06-15 S3A DAY',
     date: '2024-06-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5724,7 +5724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240615000000-fv4.00.tif',
     label: '2024-06-15 S3A NIGHT',
     date: '2024-06-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5732,7 +5732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240615000000-fv4.00.tif',
     label: '2024-06-15 S3B DAY',
     date: '2024-06-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5740,7 +5740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240615000000-fv4.00.tif',
     label: '2024-06-15 S3B NIGHT',
     date: '2024-06-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5748,7 +5748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240616000000-fv4.00.tif',
     label: '2024-06-16 S3A DAY',
     date: '2024-06-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5756,7 +5756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240616000000-fv4.00.tif',
     label: '2024-06-16 S3A NIGHT',
     date: '2024-06-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5764,7 +5764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240616000000-fv4.00.tif',
     label: '2024-06-16 S3B DAY',
     date: '2024-06-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5772,7 +5772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240616000000-fv4.00.tif',
     label: '2024-06-16 S3B NIGHT',
     date: '2024-06-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5780,7 +5780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240617000000-fv4.00.tif',
     label: '2024-06-17 S3A DAY',
     date: '2024-06-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5788,7 +5788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240617000000-fv4.00.tif',
     label: '2024-06-17 S3A NIGHT',
     date: '2024-06-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5796,7 +5796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240617000000-fv4.00.tif',
     label: '2024-06-17 S3B DAY',
     date: '2024-06-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5804,7 +5804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240617000000-fv4.00.tif',
     label: '2024-06-17 S3B NIGHT',
     date: '2024-06-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5812,7 +5812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240618000000-fv4.00.tif',
     label: '2024-06-18 S3A DAY',
     date: '2024-06-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5820,7 +5820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240618000000-fv4.00.tif',
     label: '2024-06-18 S3A NIGHT',
     date: '2024-06-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5828,7 +5828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240618000000-fv4.00.tif',
     label: '2024-06-18 S3B DAY',
     date: '2024-06-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5836,7 +5836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240618000000-fv4.00.tif',
     label: '2024-06-18 S3B NIGHT',
     date: '2024-06-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5844,7 +5844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240619000000-fv4.00.tif',
     label: '2024-06-19 S3A DAY',
     date: '2024-06-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5852,7 +5852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240619000000-fv4.00.tif',
     label: '2024-06-19 S3A NIGHT',
     date: '2024-06-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5860,7 +5860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240619000000-fv4.00.tif',
     label: '2024-06-19 S3B DAY',
     date: '2024-06-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5868,7 +5868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240619000000-fv4.00.tif',
     label: '2024-06-19 S3B NIGHT',
     date: '2024-06-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5876,7 +5876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240620000000-fv4.00.tif',
     label: '2024-06-20 S3A DAY',
     date: '2024-06-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5884,7 +5884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240620000000-fv4.00.tif',
     label: '2024-06-20 S3A NIGHT',
     date: '2024-06-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5892,7 +5892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240620000000-fv4.00.tif',
     label: '2024-06-20 S3B DAY',
     date: '2024-06-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5900,7 +5900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240620000000-fv4.00.tif',
     label: '2024-06-20 S3B NIGHT',
     date: '2024-06-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5908,7 +5908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240621000000-fv4.00.tif',
     label: '2024-06-21 S3A DAY',
     date: '2024-06-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5916,7 +5916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240621000000-fv4.00.tif',
     label: '2024-06-21 S3A NIGHT',
     date: '2024-06-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5924,7 +5924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240621000000-fv4.00.tif',
     label: '2024-06-21 S3B DAY',
     date: '2024-06-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5932,7 +5932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240621000000-fv4.00.tif',
     label: '2024-06-21 S3B NIGHT',
     date: '2024-06-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5940,7 +5940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240622000000-fv4.00.tif',
     label: '2024-06-22 S3A DAY',
     date: '2024-06-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5948,7 +5948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240622000000-fv4.00.tif',
     label: '2024-06-22 S3A NIGHT',
     date: '2024-06-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5956,7 +5956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240622000000-fv4.00.tif',
     label: '2024-06-22 S3B DAY',
     date: '2024-06-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5964,7 +5964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240622000000-fv4.00.tif',
     label: '2024-06-22 S3B NIGHT',
     date: '2024-06-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -5972,7 +5972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240623000000-fv4.00.tif',
     label: '2024-06-23 S3A DAY',
     date: '2024-06-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -5980,7 +5980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240623000000-fv4.00.tif',
     label: '2024-06-23 S3A NIGHT',
     date: '2024-06-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -5988,7 +5988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240623000000-fv4.00.tif',
     label: '2024-06-23 S3B DAY',
     date: '2024-06-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -5996,7 +5996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240623000000-fv4.00.tif',
     label: '2024-06-23 S3B NIGHT',
     date: '2024-06-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6004,7 +6004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240624000000-fv4.00.tif',
     label: '2024-06-24 S3A DAY',
     date: '2024-06-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6012,7 +6012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240624000000-fv4.00.tif',
     label: '2024-06-24 S3A NIGHT',
     date: '2024-06-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6020,7 +6020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240624000000-fv4.00.tif',
     label: '2024-06-24 S3B DAY',
     date: '2024-06-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6028,7 +6028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240624000000-fv4.00.tif',
     label: '2024-06-24 S3B NIGHT',
     date: '2024-06-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6036,7 +6036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240625000000-fv4.00.tif',
     label: '2024-06-25 S3A DAY',
     date: '2024-06-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6044,7 +6044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240625000000-fv4.00.tif',
     label: '2024-06-25 S3A NIGHT',
     date: '2024-06-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6052,7 +6052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240625000000-fv4.00.tif',
     label: '2024-06-25 S3B DAY',
     date: '2024-06-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6060,7 +6060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240625000000-fv4.00.tif',
     label: '2024-06-25 S3B NIGHT',
     date: '2024-06-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6068,7 +6068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240626000000-fv4.00.tif',
     label: '2024-06-26 S3A DAY',
     date: '2024-06-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6076,7 +6076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240626000000-fv4.00.tif',
     label: '2024-06-26 S3A NIGHT',
     date: '2024-06-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6084,7 +6084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240626000000-fv4.00.tif',
     label: '2024-06-26 S3B DAY',
     date: '2024-06-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6092,7 +6092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240626000000-fv4.00.tif',
     label: '2024-06-26 S3B NIGHT',
     date: '2024-06-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6100,7 +6100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240627000000-fv4.00.tif',
     label: '2024-06-27 S3A DAY',
     date: '2024-06-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6108,7 +6108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240627000000-fv4.00.tif',
     label: '2024-06-27 S3A NIGHT',
     date: '2024-06-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6116,7 +6116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240627000000-fv4.00.tif',
     label: '2024-06-27 S3B DAY',
     date: '2024-06-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6124,7 +6124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240627000000-fv4.00.tif',
     label: '2024-06-27 S3B NIGHT',
     date: '2024-06-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6132,7 +6132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240628000000-fv4.00.tif',
     label: '2024-06-28 S3A DAY',
     date: '2024-06-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6140,7 +6140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240628000000-fv4.00.tif',
     label: '2024-06-28 S3A NIGHT',
     date: '2024-06-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6148,7 +6148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240628000000-fv4.00.tif',
     label: '2024-06-28 S3B DAY',
     date: '2024-06-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6156,7 +6156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240628000000-fv4.00.tif',
     label: '2024-06-28 S3B NIGHT',
     date: '2024-06-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6164,7 +6164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240629000000-fv4.00.tif',
     label: '2024-06-29 S3A DAY',
     date: '2024-06-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6172,7 +6172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240629000000-fv4.00.tif',
     label: '2024-06-29 S3A NIGHT',
     date: '2024-06-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6180,7 +6180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240629000000-fv4.00.tif',
     label: '2024-06-29 S3B DAY',
     date: '2024-06-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6188,7 +6188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240629000000-fv4.00.tif',
     label: '2024-06-29 S3B NIGHT',
     date: '2024-06-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6196,7 +6196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240630000000-fv4.00.tif',
     label: '2024-06-30 S3A DAY',
     date: '2024-06-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6204,7 +6204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240630000000-fv4.00.tif',
     label: '2024-06-30 S3A NIGHT',
     date: '2024-06-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6212,7 +6212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240630000000-fv4.00.tif',
     label: '2024-06-30 S3B DAY',
     date: '2024-06-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6220,7 +6220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240630000000-fv4.00.tif',
     label: '2024-06-30 S3B NIGHT',
     date: '2024-06-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6228,7 +6228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240701000000-fv4.00.tif',
     label: '2024-07-01 S3A DAY',
     date: '2024-07-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6236,7 +6236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240701000000-fv4.00.tif',
     label: '2024-07-01 S3A NIGHT',
     date: '2024-07-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6244,7 +6244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240701000000-fv4.00.tif',
     label: '2024-07-01 S3B DAY',
     date: '2024-07-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6252,7 +6252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240701000000-fv4.00.tif',
     label: '2024-07-01 S3B NIGHT',
     date: '2024-07-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6260,7 +6260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240702000000-fv4.00.tif',
     label: '2024-07-02 S3A DAY',
     date: '2024-07-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6268,7 +6268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240702000000-fv4.00.tif',
     label: '2024-07-02 S3A NIGHT',
     date: '2024-07-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6276,7 +6276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240702000000-fv4.00.tif',
     label: '2024-07-02 S3B DAY',
     date: '2024-07-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6284,7 +6284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240702000000-fv4.00.tif',
     label: '2024-07-02 S3B NIGHT',
     date: '2024-07-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6292,7 +6292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240703000000-fv4.00.tif',
     label: '2024-07-03 S3A DAY',
     date: '2024-07-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6300,7 +6300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240703000000-fv4.00.tif',
     label: '2024-07-03 S3A NIGHT',
     date: '2024-07-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6308,7 +6308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240703000000-fv4.00.tif',
     label: '2024-07-03 S3B DAY',
     date: '2024-07-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6316,7 +6316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240703000000-fv4.00.tif',
     label: '2024-07-03 S3B NIGHT',
     date: '2024-07-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6324,7 +6324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240704000000-fv4.00.tif',
     label: '2024-07-04 S3A DAY',
     date: '2024-07-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6332,7 +6332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240704000000-fv4.00.tif',
     label: '2024-07-04 S3A NIGHT',
     date: '2024-07-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6340,7 +6340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240704000000-fv4.00.tif',
     label: '2024-07-04 S3B DAY',
     date: '2024-07-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6348,7 +6348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240704000000-fv4.00.tif',
     label: '2024-07-04 S3B NIGHT',
     date: '2024-07-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6356,7 +6356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240705000000-fv4.00.tif',
     label: '2024-07-05 S3A DAY',
     date: '2024-07-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6364,7 +6364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240705000000-fv4.00.tif',
     label: '2024-07-05 S3A NIGHT',
     date: '2024-07-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6372,7 +6372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240705000000-fv4.00.tif',
     label: '2024-07-05 S3B DAY',
     date: '2024-07-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6380,7 +6380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240705000000-fv4.00.tif',
     label: '2024-07-05 S3B NIGHT',
     date: '2024-07-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6388,7 +6388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240706000000-fv4.00.tif',
     label: '2024-07-06 S3A DAY',
     date: '2024-07-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6396,7 +6396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240706000000-fv4.00.tif',
     label: '2024-07-06 S3A NIGHT',
     date: '2024-07-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6404,7 +6404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240706000000-fv4.00.tif',
     label: '2024-07-06 S3B DAY',
     date: '2024-07-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6412,7 +6412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240706000000-fv4.00.tif',
     label: '2024-07-06 S3B NIGHT',
     date: '2024-07-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6420,7 +6420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240707000000-fv4.00.tif',
     label: '2024-07-07 S3A DAY',
     date: '2024-07-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6428,7 +6428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240707000000-fv4.00.tif',
     label: '2024-07-07 S3A NIGHT',
     date: '2024-07-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6436,7 +6436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240707000000-fv4.00.tif',
     label: '2024-07-07 S3B DAY',
     date: '2024-07-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6444,7 +6444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240707000000-fv4.00.tif',
     label: '2024-07-07 S3B NIGHT',
     date: '2024-07-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6452,7 +6452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240708000000-fv4.00.tif',
     label: '2024-07-08 S3A DAY',
     date: '2024-07-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6460,7 +6460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240708000000-fv4.00.tif',
     label: '2024-07-08 S3A NIGHT',
     date: '2024-07-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6468,7 +6468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240708000000-fv4.00.tif',
     label: '2024-07-08 S3B DAY',
     date: '2024-07-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6476,7 +6476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240708000000-fv4.00.tif',
     label: '2024-07-08 S3B NIGHT',
     date: '2024-07-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6484,7 +6484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240709000000-fv4.00.tif',
     label: '2024-07-09 S3A DAY',
     date: '2024-07-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6492,7 +6492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240709000000-fv4.00.tif',
     label: '2024-07-09 S3A NIGHT',
     date: '2024-07-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6500,7 +6500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240709000000-fv4.00.tif',
     label: '2024-07-09 S3B DAY',
     date: '2024-07-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6508,7 +6508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240709000000-fv4.00.tif',
     label: '2024-07-09 S3B NIGHT',
     date: '2024-07-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6516,7 +6516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240710000000-fv4.00.tif',
     label: '2024-07-10 S3A DAY',
     date: '2024-07-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6524,7 +6524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240710000000-fv4.00.tif',
     label: '2024-07-10 S3A NIGHT',
     date: '2024-07-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6532,7 +6532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240710000000-fv4.00.tif',
     label: '2024-07-10 S3B DAY',
     date: '2024-07-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6540,7 +6540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240710000000-fv4.00.tif',
     label: '2024-07-10 S3B NIGHT',
     date: '2024-07-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6548,7 +6548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240711000000-fv4.00.tif',
     label: '2024-07-11 S3A DAY',
     date: '2024-07-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6556,7 +6556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240711000000-fv4.00.tif',
     label: '2024-07-11 S3A NIGHT',
     date: '2024-07-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6564,7 +6564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240711000000-fv4.00.tif',
     label: '2024-07-11 S3B DAY',
     date: '2024-07-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6572,7 +6572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240711000000-fv4.00.tif',
     label: '2024-07-11 S3B NIGHT',
     date: '2024-07-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6580,7 +6580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240712000000-fv4.00.tif',
     label: '2024-07-12 S3A DAY',
     date: '2024-07-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6588,7 +6588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240712000000-fv4.00.tif',
     label: '2024-07-12 S3A NIGHT',
     date: '2024-07-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6596,7 +6596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240712000000-fv4.00.tif',
     label: '2024-07-12 S3B DAY',
     date: '2024-07-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6604,7 +6604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240712000000-fv4.00.tif',
     label: '2024-07-12 S3B NIGHT',
     date: '2024-07-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6612,7 +6612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240713000000-fv4.00.tif',
     label: '2024-07-13 S3A DAY',
     date: '2024-07-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6620,7 +6620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240713000000-fv4.00.tif',
     label: '2024-07-13 S3A NIGHT',
     date: '2024-07-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6628,7 +6628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240713000000-fv4.00.tif',
     label: '2024-07-13 S3B DAY',
     date: '2024-07-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6636,7 +6636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240713000000-fv4.00.tif',
     label: '2024-07-13 S3B NIGHT',
     date: '2024-07-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6644,7 +6644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240714000000-fv4.00.tif',
     label: '2024-07-14 S3A DAY',
     date: '2024-07-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6652,7 +6652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240714000000-fv4.00.tif',
     label: '2024-07-14 S3A NIGHT',
     date: '2024-07-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6660,7 +6660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240714000000-fv4.00.tif',
     label: '2024-07-14 S3B DAY',
     date: '2024-07-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6668,7 +6668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240714000000-fv4.00.tif',
     label: '2024-07-14 S3B NIGHT',
     date: '2024-07-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6676,7 +6676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240715000000-fv4.00.tif',
     label: '2024-07-15 S3A DAY',
     date: '2024-07-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6684,7 +6684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240715000000-fv4.00.tif',
     label: '2024-07-15 S3A NIGHT',
     date: '2024-07-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6692,7 +6692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240715000000-fv4.00.tif',
     label: '2024-07-15 S3B DAY',
     date: '2024-07-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6700,7 +6700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240715000000-fv4.00.tif',
     label: '2024-07-15 S3B NIGHT',
     date: '2024-07-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6708,7 +6708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240716000000-fv4.00.tif',
     label: '2024-07-16 S3A DAY',
     date: '2024-07-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6716,7 +6716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240716000000-fv4.00.tif',
     label: '2024-07-16 S3A NIGHT',
     date: '2024-07-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6724,7 +6724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240716000000-fv4.00.tif',
     label: '2024-07-16 S3B DAY',
     date: '2024-07-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6732,7 +6732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240716000000-fv4.00.tif',
     label: '2024-07-16 S3B NIGHT',
     date: '2024-07-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6740,7 +6740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240717000000-fv4.00.tif',
     label: '2024-07-17 S3A DAY',
     date: '2024-07-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6748,7 +6748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240717000000-fv4.00.tif',
     label: '2024-07-17 S3A NIGHT',
     date: '2024-07-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6756,7 +6756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240717000000-fv4.00.tif',
     label: '2024-07-17 S3B DAY',
     date: '2024-07-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6764,7 +6764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240717000000-fv4.00.tif',
     label: '2024-07-17 S3B NIGHT',
     date: '2024-07-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6772,7 +6772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240718000000-fv4.00.tif',
     label: '2024-07-18 S3A DAY',
     date: '2024-07-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6780,7 +6780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240718000000-fv4.00.tif',
     label: '2024-07-18 S3A NIGHT',
     date: '2024-07-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6788,7 +6788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240718000000-fv4.00.tif',
     label: '2024-07-18 S3B DAY',
     date: '2024-07-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6796,7 +6796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240718000000-fv4.00.tif',
     label: '2024-07-18 S3B NIGHT',
     date: '2024-07-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6804,7 +6804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240719000000-fv4.00.tif',
     label: '2024-07-19 S3A DAY',
     date: '2024-07-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6812,7 +6812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240719000000-fv4.00.tif',
     label: '2024-07-19 S3A NIGHT',
     date: '2024-07-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6820,7 +6820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240719000000-fv4.00.tif',
     label: '2024-07-19 S3B DAY',
     date: '2024-07-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6828,7 +6828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240719000000-fv4.00.tif',
     label: '2024-07-19 S3B NIGHT',
     date: '2024-07-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6836,7 +6836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240720000000-fv4.00.tif',
     label: '2024-07-20 S3A DAY',
     date: '2024-07-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6844,7 +6844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240720000000-fv4.00.tif',
     label: '2024-07-20 S3A NIGHT',
     date: '2024-07-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6852,7 +6852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240720000000-fv4.00.tif',
     label: '2024-07-20 S3B DAY',
     date: '2024-07-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6860,7 +6860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240720000000-fv4.00.tif',
     label: '2024-07-20 S3B NIGHT',
     date: '2024-07-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6868,7 +6868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240721000000-fv4.00.tif',
     label: '2024-07-21 S3A DAY',
     date: '2024-07-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6876,7 +6876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240721000000-fv4.00.tif',
     label: '2024-07-21 S3A NIGHT',
     date: '2024-07-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6884,7 +6884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240721000000-fv4.00.tif',
     label: '2024-07-21 S3B DAY',
     date: '2024-07-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6892,7 +6892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240721000000-fv4.00.tif',
     label: '2024-07-21 S3B NIGHT',
     date: '2024-07-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6900,7 +6900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240722000000-fv4.00.tif',
     label: '2024-07-22 S3A DAY',
     date: '2024-07-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6908,7 +6908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240722000000-fv4.00.tif',
     label: '2024-07-22 S3A NIGHT',
     date: '2024-07-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6916,7 +6916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240722000000-fv4.00.tif',
     label: '2024-07-22 S3B DAY',
     date: '2024-07-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6924,7 +6924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240722000000-fv4.00.tif',
     label: '2024-07-22 S3B NIGHT',
     date: '2024-07-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6932,7 +6932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240723000000-fv4.00.tif',
     label: '2024-07-23 S3A DAY',
     date: '2024-07-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6940,7 +6940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240723000000-fv4.00.tif',
     label: '2024-07-23 S3A NIGHT',
     date: '2024-07-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6948,7 +6948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240723000000-fv4.00.tif',
     label: '2024-07-23 S3B DAY',
     date: '2024-07-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6956,7 +6956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240723000000-fv4.00.tif',
     label: '2024-07-23 S3B NIGHT',
     date: '2024-07-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6964,7 +6964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240724000000-fv4.00.tif',
     label: '2024-07-24 S3A DAY',
     date: '2024-07-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -6972,7 +6972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240724000000-fv4.00.tif',
     label: '2024-07-24 S3A NIGHT',
     date: '2024-07-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -6980,7 +6980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240724000000-fv4.00.tif',
     label: '2024-07-24 S3B DAY',
     date: '2024-07-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -6988,7 +6988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240724000000-fv4.00.tif',
     label: '2024-07-24 S3B NIGHT',
     date: '2024-07-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -6996,7 +6996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240725000000-fv4.00.tif',
     label: '2024-07-25 S3A DAY',
     date: '2024-07-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7004,7 +7004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240725000000-fv4.00.tif',
     label: '2024-07-25 S3A NIGHT',
     date: '2024-07-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7012,7 +7012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240725000000-fv4.00.tif',
     label: '2024-07-25 S3B DAY',
     date: '2024-07-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7020,7 +7020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240725000000-fv4.00.tif',
     label: '2024-07-25 S3B NIGHT',
     date: '2024-07-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7028,7 +7028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240726000000-fv4.00.tif',
     label: '2024-07-26 S3A DAY',
     date: '2024-07-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7036,7 +7036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240726000000-fv4.00.tif',
     label: '2024-07-26 S3A NIGHT',
     date: '2024-07-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7044,7 +7044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240726000000-fv4.00.tif',
     label: '2024-07-26 S3B DAY',
     date: '2024-07-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7052,7 +7052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240726000000-fv4.00.tif',
     label: '2024-07-26 S3B NIGHT',
     date: '2024-07-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7060,7 +7060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240727000000-fv4.00.tif',
     label: '2024-07-27 S3A DAY',
     date: '2024-07-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7068,7 +7068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240727000000-fv4.00.tif',
     label: '2024-07-27 S3A NIGHT',
     date: '2024-07-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7076,7 +7076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240727000000-fv4.00.tif',
     label: '2024-07-27 S3B DAY',
     date: '2024-07-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7084,7 +7084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240727000000-fv4.00.tif',
     label: '2024-07-27 S3B NIGHT',
     date: '2024-07-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7092,7 +7092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240728000000-fv4.00.tif',
     label: '2024-07-28 S3A DAY',
     date: '2024-07-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7100,7 +7100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240728000000-fv4.00.tif',
     label: '2024-07-28 S3A NIGHT',
     date: '2024-07-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7108,7 +7108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240728000000-fv4.00.tif',
     label: '2024-07-28 S3B DAY',
     date: '2024-07-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7116,7 +7116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240728000000-fv4.00.tif',
     label: '2024-07-28 S3B NIGHT',
     date: '2024-07-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7124,7 +7124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240729000000-fv4.00.tif',
     label: '2024-07-29 S3A DAY',
     date: '2024-07-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7132,7 +7132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240729000000-fv4.00.tif',
     label: '2024-07-29 S3A NIGHT',
     date: '2024-07-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7140,7 +7140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240729000000-fv4.00.tif',
     label: '2024-07-29 S3B DAY',
     date: '2024-07-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7148,7 +7148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240729000000-fv4.00.tif',
     label: '2024-07-29 S3B NIGHT',
     date: '2024-07-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7156,7 +7156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240730000000-fv4.00.tif',
     label: '2024-07-30 S3A DAY',
     date: '2024-07-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7164,7 +7164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240730000000-fv4.00.tif',
     label: '2024-07-30 S3A NIGHT',
     date: '2024-07-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7172,7 +7172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240730000000-fv4.00.tif',
     label: '2024-07-30 S3B DAY',
     date: '2024-07-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7180,7 +7180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240730000000-fv4.00.tif',
     label: '2024-07-30 S3B NIGHT',
     date: '2024-07-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7188,7 +7188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240731000000-fv4.00.tif',
     label: '2024-07-31 S3A DAY',
     date: '2024-07-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7196,7 +7196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240731000000-fv4.00.tif',
     label: '2024-07-31 S3A NIGHT',
     date: '2024-07-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7204,7 +7204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240731000000-fv4.00.tif',
     label: '2024-07-31 S3B DAY',
     date: '2024-07-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7212,7 +7212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240731000000-fv4.00.tif',
     label: '2024-07-31 S3B NIGHT',
     date: '2024-07-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7220,7 +7220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240801000000-fv4.00.tif',
     label: '2024-08-01 S3A DAY',
     date: '2024-08-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7228,7 +7228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240801000000-fv4.00.tif',
     label: '2024-08-01 S3A NIGHT',
     date: '2024-08-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7236,7 +7236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240801000000-fv4.00.tif',
     label: '2024-08-01 S3B DAY',
     date: '2024-08-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7244,7 +7244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240801000000-fv4.00.tif',
     label: '2024-08-01 S3B NIGHT',
     date: '2024-08-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7252,7 +7252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240802000000-fv4.00.tif',
     label: '2024-08-02 S3A DAY',
     date: '2024-08-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7260,7 +7260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240802000000-fv4.00.tif',
     label: '2024-08-02 S3A NIGHT',
     date: '2024-08-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7268,7 +7268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240802000000-fv4.00.tif',
     label: '2024-08-02 S3B DAY',
     date: '2024-08-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7276,7 +7276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240802000000-fv4.00.tif',
     label: '2024-08-02 S3B NIGHT',
     date: '2024-08-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7284,7 +7284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240803000000-fv4.00.tif',
     label: '2024-08-03 S3A DAY',
     date: '2024-08-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7292,7 +7292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240803000000-fv4.00.tif',
     label: '2024-08-03 S3A NIGHT',
     date: '2024-08-03',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7300,7 +7300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240803000000-fv4.00.tif',
     label: '2024-08-03 S3B DAY',
     date: '2024-08-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7308,7 +7308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240803000000-fv4.00.tif',
     label: '2024-08-03 S3B NIGHT',
     date: '2024-08-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7316,7 +7316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240804000000-fv4.00.tif',
     label: '2024-08-04 S3A DAY',
     date: '2024-08-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7324,7 +7324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240804000000-fv4.00.tif',
     label: '2024-08-04 S3A NIGHT',
     date: '2024-08-04',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7332,7 +7332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240804000000-fv4.00.tif',
     label: '2024-08-04 S3B DAY',
     date: '2024-08-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7340,7 +7340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240804000000-fv4.00.tif',
     label: '2024-08-04 S3B NIGHT',
     date: '2024-08-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7348,7 +7348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240805000000-fv4.00.tif',
     label: '2024-08-05 S3A DAY',
     date: '2024-08-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7356,7 +7356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240805000000-fv4.00.tif',
     label: '2024-08-05 S3A NIGHT',
     date: '2024-08-05',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7364,7 +7364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240805000000-fv4.00.tif',
     label: '2024-08-05 S3B DAY',
     date: '2024-08-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7372,7 +7372,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240805000000-fv4.00.tif',
     label: '2024-08-05 S3B NIGHT',
     date: '2024-08-05',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7380,7 +7380,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240806000000-fv4.00.tif',
     label: '2024-08-06 S3A DAY',
     date: '2024-08-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7388,7 +7388,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240806000000-fv4.00.tif',
     label: '2024-08-06 S3A NIGHT',
     date: '2024-08-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7396,7 +7396,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240806000000-fv4.00.tif',
     label: '2024-08-06 S3B DAY',
     date: '2024-08-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7404,7 +7404,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240806000000-fv4.00.tif',
     label: '2024-08-06 S3B NIGHT',
     date: '2024-08-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7412,7 +7412,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240807000000-fv4.00.tif',
     label: '2024-08-07 S3A DAY',
     date: '2024-08-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7420,7 +7420,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240807000000-fv4.00.tif',
     label: '2024-08-07 S3A NIGHT',
     date: '2024-08-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7428,7 +7428,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240807000000-fv4.00.tif',
     label: '2024-08-07 S3B DAY',
     date: '2024-08-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7436,7 +7436,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240807000000-fv4.00.tif',
     label: '2024-08-07 S3B NIGHT',
     date: '2024-08-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7444,7 +7444,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240808000000-fv4.00.tif',
     label: '2024-08-08 S3A DAY',
     date: '2024-08-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7452,7 +7452,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240808000000-fv4.00.tif',
     label: '2024-08-08 S3A NIGHT',
     date: '2024-08-08',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7460,7 +7460,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240808000000-fv4.00.tif',
     label: '2024-08-08 S3B DAY',
     date: '2024-08-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7468,7 +7468,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240808000000-fv4.00.tif',
     label: '2024-08-08 S3B NIGHT',
     date: '2024-08-08',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7476,7 +7476,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240809000000-fv4.00.tif',
     label: '2024-08-09 S3A DAY',
     date: '2024-08-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7484,7 +7484,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240809000000-fv4.00.tif',
     label: '2024-08-09 S3A NIGHT',
     date: '2024-08-09',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7492,7 +7492,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240809000000-fv4.00.tif',
     label: '2024-08-09 S3B DAY',
     date: '2024-08-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7500,7 +7500,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240809000000-fv4.00.tif',
     label: '2024-08-09 S3B NIGHT',
     date: '2024-08-09',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7508,7 +7508,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240810000000-fv4.00.tif',
     label: '2024-08-10 S3A DAY',
     date: '2024-08-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7516,7 +7516,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240810000000-fv4.00.tif',
     label: '2024-08-10 S3A NIGHT',
     date: '2024-08-10',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7524,7 +7524,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240810000000-fv4.00.tif',
     label: '2024-08-10 S3B DAY',
     date: '2024-08-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7532,7 +7532,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240810000000-fv4.00.tif',
     label: '2024-08-10 S3B NIGHT',
     date: '2024-08-10',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7540,7 +7540,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240811000000-fv4.00.tif',
     label: '2024-08-11 S3A DAY',
     date: '2024-08-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7548,7 +7548,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240811000000-fv4.00.tif',
     label: '2024-08-11 S3A NIGHT',
     date: '2024-08-11',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7556,7 +7556,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240811000000-fv4.00.tif',
     label: '2024-08-11 S3B DAY',
     date: '2024-08-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7564,7 +7564,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240811000000-fv4.00.tif',
     label: '2024-08-11 S3B NIGHT',
     date: '2024-08-11',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7572,7 +7572,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240812000000-fv4.00.tif',
     label: '2024-08-12 S3A DAY',
     date: '2024-08-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7580,7 +7580,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240812000000-fv4.00.tif',
     label: '2024-08-12 S3A NIGHT',
     date: '2024-08-12',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7588,7 +7588,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240812000000-fv4.00.tif',
     label: '2024-08-12 S3B DAY',
     date: '2024-08-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7596,7 +7596,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240812000000-fv4.00.tif',
     label: '2024-08-12 S3B NIGHT',
     date: '2024-08-12',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7604,7 +7604,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240813000000-fv4.00.tif',
     label: '2024-08-13 S3A DAY',
     date: '2024-08-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7612,7 +7612,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240813000000-fv4.00.tif',
     label: '2024-08-13 S3A NIGHT',
     date: '2024-08-13',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7620,7 +7620,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240813000000-fv4.00.tif',
     label: '2024-08-13 S3B DAY',
     date: '2024-08-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7628,7 +7628,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240813000000-fv4.00.tif',
     label: '2024-08-13 S3B NIGHT',
     date: '2024-08-13',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7636,7 +7636,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240814000000-fv4.00.tif',
     label: '2024-08-14 S3A DAY',
     date: '2024-08-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7644,7 +7644,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240814000000-fv4.00.tif',
     label: '2024-08-14 S3A NIGHT',
     date: '2024-08-14',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7652,7 +7652,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240814000000-fv4.00.tif',
     label: '2024-08-14 S3B DAY',
     date: '2024-08-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7660,7 +7660,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240814000000-fv4.00.tif',
     label: '2024-08-14 S3B NIGHT',
     date: '2024-08-14',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7668,7 +7668,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240815000000-fv4.00.tif',
     label: '2024-08-15 S3A DAY',
     date: '2024-08-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7676,7 +7676,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240815000000-fv4.00.tif',
     label: '2024-08-15 S3A NIGHT',
     date: '2024-08-15',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7684,7 +7684,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240815000000-fv4.00.tif',
     label: '2024-08-15 S3B DAY',
     date: '2024-08-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7692,7 +7692,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240815000000-fv4.00.tif',
     label: '2024-08-15 S3B NIGHT',
     date: '2024-08-15',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7700,7 +7700,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240816000000-fv4.00.tif',
     label: '2024-08-16 S3A DAY',
     date: '2024-08-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7708,7 +7708,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240816000000-fv4.00.tif',
     label: '2024-08-16 S3A NIGHT',
     date: '2024-08-16',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7716,7 +7716,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240816000000-fv4.00.tif',
     label: '2024-08-16 S3B DAY',
     date: '2024-08-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7724,7 +7724,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240816000000-fv4.00.tif',
     label: '2024-08-16 S3B NIGHT',
     date: '2024-08-16',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7732,7 +7732,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240817000000-fv4.00.tif',
     label: '2024-08-17 S3A DAY',
     date: '2024-08-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7740,7 +7740,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240817000000-fv4.00.tif',
     label: '2024-08-17 S3A NIGHT',
     date: '2024-08-17',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7748,7 +7748,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240817000000-fv4.00.tif',
     label: '2024-08-17 S3B DAY',
     date: '2024-08-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7756,7 +7756,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240817000000-fv4.00.tif',
     label: '2024-08-17 S3B NIGHT',
     date: '2024-08-17',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7764,7 +7764,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240818000000-fv4.00.tif',
     label: '2024-08-18 S3A DAY',
     date: '2024-08-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7772,7 +7772,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240818000000-fv4.00.tif',
     label: '2024-08-18 S3A NIGHT',
     date: '2024-08-18',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7780,7 +7780,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240818000000-fv4.00.tif',
     label: '2024-08-18 S3B DAY',
     date: '2024-08-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7788,7 +7788,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240818000000-fv4.00.tif',
     label: '2024-08-18 S3B NIGHT',
     date: '2024-08-18',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7796,7 +7796,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240819000000-fv4.00.tif',
     label: '2024-08-19 S3A DAY',
     date: '2024-08-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7804,7 +7804,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240819000000-fv4.00.tif',
     label: '2024-08-19 S3A NIGHT',
     date: '2024-08-19',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7812,7 +7812,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240819000000-fv4.00.tif',
     label: '2024-08-19 S3B DAY',
     date: '2024-08-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7820,7 +7820,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240819000000-fv4.00.tif',
     label: '2024-08-19 S3B NIGHT',
     date: '2024-08-19',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7828,7 +7828,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240820000000-fv4.00.tif',
     label: '2024-08-20 S3A DAY',
     date: '2024-08-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7836,7 +7836,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240820000000-fv4.00.tif',
     label: '2024-08-20 S3A NIGHT',
     date: '2024-08-20',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7844,7 +7844,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240820000000-fv4.00.tif',
     label: '2024-08-20 S3B DAY',
     date: '2024-08-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7852,7 +7852,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240820000000-fv4.00.tif',
     label: '2024-08-20 S3B NIGHT',
     date: '2024-08-20',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7860,7 +7860,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240821000000-fv4.00.tif',
     label: '2024-08-21 S3A DAY',
     date: '2024-08-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7868,7 +7868,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240821000000-fv4.00.tif',
     label: '2024-08-21 S3A NIGHT',
     date: '2024-08-21',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7876,7 +7876,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240821000000-fv4.00.tif',
     label: '2024-08-21 S3B DAY',
     date: '2024-08-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7884,7 +7884,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240821000000-fv4.00.tif',
     label: '2024-08-21 S3B NIGHT',
     date: '2024-08-21',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7892,7 +7892,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240822000000-fv4.00.tif',
     label: '2024-08-22 S3A DAY',
     date: '2024-08-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7900,7 +7900,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240822000000-fv4.00.tif',
     label: '2024-08-22 S3A NIGHT',
     date: '2024-08-22',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7908,7 +7908,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240822000000-fv4.00.tif',
     label: '2024-08-22 S3B DAY',
     date: '2024-08-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7916,7 +7916,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240822000000-fv4.00.tif',
     label: '2024-08-22 S3B NIGHT',
     date: '2024-08-22',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7924,7 +7924,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240823000000-fv4.00.tif',
     label: '2024-08-23 S3A DAY',
     date: '2024-08-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7932,7 +7932,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240823000000-fv4.00.tif',
     label: '2024-08-23 S3A NIGHT',
     date: '2024-08-23',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7940,7 +7940,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240823000000-fv4.00.tif',
     label: '2024-08-23 S3B DAY',
     date: '2024-08-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7948,7 +7948,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240823000000-fv4.00.tif',
     label: '2024-08-23 S3B NIGHT',
     date: '2024-08-23',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7956,7 +7956,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240824000000-fv4.00.tif',
     label: '2024-08-24 S3A DAY',
     date: '2024-08-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7964,7 +7964,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240824000000-fv4.00.tif',
     label: '2024-08-24 S3A NIGHT',
     date: '2024-08-24',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -7972,7 +7972,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240824000000-fv4.00.tif',
     label: '2024-08-24 S3B DAY',
     date: '2024-08-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -7980,7 +7980,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240824000000-fv4.00.tif',
     label: '2024-08-24 S3B NIGHT',
     date: '2024-08-24',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -7988,7 +7988,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240825000000-fv4.00.tif',
     label: '2024-08-25 S3A DAY',
     date: '2024-08-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -7996,7 +7996,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240825000000-fv4.00.tif',
     label: '2024-08-25 S3A NIGHT',
     date: '2024-08-25',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8004,7 +8004,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240825000000-fv4.00.tif',
     label: '2024-08-25 S3B DAY',
     date: '2024-08-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8012,7 +8012,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240825000000-fv4.00.tif',
     label: '2024-08-25 S3B NIGHT',
     date: '2024-08-25',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8020,7 +8020,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240826000000-fv4.00.tif',
     label: '2024-08-26 S3A DAY',
     date: '2024-08-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8028,7 +8028,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240826000000-fv4.00.tif',
     label: '2024-08-26 S3A NIGHT',
     date: '2024-08-26',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8036,7 +8036,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240826000000-fv4.00.tif',
     label: '2024-08-26 S3B DAY',
     date: '2024-08-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8044,7 +8044,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240826000000-fv4.00.tif',
     label: '2024-08-26 S3B NIGHT',
     date: '2024-08-26',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8052,7 +8052,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240827000000-fv4.00.tif',
     label: '2024-08-27 S3A DAY',
     date: '2024-08-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8060,7 +8060,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240827000000-fv4.00.tif',
     label: '2024-08-27 S3A NIGHT',
     date: '2024-08-27',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8068,7 +8068,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240827000000-fv4.00.tif',
     label: '2024-08-27 S3B DAY',
     date: '2024-08-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8076,7 +8076,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240827000000-fv4.00.tif',
     label: '2024-08-27 S3B NIGHT',
     date: '2024-08-27',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8084,7 +8084,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240828000000-fv4.00.tif',
     label: '2024-08-28 S3A DAY',
     date: '2024-08-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8092,7 +8092,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240828000000-fv4.00.tif',
     label: '2024-08-28 S3A NIGHT',
     date: '2024-08-28',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8100,7 +8100,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240828000000-fv4.00.tif',
     label: '2024-08-28 S3B DAY',
     date: '2024-08-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8108,7 +8108,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240828000000-fv4.00.tif',
     label: '2024-08-28 S3B NIGHT',
     date: '2024-08-28',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8116,7 +8116,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240829000000-fv4.00.tif',
     label: '2024-08-29 S3A DAY',
     date: '2024-08-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8124,7 +8124,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240829000000-fv4.00.tif',
     label: '2024-08-29 S3A NIGHT',
     date: '2024-08-29',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8132,7 +8132,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240829000000-fv4.00.tif',
     label: '2024-08-29 S3B DAY',
     date: '2024-08-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8140,7 +8140,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240829000000-fv4.00.tif',
     label: '2024-08-29 S3B NIGHT',
     date: '2024-08-29',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8148,7 +8148,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240830000000-fv4.00.tif',
     label: '2024-08-30 S3A DAY',
     date: '2024-08-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8156,7 +8156,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240830000000-fv4.00.tif',
     label: '2024-08-30 S3A NIGHT',
     date: '2024-08-30',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8164,7 +8164,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240830000000-fv4.00.tif',
     label: '2024-08-30 S3B DAY',
     date: '2024-08-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8172,7 +8172,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240830000000-fv4.00.tif',
     label: '2024-08-30 S3B NIGHT',
     date: '2024-08-30',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8180,7 +8180,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240831000000-fv4.00.tif',
     label: '2024-08-31 S3A DAY',
     date: '2024-08-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8188,7 +8188,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240831000000-fv4.00.tif',
     label: '2024-08-31 S3A NIGHT',
     date: '2024-08-31',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8196,7 +8196,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240831000000-fv4.00.tif',
     label: '2024-08-31 S3B DAY',
     date: '2024-08-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8204,7 +8204,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240831000000-fv4.00.tif',
     label: '2024-08-31 S3B NIGHT',
     date: '2024-08-31',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8212,7 +8212,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240901000000-fv4.00.tif',
     label: '2024-09-01 S3A DAY',
     date: '2024-09-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8220,7 +8220,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240901000000-fv4.00.tif',
     label: '2024-09-01 S3A NIGHT',
     date: '2024-09-01',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8228,7 +8228,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240901000000-fv4.00.tif',
     label: '2024-09-01 S3B DAY',
     date: '2024-09-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8236,7 +8236,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240901000000-fv4.00.tif',
     label: '2024-09-01 S3B NIGHT',
     date: '2024-09-01',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8244,7 +8244,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240902000000-fv4.00.tif',
     label: '2024-09-02 S3A DAY',
     date: '2024-09-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8252,7 +8252,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240902000000-fv4.00.tif',
     label: '2024-09-02 S3A NIGHT',
     date: '2024-09-02',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8260,7 +8260,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240902000000-fv4.00.tif',
     label: '2024-09-02 S3B DAY',
     date: '2024-09-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8268,7 +8268,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240902000000-fv4.00.tif',
     label: '2024-09-02 S3B NIGHT',
     date: '2024-09-02',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8276,7 +8276,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240903000000-fv4.00.tif',
     label: '2024-09-03 S3B DAY',
     date: '2024-09-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8284,7 +8284,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240903000000-fv4.00.tif',
     label: '2024-09-03 S3B NIGHT',
     date: '2024-09-03',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8292,7 +8292,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240904000000-fv4.00.tif',
     label: '2024-09-04 S3B DAY',
     date: '2024-09-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8300,7 +8300,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240904000000-fv4.00.tif',
     label: '2024-09-04 S3B NIGHT',
     date: '2024-09-04',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8308,7 +8308,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240906000000-fv4.00.tif',
     label: '2024-09-06 S3A DAY',
     date: '2024-09-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8316,7 +8316,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240906000000-fv4.00.tif',
     label: '2024-09-06 S3A NIGHT',
     date: '2024-09-06',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8324,7 +8324,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240906000000-fv4.00.tif',
     label: '2024-09-06 S3B DAY',
     date: '2024-09-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8332,7 +8332,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240906000000-fv4.00.tif',
     label: '2024-09-06 S3B NIGHT',
     date: '2024-09-06',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
   {
@@ -8340,7 +8340,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_DAY-20240907000000-fv4.00.tif',
     label: '2024-09-07 S3A DAY',
     date: '2024-09-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'DAY',
   },
   {
@@ -8348,7 +8348,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240907000000-fv4.00.tif',
     label: '2024-09-07 S3A NIGHT',
     date: '2024-09-07',
-    sensor: 'S3A',
+    sensor: 'Sentinel 3A',
     day_night: 'NIGHT',
   },
   {
@@ -8356,7 +8356,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_DAY-20240907000000-fv4.00.tif',
     label: '2024-09-07 S3B DAY',
     date: '2024-09-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'DAY',
   },
   {
@@ -8364,7 +8364,7 @@ export const observationMenuItemsUK = [
       's3://leicester-lst-cogs/celcius/EOCIS_-LST-L3C-LST-SLSTRB-0.01deg_1DAILY_NIGHT-20240907000000-fv4.00.tif',
     label: '2024-09-07 S3B NIGHT',
     date: '2024-09-07',
-    sensor: 'S3B',
+    sensor: 'Sentinel 3B',
     day_night: 'NIGHT',
   },
 ] as unknown as [ObservationDatasetOption]

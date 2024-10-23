@@ -1,60 +1,76 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import { MapRef } from '../../Map/useMap'
 import axios from 'axios'
+import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 
 export const useGetObservationValueByMapclick = ({
   isMapLoaded,
   mapRef,
-  selectedObservationLayerUrl,
 }: {
   isMapLoaded: boolean
   mapRef: MapRef
-  selectedObservationLayerUrl: string
 }) => {
-  const [observationMarkerValue, setObservationMarkerValue] = useState<
-    number | string | null
-  >(null)
-  const { markerCoordinates, isMarkerOnMap } =
-    useMapClickToUpdateDraggableMarker({
-      isMapLoaded,
-      mapRef,
-    })
+  const {
+    markerCoordinates,
+    observationMarkerValue,
+    selectedObservationLayerUrl,
+    setMarkerCoordinates,
+    setObservationMarkerValue,
+  } = useContext(ObservationsPageContext)
 
-  useEffect(() => {
-    if (!markerCoordinates?.lat || !markerCoordinates?.lng) return
+  useMapClickToUpdateDraggableMarker({
+    isMapLoaded,
+    mapRef,
+    markerCoordinates,
+    setMarkerCoordinates,
+  })
 
-    const queryObservationLayerByCoordinates = () => {
-      const axiosController = new AbortController()
+  useEffect(
+    function setObservationValueOnMarkerCoordinateChange() {
+      if (
+        !markerCoordinates?.lat ||
+        !markerCoordinates?.lng ||
+        !selectedObservationLayerUrl ||
+        !setObservationMarkerValue
+      )
+        return
 
-      const queryUrl = `https://titiler.xyz/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
+      const queryObservationLayerByCoordinates = () => {
+        const axiosController = new AbortController()
 
-      setObservationMarkerValue(null)
+        const queryUrl = `https://titiler.xyz/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
 
-      axios
-        .get(queryUrl, { signal: axiosController.signal })
+        setObservationMarkerValue(null)
 
-        .then((response) => {
-          const observationValue = response.data.values[0]
-          setObservationMarkerValue(
-            observationValue ? Number(observationValue).toFixed(0) : 'Unknown',
-          )
-        })
-        .catch((error) => {
-          if (error.code !== 'ERR_CANCELED') {
-            setObservationMarkerValue('Unknown')
-          }
-        })
+        axios
+          .get(queryUrl, { signal: axiosController.signal })
 
-      return axiosController
-    }
+          .then((response) => {
+            const observationValue = response.data.values[0]
+            setObservationMarkerValue(
+              observationValue
+                ? Number(observationValue).toFixed(0)
+                : 'Unknown',
+            )
+          })
+          .catch((error) => {
+            if (error.code !== 'ERR_CANCELED') {
+              setObservationMarkerValue('Unknown')
+            }
+          })
 
-    const queryController = queryObservationLayerByCoordinates()
+        return axiosController
+      }
 
-    return () => {
-      queryController.abort()
-    }
-  }, [markerCoordinates, selectedObservationLayerUrl])
+      const queryController = queryObservationLayerByCoordinates()
 
-  return { markerCoordinates, observationMarkerValue, isMarkerOnMap }
+      return () => {
+        queryController.abort()
+      }
+    },
+    [markerCoordinates, selectedObservationLayerUrl, setObservationMarkerValue],
+  )
+
+  return { observationMarkerValue }
 }

@@ -1,6 +1,6 @@
 import { HubWorkflowNicknames } from '../../configuration/constants'
 
-interface ObservationDatasetOption {
+export interface ObservationDatasetOption {
   value: string
   label: string
   date: string

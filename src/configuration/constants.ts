@@ -32,8 +32,8 @@ export enum HubWorkflowNicknames {
 export type HubWorkflowNicknamesType = `${HubWorkflowNicknames}`
 
 export const workflowHubNames = {
-  [HubWorkflowNicknames.OSC]: 'get-asset-impact-workflow-sparkgeouser',
-  [HubWorkflowNicknames.LST]: 'get-asset-values-workflow-nostac',
+  [HubWorkflowNicknames.OSC]: 'physrisk-current',
+  [HubWorkflowNicknames.LST]: 'lst-current',
 }
 
 export const DEFAULT_USER_ASSET_COLUMNS = ['latitude', 'longitude', 'id', '']

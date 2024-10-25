@@ -23,6 +23,7 @@ body {
   --white: #fff;
   --hazard-raster-opacity: 0.8;
   --app-background-dark: #333132;
+  --app-background-light: #fff;
   --dark-text: var(--gray-12);
   --toastify-color-info: var(--indigo-9);
   --toastify-color-success: var(--green-11);

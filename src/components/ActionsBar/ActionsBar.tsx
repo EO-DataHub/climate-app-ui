@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import AnalyticsIcon from '@material-design-icons/svg/filled/leaderboard.svg?react'
 import AssetsIcon from '@material-design-icons/svg/filled/category.svg?react'
 import HazardsIcon from '@material-design-icons/svg/filled/public.svg?react'
 import InformationIcon from '@material-design-icons/svg/filled/info.svg?react'
-import NotificationsIcon from '@material-design-icons/svg/filled/notifications.svg?react'
+import ActivityIcon from '@material-design-icons/svg/filled/access_time_filled.svg?react'
 import ObservationsIcon from '@material-design-icons/svg/filled/view_timeline.svg?react'
 import PortfolioIcon from '@material-design-icons/svg/filled/folder.svg?react'
 
@@ -12,9 +12,17 @@ import { TooltipForNav } from '../TooltipForNav/TooltipForNav'
 import actionBarStyles from './ActionsBar.module.scss'
 import SparkgeoLogo from '../../../public/sparkgeo-logo.svg?react'
 import { UserMenu } from './UserMenu'
+import { WorkflowActivityDrawer } from '../WorkflowActivityDrawer/WorkflowActivityDrawer'
+import { AuthenticationContext } from '../../context/AuthenticationContext'
 
 export const ActionsBar = () => {
   const [isUserMenuOpen, setUserIsMenuOpen] = useState(false)
+  const [isWorkflowActivityOpen, setWorkflowActivityOpen] = useState(false)
+  const { isAuthenticated } = useContext(AuthenticationContext)
+
+  const handleToggleWorkflowActivity = () => {
+    setWorkflowActivityOpen(!isWorkflowActivityOpen)
+  }
 
   return (
     <div className={actionBarStyles.actionsWrapper}>
@@ -52,11 +60,13 @@ export const ActionsBar = () => {
         </TooltipForNav>
       </nav>
       <nav className={actionBarStyles.nav2}>
-        <TooltipForNav content="Notifications">
-          <NavLink to="/notifications">
-            <NotificationsIcon />
-          </NavLink>
-        </TooltipForNav>
+        {isAuthenticated ? (
+          <TooltipForNav content="Activity">
+            <button onClick={handleToggleWorkflowActivity}>
+              <ActivityIcon />
+            </button>
+          </TooltipForNav>
+        ) : null}
         <TooltipForNav content="Information">
           <NavLink to="/information">
             <InformationIcon />
@@ -67,6 +77,9 @@ export const ActionsBar = () => {
           isUserMenuOpen={isUserMenuOpen}
         />
       </nav>
+      {isWorkflowActivityOpen ? (
+        <WorkflowActivityDrawer closeDrawer={handleToggleWorkflowActivity} />
+      ) : null}
     </div>
   )
 }

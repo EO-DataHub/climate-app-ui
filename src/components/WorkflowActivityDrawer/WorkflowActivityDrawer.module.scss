@@ -1,0 +1,53 @@
+@use '../../library/genericStyles/containers';
+
+.workflowActivityDrawer {
+  @include containers.flexColumnSpaceBetweenCenter;
+  width: 430px;
+  height: 100%;
+  background-color: var(--app-background-light);
+  box-shadow: var(--shadow-6);
+  padding: var(--space-5) var(--space-5) var(--space-1) var(--space-5);
+  box-sizing: border-box;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 56px;
+  background-color: var(--color-overlay);
+  z-index: 3;
+}
+
+.drawerHeader {
+  @include containers.flexRowSpaceBetweenCenter;
+  width: 100%;
+}
+
+.activityList {
+  @include containers.flexColumnStartCenter;
+  gap: var(--space-3);
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+
+  &::-webkit-scrollbar {
+    display: none; // Safari and Opera
+  }
+}
+.activityCard {
+  @include containers.flexColumnSpaceBetweenStart;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border: solid thin var(--slate-5);
+  box-sizing: border-box;
+  border-radius: var(--radius-5);
+  width: 100%;
+}
+.portfolioName {
+  margin-top: var(--space-2);
+}

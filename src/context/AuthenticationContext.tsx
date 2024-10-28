@@ -22,6 +22,7 @@ interface AuthenticationContextValue {
   login: () => Promise<void>
   logout: () => Promise<void>
   userInfo?: KeycloakUserInfo
+  workspaceUserName?: string
 }
 
 const initOptions = {
@@ -107,6 +108,7 @@ export const AuthenticationContextProvider = ({
     AxiosInstance | undefined
   >()
   const [userInfo, setUserInfo] = useState<KeycloakUserInfo>({})
+  const workspaceUserName = userInfo?.preferred_username?.replace('-', '_')
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()
@@ -162,6 +164,7 @@ export const AuthenticationContextProvider = ({
         login,
         logout,
         userInfo,
+        workspaceUserName,
       }}
     >
       {children}

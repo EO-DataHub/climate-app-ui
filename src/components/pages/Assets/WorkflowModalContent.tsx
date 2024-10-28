@@ -21,7 +21,11 @@ export const WorkflowModalContent = ({
       <div className={containerStyles.modalTopRow}>
         <Dialog.Title>Select Workflow</Dialog.Title>
         <Dialog.Close>
-          <IconButtonOverride variant="ghost" className="close">
+          <IconButtonOverride
+            variant="ghost"
+            className="close"
+            aria-label="Close select workflow modal"
+          >
             <CloseIcon />
           </IconButtonOverride>
         </Dialog.Close>

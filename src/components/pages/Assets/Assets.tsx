@@ -29,9 +29,13 @@ export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
-  const { isAuthenticated, login, userInfo, authenticatedAxios } = useContext(
-    AuthenticationContext,
-  )
+  const {
+    authenticatedAxios,
+    isAuthenticated,
+    login,
+    userInfo,
+    workspaceUserName,
+  } = useContext(AuthenticationContext)
   const {
     persistedMapCenter,
     persistedMapZoom,
@@ -82,7 +86,7 @@ export const Assets = () => {
         'handleAnalyseAssets has a missing setAnalysedUserAssets parameter',
       )
     }
-    if (!userInfo || !authenticatedAxios) {
+    if (!userInfo || !authenticatedAxios || !workspaceUserName) {
       toast.error('Please log in to run an analysis.')
 
       return
@@ -109,7 +113,7 @@ export const Assets = () => {
       axios: authenticatedAxios,
       currentWorkflowNickname: workflowTitle,
       userAssets,
-      userInfo,
+      workspaceUserName,
     })
       .then((results) => {
         setAnalysedUserAssets(results)

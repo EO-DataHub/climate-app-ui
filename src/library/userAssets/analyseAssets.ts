@@ -1,6 +1,5 @@
 import { AxiosInstance } from 'axios'
 
-import { KeycloakUserInfo } from '../../context/AuthenticationContext'
 import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
 import {
   HubWorkflowNicknamesType,
@@ -99,15 +98,13 @@ export const analyseAssets = ({
   axios,
   currentWorkflowNickname,
   userAssets,
-  userInfo,
+  workspaceUserName,
 }: {
   axios?: AxiosInstance
   currentWorkflowNickname: HubWorkflowNicknamesType
   userAssets: UserAssets
-  userInfo: KeycloakUserInfo
+  workspaceUserName: string
 }) => {
-  const workspaceUserName = userInfo.preferred_username?.replace('-', '_')
-
   if (!axios) {
     throw new Error('axios is required')
   }

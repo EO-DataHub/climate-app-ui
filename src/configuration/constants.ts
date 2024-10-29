@@ -31,9 +31,13 @@ export enum HubWorkflowNicknames {
 
 export type HubWorkflowNicknamesType = `${HubWorkflowNicknames}`
 
-export const workflowHubNames = {
+export const hubWorkflowNames = {
   [HubWorkflowNicknames.OSC]: 'physrisk-current',
   [HubWorkflowNicknames.LST]: 'lst-current',
 }
+
+export const workflowNickNamesByHubWorkflowName = Object.fromEntries(
+  Object.entries(hubWorkflowNames).map(([key, value]) => [value, key]),
+)
 
 export const DEFAULT_USER_ASSET_COLUMNS = ['latitude', 'longitude', 'id', '']

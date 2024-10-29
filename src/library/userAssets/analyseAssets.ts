@@ -3,8 +3,11 @@ import { AxiosInstance } from 'axios'
 import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
 import {
   HubWorkflowNicknamesType,
-  workflowHubNames,
+  hubWorkflowNames,
 } from '../../configuration/constants'
+import { getResultsUrl } from '../api/getResultsUrl'
+
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 const initiateAssetsRiskAnalysis = async ({
   axios,
@@ -18,7 +21,7 @@ const initiateAssetsRiskAnalysis = async ({
   workspaceUserName: string
 }) => {
   return axios.post(
-    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/${workflowHubNames[currentWorkflowNickname]}/execution`,
+    `${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/processes/${hubWorkflowNames[currentWorkflowNickname]}/execution`,
     {
       inputs: {
         workspace: workspaceUserName,
@@ -50,7 +53,7 @@ const getData = async ({
   jobId: string
   workspaceUserName: string
 }) => {
-  const resultsUrl = `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
+  const resultsUrl = getResultsUrl({ jobId, workspaceUserName })
   return axios.get(resultsUrl).then((response) => {
     return response.data.data as AnalysedUserAssets
   })

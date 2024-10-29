@@ -4,7 +4,7 @@ import { MapRef } from '../../Map/useMap'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import { HazardsPageContext } from '../../../context/HazardsPageContext'
 
-const EDOH_BASE_URL = import.meta.env.VITE_EODH_BASE_URL
+const EDOH_BASE_URL = import.meta.env.VITE_SPARKGEO_BASE_URL
 
 export const useGetHazardValueByMapClick = ({
   isMapLoaded,

@@ -1,25 +1,5 @@
 @use '../../library/genericStyles/containers';
 
-.workflowActivityDrawer {
-  @include containers.flexColumnSpaceBetweenCenter;
-  width: 430px;
-  height: 100%;
-  background-color: var(--app-background-light);
-  box-shadow: var(--shadow-6);
-  padding: var(--space-5) var(--space-5) var(--space-1) var(--space-5);
-  box-sizing: border-box;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 56px;
-  background-color: var(--color-overlay);
-  z-index: 3;
-}
-
 .drawerHeader {
   @include containers.flexRowSpaceBetweenCenter;
   width: 100%;
@@ -50,4 +30,14 @@
 }
 .portfolioName {
   margin-top: var(--space-2);
+}
+
+.dateRow {
+  @include containers.flexRowSpaceBetweenCenter;
+  width: 100%;
+}
+
+.viewAnalysisButton {
+  @include containers.flexRowStartCenter;
+  gap: 0.5em;
 }

@@ -228,8 +228,9 @@ export const WorkflowActivityDrawer = ({
           : null}
         {!isWorkflowActivityLoading && isWorkflowActivityError ? (
           <>
-            Something went wrong when loading workflow activity information. You
-            can try again by closing and opening this drawer.
+            We&apos;re sorry. Something went wrong when loading workflow
+            activity information. You can try again by closing and opening this
+            drawer.
           </>
         ) : null}
       </div>

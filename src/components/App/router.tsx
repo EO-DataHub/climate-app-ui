@@ -14,6 +14,7 @@ export const router = createBrowserRouter(
   [
     {
       element: <AppLayout />,
+      errorElement: <div>We&apos;re sorry. Something is broken. </div>,
       children: [
         {
           path: '/',

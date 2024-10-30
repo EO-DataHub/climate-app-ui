@@ -14,7 +14,6 @@ import {
 } from '../../configuration/constants'
 
 import { areBoundsValid } from '../maplibre/isGeometryValid'
-import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
 import { LoadingContext } from '../../context/LoadingContext'
 import { MapRef } from '../../components/Map/useMap'
 import { UserAssets } from './userAssetTypes'
@@ -112,12 +111,19 @@ export const useAssetPortfolios = ({
       }
       const handleMarkerClick = (event: MapLayerMouseEvent) => {
         if (!mapRef.current) return
+
+        const clickedFeature = event.features?.[0]
         // @ts-expect-error - maplibre-gl types are contradictory with docs
-        const coordinates = event.features?.[0].geometry.coordinates.slice()
-        const assetVulnerability = event.features?.[0].properties.vulnerability
-        const assetType = event.features?.[0].properties.assetType
-        const assetCategory = event.features?.[0].properties.assetCategory
-        const itemId = event.features?.[0].properties.id
+        const coordinates = clickedFeature?.geometry.coordinates.slice()
+        const itemId = clickedFeature?.properties.id
+
+        const additionalPropertiesToShow = { ...clickedFeature?.properties }
+        delete additionalPropertiesToShow.id
+        delete additionalPropertiesToShow['']
+
+        const additionalPropertiesToShowEntries = Object.entries(
+          additionalPropertiesToShow,
+        )
 
         const adjustedCoordinates = [...coordinates]
         // Ensure popup appears over correct world 'copy'
@@ -130,41 +136,13 @@ export const useAssetPortfolios = ({
           <div className={assetsPopupStyles.assetsPopupContent}>
             <DataList.Root
               orientation={{ initial: 'vertical', sm: 'horizontal' }}
+              className={assetsPopupStyles.assetPopupDatalistRoot}
             >
-              <DataList.Item>
-                <DataList.Label>Asset Vulnerability</DataList.Label>
-                <DataList.Value>
-                  <AssetVulnerabilityBadge vulnerability={assetVulnerability} />
-                </DataList.Value>
-              </DataList.Item>
               <DataList.Item>
                 <DataList.Label>ID</DataList.Label>
                 <DataList.Value>{itemId}</DataList.Value>
               </DataList.Item>
-              <DataList.Item>
-                <DataList.Label>Asset Type</DataList.Label>
-                <DataList.Value>
-                  {assetType ? (
-                    assetType
-                  ) : (
-                    <Badge variant="soft" color="gray">
-                      Data Unavailable
-                    </Badge>
-                  )}
-                </DataList.Value>
-              </DataList.Item>
-              <DataList.Item>
-                <DataList.Label>Asset Category</DataList.Label>
-                <DataList.Value>
-                  {assetCategory ? (
-                    assetCategory
-                  ) : (
-                    <Badge variant="soft" color="gray">
-                      Data Unavailable
-                    </Badge>
-                  )}
-                </DataList.Value>
-              </DataList.Item>
+
               <DataList.Item>
                 <DataList.Label>Latitude</DataList.Label>
                 <DataList.Value>
@@ -177,6 +155,20 @@ export const useAssetPortfolios = ({
                   {adjustedCoordinates[0].toFixed(4)}°
                 </DataList.Value>
               </DataList.Item>
+              {additionalPropertiesToShowEntries.map(([key, value]) => (
+                <DataList.Item key="key">
+                  <DataList.Label>{key}</DataList.Label>
+                  <DataList.Value>
+                    {value ? (
+                      value
+                    ) : (
+                      <Badge variant="soft" color="gray">
+                        Data Unavailable
+                      </Badge>
+                    )}
+                  </DataList.Value>
+                </DataList.Item>
+              ))}
             </DataList.Root>
 
             {onHighlightInTableClick ? (

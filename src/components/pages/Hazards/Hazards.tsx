@@ -245,10 +245,10 @@ export const Hazards = () => {
   )
 
   useEffect(() => {
-    if (setHazardIndicator) setHazardIndicator(formData.indicator);
-    if (setClimateModel) setClimateModel(formData.climate_model);
-    if (setScenario) setScenario(formData.scenario);
-    if (setYear) setYear(formData.year);
+    if (setHazardIndicator) setHazardIndicator(formData.indicator)
+    if (setClimateModel) setClimateModel(formData.climate_model)
+    if (setScenario) setScenario(formData.scenario)
+    if (setYear) setYear(formData.year)
   }, [formData, setHazardIndicator, setClimateModel, setScenario, setYear])
 
   const sidebarContent = (

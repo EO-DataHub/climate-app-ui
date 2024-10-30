@@ -25,61 +25,64 @@ export const ActionsBar = () => {
   }
 
   return (
-    <div className={actionBarStyles.actionsWrapper}>
-      <nav className={actionBarStyles.nav1}>
-        <TooltipForNav content="About">
-          <NavLink to="/" className={actionBarStyles.homeLink}>
-            <SparkgeoLogo className={actionBarStyles.logo} />
-          </NavLink>
-        </TooltipForNav>
-
-        <TooltipForNav content="Hazards">
-          <NavLink to="/hazards">
-            <HazardsIcon />
-          </NavLink>
-        </TooltipForNav>
-        <TooltipForNav content="Observations">
-          <NavLink to="/observations">
-            <ObservationsIcon />
-          </NavLink>
-        </TooltipForNav>
-        <TooltipForNav content="Assets">
-          <NavLink to="/assets">
-            <AssetsIcon />
-          </NavLink>
-        </TooltipForNav>
-        <TooltipForNav content="Portfolios">
-          <NavLink to="/portfolios">
-            <PortfolioIcon />
-          </NavLink>
-        </TooltipForNav>
-        <TooltipForNav content="Analytics">
-          <NavLink to="/analytics">
-            <AnalyticsIcon />
-          </NavLink>
-        </TooltipForNav>
-      </nav>
-      <nav className={actionBarStyles.nav2}>
-        {isAuthenticated ? (
-          <TooltipForNav content="Activity">
-            <button onClick={handleToggleWorkflowActivity}>
-              <ActivityIcon />
-            </button>
+    <>
+      <div className={actionBarStyles.actionsWrapper}>
+        <nav className={actionBarStyles.nav1}>
+          <TooltipForNav content="About">
+            <NavLink to="/" className={actionBarStyles.homeLink}>
+              <SparkgeoLogo className={actionBarStyles.logo} />
+            </NavLink>
           </TooltipForNav>
-        ) : null}
-        <TooltipForNav content="Information">
-          <NavLink to="/information">
-            <InformationIcon />
-          </NavLink>
-        </TooltipForNav>
-        <UserMenu
-          setIsUserMenuOpen={setUserIsMenuOpen}
-          isUserMenuOpen={isUserMenuOpen}
-        />
-      </nav>
-      {isWorkflowActivityOpen ? (
-        <WorkflowActivityDrawer closeDrawer={handleToggleWorkflowActivity} />
-      ) : null}
-    </div>
+
+          <TooltipForNav content="Hazards">
+            <NavLink to="/hazards">
+              <HazardsIcon />
+            </NavLink>
+          </TooltipForNav>
+          <TooltipForNav content="Observations">
+            <NavLink to="/observations">
+              <ObservationsIcon />
+            </NavLink>
+          </TooltipForNav>
+          <TooltipForNav content="Assets">
+            <NavLink to="/assets">
+              <AssetsIcon />
+            </NavLink>
+          </TooltipForNav>
+          <TooltipForNav content="Portfolios">
+            <NavLink to="/portfolios">
+              <PortfolioIcon />
+            </NavLink>
+          </TooltipForNav>
+          <TooltipForNav content="Analytics">
+            <NavLink to="/analytics">
+              <AnalyticsIcon />
+            </NavLink>
+          </TooltipForNav>
+        </nav>
+        <nav className={actionBarStyles.nav2}>
+          {isAuthenticated ? (
+            <TooltipForNav content="Activity">
+              <button onClick={handleToggleWorkflowActivity}>
+                <ActivityIcon />
+              </button>
+            </TooltipForNav>
+          ) : null}
+          <TooltipForNav content="Information">
+            <NavLink to="/information">
+              <InformationIcon />
+            </NavLink>
+          </TooltipForNav>
+          <UserMenu
+            setIsUserMenuOpen={setUserIsMenuOpen}
+            isUserMenuOpen={isUserMenuOpen}
+          />
+        </nav>
+      </div>
+      <WorkflowActivityDrawer
+        closeDrawer={handleToggleWorkflowActivity}
+        isDrawerOpen={isWorkflowActivityOpen}
+      />
+    </>
   )
 }

@@ -67,7 +67,7 @@ export const chronicHeatSchema: RJSFSchema = {
       oneOf: [
         {
           title: 'Mean degree days above 32\u00b0C',
-          const: 'chronic_heat_osc_v2_mean_degree_days_v2_above_32c',
+          const: 'mean_degree_days_v2_above_32c',
         },
         {
           title: 'Days per year above 35\u00b0C (Jupiter)',
@@ -75,51 +75,51 @@ export const chronicHeatSchema: RJSFSchema = {
         },
         {
           title: 'Mean work loss, low intensity',
-          const: 'chronic_heat_osc_v2_mean_work_loss_low',
+          const: 'mean_work_loss_low',
         },
         {
           title: 'Mean work loss, medium intensity',
-          const: 'chronic_heat_osc_v2_mean_work_loss_medium',
+          const: 'mean_work_loss_medium',
         },
         {
           title: 'Mean work loss, high intensity',
-          const: 'chronic_heat_osc_v2_mean_work_loss_high',
+          const: 'mean_work_loss_high',
         },
         {
           title: 'Days with average temperature above 25\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_25c',
+          const: 'days_tas_above_25c',
         },
         {
           title: 'Days with average temperature above 30\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_30c',
+          const: 'days_tas_above_30c',
         },
         {
           title: 'Days with average temperature above 35\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_35c',
+          const: 'days_tas_above_35c',
         },
         {
           title: 'Days with average temperature above 40\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_40c',
+          const: 'days_tas_above_40c',
         },
         {
           title: 'Days with average temperature above 45\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_45c',
+          const: 'days_tas_above_45c',
         },
         {
           title: 'Days with average temperature above 50\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_50c',
+          const: 'days_tas_above_50c',
         },
         {
           title: 'Days with average temperature above 55\u00b0C',
-          const: 'chronic_heat_osc_v2_days_tas_above_55c',
+          const: 'days_tas_above_55c',
         },
         {
           title: 'Mean degree days above index value',
-          const: 'chronic_heat_osc_v2_mean_degree_days_above_index',
+          const: 'mean_degree_days_above_index',
         },
         {
           title: 'Mean degree days below index value',
-          const: 'chronic_heat_osc_v2_mean_degree_days_below_index',
+          const: 'mean_degree_days_below_index',
         },
         {
           title:
@@ -129,7 +129,7 @@ export const chronicHeatSchema: RJSFSchema = {
         {
           title:
             'Days with wet-bulb globe temperature above threshold in \u00b0C',
-          const: 'chronic_heat_osc_v2_days_wbgt_above',
+          const: 'days_wbgt_above',
         },
       ],
     },
@@ -139,7 +139,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_mean_degree_days_v2_above_32c',
+            const: 'mean_degree_days_v2_above_32c',
           },
         },
       },
@@ -797,7 +797,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_mean_work_loss_low',
+            const: 'mean_work_loss_low',
           },
         },
       },
@@ -1367,7 +1367,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_mean_work_loss_medium',
+            const: 'mean_work_loss_medium',
           },
         },
       },
@@ -1937,7 +1937,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_mean_work_loss_high',
+            const: 'mean_work_loss_high',
           },
         },
       },
@@ -2507,7 +2507,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_25c',
+            const: 'days_tas_above_25c',
           },
         },
       },
@@ -3077,7 +3077,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_30c',
+            const: 'days_tas_above_30c',
           },
         },
       },
@@ -3647,7 +3647,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_35c',
+            const: 'days_tas_above_35c',
           },
         },
       },
@@ -4217,7 +4217,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_40c',
+            const: 'days_tas_above_40c',
           },
         },
       },
@@ -4787,7 +4787,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_45c',
+            const: 'days_tas_above_45c',
           },
         },
       },
@@ -5357,7 +5357,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_50c',
+            const: 'days_tas_above_50c',
           },
         },
       },
@@ -5927,7 +5927,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_tas_above_55c',
+            const: 'days_tas_above_55c',
           },
         },
       },
@@ -6497,7 +6497,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_mean_degree_days_above_index',
+            const: 'mean_degree_days_above_index',
           },
         },
       },
@@ -7067,7 +7067,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_mean_degree_days_below_index',
+            const: 'mean_degree_days_below_index',
           },
         },
       },
@@ -8239,7 +8239,7 @@ export const chronicHeatSchema: RJSFSchema = {
       if: {
         properties: {
           indicator: {
-            const: 'chronic_heat_osc_v2_days_wbgt_above',
+            const: 'days_wbgt_above',
           },
         },
       },

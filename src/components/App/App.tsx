@@ -2,10 +2,10 @@ import {
   Theme as RadixTheme,
   ThemeProps as RadixThemeProps,
 } from '@radix-ui/themes'
+import './App.module.css'
 import '@radix-ui/themes/styles.css'
 import 'react-toastify/dist/ReactToastify.css'
-
-import './App.module.css'
+import { ErrorBoundary } from 'react-error-boundary'
 
 import { RouterProvider } from 'react-router-dom'
 import { UserAssetsProvider } from '../../context/UserAssetsContext'
@@ -22,21 +22,23 @@ const RADIX_THEME_PROPS: RadixThemeProps = {
 
 function App() {
   return (
-    <AuthenticationContextProvider>
-      <LoadingContextProvider>
-        <RadixTheme {...RADIX_THEME_PROPS}>
-          <UserAssetsProvider>
-            <HazardContextProvider>
-              <ObservationsContextProvider>
-                <AssetsPageContextProvider>
-                  <RouterProvider router={router} />
-                </AssetsPageContextProvider>
-              </ObservationsContextProvider>
-            </HazardContextProvider>
-          </UserAssetsProvider>
-        </RadixTheme>
-      </LoadingContextProvider>
-    </AuthenticationContextProvider>
+    <ErrorBoundary fallback={<div>We&apos;re sorry. Something is broken.</div>}>
+      <AuthenticationContextProvider>
+        <LoadingContextProvider>
+          <RadixTheme {...RADIX_THEME_PROPS}>
+            <UserAssetsProvider>
+              <HazardContextProvider>
+                <ObservationsContextProvider>
+                  <AssetsPageContextProvider>
+                    <RouterProvider router={router} />
+                  </AssetsPageContextProvider>
+                </ObservationsContextProvider>
+              </HazardContextProvider>
+            </UserAssetsProvider>
+          </RadixTheme>
+        </LoadingContextProvider>
+      </AuthenticationContextProvider>
+    </ErrorBoundary>
   )
 }
 

@@ -172,6 +172,11 @@ export const WorkflowActivityDrawer = ({
       </div>
       <div className={workflowAvtivityStyles.activityList}>
         {isWorkflowActivityLoading ? <LoadingIndicator /> : null}
+        {!isWorkflowActivityLoading &&
+        !isWorkflowActivityError &&
+        workflowActivity.length === 0 ? (
+          <>There is no activity to show for the current user</>
+        ) : null}
         {!isWorkflowActivityLoading && !isWorkflowActivityError
           ? workflowActivity.map(
               ({ jobID, status, started, finished, processID }) => {

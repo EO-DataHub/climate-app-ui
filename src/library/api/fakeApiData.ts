@@ -95,6 +95,7 @@ export const temporarySamplePortfolios = [
         },
       ],
     },
+    fileName: 'sample-portfolio-1.geojson', // file needs to exist in hub storage for analysis
   },
   {
     name: 'Sample Portfolio 2',
@@ -143,6 +144,7 @@ export const temporarySamplePortfolios = [
         },
       ],
     },
+    fileName: 'sample-portfolio-2.geojson', // file needs to exist in hub storage for analysis
   },
   {
     name: 'Sample Portfolio 3',
@@ -191,6 +193,7 @@ export const temporarySamplePortfolios = [
         },
       ],
     },
+    fileName: 'sample-portfolio-3.geojson', // file needs to exist in hub storage for analysis
   },
 ]
 

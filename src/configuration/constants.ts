@@ -32,8 +32,8 @@ export enum HubWorkflowNicknames {
 export type HubWorkflowNicknamesType = `${HubWorkflowNicknames}`
 
 export const hubWorkflowNames = {
-  [HubWorkflowNicknames.OSC]: 'physrisk-current',
-  [HubWorkflowNicknames.LST]: 'lst-current',
+  [HubWorkflowNicknames.OSC]: 'physrisk',
+  [HubWorkflowNicknames.LST]: 'lst',
 }
 
 export const workflowNickNamesByHubWorkflowName = Object.fromEntries(

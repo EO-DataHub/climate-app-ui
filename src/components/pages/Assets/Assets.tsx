@@ -24,6 +24,7 @@ import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/
 import { HubWorkflowNicknamesType } from '../../../configuration/constants'
 import { temporarySamplePortfolios } from '../../../library/api/fakeApiData'
 import { AssetsPageContext } from '../../../context/AssetsPageContext'
+import { getHubAssetStorageUrlForFile } from '../../../library/api/getHubAssetStorageUrls'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -67,10 +68,27 @@ export const Assets = () => {
     fileName: string
     parsedAssets: UserAssets
   }) => {
-    setCurrentWorkflowNickname?.(undefined)
-    setRowSelection({})
-    setUserAssets?.(parsedAssets)
-    setUploadedFileName?.(fileName)
+    if (!authenticatedAxios || !workspaceUserName) {
+      toast.error('Please log in to upload a file.')
+      return
+    }
+    const hubStorageUrlForFile = getHubAssetStorageUrlForFile({
+      workspaceUserName,
+      fileName,
+    })
+
+    authenticatedAxios
+      .put(hubStorageUrlForFile, parsedAssets)
+      .then(() => {
+        setCurrentWorkflowNickname?.(undefined)
+        setRowSelection({})
+        setUserAssets?.(parsedAssets)
+        setUploadedFileName?.(fileName)
+        toast.success('File uploaded to data hub successfully')
+      })
+      .catch(() => {
+        toast.error('Error uploading file to data hub')
+      })
   }
 
   const handleAnalyseAssets = ({
@@ -80,6 +98,11 @@ export const Assets = () => {
   }) => {
     if (!userAssets) {
       throw new Error('handleAnalyseAssets has a missing userAssets parameter')
+    }
+    if (!uploadedFileName) {
+      throw new Error(
+        'handleAnalyseAssets has a missing uploadedFileName parameter',
+      )
     }
     if (!setAnalysedUserAssets) {
       throw new Error(
@@ -112,7 +135,7 @@ export const Assets = () => {
     analyseAssets({
       axios: authenticatedAxios,
       currentWorkflowNickname: workflowTitle,
-      userAssets,
+      fileName: uploadedFileName,
       workspaceUserName,
     })
       .then((results) => {
@@ -163,7 +186,7 @@ export const Assets = () => {
 
     if (selectedPortfolio) {
       setCurrentWorkflowNickname?.(undefined)
-      setUploadedFileName?.(selectedPortfolio.name)
+      setUploadedFileName?.(selectedPortfolio.fileName)
       setUserAssets?.(selectedPortfolio.data as UserAssets)
     }
   }

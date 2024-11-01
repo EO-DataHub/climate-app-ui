@@ -24,7 +24,7 @@ import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/
 import { HubWorkflowNicknamesType } from '../../../configuration/constants'
 import { temporarySamplePortfolios } from '../../../library/api/fakeApiData'
 import { AssetsPageContext } from '../../../context/AssetsPageContext'
-import { getHubAssetStorageUrlForFile } from '../../../library/api/getHubAssetStorageUrls'
+import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -63,26 +63,26 @@ export const Assets = () => {
 
   const handleLoadAssets = ({
     fileName,
-    parsedAssets,
+    assets,
   }: {
     fileName: string
-    parsedAssets: UserAssets
+    assets: UserAssets
   }) => {
     if (!authenticatedAxios || !workspaceUserName) {
       toast.error('Please log in to upload a file.')
       return
     }
-    const hubStorageUrlForFile = getHubAssetStorageUrlForFile({
-      workspaceUserName,
-      fileName,
-    })
 
-    authenticatedAxios
-      .put(hubStorageUrlForFile, parsedAssets)
+    uploadUserAssets({
+      authenticatedAxios,
+      assets,
+      fileName,
+      workspaceUserName,
+    })
       .then(() => {
         setCurrentWorkflowNickname?.(undefined)
         setRowSelection({})
-        setUserAssets?.(parsedAssets)
+        setUserAssets?.(assets)
         setUploadedFileName?.(fileName)
         toast.success('File uploaded to data hub successfully')
       })
@@ -191,6 +191,12 @@ export const Assets = () => {
     }
   }
 
+  const uploadButton = (
+    <Link asChild>
+      <button>+ Open File</button>
+    </Link>
+  )
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={assetStyles.sidebarTopSection}>
@@ -199,7 +205,11 @@ export const Assets = () => {
             <label>Portfolios</label>
             <AssetsSelect onValueChange={usePortfolioData} />
           </div>
-          <UploadButtonAndDialog onLoadAssets={handleLoadAssets} />
+          <UploadButtonAndDialog
+            onLoadAssets={handleLoadAssets}
+            trigger={uploadButton}
+            description="Select a file for analysis"
+          />
         </div>
         {!userAssets ? (
           <div className={assetStyles.uploadGuildelinesWrapper}>

@@ -1,5 +1,5 @@
 import { Button, Dialog, Link, Spinner, Text } from '@radix-ui/themes'
-import { useCallback, useState } from 'react'
+import { ReactNode, useCallback, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { parseUploadedAssetsIntoGeoJson } from '../../library/userAssets/parseUploadedAssetsIntoGeoJson'
@@ -11,11 +11,12 @@ import UploadCompleteIcon from '@material-design-icons/svg/filled/check_circle.s
 
 export const UploadButtonAndDialog = ({
   onLoadAssets,
+  trigger,
+  description,
 }: {
-  onLoadAssets: (parameters: {
-    parsedAssets: UserAssets
-    fileName: string
-  }) => void
+  onLoadAssets: (parameters: { assets: UserAssets; fileName: string }) => void
+  trigger: ReactNode
+  description: string
 }) => {
   const [chosenUnparsedFiles, setChosenUnparsedFiles] = useState<File[]>([])
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -79,7 +80,10 @@ export const UploadButtonAndDialog = ({
 
   const handleLoadAssetsClick = () => {
     setIsDialogOpen(false)
-    onLoadAssets({ parsedAssets, fileName: chosenUnparsedFiles?.[0]?.name })
+    onLoadAssets({
+      assets: parsedAssets,
+      fileName: chosenUnparsedFiles?.[0]?.name,
+    })
   }
 
   const cancelUpload = () => {
@@ -105,17 +109,11 @@ export const UploadButtonAndDialog = ({
 
   return (
     <Dialog.Root open={isDialogOpen} onOpenChange={handleDialogOpenChange}>
-      <Dialog.Trigger>
-        <Link asChild>
-          <button>+ Open File</button>
-        </Link>
-      </Dialog.Trigger>
+      <Dialog.Trigger>{trigger}</Dialog.Trigger>
 
       <Dialog.Content className={uploadButtonAndDialogStyles.dialogContent}>
         <Dialog.Title>Open File</Dialog.Title>
-        <Dialog.Description size="2">
-          Select a file for analysis
-        </Dialog.Description>
+        <Dialog.Description size="2">{description}</Dialog.Description>
         <div
           {...getRootProps({
             className: dropzoneClassNameToUse,

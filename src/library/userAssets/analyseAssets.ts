@@ -1,23 +1,24 @@
 import { AxiosInstance } from 'axios'
 
-import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
+import { AnalysedUserAssets } from './userAssetTypes'
 import {
   HubWorkflowNicknamesType,
   hubWorkflowNames,
 } from '../../configuration/constants'
 import { getResultsUrl } from '../api/getResultsUrl'
+import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 const initiateAssetsRiskAnalysis = async ({
   axios,
   currentWorkflowNickname,
-  userAssets,
+  fileName,
   workspaceUserName,
 }: {
   axios: AxiosInstance
   currentWorkflowNickname: HubWorkflowNicknamesType
-  userAssets: UserAssets
+  fileName: string
   workspaceUserName: string
 }) => {
   return axios.post(
@@ -25,7 +26,10 @@ const initiateAssetsRiskAnalysis = async ({
     {
       inputs: {
         workspace: workspaceUserName,
-        json_string: JSON.stringify(userAssets),
+        json_file: getRelativeS3PathForAssetFile({
+          workspaceUserName,
+          fileName,
+        }),
       },
     },
     {
@@ -100,12 +104,12 @@ async function getAssetsRiskResults({
 export const analyseAssets = ({
   axios,
   currentWorkflowNickname,
-  userAssets,
+  fileName,
   workspaceUserName,
 }: {
   axios?: AxiosInstance
   currentWorkflowNickname: HubWorkflowNicknamesType
-  userAssets: UserAssets
+  fileName: string
   workspaceUserName: string
 }) => {
   if (!axios) {
@@ -118,7 +122,7 @@ export const analyseAssets = ({
   return initiateAssetsRiskAnalysis({
     axios,
     currentWorkflowNickname,
-    userAssets,
+    fileName,
     workspaceUserName,
   }).then((response) => {
     const statusPollingUrl = response.data.links.find(

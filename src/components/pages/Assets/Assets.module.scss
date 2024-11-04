@@ -40,3 +40,7 @@
   @include containers.flexColumnStartStart;
   gap: 0;
 }
+.openFileButton {
+  @include containers.flexRowStartCenter;
+  gap: 0.3em;
+}

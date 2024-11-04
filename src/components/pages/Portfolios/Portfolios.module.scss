@@ -1,0 +1,11 @@
+@use '../../../library/genericStyles/containers';
+
+.aboveTableRow {
+  @include containers.flexRowSpaceBetweenCenter;
+}
+
+.addPortfolioButton {
+  & > svg {
+    fill: var(--white);
+  }
+}

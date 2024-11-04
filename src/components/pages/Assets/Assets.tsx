@@ -1,4 +1,4 @@
-import { Button, Heading, Link, Text, Dialog } from '@radix-ui/themes'
+import { Button, Heading, Link, Text, Dialog, Spinner } from '@radix-ui/themes'
 import { useContext, useMemo, useState } from 'react'
 
 import {
@@ -6,29 +6,32 @@ import {
   UserAssets,
 } from '../../../library/userAssets/userAssetTypes'
 import { analyseAssets } from '../../../library/userAssets/analyseAssets'
+import { AssetsPageContext } from '../../../context/AssetsPageContext'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { AssetsTable } from '../../AssetsTable/AssetsTable'
 import { AuthenticationContext } from '../../../context/AuthenticationContext'
-import { Link as ReactRouterLink } from 'react-router-dom'
-import { Map } from '../../Map/Map'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { toast } from 'react-toastify'
-import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
-import { useMap } from '../../Map/useMap'
-import { UserAssetsContext } from '../../../context/UserAssetsContext'
-import assetStyles from './Assets.module.scss'
-import sidebarStyles from '../../Layout/Sidebar.module.scss'
-import { WorkflowModalContent } from './WorkflowModalContent'
-import { PageSubtitle } from '../../PageSubtitle'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
 import { HubWorkflowNicknamesType } from '../../../configuration/constants'
+import { Link as ReactRouterLink } from 'react-router-dom'
+import { Map } from '../../Map/Map'
+import { PageSubtitle } from '../../PageSubtitle'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { temporarySamplePortfolios } from '../../../library/api/fakeApiData'
-import { AssetsPageContext } from '../../../context/AssetsPageContext'
+import { toast } from 'react-toastify'
+import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
+import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
+import { useMap } from '../../Map/useMap'
+import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { WorkflowModalContent } from './WorkflowModalContent'
+import assetStyles from './Assets.module.scss'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
+  const [isFileUploading, setIsFileUploading] = useState(false)
+
   const {
     authenticatedAxios,
     isAuthenticated,
@@ -62,15 +65,35 @@ export const Assets = () => {
 
   const handleLoadAssets = ({
     fileName,
-    parsedAssets,
+    assets,
   }: {
     fileName: string
-    parsedAssets: UserAssets
+    assets: UserAssets
   }) => {
-    setCurrentWorkflowNickname?.(undefined)
-    setRowSelection({})
-    setUserAssets?.(parsedAssets)
-    setUploadedFileName?.(fileName)
+    if (!authenticatedAxios || !workspaceUserName) {
+      toast.error('Please log in to upload a file.')
+      return
+    }
+    setIsFileUploading(true)
+    uploadUserAssets({
+      authenticatedAxios,
+      assets,
+      fileName,
+      workspaceUserName,
+    })
+      .then(() => {
+        setCurrentWorkflowNickname?.(undefined)
+        setRowSelection({})
+        setUserAssets?.(assets)
+        setUploadedFileName?.(fileName)
+        toast.success('File uploaded to data hub successfully')
+      })
+      .catch(() => {
+        toast.error('Error uploading file to data hub')
+      })
+      .finally(() => {
+        setIsFileUploading(false)
+      })
   }
 
   const handleAnalyseAssets = ({
@@ -80,6 +103,11 @@ export const Assets = () => {
   }) => {
     if (!userAssets) {
       throw new Error('handleAnalyseAssets has a missing userAssets parameter')
+    }
+    if (!uploadedFileName) {
+      throw new Error(
+        'handleAnalyseAssets has a missing uploadedFileName parameter',
+      )
     }
     if (!setAnalysedUserAssets) {
       throw new Error(
@@ -112,7 +140,7 @@ export const Assets = () => {
     analyseAssets({
       axios: authenticatedAxios,
       currentWorkflowNickname: workflowTitle,
-      userAssets,
+      fileName: uploadedFileName,
       workspaceUserName,
     })
       .then((results) => {
@@ -163,10 +191,18 @@ export const Assets = () => {
 
     if (selectedPortfolio) {
       setCurrentWorkflowNickname?.(undefined)
-      setUploadedFileName?.(selectedPortfolio.name)
+      setUploadedFileName?.(selectedPortfolio.fileName)
       setUserAssets?.(selectedPortfolio.data as UserAssets)
     }
   }
+
+  const uploadButton = (
+    <Link asChild>
+      <button className={assetStyles.openFileButton} disabled={isFileUploading}>
+        {isFileUploading ? <Spinner /> : <>+</>} Open File
+      </button>
+    </Link>
+  )
 
   const sidebarContent = (
     <div className={sidebarStyles.content}>
@@ -176,7 +212,11 @@ export const Assets = () => {
             <label>Portfolios</label>
             <AssetsSelect onValueChange={usePortfolioData} />
           </div>
-          <UploadButtonAndDialog onLoadAssets={handleLoadAssets} />
+          <UploadButtonAndDialog
+            onLoadAssets={handleLoadAssets}
+            trigger={uploadButton}
+            description="Select a file for analysis"
+          />
         </div>
         {!userAssets ? (
           <div className={assetStyles.uploadGuildelinesWrapper}>

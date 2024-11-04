@@ -17,3 +17,8 @@
   margin-top: var(--space-1);
   color: var(--slate-11);
 }
+.downloadMenuContent {
+  & *[role='menuitem'] a {
+    all: unset;
+  }
+}

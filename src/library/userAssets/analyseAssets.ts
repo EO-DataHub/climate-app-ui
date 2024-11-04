@@ -5,7 +5,7 @@ import {
   HubWorkflowNicknamesType,
   hubWorkflowNames,
 } from '../../configuration/constants'
-import { getResultsUrl } from '../api/getResultsUrl'
+import { getResultsUrl } from '../api/getUrls'
 import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
@@ -73,7 +73,10 @@ async function getAssetsRiskResults({
   workspaceUserName: string
 }) {
   const pollForAnalysisResults = async (
-    resolve: (data: AnalysedUserAssets) => void,
+    resolve: (result: {
+      analysedData: AnalysedUserAssets
+      jobId: string
+    }) => void,
     reject: (error: unknown) => void,
   ) => {
     try {
@@ -87,7 +90,8 @@ async function getAssetsRiskResults({
           jobId,
           workspaceUserName,
         })
-        resolve(data)
+
+        resolve({ analysedData: data, jobId })
       } else {
         setTimeout(() => {
           void pollForAnalysisResults(resolve, reject)

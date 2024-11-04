@@ -59,6 +59,7 @@ export const Assets = () => {
     setCurrentWorkflowNickname,
     setUploadedFileName,
     setUserAssets,
+    setWorkflowJobIdAssociatedWithData,
     uploadedFileName,
     userAssets,
   } = useContext(UserAssetsContext)
@@ -114,6 +115,11 @@ export const Assets = () => {
         'handleAnalyseAssets has a missing setAnalysedUserAssets parameter',
       )
     }
+    if (!setWorkflowJobIdAssociatedWithData) {
+      throw new Error(
+        'handleAnalyseAssets has a missing setWorkflowJobIdAssociatedWithData parameter',
+      )
+    }
     if (!userInfo || !authenticatedAxios || !workspaceUserName) {
       toast.error('Please log in to run an analysis.')
 
@@ -133,6 +139,7 @@ export const Assets = () => {
         You will receive a notification when it&apos;s ready.
       </>,
     )
+    setWorkflowJobIdAssociatedWithData(null)
     setAnalysedUserAssets(null)
     setCurrentWorkflowNickname?.(workflowTitle)
     setIsWorkflowModalOpen(false)
@@ -143,14 +150,15 @@ export const Assets = () => {
       fileName: uploadedFileName,
       workspaceUserName,
     })
-      .then((results) => {
-        setAnalysedUserAssets(results)
+      .then(({ analysedData, jobId }) => {
+        setWorkflowJobIdAssociatedWithData(jobId)
+        setAnalysedUserAssets(analysedData)
         setAnalysisRunDate?.(
           ` ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
         )
 
         // eslint-disable-next-line no-console
-        console.log('Risk analysis results:', results)
+        console.log('Risk analysis results:', analysedData)
         toast.dismiss()
         toast.success(
           <div

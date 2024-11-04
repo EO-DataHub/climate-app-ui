@@ -18,7 +18,7 @@ import {
   hubWorkflowNames,
   workflowNickNamesByHubWorkflowName,
 } from '../../configuration/constants'
-import { getResultsUrl } from '../../library/api/getResultsUrl'
+import { getResultsUrl } from '../../library/api/getUrls'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Drawer } from '../Drawer/Drawer'
@@ -59,7 +59,10 @@ export const WorkflowActivityDrawer = ({
   const {
     analysedUserAssets,
     setAnalysedUserAssets,
+    setAnalysisRunDate,
     setCurrentWorkflowNickname,
+    setUploadedFileName,
+    setWorkflowJobIdAssociatedWithData,
   } = useContext(UserAssetsContext)
 
   useEffect(
@@ -104,7 +107,13 @@ export const WorkflowActivityDrawer = ({
 
   const viewAnalysis = (jobId: string) => {
     const jobInfo = workflowActivity.find((job) => job.jobID === jobId)
-    if (!jobInfo || !workspaceUserName) {
+    if (
+      !jobInfo ||
+      !setAnalysisRunDate ||
+      !setUploadedFileName ||
+      !setWorkflowJobIdAssociatedWithData ||
+      !workspaceUserName
+    ) {
       toast.error('Error viewing analysis')
       return
     }
@@ -124,6 +133,9 @@ export const WorkflowActivityDrawer = ({
       ?.get(resultsUrl)
       .then(({ data: { data } }) => {
         if (data) {
+          setAnalysisRunDate(new Date(jobInfo.finished).toLocaleDateString())
+          setUploadedFileName('placeholder-file-name')
+          setWorkflowJobIdAssociatedWithData(jobId)
           setCurrentWorkflowNickname?.(
             workflowNickNamesByHubWorkflowName[jobInfo.processID],
           )

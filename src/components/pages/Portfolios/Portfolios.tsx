@@ -4,15 +4,17 @@ import { PageTitle } from '../../PageTitle'
 import { PageLayout } from '../../Layout/PageLayout'
 
 import portfolioStyles from './Portfolios.module.scss'
-import { Button } from '@radix-ui/themes'
+import { Button, Spinner } from '@radix-ui/themes'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AuthenticationContext } from '../../../context/AuthenticationContext'
 import { UserAssets } from '../../../library/userAssets/userAssetTypes'
 import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
 import { toast } from 'react-toastify'
 
 export const Portfolios = () => {
+  const [isFileUploading, setIsFileUploading] = useState(false)
+
   const {
     authenticatedAxios,
 
@@ -30,6 +32,7 @@ export const Portfolios = () => {
       toast.error('Please log in to upload a file.')
       return
     }
+    setIsFileUploading(true)
     uploadUserAssets({
       authenticatedAxios,
       assets,
@@ -42,6 +45,9 @@ export const Portfolios = () => {
       .catch(() => {
         toast.error('Error uploading file to data hub')
       })
+      .finally(() => {
+        setIsFileUploading(false)
+      })
   }
   return (
     <PageLayout>
@@ -53,7 +59,7 @@ export const Portfolios = () => {
             onLoadAssets={handleLoadAssets}
             trigger={
               <Button className={portfolioStyles.addPortfolioButton}>
-                <AddIcon /> New Portfolio
+                {isFileUploading ? <Spinner /> : <AddIcon />} New Portfolio
               </Button>
             }
             description="Upload a new portfolio of assets"

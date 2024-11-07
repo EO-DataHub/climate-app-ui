@@ -134,18 +134,14 @@ export const AssetsTable = ({
 
   const getHeaderSortIcon = (header: Header<UserAssetForTable, unknown>) => {
     return (
-      {
-        asc: (
-          <span className={tableStyles.sortIconWrapper}>
-            <TriangleDownIcon />
-          </span>
-        ),
-        desc: (
-          <span className={tableStyles.sortIconWrapper}>
-            <TriangleUpIcon />
-          </span>
-        ),
-      }[header.column.getIsSorted() as string] ?? null
+      <span className={tableStyles.sortIconWrapper}>
+        {header.column.getIsSorted() === 'asc' && <TriangleDownIcon />}
+        {header.column.getIsSorted() === 'desc' && <TriangleUpIcon />}
+        {header.column.getIsSorted() === false &&
+          header.column.getCanSort() && (
+            <TriangleDownIcon className={tableStyles.hiddenSortIcon} />
+          )}
+      </span>
     )
   }
 
@@ -349,11 +345,11 @@ export const AssetsTable = ({
                 >
                   {header.isPlaceholder ? null : (
                     <div
-                      className={
+                      className={`${
                         header.column.getCanSort()
-                          ? 'cursor-pointer select-none'
-                          : ''
-                      }
+                          ? tableStyles.tableHeaderWithClickableCursorOnHover
+                          : undefined
+                      } ${tableStyles.tableHeader}`}
                       onClick={header.column.getToggleSortingHandler()}
                       title={
                         header.column.getCanSort()

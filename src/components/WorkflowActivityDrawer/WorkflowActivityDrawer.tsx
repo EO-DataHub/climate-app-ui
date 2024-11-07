@@ -58,10 +58,10 @@ export const WorkflowActivityDrawer = ({
     useState<WorkflowInfoFromApi['jobID'] | undefined>(undefined)
   const {
     analysedUserAssets,
+    setAnalysedAssetsFileName,
     setAnalysedUserAssets,
     setAnalysisRunDate,
-    setCurrentWorkflowNickname,
-    setUploadedFileName,
+    setAnalysedAssetsWorkflowNickname,
     setWorkflowJobIdAssociatedWithData,
   } = useContext(UserAssetsContext)
 
@@ -110,7 +110,7 @@ export const WorkflowActivityDrawer = ({
     if (
       !jobInfo ||
       !setAnalysisRunDate ||
-      !setUploadedFileName ||
+      !setAnalysedAssetsFileName ||
       !setWorkflowJobIdAssociatedWithData ||
       !workspaceUserName
     ) {
@@ -133,15 +133,18 @@ export const WorkflowActivityDrawer = ({
       ?.get(resultsUrl)
       .then(({ data: { data } }) => {
         if (data) {
+          setAnalysedUserAssets?.(data)
           setAnalysisRunDate(new Date(jobInfo.finished).toLocaleDateString())
-          setUploadedFileName('placeholder-file-name')
+          setAnalysedAssetsFileName('placeholder-file-name')
           setWorkflowJobIdAssociatedWithData(jobId)
-          setCurrentWorkflowNickname?.(
+          setAnalysedAssetsWorkflowNickname?.(
             workflowNickNamesByHubWorkflowName[jobInfo.processID],
           )
-          setAnalysedUserAssets?.(data)
           closeDrawer()
-          navigate('/analytics')
+          setTimeout(() => {
+            // give react a second to update state so that table shows data - otherwise there is an issue with the analytics page where it doesnt update from context. Could be a react-table thing?
+            navigate('/analytics')
+          }, 1000)
         }
         if (!data) {
           toast.error('Error viewing analysis')

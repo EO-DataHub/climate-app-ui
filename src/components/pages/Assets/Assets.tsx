@@ -2,6 +2,7 @@ import { Button, Heading, Link, Text, Dialog, Spinner } from '@radix-ui/themes'
 import { useContext, useMemo, useState } from 'react'
 
 import {
+  AnalysedUserAssets,
   RowSelection,
   UserAssets,
 } from '../../../library/userAssets/userAssetTypes'
@@ -12,7 +13,7 @@ import { AssetsTable } from '../../AssetsTable/AssetsTable'
 import { AuthenticationContext } from '../../../context/AuthenticationContext'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
 import { HubWorkflowNicknamesType } from '../../../configuration/constants'
-import { Link as ReactRouterLink } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Map } from '../../Map/Map'
 import { PageSubtitle } from '../../PageSubtitle'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
@@ -31,6 +32,8 @@ export const Assets = () => {
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
   const [isFileUploading, setIsFileUploading] = useState(false)
+
+  const navigate = useNavigate()
 
   const {
     authenticatedAxios,
@@ -54,6 +57,8 @@ export const Assets = () => {
   })
   const {
     currentWorkflowNickname,
+    setAnalysedAssetsFileName,
+    setAnalysedAssetsWorkflowNickname,
     setAnalysedUserAssets,
     setAnalysisRunDate,
     setCurrentWorkflowNickname,
@@ -96,7 +101,28 @@ export const Assets = () => {
         setIsFileUploading(false)
       })
   }
+  const handleViewAnalysis = ({
+    jobId,
+    analysedData,
+    analysisWorkflowNickname,
+  }: {
+    jobId: string
+    analysedData: AnalysedUserAssets
+    analysisWorkflowNickname: string
+  }) => {
+    setWorkflowJobIdAssociatedWithData?.(jobId)
+    setAnalysedUserAssets?.(analysedData)
+    setAnalysisRunDate?.(
+      ` ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+    )
+    setAnalysedAssetsFileName?.(uploadedFileName ?? 'Unknown file name')
+    setAnalysedAssetsWorkflowNickname?.(analysisWorkflowNickname)
 
+    setTimeout(() => {
+      // give react a second to update state so that table shows data - otherwise there is an issue with the analytics page where it sometimes doesnt update from context. Could be a react-table thing?
+      navigate('/analytics')
+    }, 1000)
+  }
   const handleAnalyseAssets = ({
     workflowTitle,
   }: {
@@ -110,14 +136,16 @@ export const Assets = () => {
         'handleAnalyseAssets has a missing uploadedFileName parameter',
       )
     }
-    if (!setAnalysedUserAssets) {
+    if (
+      !setAnalysedAssetsFileName ||
+      !setAnalysedAssetsWorkflowNickname ||
+      !setAnalysedUserAssets ||
+      !setAnalysisRunDate ||
+      !setAnalysisRunDate ||
+      !setWorkflowJobIdAssociatedWithData
+    ) {
       throw new Error(
-        'handleAnalyseAssets has a missing setAnalysedUserAssets parameter',
-      )
-    }
-    if (!setWorkflowJobIdAssociatedWithData) {
-      throw new Error(
-        'handleAnalyseAssets has a missing setWorkflowJobIdAssociatedWithData parameter',
+        'handleAnalyseAssets depends on UserAssetsContext state setters',
       )
     }
     if (!userInfo || !authenticatedAxios || !workspaceUserName) {
@@ -139,8 +167,6 @@ export const Assets = () => {
         You will receive a notification when it&apos;s ready.
       </>,
     )
-    setWorkflowJobIdAssociatedWithData(null)
-    setAnalysedUserAssets(null)
     setCurrentWorkflowNickname?.(workflowTitle)
     setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
@@ -151,16 +177,10 @@ export const Assets = () => {
       workspaceUserName,
     })
       .then(({ analysedData, jobId }) => {
-        setWorkflowJobIdAssociatedWithData(jobId)
-        setAnalysedUserAssets(analysedData)
-        setAnalysisRunDate?.(
-          ` ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
-        )
-
         // eslint-disable-next-line no-console
         console.log('Risk analysis results:', analysedData)
         toast.dismiss()
-        toast.success(
+        const toastId = toast.success(
           <div
             className={assetStyles.analysisSuccessToastMessageAndButtonWrapper}
           >
@@ -172,8 +192,18 @@ export const Assets = () => {
               {uploadedFileName ? uploadedFileName : null}
             </div>
 
-            <Button asChild variant="surface">
-              <ReactRouterLink to="/analytics">View Analysis</ReactRouterLink>
+            <Button
+              variant="surface"
+              onClick={() => {
+                toast.dismiss(toastId)
+                handleViewAnalysis({
+                  jobId,
+                  analysedData,
+                  analysisWorkflowNickname: workflowTitle,
+                })
+              }}
+            >
+              View Analysis
             </Button>
           </div>,
         )

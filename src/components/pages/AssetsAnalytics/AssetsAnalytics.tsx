@@ -33,9 +33,9 @@ export const AssetsAnalytics = () => {
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
   const {
-    currentWorkflowNickname,
+    analysedAssetsWorkflowNickname,
     analysedUserAssets,
-    uploadedFileName,
+    analysedAssetsFileName,
     analysisRunDate,
     csvResults,
   } = useContext(UserAssetsContext)
@@ -43,12 +43,12 @@ export const AssetsAnalytics = () => {
   useEffect(
     function initializeFiltersForCurrentWorkflow() {
       setHazardTypeFilterOptions(
-        currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
+        analysedAssetsWorkflowNickname === (HubWorkflowNicknames.OSC as string)
           ? ['ChronicHeat']
           : undefined,
       )
     },
-    [currentWorkflowNickname],
+    [analysedAssetsWorkflowNickname],
   )
 
   const downloadFileGeoJson = new Blob([JSON.stringify(analysedUserAssets)], {
@@ -66,11 +66,11 @@ export const AssetsAnalytics = () => {
 
   const analysedUserAssetsForTable = useMemo(
     () =>
-      currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
+      analysedAssetsWorkflowNickname === (HubWorkflowNicknames.OSC as string)
         ? getOscResultsTableData(analysedUserAssets)
         : getLstResultsTableData(analysedUserAssets),
 
-    [currentWorkflowNickname, analysedUserAssets],
+    [analysedAssetsWorkflowNickname, analysedUserAssets],
   )
   const filteredAnalysedUserAssetsForTable = useMemo(() => {
     return analysedUserAssetsForTable.filter(
@@ -260,7 +260,7 @@ export const AssetsAnalytics = () => {
               >
                 <DropdownMenu.Item>
                   <a
-                    download={`${uploadedFileName}_${currentWorkflowNickname}_${analysisRunDate}.geojson`}
+                    download={`${analysedAssetsFileName}_${analysedAssetsWorkflowNickname}_${analysisRunDate}.geojson`}
                     href={downloadUrlGeoJson}
                   >
                     as GeoJSON
@@ -269,7 +269,7 @@ export const AssetsAnalytics = () => {
                 {csvResults ? (
                   <DropdownMenu.Item>
                     <a
-                      download={`${uploadedFileName}_${currentWorkflowNickname}_${analysisRunDate}.csv`}
+                      download={`${analysedAssetsFileName}_${analysedAssetsWorkflowNickname}_${analysisRunDate}.csv`}
                       href={downloadUrlCsv}
                     >
                       as CSV
@@ -284,17 +284,19 @@ export const AssetsAnalytics = () => {
         {analysedUserAssets ? (
           <>
             <PageSubtitle>
-              {uploadedFileName ? <>Portfolio: {uploadedFileName}</> : null}
-              {analysisRunDate && uploadedFileName ? (
+              {analysedAssetsFileName ? (
+                <>Portfolio: {analysedAssetsFileName}</>
+              ) : null}
+              {analysisRunDate && analysedAssetsFileName ? (
                 <> | Analysis Run: {analysisRunDate}</>
               ) : null}
-              {analysedUserAssets.features.length && uploadedFileName ? (
+              {analysedUserAssets.features.length && analysedAssetsFileName ? (
                 <> | Assets: {analysedUserAssets?.features.length}</>
               ) : null}
             </PageSubtitle>
             <Text as="p" className={analyticsStyles.subSubtitle}>
-              {currentWorkflowNickname ? (
-                <> Workflow: {currentWorkflowNickname}</>
+              {analysedAssetsWorkflowNickname ? (
+                <> Workflow: {analysedAssetsWorkflowNickname}</> // update
               ) : null}
             </Text>
 

@@ -1,5 +1,3 @@
-import { HubWorkflowNicknames } from '../../configuration/constants'
-
 export interface ObservationDatasetOption {
   value: string
   label: string
@@ -9048,18 +9046,93 @@ export const observationTypeConfigs = [
 
 export const workflowOptions = [
   {
-    title: 'OS Climate Physical Risk',
-    nickName: HubWorkflowNicknames.OSC,
-    requiredColumns: ['ID', 'latitude', 'longitude', 'asset_type', 'location'],
+    title: 'Land Surface Temperature (LST) - Day',
     description:
-      'The OS Climate physical risk workflow will undertake a risk analysis on your asset portfolio of the potential impacts of climate change. According to the type of your asset, the workflow will analyse risks from chronic heat, inundation.',
+      'This workflow provides daytime land surface temperature observations for the specified assets.',
+    constraints: {
+      supported_assets: ['points'],
+      required_columns: ['ID', 'latitude', 'longitude'],
+    },
+    preset_inputs: {
+      workflow: 'lst-file',
+      stac_collection:
+        'test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/lst-catalog',
+      'day/night': 'day',
+    },
+    user_inputs: {
+      assets: {
+        type: 'file',
+        file_type: 'geojson',
+        label: 'Upload your asset GeoJSON file',
+      },
+      start_date: {
+        label: 'Select the start date',
+        type: 'date',
+        default: '2021-01-01',
+      },
+      end_date: {
+        label: 'Select the end date',
+        type: 'date',
+        default: '2021-01-31',
+      },
+    },
   },
   {
-    title: 'Land Surface Temperature (LST)',
-    nickName: HubWorkflowNicknames.LST,
+    title: 'Land Surface Temperature (LST) - Night',
     description:
-      'The Land Surface Temperature workflow will report on observed land surface temperature observations from your assets.',
-    requiredColumns: ['ID', 'latitude', 'longitude'],
+      'This workflow provides nighttime land surface temperature observations for the specified assets.',
+    constraints: {
+      supported_assets: ['points'],
+      required_columns: ['ID', 'latitude', 'longitude'],
+    },
+    preset_inputs: {
+      workflow: 'lst-file',
+      stac_collection:
+        'test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/lst-catalog',
+      'day/night': 'night',
+    },
+    user_inputs: {
+      assets: {
+        type: 'file',
+        file_type: 'geojson',
+        label: 'Upload your asset GeoJSON file',
+      },
+      start_date: {
+        label: 'Select the start date',
+        type: 'date',
+        default: '2021-01-01',
+      },
+      end_date: {
+        label: 'Select the end date',
+        type: 'date',
+        default: '2021-01-31',
+      },
+    },
+  },
+  {
+    title: 'OS Climate Physical Risk',
+    description:
+      'This workflow assesses the physical risks of climate change, including chronic heat and inundation, for the specified asset portfolio.',
+    constraints: {
+      supported_assets: ['points'],
+      required_columns: [
+        'ID',
+        'latitude',
+        'longitude',
+        'asset_type',
+        'location',
+      ],
+    },
+    preset_inputs: {
+      workflow: 'physrisk-file',
+    },
+    user_inputs: {
+      assets: {
+        type: 'file',
+        file_type: 'geojson',
+        label: 'Upload your asset GeoJSON file',
+      },
+    },
   },
 ]
 

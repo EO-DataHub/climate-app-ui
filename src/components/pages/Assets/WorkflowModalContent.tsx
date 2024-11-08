@@ -5,7 +5,10 @@ import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { workflowOptions } from '../../../library/api/fakeApiData'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import modalStyles from './WorkflowModalContent.module.scss'
-import { HubWorkflowNicknamesType } from '../../../configuration/constants'
+import {
+  HubWorkflowNicknamesType,
+  workflowNickNamesByHubWorkflowName,
+} from '../../../configuration/constants'
 
 export const WorkflowModalContent = ({
   handleAnalyseAssets,
@@ -32,9 +35,15 @@ export const WorkflowModalContent = ({
       </div>
       <ul className={modalStyles.workflowList}>
         {workflowOptions.map(
-          ({ title, nickName, description, requiredColumns }) => {
+          ({
+            title,
+            description,
+            constraints: { required_columns: requiredColumns },
+            preset_inputs: { workflow },
+          }) => {
+            const nickname = workflowNickNamesByHubWorkflowName[workflow]
             return (
-              <li key={nickName}>
+              <li key={title}>
                 <p>{title}</p>
                 <p>{description}</p>
                 <p>
@@ -48,10 +57,12 @@ export const WorkflowModalContent = ({
                 <Button
                   variant="outline"
                   onClick={() =>
-                    handleAnalyseAssets({ workflowTitle: nickName })
+                    handleAnalyseAssets({
+                      workflowTitle: nickname as HubWorkflowNicknamesType,
+                    })
                   }
                 >
-                  Run {nickName} Analysis
+                  Run {nickname} Analysis
                 </Button>
               </li>
             )

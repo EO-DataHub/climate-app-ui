@@ -40,3 +40,17 @@ body {
   width: fit-content;
   height: fit-content;
 }
+
+/* Mui date input overrides */
+.MuiOutlinedInput-root {
+  padding-right: var(--space-1);
+}
+.MuiOutlinedInput-root input {
+  padding: var(--space-1);
+
+  font-size: var(--font-size-2);
+}
+.MuiFormHelperText-root {
+  margin-left: 0.1em !important;
+  font-weight: normal !important;
+}

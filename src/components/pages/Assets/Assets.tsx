@@ -12,8 +12,6 @@ import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
 import { AssetsTable } from '../../AssetsTable/AssetsTable'
 import { AuthenticationContext } from '../../../context/AuthenticationContext'
 import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/convertUserAssets'
-import { HubWorkflowNicknamesType } from '../../../configuration/constants'
-import { useNavigate } from 'react-router-dom'
 import { Map } from '../../Map/Map'
 import { PageSubtitle } from '../../PageSubtitle'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
@@ -22,10 +20,13 @@ import { toast } from 'react-toastify'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
 import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
 import { useMap } from '../../Map/useMap'
+import { useNavigate } from 'react-router-dom'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
 import { WorkflowModalContent } from './WorkflowModalContent'
+import { workflowNickNamesByHubWorkflowName } from '../../../configuration/constants'
 import assetStyles from './Assets.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import { HandleAnalyseAssetsProps } from './assetsTypes'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -124,10 +125,10 @@ export const Assets = () => {
     }, 1000)
   }
   const handleAnalyseAssets = ({
-    workflowTitle,
-  }: {
-    workflowTitle: HubWorkflowNicknamesType
-  }) => {
+    endDate,
+    hubWorkflowPresetInputs,
+    startDate,
+  }: HandleAnalyseAssetsProps) => {
     if (!userAssets) {
       throw new Error('handleAnalyseAssets has a missing userAssets parameter')
     }
@@ -158,8 +159,18 @@ export const Assets = () => {
       void login()
       return
     }
-    toast.dismiss()
 
+    if (!hubWorkflowPresetInputs) {
+      toast.error(
+        'Sorry, the configuration for this workflow is broken on our end. Please select another workflow.',
+      )
+      return
+    }
+
+    const workflowNickName =
+      workflowNickNamesByHubWorkflowName[hubWorkflowPresetInputs.workflow]
+
+    toast.dismiss()
     toast.success(
       <>
         <strong>Analysis in Progress</strong>
@@ -167,13 +178,15 @@ export const Assets = () => {
         You will receive a notification when it&apos;s ready.
       </>,
     )
-    setCurrentWorkflowNickname?.(workflowTitle)
+    setCurrentWorkflowNickname?.(workflowNickName)
     setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
     analyseAssets({
       axios: authenticatedAxios,
-      currentWorkflowNickname: workflowTitle,
+      endDate,
       fileName: uploadedFileName,
+      startDate,
+      hubWorkflowPresetInputs,
       workspaceUserName,
     })
       .then(({ analysedData, jobId }) => {
@@ -186,7 +199,7 @@ export const Assets = () => {
           >
             <div className={assetStyles.analysisSuccessToastMessage}>
               <strong>
-                {workflowTitle} Analysis complete{' '}
+                {workflowNickName} Analysis complete{' '}
                 {uploadedFileName ? <>for</> : null}
               </strong>
               {uploadedFileName ? uploadedFileName : null}
@@ -199,7 +212,7 @@ export const Assets = () => {
                 handleViewAnalysis({
                   jobId,
                   analysedData,
-                  analysisWorkflowNickname: workflowTitle,
+                  analysisWorkflowNickname: workflowNickName,
                 })
               }}
             >

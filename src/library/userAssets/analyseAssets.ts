@@ -1,36 +1,41 @@
 import { AxiosInstance } from 'axios'
 
 import { AnalysedUserAssets } from './userAssetTypes'
-import {
-  HubWorkflowNicknamesType,
-  hubWorkflowNames,
-} from '../../configuration/constants'
-import { getResultsUrl } from '../api/getUrls'
 import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
+import { getResultsUrl } from '../api/getUrls'
+import { HubWorkflowPresetInputs } from '../api/apiTypes'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 const initiateAssetsRiskAnalysis = async ({
   axios,
-  currentWorkflowNickname,
+  endDate,
   fileName,
+  hubWorkflowPresetInputs,
+  startDate,
   workspaceUserName,
 }: {
   axios: AxiosInstance
-  currentWorkflowNickname: HubWorkflowNicknamesType
+  endDate?: string
   fileName: string
+  hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
+  startDate?: string
   workspaceUserName: string
 }) => {
+  const inputsFromConfigurationsToUse = {
+    stac_collection: hubWorkflowPresetInputs?.stac_collection,
+    'day/night': hubWorkflowPresetInputs?.['day/night'],
+  }
   return axios.post(
-    `${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/processes/${hubWorkflowNames[currentWorkflowNickname]}/execution`,
+    `${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
     {
-      inputs: {
-        workspace: workspaceUserName,
-        json_file: getRelativeS3PathForAssetFile({
-          workspaceUserName,
-          fileName,
-        }),
-      },
+      ...inputsFromConfigurationsToUse,
+      assets: getRelativeS3PathForAssetFile({
+        workspaceUserName,
+        fileName,
+      }),
+      start_date: startDate,
+      end_date: endDate,
     },
     {
       headers: { prefer: 'respond-async' },
@@ -107,13 +112,18 @@ async function getAssetsRiskResults({
 
 export const analyseAssets = ({
   axios,
-  currentWorkflowNickname,
+  endDate,
   fileName,
+  startDate,
+  hubWorkflowPresetInputs,
   workspaceUserName,
 }: {
   axios?: AxiosInstance
-  currentWorkflowNickname: HubWorkflowNicknamesType
+  endDate?: string
   fileName: string
+
+  startDate?: string
+  hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
   workspaceUserName: string
 }) => {
   if (!axios) {
@@ -125,9 +135,11 @@ export const analyseAssets = ({
 
   return initiateAssetsRiskAnalysis({
     axios,
-    currentWorkflowNickname,
+    endDate,
     fileName,
+    startDate,
     workspaceUserName,
+    hubWorkflowPresetInputs,
   }).then((response) => {
     const statusPollingUrl = response.data.links.find(
       (link: { title: string }) => link.title === 'Status location',

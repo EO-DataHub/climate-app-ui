@@ -41,3 +41,7 @@
   @include containers.flexRowStartCenter;
   gap: 0.5em;
 }
+.aboveActivityListRow {
+  @include containers.flexRowEndCenter;
+  width: 100%;
+}

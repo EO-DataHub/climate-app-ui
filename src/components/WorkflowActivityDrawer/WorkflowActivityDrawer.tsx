@@ -12,7 +12,7 @@ import CloseIcon from '@material-design-icons/svg/filled/close.svg?react'
 
 import { AuthenticationContext } from '../../context/AuthenticationContext'
 import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator'
-import workflowAvtivityStyles from './WorkflowActivityDrawer.module.scss'
+import workflowActivityStyles from './WorkflowActivityDrawer.module.scss'
 import { UserAssetsContext } from '../../context/UserAssetsContext'
 import {
   hubWorkflowNames,
@@ -51,6 +51,7 @@ export const WorkflowActivityDrawer = ({
   const [workflowActivity, setWorkflowActivity] = useState<
     WorkflowInfoFromApi[]
   >([])
+  const [isActivityBeingCleared, setIsActivityBeingCleared] = useState(false)
   const navigate = useNavigate()
 
   const { authenticatedAxios, workspaceUserName } = useContext(
@@ -176,6 +177,26 @@ export const WorkflowActivityDrawer = ({
         toast.error('Error cancelling analysis.')
       })
   }
+
+  const clearAll = () => {
+    if (!authenticatedAxios || !workspaceUserName) return
+    const deletePromises = workflowActivity.map(({ jobID }) =>
+      deleteWorkflow({ jobId: jobID, authenticatedAxios, workspaceUserName }),
+    )
+    setIsActivityBeingCleared(true)
+    Promise.all(deletePromises)
+      .then(() => {
+        setWorkflowActivity([])
+        toast.dismiss()
+        toast.success('All activity has been cleared.')
+      })
+      .catch(() => {
+        toast.error('Error clearing activity.')
+      })
+      .finally(() => {
+        setIsActivityBeingCleared(false)
+      })
+  }
   const badgeColor = {
     successful: 'green',
     failed: 'red',
@@ -190,7 +211,7 @@ export const WorkflowActivityDrawer = ({
 
   return (
     <Drawer isDrawerOpen={isDrawerOpen}>
-      <div className={workflowAvtivityStyles.drawerHeader}>
+      <div className={workflowActivityStyles.drawerHeader}>
         <Heading as="h3">Activity</Heading>
         <IconButton
           aria-label="Close workflow activity drawer"
@@ -203,7 +224,23 @@ export const WorkflowActivityDrawer = ({
           />
         </IconButton>
       </div>
-      <div className={workflowAvtivityStyles.activityList}>
+
+      <div className={workflowActivityStyles.activityList}>
+        {!isWorkflowActivityLoading &&
+        !isWorkflowActivityError &&
+        workflowActivity.length > 0 ? (
+          <div className={workflowActivityStyles.aboveActivityListRow}>
+            <Link asChild size="1">
+              <button
+                className={workflowActivityStyles.workflowActivityButton}
+                onClick={clearAll}
+              >
+                {isActivityBeingCleared ? <Spinner /> : null}
+                Clear All
+              </button>
+            </Link>
+          </div>
+        ) : null}
         {isWorkflowActivityLoading ? <LoadingIndicator /> : null}
         {!isWorkflowActivityLoading &&
         !isWorkflowActivityError &&
@@ -218,7 +255,7 @@ export const WorkflowActivityDrawer = ({
                 return (
                   <div
                     key={jobID}
-                    className={workflowAvtivityStyles.activityCard}
+                    className={workflowActivityStyles.activityCard}
                   >
                     <Badge color={badgeColor[status] as BadgeProps['color']}>
                       {badgeText[status]}
@@ -226,14 +263,14 @@ export const WorkflowActivityDrawer = ({
                     <Text
                       weight="bold"
                       size="3"
-                      className={workflowAvtivityStyles.portfolioName}
+                      className={workflowActivityStyles.portfolioName}
                     >
                       Portfolio Name Here
                     </Text>
                     <Text color="gray" size="1">
                       Type: {workflowNickNamesByHubWorkflowName[processID]}
                     </Text>
-                    <div className={workflowAvtivityStyles.dateRow}>
+                    <div className={workflowActivityStyles.dateRow}>
                       <Text color="gray" size="1">
                         Date:{''}
                         {dateStringToUse ? (
@@ -247,7 +284,7 @@ export const WorkflowActivityDrawer = ({
                           <button
                             onClick={() => viewAnalysis(jobID)}
                             className={
-                              workflowAvtivityStyles.workflowActivityButton
+                              workflowActivityStyles.workflowActivityButton
                             }
                             disabled={!!analysisIdWaitingToBeViewed}
                           >
@@ -266,7 +303,7 @@ export const WorkflowActivityDrawer = ({
                             <Link asChild size="1">
                               <button
                                 className={
-                                  workflowAvtivityStyles.workflowActivityButton
+                                  workflowActivityStyles.workflowActivityButton
                                 }
                               >
                                 Cancel Analysis

@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios'
+import { AxiosError, AxiosInstance } from 'axios'
 
 import { AnalysedUserAssets } from './userAssetTypes'
 import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
@@ -103,6 +103,12 @@ async function getAssetsRiskResults({
         }, 10000)
       }
     } catch (error) {
+      if (
+        error instanceof AxiosError &&
+        error.response?.data.title === 'NoSuchJob'
+      ) {
+        return // analysis was  deleted/cancelled
+      }
       reject(error)
     }
   }

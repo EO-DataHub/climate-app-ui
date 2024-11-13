@@ -22,6 +22,8 @@ import { getResultsUrl } from '../../library/api/getUrls'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Drawer } from '../Drawer/Drawer'
+import { deleteWorkflow } from '../../library/api/deleteWorkflow'
+import { Prompt } from '../Prompt/Prompt'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
@@ -65,43 +67,44 @@ export const WorkflowActivityDrawer = ({
     setWorkflowJobIdAssociatedWithData,
   } = useContext(UserAssetsContext)
 
+  const loadWorkflowActivity = () => {
+    if (!authenticatedAxios || !workspaceUserName) return
+
+    if (isDrawerOpen) {
+      setIsWorkflowActivityLoading(true)
+      authenticatedAxios
+        .get(`${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/jobs`)
+        .then((response) => {
+          const jobs = response.data.jobs as WorkflowInfoFromApi[]
+
+          const jobsRelatedToWorkflowsInThisApp = jobs.filter(({ processID }) =>
+            workflowsSupportedByThisApp.includes(processID),
+          )
+
+          const jobsSortedByDate = jobsRelatedToWorkflowsInThisApp.sort(
+            (a: WorkflowInfoFromApi, b: WorkflowInfoFromApi) => {
+              // UX requirement: show date analysis was started, or Date Error occurred or Date analysis was completed
+              const dateStringToUseForA = a.finished ?? a.started
+              const dateStringToUseForB = b.finished ?? b.started
+              return new Date(dateStringToUseForB).getTime() >
+                new Date(dateStringToUseForA).getTime()
+                ? 1
+                : -1
+            },
+          )
+          setWorkflowActivity(jobsSortedByDate)
+        })
+        .catch(() => {
+          setIsWorkflowActivityError(true)
+        })
+        .finally(() => {
+          setIsWorkflowActivityLoading(false)
+        })
+    }
+  }
+
   useEffect(
-    function loadWorkflowActivity() {
-      if (!authenticatedAxios || !workspaceUserName) return
-
-      if (isDrawerOpen) {
-        setIsWorkflowActivityLoading(true)
-        authenticatedAxios
-          .get(`${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/jobs`)
-          .then((response) => {
-            const jobs = response.data.jobs as WorkflowInfoFromApi[]
-
-            const jobsRelatedToWorkflowsInThisApp = jobs.filter(
-              ({ processID }) =>
-                workflowsSupportedByThisApp.includes(processID),
-            )
-
-            const jobsSortedByDate = jobsRelatedToWorkflowsInThisApp.sort(
-              (a: WorkflowInfoFromApi, b: WorkflowInfoFromApi) => {
-                // UX requirement: show date analysis was started, or Date Error occurred or Date analysis was completed
-                const dateStringToUseForA = a.finished ?? a.started
-                const dateStringToUseForB = b.finished ?? b.started
-                return new Date(dateStringToUseForB).getTime() >
-                  new Date(dateStringToUseForA).getTime()
-                  ? 1
-                  : -1
-              },
-            )
-            setWorkflowActivity(jobsSortedByDate)
-          })
-          .catch(() => {
-            setIsWorkflowActivityError(true)
-          })
-          .finally(() => {
-            setIsWorkflowActivityLoading(false)
-          })
-      }
-    },
+    loadWorkflowActivity,
     [authenticatedAxios, workspaceUserName, analysedUserAssets, isDrawerOpen], // we want to refresh whenever analysedUserAssets has changes which indicated a workflow status has changes
   )
 
@@ -157,7 +160,22 @@ export const WorkflowActivityDrawer = ({
         setAnalysisIdWaitingToBeViewed(undefined)
       })
   }
-
+  const cancelAnalysis = (jobId: string) => {
+    if (!authenticatedAxios || !workspaceUserName) return
+    deleteWorkflow({
+      jobId,
+      authenticatedAxios,
+      workspaceUserName,
+    })
+      .then(() => {
+        loadWorkflowActivity()
+        toast.dismiss()
+        toast.success('Analysis cancelled.')
+      })
+      .catch(() => {
+        toast.error('Error cancelling analysis.')
+      })
+  }
   const badgeColor = {
     successful: 'green',
     failed: 'red',
@@ -229,7 +247,7 @@ export const WorkflowActivityDrawer = ({
                           <button
                             onClick={() => viewAnalysis(jobID)}
                             className={
-                              workflowAvtivityStyles.viewAnalysisButton
+                              workflowAvtivityStyles.workflowActivityButton
                             }
                             disabled={!!analysisIdWaitingToBeViewed}
                           >
@@ -239,6 +257,25 @@ export const WorkflowActivityDrawer = ({
                             View Analysis
                           </button>
                         </Link>
+                      ) : null}
+                      {status === 'running' &&
+                      authenticatedAxios &&
+                      workspaceUserName ? (
+                        <Prompt
+                          trigger={
+                            <Link asChild size="1">
+                              <button
+                                className={
+                                  workflowAvtivityStyles.workflowActivityButton
+                                }
+                              >
+                                Cancel Analysis
+                              </button>
+                            </Link>
+                          }
+                          onConfirm={() => cancelAnalysis(jobID)}
+                          promptText="Do you want to cancel the ongoing analysis?"
+                        />
                       ) : null}
                     </div>
                   </div>

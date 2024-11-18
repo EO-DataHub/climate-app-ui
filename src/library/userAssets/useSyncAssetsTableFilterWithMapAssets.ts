@@ -1,12 +1,10 @@
-import { useEffect, useMemo } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 
 import { Table as TanstackTable } from '@tanstack/table-core'
-import {
-  UserAssetForTable,
-  convertDataForTableToGeoJSON,
-} from './convertUserAssets'
+import { UserAssetForTable } from './convertUserAssets'
 import { MapRef } from '../../components/Map/useMap'
 import { UserAssets } from './userAssetTypes'
+import { UserAssetsContext } from '../../context/UserAssetsContext'
 
 export const useSyncAssetsTableFilterWithMapAssets = ({
   isMapLoaded,
@@ -21,11 +19,18 @@ export const useSyncAssetsTableFilterWithMapAssets = ({
   updateUserAssetsInMap: (assets: UserAssets) => void
 }) => {
   const filteredRows = table.getFilteredRowModel().rows
+  const { userAssets } = useContext(UserAssetsContext)
 
   const filteredAssetsForMap = useMemo(() => {
-    const filteredRowsOriginal = filteredRows.map((row) => row.original)
-    return convertDataForTableToGeoJSON(filteredRowsOriginal)
-  }, [filteredRows])
+    const filteredFeatureIds = filteredRows.map((row) => row.original.id)
+    return {
+      type: 'FeatureCollection',
+      features:
+        userAssets?.features.filter((feature) =>
+          filteredFeatureIds.includes(feature.properties.id),
+        ) ?? [],
+    } as UserAssets
+  }, [filteredRows, userAssets?.features])
 
   useEffect(
     function syncMapWithTableFilter() {

@@ -1,4 +1,4 @@
-import { FeatureCollection, Point } from 'geojson'
+import { FeatureCollection, Geometry } from 'geojson'
 
 export type RowSelection = Record<string | number, boolean>
 export interface UserAssetsProperties {
@@ -9,9 +9,12 @@ export interface UserAssetsProperties {
   [x: string]: unknown
 }
 
-export type UserAssets = FeatureCollection<Point, UserAssetsProperties> | null
+export type UserAssets = FeatureCollection<
+  Geometry,
+  UserAssetsProperties
+> | null
 export type AnalysedUserAssets = FeatureCollection<
-  Point,
+  Geometry,
   UserAssetsProperties //the schema between workflows is variable, so we dont really have a type for this yet
 > | null
 

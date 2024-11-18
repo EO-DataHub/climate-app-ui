@@ -27,6 +27,7 @@ import { workflowNickNamesByHubWorkflowName } from '../../../configuration/const
 import assetStyles from './Assets.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { HandleAnalyseAssetsProps } from './assetsTypes'
+import { useSyncAssetsTableSelectionWithMapAssets } from '../../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -70,6 +71,19 @@ export const Assets = () => {
     userAssets,
   } = useContext(UserAssetsContext)
 
+  const userAssetsForTable = useMemo(
+    () => convertSimpleGeoJSONToDataForTable(userAssets),
+    [userAssets],
+  )
+
+  const { toggleAllMapAssetsSelection, toggleMapAssetSelection } =
+    useSyncAssetsTableSelectionWithMapAssets({
+      isMapLoaded,
+      mapRef,
+      userAssetsForTable,
+      rowSelection,
+    })
+
   const handleLoadAssets = ({
     fileName,
     assets,
@@ -91,9 +105,12 @@ export const Assets = () => {
       .then(() => {
         setCurrentWorkflowNickname?.(undefined)
         setRowSelection({})
+        toggleAllMapAssetsSelection(false)
         setUserAssets?.(assets)
         setUploadedFileName?.(fileName)
-        toast.success('File uploaded to data hub successfully')
+        toast.success('File uploaded to data hub successfully', {
+          autoClose: 5000,
+        })
       })
       .catch(() => {
         toast.error('Error uploading file to data hub')
@@ -230,17 +247,14 @@ export const Assets = () => {
       })
   }
 
-  const userAssetsForTable = useMemo(
-    () => convertSimpleGeoJSONToDataForTable(userAssets),
-    [userAssets],
-  )
-
   const usePortfolioData = (id: string) => {
     const selectedPortfolio = temporarySamplePortfolios.find(
       (portfolio) => portfolio.id === id,
     )
 
     if (selectedPortfolio) {
+      setRowSelection({})
+      toggleAllMapAssetsSelection(false)
       setCurrentWorkflowNickname?.(undefined)
       setUploadedFileName?.(selectedPortfolio.fileName)
       setUserAssets?.(selectedPortfolio.data as UserAssets)
@@ -303,6 +317,8 @@ export const Assets = () => {
             userAssetsForTable={userAssetsForTable}
             rowSelection={rowSelection}
             setRowSelection={setRowSelection}
+            toggleAllMapAssetsSelection={toggleAllMapAssetsSelection}
+            toggleMapAssetSelection={toggleMapAssetSelection}
           />
         ) : null}
       </div>

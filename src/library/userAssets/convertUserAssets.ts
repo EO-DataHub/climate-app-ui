@@ -1,9 +1,10 @@
-import { Feature, Point } from 'geojson'
+import { Feature, Geometry, Point } from 'geojson'
 import { UserAssets, UserAssetsProperties } from './userAssetTypes'
+import { getIsFeaturePoint } from '../geoJson/getIsFeaturePoint'
 
 export interface UserAssetForTable extends UserAssetsProperties {
-  latitude: number
-  longitude: number
+  latitude: number | 'Not Applicable'
+  longitude: number | 'Not Applicable'
 }
 
 export interface AnalysedOscUserAssetForTable extends UserAssetForTable {
@@ -12,47 +13,39 @@ export interface AnalysedOscUserAssetForTable extends UserAssetForTable {
   hazardType?: string
 }
 
+const getCoordinatesToUseForTable = (feature: Feature) => {
+  const isPoint = getIsFeaturePoint(feature)
+  return {
+    latitude: isPoint
+      ? (feature.geometry as Point).coordinates[1]
+      : 'Not Applicable',
+    longitude: isPoint
+      ? (feature.geometry as Point).coordinates[0]
+      : 'Not Applicable',
+  }
+}
 export const convertSimpleGeoJSONToDataForTable = (
   userAssets?: UserAssets,
 ): UserAssetForTable[] => {
   if (!userAssets) return []
 
-  return userAssets.features?.map((feature) => ({
-    latitude: feature.geometry.coordinates[1],
-    longitude: feature.geometry.coordinates[0],
-    ...feature.properties,
-  }))
-}
-
-export const convertDataForTableToGeoJSON = (
-  tableAssets: UserAssetForTable[],
-): UserAssets => {
-  return {
-    type: 'FeatureCollection',
-    features: tableAssets.map((tableAsset) => {
-      const { latitude, longitude, ...properties } = tableAsset
-      return {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [longitude, latitude],
-        },
-        properties,
-      }
-    }),
-  }
+  return userAssets.features?.map((feature) => {
+    return {
+      ...getCoordinatesToUseForTable(feature),
+      ...feature.properties,
+    } as UserAssetForTable
+  })
 }
 
 export const flattenOscRootFeatureProperty = ({
   feature,
   rootLevelPropertyName,
 }: {
-  feature: Feature<Point, UserAssetsProperties>
+  feature: Feature<Geometry, UserAssetsProperties>
   rootLevelPropertyName: string
 }) => {
   // @ts-expect-error - results schema subject to change. Skipping typing for now.
   const rootLevelFeatureProperty = feature[rootLevelPropertyName]
-  const [longitude, latitude] = feature.geometry.coordinates
   const { id } = feature.properties
   const hazardTypes = Object.keys(rootLevelFeatureProperty)
   return hazardTypes
@@ -74,13 +67,13 @@ export const flattenOscRootFeatureProperty = ({
                 impact_exceedance,
                 ...restOfProperties
               } = yearLevelInformation[year] as Record<string, number>
+
               return {
                 id,
-                latitude,
-                longitude,
                 year,
                 scenario,
                 hazardType,
+                ...getCoordinatesToUseForTable(feature),
                 ...restOfProperties,
               }
             },
@@ -116,7 +109,6 @@ export const getLstResultsTableData = (
   if (!analysedUserAssets) return []
 
   return analysedUserAssets.features?.map((feature) => {
-    const [longitude, latitude] = feature.geometry.coordinates
     const { returned_values, ...restOfProperties } = feature.properties
 
     const simplifiedReturnedValues: { [s: string]: number } = {}
@@ -128,8 +120,7 @@ export const getLstResultsTableData = (
     })
 
     return {
-      latitude,
-      longitude,
+      ...getCoordinatesToUseForTable(feature),
       ...restOfProperties,
       ...(simplifiedReturnedValues as object),
     }

@@ -32,6 +32,7 @@ import {
   UserAssetForTable,
 } from '../../../../library/userAssets/convertUserAssets'
 import { ResultsVisualisation } from './ResultsVisualisation'
+import { useSyncAssetsTableSelectionWithMapAssets } from '../../../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 
 export const AssetImpactsDetails = ({
   analysedUserAssets,
@@ -150,6 +151,14 @@ export const AssetImpactsDetails = ({
   const extraPropertiesList = analysedUserAssetForTable
     ? Object.entries(removeDefaultColumnInfo(analysedUserAssetForTable))
     : []
+
+  const { toggleAllMapAssetsSelection, toggleMapAssetSelection } =
+    useSyncAssetsTableSelectionWithMapAssets({
+      isMapLoaded,
+      mapRef,
+      userAssetsForTable: analysedUserAssetsForTable,
+      rowSelection,
+    })
   return (
     <div className={detailStyles.detailsWrapper}>
       {assetToDetail ? (
@@ -165,6 +174,8 @@ export const AssetImpactsDetails = ({
           showSelectBoxes={false}
           showViewDetailsButton={false}
           areExtraColumnsVisibleInitially={false}
+          toggleAllMapAssetsSelection={toggleAllMapAssetsSelection}
+          toggleMapAssetSelection={toggleMapAssetSelection}
         />
       ) : null}
       <div className={detailStyles.chartAndMapWrapper}>

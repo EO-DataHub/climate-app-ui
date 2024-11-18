@@ -10,9 +10,10 @@ export const OBSERVATIONS_LAYER_INITIAL_OPACITY = 1
 export const HAZARDS_LAYER_INITIAL_OPACITY = 1
 
 export enum MapLayerIds {
-  USER_ASSETS_UNCLUSTERED = 'user-assets-unclustered',
-  USER_ASSETS_CLUSTERED = 'user-assets-clustered',
-  USER_ASSETS_CLUSTER_COUNT = 'user-assets-cluster-count',
+  USER_ASSETS_POINTS = 'user-assets-points',
+  USER_ASSETS_LINES = 'user-assets-lines',
+  USER_ASSETS_POLYGONS_FILL = 'user-assets-polygons',
+  USER_ASSETS_POLYGONS_STROKE = 'user-assets-polygons-stroke',
 }
 
 export const UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT = 'unsavedAssets'

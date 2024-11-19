@@ -73,7 +73,9 @@ export const AssetsAnalytics = () => {
     [analysedAssetsWorkflowNickname, analysedUserAssets],
   )
   const filteredAnalysedUserAssetsForTable = useMemo(() => {
-    return analysedUserAssetsForTable.filter(
+    return (
+      analysedUserAssetsForTable as AnalysedOscUserAssetForTable[]
+    ).filter(
       (asset: AnalysedOscUserAssetForTable) =>
         (yearFilterValue ? asset.year === yearFilterValue : true) &&
         (scenarioFilterValue ? asset.scenario === scenarioFilterValue : true) &&

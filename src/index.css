@@ -9,15 +9,9 @@ body {
 :root {
   /* not all Radix tokens are available in this scope, such as --accent-x */
   --error-color: var(--red-11);
-  --large-marker-cluster-color: #3e63dd;
-  --medium-marker-cluster-color: #3e63dd;
-  --small-marker-cluster-color: #3e63dd;
   --unclustered-marker-color: #3e63dd;
   --marker-stroke-color: #eeeeeeee;
   --marker-stroke-color-selected: rgba(0, 0, 0, 0.75);
-  --high-asset-risk-color: #ce2c31;
-  --medium-asset-risk-color: #f76b15;
-  --low-asset-risk-color: #218358;
   --button-svg-fill: #3a5bc7;
   --button-svg-fill-disabled: #00083046;
   --white: #fff;

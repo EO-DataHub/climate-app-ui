@@ -1,6 +1,6 @@
 // @ts-expect-error - no types available
 import { csv2geojson as getGeojsonFromCsv } from 'csv2geojson'
-import { FeatureCollection, GeoJsonProperties, Point } from 'geojson'
+import { FeatureCollection, GeoJsonProperties, Point, Geometry } from 'geojson'
 import { toast } from 'react-toastify'
 
 import { getIsFileCsv, getIsFileGeoJson } from '../fileTypes'
@@ -8,14 +8,10 @@ import { getObjectKeyNameFromCaseInsensitiveKeyName } from '../objects/getObject
 import { UserAssets } from './userAssetTypes'
 
 const doesGeoJsonContainRequiredProperties = (
-  geoJson: FeatureCollection<Point>,
+  geoJson: FeatureCollection<Geometry>,
 ) =>
   geoJson.features.every((feature) => {
-    return (
-      !!feature.properties?.id &&
-      typeof feature.geometry?.coordinates?.[0] === 'number' &&
-      typeof feature.geometry?.coordinates?.[1] === 'number'
-    )
+    return !!feature.properties?.id
   })
 
 const getGeoJsonWithPropertyIdStoredOnLowercaseIdProperty = (

@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-const authenticatedAxios = axios.create()
-
 export const getAuthenticatedAxios = ({
   token,
   getUpdatedToken,
@@ -9,6 +7,8 @@ export const getAuthenticatedAxios = ({
   token: string | undefined
   getUpdatedToken: () => Promise<string | undefined>
 }) => {
+  const authenticatedAxios = axios.create()
+
   let tokenExpiredRetries = 0
 
   if (!token)

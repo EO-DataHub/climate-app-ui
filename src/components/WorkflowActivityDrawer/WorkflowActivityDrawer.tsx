@@ -139,7 +139,9 @@ export const WorkflowActivityDrawer = ({
       .then(({ data: { data } }) => {
         if (data) {
           setAnalysedUserAssets?.(data)
-          setAnalysisRunDate(new Date(jobInfo.finished).toLocaleDateString())
+          setAnalysisRunDate(
+            new Date(jobInfo.finished).toLocaleDateString('en-GB'),
+          )
           setAnalysedAssetsFileName('placeholder-file-name')
           setWorkflowJobIdAssociatedWithData(jobId)
           setAnalysedAssetsWorkflowNickname?.(
@@ -276,9 +278,9 @@ export const WorkflowActivityDrawer = ({
                     </Text>
                     <div className={workflowActivityStyles.dateRow}>
                       <Text color="gray" size="1">
-                        Date:{''}
+                        Date:
                         {dateStringToUse ? (
-                          `${new Date(dateStringToUse).toLocaleDateString()} ${new Date(dateStringToUse).toLocaleTimeString()}`
+                          ` ${new Date(dateStringToUse).toLocaleDateString('en-GB')} ${new Date(dateStringToUse).toLocaleTimeString()}`
                         ) : (
                           <>unknown</>
                         )}

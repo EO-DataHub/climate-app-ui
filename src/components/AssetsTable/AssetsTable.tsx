@@ -7,17 +7,12 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  Header,
 } from '@tanstack/react-table'
 import {
   Table as TanstackTable,
   Row as TanstackRow,
 } from '@tanstack/table-core'
-import {
-  MagnifyingGlassIcon as SearchIcon,
-  TriangleDownIcon,
-  TriangleUpIcon,
-} from '@radix-ui/react-icons'
+import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 
 import { Table, TextField, Tooltip, Text, Link } from '@radix-ui/themes'
 import {
@@ -45,8 +40,9 @@ import { useSyncAssetsTableFilterWithMapAssets } from '../../library/userAssets/
 import containerStyles from '../../library/genericStyles/containers.module.scss'
 import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
 import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
-import tableStyles from './AssetsTable.module.scss'
+import tableStyles from '../../library/genericStyles/table.module.scss'
 import { DEFAULT_USER_ASSET_COLUMNS } from '../../configuration/constants'
+import { getTableHeaderSortIcon } from '../../library/tanStackTable/getTableHeaderSortIcon'
 
 const getUniqueColumnNames = (
   previousValue: string[],
@@ -133,19 +129,6 @@ export const AssetsTable = ({
     },
     [areExtraColumnsVisible, extraColumnNames],
   )
-
-  const getHeaderSortIcon = (header: Header<UserAssetForTable, unknown>) => {
-    return (
-      <span className={tableStyles.sortIconWrapper}>
-        {header.column.getIsSorted() === 'asc' && <TriangleDownIcon />}
-        {header.column.getIsSorted() === 'desc' && <TriangleUpIcon />}
-        {header.column.getIsSorted() === false &&
-          header.column.getCanSort() && (
-            <TriangleDownIcon className={tableStyles.hiddenSortIcon} />
-          )}
-      </span>
-    )
-  }
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetForTable>()
@@ -383,7 +366,7 @@ export const AssetsTable = ({
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
-                      {getHeaderSortIcon(header)}
+                      {getTableHeaderSortIcon(header)}
                     </div>
                   )}
                 </Table.ColumnHeaderCell>

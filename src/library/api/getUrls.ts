@@ -1,3 +1,5 @@
+const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME
+
 export const getResultsUrl = ({
   workspaceUserName,
   jobId,
@@ -5,7 +7,7 @@ export const getResultsUrl = ({
   jobId: string
   workspaceUserName: string
 }) =>
-  `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
+  `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/${AWS_BUCKET_NAME}/processing-results/cat_${jobId}.json`
 
 export const getCsvResultsUrl = ({
   workspaceUserName,
@@ -14,4 +16,4 @@ export const getCsvResultsUrl = ({
   jobId: string
   workspaceUserName: string
 }) =>
-  `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}/col_${jobId}/data.csv`
+  `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/${AWS_BUCKET_NAME}/processing-results/cat_${jobId}/col_${jobId}/data.csv`

@@ -1,26 +1,51 @@
 import AddIcon from '@material-design-icons/svg/filled/add.svg?react'
-
-import { PageTitle } from '../../PageTitle'
-import { PageLayout } from '../../Layout/PageLayout'
-
-import portfolioStyles from './Portfolios.module.scss'
-import { Button, Spinner } from '@radix-ui/themes'
-import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
-import { useContext, useState } from 'react'
-import { AuthenticationContext } from '../../../context/AuthenticationContext'
-import { UserAssets } from '../../../library/userAssets/userAssetTypes'
-import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
+import { Button, Spinner, Table, Text, TextField } from '@radix-ui/themes'
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table'
 import { toast } from 'react-toastify'
+import { useContext, useEffect, useMemo, useState } from 'react'
+import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
+
+import {
+  getUploadedFileList,
+  UploadedFileInfo,
+} from '../../../library/api/getUploadedFileList'
+import { AuthenticationContext } from '../../../context/AuthenticationContext'
+import { getTableHeaderSortIcon } from '../../../library/tanStackTable/getTableHeaderSortIcon'
+import { PageLayout } from '../../Layout/PageLayout'
+import { PageSelector } from '../../Pagination/PageSelector/PageSelector'
+import { PageTitle } from '../../PageTitle'
+import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
+import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
+import { UserAssets } from '../../../library/userAssets/userAssetTypes'
+import containerStyles from '../../../library/genericStyles/containers.module.scss'
+import portfolioStyles from './Portfolios.module.scss'
+import tableStyles from '../../../library/genericStyles/table.module.scss'
+import { useDebouncedCallback } from 'use-debounce'
+import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 
 export const Portfolios = () => {
+  const [fileInfo, setFileInfo] = useState<UploadedFileInfo[]>([])
+  const [globalFilter, setGlobalFilter] = useState('')
   const [isFileUploading, setIsFileUploading] = useState(false)
+  const [isTableLoading, setIsTableLoading] = useState(true)
+  const [tableSearchValue, setTableSearchValue] = useState('')
+  const isTableShowing = !!fileInfo.length
 
-  const {
-    authenticatedAxios,
+  const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
+    setGlobalFilter(value)
+  }, 500)
 
-    workspaceUserName,
-  } = useContext(AuthenticationContext)
-
+  const { authenticatedAxios, workspaceUserName } = useContext(
+    AuthenticationContext,
+  )
   const handleLoadAssets = ({
     fileName,
     assets,
@@ -49,12 +74,166 @@ export const Portfolios = () => {
         setIsFileUploading(false)
       })
   }
+
+  useEffect(
+    function getUploadedFilesList() {
+      if (!authenticatedAxios || !workspaceUserName) return
+
+      setIsTableLoading(true)
+      getUploadedFileList({ authenticatedAxios, workspaceUserName })
+        .then((response) => {
+          setFileInfo(response)
+        })
+        .catch(() => {
+          toast.error(
+            "We're sorry. Something went wrong. Please try refreshing the page.",
+          )
+        })
+        .finally(() => {
+          setIsTableLoading(false)
+        })
+    },
+    [authenticatedAxios, workspaceUserName],
+  )
+
+  const tableColumns = useMemo(() => {
+    const columnHelper = createColumnHelper<UploadedFileInfo>()
+
+    return [
+      columnHelper.accessor('name', { header: 'Name' }),
+      columnHelper.accessor('dateAdded', {
+        header: 'Date Added',
+        cell: (row) => row.getValue().toLocaleDateString('en-GB'),
+      }),
+    ]
+  }, [])
+
+  const reactTable = useReactTable({
+    columns: tableColumns,
+    data: fileInfo,
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    initialState: {
+      pagination: {
+        pageSize: 20,
+      },
+      sorting: [
+        {
+          id: 'name',
+          desc: false,
+        },
+      ],
+    },
+    state: {
+      globalFilter,
+    },
+  })
+
+  const table = isTableShowing ? (
+    <>
+      <Table.Root variant="surface" className={tableStyles.table}>
+        <Table.Header>
+          {reactTable.getHeaderGroups().map((headerGroup) => (
+            <Table.Row key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <Table.ColumnHeaderCell
+                  key={header.id}
+                  colSpan={header.colSpan}
+                  // @ts-expect-error - meta allows for any property
+                  justify={header.column.columnDef.meta?.justify}
+                >
+                  {header.isPlaceholder ? null : (
+                    <div
+                      className={`${
+                        header.column.getCanSort()
+                          ? tableStyles.tableHeaderWithClickableCursorOnHover
+                          : undefined
+                      } ${tableStyles.tableHeader}`}
+                      onClick={header.column.getToggleSortingHandler()}
+                      title={
+                        header.column.getCanSort()
+                          ? header.column.getNextSortingOrder() === 'asc'
+                            ? 'Sort ascending'
+                            : header.column.getNextSortingOrder() === 'desc'
+                              ? 'Sort descending'
+                              : 'Clear sort'
+                          : undefined
+                      }
+                    >
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                      {getTableHeaderSortIcon(header)}
+                    </div>
+                  )}
+                </Table.ColumnHeaderCell>
+              ))}
+            </Table.Row>
+          ))}
+        </Table.Header>
+        <Table.Body>
+          {reactTable.getRowModel().rows.map((row) => {
+            return (
+              <Table.Row key={`${String(row.id)}`}>
+                {row.getVisibleCells().map((cell) => (
+                  <Table.Cell
+                    key={cell.id}
+                    // @ts-expect-error - meta allows for any property
+                    justify={cell.column.columnDef.meta?.justify}
+                    className={tableStyles.tableCell}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </Table.Cell>
+                ))}
+              </Table.Row>
+            )
+          })}
+        </Table.Body>
+      </Table.Root>
+      <div className={containerStyles.flexRowStartCenter}>
+        <PageSelector
+          currentPageIndex={reactTable.getState().pagination.pageIndex}
+          nextDisabled={!reactTable.getCanNextPage()}
+          onGoToPage={reactTable.setPageIndex}
+          onNextClick={reactTable.nextPage}
+          onPreviousClick={reactTable.previousPage}
+          pageCount={reactTable.getPageCount()}
+          previousDisabled={!reactTable.getCanPreviousPage()}
+        />
+      </div>
+    </>
+  ) : (
+    <div className={containerStyles.flexRowCenterCenterFullDimensions}>
+      There are no portfolios to display.
+    </div>
+  )
+
   return (
     <PageLayout>
       <PageTitle>Portfolios</PageTitle>
       <div className={portfolioStyles.aboveTableRow}>
-        <div></div>
-        <div>
+        <Text asChild size="3">
+          <h2>Saved Portfolios</h2>
+        </Text>
+        <div className={portfolioStyles.aboveTableRowRightHandButtons}>
+          {isTableShowing ? (
+            <TextField.Root
+              placeholder="Search"
+              value={tableSearchValue ?? ''}
+              onChange={(event) => {
+                const { value } = event.target
+                setTableSearchValue(value)
+                debouncedSetGlobalFilter(value)
+              }}
+            >
+              <TextField.Slot>
+                <SearchIcon />
+              </TextField.Slot>
+            </TextField.Root>
+          ) : null}
           <UploadButtonAndDialog
             onLoadAssets={handleLoadAssets}
             trigger={
@@ -66,6 +245,13 @@ export const Portfolios = () => {
           />
         </div>
       </div>
+      {isTableLoading ? (
+        <div className={containerStyles.flexRowCenterCenterFullDimensions}>
+          <LoadingIndicator />
+        </div>
+      ) : (
+        table
+      )}
     </PageLayout>
   )
 }

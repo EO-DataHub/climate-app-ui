@@ -49,6 +49,8 @@ jobs:
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
           VITE_SPARKGEO_BASE_URL: ${{ secrets.VITE_SPARKGEO_BASE_URL }}
           VITE_HUB_BASE_URL: ${{secrets.VITE_HUB_BASE_URL}}
+          VITE_AWS_BUCKET_NAME: ${{ secrets.VITE_AWS_BUCKET_NAME }}
+          VITE_AWS_REGION: ${{ secrets.VITE_AWS_REGION }}
 
       - name: Stage build files for upload to s3
         uses: actions/upload-artifact@v4

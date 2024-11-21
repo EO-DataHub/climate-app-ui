@@ -139,7 +139,7 @@ export const Assets = () => {
     setWorkflowJobIdAssociatedWithData?.(jobId)
     setAnalysedUserAssets?.(analysedData)
     setAnalysisRunDate?.(
-      ` ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
+      ` ${new Date().toLocaleDateString('en-GB')} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
     )
     setAnalysedAssetsFileName?.(uploadedFileName ?? 'Unknown file name')
     setAnalysedAssetsWorkflowNickname?.(analysisWorkflowNickname)

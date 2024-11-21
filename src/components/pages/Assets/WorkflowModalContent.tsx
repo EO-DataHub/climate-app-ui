@@ -67,7 +67,7 @@ const WorkflowInformation = ({
       supportedGeometriesToUse.length < 3 ? (
         <p>
           Only {supportedGeometriesString} are supported. Other geometires
-          cannot be analysed
+          cannot be analysed.
         </p>
       ) : null}
       {supportedGeometriesToUse.length === 3 ? (
@@ -84,13 +84,18 @@ const WorkflowInformation = ({
 
 export const WorkflowModalContent = ({
   handleAnalyseAssets,
+  selectedWorkflowOptions,
+  setSelectedWorkflowOptions,
 }: {
   handleAnalyseAssets: (props: HandleAnalyseAssetsProps) => void
+  selectedWorkflowOptions: HubWorkflowOptions | null
+  setSelectedWorkflowOptions: (
+    workflowOptions: HubWorkflowOptions | null,
+  ) => void
 }) => {
   const [endDate, setEndDate] = useState<Dayjs | null>(null)
   const [endDateError, setEndDateError] = useState<DateErrorType>(null)
-  const [selectedWorkflowOptions, setSelectedWorkflowOptions] =
-    useState<HubWorkflowOptions | null>(null)
+
   const [startDate, setStartDate] = useState<Dayjs | null>(null)
   const [startDateError, setStartDateError] = useState<DateErrorType>(null)
 
@@ -103,8 +108,16 @@ export const WorkflowModalContent = ({
 
   const initializeDateRangeValues = () => {
     if (areDateRangeInputsShowing) {
-      setStartDate(defaultStartDate)
-      setEndDate(defaultEndDate)
+      setStartDate(
+        dayjs(selectedWorkflowOptions?.user_inputs.start_date?.default) ??
+          defaultStartDate,
+      )
+      setEndDate(
+        dayjs(
+          selectedWorkflowOptions?.user_inputs.end_date?.default ??
+            defaultEndDate,
+        ),
+      )
     }
     if (!areDateRangeInputsShowing) {
       // to ensure that we dont send date values to workflows that dont support them
@@ -113,7 +126,11 @@ export const WorkflowModalContent = ({
     }
   }
 
-  useEffect(initializeDateRangeValues, [areDateRangeInputsShowing])
+  useEffect(initializeDateRangeValues, [
+    areDateRangeInputsShowing,
+    selectedWorkflowOptions?.user_inputs.end_date?.default,
+    selectedWorkflowOptions?.user_inputs.start_date?.default,
+  ])
 
   const hackToEnforceMuiRequiredDateValues = ({
     newValue,

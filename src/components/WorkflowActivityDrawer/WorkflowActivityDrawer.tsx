@@ -62,9 +62,10 @@ export const WorkflowActivityDrawer = ({
   const {
     analysedUserAssets,
     setAnalysedAssetsFileName,
+    setAnalysedAssetsWorkflowNickname,
+    setAnalysedAssetsWorkflowTitle,
     setAnalysedUserAssets,
     setAnalysisRunDate,
-    setAnalysedAssetsWorkflowNickname,
     setWorkflowJobIdAssociatedWithData,
   } = useContext(UserAssetsContext)
 
@@ -143,6 +144,9 @@ export const WorkflowActivityDrawer = ({
           setWorkflowJobIdAssociatedWithData(jobId)
           setAnalysedAssetsWorkflowNickname?.(
             workflowNickNamesByHubWorkflowName[jobInfo.processID],
+          )
+          setAnalysedAssetsWorkflowTitle?.(
+            workflowNickNamesByHubWorkflowName[jobInfo.processID] ?? null, // we can't currently get the workflow title, so we will use the nickname in the analysis page workflow title
           )
           closeDrawer()
           setTimeout(() => {

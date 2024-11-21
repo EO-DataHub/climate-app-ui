@@ -7,7 +7,8 @@ interface DateInputOptions {
 export interface HubWorkflowPresetInputs {
   workflow: string
   stac_collection: string
-  'day/night': string
+  stac_query: string
+  stac_catalog: string
 }
 
 export interface HubWorkflowOptions {

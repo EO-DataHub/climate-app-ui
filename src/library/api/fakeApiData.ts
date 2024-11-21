@@ -9054,10 +9054,11 @@ export const workflowOptions = [
       required_columns: ['ID', 'latitude', 'longitude'],
     },
     preset_inputs: {
-      workflow: 'lst-file',
-      stac_collection:
-        'test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/lst-catalog',
-      'day/night': 'day',
+      workflow: 'lst-filter',
+      stac_catalog:
+        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/user-datasets/sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782',
+      stac_collection: 'col_f99e920a-a58e-11ef-aab0-7a33b70d8782',
+      stac_query: "{'day_night': 'DAY'}",
     },
     user_inputs: {
       assets: {
@@ -9068,12 +9069,12 @@ export const workflowOptions = [
       start_date: {
         label: 'Select the start date',
         type: 'date',
-        default: '2021-01-01',
+        default: '2024-01-01',
       },
       end_date: {
         label: 'Select the end date',
         type: 'date',
-        default: '2021-01-31',
+        default: '2024-01-10',
       },
     },
   },
@@ -9086,10 +9087,11 @@ export const workflowOptions = [
       required_columns: ['ID', 'latitude', 'longitude'],
     },
     preset_inputs: {
-      workflow: 'lst-file',
-      stac_collection:
-        'test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/lst-catalog',
-      'day/night': 'night',
+      workflow: 'lst-filter',
+      stac_catalog:
+        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/user-datasets/sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782',
+      stac_collection: 'col_f99e920a-a58e-11ef-aab0-7a33b70d8782',
+      stac_query: "{'day_night': 'NIGHT'}",
     },
     user_inputs: {
       assets: {
@@ -9100,12 +9102,12 @@ export const workflowOptions = [
       start_date: {
         label: 'Select the start date',
         type: 'date',
-        default: '2021-01-01',
+        default: '2024-01-01',
       },
       end_date: {
         label: 'Select the end date',
         type: 'date',
-        default: '2021-01-31',
+        default: '2024-01-10',
       },
     },
   },
@@ -9124,7 +9126,7 @@ export const workflowOptions = [
       ],
     },
     preset_inputs: {
-      workflow: 'physrisk-file',
+      workflow: 'physrisk-filter',
     },
     user_inputs: {
       assets: {
@@ -9135,7 +9137,6 @@ export const workflowOptions = [
     },
   },
 ]
-
 export const fakeLstResultsData = {
   type: 'FeatureCollection',
   features: [

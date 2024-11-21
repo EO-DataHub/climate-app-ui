@@ -28,12 +28,15 @@ import assetStyles from './Assets.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { HandleAnalyseAssetsProps } from './assetsTypes'
 import { useSyncAssetsTableSelectionWithMapAssets } from '../../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
+import { HubWorkflowOptions } from '../../../library/api/apiTypes'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false)
   const [rowSelection, setRowSelection] = useState<RowSelection>({})
   const [isFileUploading, setIsFileUploading] = useState(false)
+  const [selectedWorkflowOptions, setSelectedWorkflowOptions] =
+    useState<HubWorkflowOptions | null>(null)
 
   const navigate = useNavigate()
 
@@ -41,6 +44,7 @@ export const Assets = () => {
     authenticatedAxios,
     isAuthenticated,
     login,
+    token,
     userInfo,
     workspaceUserName,
   } = useContext(AuthenticationContext)
@@ -58,12 +62,14 @@ export const Assets = () => {
     setPersistedMapZoom,
   })
   const {
-    currentWorkflowNickname,
+    currentWorkflowTitle,
     setAnalysedAssetsFileName,
     setAnalysedAssetsWorkflowNickname,
+    setAnalysedAssetsWorkflowTitle,
     setAnalysedUserAssets,
     setAnalysisRunDate,
     setCurrentWorkflowNickname,
+    setCurrentWorkflowTitle,
     setUploadedFileName,
     setUserAssets,
     setWorkflowJobIdAssociatedWithData,
@@ -103,11 +109,13 @@ export const Assets = () => {
       workspaceUserName,
     })
       .then(() => {
-        setCurrentWorkflowNickname?.(undefined)
+        setCurrentWorkflowNickname?.(null)
+        setCurrentWorkflowTitle?.(null)
         setRowSelection({})
         toggleAllMapAssetsSelection(false)
         setUserAssets?.(assets)
         setUploadedFileName?.(fileName)
+
         toast.success('File uploaded to data hub successfully', {
           autoClose: 5000,
         })
@@ -135,6 +143,7 @@ export const Assets = () => {
     )
     setAnalysedAssetsFileName?.(uploadedFileName ?? 'Unknown file name')
     setAnalysedAssetsWorkflowNickname?.(analysisWorkflowNickname)
+    setAnalysedAssetsWorkflowTitle?.(selectedWorkflowOptions?.title ?? null)
 
     setTimeout(() => {
       // give react a second to update state so that table shows data - otherwise there is an issue with the analytics page where it sometimes doesnt update from context. Could be a react-table thing?
@@ -172,12 +181,12 @@ export const Assets = () => {
       return
     }
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !token) {
       void login()
       return
     }
 
-    if (!hubWorkflowPresetInputs) {
+    if (!hubWorkflowPresetInputs || !selectedWorkflowOptions) {
       toast.error(
         'Sorry, the configuration for this workflow is broken on our end. Please select another workflow.',
       )
@@ -196,14 +205,16 @@ export const Assets = () => {
       </>,
     )
     setCurrentWorkflowNickname?.(workflowNickName)
+    setCurrentWorkflowTitle?.(selectedWorkflowOptions.title)
     setIsWorkflowModalOpen(false)
     setIsAnalysisRunning(true)
     analyseAssets({
+      authToken: token,
       axios: authenticatedAxios,
       endDate,
       fileName: uploadedFileName,
-      startDate,
       hubWorkflowPresetInputs,
+      startDate,
       workspaceUserName,
     })
       .then(({ analysedData, jobId }) => {
@@ -255,7 +266,8 @@ export const Assets = () => {
     if (selectedPortfolio) {
       setRowSelection({})
       toggleAllMapAssetsSelection(false)
-      setCurrentWorkflowNickname?.(undefined)
+      setCurrentWorkflowNickname?.(null)
+      setCurrentWorkflowTitle?.(null)
       setUploadedFileName?.(selectedPortfolio.fileName)
       setUserAssets?.(selectedPortfolio.data as UserAssets)
     }
@@ -334,7 +346,11 @@ export const Assets = () => {
             </Dialog.Trigger>
 
             <Dialog.Content maxWidth="500px">
-              <WorkflowModalContent handleAnalyseAssets={handleAnalyseAssets} />
+              <WorkflowModalContent
+                handleAnalyseAssets={handleAnalyseAssets}
+                setSelectedWorkflowOptions={setSelectedWorkflowOptions}
+                selectedWorkflowOptions={selectedWorkflowOptions}
+              />
             </Dialog.Content>
           </Dialog.Root>
         ) : null}
@@ -345,9 +361,7 @@ export const Assets = () => {
   const portfolioWorkflowInfo = (
     <Text as="p">
       Portfolio: {uploadedFileName}
-      {currentWorkflowNickname ? (
-        <> | Workflow: {currentWorkflowNickname}</>
-      ) : null}
+      {currentWorkflowTitle ? <> | Workflow: {currentWorkflowTitle}</> : null}
     </Text>
   )
 

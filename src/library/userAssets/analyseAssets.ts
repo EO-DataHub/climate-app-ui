@@ -8,6 +8,7 @@ import { HubWorkflowPresetInputs } from '../api/apiTypes'
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 const initiateAssetsRiskAnalysis = async ({
+  authToken,
   axios,
   endDate,
   fileName,
@@ -15,6 +16,7 @@ const initiateAssetsRiskAnalysis = async ({
   startDate,
   workspaceUserName,
 }: {
+  authToken: string
   axios: AxiosInstance
   endDate?: string
   fileName: string
@@ -23,19 +25,24 @@ const initiateAssetsRiskAnalysis = async ({
   workspaceUserName: string
 }) => {
   const inputsFromConfigurationsToUse = {
+    stac_catalog: hubWorkflowPresetInputs?.stac_catalog,
     stac_collection: hubWorkflowPresetInputs?.stac_collection,
-    'day/night': hubWorkflowPresetInputs?.['day/night'],
+    stac_query: hubWorkflowPresetInputs?.stac_query,
   }
   return axios.post(
     `${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
     {
-      ...inputsFromConfigurationsToUse,
-      assets: getRelativeS3PathForAssetFile({
-        workspaceUserName,
-        fileName,
-      }),
-      start_date: startDate,
-      end_date: endDate,
+      inputs: {
+        ...inputsFromConfigurationsToUse,
+        assets: getRelativeS3PathForAssetFile({
+          workspaceUserName,
+          fileName,
+        }),
+        end_date: endDate,
+        start_date: startDate,
+        token: authToken,
+        workspace: workspaceUserName,
+      },
     },
     {
       headers: { prefer: 'respond-async' },
@@ -117,17 +124,18 @@ async function getAssetsRiskResults({
 }
 
 export const analyseAssets = ({
+  authToken,
   axios,
   endDate,
   fileName,
-  startDate,
   hubWorkflowPresetInputs,
+  startDate,
   workspaceUserName,
 }: {
+  authToken: string
   axios?: AxiosInstance
   endDate?: string
   fileName: string
-
   startDate?: string
   hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
   workspaceUserName: string
@@ -140,6 +148,7 @@ export const analyseAssets = ({
   }
 
   return initiateAssetsRiskAnalysis({
+    authToken,
     axios,
     endDate,
     fileName,

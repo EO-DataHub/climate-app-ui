@@ -17,16 +17,20 @@ import { HubWorkflowNicknames } from '../configuration/constants'
 
 interface UserAssetsContextValue {
   analysedAssetsFileName?: string | null
-  analysedAssetsWorkflowNickname?: string | null
+  analysedAssetsWorkflowNickname: string | null
+  analysedAssetsWorkflowTitle: string | null
   analysedUserAssets?: AnalysedUserAssets
   analysisRunDate?: string
   csvResults?: string | null
-  currentWorkflowNickname?: string | undefined
+  currentWorkflowNickname: string | null
+  currentWorkflowTitle: string | null
   setAnalysedAssetsFileName?: Dispatch<SetStateAction<string | null>>
   setAnalysedAssetsWorkflowNickname?: Dispatch<SetStateAction<string | null>>
+  setAnalysedAssetsWorkflowTitle?: Dispatch<SetStateAction<string | null>>
   setAnalysedUserAssets?: Dispatch<SetStateAction<AnalysedUserAssets>>
   setAnalysisRunDate?: Dispatch<SetStateAction<string | undefined>>
-  setCurrentWorkflowNickname?: Dispatch<SetStateAction<string | undefined>>
+  setCurrentWorkflowNickname?: Dispatch<SetStateAction<string | null>>
+  setCurrentWorkflowTitle?: Dispatch<SetStateAction<string | null>>
   setUploadedFileName?: Dispatch<SetStateAction<string | null>>
   setUserAssets?: Dispatch<SetStateAction<UserAssets>>
   setWorkflowJobIdAssociatedWithData?: Dispatch<SetStateAction<string | null>>
@@ -35,7 +39,12 @@ interface UserAssetsContextValue {
   workflowJobIdAssociatedWithData?: string | null
 }
 
-export const UserAssetsContext = createContext<UserAssetsContextValue>({})
+export const UserAssetsContext = createContext<UserAssetsContextValue>({
+  analysedAssetsWorkflowNickname: null,
+  analysedAssetsWorkflowTitle: null,
+  currentWorkflowNickname: null,
+  currentWorkflowTitle: null,
+})
 
 export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null)
@@ -48,13 +57,18 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [analysedAssetsWorkflowNickname, setAnalysedAssetsWorkflowNickname] =
     useState<string | null>(null)
   const [currentWorkflowNickname, setCurrentWorkflowNickname] = useState<
-    string | undefined
-  >()
+    string | null
+  >(null)
   const [analysisRunDate, setAnalysisRunDate] = useState<string>()
   const [workflowJobIdAssociatedWithData, setWorkflowJobIdAssociatedWithData] =
     useState<string | null>(null)
 
   const [csvResults, setCsvResults] = useState<string | null>(null)
+  const [analysedAssetsWorkflowTitle, setAnalysedAssetsWorkflowTitle] =
+    useState<string | null>(null)
+  const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
+    string | null
+  >(null)
 
   const { workspaceUserName, authenticatedAxios } = useContext(
     AuthenticationContext,
@@ -97,15 +111,19 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
       value={{
         analysedAssetsFileName,
         analysedAssetsWorkflowNickname,
+        analysedAssetsWorkflowTitle,
         analysedUserAssets,
         analysisRunDate,
         csvResults,
         currentWorkflowNickname,
+        currentWorkflowTitle,
         setAnalysedAssetsFileName,
         setAnalysedAssetsWorkflowNickname,
+        setAnalysedAssetsWorkflowTitle,
         setAnalysedUserAssets,
         setAnalysisRunDate,
         setCurrentWorkflowNickname,
+        setCurrentWorkflowTitle,
         setUploadedFileName,
         setUserAssets,
         setWorkflowJobIdAssociatedWithData,

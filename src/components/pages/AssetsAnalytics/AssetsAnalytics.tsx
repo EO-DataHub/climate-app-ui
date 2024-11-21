@@ -34,6 +34,7 @@ export const AssetsAnalytics = () => {
 
   const {
     analysedAssetsWorkflowNickname,
+    analysedAssetsWorkflowTitle,
     analysedUserAssets,
     analysedAssetsFileName,
     analysisRunDate,
@@ -262,7 +263,7 @@ export const AssetsAnalytics = () => {
               >
                 <DropdownMenu.Item>
                   <a
-                    download={`${analysedAssetsFileName}_${analysedAssetsWorkflowNickname}_${analysisRunDate}.geojson`}
+                    download={`${analysedAssetsFileName}_${analysedAssetsWorkflowTitle}_${analysisRunDate}.geojson`}
                     href={downloadUrlGeoJson}
                   >
                     as GeoJSON
@@ -271,7 +272,7 @@ export const AssetsAnalytics = () => {
                 {csvResults ? (
                   <DropdownMenu.Item>
                     <a
-                      download={`${analysedAssetsFileName}_${analysedAssetsWorkflowNickname}_${analysisRunDate}.csv`}
+                      download={`${analysedAssetsFileName}_${analysedAssetsWorkflowTitle}_${analysisRunDate}.csv`}
                       href={downloadUrlCsv}
                     >
                       as CSV
@@ -297,8 +298,8 @@ export const AssetsAnalytics = () => {
               ) : null}
             </PageSubtitle>
             <Text as="p" className={analyticsStyles.subSubtitle}>
-              {analysedAssetsWorkflowNickname ? (
-                <> Workflow: {analysedAssetsWorkflowNickname}</> // update
+              {analysedAssetsWorkflowTitle ? (
+                <> Workflow: {analysedAssetsWorkflowTitle}</>
               ) : null}
             </Text>
 

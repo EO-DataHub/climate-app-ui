@@ -22,6 +22,7 @@ interface AuthenticationContextValue {
   isAuthenticationServiceError: boolean
   login: () => Promise<void>
   logout: () => Promise<void>
+  token: string | undefined
   userInfo?: KeycloakUserInfo
   workspaceUserName?: string
 }
@@ -41,6 +42,7 @@ export const AuthenticationContext = createContext<AuthenticationContextValue>({
   isAuthenticationServiceError: false,
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
+  token: undefined,
 })
 
 export const AuthenticationContextProvider = ({
@@ -164,6 +166,7 @@ export const AuthenticationContextProvider = ({
         isAuthenticationServiceError,
         login,
         logout,
+        token,
         userInfo,
         workspaceUserName,
       }}

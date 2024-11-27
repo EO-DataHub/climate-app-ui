@@ -69,9 +69,13 @@ export const ActionsBar = () => {
             </TooltipForNav>
           ) : null}
           <TooltipForNav content="Information">
-            <NavLink to="/information">
+            <a
+              href="https://sparkgeo.github.io/uk_eodatahub/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <InformationIcon />
-            </NavLink>
+            </a>
           </TooltipForNav>
           <UserMenu
             setIsUserMenuOpen={setUserIsMenuOpen}

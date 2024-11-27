@@ -6,8 +6,8 @@ import { Hazards } from '../pages/Hazards/Hazards'
 import { AssetsAnalytics } from '../pages/AssetsAnalytics/AssetsAnalytics'
 import { Observations } from '../pages/Observations/Observations'
 import { About } from '../pages/About/About'
+
 import { Portfolios } from '../pages/Portfolios/Portfolios'
-import { Information } from '../pages/Information'
 import { Settings } from '../pages/Settings'
 
 const routes = [
@@ -32,7 +32,6 @@ const routes = [
     element: <Observations />,
   },
   { path: '/portfolios', element: <Portfolios /> },
-  { path: '/information', element: <Information /> },
   { path: '/settings', element: <Settings /> },
   { path: '*', element: <NotFound /> },
 ]

@@ -6,17 +6,21 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import ArrowLeft from '../../../localAssets/arrow-left.svg?react'
 import CloseIcon from '@material-design-icons/svg/filled/close.svg?react'
 import dayjs, { Dayjs } from 'dayjs'
+// import 'dayjs/locale/en-gb' // we are suppossed to import this but doing so breaks by reverting back to American date formatting. For now this hack to exclude this import is good enough temporarily for a demo.
 
 import { capitalizeFirstLetter } from '../../../library/strings/capitalizeFirstLetter'
 import { getHumanFriendlyListFromArray } from '../../../library/arrays/getHumanFriendlyListFromArray'
 import { HubWorkflowOptions } from '../../../library/api/apiTypes'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode, useContext, useEffect, useState } from 'react'
 import { workflowOptions } from '../../../library/api/fakeApiData'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import modalStyles from './WorkflowModalContent.module.scss'
 import { HandleAnalyseAssetsProps } from './assetsTypes'
+import { getGeometriesPresentInFeatureCollection } from '../../../library/geoJson/getGeometriesPresentInFeatureClass'
+import { FeatureCollection } from 'geojson'
+import { UserAssetsContext } from '../../../context/UserAssetsContext'
 
 type DateErrorType = DateValidationError | 'required' | null
 
@@ -36,9 +40,11 @@ const getDateErrorMessage = (error: DateErrorType) => {
 const WorkflowInformation = ({
   inputContent,
   workflowOptions,
+  areGeometriesSupportedWorkflowOption,
 }: {
   inputContent: ReactNode
   workflowOptions: HubWorkflowOptions
+  areGeometriesSupportedWorkflowOption: boolean
 }) => {
   const {
     title,
@@ -48,7 +54,9 @@ const WorkflowInformation = ({
       supported_assets: supportedGeometries,
     },
   } = workflowOptions
-  const supportedGeometriesToUse = supportedGeometries.filter(Boolean)
+  const supportedGeometriesToUse = supportedGeometries
+    .filter(Boolean)
+    .map((geometry) => geometry.toLowerCase())
 
   const supportedGeometriesString = getHumanFriendlyListFromArray(
     supportedGeometriesToUse,
@@ -65,13 +73,22 @@ const WorkflowInformation = ({
       </p>
       {supportedGeometriesToUse.length >= 1 &&
       supportedGeometriesToUse.length < 3 ? (
-        <p>
-          Only {supportedGeometriesString} are supported. Other geometires
-          cannot be analysed.
+        <p
+          className={
+            areGeometriesSupportedWorkflowOption
+              ? undefined
+              : modalStyles.geometryError
+          }
+        >
+          Only {supportedGeometriesString} geometries are supported. Other
+          geometires cannot be analysed.
         </p>
       ) : null}
       {supportedGeometriesToUse.length === 3 ? (
-        <p>{capitalizeFirstLetter(supportedGeometriesString)} are supported.</p>
+        <p>
+          {capitalizeFirstLetter(supportedGeometriesString)} geometries are
+          supported.
+        </p>
       ) : null}
       {supportedGeometriesToUse.length < 1 ? (
         <p>Supported geometry information is missing.</p>
@@ -98,6 +115,7 @@ export const WorkflowModalContent = ({
 
   const [startDate, setStartDate] = useState<Dayjs | null>(null)
   const [startDateError, setStartDateError] = useState<DateErrorType>(null)
+  const { userAssets } = useContext(UserAssetsContext)
 
   const hubWorkflowName = selectedWorkflowOptions?.preset_inputs.workflow
   const hubWorkflowPresetInputs = selectedWorkflowOptions?.preset_inputs
@@ -105,6 +123,25 @@ export const WorkflowModalContent = ({
   const areDateRangeInputsShowing =
     selectedWorkflowOptions?.user_inputs.start_date &&
     selectedWorkflowOptions?.user_inputs.end_date
+
+  const getAreGeometriesSupportedForWorkflow = ({
+    workflowOptions,
+  }: {
+    workflowOptions: HubWorkflowOptions
+  }) => {
+    const supportedGeometriesForSelectedWorkflow =
+      workflowOptions.constraints.supported_assets
+        .filter(Boolean)
+        .map((geometry) => geometry.toLowerCase())
+    const geometriesPresentInUserAssets =
+      getGeometriesPresentInFeatureCollection(
+        userAssets as FeatureCollection,
+      ).map((geometry) => geometry.toLowerCase())
+
+    return geometriesPresentInUserAssets.every((geometry) => {
+      return supportedGeometriesForSelectedWorkflow?.includes(geometry)
+    })
+  }
 
   const initializeDateRangeValues = () => {
     if (areDateRangeInputsShowing) {
@@ -162,15 +199,18 @@ export const WorkflowModalContent = ({
 
   const selectWorkflowView = (
     <ul className={modalStyles.workflowList}>
-      {workflowOptions.map((workflowOptions) => {
-        const { title } = workflowOptions
+      {workflowOptions.map((options) => {
+        const { title } = options
+        const areGeometriesSupportedWorkflowOption =
+          getAreGeometriesSupportedForWorkflow({
+            workflowOptions: options as HubWorkflowOptions,
+          })
 
         const selectAnalysisButton = (
           <Button
             variant="outline"
-            onClick={() =>
-              handleSelectWorkflow(workflowOptions as HubWorkflowOptions)
-            }
+            onClick={() => handleSelectWorkflow(options as HubWorkflowOptions)}
+            disabled={!areGeometriesSupportedWorkflowOption}
           >
             Select Workflow
           </Button>
@@ -180,7 +220,10 @@ export const WorkflowModalContent = ({
           <li key={title}>
             <WorkflowInformation
               inputContent={selectAnalysisButton}
-              workflowOptions={workflowOptions as HubWorkflowOptions}
+              workflowOptions={options as HubWorkflowOptions}
+              areGeometriesSupportedWorkflowOption={
+                areGeometriesSupportedWorkflowOption
+              }
             />
           </li>
         )
@@ -246,6 +289,13 @@ export const WorkflowModalContent = ({
   )
   const workflowInputs = areDateRangeInputsShowing ? dateRangeInputs : null
 
+  const areUserAssetsGeometriesSupportedForSelectedWorkflow =
+    selectedWorkflowOptions
+      ? getAreGeometriesSupportedForWorkflow({
+          workflowOptions: selectedWorkflowOptions,
+        })
+      : false
+
   const userInputsView = selectedWorkflowOptions ? (
     <div>
       {isHubWorkflowErrorShowing ? (
@@ -262,6 +312,9 @@ export const WorkflowModalContent = ({
         <WorkflowInformation
           workflowOptions={selectedWorkflowOptions}
           inputContent={workflowInputs}
+          areGeometriesSupportedWorkflowOption={
+            areUserAssetsGeometriesSupportedForSelectedWorkflow
+          }
         />
       ) : null}
       <Button
@@ -273,7 +326,12 @@ export const WorkflowModalContent = ({
             hubWorkflowPresetInputs: hubWorkflowPresetInputs,
           })
         }
-        disabled={!!startDateError || !!endDateError || !hubWorkflowName}
+        disabled={
+          !!startDateError ||
+          !!endDateError ||
+          !hubWorkflowName ||
+          !areUserAssetsGeometriesSupportedForSelectedWorkflow
+        }
       >
         Run Analysis
       </Button>

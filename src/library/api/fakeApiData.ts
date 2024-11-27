@@ -9050,7 +9050,7 @@ export const workflowOptions = [
     description:
       'This workflow provides daytime land surface temperature observations for the specified assets.',
     constraints: {
-      supported_assets: ['points'],
+      supported_assets: ['Point'],
       required_columns: ['ID', 'latitude', 'longitude'],
     },
     preset_inputs: {
@@ -9083,7 +9083,7 @@ export const workflowOptions = [
     description:
       'This workflow provides nighttime land surface temperature observations for the specified assets.',
     constraints: {
-      supported_assets: ['points'],
+      supported_assets: ['Point'],
       required_columns: ['ID', 'latitude', 'longitude'],
     },
     preset_inputs: {
@@ -9116,7 +9116,7 @@ export const workflowOptions = [
     description:
       'This workflow assesses the physical risks of climate change, including chronic heat and inundation, for the specified asset portfolio.',
     constraints: {
-      supported_assets: ['points'],
+      supported_assets: ['Point'],
       required_columns: [
         'ID',
         'latitude',

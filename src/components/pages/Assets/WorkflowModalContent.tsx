@@ -189,7 +189,7 @@ export const WorkflowModalContent = ({
   )
   const dateRangeInputs = (
     <div className={modalStyles.dateInputs}>
-      <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
         <label className={formStyles.formLabel}>
           Start Date
           <DateField

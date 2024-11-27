@@ -281,6 +281,11 @@ export const Assets = () => {
     </Link>
   )
 
+  const handleDialogOpenChange = (isOpen: boolean) => {
+    setSelectedWorkflowOptions(null)
+    setIsWorkflowModalOpen(isOpen)
+  }
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={assetStyles.sidebarTopSection}>
@@ -339,7 +344,7 @@ export const Assets = () => {
         {userAssets ? (
           <Dialog.Root
             open={isWorkflowModalOpen}
-            onOpenChange={setIsWorkflowModalOpen}
+            onOpenChange={handleDialogOpenChange}
           >
             <Dialog.Trigger>
               <Button disabled={isAnalysisRunning}>Analyse Assets</Button>

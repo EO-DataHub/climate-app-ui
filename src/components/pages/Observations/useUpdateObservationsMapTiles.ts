@@ -16,8 +16,8 @@ export const useUpdateObservationsMapTiles = ({
 }: {
   isMapLoaded: boolean
   mapRef: MapRef
-  maxTemp: number
-  minTemp: number
+  maxTemp: string
+  minTemp: string
   selectedObservationLayerUrl: string
   setIsMapLoading: Dispatch<SetStateAction<boolean>> | undefined
 }) => {

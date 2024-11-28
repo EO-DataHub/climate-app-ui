@@ -1,5 +1,5 @@
-import { Button, Select, Tabs, Text } from '@radix-ui/themes'
-import { useContext } from 'react'
+import { Button, Select, Tabs, Text, TextField } from '@radix-ui/themes'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -25,13 +25,16 @@ import { useMap } from '../../Map/useMap'
 import { useUpdateObservationsMapTiles } from './useUpdateObservationsMapTiles'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import observationStyles from './Observations.module.scss'
 
-const MIN_TEMP = 10
-const MAX_TEMP = 45
+const DEFAULT_MIN_TEMP = '-10'
+const DEFAULT_MAX_TEMP = '45'
 
 export const Observations = () => {
   const navigate = useNavigate()
   const { setIsMapLoading } = useContext(LoadingContext)
+  const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
+  const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
   const {
     observationTypeConfigs,
     persistedMapCenter,
@@ -69,8 +72,8 @@ export const Observations = () => {
   useUpdateObservationsMapTiles({
     isMapLoaded,
     mapRef,
-    maxTemp: MAX_TEMP,
-    minTemp: MIN_TEMP,
+    maxTemp,
+    minTemp,
     selectedObservationLayerUrl,
     setIsMapLoading,
   })
@@ -217,32 +220,46 @@ export const Observations = () => {
     </div>
   )
 
+  const handleMinTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = parseFloat(event.target.value)
+
+    if (numericValue < parseFloat(maxTemp) || isNaN(numericValue)) {
+      setMinTemp(event.target.value)
+    }
+  }
+
+  const handleMaxTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = parseFloat(event.target.value)
+    if (numericValue > parseFloat(minTemp) || isNaN(numericValue)) {
+      setMaxTemp(event.target.value)
+    }
+  }
+
   const legend = (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        fontSize: `12px`,
-      }}
-    >
-      <div style={{ width: '100%', textAlign: 'left', marginBottom: '5px' }}>
-        Degrees Celsius
-      </div>
-      <img
-        src="https://titiler.xyz/colorMaps/jet?format=png"
-        alt="Color Map Legend"
-        style={{ width: '100%', height: 'auto' }}
-      />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
-        <span>{MIN_TEMP}</span>
-        <span>{MAX_TEMP}</span>
+    <div className={observationStyles.legendWrapper}>
+      <figure>
+        <figcaption>Degrees Celsius</figcaption>
+        <img
+          src="https://titiler.xyz/colorMaps/jet?format=png"
+          alt="Color Map Legend"
+        />
+      </figure>
+
+      <div className={observationStyles.legendInputWrapper}>
+        <TextField.Root
+          size="1"
+          value={minTemp}
+          onChange={handleMinTempChange}
+          type="number"
+          aria-label="Minimum temperature to show on the map"
+        />
+        <TextField.Root
+          size="1"
+          value={maxTemp}
+          onChange={handleMaxTempChange}
+          type="number"
+          aria-label="Maximum temperature to show on the map"
+        />
       </div>
     </div>
   )

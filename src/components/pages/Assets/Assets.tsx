@@ -350,7 +350,7 @@ export const Assets = () => {
               <Button disabled={isAnalysisRunning}>Analyse Assets</Button>
             </Dialog.Trigger>
 
-            <Dialog.Content maxWidth="500px">
+            <Dialog.Content maxWidth="800px">
               <WorkflowModalContent
                 handleAnalyseAssets={handleAnalyseAssets}
                 setSelectedWorkflowOptions={setSelectedWorkflowOptions}

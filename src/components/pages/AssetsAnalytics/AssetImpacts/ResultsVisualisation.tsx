@@ -43,7 +43,10 @@ export const ResultsVisualisation = ({
         {
           x: xValues,
           y: yValues,
-
+          hovertemplate:
+            'Temperature: %{y:.1f} °C<br>' +
+            'Date: %{x|%d %b %Y %H:%M}<br>' +
+            '<extra></extra>',
           type: 'scatter',
           mode: 'markers',
           marker: { color: markerColor, size: 10 },

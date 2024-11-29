@@ -103,7 +103,6 @@ export const AuthenticationContextProvider = ({
       toast.error('You have been logged out by the system.')
     }
 
-    // @ts-expect-error - didInitialize isnt technically a public property, but ticket accepted to make it so https://github.com/keycloak/keycloak/issues/27040
     if (authenticationInstance.didInitialize) return // this ensures vite HMR keeps working in development
 
     setIsAuthenticating(true)

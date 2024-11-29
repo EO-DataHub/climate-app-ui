@@ -8145,11 +8145,6 @@ jest-canvas-mock@~2.5.2:
     cssfontparser "^1.2.1"
     moo-color "^1.0.2"
 
-js-sha256@^0.11.0:
-  version "0.11.0"
-  resolved "https://registry.npmjs.org/js-sha256/-/js-sha256-0.11.0.tgz"
-  integrity sha512-6xNlKayMZvds9h1Y1VWc0fQHQ82BxTXizWPEtEeGvmOUYpBRy4gbWroHLpzowe6xiQhHpelCQiE7HEdznyBL9Q==
-
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz"
@@ -8276,11 +8271,6 @@ jsonc-parser@^3.2.0:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
-jwt-decode@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/jwt-decode/-/jwt-decode-4.0.0.tgz"
-  integrity sha512-+KJGIyHgkGuIq3IEBNftfhW/LfWhXUIY6OmyVWjliu5KH1y0fw7VQ8YndE2O4qZdMSd9SqbnC8GOcZEy0Om7sA==
-
 katex@^0.16.0:
   version "0.16.10"
   resolved "https://registry.npmjs.org/katex/-/katex-0.16.10.tgz"
@@ -8298,13 +8288,10 @@ kdbush@^4.0.2:
   resolved "https://registry.npmjs.org/kdbush/-/kdbush-4.0.2.tgz"
   integrity sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA==
 
-keycloak-js@24.0.2:
-  version "24.0.2"
-  resolved "https://registry.npmjs.org/keycloak-js/-/keycloak-js-24.0.2.tgz"
-  integrity sha512-V2N8cSz3NfON98XHp+DCzvrb1WW35JalL5Zphe/uoVWOxcof7v522Yz9Q2O3BqXqXP3V/H9ml6o24BwwtXUTGA==
-  dependencies:
-    js-sha256 "^0.11.0"
-    jwt-decode "^4.0.0"
+keycloak-js@26.0.6:
+  version "26.0.6"
+  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-26.0.6.tgz#3c33bc6960d646c60f464ed0eaf6fcaff9305aaa"
+  integrity sha512-HHRuMOm5w4vAkhWyqs7VPQqYUCSyPagTdQcUIi7xF6XU9GoSZgh2jRtry5P4t6XxhyuMiCwWg7JN8W9cDyqRfQ==
 
 keyv@^4.5.3:
   version "4.5.4"

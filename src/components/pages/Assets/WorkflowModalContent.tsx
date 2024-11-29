@@ -81,7 +81,7 @@ const WorkflowInformation = ({
           }
         >
           Only {supportedGeometriesString} geometries are supported. Other
-          geometires cannot be analysed.
+          geometries cannot be analysed.
         </p>
       ) : null}
       {supportedGeometriesToUse.length === 3 ? (

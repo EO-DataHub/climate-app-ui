@@ -28,7 +28,7 @@
     "axios": "^1.6.8",
     "csv2geojson": "^5.1.2",
     "dayjs": "^1.11.13",
-    "keycloak-js": "24.0.2",
+    "keycloak-js": "26.0.6",
     "maplibre-gl": "^4.1.2",
     "plotly.js": "^2.35.2",
     "proj4": "^2.11.0",

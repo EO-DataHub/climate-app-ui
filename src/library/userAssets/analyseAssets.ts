@@ -6,6 +6,7 @@ import { getResultsUrl } from '../api/getUrls'
 import { HubWorkflowPresetInputs } from '../api/apiTypes'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 const initiateAssetsRiskAnalysis = async ({
   authToken,
@@ -30,7 +31,7 @@ const initiateAssetsRiskAnalysis = async ({
     stac_query: hubWorkflowPresetInputs?.stac_query,
   }
   return axios.post(
-    `${HUB_BASE_URL}/ades/sparkgeouser/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
+    `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
     {
       inputs: {
         ...inputsFromConfigurationsToUse,

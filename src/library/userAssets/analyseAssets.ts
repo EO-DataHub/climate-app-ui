@@ -11,19 +11,21 @@ const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 const initiateAssetsRiskAnalysis = async ({
   authToken,
   axios,
+  workspaceUserName,
   endDate,
   fileName,
   hubWorkflowPresetInputs,
+  areUserAssetsASamplePortfolio,
   startDate,
-  workspaceUserName,
 }: {
   authToken: string
   axios: AxiosInstance
+  workspaceUserName: string
   endDate?: string
   fileName: string
   hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
+  areUserAssetsASamplePortfolio: boolean
   startDate?: string
-  workspaceUserName: string
 }) => {
   const inputsFromConfigurationsToUse = {
     stac_catalog: hubWorkflowPresetInputs?.stac_catalog,
@@ -36,13 +38,14 @@ const initiateAssetsRiskAnalysis = async ({
       inputs: {
         ...inputsFromConfigurationsToUse,
         assets: getRelativeS3PathForAssetFile({
-          workspaceUserName,
+          workspaceUserName: areUserAssetsASamplePortfolio
+            ? HUB_APP_WORKSPACE_NAME
+            : workspaceUserName,
           fileName,
         }),
         end_date: endDate,
         start_date: startDate,
         token: authToken,
-        workspace: workspaceUserName,
       },
     },
     {
@@ -127,19 +130,21 @@ async function getAssetsRiskResults({
 export const analyseAssets = ({
   authToken,
   axios,
+  workspaceUserName,
   endDate,
   fileName,
   hubWorkflowPresetInputs,
+  areUserAssetsASamplePortfolio,
   startDate,
-  workspaceUserName,
 }: {
   authToken: string
   axios?: AxiosInstance
+  workspaceUserName: string
   endDate?: string
   fileName: string
-  startDate?: string
   hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
-  workspaceUserName: string
+  areUserAssetsASamplePortfolio: boolean
+  startDate?: string
 }) => {
   if (!axios) {
     throw new Error('axios is required')
@@ -151,11 +156,12 @@ export const analyseAssets = ({
   return initiateAssetsRiskAnalysis({
     authToken,
     axios,
+    workspaceUserName,
     endDate,
     fileName,
-    startDate,
-    workspaceUserName,
     hubWorkflowPresetInputs,
+    areUserAssetsASamplePortfolio,
+    startDate,
   }).then((response) => {
     const statusPollingUrl = response.data.links.find(
       (link: { title: string }) => link.title === 'Status location',

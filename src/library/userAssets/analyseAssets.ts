@@ -30,7 +30,7 @@ const initiateAssetsRiskAnalysis = async ({
     stac_query: hubWorkflowPresetInputs?.stac_query,
   }
   return axios.post(
-    `${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
+    `${HUB_BASE_URL}/ades/sparkgeouser/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
     {
       inputs: {
         ...inputsFromConfigurationsToUse,

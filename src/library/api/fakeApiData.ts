@@ -9070,7 +9070,7 @@ export const workflowOptions = [
     preset_inputs: {
       workflow: 'lst-filter',
       stac_catalog:
-        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/user-datasets/sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782',
+        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782',
       stac_collection: 'col_f99e920a-a58e-11ef-aab0-7a33b70d8782',
       stac_query: "{'day_night': 'DAY'}",
     },
@@ -9103,7 +9103,7 @@ export const workflowOptions = [
     preset_inputs: {
       workflow: 'lst-filter',
       stac_catalog:
-        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/user-datasets/sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782',
+        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782',
       stac_collection: 'col_f99e920a-a58e-11ef-aab0-7a33b70d8782',
       stac_query: "{'day_night': 'NIGHT'}",
     },

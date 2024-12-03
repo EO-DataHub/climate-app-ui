@@ -75,7 +75,7 @@ export const WorkflowActivityDrawer = ({
     if (isDrawerOpen) {
       setIsWorkflowActivityLoading(true)
       authenticatedAxios
-        .get(`${HUB_BASE_URL}/ades/${workspaceUserName}/ogc-api/jobs`)
+        .get(`${HUB_BASE_URL}/ades/sparkgeouser/ogc-api/jobs`)
         .then((response) => {
           const jobs = response.data.jobs as WorkflowInfoFromApi[]
 
@@ -172,7 +172,6 @@ export const WorkflowActivityDrawer = ({
     deleteWorkflow({
       jobId,
       authenticatedAxios,
-      workspaceUserName,
     })
       .then(() => {
         loadWorkflowActivity()
@@ -187,7 +186,7 @@ export const WorkflowActivityDrawer = ({
   const clearAll = () => {
     if (!authenticatedAxios || !workspaceUserName) return
     const deletePromises = workflowActivity.map(({ jobID }) =>
-      deleteWorkflow({ jobId: jobID, authenticatedAxios, workspaceUserName }),
+      deleteWorkflow({ jobId: jobID, authenticatedAxios }),
     )
     setIsActivityBeingCleared(true)
     Promise.all(deletePromises)

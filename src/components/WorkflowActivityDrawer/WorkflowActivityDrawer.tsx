@@ -26,6 +26,7 @@ import { deleteWorkflow } from '../../library/api/deleteWorkflow'
 import { Prompt } from '../Prompt/Prompt'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 interface WorkflowInfoFromApi {
   jobID: string
@@ -75,7 +76,7 @@ export const WorkflowActivityDrawer = ({
     if (isDrawerOpen) {
       setIsWorkflowActivityLoading(true)
       authenticatedAxios
-        .get(`${HUB_BASE_URL}/ades/sparkgeouser/ogc-api/jobs`)
+        .get(`${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs`)
         .then((response) => {
           const jobs = response.data.jobs as WorkflowInfoFromApi[]
 

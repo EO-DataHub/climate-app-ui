@@ -1,6 +1,7 @@
 import { AxiosInstance } from 'axios'
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3'
 import { getS3Credentials } from './getS3Credentials'
+import { getFilenameFromAwsFileKey } from './getFilenameFromAwsFileKey'
 
 const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME
 const AWS_REGION = import.meta.env.VITE_AWS_REGION
@@ -8,6 +9,7 @@ const AWS_REGION = import.meta.env.VITE_AWS_REGION
 export interface UploadedFileInfo {
   name: string
   dateAdded: Date
+  key: string
 }
 
 export const getUploadedFileList = ({
@@ -32,7 +34,7 @@ export const getUploadedFileList = ({
     })
     .then((response) => {
       return response.Contents?.map(({ Key, LastModified }) => ({
-        name: Key?.replace(`${workspaceUserName}/user-assets/`, ''),
+        name: getFilenameFromAwsFileKey({ key: Key, workspaceUserName }),
         dateAdded: new Date(LastModified!),
       })).filter((item) => item.name !== '') as UploadedFileInfo[]
     })

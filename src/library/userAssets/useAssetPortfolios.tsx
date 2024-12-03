@@ -2,7 +2,7 @@ import { Badge, DataList, Link, Separator } from '@radix-ui/themes'
 // @ts-expect-error  turf has an issue delaring its types
 import { bbox as turfBbox } from '@turf/turf'
 import { MapLayerMouseEvent, Popup } from 'maplibre-gl'
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import {
@@ -10,7 +10,6 @@ import {
   MapLayerIds,
   MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
   MapSourceIds,
-  UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT,
 } from '../../configuration/constants'
 
 import { areBoundsValid } from '../maplibre/isGeometryValid'
@@ -19,8 +18,10 @@ import { LoadingContext } from '../../context/LoadingContext'
 import { MapRef } from '../../components/Map/useMap'
 import { temporarySamplePortfolios } from '../api/fakeApiData'
 import { UserAssets } from './userAssetTypes'
-import { UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsPopupStyles from './AssetsPopup.module.scss'
+import { AuthenticationContext } from '../../context/AuthenticationContext'
+import { toast } from 'react-toastify'
+import { getUploadedFileUrl } from '../api/getUrls'
 
 export const useAssetPortfolios = ({
   isMapLoaded,
@@ -37,8 +38,12 @@ export const useAssetPortfolios = ({
   onAssetMarkerClick?: (event: MapLayerMouseEvent) => void
   zoomToUserAssets?: boolean
 }) => {
+  const [isPortfolioLoading, setIsPortfolioLoading] = useState(false)
+
   const { setIsMapLoading } = useContext(LoadingContext)
-  const { userAssets } = useContext(UserAssetsContext)
+  const { authenticatedAxios, workspaceUserName } = useContext(
+    AuthenticationContext,
+  )
 
   const removeUserAssetsFromMap = useCallback(() => {
     if (!mapRef?.current || !setIsMapLoading) return
@@ -370,34 +375,61 @@ export const useAssetPortfolios = ({
   )
 
   const updateCurrentPortfolioShown = useCallback(
-    (portfolioName: string) => {
-      if (!portfolioName) {
+    (id: string) => {
+      if (!id) {
         removeUserAssetsFromMap()
         return
       }
 
-      if (
-        userAssets &&
-        portfolioName == UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT
-      ) {
-        // right now we only have one possible portfolio called userAssets that come from a file the user just opened. We'll figure out better naming later.
-        updateUserAssetsInMap(userAssets)
+      setIsPortfolioLoading(true)
+      const selectedSamplePortfolio = temporarySamplePortfolios.find(
+        (portfolio) => portfolio.id === id,
+      )
+
+      if (selectedSamplePortfolio) {
+        setIsPortfolioLoading(false)
+
+        updateUserAssetsInMap(selectedSamplePortfolio?.data as UserAssets)
+
         return
       }
 
-      // this is temporary for MVP
-      const selectedPortfolio = temporarySamplePortfolios.find(
-        (samplePortfolio) => samplePortfolio.id === portfolioName,
-      )
+      if (!authenticatedAxios || !workspaceUserName) {
+        toast.error(
+          'There was an issue with authentication. Try logging in again.',
+        )
+        setIsPortfolioLoading(false)
 
-      updateUserAssetsInMap(selectedPortfolio?.data as UserAssets)
+        return
+      }
+      return authenticatedAxios
+        .get(getUploadedFileUrl({ workspaceUserName, fileName: id }))
+        .then((response) => {
+          if (!response) throw new Error('No response')
+
+          updateUserAssetsInMap(response.data as UserAssets)
+        })
+        .catch(() => {
+          toast.error(
+            'There was an issue accessing that portfolio. Please try again.',
+          )
+        })
+        .finally(() => {
+          setIsPortfolioLoading(false)
+        })
     },
-    [removeUserAssetsFromMap, updateUserAssetsInMap, userAssets],
+    [
+      authenticatedAxios,
+      removeUserAssetsFromMap,
+      updateUserAssetsInMap,
+      workspaceUserName,
+    ],
   )
 
   return {
     updateUserAssetsInMap,
     removeUserAssetsFromMap,
     updateCurrentPortfolioShown,
+    isPortfolioLoading,
   }
 }

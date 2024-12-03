@@ -1,4 +1,12 @@
-import { Button, Select, Tabs, Text, TextField } from '@radix-ui/themes'
+import {
+  Button,
+  Flex,
+  Select,
+  Spinner,
+  Tabs,
+  Text,
+  TextField,
+} from '@radix-ui/themes'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -60,10 +68,11 @@ export const Observations = () => {
     setPersistedMapCenter,
     setPersistedMapZoom,
   })
-  const { updateCurrentPortfolioShown } = useAssetPortfolios({
-    mapRef,
-    isMapLoaded,
-  })
+  const { updateCurrentPortfolioShown, isPortfolioLoading } =
+    useAssetPortfolios({
+      mapRef,
+      isMapLoaded,
+    })
   useGetObservationValueByMapclick({
     isMapLoaded,
     mapRef,
@@ -203,12 +212,12 @@ export const Observations = () => {
 
       <div className={sidebarStyles.contentBottomButtonRow}>
         <div className={sidebarStyles.selectAssetsWrapper}>
-          <label>View Assets on Map</label>
+          <Flex gap="1">
+            <label>View Assets on Map</label>{' '}
+            {isPortfolioLoading ? <Spinner /> : null}
+          </Flex>
           <InputLabelContainer>
-            <AssetsSelect
-              showUnsaved
-              onValueChange={updateCurrentPortfolioShown}
-            />
+            <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
           </InputLabelContainer>
         </div>
         <div className={sidebarStyles.selectAssetsButtonWrapper}>

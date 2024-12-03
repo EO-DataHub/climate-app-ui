@@ -1,4 +1,12 @@
-import { Button, Heading, Link, Text, Dialog, Spinner } from '@radix-ui/themes'
+import {
+  Button,
+  Heading,
+  Link,
+  Text,
+  Dialog,
+  Spinner,
+  Flex,
+} from '@radix-ui/themes'
 import { useContext, useMemo, useState } from 'react'
 
 import {
@@ -29,6 +37,9 @@ import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { HandleAnalyseAssetsProps } from './assetsTypes'
 import { useSyncAssetsTableSelectionWithMapAssets } from '../../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 import { HubWorkflowOptions } from '../../../library/api/apiTypes'
+import { PortfoliosContext } from '../../../context/PortfoliosContext'
+import { getFilenameFromAwsFileKey } from '../../../library/api/getFilenameFromAwsFileKey'
+import { getUploadedFileUrl } from '../../../library/api/getUrls'
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -37,8 +48,11 @@ export const Assets = () => {
   const [isFileUploading, setIsFileUploading] = useState(false)
   const [selectedWorkflowOptions, setSelectedWorkflowOptions] =
     useState<HubWorkflowOptions | null>(null)
+  const [isPortfolioLoading, setIsPortfolioLoading] = useState(false)
 
   const navigate = useNavigate()
+
+  const { updateUploadedFilesList } = useContext(PortfoliosContext)
 
   const {
     authenticatedAxios,
@@ -92,6 +106,13 @@ export const Assets = () => {
       rowSelection,
     })
 
+  const resetAssetsState = () => {
+    setCurrentWorkflowNickname?.(null)
+    setCurrentWorkflowTitle?.(null)
+    setRowSelection({})
+    toggleAllMapAssetsSelection(false)
+  }
+
   const handleLoadAssets = ({
     fileName,
     assets,
@@ -111,12 +132,10 @@ export const Assets = () => {
       workspaceUserName,
     })
       .then(() => {
-        setCurrentWorkflowNickname?.(null)
-        setCurrentWorkflowTitle?.(null)
-        setRowSelection({})
-        toggleAllMapAssetsSelection(false)
+        resetAssetsState()
         setUserAssets?.(assets)
         setUploadedFileName?.(fileName)
+        updateUploadedFilesList()
 
         toast.success('File uploaded to data hub successfully', {
           autoClose: 5000,
@@ -261,21 +280,52 @@ export const Assets = () => {
       })
   }
 
-  const checkForSamplePortfolioDataToUse = (id: string) => {
-    const selectedPortfolio = temporarySamplePortfolios.find(
+  const loadPortfolio = (id: string) => {
+    setIsPortfolioLoading(true)
+    const selectedSamplePortfolio = temporarySamplePortfolios.find(
       (portfolio) => portfolio.id === id,
     )
 
-    setAreUserAssetsASamplePortfolio?.(!!selectedPortfolio)
+    setAreUserAssetsASamplePortfolio?.(!!selectedSamplePortfolio)
 
-    if (selectedPortfolio) {
-      setRowSelection({})
-      toggleAllMapAssetsSelection(false)
-      setCurrentWorkflowNickname?.(null)
-      setCurrentWorkflowTitle?.(null)
-      setUploadedFileName?.(selectedPortfolio.fileName)
-      setUserAssets?.(selectedPortfolio.data as UserAssets)
+    if (selectedSamplePortfolio) {
+      resetAssetsState()
+      setUploadedFileName?.(selectedSamplePortfolio.fileName)
+      setUserAssets?.(selectedSamplePortfolio.data as UserAssets)
+      setIsPortfolioLoading(false)
+
+      return
     }
+
+    if (!authenticatedAxios || !workspaceUserName) {
+      toast.error(
+        'There was an issue with authentication. Try logging in again.',
+      )
+      setIsPortfolioLoading(false)
+
+      return
+    }
+    return authenticatedAxios
+      .get(getUploadedFileUrl({ workspaceUserName, fileName: id }))
+      .then((response) => {
+        if (!setUserAssets) throw new Error('No setUserAssets')
+        if (!response) throw new Error('No response')
+
+        resetAssetsState()
+        setUploadedFileName?.(
+          getFilenameFromAwsFileKey({ key: id, workspaceUserName }) ??
+            'Unknown file name',
+        )
+        setUserAssets(response.data as UserAssets)
+      })
+      .catch(() => {
+        toast.error(
+          'There was an issue accessing that portfolio. Please try again.',
+        )
+      })
+      .finally(() => {
+        setIsPortfolioLoading(false)
+      })
   }
 
   const uploadButton = (
@@ -296,8 +346,12 @@ export const Assets = () => {
       <div className={assetStyles.sidebarTopSection}>
         <div className={assetStyles.selectPortfolioRow}>
           <div className={assetStyles.assetsSelectWrapper}>
-            <label>Portfolios</label>
-            <AssetsSelect onValueChange={checkForSamplePortfolioDataToUse} />
+            <Flex gap={'1'}>
+              <label>Portfolios </label>
+              {isPortfolioLoading ? <Spinner /> : null}
+            </Flex>
+
+            <AssetsSelect onValueChange={loadPortfolio} />
           </div>
           <UploadButtonAndDialog
             onLoadAssets={handleLoadAssets}

@@ -17,3 +17,12 @@ export const getCsvResultsUrl = ({
   workspaceUserName: string
 }) =>
   `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/${AWS_BUCKET_NAME}/processing-results/cat_${jobId}/col_${jobId}/data.csv`
+
+export const getUploadedFileUrl = ({
+  workspaceUserName,
+  fileName,
+}: {
+  workspaceUserName: string
+  fileName: string
+}) =>
+  `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/${AWS_BUCKET_NAME}/user-assets/${fileName}`

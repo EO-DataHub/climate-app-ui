@@ -16,7 +16,6 @@ export enum MapLayerIds {
   USER_ASSETS_POLYGONS_STROKE = 'user-assets-polygons-stroke',
 }
 
-export const UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT = 'unsavedAssets'
 export const MAPLIBRE_FIT_BOUNDS_PADDING = 100
 export const MAPLIBRE_FIT_BOUNDS_MAX_ZOOM = 10
 

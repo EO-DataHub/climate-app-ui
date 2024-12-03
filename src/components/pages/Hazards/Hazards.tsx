@@ -1,4 +1,4 @@
-import { Button, Heading, Select, Tabs } from '@radix-ui/themes'
+import { Button, Flex, Heading, Select, Spinner, Tabs } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -64,10 +64,11 @@ export const Hazards = () => {
     setPersistedMapZoom,
   })
   const { setIsMapLoading } = useContext(LoadingContext)
-  const { updateCurrentPortfolioShown } = useAssetPortfolios({
-    mapRef,
-    isMapLoaded,
-  })
+  const { updateCurrentPortfolioShown, isPortfolioLoading } =
+    useAssetPortfolios({
+      mapRef,
+      isMapLoaded,
+    })
 
   const { scenarioOptions, yearOptions } =
     getOptionsByClimateModel(climateModel)
@@ -353,12 +354,13 @@ export const Hazards = () => {
 
         <div className={sidebarStyles.contentBottomButtonRow}>
           <div className={sidebarStyles.selectAssetsWrapper}>
-            <label>View Assets on Map</label>
+            <Flex gap="1">
+              <label>View Assets on Map</label>{' '}
+              {isPortfolioLoading ? <Spinner /> : null}
+            </Flex>
+
             <InputLabelContainer>
-              <AssetsSelect
-                showUnsaved
-                onValueChange={updateCurrentPortfolioShown}
-              />
+              <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
             </InputLabelContainer>
           </div>
           <div className={sidebarStyles.selectAssetsButtonWrapper}>

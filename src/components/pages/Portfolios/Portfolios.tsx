@@ -10,13 +10,10 @@ import {
   useReactTable,
 } from '@tanstack/react-table'
 import { toast } from 'react-toastify'
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 
-import {
-  getUploadedFileList,
-  UploadedFileInfo,
-} from '../../../library/api/getUploadedFileList'
+import { UploadedFileInfo } from '../../../library/api/getUploadedFileList'
 import { AuthenticationContext } from '../../../context/AuthenticationContext'
 import { getTableHeaderSortIcon } from '../../../library/tanStackTable/getTableHeaderSortIcon'
 import { PageLayout } from '../../Layout/PageLayout'
@@ -30,22 +27,25 @@ import portfolioStyles from './Portfolios.module.scss'
 import tableStyles from '../../../library/genericStyles/table.module.scss'
 import { useDebouncedCallback } from 'use-debounce'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
+import { PortfoliosContext } from '../../../context/PortfoliosContext'
 
 export const Portfolios = () => {
-  const [fileInfo, setFileInfo] = useState<UploadedFileInfo[]>([])
   const [globalFilter, setGlobalFilter] = useState('')
   const [isFileUploading, setIsFileUploading] = useState(false)
-  const [isTableLoading, setIsTableLoading] = useState(true)
   const [tableSearchValue, setTableSearchValue] = useState('')
+  const {
+    authenticatedAxios,
+    workspaceUserName,
+    isAuthenticated,
+    isAuthenticating,
+  } = useContext(AuthenticationContext)
+  const { fileInfo, isFileInfoLoading, updateUploadedFilesList } =
+    useContext(PortfoliosContext)
   const isTableShowing = !!fileInfo.length
-
   const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
     setGlobalFilter(value)
   }, 500)
 
-  const { authenticatedAxios, workspaceUserName } = useContext(
-    AuthenticationContext,
-  )
   const handleLoadAssets = ({
     fileName,
     assets,
@@ -65,7 +65,10 @@ export const Portfolios = () => {
       workspaceUserName,
     })
       .then(() => {
-        toast.success('File uploaded to data hub successfully')
+        updateUploadedFilesList()
+        toast.success('File uploaded to data hub successfully', {
+          autoClose: 5000,
+        })
       })
       .catch(() => {
         toast.error('Error uploading file to data hub')
@@ -74,27 +77,6 @@ export const Portfolios = () => {
         setIsFileUploading(false)
       })
   }
-
-  useEffect(
-    function getUploadedFilesList() {
-      if (!authenticatedAxios || !workspaceUserName) return
-
-      setIsTableLoading(true)
-      getUploadedFileList({ authenticatedAxios, workspaceUserName })
-        .then((response) => {
-          setFileInfo(response)
-        })
-        .catch(() => {
-          toast.error(
-            "We're sorry. Something went wrong. Please try refreshing the page.",
-          )
-        })
-        .finally(() => {
-          setIsTableLoading(false)
-        })
-    },
-    [authenticatedAxios, workspaceUserName],
-  )
 
   const tableColumns = useMemo(() => {
     const columnHelper = createColumnHelper<UploadedFileInfo>()
@@ -210,10 +192,13 @@ export const Portfolios = () => {
       There are no portfolios to display.
     </div>
   )
-
-  return (
-    <PageLayout>
-      <PageTitle>Portfolios</PageTitle>
+  const logInMessage = isAuthenticating ? (
+    <LoadingIndicator />
+  ) : (
+    'Please log in to view portfolios.'
+  )
+  const authenticatedPageContent = isAuthenticated ? (
+    <>
       <div className={portfolioStyles.aboveTableRow}>
         <Text asChild size="3">
           <h2>Saved Portfolios</h2>
@@ -245,13 +230,22 @@ export const Portfolios = () => {
           />
         </div>
       </div>
-      {isTableLoading ? (
+      {isFileInfoLoading ? (
         <div className={containerStyles.flexRowCenterCenterFullDimensions}>
           <LoadingIndicator />
         </div>
       ) : (
         table
       )}
+    </>
+  ) : (
+    logInMessage
+  )
+
+  return (
+    <PageLayout>
+      <PageTitle>Portfolios</PageTitle>
+      {authenticatedPageContent}
     </PageLayout>
   )
 }

@@ -15,6 +15,7 @@ import { AuthenticationContextProvider } from '../../context/AuthenticationConte
 import { HazardContextProvider } from '../../context/HazardsPageContext'
 import { ObservationsContextProvider } from '../../context/ObservationsPageContext'
 import { AssetsPageContextProvider } from '../../context/AssetsPageContext'
+import { PortfoliosContextProvider } from '../../context/PortfoliosContext'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',
@@ -30,7 +31,9 @@ function App() {
               <HazardContextProvider>
                 <ObservationsContextProvider>
                   <AssetsPageContextProvider>
-                    <RouterProvider router={router} />
+                    <PortfoliosContextProvider>
+                      <RouterProvider router={router} />
+                    </PortfoliosContextProvider>
                   </AssetsPageContextProvider>
                 </ObservationsContextProvider>
               </HazardContextProvider>

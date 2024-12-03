@@ -1,20 +1,18 @@
-import { Select } from '@radix-ui/themes'
+import { Select, Spinner } from '@radix-ui/themes'
 import { useContext } from 'react'
 
-import { UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT } from '../../configuration/constants'
-import { UserAssetsContext } from '../../context/UserAssetsContext'
 import { AuthenticationContext } from '../../context/AuthenticationContext'
 import { temporarySamplePortfolios } from '../../library/api/fakeApiData'
+import { PortfoliosContext } from '../../context/PortfoliosContext'
 
 export const AssetsSelect = ({
   onValueChange,
-  showUnsaved = false,
 }: {
   onValueChange?: (value: string) => void
-  showUnsaved?: boolean
 }) => {
-  const { userAssets } = useContext(UserAssetsContext)
   const { isAuthenticated } = useContext(AuthenticationContext)
+
+  const { fileInfo, isFileInfoLoading } = useContext(PortfoliosContext)
 
   return (
     <Select.Root onValueChange={onValueChange}>
@@ -22,34 +20,26 @@ export const AssetsSelect = ({
       <Select.Content position="popper">
         {isAuthenticated ? (
           <>
-            {' '}
             <Select.Group>
-              <Select.Label>My Portfolios</Select.Label>
-              <Select.Item value="#" disabled>
-                Portfolio 1
-              </Select.Item>
-              <Select.Item value="#" disabled>
-                Portfolio 2
-              </Select.Item>
-              <Select.Item value="#" disabled>
-                Portfolio 3
-              </Select.Item>
+              <Select.Label>
+                My Portfolios
+                {isFileInfoLoading ? (
+                  <>
+                    &nbsp;
+                    <Spinner />
+                  </>
+                ) : null}
+              </Select.Label>
+              {fileInfo.map(({ name }) => (
+                <Select.Item value={name} key={name}>
+                  {name}
+                </Select.Item>
+              ))}
             </Select.Group>
             <Select.Separator />
           </>
         ) : null}
 
-        {showUnsaved && userAssets ? (
-          <>
-            <Select.Group>
-              <Select.Label>Private Portfolios (Unsaved)</Select.Label>
-              <Select.Item value={UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT}>
-                Portfolio 1
-              </Select.Item>
-            </Select.Group>
-            <Select.Separator />
-          </>
-        ) : null}
         <Select.Group>
           <Select.Label>Sample Portfolios</Select.Label>
           {temporarySamplePortfolios.map(({ id, name }) => (

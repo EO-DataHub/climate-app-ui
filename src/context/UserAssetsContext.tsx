@@ -37,6 +37,8 @@ interface UserAssetsContextValue {
   uploadedFileName?: string | null
   userAssets?: UserAssets
   workflowJobIdAssociatedWithData?: string | null
+  areUserAssetsASamplePortfolio: boolean
+  setAreUserAssetsASamplePortfolio?: Dispatch<SetStateAction<boolean>>
 }
 
 export const UserAssetsContext = createContext<UserAssetsContextValue>({
@@ -44,6 +46,7 @@ export const UserAssetsContext = createContext<UserAssetsContextValue>({
   analysedAssetsWorkflowTitle: null,
   currentWorkflowNickname: null,
   currentWorkflowTitle: null,
+  areUserAssetsASamplePortfolio: false,
 })
 
 export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
@@ -69,6 +72,8 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [currentWorkflowTitle, setCurrentWorkflowTitle] = useState<
     string | null
   >(null)
+  const [areUserAssetsASamplePortfolio, setAreUserAssetsASamplePortfolio] =
+    useState<boolean>(false)
 
   const { workspaceUserName, authenticatedAxios } = useContext(
     AuthenticationContext,
@@ -114,6 +119,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
         analysedAssetsWorkflowTitle,
         analysedUserAssets,
         analysisRunDate,
+        areUserAssetsASamplePortfolio,
         csvResults,
         currentWorkflowNickname,
         currentWorkflowTitle,
@@ -122,6 +128,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
         setAnalysedAssetsWorkflowTitle,
         setAnalysedUserAssets,
         setAnalysisRunDate,
+        setAreUserAssetsASamplePortfolio,
         setCurrentWorkflowNickname,
         setCurrentWorkflowTitle,
         setUploadedFileName,

@@ -62,12 +62,14 @@ export const Assets = () => {
     setPersistedMapZoom,
   })
   const {
+    areUserAssetsASamplePortfolio,
     currentWorkflowTitle,
     setAnalysedAssetsFileName,
     setAnalysedAssetsWorkflowNickname,
     setAnalysedAssetsWorkflowTitle,
     setAnalysedUserAssets,
     setAnalysisRunDate,
+    setAreUserAssetsASamplePortfolio,
     setCurrentWorkflowNickname,
     setCurrentWorkflowTitle,
     setUploadedFileName,
@@ -216,6 +218,7 @@ export const Assets = () => {
       hubWorkflowPresetInputs,
       startDate,
       workspaceUserName,
+      areUserAssetsASamplePortfolio,
     })
       .then(({ analysedData, jobId }) => {
         // eslint-disable-next-line no-console
@@ -258,10 +261,12 @@ export const Assets = () => {
       })
   }
 
-  const usePortfolioData = (id: string) => {
+  const checkForSamplePortfolioDataToUse = (id: string) => {
     const selectedPortfolio = temporarySamplePortfolios.find(
       (portfolio) => portfolio.id === id,
     )
+
+    setAreUserAssetsASamplePortfolio?.(!!selectedPortfolio)
 
     if (selectedPortfolio) {
       setRowSelection({})
@@ -292,7 +297,7 @@ export const Assets = () => {
         <div className={assetStyles.selectPortfolioRow}>
           <div className={assetStyles.assetsSelectWrapper}>
             <label>Portfolios</label>
-            <AssetsSelect onValueChange={usePortfolioData} />
+            <AssetsSelect onValueChange={checkForSamplePortfolioDataToUse} />
           </div>
           <UploadButtonAndDialog
             onLoadAssets={handleLoadAssets}

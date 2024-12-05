@@ -9126,6 +9126,39 @@ export const workflowOptions = [
     },
   },
   {
+    title: 'London Land Surface Temperature (LST)',
+    description:
+      'This workflow provides daytime land surface temperature observations for the specified assets (within London).',
+    constraints: {
+      supported_assets: ['Point'],
+      required_columns: ['latitude', 'longitude'],
+    },
+    preset_inputs: {
+      workflow: 'lst-filter',
+      stac_catalog:
+        'https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789',
+      stac_collection: 'col_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789',
+      stac_query: '{}',
+    },
+    user_inputs: {
+      assets: {
+        type: 'file',
+        file_type: 'geojson',
+        label: 'Upload your asset GeoJSON file',
+      },
+      start_date: {
+        label: 'Select the start date',
+        type: 'date',
+        default: '2023-01-01',
+      },
+      end_date: {
+        label: 'Select the end date',
+        type: 'date',
+        default: '2023-12-01',
+      },
+    },
+  },
+  {
     title: 'OS Climate Physical Risk',
     description:
       'This workflow assesses the physical risks of climate change, including chronic heat and inundation, for the specified asset portfolio.',

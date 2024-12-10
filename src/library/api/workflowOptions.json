@@ -3,11 +3,17 @@
     "title": "Land Surface Temperature (LST) - Day",
     "description": "This workflow provides daytime land surface temperature observations for the specified assets.",
     "constraints": {
-      "supported_assets": ["Point"],
-      "required_columns": ["ID", "latitude", "longitude"]
+      "supported_assets": [
+        "Point"
+      ],
+      "required_columns": [
+        "ID",
+        "latitude",
+        "longitude"
+      ]
     },
     "preset_inputs": {
-      "workflow": "lst-xarray",
+      "workflow": "lst-filter",
       "stac_catalog": "https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782",
       "stac_collection": "col_f99e920a-a58e-11ef-aab0-7a33b70d8782",
       "stac_query": "{'day_night': 'DAY'}",
@@ -35,11 +41,17 @@
     "title": "Land Surface Temperature (LST) - Night",
     "description": "This workflow provides nighttime land surface temperature observations for the specified assets.",
     "constraints": {
-      "supported_assets": ["Point"],
-      "required_columns": ["ID", "latitude", "longitude"]
+      "supported_assets": [
+        "Point"
+      ],
+      "required_columns": [
+        "ID",
+        "latitude",
+        "longitude"
+      ]
     },
     "preset_inputs": {
-      "workflow": "lst-xarray",
+      "workflow": "lst-filter",
       "stac_catalog": "https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782",
       "stac_collection": "col_f99e920a-a58e-11ef-aab0-7a33b70d8782",
       "stac_query": "{'day_night': 'NIGHT'}",
@@ -67,11 +79,17 @@
     "title": "Land Surface Temperature (LST) - Day & Night",
     "description": "This workflow provides land surface temperature observations for the specified assets.",
     "constraints": {
-      "supported_assets": ["Point"],
-      "required_columns": ["ID", "latitude", "longitude"]
+      "supported_assets": [
+        "Point"
+      ],
+      "required_columns": [
+        "ID",
+        "latitude",
+        "longitude"
+      ]
     },
     "preset_inputs": {
-      "workflow": "lst-xarray",
+      "workflow": "lst-filter",
       "stac_catalog": "https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_f99e920a-a58e-11ef-aab0-7a33b70d8782",
       "stac_collection": "col_f99e920a-a58e-11ef-aab0-7a33b70d8782",
       "stac_query": "{}",
@@ -99,11 +117,16 @@
     "title": "London Land Surface Temperature (LST)",
     "description": "This workflow provides daytime land surface temperature observations for the specified assets (within London).",
     "constraints": {
-      "supported_assets": ["Point"],
-      "required_columns": ["latitude", "longitude"]
+      "supported_assets": [
+        "Point"
+      ],
+      "required_columns": [
+        "latitude",
+        "longitude"
+      ]
     },
     "preset_inputs": {
-      "workflow": "lst-xarray",
+      "workflow": "lst-filter",
       "stac_catalog": "https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789",
       "stac_collection": "col_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789",
       "stac_query": "{}",
@@ -131,7 +154,9 @@
     "title": "OS Climate Physical Risk",
     "description": "This workflow assesses the physical risks of climate change, including chronic heat and inundation, for the specified asset portfolio.",
     "constraints": {
-      "supported_assets": ["Point"],
+      "supported_assets": [
+        "Point"
+      ],
       "required_columns": [
         "ID",
         "latitude",

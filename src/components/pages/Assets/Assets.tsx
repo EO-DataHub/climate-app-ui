@@ -23,7 +23,7 @@ import { convertSimpleGeoJSONToDataForTable } from '../../../library/userAssets/
 import { Map } from '../../Map/Map'
 import { PageSubtitle } from '../../PageSubtitle'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { temporarySamplePortfolios } from '../../../library/api/fakeApiData'
+import samplePortfolios from '../../../library/api/samplePortfolios.json'
 import { toast } from 'react-toastify'
 import { UploadButtonAndDialog } from '../../UploadButtonAndDialog/UploadButtonAndDialog'
 import { uploadUserAssets } from '../../../library/api/uploadUserAssets'
@@ -280,9 +280,24 @@ export const Assets = () => {
       })
   }
 
-  const loadPortfolio = (id: string) => {
+  const loadUserAssetsFromUrl = async (url: string) => {
+    try {
+      const response = await fetch(url)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch data from ${url}`)
+      }
+      const data = await response.json()
+      setUserAssets?.(data as UserAssets)
+    } catch (error) {
+      toast.error(
+        'There was an issue accessing that portfolio. Please try again.',
+      )
+    }
+  }
+
+  const loadPortfolio = async (id: string) => {
     setIsPortfolioLoading(true)
-    const selectedSamplePortfolio = temporarySamplePortfolios.find(
+    const selectedSamplePortfolio = samplePortfolios.find(
       (portfolio) => portfolio.id === id,
     )
 
@@ -291,7 +306,14 @@ export const Assets = () => {
     if (selectedSamplePortfolio) {
       resetAssetsState()
       setUploadedFileName?.(selectedSamplePortfolio.fileName)
-      setUserAssets?.(selectedSamplePortfolio.data as UserAssets)
+
+      try {
+        await loadUserAssetsFromUrl(selectedSamplePortfolio.fileName)
+      } catch (error) {
+        toast.error(
+          'There was an issue accessing that portfolio. Please try again.',
+        )
+      }
       setIsPortfolioLoading(false)
 
       return

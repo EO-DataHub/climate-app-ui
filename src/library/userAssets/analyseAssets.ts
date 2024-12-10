@@ -31,6 +31,7 @@ const initiateAssetsRiskAnalysis = async ({
     stac_catalog: hubWorkflowPresetInputs?.stac_catalog,
     stac_collection: hubWorkflowPresetInputs?.stac_collection,
     stac_query: hubWorkflowPresetInputs?.stac_query,
+    extra_args: hubWorkflowPresetInputs?.extra_args,
   }
   return axios.post(
     `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,

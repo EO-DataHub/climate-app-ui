@@ -21,4 +21,9 @@ export const getRelativeS3PathForAssetFile = ({
 }: {
   fileName: string
   workspaceUserName: string
-}) => `${workspaceUserName}/user-assets/${fileName}`
+}) => {
+  if (fileName.startsWith('http://') || fileName.startsWith('https://')) {
+    return fileName
+  }
+  return `${workspaceUserName}/user-assets/${fileName}`
+}

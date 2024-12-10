@@ -1,16 +1,10 @@
 [
   {
-    "title": "Land Surface Temperature (LST) - Day",
-    "description": "This workflow provides daytime land surface temperature observations for the specified assets.",
+    "title": "Land Surface Temperature (LST) - UK, Day",
+    "description": "This workflow provides daytime land surface temperature observations for specified assets across the UK, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2024 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point"
-      ],
-      "required_columns": [
-        "ID",
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point"],
+      "required_columns": ["ID", "latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-filter",
@@ -28,27 +22,21 @@
       "start_date": {
         "label": "Select the start date",
         "type": "date",
-        "default": "2024-01-01"
+        "default": "2024-07-01"
       },
       "end_date": {
         "label": "Select the end date",
         "type": "date",
-        "default": "2024-01-10"
+        "default": "2024-07-31"
       }
     }
   },
   {
-    "title": "Land Surface Temperature (LST) - Night",
-    "description": "This workflow provides nighttime land surface temperature observations for the specified assets.",
+    "title": "Land Surface Temperature (LST) - UK, Night",
+    "description": "This workflow provides nighttime land surface temperature observations for specified assets across the UK, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2024 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point"
-      ],
-      "required_columns": [
-        "ID",
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point"],
+      "required_columns": ["ID", "latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-filter",
@@ -66,27 +54,21 @@
       "start_date": {
         "label": "Select the start date",
         "type": "date",
-        "default": "2024-01-01"
+        "default": "2024-07-01"
       },
       "end_date": {
         "label": "Select the end date",
         "type": "date",
-        "default": "2024-01-10"
+        "default": "2024-07-31"
       }
     }
   },
   {
-    "title": "Land Surface Temperature (LST) - Day & Night",
-    "description": "This workflow provides land surface temperature observations for the specified assets.",
+    "title": "Land Surface Temperature (LST) - UK, All",
+    "description": "This workflow provides daytime and nightime land surface temperature observations for specified assets across the UK, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR).   Data is available from 1st January 2024 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point"
-      ],
-      "required_columns": [
-        "ID",
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point"],
+      "required_columns": ["ID", "latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-filter",
@@ -104,26 +86,21 @@
       "start_date": {
         "label": "Select the start date",
         "type": "date",
-        "default": "2024-01-01"
+        "default": "2024-07-01"
       },
       "end_date": {
         "label": "Select the end date",
         "type": "date",
-        "default": "2024-01-10"
+        "default": "2024-07-31"
       }
     }
   },
   {
-    "title": "London Land Surface Temperature (LST)",
-    "description": "This workflow provides daytime land surface temperature observations for the specified assets (within London).",
+    "title": "Land Surface Temperature (LST) - London, All",
+    "description": "This worfklow provides land surface temperature observations for specified assets across London, from the downscaled 100 metre resolution data provided by the University of Leicester. Data is available from May 2013 to October 2023.",
     "constraints": {
-      "supported_assets": [
-        "Point"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-filter",
@@ -141,12 +118,12 @@
       "start_date": {
         "label": "Select the start date",
         "type": "date",
-        "default": "2023-01-01"
+        "default": "2022-05-01"
       },
       "end_date": {
         "label": "Select the end date",
         "type": "date",
-        "default": "2023-12-01"
+        "default": "2022-08-30"
       }
     }
   },
@@ -154,9 +131,7 @@
     "title": "OS Climate Physical Risk",
     "description": "This workflow assesses the physical risks of climate change, including chronic heat and inundation, for the specified asset portfolio.",
     "constraints": {
-      "supported_assets": [
-        "Point"
-      ],
+      "supported_assets": ["Point"],
       "required_columns": [
         "ID",
         "latitude",

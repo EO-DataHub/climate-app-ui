@@ -1,13 +1,11 @@
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { Button, Dialog } from '@radix-ui/themes'
-import { DateField } from '@mui/x-date-pickers/DateField'
+import { DateCalendar } from '@mui/x-date-pickers/DateCalendar'
 import { DateValidationError } from '@mui/x-date-pickers/models'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import ArrowLeft from '../../../localAssets/arrow-left.svg?react'
 import CloseIcon from '@material-design-icons/svg/filled/close.svg?react'
 import dayjs, { Dayjs } from 'dayjs'
-// import 'dayjs/locale/en-gb' // we are suppossed to import this but doing so breaks by reverting back to American date formatting. For now this hack to exclude this import is good enough temporarily for a demo.
-
 import { capitalizeFirstLetter } from '../../../library/strings/capitalizeFirstLetter'
 import { getHumanFriendlyListFromArray } from '../../../library/arrays/getHumanFriendlyListFromArray'
 import { HubWorkflowOptions } from '../../../library/api/apiTypes'
@@ -15,7 +13,6 @@ import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { ReactNode, useContext, useEffect, useState } from 'react'
 import { workflowOptions } from '../../../library/api/fakeApiData'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
-import formStyles from '../../../library/genericStyles/forms.module.scss'
 import modalStyles from './WorkflowModalContent.module.scss'
 import { HandleAnalyseAssetsProps } from './assetsTypes'
 import { getGeometriesPresentInFeatureCollection } from '../../../library/geoJson/getGeometriesPresentInFeatureClass'
@@ -26,17 +23,7 @@ type DateErrorType = DateValidationError | 'required' | null
 
 const defaultEndDate = dayjs()
 const defaultStartDate = defaultEndDate.subtract(1, 'month')
-const errorMessages: Record<string, string> = {
-  required: 'This field is required.',
-  disableFuture: 'Future dates are not allowed.',
-}
-const getDateErrorMessage = (error: DateErrorType) => {
-  if (!error) {
-    return null
-  }
 
-  return errorMessages[error] ?? 'There is an error with this field.'
-}
 const WorkflowInformation = ({
   inputContent,
   workflowOptions,
@@ -54,6 +41,7 @@ const WorkflowInformation = ({
       supported_assets: supportedGeometries,
     },
   } = workflowOptions
+
   const supportedGeometriesToUse = supportedGeometries
     .filter(Boolean)
     .map((geometry) => geometry.toLowerCase())
@@ -169,23 +157,6 @@ export const WorkflowModalContent = ({
     selectedWorkflowOptions?.user_inputs.start_date?.default,
   ])
 
-  const hackToEnforceMuiRequiredDateValues = ({
-    newValue,
-    setValue,
-    setError,
-  }: {
-    newValue: Dayjs | null
-    setValue: (newValue: Dayjs | null) => void
-    setError: (newError: DateErrorType) => void
-  }) => {
-    if (!newValue) {
-      setTimeout(() => {
-        setError('required')
-      }, 500) // timeout becasue even when no error, MUI onError gets called with a null value. We want to ensure this is the one that gets set and sticks
-    }
-    setValue(newValue)
-  }
-
   const handleSelectWorkflow = (workflowOptions: HubWorkflowOptions) => {
     setSelectedWorkflowOptions(workflowOptions)
     initializeDateRangeValues()
@@ -232,58 +203,31 @@ export const WorkflowModalContent = ({
   )
   const dateRangeInputs = (
     <div className={modalStyles.dateInputs}>
-      <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
-        <label className={formStyles.formLabel}>
-          Start Date
-          <DateField
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <div>
+          <h3>Start Date</h3>
+          <DateCalendar
             value={startDate}
             onChange={(newValue) => {
-              hackToEnforceMuiRequiredDateValues({
-                newValue,
-                setValue: setStartDate,
-                setError: setStartDateError,
-              })
-            }}
-            onError={setStartDateError}
-            slotProps={{
-              textField: {
-                helperText: startDateError
-                  ? getDateErrorMessage(startDateError)
-                  : ' ', // the space reserves helper text space so that we can keep alignment when one field has error text while the other doesnt
-                fullWidth: true,
-                error: !!startDateError,
-              },
+              if (newValue.isAfter(endDate)) {
+                setEndDate(newValue)
+              }
+              setStartDate(newValue)
             }}
             disableFuture
           />
-        </label>
-
-        <label className={formStyles.formLabel}>
-          End Date
-          <DateField
+        </div>
+        <div>
+          <h3>End Date</h3>
+          <DateCalendar
             value={endDate}
+            minDate={startDate ?? undefined}
             onChange={(newValue) => {
-              hackToEnforceMuiRequiredDateValues({
-                newValue,
-                setValue: setEndDate,
-                setError: setEndDateError,
-              })
-            }}
-            onError={setEndDateError}
-            size="small"
-            slotProps={{
-              textField: {
-                helperText: endDateError
-                  ? getDateErrorMessage(endDateError)
-                  : ' ', // the space reserves helper text space so that we can keep alignment when one field has error text while the other doesnt
-                fullWidth: true,
-                error: !!endDateError,
-              },
+              setEndDate(newValue)
             }}
             disableFuture
-            required
           />
-        </label>
+        </div>
       </LocalizationProvider>
     </div>
   )

@@ -2,7 +2,7 @@ import { Select, Spinner } from '@radix-ui/themes'
 import { useContext } from 'react'
 
 import { AuthenticationContext } from '../../context/AuthenticationContext'
-import { temporarySamplePortfolios } from '../../library/api/fakeApiData'
+import samplePortfolios from '../../library/api/samplePortfolios.json'
 import { PortfoliosContext } from '../../context/PortfoliosContext'
 
 export const AssetsSelect = ({
@@ -42,7 +42,7 @@ export const AssetsSelect = ({
 
         <Select.Group>
           <Select.Label>Sample Portfolios</Select.Label>
-          {temporarySamplePortfolios.map(({ id, name }) => (
+          {samplePortfolios.map(({ id, name }) => (
             <Select.Item value={id} key={id}>
               {name}
             </Select.Item>

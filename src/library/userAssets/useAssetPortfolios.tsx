@@ -16,7 +16,7 @@ import { areBoundsValid } from '../maplibre/isGeometryValid'
 import { getIsFeaturePoint } from '../geoJson/getIsFeaturePoint'
 import { LoadingContext } from '../../context/LoadingContext'
 import { MapRef } from '../../components/Map/useMap'
-import { temporarySamplePortfolios } from '../api/fakeApiData'
+
 import { UserAssets } from './userAssetTypes'
 import assetsPopupStyles from './AssetsPopup.module.scss'
 import { AuthenticationContext } from '../../context/AuthenticationContext'
@@ -382,17 +382,6 @@ export const useAssetPortfolios = ({
       }
 
       setIsPortfolioLoading(true)
-      const selectedSamplePortfolio = temporarySamplePortfolios.find(
-        (portfolio) => portfolio.id === id,
-      )
-
-      if (selectedSamplePortfolio) {
-        setIsPortfolioLoading(false)
-
-        updateUserAssetsInMap(selectedSamplePortfolio?.data as UserAssets)
-
-        return
-      }
 
       if (!authenticatedAxios || !workspaceUserName) {
         toast.error(

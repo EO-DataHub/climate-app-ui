@@ -7,8 +7,9 @@ interface DateInputOptions {
 export interface HubWorkflowPresetInputs {
   workflow: string
   stac_collection: string
-  stac_query: string
+  stac_query?: string
   stac_catalog: string
+  extra_args?: string
 }
 
 export interface HubWorkflowOptions {

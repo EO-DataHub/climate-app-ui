@@ -13,7 +13,7 @@ import { getHumanFriendlyListFromArray } from '../../../library/arrays/getHumanF
 import { HubWorkflowOptions } from '../../../library/api/apiTypes'
 import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
 import { ReactNode, useContext, useEffect, useState } from 'react'
-import { workflowOptions } from '../../../library/api/fakeApiData'
+import workflowOptions from '../../../library/api/workflowOptions.json'
 import containerStyles from '../../../library/genericStyles/containers.module.scss'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import modalStyles from './WorkflowModalContent.module.scss'

@@ -42,7 +42,7 @@ export const PortfoliosContextProvider = ({
     setIsFileInfoLoading(true)
     getUploadedFileList({ authenticatedAxios, workspaceUserName })
       .then((response) => {
-        setFileInfo(response)
+        setFileInfo(response || [])
       })
       .catch(() => {
         toast.error(

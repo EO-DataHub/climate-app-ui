@@ -30,7 +30,7 @@ export const AssetsSelect = ({
                   </>
                 ) : null}
               </Select.Label>
-              {fileInfo.map(({ name }) => (
+              {fileInfo?.map(({ name }) => (
                 <Select.Item value={name} key={name}>
                   {name}
                 </Select.Item>

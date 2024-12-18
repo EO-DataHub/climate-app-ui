@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 
 export const getAuthenticatedAxios = ({
   token,
@@ -7,51 +7,45 @@ export const getAuthenticatedAxios = ({
   token: string | undefined
   getUpdatedToken: () => Promise<string | undefined>
 }) => {
-  const authenticatedAxios = axios.create()
-
-  let tokenExpiredRetries = 0
-
-  if (!token)
+  if (!token) {
     throw new Error(
       'Token is required to create an authenticated axios instance',
     )
+  }
 
-  let tokenToUse = token
-
-  authenticatedAxios.interceptors.request.use(
-    (config) => {
-      if (tokenToUse) {
-        tokenExpiredRetries = 0
-        config.headers.Authorization = `Bearer ${tokenToUse}`
-      }
-      return config
+  const authenticatedAxios = axios.create({
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
-    (error) => Promise.reject(error),
-  )
+  })
 
-  authenticatedAxios.interceptors.response.use(
-    (response) => {
-      return response
-    },
-    async function (error) {
-      const originalRequest = error.config
-      const errorStatus = error.response?.status
-      if (
-        (errorStatus === 403 || errorStatus === 401) &&
-        tokenExpiredRetries < 3
-      ) {
-        tokenExpiredRetries = tokenExpiredRetries + 1
+  const createErrorInterceptor = () => {
+    let retries = 0
+
+    return async (error: AxiosError) => {
+      const { config } = error
+      const status = error.response?.status
+
+      if ((status === 403 || status === 401) && retries < 3) {
+        retries = retries + 1
+
         const newAccessToken = await getUpdatedToken()
 
-        if (newAccessToken) {
-          tokenToUse = newAccessToken
-        }
-
-        return authenticatedAxios(originalRequest)
+        return authenticatedAxios({
+          ...config,
+          headers: {
+            Authorization: `Bearer ${newAccessToken}`,
+          },
+        })
       }
 
       return Promise.reject(error)
-    },
+    }
+  }
+
+  authenticatedAxios.interceptors.response.use(
+    (response) => response,
+    createErrorInterceptor(),
   )
 
   return authenticatedAxios

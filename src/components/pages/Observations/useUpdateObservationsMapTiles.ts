@@ -31,7 +31,7 @@ export const useUpdateObservationsMapTiles = ({
       const observationsSource = mapRef.current.getSource(
         MapSourceIds.OBSERVATIONS,
       ) as RasterTileSource
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
+      const titilerUrl = `https://test.eodatahub.org.uk/titiler/core/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
       if (!observationsSource) {
         mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
           type: 'raster',

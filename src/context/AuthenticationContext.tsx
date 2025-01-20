@@ -59,7 +59,7 @@ export const AuthenticationContextProvider = ({
   >()
   const [userInfo, setUserInfo] = useState<KeycloakUserInfo>({})
   const [token, setToken] = useState<string>() // we track this to trigger axios reinitialization
-  const workspaceUserName = userInfo?.preferred_username?.replace('-', '_')
+  const workspaceUserName = userInfo?.preferred_username
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()

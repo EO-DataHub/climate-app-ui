@@ -45,7 +45,7 @@ interface HazardFormData {
 }
 
 // There must be a type defined for this in RJSF, but I can't find it. I hate TypeScript more than I hate JavaScript.
-interface SelectItem {
+interface RSJFSelectItem {
   title: string
   const: string
 }
@@ -154,12 +154,6 @@ export const Hazards = () => {
       setIsMapLoading(true)
 
       void mapRef.current.once('idle', () => setIsMapLoading(false))
-      void mapRef.current.once('error', () => {
-        setIsMapLoading(false)
-        if (mapRef.current?.getLayer(MapSourceIds.HAZARDS)) {
-          mapRef.current?.removeLayer(MapSourceIds.HAZARDS)
-        }
-      })
 
       const hazardSource = mapRef.current.getSource(
         MapSourceIds.HAZARDS,
@@ -263,13 +257,14 @@ export const Hazards = () => {
           formData={formData}
           onChange={(e: IChangeEvent, idx) => {
             if (idx === 'root_indicator') {
-              // Remove the magic and treat the data as a Plain Old Object so we don't get the linter moaning about "oneOf".
-              const poo: GenericObjectType = Object.assign(
+              // Remove the magic and treat the data as a Plain Old Javascript Object
+              // so we don't get the linter moaning about "oneOf".
+              const pojo: GenericObjectType = Object.assign(
                 {},
                 e.schema.properties,
               )
-              const res: SelectItem = poo.indicator.oneOf.find(
-                (item: SelectItem) => item.const === e.formData?.indicator,
+              const res: RSJFSelectItem = pojo.indicator.oneOf.find(
+                (item: RSJFSelectItem) => item.const === e.formData?.indicator,
               )
               setHazardIndicatorLabel(res ? res.title : ' ')
             } else if (idx === 'root_scenario') {

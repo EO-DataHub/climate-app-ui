@@ -306,24 +306,24 @@ export const Hazards = () => {
         </Tabs.Root>
       </div>
 
-        <div className={sidebarStyles.contentBottomButtonRow}>
-          <div className={sidebarStyles.selectAssetsWrapper}>
-            <Flex gap="1">
-              <label>View Assets on Map</label>{' '}
-              {isPortfolioLoading ? <Spinner /> : null}
-            </Flex>
+      <div className={sidebarStyles.contentBottomButtonRow}>
+        <div className={sidebarStyles.selectAssetsWrapper}>
+          <Flex gap="1">
+            <label>View Assets on Map</label>{' '}
+            {isPortfolioLoading ? <Spinner /> : null}
+          </Flex>
 
-            <InputLabelContainer>
-              <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
-            </InputLabelContainer>
-          </div>
-          <div className={sidebarStyles.selectAssetsButtonWrapper}>
-            <Button onClick={handleSelectAssetsClick}>
-              Select Assets for Analysis
-            </Button>
-          </div>
+          <InputLabelContainer>
+            <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
+          </InputLabelContainer>
+        </div>
+        <div className={sidebarStyles.selectAssetsButtonWrapper}>
+          <Button onClick={handleSelectAssetsClick}>
+            Select Assets for Analysis
+          </Button>
         </div>
       </div>
+    </div>
   )
 
   const legend = (

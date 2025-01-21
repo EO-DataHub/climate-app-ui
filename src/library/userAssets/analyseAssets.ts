@@ -1,29 +1,52 @@
-import { AxiosInstance } from 'axios'
+import { AxiosError, AxiosInstance } from 'axios'
 
-import { KeycloakUserInfo } from '../../context/AuthenticationContext'
-import { AnalysedUserAssets, UserAssets } from './userAssetTypes'
-import {
-  HubWorkflowNicknamesType,
-  workflowHubNames,
-} from '../../configuration/constants'
+import { AnalysedUserAssets } from './userAssetTypes'
+import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
+import { getResultsUrl } from '../api/getUrls'
+import { HubWorkflowPresetInputs } from '../api/apiTypes'
+
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 const initiateAssetsRiskAnalysis = async ({
+  authToken,
   axios,
-  currentWorkflowNickname,
-  userAssets,
   workspaceUserName,
+  endDate,
+  fileName,
+  hubWorkflowPresetInputs,
+  areUserAssetsASamplePortfolio,
+  startDate,
 }: {
+  authToken: string
   axios: AxiosInstance
-  currentWorkflowNickname: HubWorkflowNicknamesType
-  userAssets: UserAssets
   workspaceUserName: string
+  endDate?: string
+  fileName: string
+  hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
+  areUserAssetsASamplePortfolio: boolean
+  startDate?: string
 }) => {
+  const inputsFromConfigurationsToUse = {
+    stac_catalog: hubWorkflowPresetInputs?.stac_catalog,
+    stac_collection: hubWorkflowPresetInputs?.stac_collection,
+    stac_query: hubWorkflowPresetInputs?.stac_query,
+    extra_args: hubWorkflowPresetInputs?.extra_args,
+  }
   return axios.post(
-    `https://test.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/processes/${workflowHubNames[currentWorkflowNickname]}/execution`,
+    `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
     {
       inputs: {
-        workspace: workspaceUserName,
-        json_string: JSON.stringify(userAssets),
+        ...inputsFromConfigurationsToUse,
+        assets: getRelativeS3PathForAssetFile({
+          workspaceUserName: areUserAssetsASamplePortfolio
+            ? HUB_APP_WORKSPACE_NAME
+            : workspaceUserName,
+          fileName,
+        }),
+        end_date: endDate,
+        start_date: startDate,
+        token: authToken,
       },
     },
     {
@@ -51,7 +74,7 @@ const getData = async ({
   jobId: string
   workspaceUserName: string
 }) => {
-  const resultsUrl = `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/eodhp-test-workspaces1/processing-results/cat_${jobId}.json`
+  const resultsUrl = getResultsUrl({ jobId, workspaceUserName })
   return axios.get(resultsUrl).then((response) => {
     return response.data.data as AnalysedUserAssets
   })
@@ -67,7 +90,10 @@ async function getAssetsRiskResults({
   workspaceUserName: string
 }) {
   const pollForAnalysisResults = async (
-    resolve: (data: AnalysedUserAssets) => void,
+    resolve: (result: {
+      analysedData: AnalysedUserAssets
+      jobId: string
+    }) => void,
     reject: (error: unknown) => void,
   ) => {
     try {
@@ -81,13 +107,20 @@ async function getAssetsRiskResults({
           jobId,
           workspaceUserName,
         })
-        resolve(data)
+
+        resolve({ analysedData: data, jobId })
       } else {
         setTimeout(() => {
           void pollForAnalysisResults(resolve, reject)
         }, 10000)
       }
     } catch (error) {
+      if (
+        error instanceof AxiosError &&
+        error.response?.data.title === 'NoSuchJob'
+      ) {
+        return // analysis was  deleted/cancelled
+      }
       reject(error)
     }
   }
@@ -96,18 +129,24 @@ async function getAssetsRiskResults({
 }
 
 export const analyseAssets = ({
+  authToken,
   axios,
-  currentWorkflowNickname,
-  userAssets,
-  userInfo,
+  workspaceUserName,
+  endDate,
+  fileName,
+  hubWorkflowPresetInputs,
+  areUserAssetsASamplePortfolio,
+  startDate,
 }: {
+  authToken: string
   axios?: AxiosInstance
-  currentWorkflowNickname: HubWorkflowNicknamesType
-  userAssets: UserAssets
-  userInfo: KeycloakUserInfo
+  workspaceUserName: string
+  endDate?: string
+  fileName: string
+  hubWorkflowPresetInputs: HubWorkflowPresetInputs | undefined
+  areUserAssetsASamplePortfolio: boolean
+  startDate?: string
 }) => {
-  const workspaceUserName = userInfo.preferred_username?.replace('-', '_')
-
   if (!axios) {
     throw new Error('axios is required')
   }
@@ -116,10 +155,14 @@ export const analyseAssets = ({
   }
 
   return initiateAssetsRiskAnalysis({
+    authToken,
     axios,
-    currentWorkflowNickname,
-    userAssets,
     workspaceUserName,
+    endDate,
+    fileName,
+    hubWorkflowPresetInputs,
+    areUserAssetsASamplePortfolio,
+    startDate,
   }).then((response) => {
     const statusPollingUrl = response.data.links.find(
       (link: { title: string }) => link.title === 'Status location',

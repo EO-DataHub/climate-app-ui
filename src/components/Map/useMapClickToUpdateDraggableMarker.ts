@@ -1,17 +1,30 @@
 import { LngLat, MapMouseEvent, Marker } from 'maplibre-gl'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, Dispatch, SetStateAction } from 'react'
 import { MapRef } from './useMap'
 
 export const useMapClickToUpdateDraggableMarker = ({
   isMapLoaded,
   mapRef,
+  markerCoordinates,
+  setMarkerCoordinates,
 }: {
   isMapLoaded: boolean
   mapRef: MapRef
+  markerCoordinates: LngLat | undefined
+  setMarkerCoordinates?: Dispatch<SetStateAction<LngLat | undefined>>
 }) => {
-  const [coordinates, setCoordinates] = useState<LngLat | undefined>()
-  const isMarkerOnMap = useRef(false)
   const marker = useRef(new Marker({ draggable: true, color: '#3e63dd' }))
+
+  useEffect(
+    function addMarkerToMapIfPersistedCoordinates() {
+      if (!isMapLoaded || !mapRef.current || !markerCoordinates) return
+      if (!marker.current.getLngLat()) {
+        marker.current.setLngLat(markerCoordinates)
+        marker.current.addTo(mapRef.current)
+      }
+    },
+    [isMapLoaded, mapRef, markerCoordinates],
+  )
 
   useEffect(
     function initializeMarkerAndClicking() {
@@ -19,16 +32,13 @@ export const useMapClickToUpdateDraggableMarker = ({
 
       const handleMapClick = (event: MapMouseEvent) => {
         const { lngLat } = event
-        setCoordinates(lngLat)
+        setMarkerCoordinates?.(lngLat)
         marker.current.setLngLat(lngLat)
-        if (!isMarkerOnMap.current) {
-          marker.current.addTo(mapRef.current!)
-          isMarkerOnMap.current = true
-        }
+        marker.current.addTo(mapRef.current!)
       }
 
       const handleMarkerDragEnd = () => {
-        setCoordinates(marker.current.getLngLat())
+        setMarkerCoordinates?.(marker.current.getLngLat())
       }
 
       mapRef.current.on('click', handleMapClick)
@@ -40,14 +50,8 @@ export const useMapClickToUpdateDraggableMarker = ({
       return () => {
         currentMapRef?.off('click', handleMapClick)
         currentMarker.off('dragend', handleMarkerDragEnd)
-        isMarkerOnMap.current = false
       }
     },
-    [isMapLoaded, mapRef],
+    [isMapLoaded, mapRef, setMarkerCoordinates],
   )
-
-  return {
-    markerCoordinates: coordinates,
-    isMarkerOnMap: isMarkerOnMap.current,
-  }
 }

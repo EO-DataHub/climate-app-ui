@@ -7,17 +7,6 @@ import { getIsFileCsv, getIsFileGeoJson } from '../fileTypes'
 import { getObjectKeyNameFromCaseInsensitiveKeyName } from '../objects/getObjectKeyNameFromCaseInsensitiveKeyName'
 import { UserAssets } from './userAssetTypes'
 
-const doesGeoJsonContainRequiredProperties = (
-  geoJson: FeatureCollection<Point>,
-) =>
-  geoJson.features.every((feature) => {
-    return (
-      !!feature.properties?.id &&
-      typeof feature.geometry?.coordinates?.[0] === 'number' &&
-      typeof feature.geometry?.coordinates?.[1] === 'number'
-    )
-  })
-
 const getGeoJsonWithPropertyIdStoredOnLowercaseIdProperty = (
   geoJson: FeatureCollection<Point>,
 ) => {
@@ -72,16 +61,6 @@ export const parseUploadedAssetsIntoGeoJson = (uploadedFile: File) => {
               parsedFileContents,
             )
 
-          if (
-            !doesGeoJsonContainRequiredProperties(reformattedParsedFileContents)
-          ) {
-            toast.error(
-              'GeoJSON file must contain an "id" field within each feature\'s properties object',
-            )
-            reject(
-              "GeoJSON file must contain an 'id' field within each feature's properties object",
-            )
-          }
           resolve(reformattedParsedFileContents as UserAssets)
         } catch (error) {
           reject(error)

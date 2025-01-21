@@ -1,8 +1,23 @@
 # Asset Vulnerability Calculator
 
-Uses Nodejs 21.7.1, and Yarn.
+## Getting started
 
-Ensure you have a `.env` file in the project's root. Copy `.env.example` and modify the environment variables
-accordingly.
+No back end set up is needed currently as the back end is served remotely
 
-As usual run `yarn install` followed by `yarn run`
+### Environment file
+
+- Look at the .env.sample file to see what environment variables you will need
+- contact another dev to get a copy of environment values and paste them into a new file called `.env` (located at the root of this repo)
+
+### Install Dependencies
+
+- run `yarn install`
+
+### Run the Development Server
+
+- run `yarn dev`
+
+### Build files for production
+
+- run `yarn build`
+- to see built files locally run `yarn preview` after the build commend.

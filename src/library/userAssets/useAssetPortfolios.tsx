@@ -2,7 +2,7 @@ import { Badge, DataList, Link, Separator } from '@radix-ui/themes'
 // @ts-expect-error  turf has an issue delaring its types
 import { bbox as turfBbox } from '@turf/turf'
 import { MapLayerMouseEvent, Popup } from 'maplibre-gl'
-import { useCallback, useContext } from 'react'
+import { useCallback, useContext, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import {
@@ -10,17 +10,18 @@ import {
   MapLayerIds,
   MAPLIBRE_FIT_BOUNDS_MAX_ZOOM,
   MapSourceIds,
-  UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT,
 } from '../../configuration/constants'
 
 import { areBoundsValid } from '../maplibre/isGeometryValid'
-import { AssetVulnerabilityBadge } from '../../components/AssetVulnerabilityBadge/AssetVulnerabilityBadge'
+import { getIsFeaturePoint } from '../geoJson/getIsFeaturePoint'
 import { LoadingContext } from '../../context/LoadingContext'
 import { MapRef } from '../../components/Map/useMap'
+
 import { UserAssets } from './userAssetTypes'
-import { UserAssetsContext } from '../../context/UserAssetsContext'
 import assetsPopupStyles from './AssetsPopup.module.scss'
-import { temporarySamplePortfolios } from '../api/fakeApiData'
+import { AuthenticationContext } from '../../context/AuthenticationContext'
+import { toast } from 'react-toastify'
+import { getUploadedFileUrl } from '../api/getUrls'
 
 export const useAssetPortfolios = ({
   isMapLoaded,
@@ -37,8 +38,12 @@ export const useAssetPortfolios = ({
   onAssetMarkerClick?: (event: MapLayerMouseEvent) => void
   zoomToUserAssets?: boolean
 }) => {
+  const [isPortfolioLoading, setIsPortfolioLoading] = useState(false)
+
   const { setIsMapLoading } = useContext(LoadingContext)
-  const { userAssets } = useContext(UserAssetsContext)
+  const { authenticatedAxios, workspaceUserName } = useContext(
+    AuthenticationContext,
+  )
 
   const removeUserAssetsFromMap = useCallback(() => {
     if (!mapRef?.current || !setIsMapLoading) return
@@ -50,9 +55,10 @@ export const useAssetPortfolios = ({
     })
 
     mapRef.current.removeSource(MapSourceIds.USER_ASSETS)
-    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_CLUSTERED)
-    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_UNCLUSTERED)
-    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_CLUSTER_COUNT)
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_POINTS)
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_LINES)
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_POLYGONS_FILL)
+    mapRef.current.removeLayer(MapLayerIds.USER_ASSETS_POLYGONS_STROKE)
   }, [setIsMapLoading, mapRef])
 
   const updateUserAssetsInMap = useCallback(
@@ -72,52 +78,36 @@ export const useAssetPortfolios = ({
       const userAssetsSource = mapRef.current.getSource(
         MapSourceIds.USER_ASSETS,
       ) as maplibregl.GeoJSONSource
-      const userAssetsClustersLayer = mapRef.current.getLayer(
-        MapLayerIds.USER_ASSETS_CLUSTERED,
+      const userAssetsPointsLayer = mapRef.current.getLayer(
+        MapLayerIds.USER_ASSETS_POINTS,
       )
-      const userAssetsUnclusteredLayer = mapRef.current.getLayer(
-        MapLayerIds.USER_ASSETS_UNCLUSTERED,
+      const userAssetsLinesLayer = mapRef.current.getLayer(
+        MapLayerIds.USER_ASSETS_LINES,
       )
-      const userAssetsCountLayer = mapRef.current.getLayer(
-        MapLayerIds.USER_ASSETS_CLUSTER_COUNT,
+      const userAssetsPolygonsFillLayer = mapRef.current.getLayer(
+        MapLayerIds.USER_ASSETS_POLYGONS_FILL,
       )
-      const handleMarkerClusterClick = (event: MapLayerMouseEvent) => {
-        const feature = event.features?.[0]
+      const userAssetsPolygonsStrokeLayer = mapRef.current.getLayer(
+        MapLayerIds.USER_ASSETS_POLYGONS_STROKE,
+      )
 
-        if (!feature) return
-
-        const clusterId = feature.properties.cluster_id
-
-        userAssetsSource ??
-          (
-            mapRef.current!.getSource(
-              MapSourceIds.USER_ASSETS,
-            ) as maplibregl.GeoJSONSource
-          )
-            .getClusterExpansionZoom(clusterId)
-            .then((zoom: number) => {
-              mapRef.current!.easeTo({
-                // @ts-expect-error - maplibre-gl types are contradictory with docs
-                center: feature.geometry.coordinates,
-                zoom: zoom,
-              })
-            })
-            .catch(() => {
-              mapRef.current!.easeTo({
-                // @ts-expect-error - maplibre-gl types are contradictory with docs
-                center: feature.geometry.coordinates,
-                zoom: mapRef.current!.getZoom() + 2,
-              })
-            })
-      }
       const handleMarkerClick = (event: MapLayerMouseEvent) => {
         if (!mapRef.current) return
+
+        const clickedFeature = event.features?.[0]
+        if (!clickedFeature) return
+        const isClickedFeatureAPoint = getIsFeaturePoint(clickedFeature)
         // @ts-expect-error - maplibre-gl types are contradictory with docs
-        const coordinates = event.features?.[0].geometry.coordinates.slice()
-        const assetVulnerability = event.features?.[0].properties.vulnerability
-        const assetType = event.features?.[0].properties.assetType
-        const assetCategory = event.features?.[0].properties.assetCategory
-        const itemId = event.features?.[0].properties.id
+        const coordinates = clickedFeature?.geometry.coordinates.slice()
+        const itemId = clickedFeature?.properties.id
+
+        const additionalPropertiesToShow = { ...clickedFeature?.properties }
+        delete additionalPropertiesToShow.id
+        delete additionalPropertiesToShow['']
+
+        const additionalPropertiesToShowEntries = Object.entries(
+          additionalPropertiesToShow,
+        )
 
         const adjustedCoordinates = [...coordinates]
         // Ensure popup appears over correct world 'copy'
@@ -130,53 +120,43 @@ export const useAssetPortfolios = ({
           <div className={assetsPopupStyles.assetsPopupContent}>
             <DataList.Root
               orientation={{ initial: 'vertical', sm: 'horizontal' }}
+              className={assetsPopupStyles.assetPopupDatalistRoot}
             >
-              <DataList.Item>
-                <DataList.Label>Asset Vulnerability</DataList.Label>
-                <DataList.Value>
-                  <AssetVulnerabilityBadge vulnerability={assetVulnerability} />
-                </DataList.Value>
-              </DataList.Item>
               <DataList.Item>
                 <DataList.Label>ID</DataList.Label>
                 <DataList.Value>{itemId}</DataList.Value>
               </DataList.Item>
-              <DataList.Item>
-                <DataList.Label>Asset Type</DataList.Label>
-                <DataList.Value>
-                  {assetType ? (
-                    assetType
-                  ) : (
-                    <Badge variant="soft" color="gray">
-                      Data Unavailable
-                    </Badge>
-                  )}
-                </DataList.Value>
-              </DataList.Item>
-              <DataList.Item>
-                <DataList.Label>Asset Category</DataList.Label>
-                <DataList.Value>
-                  {assetCategory ? (
-                    assetCategory
-                  ) : (
-                    <Badge variant="soft" color="gray">
-                      Data Unavailable
-                    </Badge>
-                  )}
-                </DataList.Value>
-              </DataList.Item>
-              <DataList.Item>
-                <DataList.Label>Latitude</DataList.Label>
-                <DataList.Value>
-                  {adjustedCoordinates[1].toFixed(4)}°
-                </DataList.Value>
-              </DataList.Item>
-              <DataList.Item>
-                <DataList.Label>Longitude</DataList.Label>
-                <DataList.Value>
-                  {adjustedCoordinates[0].toFixed(4)}°
-                </DataList.Value>
-              </DataList.Item>
+
+              {isClickedFeatureAPoint ? (
+                <DataList.Item>
+                  <DataList.Label>Latitude</DataList.Label>
+                  <DataList.Value>
+                    {adjustedCoordinates[1]?.toFixed(4)}°
+                  </DataList.Value>
+                </DataList.Item>
+              ) : null}
+              {isClickedFeatureAPoint ? (
+                <DataList.Item>
+                  <DataList.Label>Longitude</DataList.Label>
+                  <DataList.Value>
+                    {adjustedCoordinates[0]?.toFixed(4)}°
+                  </DataList.Value>
+                </DataList.Item>
+              ) : null}
+              {additionalPropertiesToShowEntries.map(([key, value]) => (
+                <DataList.Item key={key}>
+                  <DataList.Label>{key}</DataList.Label>
+                  <DataList.Value>
+                    {value ? (
+                      value
+                    ) : (
+                      <Badge variant="soft" color="gray">
+                        Data Unavailable
+                      </Badge>
+                    )}
+                  </DataList.Value>
+                </DataList.Item>
+              ))}
             </DataList.Root>
 
             {onHighlightInTableClick ? (
@@ -202,47 +182,29 @@ export const useAssetPortfolios = ({
         ReactDOM.createRoot(popupContentHack).render(popupContent)
         new Popup()
           .setDOMContent(popupContentHack)
-          .setLngLat(coordinates)
+          .setLngLat(event.lngLat)
           .addTo(mapRef.current)
           .on('close', () => {
             onMapMarkerPopupClose?.()
           })
       }
+
+      const markerClickHandlerToUse = onAssetMarkerClick ?? handleMarkerClick
+
       const handleMarkerMouseEnter = () => {
         mapRef.current!.getCanvas().style.cursor = 'pointer'
       }
       const handleMarkerMouseLeave = () => {
         mapRef.current!.getCanvas().style.cursor = ''
       }
-      const largeClusterColor = cssStyles.getPropertyValue(
-        '--large-marker-cluster-color',
-      )
-      const mediumClusterColor = cssStyles.getPropertyValue(
-        '--medium-marker-cluster-color',
-      )
-      const smallClusterColor = cssStyles.getPropertyValue(
-        '--small-marker-cluster-color',
-      )
       const unclusteredColor = cssStyles.getPropertyValue(
         '--unclustered-marker-color',
       )
       const markerStrokeColor = cssStyles.getPropertyValue(
         '--marker-stroke-color',
       )
-
       const markerStrokeColorSelected = cssStyles.getPropertyValue(
         '--marker-stroke-color-selected',
-      )
-
-      const lowAssetRiskColor = cssStyles.getPropertyValue(
-        '--low-asset-risk-color',
-      )
-
-      const mediumAssetRiskColor = cssStyles.getPropertyValue(
-        '--medium-asset-risk-color',
-      )
-      const highAssetRiskColor = cssStyles.getPropertyValue(
-        '--high-asset-risk-color',
       )
 
       const areUserAssetBoundsValid = areBoundsValid(userAssetBounds)
@@ -265,74 +227,16 @@ export const useAssetPortfolios = ({
         mapRef.current.addSource(MapSourceIds.USER_ASSETS, {
           type: 'geojson',
           data: userAssets,
-          cluster: true,
-          clusterMaxZoom: 14,
-          clusterRadius: 50,
           promoteId: 'id', // necessary to use for table selection styling via setFeatureState
         })
       }
 
-      if (!userAssetsClustersLayer) {
+      if (!userAssetsPointsLayer) {
         mapRef.current.addLayer({
-          id: MapLayerIds.USER_ASSETS_CLUSTERED,
+          id: MapLayerIds.USER_ASSETS_POINTS,
           type: 'circle',
           source: MapSourceIds.USER_ASSETS,
-          paint: {
-            'circle-color': [
-              'step',
-              ['get', 'point_count'],
-              smallClusterColor,
-              100,
-              mediumClusterColor,
-              750,
-              largeClusterColor,
-            ],
-            'circle-radius': [
-              'step',
-              ['get', 'point_count'],
-              30,
-              100,
-              40,
-              750,
-              50,
-            ],
-            'circle-stroke-width': 2,
-            'circle-stroke-color': markerStrokeColor,
-          },
-          filter: ['has', 'point_count'],
-        })
-        mapRef.current.on(
-          'click',
-          MapLayerIds.USER_ASSETS_CLUSTERED,
-          handleMarkerClusterClick,
-        )
-      }
-      if (!userAssetsCountLayer) {
-        mapRef.current.addLayer({
-          id: MapLayerIds.USER_ASSETS_CLUSTER_COUNT,
-          type: 'symbol',
-          source: MapSourceIds.USER_ASSETS,
-          filter: ['has', 'point_count'],
-          layout: {
-            'text-field': ['get', 'point_count_abbreviated'],
-            'text-font': ['Noto Sans Medium'],
-            'text-size': 12,
-          },
-          paint: {
-            'text-color': markerStrokeColor,
-            'text-halo-color': markerStrokeColor,
-            'text-halo-width': 0.3, // to achieve 'bold'
-            'text-halo-blur': 0,
-          },
-        })
-      }
-
-      if (!userAssetsUnclusteredLayer) {
-        mapRef.current.addLayer({
-          id: MapLayerIds.USER_ASSETS_UNCLUSTERED,
-          type: 'circle',
-          source: MapSourceIds.USER_ASSETS,
-          filter: ['!', ['has', 'point_count']],
+          filter: ['==', '$type', 'Point'],
           paint: {
             'circle-radius': [
               'case',
@@ -347,36 +251,116 @@ export const useAssetPortfolios = ({
               markerStrokeColorSelected,
               markerStrokeColor,
             ],
-            'circle-color': [
-              'match',
-              ['get', 'vulnerability'],
-              'High',
-              highAssetRiskColor,
-              'Medium',
-              mediumAssetRiskColor,
-              'Low',
-              lowAssetRiskColor,
-              unclusteredColor,
-            ],
+            'circle-color': unclusteredColor,
           },
         })
 
-        const markerClickHandlerToUse = onAssetMarkerClick ?? handleMarkerClick
         mapRef.current.on(
           'click',
-          MapLayerIds.USER_ASSETS_UNCLUSTERED,
+          MapLayerIds.USER_ASSETS_POINTS,
           markerClickHandlerToUse,
         )
         mapRef.current.on(
           'mouseenter',
-          MapLayerIds.USER_ASSETS_UNCLUSTERED,
+          MapLayerIds.USER_ASSETS_POINTS,
           handleMarkerMouseEnter,
         )
         mapRef.current.on(
           'mouseleave',
-          MapLayerIds.USER_ASSETS_UNCLUSTERED,
+          MapLayerIds.USER_ASSETS_POINTS,
           handleMarkerMouseLeave,
         )
+      }
+
+      if (!userAssetsPolygonsFillLayer) {
+        mapRef.current.addLayer({
+          id: MapLayerIds.USER_ASSETS_POLYGONS_FILL,
+          type: 'fill',
+          source: MapSourceIds.USER_ASSETS,
+          paint: {
+            'fill-color': unclusteredColor,
+            'fill-opacity': 0.75,
+          },
+          filter: ['==', '$type', 'Polygon'],
+        })
+
+        mapRef.current.on(
+          'click',
+          MapLayerIds.USER_ASSETS_POLYGONS_FILL,
+          markerClickHandlerToUse,
+        )
+        mapRef.current.on(
+          'mouseenter',
+          MapLayerIds.USER_ASSETS_POLYGONS_FILL,
+          handleMarkerMouseEnter,
+        )
+        mapRef.current.on(
+          'mouseleave',
+          MapLayerIds.USER_ASSETS_POLYGONS_FILL,
+          handleMarkerMouseLeave,
+        )
+      }
+
+      if (!userAssetsPolygonsStrokeLayer) {
+        mapRef.current.addLayer({
+          id: MapLayerIds.USER_ASSETS_POLYGONS_STROKE,
+          type: 'line',
+          source: MapSourceIds.USER_ASSETS,
+          paint: {
+            'line-color': [
+              'case',
+              ['==', ['feature-state', 'isSelected'], true],
+              markerStrokeColorSelected,
+              markerStrokeColor,
+            ],
+            'line-width': [
+              'case',
+              ['==', ['feature-state', 'isSelected'], true],
+              3,
+              2,
+            ],
+          },
+          filter: ['==', '$type', 'Polygon'],
+        })
+
+        mapRef.current.on(
+          'click',
+          MapLayerIds.USER_ASSETS_LINES,
+          markerClickHandlerToUse,
+        )
+        mapRef.current.on(
+          'mouseenter',
+          MapLayerIds.USER_ASSETS_LINES,
+          handleMarkerMouseEnter,
+        )
+        mapRef.current.on(
+          'mouseleave',
+          MapLayerIds.USER_ASSETS_LINES,
+          handleMarkerMouseLeave,
+        )
+      }
+
+      if (!userAssetsLinesLayer) {
+        mapRef.current.addLayer({
+          id: MapLayerIds.USER_ASSETS_LINES,
+          type: 'line',
+          source: MapSourceIds.USER_ASSETS,
+          paint: {
+            'line-color': [
+              'case',
+              ['==', ['feature-state', 'isSelected'], true],
+              markerStrokeColorSelected,
+              unclusteredColor,
+            ],
+            'line-width': [
+              'case',
+              ['==', ['feature-state', 'isSelected'], true],
+              6,
+              5,
+            ],
+          },
+          filter: ['==', '$type', 'LineString'],
+        })
       }
     },
     [
@@ -391,34 +375,50 @@ export const useAssetPortfolios = ({
   )
 
   const updateCurrentPortfolioShown = useCallback(
-    (portfolioName: string) => {
-      if (!portfolioName) {
+    (id: string) => {
+      if (!id) {
         removeUserAssetsFromMap()
         return
       }
 
-      if (
-        userAssets &&
-        portfolioName == UNSAVED_PORTFOLIO_VALUE_FOR_SELECT_INPUT
-      ) {
-        // right now we only have one possible portfolio called userAssets that come from a file the user just opened. We'll figure out better naming later.
-        updateUserAssetsInMap(userAssets)
+      setIsPortfolioLoading(true)
+
+      if (!authenticatedAxios || !workspaceUserName) {
+        toast.error(
+          'There was an issue with authentication. Try logging in again.',
+        )
+        setIsPortfolioLoading(false)
+
         return
       }
+      return authenticatedAxios
+        .get(getUploadedFileUrl({ workspaceUserName, fileName: id }))
+        .then((response) => {
+          if (!response) throw new Error('No response')
 
-      // this is temporary for MVP
-      const selectedPortfolio = temporarySamplePortfolios.find(
-        (samplePortfolio) => samplePortfolio.id === portfolioName,
-      )
-
-      updateUserAssetsInMap(selectedPortfolio?.data as UserAssets)
+          updateUserAssetsInMap(response.data as UserAssets)
+        })
+        .catch(() => {
+          toast.error(
+            'There was an issue accessing that portfolio. Please try again.',
+          )
+        })
+        .finally(() => {
+          setIsPortfolioLoading(false)
+        })
     },
-    [removeUserAssetsFromMap, updateUserAssetsInMap, userAssets],
+    [
+      authenticatedAxios,
+      removeUserAssetsFromMap,
+      updateUserAssetsInMap,
+      workspaceUserName,
+    ],
   )
 
   return {
     updateUserAssetsInMap,
     removeUserAssetsFromMap,
     updateCurrentPortfolioShown,
+    isPortfolioLoading,
   }
 }

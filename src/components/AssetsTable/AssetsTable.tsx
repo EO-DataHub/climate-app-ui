@@ -7,17 +7,12 @@ import {
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
-  Header,
 } from '@tanstack/react-table'
 import {
   Table as TanstackTable,
   Row as TanstackRow,
 } from '@tanstack/table-core'
-import {
-  MagnifyingGlassIcon as SearchIcon,
-  TriangleDownIcon,
-  TriangleUpIcon,
-} from '@radix-ui/react-icons'
+import { MagnifyingGlassIcon as SearchIcon } from '@radix-ui/react-icons'
 
 import { Table, TextField, Tooltip, Text, Link } from '@radix-ui/themes'
 import {
@@ -42,12 +37,12 @@ import {
   UserAssetForTable,
 } from '../../library/userAssets/convertUserAssets'
 import { useSyncAssetsTableFilterWithMapAssets } from '../../library/userAssets/useSyncAssetsTableFilterWithMapAssets'
-import { useSyncAssetsTableSelectionWithMapAssets } from '../../library/userAssets/useSyncAssetsTableSelectionWithMapAssets'
 import containerStyles from '../../library/genericStyles/containers.module.scss'
 import EyeClosedIcon from '@material-design-icons/svg/filled/visibility_off.svg?react'
 import EyeOpenIcon from '@material-design-icons/svg/filled/visibility.svg?react'
-import tableStyles from './AssetsTable.module.scss'
+import tableStyles from '../../library/genericStyles/table.module.scss'
 import { DEFAULT_USER_ASSET_COLUMNS } from '../../configuration/constants'
+import { getTableHeaderSortIcon } from '../../library/tanStackTable/getTableHeaderSortIcon'
 
 const getUniqueColumnNames = (
   previousValue: string[],
@@ -71,6 +66,8 @@ export const AssetsTable = ({
   showSelectBoxes = true,
   showViewDetailsButton = false,
   title = 'Assets',
+  toggleAllMapAssetsSelection,
+  toggleMapAssetSelection,
   upperRightTitleRowSlot,
   userAssetsForTable,
 }: {
@@ -88,6 +85,14 @@ export const AssetsTable = ({
   title?: string
   upperRightTitleRowSlot?: React.ReactNode
   userAssetsForTable: UserAssetForTable[] | AnalysedOscUserAssetForTable[]
+  toggleAllMapAssetsSelection?: (isSelected: boolean) => void
+  toggleMapAssetSelection?: ({
+    isSelected,
+    id,
+  }: {
+    isSelected: boolean
+    id: string
+  }) => void
 }) => {
   const [areExtraColumnsVisible, setAreExtraColumnsVisible] = useState(
     areExtraColumnsVisibleInitially,
@@ -124,30 +129,6 @@ export const AssetsTable = ({
     },
     [areExtraColumnsVisible, extraColumnNames],
   )
-  const { toggleAllMapAssetsSelection, toggleMapAssetSelection } =
-    useSyncAssetsTableSelectionWithMapAssets({
-      isMapLoaded,
-      mapRef,
-      userAssetsForTable,
-      rowSelection,
-    })
-
-  const getHeaderSortIcon = (header: Header<UserAssetForTable, unknown>) => {
-    return (
-      {
-        asc: (
-          <span className={tableStyles.sortIconWrapper}>
-            <TriangleDownIcon />
-          </span>
-        ),
-        desc: (
-          <span className={tableStyles.sortIconWrapper}>
-            <TriangleUpIcon />
-          </span>
-        ),
-      }[header.column.getIsSorted() as string] ?? null
-    )
-  }
 
   const columns = useMemo(() => {
     const columnHelper = createColumnHelper<UserAssetForTable>()
@@ -169,7 +150,7 @@ export const AssetsTable = ({
               checked={table?.getIsAllRowsSelected() || indeterminateValue}
               onCheckedChange={(isSelected: boolean) => {
                 table.toggleAllRowsSelected(isSelected)
-                toggleAllMapAssetsSelection(isSelected)
+                toggleAllMapAssetsSelection?.(isSelected)
               }}
             />
           )
@@ -177,7 +158,7 @@ export const AssetsTable = ({
 
         cell: ({ row }: { row: TanstackRow<UserAssetForTable> }) => {
           const handleAssetSelection = (isSelected: boolean) => {
-            toggleMapAssetSelection({
+            toggleMapAssetSelection?.({
               isSelected,
               id: String(row.original.id),
             })
@@ -212,16 +193,32 @@ export const AssetsTable = ({
       columnHelper.accessor('latitude', {
         header: 'Latitude',
         meta: { justify: 'end' },
-        cell: (cellContent: CellContext<UserAssetForTable, number>) => (
-          <>{`${cellContent.row.original.latitude.toFixed(4)}°`}</>
-        ),
+        cell: (cellContent: CellContext<UserAssetForTable, number>) => {
+          const latitude = cellContent.row.original.latitude
+
+          return (
+            <>
+              {typeof latitude === 'number'
+                ? `${latitude?.toFixed(4)}°`
+                : latitude}
+            </>
+          )
+        },
       }),
       columnHelper.accessor('longitude', {
         header: 'Longitude',
         meta: { justify: 'end' },
-        cell: (cellContent: CellContext<UserAssetForTable, number>) => (
-          <>{`${cellContent.row.original.longitude.toFixed(4)}°`}</>
-        ),
+        cell: (cellContent: CellContext<UserAssetForTable, number>) => {
+          const longitude = cellContent.row.original.longitude
+
+          return (
+            <>
+              {typeof longitude === 'number'
+                ? `${longitude.toFixed(4)}°`
+                : longitude}
+            </>
+          )
+        },
       }),
     ]
 
@@ -265,7 +262,7 @@ export const AssetsTable = ({
   })
   const highlightTableRow = useCallback(
     (id: string) => {
-      setHighlightedRowId(id)
+      setHighlightedRowId(`${id}`) // ensure is string in case of number
       const pageIndexForHighlightedRow = getTablePageIndexByRowId({ id, table })
       if (!pageIndexForHighlightedRow) return
       table.setPageIndex(pageIndexForHighlightedRow)
@@ -349,11 +346,11 @@ export const AssetsTable = ({
                 >
                   {header.isPlaceholder ? null : (
                     <div
-                      className={
+                      className={`${
                         header.column.getCanSort()
-                          ? 'cursor-pointer select-none'
-                          : ''
-                      }
+                          ? tableStyles.tableHeaderWithClickableCursorOnHover
+                          : undefined
+                      } ${tableStyles.tableHeader}`}
                       onClick={header.column.getToggleSortingHandler()}
                       title={
                         header.column.getCanSort()
@@ -369,7 +366,7 @@ export const AssetsTable = ({
                         header.column.columnDef.header,
                         header.getContext(),
                       )}
-                      {getHeaderSortIcon(header)}
+                      {getTableHeaderSortIcon(header)}
                     </div>
                   )}
                 </Table.ColumnHeaderCell>

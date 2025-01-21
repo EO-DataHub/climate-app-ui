@@ -1,4 +1,4 @@
-import { Button, Select, Tabs, Text } from '@radix-ui/themes'
+import { Button, DropdownMenu, Select, Tabs, Text } from '@radix-ui/themes'
 import { useContext, useEffect, useMemo, useState } from 'react'
 
 import { HubWorkflowNicknames } from '../../../configuration/constants'
@@ -33,38 +33,50 @@ export const AssetsAnalytics = () => {
   const [yearFilterValue, setYearFilterValue] = useState<string>()
 
   const {
-    currentWorkflowNickname,
+    analysedAssetsWorkflowNickname,
+    analysedAssetsWorkflowTitle,
     analysedUserAssets,
-    uploadedFileName,
+    analysedAssetsFileName,
     analysisRunDate,
+    csvResults,
   } = useContext(UserAssetsContext)
 
   useEffect(
     function initializeFiltersForCurrentWorkflow() {
       setHazardTypeFilterOptions(
-        currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
+        analysedAssetsWorkflowNickname === (HubWorkflowNicknames.OSC as string)
           ? ['ChronicHeat']
           : undefined,
       )
     },
-    [currentWorkflowNickname],
+    [analysedAssetsWorkflowNickname],
   )
 
-  const downloadFile = new Blob([JSON.stringify(analysedUserAssets)], {
+  const downloadFileGeoJson = new Blob([JSON.stringify(analysedUserAssets)], {
     type: 'text/json;charset=utf-8',
   })
-  const downloadUrl = URL.createObjectURL(downloadFile)
+  const downloadUrlGeoJson = URL.createObjectURL(downloadFileGeoJson)
+  const downloadFileCsv = csvResults
+    ? new Blob([csvResults], {
+        type: 'text/json;charset=utf-8',
+      })
+    : undefined
+  const downloadUrlCsv = downloadFileCsv
+    ? URL.createObjectURL(downloadFileCsv)
+    : undefined
 
   const analysedUserAssetsForTable = useMemo(
     () =>
-      currentWorkflowNickname === (HubWorkflowNicknames.OSC as string)
+      analysedAssetsWorkflowNickname === (HubWorkflowNicknames.OSC as string)
         ? getOscResultsTableData(analysedUserAssets)
         : getLstResultsTableData(analysedUserAssets),
 
-    [currentWorkflowNickname, analysedUserAssets],
+    [analysedAssetsWorkflowNickname, analysedUserAssets],
   )
   const filteredAnalysedUserAssetsForTable = useMemo(() => {
-    return analysedUserAssetsForTable.filter(
+    return (
+      analysedUserAssetsForTable as AnalysedOscUserAssetForTable[]
+    ).filter(
       (asset: AnalysedOscUserAssetForTable) =>
         (yearFilterValue ? asset.year === yearFilterValue : true) &&
         (scenarioFilterValue ? asset.scenario === scenarioFilterValue : true) &&
@@ -241,31 +253,53 @@ export const AssetsAnalytics = () => {
         <div className={containerStyles.flexRowSpaceBetweenStart}>
           <PageTitle>Analysis</PageTitle>
           {analysedUserAssets ? (
-            <Button asChild>
-              <a
-                download={`${uploadedFileName}_${currentWorkflowNickname}_${analysisRunDate}.geojson`}
-                href={downloadUrl}
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <Button>Download Analysis</Button>
+              </DropdownMenu.Trigger>
+
+              <DropdownMenu.Content
+                className={analyticsStyles.downloadMenuContent}
               >
-                Download Analysis
-              </a>
-            </Button>
+                <DropdownMenu.Item>
+                  <a
+                    download={`${analysedAssetsFileName}_${analysedAssetsWorkflowTitle}_${analysisRunDate}.geojson`}
+                    href={downloadUrlGeoJson}
+                  >
+                    as GeoJSON
+                  </a>
+                </DropdownMenu.Item>
+                {csvResults ? (
+                  <DropdownMenu.Item>
+                    <a
+                      download={`${analysedAssetsFileName}_${analysedAssetsWorkflowTitle}_${analysisRunDate}.csv`}
+                      href={downloadUrlCsv}
+                    >
+                      as CSV
+                    </a>
+                  </DropdownMenu.Item>
+                ) : null}
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
           ) : null}
         </div>
 
         {analysedUserAssets ? (
           <>
             <PageSubtitle>
-              {uploadedFileName ? <>Portfolio: {uploadedFileName}</> : null}
-              {analysisRunDate && uploadedFileName ? (
+              {analysedAssetsFileName ? (
+                <>Portfolio: {analysedAssetsFileName}</>
+              ) : null}
+              {analysisRunDate && analysedAssetsFileName ? (
                 <> | Analysis Run: {analysisRunDate}</>
               ) : null}
-              {analysedUserAssets.features.length && uploadedFileName ? (
+              {analysedUserAssets.features.length && analysedAssetsFileName ? (
                 <> | Assets: {analysedUserAssets?.features.length}</>
               ) : null}
             </PageSubtitle>
             <Text as="p" className={analyticsStyles.subSubtitle}>
-              {currentWorkflowNickname ? (
-                <> Workflow: {currentWorkflowNickname}</>
+              {analysedAssetsWorkflowTitle ? (
+                <> Workflow: {analysedAssetsWorkflowTitle}</>
               ) : null}
             </Text>
 

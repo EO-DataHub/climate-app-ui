@@ -1,51 +1,66 @@
-import { Button, Select, Tabs, Text } from '@radix-ui/themes'
-import { useContext, useEffect } from 'react'
+import {
+  Button,
+  Flex,
+  Select,
+  Spinner,
+  Tabs,
+  Text,
+  TextField,
+} from '@radix-ui/themes'
+import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { InputLabelContainer } from '../../Form/InputLabelContainer'
-import { Map } from '../../Map/Map'
-import { ObservationsMenu } from './ObservationsMenu'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
-import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
-import { useMap } from '../../Map/useMap'
-import formStyles from '../../../library/genericStyles/forms.module.scss'
-import sidebarStyles from '../../Layout/Sidebar.module.scss'
-import {
-  observationDatePopupContent,
-  observationTypePopupContent,
-} from '../../../configuration/infoPopupContentObservations'
-import { InfoPopover } from '../../InfoPopover/InfoPopover'
-import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
-import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
-import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 import {
   MapSourceIds,
   OBSERVATIONS_LAYER_INITIAL_OPACITY,
 } from '../../../configuration/constants'
+import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
+import { InfoPopover } from '../../InfoPopover/InfoPopover'
+import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { LoadingContext } from '../../../context/LoadingContext'
-import { RasterTileSource } from 'maplibre-gl'
+import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
+import { Map } from '../../Map/Map'
+import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
+import {
+  observationSensorPopupContent,
+  observationTypePopupContent,
+} from '../../../configuration/infoPopupContentObservations'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
+import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
+import { useGetObservationValueByMapclick } from './useGetObservationValueByMapClick'
+import { useMap } from '../../Map/useMap'
+import { useUpdateObservationsMapTiles } from './useUpdateObservationsMapTiles'
+import formStyles from '../../../library/genericStyles/forms.module.scss'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import observationStyles from './Observations.module.scss'
 
-const MIN_TEMP = 10
-const MAX_TEMP = 45
+const DEFAULT_MIN_TEMP = '-10'
+const DEFAULT_MAX_TEMP = '45'
 
 export const Observations = () => {
-  const {
-    persistedMapCenter,
-    setPersistedMapCenter,
-    persistedMapZoom,
-    setPersistedMapZoom,
-    selectedObservationLayerUrl,
-    setSelectedObservationType,
-    selectedObservationType,
-  } = useContext(ObservationsPageContext)
-
+  const navigate = useNavigate()
   const { setIsMapLoading } = useContext(LoadingContext)
-
-  const handleSelectObservationType = (value: string) => {
-    setSelectedObservationType?.(value)
-  }
+  const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
+  const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
+  const {
+    observationTypeConfigs,
+    persistedMapCenter,
+    persistedMapZoom,
+    selectedObservationLayerUrl,
+    selectedObservationType,
+    setPersistedMapCenter,
+    setPersistedMapZoom,
+    setSelectedObservationLayerUrl,
+    setSelectedObservationType,
+    markerCoordinates,
+    observationMarkerValue,
+    sensorFilterOptions,
+    isSensorFilterUsed,
+    selectedSensor,
+    setSelectedSensor,
+    filteredDatasetOptions,
+  } = useContext(ObservationsPageContext)
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: persistedMapCenter ?? [0, 51.5],
@@ -53,106 +68,100 @@ export const Observations = () => {
     setPersistedMapCenter,
     setPersistedMapZoom,
   })
-  const { updateCurrentPortfolioShown } = useAssetPortfolios({
-    mapRef,
+  const { updateCurrentPortfolioShown, isPortfolioLoading } =
+    useAssetPortfolios({
+      mapRef,
+      isMapLoaded,
+    })
+  useGetObservationValueByMapclick({
     isMapLoaded,
+    mapRef,
   })
-  const navigate = useNavigate()
+
+  useUpdateObservationsMapTiles({
+    isMapLoaded,
+    mapRef,
+    maxTemp,
+    minTemp,
+    selectedObservationLayerUrl,
+    setIsMapLoading,
+  })
+
+  const handleSelectObservationType = (value: string) => {
+    setSelectedObservationType?.(value)
+  }
 
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
 
-  const { markerCoordinates, observationMarkerValue, isMarkerOnMap } =
-    useGetObservationValueByMapclick({
-      isMapLoaded,
-      mapRef,
-      selectedObservationLayerUrl,
-    })
-
-  useEffect(
-    function updateObservationsMapTiles() {
-      if (!isMapLoaded || !mapRef.current || !setIsMapLoading) {
-        return
-      }
-
-      setIsMapLoading(true)
-
-      void mapRef.current.once('idle', () => setIsMapLoading(false))
-
-      const observationsSource = mapRef.current.getSource(
-        MapSourceIds.OBSERVATIONS,
-      ) as RasterTileSource
-
-      const titilerUrl = `https://titiler.xyz/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${MIN_TEMP},${MAX_TEMP}&colormap_name=jet`
-
-      if (!observationsSource) {
-        mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
-          type: 'raster',
-          tiles: [titilerUrl],
-          tileSize: 256,
-        })
-      }
-
-      if (observationsSource) {
-        observationsSource.setTiles([titilerUrl])
-      }
-
-      const observationsLayer = mapRef.current.getLayer(
-        MapSourceIds.OBSERVATIONS,
-      )
-      const userAssetsLayer = mapRef.current.getLayer(MapSourceIds.USER_ASSETS)
-
-      const layerIdToLoadObservationsBelow = userAssetsLayer
-        ? userAssetsLayer.id
-        : undefined
-
-      if (!observationsLayer) {
-        mapRef.current.addLayer(
-          {
-            id: MapSourceIds.OBSERVATIONS,
-            type: 'raster',
-            source: MapSourceIds.OBSERVATIONS,
-            paint: { 'raster-opacity': OBSERVATIONS_LAYER_INITIAL_OPACITY },
-          },
-          layerIdToLoadObservationsBelow,
-        )
-      }
-    },
-    [isMapLoaded, mapRef, selectedObservationLayerUrl, setIsMapLoading],
-  )
-
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
+          <div className={formStyles.multipleInputsRow}>
+            <InputLabelContainer>
+              <div className={formStyles.labelWithInfoPopoverRow}>
+                <label htmlFor="observation-type">Observation Type</label>
+                <InfoPopover>{observationTypePopupContent}</InfoPopover>
+              </div>
+
+              <Select.Root
+                onValueChange={handleSelectObservationType}
+                value={selectedObservationType}
+              >
+                <Select.Trigger placeholder="Select" />
+                <Select.Content id="observation-type">
+                  {observationTypeConfigs?.map(({ value, label }) => (
+                    <Select.Item value={value} key={value}>
+                      {label}
+                    </Select.Item>
+                  ))}
+                </Select.Content>
+              </Select.Root>
+            </InputLabelContainer>
+
+            {isSensorFilterUsed ? (
+              <InputLabelContainer>
+                <div className={formStyles.labelWithInfoPopoverRow}>
+                  <label htmlFor="sensor">Sensor</label>
+                  <InfoPopover>{observationSensorPopupContent}</InfoPopover>
+                </div>
+
+                <Select.Root
+                  onValueChange={setSelectedSensor}
+                  value={selectedSensor}
+                >
+                  <Select.Trigger placeholder="Select" />
+                  <Select.Content id="sensor">
+                    {sensorFilterOptions.map((option) => (
+                      <Select.Item value={option} key={option}>
+                        {option}
+                      </Select.Item>
+                    ))}
+                  </Select.Content>
+                </Select.Root>
+              </InputLabelContainer>
+            ) : null}
+          </div>
+
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-type">Observation Type</label>
-              <InfoPopover>{observationTypePopupContent}</InfoPopover>
+              <label htmlFor="observation-date">Datasets Available</label>
             </div>
-
             <Select.Root
-              onValueChange={handleSelectObservationType}
-              value={selectedObservationType}
+              value={selectedObservationLayerUrl}
+              onValueChange={setSelectedObservationLayerUrl}
             >
               <Select.Trigger placeholder="Select" />
-              <Select.Content id="observation-type">
-                <Select.Item value="london">
-                  Land Surface Temperature (London 100m resolution)
-                </Select.Item>
-                <Select.Item value="uk">
-                  Land Surface Temperature (UK)
-                </Select.Item>
+              <Select.Content id="observation-date">
+                {filteredDatasetOptions.map((option) => (
+                  <Select.Item key={option.value} value={option.value}>
+                    {option.label}
+                  </Select.Item>
+                ))}
               </Select.Content>
             </Select.Root>
-          </InputLabelContainer>
-          <InputLabelContainer>
-            <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-date">Date</label>
-              <InfoPopover>{observationDatePopupContent}</InfoPopover>
-            </div>
-            <ObservationsMenu />
           </InputLabelContainer>
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
@@ -163,7 +172,7 @@ export const Observations = () => {
           <div className={sidebarStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
               <LocationValueOverview
-                isMarkerOnMap={isMarkerOnMap}
+                isMarkerOnMap={!!markerCoordinates}
                 layerLabel={''}
                 locationValue={
                   observationMarkerValue === null
@@ -203,12 +212,12 @@ export const Observations = () => {
 
       <div className={sidebarStyles.contentBottomButtonRow}>
         <div className={sidebarStyles.selectAssetsWrapper}>
-          <label>View Assets on Map</label>
+          <Flex gap="1">
+            <label>View Assets on Map</label>{' '}
+            {isPortfolioLoading ? <Spinner /> : null}
+          </Flex>
           <InputLabelContainer>
-            <AssetsSelect
-              showUnsaved
-              onValueChange={updateCurrentPortfolioShown}
-            />
+            <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
           </InputLabelContainer>
         </div>
         <div className={sidebarStyles.selectAssetsButtonWrapper}>
@@ -220,32 +229,46 @@ export const Observations = () => {
     </div>
   )
 
+  const handleMinTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = parseFloat(event.target.value)
+
+    if (numericValue < parseFloat(maxTemp) || isNaN(numericValue)) {
+      setMinTemp(event.target.value)
+    }
+  }
+
+  const handleMaxTempChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = parseFloat(event.target.value)
+    if (numericValue > parseFloat(minTemp) || isNaN(numericValue)) {
+      setMaxTemp(event.target.value)
+    }
+  }
+
   const legend = (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        fontSize: `12px`,
-      }}
-    >
-      <div style={{ width: '100%', textAlign: 'left', marginBottom: '5px' }}>
-        Degrees Celsius
-      </div>
-      <img
-        src="https://titiler.xyz/colorMaps/jet?format=png"
-        alt="Color Map Legend"
-        style={{ width: '100%', height: 'auto' }}
-      />
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          width: '100%',
-        }}
-      >
-        <span>{MIN_TEMP}</span>
-        <span>{MAX_TEMP}</span>
+    <div className={observationStyles.legendWrapper}>
+      <figure>
+        <figcaption>Degrees Celsius</figcaption>
+        <img
+          src="https://test.eodatahub.org.uk/titiler/core/colorMaps/jet?format=png"
+          alt="Color Map Legend"
+        />
+      </figure>
+
+      <div className={observationStyles.legendInputWrapper}>
+        <TextField.Root
+          size="1"
+          value={minTemp}
+          onChange={handleMinTempChange}
+          type="number"
+          aria-label="Minimum temperature to show on the map"
+        />
+        <TextField.Root
+          size="1"
+          value={maxTemp}
+          onChange={handleMaxTempChange}
+          type="number"
+          aria-label="Maximum temperature to show on the map"
+        />
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import Form, { IChangeEvent } from '@rjsf/core'
 import validator from '@rjsf/validator-ajv8'
-import { Button, Heading, Tabs } from '@radix-ui/themes'
 import { GenericObjectType } from '@rjsf/utils'
+import { Button, Flex, Heading, Spinner, Tabs } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +16,6 @@ import {
   HAZARDS_LAYER_INITIAL_OPACITY,
   MapSourceIds,
 } from '../../../configuration/constants'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
@@ -25,13 +24,14 @@ import hazardStyles from './Hazards.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { HazardsPageContext } from '../../../context/HazardsPageContext'
-import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
 import {
   chronicHeatSchema,
   chronicHeatUiSchema,
 } from '../../../library/api/rjsfChronicHeat.ts'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import { RJSFRadixSelectWidget } from './RJSFRadixSelectWidget.tsx'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout.tsx'
+import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl.tsx'
 
 const customWidgets = {
   customSelect: RJSFRadixSelectWidget,
@@ -66,6 +66,8 @@ export const Hazards = () => {
     setScenario,
     setYear,
     year,
+    hazardMarkerValue,
+    markerCoordinates,
   } = useContext(HazardsPageContext)
 
   const [formData, setFormData] = useState<HazardFormData>({
@@ -82,10 +84,11 @@ export const Hazards = () => {
     setPersistedMapZoom,
   })
   const { setIsMapLoading } = useContext(LoadingContext)
-  const { updateCurrentPortfolioShown } = useAssetPortfolios({
-    mapRef,
-    isMapLoaded,
-  })
+  const { updateCurrentPortfolioShown, isPortfolioLoading } =
+    useAssetPortfolios({
+      mapRef,
+      isMapLoaded,
+    })
 
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
@@ -98,14 +101,13 @@ export const Hazards = () => {
       year,
     })
 
-  const zarrPath = `s3://ukri-eodh-hazard-tiles-us-west-2/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
+  const zarrPath = `https://ukri-eodh-hazard-tiles-sg.s3.eu-west-1.amazonaws.com/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
-  const { isMarkerOnMap, hazardMarkerValue, markerCoordinates } =
-    useGetHazardValueByMapClick({
-      isMapLoaded,
-      mapRef,
-      zarrPath,
-    })
+  useGetHazardValueByMapClick({
+    isMapLoaded,
+    mapRef,
+    zarrPath,
+  })
 
   const hazardDetail = isHazardMetadataError ? (
     <>Hazard indicator details are currently unavailable.</>
@@ -168,7 +170,7 @@ export const Hazards = () => {
         }),
       )
 
-      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
+      const tileUrlToUse = `https://test.eodatahub.org.uk/titiler/xarray/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARDS, {
@@ -284,7 +286,7 @@ export const Hazards = () => {
           <div className={hazardStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
               <LocationValueOverview
-                isMarkerOnMap={isMarkerOnMap}
+                isMarkerOnMap={!!markerCoordinates}
                 layerLabel={hazardIndicatorLabel}
                 locationValue={hazardMarkerValue}
                 markerCoordinates={markerCoordinates}
@@ -304,23 +306,24 @@ export const Hazards = () => {
         </Tabs.Root>
       </div>
 
-      <div className={hazardStyles.contentBottomButtonRow}>
-        <div className={hazardStyles.selectAssetsWrapper}>
-          <label>View Assets on Map</label>
-          <InputLabelContainer>
-            <AssetsSelect
-              showUnsaved
-              onValueChange={updateCurrentPortfolioShown}
-            />
-          </InputLabelContainer>
-        </div>
-        <div className={hazardStyles.selectAssetsButtonWrapper}>
-          <Button onClick={handleSelectAssetsClick}>
-            Select Assets for Analysis
-          </Button>
+        <div className={sidebarStyles.contentBottomButtonRow}>
+          <div className={sidebarStyles.selectAssetsWrapper}>
+            <Flex gap="1">
+              <label>View Assets on Map</label>{' '}
+              {isPortfolioLoading ? <Spinner /> : null}
+            </Flex>
+
+            <InputLabelContainer>
+              <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
+            </InputLabelContainer>
+          </div>
+          <div className={sidebarStyles.selectAssetsButtonWrapper}>
+            <Button onClick={handleSelectAssetsClick}>
+              Select Assets for Analysis
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
   )
 
   const legend = (

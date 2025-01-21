@@ -3,6 +3,7 @@ import { ReactNode, createContext } from 'react'
 import Keycloak, { KeycloakOnLoad } from 'keycloak-js'
 import { getAuthenticatedAxios } from '../library/axios'
 import { AxiosInstance } from 'axios'
+import { toast } from 'react-toastify'
 
 export interface KeycloakUserInfo {
   sub?: string
@@ -21,7 +22,9 @@ interface AuthenticationContextValue {
   isAuthenticationServiceError: boolean
   login: () => Promise<void>
   logout: () => Promise<void>
+  token: string | undefined
   userInfo?: KeycloakUserInfo
+  workspaceUserName?: string
 }
 
 const initOptions = {
@@ -33,65 +36,13 @@ const initOptions = {
 
 const authenticationInstance = new Keycloak(initOptions)
 
-const ensureLogoutDoesNotRedirect = () => {
-  authenticationInstance.createLogoutUrl = function () {
-    return (
-      // @ts-expect-error - missing property in type definitions
-      authenticationInstance.endpoints.logout() +
-      '?id_token_hint=' +
-      authenticationInstance.idToken +
-      '&post_logout_redirect_uri=' +
-      encodeURIComponent(window.location.href)
-    )
-  }
-}
-
-const initializeAuthentication = ({
-  setIsAuthenticated,
-  setIsAuthenticating,
-  setUserInfo,
-  setIsAuthenticationServiceError,
-}: {
-  setIsAuthenticated: React.Dispatch<React.SetStateAction<boolean>>
-  setIsAuthenticating: React.Dispatch<React.SetStateAction<boolean>>
-  setUserInfo: React.Dispatch<React.SetStateAction<KeycloakUserInfo>>
-  setIsAuthenticationServiceError: React.Dispatch<React.SetStateAction<boolean>>
-}) => {
-  // @ts-expect-error - didInitialize isnt technically a public property, but ticket accepted to make it so https://github.com/keycloak/keycloak/issues/27040
-  if (authenticationInstance.didInitialize) return // this ensures vite HMR keeps working in development
-
-  setIsAuthenticating(true)
-
-  authenticationInstance
-    .init({
-      onLoad: initOptions.onLoad as KeycloakOnLoad,
-      silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
-    })
-    .then((auth) => {
-      setIsAuthenticated(auth)
-
-      if (auth) {
-        ensureLogoutDoesNotRedirect()
-        return authenticationInstance.loadUserInfo()
-      }
-    })
-    .then((userInfo) => {
-      setUserInfo(userInfo as KeycloakUserInfo)
-    })
-    .catch(() => {
-      setIsAuthenticationServiceError(true)
-    })
-    .finally(() => {
-      setIsAuthenticating(false)
-    })
-}
-
 export const AuthenticationContext = createContext<AuthenticationContextValue>({
   isAuthenticated: false,
   isAuthenticating: false,
   isAuthenticationServiceError: false,
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
+  token: undefined,
 })
 
 export const AuthenticationContextProvider = ({
@@ -107,6 +58,8 @@ export const AuthenticationContextProvider = ({
     AxiosInstance | undefined
   >()
   const [userInfo, setUserInfo] = useState<KeycloakUserInfo>({})
+  const [token, setToken] = useState<string>() // we track this to trigger axios reinitialization
+  const workspaceUserName = userInfo?.preferred_username
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()
@@ -116,26 +69,77 @@ export const AuthenticationContextProvider = ({
     return authenticationInstance.logout()
   }
 
-  useEffect(() => {
-    initializeAuthentication({
-      setIsAuthenticated,
-      setIsAuthenticating,
-      setIsAuthenticationServiceError,
-      setUserInfo,
-    })
+  useEffect(function initiializeAuthentication() {
+    const ensureLogoutDoesNotRedirect = () => {
+      authenticationInstance.createLogoutUrl = function () {
+        return (
+          // @ts-expect-error - missing property in type definitions
+          authenticationInstance.endpoints.logout() +
+          '?id_token_hint=' +
+          authenticationInstance.idToken +
+          '&post_logout_redirect_uri=' +
+          encodeURIComponent(window.location.href)
+        )
+      }
+    }
+
+    authenticationInstance.onTokenExpired = () => {
+      authenticationInstance
+        .updateToken()
+        .then(() => {
+          setToken(authenticationInstance.token)
+        })
+        .catch(() => {
+          setIsAuthenticated(false)
+          setUserInfo({})
+          toast.error('Your session has expired. Please log in again.')
+          void authenticationInstance.logout()
+        })
+    }
+
+    authenticationInstance.onAuthLogout = () => {
+      setIsAuthenticated(false)
+      setUserInfo({})
+      toast.error('You have been logged out by the system.')
+    }
+
+    if (authenticationInstance.didInitialize) return // this ensures vite HMR keeps working in development
+
+    setIsAuthenticating(true)
+
+    authenticationInstance
+      .init({
+        onLoad: initOptions.onLoad as KeycloakOnLoad,
+        silentCheckSsoRedirectUri: `${location.origin}/silent-check-sso.html`,
+      })
+      .then((auth) => {
+        setIsAuthenticated(auth)
+
+        if (auth) {
+          ensureLogoutDoesNotRedirect()
+          setToken(authenticationInstance.token)
+          return authenticationInstance.loadUserInfo()
+        }
+      })
+      .then((userInfo) => {
+        setUserInfo(userInfo as KeycloakUserInfo)
+      })
+      .catch(() => {
+        setIsAuthenticationServiceError(true)
+      })
+      .finally(() => {
+        setIsAuthenticating(false)
+      })
   }, [])
 
   useEffect(
     function initializeAuthenticatedAxios() {
-      if (isAuthenticated) {
-        const token = authenticationInstance.token
+      if (isAuthenticated && !!token) {
         const getUpdatedToken = async () => {
           await authenticationInstance.updateToken()
 
           return authenticationInstance.token
         }
-
-        if (!token) return
 
         const authenticatedAxios = getAuthenticatedAxios({
           token,
@@ -149,7 +153,7 @@ export const AuthenticationContextProvider = ({
         })
       }
     },
-    [isAuthenticated],
+    [isAuthenticated, token],
   )
 
   return (
@@ -161,7 +165,9 @@ export const AuthenticationContextProvider = ({
         isAuthenticationServiceError,
         login,
         logout,
+        token,
         userInfo,
+        workspaceUserName,
       }}
     >
       {children}

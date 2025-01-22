@@ -90,7 +90,7 @@ export const Hazards = () => {
   const hazardIndicatorLabel = indicatorOptions.find(
     (option) => option.value === hazardIndicator,
   )?.label
-  const zarrPath = `s3://ukri-eodh-hazard-tiles-us-west-2/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
+  const zarrPath = `https://ukri-eodh-hazard-tiles-sg.s3.eu-west-1.amazonaws.com/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
   useGetHazardValueByMapClick({
     isMapLoaded,
@@ -159,7 +159,7 @@ export const Hazards = () => {
         }),
       )
 
-      const tileUrlToUse = `https://i0h9crgku9.execute-api.us-west-2.amazonaws.com/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
+      const tileUrlToUse = `https://test.eodatahub.org.uk/titiler/xarray/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARDS, {

@@ -249,7 +249,7 @@ export const Observations = () => {
       <figure>
         <figcaption>Degrees Celsius</figcaption>
         <img
-          src="https://titiler.xyz/colorMaps/jet?format=png"
+          src="https://test.eodatahub.org.uk/titiler/core/colorMaps/jet?format=png"
           alt="Color Map Legend"
         />
       </figure>

@@ -39,7 +39,7 @@ export const useGetObservationValueByMapclick = ({
       const queryObservationLayerByCoordinates = () => {
         const axiosController = new AbortController()
 
-        const queryUrl = `https://titiler.xyz/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
+        const queryUrl = `https://test.eodatahub.org.uk/titiler/core/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
 
         setObservationMarkerValue(null)
 

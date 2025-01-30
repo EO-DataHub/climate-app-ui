@@ -32,6 +32,7 @@ const initOptions = {
   realm: import.meta.env.VITE_KEYCLOAK_REALM as string,
   clientId: import.meta.env.VITE_KEYCLOAK_CLIENT_ID as string,
   onLoad: 'check-sso',
+  scope: 'openid workspaces',
 }
 
 const authenticationInstance = new Keycloak(initOptions)
@@ -63,7 +64,9 @@ export const AuthenticationContextProvider = ({
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()
-    return authenticationInstance.login()
+    return authenticationInstance.login({
+      scope: 'openid workspaces',
+    })
   }
   const logout = () => {
     return authenticationInstance.logout()

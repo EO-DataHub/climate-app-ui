@@ -1,16 +1,17 @@
-import { AxiosError, AxiosInstance } from 'axios'
+import { AxiosError } from 'axios'
 
 import { AnalysedUserAssets } from './userAssetTypes'
 import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
 import { getResultsUrl } from '../api/getUrls'
 import { HubWorkflowPresetInputs } from '../api/apiTypes'
+import AuthenticatedAxios from '../axios'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 const initiateAssetsRiskAnalysis = async ({
   authToken,
-  axios,
+  authenticatedAxiosInstance,
   workspaceUserName,
   endDate,
   fileName,
@@ -19,7 +20,7 @@ const initiateAssetsRiskAnalysis = async ({
   startDate,
 }: {
   authToken: string
-  axios: AxiosInstance
+  authenticatedAxiosInstance: AuthenticatedAxios
   workspaceUserName: string
   endDate?: string
   fileName: string
@@ -33,7 +34,7 @@ const initiateAssetsRiskAnalysis = async ({
     stac_query: hubWorkflowPresetInputs?.stac_query,
     extra_args: hubWorkflowPresetInputs?.extra_args,
   }
-  return axios.post(
+  return authenticatedAxiosInstance.authenticatedAxios.post(
     `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/processes/${hubWorkflowPresetInputs?.workflow}/execution`,
     {
       inputs: {
@@ -66,26 +67,28 @@ const getIsDataReady = (status: string) => {
 }
 
 const getData = async ({
-  axios,
+  authenticatedAxiosInstance,
   jobId,
   workspaceUserName,
 }: {
-  axios: AxiosInstance
+  authenticatedAxiosInstance: AuthenticatedAxios
   jobId: string
   workspaceUserName: string
 }) => {
   const resultsUrl = getResultsUrl({ jobId, workspaceUserName })
-  return axios.get(resultsUrl).then((response) => {
-    return response.data.data as AnalysedUserAssets
-  })
+  return authenticatedAxiosInstance.authenticatedAxios
+    .get(resultsUrl)
+    .then((response) => {
+      return response.data.data as AnalysedUserAssets
+    })
 }
 
 async function getAssetsRiskResults({
-  axios,
+  authenticatedAxiosInstance,
   url,
   workspaceUserName,
 }: {
-  axios: AxiosInstance
+  authenticatedAxiosInstance: AuthenticatedAxios
   url: string
   workspaceUserName: string
 }) {
@@ -99,11 +102,11 @@ async function getAssetsRiskResults({
     try {
       const {
         data: { status, jobID: jobId },
-      } = await axios.get(url)
+      } = await authenticatedAxiosInstance.authenticatedAxios.get(url)
       const isDataReady = getIsDataReady(status)
       if (isDataReady) {
         const data = await getData({
-          axios,
+          authenticatedAxiosInstance,
           jobId,
           workspaceUserName,
         })
@@ -130,7 +133,7 @@ async function getAssetsRiskResults({
 
 export const analyseAssets = ({
   authToken,
-  axios,
+  authenticatedAxiosInstance,
   workspaceUserName,
   endDate,
   fileName,
@@ -139,7 +142,7 @@ export const analyseAssets = ({
   startDate,
 }: {
   authToken: string
-  axios?: AxiosInstance
+  authenticatedAxiosInstance?: AuthenticatedAxios
   workspaceUserName: string
   endDate?: string
   fileName: string
@@ -147,7 +150,7 @@ export const analyseAssets = ({
   areUserAssetsASamplePortfolio: boolean
   startDate?: string
 }) => {
-  if (!axios) {
+  if (!authenticatedAxiosInstance) {
     throw new Error('axios is required')
   }
   if (!workspaceUserName) {
@@ -156,7 +159,7 @@ export const analyseAssets = ({
 
   return initiateAssetsRiskAnalysis({
     authToken,
-    axios,
+    authenticatedAxiosInstance,
     workspaceUserName,
     endDate,
     fileName,
@@ -169,7 +172,7 @@ export const analyseAssets = ({
     ).href
 
     return getAssetsRiskResults({
-      axios,
+      authenticatedAxiosInstance,
       url: statusPollingUrl,
       workspaceUserName,
     })

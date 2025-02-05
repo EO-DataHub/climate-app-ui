@@ -55,6 +55,7 @@ export const Assets = () => {
   const { updateUploadedFilesList } = useContext(PortfoliosContext)
 
   const {
+    authenticatedAxiosInstance,
     authenticatedAxios,
     isAuthenticated,
     login,
@@ -231,7 +232,7 @@ export const Assets = () => {
     setIsAnalysisRunning(true)
     analyseAssets({
       authToken: token,
-      axios: authenticatedAxios,
+      authenticatedAxiosInstance: authenticatedAxiosInstance,
       endDate,
       fileName: uploadedFileName,
       hubWorkflowPresetInputs,

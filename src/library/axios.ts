@@ -1,25 +1,38 @@
-import axios, { AxiosError } from 'axios'
-
-export const getAuthenticatedAxios = ({
-  token,
-  getUpdatedToken,
-}: {
-  token: string | undefined
+import axios, { AxiosError, AxiosInstance } from 'axios'
+class AuthenticatedAxios {
+  token: string
+  authenticatedAxios: AxiosInstance
   getUpdatedToken: () => Promise<string | undefined>
-}) => {
-  if (!token) {
-    throw new Error(
-      'Token is required to create an authenticated axios instance',
+
+  constructor(
+    token: string,
+    getUpdatedToken: () => Promise<string | undefined>,
+  ) {
+    this.token = token
+    this.getUpdatedToken = getUpdatedToken
+
+    this.authenticatedAxios = axios.create({
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+      },
+    })
+
+    this.authenticatedAxios.interceptors.response.use(
+      (response) => response,
+      this.createErrorInterceptor(),
     )
   }
 
-  const authenticatedAxios = axios.create({
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
+  updateToken(newToken: string) {
+    this.token = newToken
+    this.authenticatedAxios = axios.create({
+      headers: {
+        Authorization: `Bearer ${newToken}`,
+      },
+    })
+  }
 
-  const createErrorInterceptor = () => {
+  createErrorInterceptor() {
     let retries = 0
 
     return async (error: AxiosError) => {
@@ -29,24 +42,25 @@ export const getAuthenticatedAxios = ({
       if ((status === 403 || status === 401) && retries < 3) {
         retries = retries + 1
 
-        const newAccessToken = await getUpdatedToken()
+        const newAccessToken = await this.getUpdatedToken()
 
-        return authenticatedAxios({
-          ...config,
-          headers: {
-            Authorization: `Bearer ${newAccessToken}`,
-          },
-        })
+        if (newAccessToken) {
+          retries = 0
+
+          this.updateToken(newAccessToken)
+
+          return this.authenticatedAxios({
+            ...config,
+            headers: {
+              Authorization: `Bearer ${newAccessToken}`,
+            },
+          })
+        }
       }
 
       return Promise.reject(error)
     }
   }
-
-  authenticatedAxios.interceptors.response.use(
-    (response) => response,
-    createErrorInterceptor(),
-  )
-
-  return authenticatedAxios
 }
+
+export default AuthenticatedAxios

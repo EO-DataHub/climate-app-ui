@@ -27,13 +27,15 @@ export enum AssetImpactViewOptions {
 export enum HubWorkflowNicknames {
   OSC = 'OS-Climate',
   LST = 'LST',
+  LSTP = 'LSTP',
 }
 
 export type HubWorkflowNicknamesType = `${HubWorkflowNicknames}`
 
 export const hubWorkflowNames = {
   [HubWorkflowNicknames.OSC]: 'physrisk-filter',
-  [HubWorkflowNicknames.LST]: 'lst-filter-polygons',
+  [HubWorkflowNicknames.LST]: 'lst-filter',
+  [HubWorkflowNicknames.LSTP]: 'lst-filter-polygons',
 }
 
 export const workflowNickNamesByHubWorkflowName = Object.fromEntries(

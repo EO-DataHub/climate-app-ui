@@ -31,7 +31,7 @@ export const useUpdateObservationsMapTiles = ({
       const observationsSource = mapRef.current.getSource(
         MapSourceIds.OBSERVATIONS,
       ) as RasterTileSource
-      const titilerUrl = `https://test.eodatahub.org.uk/titiler/core/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
+      const titilerUrl = `https://staging.eodatahub.org.uk/titiler/xarray/tiles/{z}/{x}/{y}?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet&variable=lst&tileMatrixSetId=WebMercatorQuad&scale=1&multiscale=false&reference=true&decode_times=true&consolidated=false&return_mask=true`
       if (!observationsSource) {
         mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
           type: 'raster',

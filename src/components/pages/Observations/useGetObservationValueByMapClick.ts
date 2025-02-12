@@ -7,9 +7,11 @@ import { ObservationsPageContext } from '../../../context/ObservationsPageContex
 export const useGetObservationValueByMapclick = ({
   isMapLoaded,
   mapRef,
+  use_cog_urls,
 }: {
   isMapLoaded: boolean
   mapRef: MapRef
+  use_cog_urls: boolean
 }) => {
   const {
     markerCoordinates,
@@ -39,15 +41,18 @@ export const useGetObservationValueByMapclick = ({
       const queryObservationLayerByCoordinates = () => {
         const axiosController = new AbortController()
 
-        const queryUrl = `https://test.eodatahub.org.uk/titiler/core/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
-
+        const queryUrl = use_cog_urls
+          ? `https://test.eodatahub.org.uk/titiler/core/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
+          : `https://eodh-eu.sparkgeo.uk/get_hazard_value?zarr_path=${selectedObservationLayerUrl}&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}&expression=x-273.15`
         setObservationMarkerValue(null)
 
         axios
           .get(queryUrl, { signal: axiosController.signal })
 
           .then((response) => {
-            const observationValue = response.data.values[0]
+            const observationValue = use_cog_urls
+              ? response.data.values[0]
+              : response.data.hazard_value
             setObservationMarkerValue(
               observationValue
                 ? Number(observationValue).toFixed(0)
@@ -69,7 +74,12 @@ export const useGetObservationValueByMapclick = ({
         queryController.abort()
       }
     },
-    [markerCoordinates, selectedObservationLayerUrl, setObservationMarkerValue],
+    [
+      markerCoordinates,
+      selectedObservationLayerUrl,
+      setObservationMarkerValue,
+      use_cog_urls,
+    ],
   )
 
   return { observationMarkerValue }

@@ -12,6 +12,7 @@ export const useUpdateObservationsMapTiles = ({
   maxTemp,
   minTemp,
   selectedObservationLayerUrl,
+  use_cog_urls,
   setIsMapLoading,
 }: {
   isMapLoaded: boolean
@@ -19,6 +20,7 @@ export const useUpdateObservationsMapTiles = ({
   maxTemp: string
   minTemp: string
   selectedObservationLayerUrl: string
+  use_cog_urls: boolean
   setIsMapLoading: Dispatch<SetStateAction<boolean>> | undefined
 }) => {
   useEffect(
@@ -31,7 +33,9 @@ export const useUpdateObservationsMapTiles = ({
       const observationsSource = mapRef.current.getSource(
         MapSourceIds.OBSERVATIONS,
       ) as RasterTileSource
-      const titilerUrl = `https://test.eodatahub.org.uk/titiler/core/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
+      const titilerUrl = use_cog_urls
+        ? `https://test.eodatahub.org.uk/titiler/core/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
+        : `https://staging.eodatahub.org.uk/titiler/xarray/tiles/{z}/{x}/{y}?url=${selectedObservationLayerUrl}&rescale=${parseFloat(minTemp) + 273.15},${parseFloat(maxTemp) + 273.15}&colormap_name=jet&variable=lst&tileMatrixSetId=WebMercatorQuad&scale=1&multiscale=false&reference=true&decode_times=true&consolidated=false&return_mask=true`
       if (!observationsSource) {
         mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
           type: 'raster',
@@ -68,6 +72,7 @@ export const useUpdateObservationsMapTiles = ({
       minTemp,
       selectedObservationLayerUrl,
       setIsMapLoading,
+      use_cog_urls,
     ],
   )
 }

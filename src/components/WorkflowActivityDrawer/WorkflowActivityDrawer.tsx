@@ -9,6 +9,7 @@ import {
 } from '@radix-ui/themes'
 import { useContext, useEffect, useState } from 'react'
 import CloseIcon from '@material-design-icons/svg/filled/close.svg?react'
+import { formatISO, subDays } from 'date-fns'
 
 import { AuthenticationContext } from '../../context/AuthenticationContext'
 import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator'
@@ -75,8 +76,15 @@ export const WorkflowActivityDrawer = ({
 
     if (isDrawerOpen) {
       setIsWorkflowActivityLoading(true)
+
+      const endDate = new Date()
+      const startDate = subDays(endDate, 7)
+      const formattedDateRange = `${formatISO(startDate)}/${formatISO(endDate)}`
+
       authenticatedAxios
-        .get(`${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs`)
+        .get(
+          `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs?datetime=${formattedDateRange}&limit=500`,
+        )
         .then((response) => {
           const jobs = response.data.jobs as WorkflowInfoFromApi[]
 
@@ -266,13 +274,6 @@ export const WorkflowActivityDrawer = ({
                     <Badge color={badgeColor[status] as BadgeProps['color']}>
                       {badgeText[status]}
                     </Badge>
-                    <Text
-                      weight="bold"
-                      size="3"
-                      className={workflowActivityStyles.portfolioName}
-                    >
-                      Portfolio Name Here
-                    </Text>
                     <Text color="gray" size="1">
                       Type: {workflowNickNamesByHubWorkflowName[processID]}
                     </Text>

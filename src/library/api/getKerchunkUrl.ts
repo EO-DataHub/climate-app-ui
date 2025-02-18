@@ -5,7 +5,7 @@ export interface LSTParams {
   month: number
   sensor: string // ["sentinel3a", "sentinel3b", "all"]
   timeOfDay: string // ["day", "night", "all"]
-  type: string // ["daily", "monthly_average"]
+  type: string // ["daily", "monthly"]
 }
 
 export function GetKerchunkUrl(params: LSTParams): ObservationDatasetOption[] {
@@ -41,7 +41,7 @@ export function GetKerchunkUrl(params: LSTParams): ObservationDatasetOption[] {
   // const foo: string = "https://eocis.org/data/eocis-lst-s3a-night-kerchunk/2024/01/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240101000000-fv4.00-kerchunk.json";
   const output: ObservationDatasetOption[] = []
   const numberOfDays =
-    params.type === 'monthly_average'
+    params.type === 'monthly'
       ? 1
       : new Date(params.year, params.month, 0).getDate()
 
@@ -83,7 +83,7 @@ function validate(params: LSTParams) {
     throw new Error(`Invalid time of day "${params.timeOfDay}"`)
   }
 
-  if (!['daily', 'monthly_average'].some((x) => x === params.type)) {
+  if (!['daily', 'monthly'].some((x) => x === params.type)) {
     throw new Error(`Invalid type "${params.type}"`)
   }
 }

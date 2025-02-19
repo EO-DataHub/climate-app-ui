@@ -15,16 +15,11 @@ import {
   OBSERVATIONS_LAYER_INITIAL_OPACITY,
 } from '../../../configuration/constants'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { Map } from '../../Map/Map'
 import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
-import {
-  observationSensorPopupContent,
-  observationTypePopupContent,
-} from '../../../configuration/infoPopupContentObservations'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
@@ -34,31 +29,64 @@ import { useUpdateObservationsMapTiles } from './useUpdateObservationsMapTiles'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import observationStyles from './Observations.module.scss'
+import { Autocomplete, TextField as MuiTextField } from '@mui/material'
 
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
+const VALID_OBSERVATION_YEARS = [
+  '2024',
+  '2023',
+  '2022',
+  '2021',
+  '2020',
+  '2019',
+  '2018',
+]
+const VALID_OBSERVATION_MONTHS = [
+  'January',
+  'Februray',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+const AVAILABLE_OBSERVATION_SENSORS = ['Sentinel 3A (1km)', 'Sentinel 3B (1km)']
+const AVAILABLE_OBSERVATION_TIME_OF_DAY = ['Day', 'Night']
+const AVAILABLE_OBSERVATION_REVISIT_PERIODS = ['Daily', 'Monthly Average']
+
+const DEFAULT_OBSERVATION_PARAMETERS = {
+  years: ['2024'],
+  months: ['January'],
+  sensors: ['Sentinel 3A (1km)'],
+  timeOfDay: ['Day'],
+  revisitPeriod: ['Daily'],
+}
 
 export const Observations = () => {
   const navigate = useNavigate()
   const { setIsMapLoading } = useContext(LoadingContext)
   const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
   const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
+
+  const [observationParameters, setObservationParameters] = useState(
+    DEFAULT_OBSERVATION_PARAMETERS,
+  )
+
   const {
-    observationTypeConfigs,
     persistedMapCenter,
     persistedMapZoom,
     selectedObservationLayerUrl,
-    selectedObservationType,
     setPersistedMapCenter,
     setPersistedMapZoom,
     setSelectedObservationLayerUrl,
-    setSelectedObservationType,
     markerCoordinates,
     observationMarkerValue,
-    sensorFilterOptions,
-    isSensorFilterUsed,
-    selectedSensor,
-    setSelectedSensor,
     filteredDatasetOptions,
   } = useContext(ObservationsPageContext)
 
@@ -92,8 +120,11 @@ export const Observations = () => {
     setIsMapLoading,
   })
 
-  const handleSelectObservationType = (value: string) => {
-    setSelectedObservationType?.(value)
+  const handleAutoCompleteChange = (value: Array<string>, type: string) => {
+    setObservationParameters({
+      ...observationParameters,
+      [type]: value,
+    })
   }
 
   const handleSelectAssetsClick = () => {
@@ -105,51 +136,80 @@ export const Observations = () => {
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
           <div className={formStyles.multipleInputsRow}>
-            <InputLabelContainer>
-              <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="observation-type">Observation Type</label>
-                <InfoPopover>{observationTypePopupContent}</InfoPopover>
-              </div>
-
-              <Select.Root
-                onValueChange={handleSelectObservationType}
-                value={selectedObservationType}
-              >
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="observation-type">
-                  {observationTypeConfigs?.map(({ value, label }) => (
-                    <Select.Item value={value} key={value}>
-                      {label}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-
-            {isSensorFilterUsed ? (
-              <InputLabelContainer>
-                <div className={formStyles.labelWithInfoPopoverRow}>
-                  <label htmlFor="sensor">Sensor</label>
-                  <InfoPopover>{observationSensorPopupContent}</InfoPopover>
-                </div>
-
-                <Select.Root
-                  onValueChange={setSelectedSensor}
-                  value={selectedSensor}
-                >
-                  <Select.Trigger placeholder="Select" />
-                  <Select.Content id="sensor">
-                    {sensorFilterOptions.map((option) => (
-                      <Select.Item value={option} key={option}>
-                        {option}
-                      </Select.Item>
-                    ))}
-                  </Select.Content>
-                </Select.Root>
-              </InputLabelContainer>
-            ) : null}
+            <Autocomplete
+              onChange={(event, value) =>
+                handleAutoCompleteChange(value, 'years')
+              }
+              size="small"
+              fullWidth
+              multiple
+              options={VALID_OBSERVATION_YEARS}
+              renderInput={(params) => (
+                <MuiTextField {...params} label="Year" />
+              )}
+              value={observationParameters.years}
+            />
           </div>
-
+          <div className={formStyles.multipleInputsRow}>
+            <Autocomplete
+              onChange={(event, value) =>
+                handleAutoCompleteChange(value, 'months')
+              }
+              size="small"
+              fullWidth
+              multiple
+              options={VALID_OBSERVATION_MONTHS}
+              renderInput={(params) => (
+                <MuiTextField {...params} label="Months" />
+              )}
+              value={observationParameters.months}
+            />
+          </div>
+          <div className={formStyles.multipleInputsRow}>
+            <Autocomplete
+              onChange={(event, value) =>
+                handleAutoCompleteChange(value, 'sensors')
+              }
+              size="small"
+              fullWidth
+              multiple
+              options={AVAILABLE_OBSERVATION_SENSORS}
+              renderInput={(params) => (
+                <MuiTextField {...params} label="Sensor" />
+              )}
+              value={observationParameters.sensors}
+            />
+          </div>
+          <div className={formStyles.multipleInputsRow}>
+            <Autocomplete
+              onChange={(event, value) =>
+                handleAutoCompleteChange(value, 'timeOfDay')
+              }
+              size="small"
+              fullWidth
+              multiple
+              options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
+              renderInput={(params) => (
+                <MuiTextField {...params} label="Time of day" />
+              )}
+              value={observationParameters.timeOfDay}
+            />
+          </div>
+          <div className={formStyles.multipleInputsRow}>
+            <Autocomplete
+              onChange={(event, value) =>
+                handleAutoCompleteChange(value, 'revisitPeriod')
+              }
+              size="small"
+              fullWidth
+              multiple
+              options={AVAILABLE_OBSERVATION_REVISIT_PERIODS}
+              renderInput={(params) => (
+                <MuiTextField {...params} label="Revisit Period" />
+              )}
+              value={observationParameters.revisitPeriod}
+            />
+          </div>
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
               <label htmlFor="observation-date">Datasets Available</label>

@@ -8,7 +8,13 @@ interface LSTParams {
   period: string // ["daily", "monthly"]
 }
 
-export function GetKerchunkUrl(years: number[], months: number[], sensor: string, timeOfDay: string, period: string): ObservationDatasetOption[] {
+export function GetKerchunkUrl(
+  years: number[],
+  months: number[],
+  sensor: string,
+  timeOfDay: string,
+  period: string,
+): ObservationDatasetOption[] {
   validate(sensor, timeOfDay, period)
 
   const p_years: LSTParams[] = []

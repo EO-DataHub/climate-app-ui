@@ -1,27 +1,51 @@
 import { ObservationDatasetOption } from './fakeApiData.ts'
 
-export interface LSTParams {
+interface LSTParams {
   year: number
   month: number
   sensor: string // ["sentinel3a", "sentinel3b", "all"]
   timeOfDay: string // ["day", "night", "all"]
-  type: string // ["daily", "monthly"]
+  period: string // ["daily", "monthly"]
 }
 
-export function GetKerchunkUrl(params: LSTParams): ObservationDatasetOption[] {
-  validate(params)
+export function GetKerchunkUrl(
+  years: number[],
+  months: number[],
+  sensor: string,
+  timeOfDay: string,
+  period: string,
+): ObservationDatasetOption[] {
+  validate(sensor, timeOfDay, period)
+
+  const p_years: LSTParams[] = []
+
+  for (const year of years) {
+    for (const month of months) {
+      const param: LSTParams = {
+        year: year,
+        month: month,
+        sensor: sensor,
+        timeOfDay: timeOfDay,
+        period: period,
+      }
+
+      p_years.push(param)
+    }
+  }
 
   const p: LSTParams[] = []
 
-  if (params.sensor === 'all') {
-    const a = { ...params }
-    a.sensor = 'sentinel3a'
-    p.push(a)
-    const b = { ...params }
-    b.sensor = 'sentinel3b'
-    p.push(b)
-  } else {
-    p.push(params)
+  for (const param of p_years) {
+    if (param.sensor === 'all') {
+      const a = { ...param }
+      a.sensor = 'sentinel3a'
+      p.push(a)
+      const b = { ...param }
+      b.sensor = 'sentinel3b'
+      p.push(b)
+    } else {
+      p.push(param)
+    }
   }
 
   const pp: LSTParams[] = []
@@ -38,14 +62,16 @@ export function GetKerchunkUrl(params: LSTParams): ObservationDatasetOption[] {
       pp.push(pItem)
     }
   }
+
   // const foo: string = "https://eocis.org/data/eocis-lst-s3a-night-kerchunk/2024/01/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240101000000-fv4.00-kerchunk.json";
   const output: ObservationDatasetOption[] = []
-  const numberOfDays =
-    params.type === 'monthly'
-      ? 1
-      : new Date(params.year, params.month, 0).getDate()
 
   for (const param of pp) {
+    const numberOfDays =
+      param.period === 'monthly'
+        ? 1
+        : new Date(param.year, param.month, 0).getDate()
+
     const shortSat = param.sensor === 'sentinel3a' ? 's3a' : 's3b'
     const time = param.timeOfDay
     const year = param.year
@@ -53,7 +79,7 @@ export function GetKerchunkUrl(params: LSTParams): ObservationDatasetOption[] {
     const longSat = param.sensor === 'sentinel3a' ? 'SLSTRA' : 'SLSTRB'
     const prettySat =
       param.sensor === 'sentinel3a' ? 'Sentinel 3A' : 'Sentinel 3B'
-    const type = param.type.toUpperCase()
+    const type = param.period.toUpperCase()
     const timeOfDay = param.timeOfDay.toUpperCase()
 
     for (let i = 1; i <= numberOfDays; i++) {
@@ -74,16 +100,16 @@ export function GetKerchunkUrl(params: LSTParams): ObservationDatasetOption[] {
   return output
 }
 
-function validate(params: LSTParams) {
-  if (!['sentinel3a', 'sentinel3b', 'all'].some((x) => x === params.sensor)) {
-    throw new Error(`Invalid sensor value "${params.sensor}"`)
+function validate(sensor: string, timeOfDay: string, period: string) {
+  if (!['sentinel3a', 'sentinel3b', 'all'].some((x) => x === sensor)) {
+    throw new Error(`Invalid sensor value "${sensor}"`)
   }
 
-  if (!['day', 'night', 'all'].some((x) => x === params.timeOfDay)) {
-    throw new Error(`Invalid time of day "${params.timeOfDay}"`)
+  if (!['day', 'night', 'all'].some((x) => x === timeOfDay)) {
+    throw new Error(`Invalid time of day "${timeOfDay}"`)
   }
 
-  if (!['daily', 'monthly'].some((x) => x === params.type)) {
-    throw new Error(`Invalid type "${params.type}"`)
+  if (!['daily', 'monthly'].some((x) => x === period)) {
+    throw new Error(`Invalid type "${period}"`)
   }
 }

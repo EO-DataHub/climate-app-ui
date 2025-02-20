@@ -238,7 +238,6 @@ export const Observations = () => {
 
         setDatasetOptions(newDatasetOptions)
       } catch (error) {
-        console.warn(error)
         setDatasetOptions(undefined)
       }
     }

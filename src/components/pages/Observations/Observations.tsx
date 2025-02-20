@@ -73,9 +73,13 @@ export const Observations = () => {
       mapRef,
       isMapLoaded,
     })
+
+  const use_cog_urls = selectedObservationLayerUrl?.endsWith('.tif') ?? false
+
   useGetObservationValueByMapclick({
     isMapLoaded,
     mapRef,
+    use_cog_urls,
   })
 
   useUpdateObservationsMapTiles({
@@ -84,6 +88,7 @@ export const Observations = () => {
     maxTemp,
     minTemp,
     selectedObservationLayerUrl,
+    use_cog_urls,
     setIsMapLoading,
   })
 

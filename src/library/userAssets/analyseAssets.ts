@@ -6,7 +6,7 @@ import { getResultsUrl } from '../api/getUrls'
 import { HubWorkflowPresetInputs } from '../api/apiTypes'
 import AuthenticatedAxios from '../axios'
 
-const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+const HUB_BASE_URL = import.meta.env.VITE_WORKFLOW_BASE_URL
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 const initiateAssetsRiskAnalysis = async ({

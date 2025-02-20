@@ -37,6 +37,8 @@ interface AutoCompleteOption {
   value: number | string
 }
 
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
 const VALID_OBSERVATION_YEARS = [
@@ -431,14 +433,13 @@ export const Observations = () => {
     }
   }
 
+  const legendUrl = `${HUB_BASE_URL}/titiler/core/colorMaps/jet?format=png`
+
   const legend = (
     <div className={observationStyles.legendWrapper}>
       <figure>
         <figcaption>Degrees Celsius</figcaption>
-        <img
-          src="https://test.eodatahub.org.uk/titiler/core/colorMaps/jet?format=png"
-          alt="Color Map Legend"
-        />
+        <img src={legendUrl} alt="Color Map Legend" />
       </figure>
 
       <div className={observationStyles.legendInputWrapper}>

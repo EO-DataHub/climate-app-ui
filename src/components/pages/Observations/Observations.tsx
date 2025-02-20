@@ -223,19 +223,24 @@ export const Observations = () => {
       const flatMonths = flattenParameters(months).map((year) => Number(year))
 
       const sensorsParam = sensors.length > 1 ? 'all' : sensors[0].value
-      const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0].value
+      const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0]?.value
       const revisitPeriodParam =
-        timeOfDay.length > 1 ? 'all' : revisitPeriod[0].value
+        revisitPeriod.length > 1 ? 'all' : revisitPeriod[0]?.value
 
-      const newDatasetOptions = GetKerchunkUrl(
-        flatYears,
-        flatMonths,
-        sensorsParam,
-        timeOfDayParam,
-        revisitPeriodParam,
-      )
+      try {
+        const newDatasetOptions = GetKerchunkUrl(
+          flatYears,
+          flatMonths,
+          sensorsParam,
+          timeOfDayParam,
+          revisitPeriodParam,
+        )
 
-      setDatasetOptions(newDatasetOptions)
+        setDatasetOptions(newDatasetOptions)
+      } catch (error) {
+        console.warn(error)
+        setDatasetOptions(undefined)
+      }
     }
   }, [observationParameters, setDatasetOptions])
 

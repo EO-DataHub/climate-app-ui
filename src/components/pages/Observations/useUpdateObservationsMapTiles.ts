@@ -6,6 +6,8 @@ import {
 import { RasterTileSource } from 'maplibre-gl'
 import { MapRef } from '../../Map/useMap'
 
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+
 export const useUpdateObservationsMapTiles = ({
   isMapLoaded,
   mapRef,
@@ -34,8 +36,8 @@ export const useUpdateObservationsMapTiles = ({
         MapSourceIds.OBSERVATIONS,
       ) as RasterTileSource
       const titilerUrl = use_cog_urls
-        ? `https://test.eodatahub.org.uk/titiler/core/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
-        : `https://staging.eodatahub.org.uk/titiler/xarray/tiles/{z}/{x}/{y}?url=${selectedObservationLayerUrl}&rescale=${parseFloat(minTemp) + 273.15},${parseFloat(maxTemp) + 273.15}&colormap_name=jet&variable=lst&tileMatrixSetId=WebMercatorQuad&scale=1&multiscale=false&reference=true&decode_times=true&consolidated=false&return_mask=true`
+        ? `${HUB_BASE_URL}/titiler/core/cog/tiles/WebMercatorQuad/{z}/{x}/{y}.png?url=${selectedObservationLayerUrl}&rescale=${minTemp},${maxTemp}&colormap_name=jet`
+        : `${HUB_BASE_URL}/titiler/xarray/tiles/{z}/{x}/{y}?url=${selectedObservationLayerUrl}&rescale=${parseFloat(minTemp) + 273.15},${parseFloat(maxTemp) + 273.15}&colormap_name=jet&variable=lst&tileMatrixSetId=WebMercatorQuad&scale=1&multiscale=false&reference=true&decode_times=true&consolidated=false&return_mask=true`
       if (!observationsSource) {
         mapRef.current.addSource(MapSourceIds.OBSERVATIONS, {
           type: 'raster',

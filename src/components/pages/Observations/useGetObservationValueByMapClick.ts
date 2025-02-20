@@ -4,6 +4,8 @@ import { MapRef } from '../../Map/useMap'
 import axios from 'axios'
 import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+
 export const useGetObservationValueByMapclick = ({
   isMapLoaded,
   mapRef,
@@ -42,7 +44,7 @@ export const useGetObservationValueByMapclick = ({
         const axiosController = new AbortController()
 
         const queryUrl = use_cog_urls
-          ? `https://test.eodatahub.org.uk/titiler/core/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
+          ? `${HUB_BASE_URL}/titiler/core/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
           : `https://eodh-eu.sparkgeo.uk/get_hazard_value?zarr_path=${selectedObservationLayerUrl}&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}&expression=x-273.15`
         setObservationMarkerValue(null)
 

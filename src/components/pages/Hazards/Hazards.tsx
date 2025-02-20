@@ -39,6 +39,8 @@ import { LocationValueOverview } from '../../LocationValueOverview/LocationValue
 import { HazardsPageContext } from '../../../context/HazardsPageContext'
 import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
 
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+
 export const Hazards = () => {
   const {
     climateModel,
@@ -159,7 +161,7 @@ export const Hazards = () => {
         }),
       )
 
-      const tileUrlToUse = `https://test.eodatahub.org.uk/titiler/xarray/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
+      const tileUrlToUse = `${HUB_BASE_URL}/titiler/xarray/tiles/WebMercatorQuad/{z}/{x}/{y}@1x?url=${zarrPath}&variable=data&colormap=${titilerColormap}&maxzoom10=`
 
       if (!hazardSource) {
         mapRef.current.addSource(MapSourceIds.HAZARDS, {

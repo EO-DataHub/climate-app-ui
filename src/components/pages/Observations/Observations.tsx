@@ -7,7 +7,7 @@ import {
   Text,
   TextField,
 } from '@radix-ui/themes'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -30,42 +30,132 @@ import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import observationStyles from './Observations.module.scss'
 import { Autocomplete, TextField as MuiTextField } from '@mui/material'
+import { GetKerchunkUrl } from '../../../library/api/getKerchunkUrl'
+
+interface AutoCompleteOption {
+  label: string
+  value: number | string
+}
 
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
 const VALID_OBSERVATION_YEARS = [
-  '2024',
-  '2023',
-  '2022',
-  '2021',
-  '2020',
-  '2019',
-  '2018',
+  {
+    label: '2024',
+    value: 2024,
+  },
+  {
+    label: '2023',
+    value: 2023,
+  },
+  {
+    label: '2022',
+    value: 2022,
+  },
+  {
+    label: '2021',
+    value: 2021,
+  },
+  {
+    label: '2020',
+    value: 2020,
+  },
+  {
+    label: '2019',
+    value: 2019,
+  },
+  {
+    label: '2018',
+    value: 2018,
+  },
 ]
 const VALID_OBSERVATION_MONTHS = [
-  'January',
-  'Februray',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  {
+    label: 'January',
+    value: 1,
+  },
+  {
+    label: 'Februray',
+    value: 2,
+  },
+  {
+    label: 'March',
+    value: 3,
+  },
+  {
+    label: 'April',
+    value: 4,
+  },
+  {
+    label: 'May',
+    value: 5,
+  },
+  {
+    label: 'June',
+    value: 6,
+  },
+  {
+    label: 'July',
+    value: 7,
+  },
+  {
+    label: 'August',
+    value: 8,
+  },
+  {
+    label: 'September',
+    value: 9,
+  },
+  {
+    label: 'Ocotber',
+    value: 10,
+  },
+  {
+    label: 'November',
+    value: 11,
+  },
+  {
+    label: 'Februray',
+    value: 12,
+  },
 ]
-const AVAILABLE_OBSERVATION_SENSORS = ['Sentinel 3A (1km)', 'Sentinel 3B (1km)']
-const AVAILABLE_OBSERVATION_TIME_OF_DAY = ['Day', 'Night']
-const AVAILABLE_OBSERVATION_REVISIT_PERIODS = ['Daily', 'Monthly Average']
+const AVAILABLE_OBSERVATION_SENSORS = [
+  {
+    label: 'Sentinel 3A (1km)',
+    value: 'sentinel3a',
+  },
+  {
+    label: 'Sentinel 3B (1km)',
+    value: 'sentinel3b',
+  },
+]
+const AVAILABLE_OBSERVATION_TIME_OF_DAY = [
+  {
+    label: 'Day',
+    value: 'day',
+  },
+  {
+    label: 'Night',
+    value: 'night',
+  },
+]
+const AVAILABLE_OBSERVATION_REVISIT_PERIODS = [
+  {
+    label: 'Daily',
+    value: 'daily',
+  },
+  {
+    label: 'Monthly (Average)',
+    value: 'monthly',
+  },
+]
 
 const DEFAULT_OBSERVATION_PARAMETERS = {
-  years: ['2024'],
-  months: ['January'],
-  sensors: ['Sentinel 3A (1km)'],
-  timeOfDay: ['Day'],
-  revisitPeriod: ['Daily'],
+  years: [VALID_OBSERVATION_YEARS[0]],
+  months: [VALID_OBSERVATION_MONTHS[0]],
+  sensors: [AVAILABLE_OBSERVATION_SENSORS[0]],
+  timeOfDay: [AVAILABLE_OBSERVATION_TIME_OF_DAY[0]],
+  revisitPeriod: [AVAILABLE_OBSERVATION_REVISIT_PERIODS[0]],
 }
 
 export const Observations = () => {
@@ -81,13 +171,14 @@ export const Observations = () => {
   const {
     persistedMapCenter,
     persistedMapZoom,
-    selectedObservationLayerUrl,
+    selectedObservationLayerUrl = '',
     setPersistedMapCenter,
     setPersistedMapZoom,
     setSelectedObservationLayerUrl,
+    setDatasetOptions,
+    datasetOptions,
     markerCoordinates,
     observationMarkerValue,
-    filteredDatasetOptions,
   } = useContext(ObservationsPageContext)
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
@@ -120,7 +211,38 @@ export const Observations = () => {
     setIsMapLoading,
   })
 
-  const handleAutoCompleteChange = (value: Array<string>, type: string) => {
+  useEffect(() => {
+    if (setDatasetOptions) {
+      const { years, months, sensors, timeOfDay, revisitPeriod } =
+        observationParameters
+
+      const flattenParameters = (array: AutoCompleteOption[]) =>
+        array.map((input: AutoCompleteOption) => input.value)
+
+      const flatYears = flattenParameters(years).map((year) => Number(year))
+      const flatMonths = flattenParameters(months).map((year) => Number(year))
+
+      const sensorsParam = sensors.length > 1 ? 'all' : sensors[0].value
+      const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0].value
+      const revisitPeriodParam =
+        timeOfDay.length > 1 ? 'all' : revisitPeriod[0].value
+
+      const newDatasetOptions = GetKerchunkUrl(
+        flatYears,
+        flatMonths,
+        sensorsParam,
+        timeOfDayParam,
+        revisitPeriodParam,
+      )
+
+      setDatasetOptions(newDatasetOptions)
+    }
+  }, [observationParameters, setDatasetOptions])
+
+  const handleAutoCompleteChange = (
+    value: AutoCompleteOption[],
+    type: string,
+  ) => {
     setObservationParameters({
       ...observationParameters,
       [type]: value,
@@ -137,9 +259,7 @@ export const Observations = () => {
         <form className={sidebarStyles.contentForm}>
           <div className={formStyles.multipleInputsRow}>
             <Autocomplete
-              onChange={(event, value) =>
-                handleAutoCompleteChange(value, 'years')
-              }
+              onChange={(_, value) => handleAutoCompleteChange(value, 'years')}
               size="small"
               fullWidth
               multiple
@@ -152,22 +272,20 @@ export const Observations = () => {
           </div>
           <div className={formStyles.multipleInputsRow}>
             <Autocomplete
-              onChange={(event, value) =>
-                handleAutoCompleteChange(value, 'months')
-              }
+              onChange={(_, value) => handleAutoCompleteChange(value, 'months')}
               size="small"
               fullWidth
               multiple
               options={VALID_OBSERVATION_MONTHS}
               renderInput={(params) => (
-                <MuiTextField {...params} label="Months" />
+                <MuiTextField {...params} label="Month" />
               )}
               value={observationParameters.months}
             />
           </div>
           <div className={formStyles.multipleInputsRow}>
             <Autocomplete
-              onChange={(event, value) =>
+              onChange={(_, value) =>
                 handleAutoCompleteChange(value, 'sensors')
               }
               size="small"
@@ -182,7 +300,7 @@ export const Observations = () => {
           </div>
           <div className={formStyles.multipleInputsRow}>
             <Autocomplete
-              onChange={(event, value) =>
+              onChange={(_, value) =>
                 handleAutoCompleteChange(value, 'timeOfDay')
               }
               size="small"
@@ -197,7 +315,7 @@ export const Observations = () => {
           </div>
           <div className={formStyles.multipleInputsRow}>
             <Autocomplete
-              onChange={(event, value) =>
+              onChange={(_, value) =>
                 handleAutoCompleteChange(value, 'revisitPeriod')
               }
               size="small"
@@ -220,7 +338,7 @@ export const Observations = () => {
             >
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-date">
-                {filteredDatasetOptions.map((option) => (
+                {datasetOptions?.map((option) => (
                   <Select.Item key={option.value} value={option.value}>
                     {option.label}
                   </Select.Item>

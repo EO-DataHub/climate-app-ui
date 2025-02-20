@@ -28,6 +28,7 @@
 .contentForm {
   @include containers.flexColumnStartStart;
   width: 100%;
+  padding: var(--space-1);
   box-sizing: border-box;
 }
 

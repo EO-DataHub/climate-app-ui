@@ -222,7 +222,7 @@ export const Observations = () => {
       const flatYears = flattenParameters(years).map((year) => Number(year))
       const flatMonths = flattenParameters(months).map((year) => Number(year))
 
-      const sensorsParam = sensors.length > 1 ? 'all' : sensors[0].value
+      const sensorsParam = sensors.length > 1 ? 'all' : sensors[0]?.value
       const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0]?.value
       const revisitPeriodParam =
         revisitPeriod.length > 1 ? 'all' : revisitPeriod[0]?.value

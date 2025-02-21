@@ -5,6 +5,7 @@ import aws_cdk as cdk
 
 from configs.develop import DEPLOY_PROJECT_CONFIG as DEVELOP_PROJECT_CONFIG
 from configs.demo import DEPLOY_PROJECT_CONFIG as DEMO_PROJECT_CONFIG
+from configs.test import DEPLOY_PROJECT_CONFIG as TEST_PROJECT_CONFIG
 from stacks.static_site import StaticSiteStack
 
 app = cdk.App()
@@ -28,4 +29,13 @@ demo_site = StaticSiteStack(
     config=DEMO_PROJECT_CONFIG,
 )
 
+test_site = StaticSiteStack(
+    app,
+    f"{TEST_PROJECT_CONFIG.environment}-{TEST_PROJECT_CONFIG.project}-static-site",
+    env=cdk.Environment(
+        account=os.environ.get("CDK_DEPLOY_ACCOUNT"),
+        region=os.environ.get("CDK_DEPLOY_REGION"),
+    ),
+    config=TEST_PROJECT_CONFIG,
+)
 app.synth()

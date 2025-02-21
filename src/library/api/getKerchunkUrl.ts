@@ -11,15 +11,15 @@ interface LSTParams {
 }
 
 interface Feature {
-  collection: string,
+  collection: string
   properties: {
-    datetime: string,
-    platform: string,
-    "lst:type": string | undefined,
-  },
+    datetime: string
+    platform: string
+    'lst:type': string | undefined
+  }
   assets: {
     reference_file: {
-      href: string,
+      href: string
     }
   }
 }
@@ -67,48 +67,46 @@ function buildCQL2Query(
       const numberOfDays = new Date(year, month, 0).getDate()
       const monthPad = month.toString().padStart(2, '0')
 
-      dateArgs.push(
-        {
-          'op': 'and',
-          'args': [
-            {
-              'op': '>=',
-              'args': [
-                {
-                  'property': 'properties.datetime',
-                },
-                `${year}-${monthPad}-01`,
-              ],
-            },
-            {
-              'op': '<=',
-              'args': [
-                {
-                  'property': 'properties.datetime',
-                },
-                `${year}-${monthPad}-${numberOfDays}`,
-              ],
-            },
-          ],
-        },
-      )
+      dateArgs.push({
+        op: 'and',
+        args: [
+          {
+            op: '>=',
+            args: [
+              {
+                property: 'properties.datetime',
+              },
+              `${year}-${monthPad}-01`,
+            ],
+          },
+          {
+            op: '<=',
+            args: [
+              {
+                property: 'properties.datetime',
+              },
+              `${year}-${monthPad}-${numberOfDays}`,
+            ],
+          },
+        ],
+      })
     }
   }
 
   const dateQuery = {
-    'op': 'or',
-    'args': dateArgs,
+    op: 'or',
+    args: dateArgs,
   }
 
-  const prettySat = sensors.map(sensor => {
+  const prettySat = sensors.map((sensor) => {
     return sensor === 'sentinel3a' ? 'Sentinel3A' : 'Sentinel3B'
   })
 
   const sensorQuery = {
-    'op': 'in',
-    'args': [
+    op: 'in',
+    args: [
       {
-        'property': 'properties.platform',
+        property: 'properties.platform',
       },
       prettySat,
     ],
@@ -131,33 +129,32 @@ function buildCQL2Query(
   }
 
   const collectionQuery = {
-    'op': 'in',
-    'args': [
+    op: 'in',
+    args: [
       {
-        'property': 'collection',
+        property: 'collection',
       },
       collections,
     ],
   }
 
   return {
-    'fields': {
-      'include': [
-        'properties'
-      ]
+    fields: {
+      include: ['properties'],
     },
-    'filter': {
-      'op': 'and',
-      'args': [
-        collectionQuery, sensorQuery, dateQuery,
-      ],
+    filter: {
+      op: 'and',
+      args: [collectionQuery, sensorQuery, dateQuery],
     },
   }
 }
 
 async function executeCQL2Query(query: object): Promise<FeatureCollection> {
   async function _runQuery(query: object) {
-    return await axios.post('https://test.eodatahub.org.uk/api/catalogue/stac/' + 'search', query)
+    return await axios.post(
+      'https://test.eodatahub.org.uk/api/catalogue/stac/' + 'search',
+      query,
+    )
   }
 
   try {
@@ -179,11 +176,13 @@ function buildLSTParamsFromSTAC(results: FeatureCollection): LSTParams[] {
       year: date.getFullYear(),
       month: date.getMonth() + 1,
       sensor: feature.properties.platform.toLowerCase(),
-      timeOfDay: feature.collection.slice(feature.collection.lastIndexOf("-") + 1),
-      period: feature.properties['lst:type'] ?? "daily",
+      timeOfDay: feature.collection.slice(
+        feature.collection.lastIndexOf('-') + 1,
+      ),
+      period: feature.properties['lst:type'] ?? 'daily',
       url: feature.assets.reference_file.href,
     }
-    return param;
+    return param
   })
 }
 
@@ -204,7 +203,7 @@ function expandParameters(
         sensor: sensor,
         timeOfDay: timeOfDay,
         period: period,
-        url: undefined
+        url: undefined,
       }
 
       p_years.push(param)
@@ -268,7 +267,7 @@ function buildURLs(params: LSTParams[]) {
       const day = i.toString().padStart(2, '0')
       let URL = `https://leicester-lst-monthly.s3.eu-west-1.amazonaws.com/ESACCI-LST-L3C-LST-${longSat}-0.01deg_1${type}_${timeOfDay}-${year}${month}${day}000000-fv4.00.json`
 
-      if (type === "daily") {
+      if (type === 'daily') {
         URL = `https://eocis.org/data/eocis-lst-${shortSat}-${time}-kerchunk/${year}/${month}/EOCIS_-LST-L3C-LST-${longSat}-0.01deg_1${type}_${timeOfDay}-${year}${month}${day}000000-fv4.00-kerchunk.json`
       }
 

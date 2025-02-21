@@ -10,6 +10,7 @@ from constructs import Construct
 
 from configs import ProjectConfig
 
+
 class StaticSiteStack(Stack):
     def __init__(
         self, scope: Construct, id: str, config: ProjectConfig, **kwargs
@@ -36,18 +37,21 @@ class StaticSiteStack(Stack):
                 principals=[cfoai_principal],
             )
         )
-    
+
         # Check if the hosted zone already exists
         hosted_zone = route53.HostedZone(
-            self, "HostedZone",
+            self,
+            "HostedZone",
             zone_name=f"{config.project}.sparkgeo.dev",
-            comment="Hosted Zone for EODH website"
+            comment="Hosted Zone for EODH website",
         )
 
-        cert = acm.Certificate(self, "Certificate",
+        cert = acm.Certificate(
+            self,
+            "Certificate",
             domain_name=f"*.{config.project}.sparkgeo.dev",
             certificate_name=f"{config.project}-certificate",
-            validation=acm.CertificateValidation.from_dns(hosted_zone)
+            validation=acm.CertificateValidation.from_dns(hosted_zone),
         )
 
         behaviour_options = cf.BehaviorOptions(
@@ -63,27 +67,29 @@ class StaticSiteStack(Stack):
             domain_names=[f"{config.environment}.{config.project}.sparkgeo.dev"],
             certificate=cert,
             error_responses=[
-            cf.ErrorResponse(
-                http_status=404,
-                response_page_path="/index.html",
-                response_http_status=200,
-            ),
-            cf.ErrorResponse(
-                http_status=403,
-                response_page_path="/index.html",
-                response_http_status=200,
-            ),
+                cf.ErrorResponse(
+                    http_status=404,
+                    response_page_path="/index.html",
+                    response_http_status=200,
+                ),
+                cf.ErrorResponse(
+                    http_status=403,
+                    response_page_path="/index.html",
+                    response_http_status=200,
+                ),
             ],
             default_behavior=behaviour_options,
             default_root_object="index.html",
         )
 
         a_record = route53.ARecord(
-            self, 
+            self,
             "ARecord",
             zone=hosted_zone,
             record_name=f"{config.environment}",
-            target=route53.RecordTarget.from_alias(route53_targets.CloudFrontTarget(distribution))
+            target=route53.RecordTarget.from_alias(
+                route53_targets.CloudFrontTarget(distribution)
+            ),
         )
 
         CfnOutput(

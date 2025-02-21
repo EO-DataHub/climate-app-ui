@@ -37,6 +37,14 @@ interface AutoCompleteOption {
   value: number | string
 }
 
+interface ObservationFilterProps {
+  value: AutoCompleteOption[]
+  options: AutoCompleteOption[]
+  filterType: string
+  label: string
+  showAllButton?: boolean
+}
+
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
 const VALID_OBSERVATION_YEARS = [
@@ -71,19 +79,19 @@ const VALID_OBSERVATION_YEARS = [
 ]
 const VALID_OBSERVATION_MONTHS = [
   {
-    label: 'January',
+    label: 'Jan',
     value: 1,
   },
   {
-    label: 'Februray',
+    label: 'Feb',
     value: 2,
   },
   {
-    label: 'March',
+    label: 'Mar',
     value: 3,
   },
   {
-    label: 'April',
+    label: 'Apr',
     value: 4,
   },
   {
@@ -91,31 +99,31 @@ const VALID_OBSERVATION_MONTHS = [
     value: 5,
   },
   {
-    label: 'June',
+    label: 'Jun',
     value: 6,
   },
   {
-    label: 'July',
+    label: 'Jul',
     value: 7,
   },
   {
-    label: 'August',
+    label: 'Aug',
     value: 8,
   },
   {
-    label: 'September',
+    label: 'Sep',
     value: 9,
   },
   {
-    label: 'Ocotber',
+    label: 'Oct',
     value: 10,
   },
   {
-    label: 'November',
+    label: 'Nov',
     value: 11,
   },
   {
-    label: 'Februray',
+    label: 'Dec',
     value: 12,
   },
 ]
@@ -139,23 +147,23 @@ const AVAILABLE_OBSERVATION_TIME_OF_DAY = [
     value: 'night',
   },
 ]
-const AVAILABLE_OBSERVATION_REVISIT_PERIODS = [
+const AVAILABLE_OBSERVATION_TYPES = [
   {
     label: 'Daily',
     value: 'daily',
   },
   {
-    label: 'Monthly (Average)',
+    label: 'Monthly (Avg)',
     value: 'monthly',
   },
 ]
 
 const DEFAULT_OBSERVATION_PARAMETERS = {
   years: [VALID_OBSERVATION_YEARS[0]],
-  months: [VALID_OBSERVATION_MONTHS[0]],
-  sensors: [AVAILABLE_OBSERVATION_SENSORS[0]],
-  timeOfDay: [AVAILABLE_OBSERVATION_TIME_OF_DAY[0]],
-  revisitPeriod: [AVAILABLE_OBSERVATION_REVISIT_PERIODS[0]],
+  months: VALID_OBSERVATION_MONTHS,
+  sensors: AVAILABLE_OBSERVATION_SENSORS,
+  timeOfDay: AVAILABLE_OBSERVATION_TIME_OF_DAY,
+  observation: [AVAILABLE_OBSERVATION_TYPES[1]],
 }
 
 export const Observations = () => {
@@ -213,7 +221,7 @@ export const Observations = () => {
 
   useEffect(() => {
     if (setDatasetOptions) {
-      const { years, months, sensors, timeOfDay, revisitPeriod } =
+      const { years, months, sensors, timeOfDay, observation } =
         observationParameters
 
       const flattenParameters = (array: AutoCompleteOption[]) =>
@@ -224,8 +232,8 @@ export const Observations = () => {
 
       const sensorsParam = sensors.length > 1 ? 'all' : sensors[0]?.value
       const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0]?.value
-      const revisitPeriodParam =
-        revisitPeriod.length > 1 ? 'all' : revisitPeriod[0]?.value
+      const observationParam =
+        observation.length > 1 ? 'all' : observation[0]?.value
 
       try {
         const newDatasetOptions = GetKerchunkUrl(
@@ -233,7 +241,7 @@ export const Observations = () => {
           flatMonths,
           sensorsParam,
           timeOfDayParam,
-          revisitPeriodParam,
+          observationParam,
         )
 
         setDatasetOptions(newDatasetOptions)
@@ -244,12 +252,12 @@ export const Observations = () => {
   }, [observationParameters, setDatasetOptions])
 
   const handleAutoCompleteChange = (
-    value: AutoCompleteOption[],
+    options: AutoCompleteOption[],
     type: string,
   ) => {
     setObservationParameters({
       ...observationParameters,
-      [type]: value,
+      [type]: options,
     })
   }
 
@@ -257,79 +265,92 @@ export const Observations = () => {
     navigate('/assets')
   }
 
+  const ObservationFilterSelect = ({
+    value,
+    options,
+    filterType,
+    label,
+    showAllButton,
+  }: ObservationFilterProps) => (
+    <>
+      <Autocomplete
+        onChange={(_, option) => handleAutoCompleteChange(option, filterType)}
+        size="small"
+        disableCloseOnSelect
+        disableClearable
+        fullWidth
+        limitTags={2}
+        multiple
+        options={options}
+        renderInput={(params) => (
+          <MuiTextField
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...params}
+            label={label}
+          />
+        )}
+        value={value}
+      />
+      {showAllButton && (
+        <Button
+          variant="soft"
+          onClick={(event) => {
+            event.preventDefault()
+            handleAutoCompleteChange(options, filterType)
+          }}
+          size="2"
+        >
+          All
+        </Button>
+      )}
+    </>
+  )
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
+          <InputLabelContainer>
+            <div className={formStyles.labelWithInfoPopoverRow}>
+              <label htmlFor="observation-date">Find Datasets</label>
+            </div>
+          </InputLabelContainer>
           <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) => handleAutoCompleteChange(value, 'years')}
-              size="small"
-              fullWidth
-              multiple
-              options={VALID_OBSERVATION_YEARS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Year" />
-              )}
+            <ObservationFilterSelect
               value={observationParameters.years}
+              options={VALID_OBSERVATION_YEARS}
+              filterType="years"
+              label="Years"
+              showAllButton
             />
-          </div>
-          <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) => handleAutoCompleteChange(value, 'months')}
-              size="small"
-              fullWidth
-              multiple
-              options={VALID_OBSERVATION_MONTHS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Month" />
-              )}
+            <ObservationFilterSelect
               value={observationParameters.months}
+              options={VALID_OBSERVATION_MONTHS}
+              filterType="months"
+              label="Months"
+              showAllButton
             />
           </div>
           <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) =>
-                handleAutoCompleteChange(value, 'sensors')
-              }
-              size="small"
-              fullWidth
-              multiple
-              options={AVAILABLE_OBSERVATION_SENSORS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Sensor" />
-              )}
-              value={observationParameters.sensors}
+            <ObservationFilterSelect
+              value={observationParameters.observation}
+              options={AVAILABLE_OBSERVATION_TYPES}
+              filterType="observation"
+              label="Observation Type"
             />
-          </div>
-          <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) =>
-                handleAutoCompleteChange(value, 'timeOfDay')
-              }
-              size="small"
-              fullWidth
-              multiple
-              options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Time of day" />
-              )}
+            <ObservationFilterSelect
               value={observationParameters.timeOfDay}
+              options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
+              filterType="timeOfDay"
+              label="TIme of day"
             />
           </div>
           <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) =>
-                handleAutoCompleteChange(value, 'revisitPeriod')
-              }
-              size="small"
-              fullWidth
-              multiple
-              options={AVAILABLE_OBSERVATION_REVISIT_PERIODS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Revisit Period" />
-              )}
-              value={observationParameters.revisitPeriod}
+            <ObservationFilterSelect
+              value={observationParameters.sensors}
+              options={AVAILABLE_OBSERVATION_SENSORS}
+              filterType="sensors"
+              label="Sensors"
             />
           </div>
           <InputLabelContainer>

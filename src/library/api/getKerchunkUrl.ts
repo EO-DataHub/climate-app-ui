@@ -153,7 +153,9 @@ async function executeCQL2Query(query: object): Promise<FeatureCollection> {
   }
 }
 
-function buildLSTParamsFromSTAC(results: FeatureCollection): ObservationDatasetOption[] {
+function buildLSTParamsFromSTAC(
+  results: FeatureCollection,
+): ObservationDatasetOption[] {
   return results.features.map((feature) => {
     const date = new Date(feature.properties.datetime)
 
@@ -161,7 +163,9 @@ function buildLSTParamsFromSTAC(results: FeatureCollection): ObservationDatasetO
     const month = (date.getUTCMonth() + 1).toString().padStart(2, '0')
     const day = date.getUTCDate().toString().padStart(2, '0')
     const prettySat = feature.properties.platform
-    const timeOfDay = feature.properties['lst:time_of_day'] ?? feature.collection.substring(feature.collection.lastIndexOf("-") + 1)
+    const timeOfDay =
+      feature.properties['lst:time_of_day'] ??
+      feature.collection.substring(feature.collection.lastIndexOf('-') + 1)
     const period = feature.properties['lst:type'] ?? 'daily'
 
     const dataset: ObservationDatasetOption = {

@@ -1,115 +1,213 @@
 import { ObservationDatasetOption } from './fakeApiData.ts'
+import axios, { AxiosResponse } from 'axios'
 
-interface LSTParams {
-  year: number
-  month: number
-  sensor: string // ["sentinel3a", "sentinel3b", "all"]
-  timeOfDay: string // ["day", "night", "all"]
-  period: string // ["daily", "monthly"]
+const SEARCH_URL = import.meta.env.VITE_CATALOG_SEARCH_URL
+const PAGE_SIZE = Number(import.meta.env.VITE_CATALOG_PAGE_SIZE)
+
+interface RefFile {
+  reference_file: {
+    href: string
+  }
 }
 
-export function GetKerchunkUrl(
+interface COG {
+  cog: {
+    href: string
+  }
+}
+
+interface Feature {
+  collection: string
+  properties: {
+    datetime: string
+    platform: string
+    'lst:type': string | undefined
+    'lst:time_of_day': string | undefined
+    day_night: string | undefined
+  }
+  assets: RefFile | COG
+}
+
+interface FeatureCollection {
+  features: Feature[]
+}
+
+export async function QuerySTACCatalog(
   years: number[],
   months: number[],
-  sensor: string,
-  timeOfDay: string,
-  period: string,
-): ObservationDatasetOption[] {
-  validate(sensor, timeOfDay, period)
+  sensor: string[],
+  timeOfDay: string[],
+  period: string[],
+): Promise<ObservationDatasetOption[]> {
+  const query = buildCQL2Query(years, months, sensor, timeOfDay, period)
+  const results = await executeCQL2Query(query)
+  return buildLSTParamsFromSTAC(results)
+}
 
-  const p_years: LSTParams[] = []
+function buildCQL2Query(
+  years: number[],
+  months: number[],
+  sensors: string[],
+  timeOfDays: string[],
+  periods: string[],
+): object {
+  const queries = []
+
+  const dateArgs = []
 
   for (const year of years) {
     for (const month of months) {
-      const param: LSTParams = {
-        year: year,
-        month: month,
-        sensor: sensor,
-        timeOfDay: timeOfDay,
-        period: period,
+      const numberOfDays = new Date(year, month, 0).getDate()
+      const monthPad = month.toString().padStart(2, '0')
+
+      dateArgs.push({
+        op: 'and',
+        args: [
+          {
+            op: '>=',
+            args: [
+              {
+                property: 'properties.datetime',
+              },
+              `${year}-${monthPad}-01`,
+            ],
+          },
+          {
+            op: '<=',
+            args: [
+              {
+                property: 'properties.datetime',
+              },
+              `${year}-${monthPad}-${numberOfDays}`,
+            ],
+          },
+        ],
+      })
+    }
+  }
+
+  queries.push({
+    op: 'or',
+    args: dateArgs,
+  })
+
+  const prettySat = sensors
+    .filter((sensor) => {
+      return sensor.startsWith('sentinel')
+    })
+    .map((sensor) => {
+      if (sensor === 'sentinel3a') {
+        return 'Sentinel3A'
+      } else if (sensor === 'sentinel3b') {
+        return 'Sentinel3B'
+      } else {
+        return sensor
       }
+    })
 
-      p_years.push(param)
-    }
+  if (prettySat.length > 0) {
+    queries.push({
+      op: 'in',
+      args: [
+        {
+          property: 'properties.platform',
+        },
+        prettySat,
+      ],
+    })
   }
 
-  const p: LSTParams[] = []
+  const collections = []
 
-  for (const param of p_years) {
-    if (param.sensor === 'all') {
-      const a = { ...param }
-      a.sensor = 'sentinel3a'
-      p.push(a)
-      const b = { ...param }
-      b.sensor = 'sentinel3b'
-      p.push(b)
-    } else {
-      p.push(param)
-    }
-  }
+  for (const period of periods) {
+    for (const timeOfDay of timeOfDays) {
+      for (const sensor of sensors) {
+        const shortSat = sensor === 'sentinel3a' ? 's3a' : 's3b'
 
-  const pp: LSTParams[] = []
-
-  for (const pItem of p) {
-    if (pItem.timeOfDay === 'all') {
-      const day = { ...pItem }
-      day.timeOfDay = 'day'
-      pp.push(day)
-      const night = { ...pItem }
-      night.timeOfDay = 'night'
-      pp.push(night)
-    } else {
-      pp.push(pItem)
-    }
-  }
-
-  // const foo: string = "https://eocis.org/data/eocis-lst-s3a-night-kerchunk/2024/01/EOCIS_-LST-L3C-LST-SLSTRA-0.01deg_1DAILY_NIGHT-20240101000000-fv4.00-kerchunk.json";
-  const output: ObservationDatasetOption[] = []
-
-  for (const param of pp) {
-    const numberOfDays =
-      param.period === 'monthly'
-        ? 1
-        : new Date(param.year, param.month, 0).getDate()
-
-    const shortSat = param.sensor === 'sentinel3a' ? 's3a' : 's3b'
-    const time = param.timeOfDay
-    const year = param.year
-    const month = param.month.toString().padStart(2, '0')
-    const longSat = param.sensor === 'sentinel3a' ? 'SLSTRA' : 'SLSTRB'
-    const prettySat =
-      param.sensor === 'sentinel3a' ? 'Sentinel 3A' : 'Sentinel 3B'
-    const type = param.period.toUpperCase()
-    const timeOfDay = param.timeOfDay.toUpperCase()
-
-    for (let i = 1; i <= numberOfDays; i++) {
-      const day = i.toString().padStart(2, '0')
-      const URL = `https://eocis.org/data/eocis-lst-${shortSat}-${time}-kerchunk/${year}/${month}/EOCIS_-LST-L3C-LST-${longSat}-0.01deg_1${type}_${timeOfDay}-${year}${month}${day}000000-fv4.00-kerchunk.json`
-
-      const dataset: ObservationDatasetOption = {
-        value: URL,
-        label: `${year}-${month}-${day} ${shortSat.toUpperCase()} ${timeOfDay}`,
-        date: `${year}-${month}-${day}`,
-        sensor: prettySat,
-        day_night: timeOfDay,
+        if (period === 'daily') {
+          if (sensor === 'landsat') {
+            collections.push(`col_f99e920a-a58e-11ef-aab0-7a33b70d8782`)
+          } else {
+            collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
+          }
+        } else {
+          collections.push(`esacci-lst-${shortSat}-${timeOfDay}-monthly`)
+        }
       }
-      output.push(dataset)
     }
   }
 
-  return output
+  queries.push({
+    op: 'in',
+    args: [
+      {
+        property: 'collection',
+      },
+      [...new Set(collections)],
+    ],
+  })
+
+  return {
+    limit: PAGE_SIZE,
+    fields: {
+      include: ['properties'],
+    },
+    filter: {
+      op: 'and',
+      args: queries,
+    },
+    sortBy: {
+      field: 'properties.datetime',
+      direction: 'desc',
+    },
+  }
 }
 
-function validate(sensor: string, timeOfDay: string, period: string) {
-  if (!['sentinel3a', 'sentinel3b', 'all'].some((x) => x === sensor)) {
-    throw new Error(`Invalid sensor value "${sensor}"`)
+async function executeCQL2Query(query: object): Promise<FeatureCollection> {
+  async function _runQuery(query: object) {
+    return await axios.post(SEARCH_URL, query)
   }
 
-  if (!['day', 'night', 'all'].some((x) => x === timeOfDay)) {
-    throw new Error(`Invalid time of day "${timeOfDay}"`)
+  try {
+    const result: AxiosResponse<FeatureCollection> = await _runQuery(query)
+    return result.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw error
+    } else {
+      throw new Error('Unknown error')
+    }
   }
+}
 
-  if (!['daily', 'monthly'].some((x) => x === period)) {
-    throw new Error(`Invalid type "${period}"`)
-  }
+function buildLSTParamsFromSTAC(
+  results: FeatureCollection,
+): ObservationDatasetOption[] {
+  return results.features.map((feature) => {
+    const date = new Date(feature.properties.datetime)
+
+    const year = date.getUTCFullYear()
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0')
+    const day = date.getUTCDate().toString().padStart(2, '0')
+    const prettySat = feature.properties.platform ?? 'Landsat, London (100m)'
+    const timeOfDay =
+      feature.properties['lst:time_of_day'] ??
+      feature.properties.day_night ??
+      feature.collection.substring(feature.collection.lastIndexOf('-') + 1)
+    const period = feature.properties['lst:type'] ?? 'daily'
+
+    const asset =
+      'reference_file' in feature.assets
+        ? feature.assets.reference_file
+        : feature.assets.cog
+    const dataset: ObservationDatasetOption = {
+      value: asset.href,
+      label: `${year}-${month}-${day} ${prettySat} ${timeOfDay} ${period}`,
+      date: `${year}-${month}-${day}`,
+      sensor: prettySat,
+      day_night: timeOfDay,
+    }
+
+    return dataset
+  })
 }

@@ -1,13 +1,13 @@
 import {
+  Box,
   Button,
   Flex,
-  Select,
   Spinner,
   Tabs,
   Text,
   TextField,
 } from '@radix-ui/themes'
-import { useContext, useEffect, useState } from 'react'
+import { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -30,154 +30,54 @@ import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import observationStyles from './Observations.module.scss'
 import { Autocomplete, TextField as MuiTextField } from '@mui/material'
-import { GetKerchunkUrl } from '../../../library/api/getKerchunkUrl'
-
-interface AutoCompleteOption {
+import { QuerySTACCatalog } from '../../../library/api/getKerchunkUrl'
+import {
+  VALID_OBSERVATION_MONTHS,
+  VALID_OBSERVATION_YEARS,
+  AVAILABLE_OBSERVATION_SENSORS,
+  AVAILABLE_OBSERVATION_TIME_OF_DAY,
+  AVAILABLE_OBSERVATION_TYPES,
+  DEFAULT_SELECTED_OBSERVATION,
+  ObservationDatasetOption,
+} from '../../../library/api/fakeApiData'
+import { toast } from 'react-toastify'
+export interface AutoCompleteOption {
   label: string
   value: number | string
+}
+
+interface ObservationFilterProps {
+  value: AutoCompleteOption[]
+  options: AutoCompleteOption[]
+  filterType: string
+  label: string
+  showAllButton?: boolean
 }
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
-const VALID_OBSERVATION_YEARS = [
-  {
-    label: '2024',
-    value: 2024,
-  },
-  {
-    label: '2023',
-    value: 2023,
-  },
-  {
-    label: '2022',
-    value: 2022,
-  },
-  {
-    label: '2021',
-    value: 2021,
-  },
-  {
-    label: '2020',
-    value: 2020,
-  },
-  {
-    label: '2019',
-    value: 2019,
-  },
-  {
-    label: '2018',
-    value: 2018,
-  },
-]
-const VALID_OBSERVATION_MONTHS = [
-  {
-    label: 'January',
-    value: 1,
-  },
-  {
-    label: 'Februray',
-    value: 2,
-  },
-  {
-    label: 'March',
-    value: 3,
-  },
-  {
-    label: 'April',
-    value: 4,
-  },
-  {
-    label: 'May',
-    value: 5,
-  },
-  {
-    label: 'June',
-    value: 6,
-  },
-  {
-    label: 'July',
-    value: 7,
-  },
-  {
-    label: 'August',
-    value: 8,
-  },
-  {
-    label: 'September',
-    value: 9,
-  },
-  {
-    label: 'Ocotber',
-    value: 10,
-  },
-  {
-    label: 'November',
-    value: 11,
-  },
-  {
-    label: 'Februray',
-    value: 12,
-  },
-]
-const AVAILABLE_OBSERVATION_SENSORS = [
-  {
-    label: 'Sentinel 3A (1km)',
-    value: 'sentinel3a',
-  },
-  {
-    label: 'Sentinel 3B (1km)',
-    value: 'sentinel3b',
-  },
-]
-const AVAILABLE_OBSERVATION_TIME_OF_DAY = [
-  {
-    label: 'Day',
-    value: 'day',
-  },
-  {
-    label: 'Night',
-    value: 'night',
-  },
-]
-const AVAILABLE_OBSERVATION_REVISIT_PERIODS = [
-  {
-    label: 'Daily',
-    value: 'daily',
-  },
-  {
-    label: 'Monthly (Average)',
-    value: 'monthly',
-  },
-]
-
-const DEFAULT_OBSERVATION_PARAMETERS = {
-  years: [VALID_OBSERVATION_YEARS[0]],
-  months: [VALID_OBSERVATION_MONTHS[0]],
-  sensors: [AVAILABLE_OBSERVATION_SENSORS[0]],
-  timeOfDay: [AVAILABLE_OBSERVATION_TIME_OF_DAY[0]],
-  revisitPeriod: [AVAILABLE_OBSERVATION_REVISIT_PERIODS[0]],
-}
 
 export const Observations = () => {
   const navigate = useNavigate()
   const { setIsMapLoading } = useContext(LoadingContext)
   const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
   const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
-
-  const [observationParameters, setObservationParameters] = useState(
-    DEFAULT_OBSERVATION_PARAMETERS,
-  )
+  const [loadingDatasets, setLoadingDatasets] = useState(false)
 
   const {
     persistedMapCenter,
     persistedMapZoom,
-    selectedObservationLayerUrl = '',
+    selectedObservationLayerUrl,
+    selectedObservationOption,
+    observationParameters,
     setPersistedMapCenter,
     setPersistedMapZoom,
     setSelectedObservationLayerUrl,
     setDatasetOptions,
+    setObservationParameters,
+    setSelectedObservationOption,
     datasetOptions,
     markerCoordinates,
     observationMarkerValue,
@@ -215,7 +115,7 @@ export const Observations = () => {
 
   useEffect(() => {
     if (setDatasetOptions) {
-      const { years, months, sensors, timeOfDay, revisitPeriod } =
+      const { years, months, sensors, timeOfDay, observation } =
         observationParameters
 
       const flattenParameters = (array: AutoCompleteOption[]) =>
@@ -223,135 +123,172 @@ export const Observations = () => {
 
       const flatYears = flattenParameters(years).map((year) => Number(year))
       const flatMonths = flattenParameters(months).map((year) => Number(year))
+      const flatSensors = flattenParameters(sensors).map((sensor) =>
+        sensor.toString(),
+      )
+      const flatTimeOfDay = flattenParameters(timeOfDay).map((timeOfDay) =>
+        timeOfDay.toString(),
+      )
+      const flatObservation = flattenParameters(observation).map(
+        (observation) => observation.toString(),
+      )
 
-      const sensorsParam = sensors.length > 1 ? 'all' : sensors[0]?.value
-      const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0]?.value
-      const revisitPeriodParam =
-        revisitPeriod.length > 1 ? 'all' : revisitPeriod[0]?.value
+      setLoadingDatasets(true)
 
-      try {
-        const newDatasetOptions = GetKerchunkUrl(
-          flatYears,
-          flatMonths,
-          sensorsParam,
-          timeOfDayParam,
-          revisitPeriodParam,
-        )
-
-        setDatasetOptions(newDatasetOptions)
-      } catch (error) {
-        setDatasetOptions(undefined)
-      }
+      QuerySTACCatalog(
+        flatYears,
+        flatMonths,
+        flatSensors,
+        flatTimeOfDay,
+        flatObservation,
+      )
+        .then((newDatasetOptions) => {
+          setLoadingDatasets(false)
+          setDatasetOptions(newDatasetOptions)
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.warn(error)
+          toast.error('There was a problem retrieving available datasets')
+          setDatasetOptions([DEFAULT_SELECTED_OBSERVATION])
+        })
     }
   }, [observationParameters, setDatasetOptions])
 
   const handleAutoCompleteChange = (
-    value: AutoCompleteOption[],
+    options: AutoCompleteOption[],
     type: string,
   ) => {
     setObservationParameters({
       ...observationParameters,
-      [type]: value,
+      [type]: options,
     })
+  }
+
+  const handleObservationChange = (
+    _: SyntheticEvent,
+    option: ObservationDatasetOption,
+  ) => {
+    setSelectedObservationOption(option)
+    setSelectedObservationLayerUrl(option.value)
   }
 
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
 
+  const ObservationFilterSelect = ({
+    value,
+    options,
+    filterType,
+    label,
+    showAllButton,
+  }: ObservationFilterProps) => (
+    <>
+      <Autocomplete
+        onChange={(_, option) => handleAutoCompleteChange(option, filterType)}
+        size="small"
+        disableCloseOnSelect
+        disableClearable
+        fullWidth
+        limitTags={2}
+        multiple
+        options={options}
+        renderInput={(params) => (
+          <MuiTextField
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...params}
+            label={label}
+          />
+        )}
+        value={value}
+      />
+      {showAllButton && (
+        <Button
+          variant="soft"
+          onClick={(event) => {
+            event.preventDefault()
+            handleAutoCompleteChange(options, filterType)
+          }}
+          size="2"
+        >
+          All
+        </Button>
+      )}
+    </>
+  )
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
+          <InputLabelContainer>
+            <div className={formStyles.labelWithInfoPopoverRow}>
+              <label htmlFor="observation-date">Find Datasets</label>
+            </div>
+          </InputLabelContainer>
           <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) => handleAutoCompleteChange(value, 'years')}
-              size="small"
-              fullWidth
-              multiple
-              options={VALID_OBSERVATION_YEARS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Year" />
-              )}
+            <ObservationFilterSelect
               value={observationParameters.years}
+              options={VALID_OBSERVATION_YEARS}
+              filterType="years"
+              label="Years"
+              showAllButton
             />
-          </div>
-          <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) => handleAutoCompleteChange(value, 'months')}
-              size="small"
-              fullWidth
-              multiple
-              options={VALID_OBSERVATION_MONTHS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Month" />
-              )}
+            <ObservationFilterSelect
               value={observationParameters.months}
+              options={VALID_OBSERVATION_MONTHS}
+              filterType="months"
+              label="Months"
+              showAllButton
             />
           </div>
           <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) =>
-                handleAutoCompleteChange(value, 'sensors')
-              }
-              size="small"
-              fullWidth
-              multiple
-              options={AVAILABLE_OBSERVATION_SENSORS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Sensor" />
-              )}
-              value={observationParameters.sensors}
+            <ObservationFilterSelect
+              value={observationParameters.observation}
+              options={AVAILABLE_OBSERVATION_TYPES}
+              filterType="observation"
+              label="Observation Type"
             />
-          </div>
-          <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) =>
-                handleAutoCompleteChange(value, 'timeOfDay')
-              }
-              size="small"
-              fullWidth
-              multiple
-              options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Time of day" />
-              )}
+            <ObservationFilterSelect
               value={observationParameters.timeOfDay}
+              options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
+              filterType="timeOfDay"
+              label="TIme of day"
             />
           </div>
           <div className={formStyles.multipleInputsRow}>
-            <Autocomplete
-              onChange={(_, value) =>
-                handleAutoCompleteChange(value, 'revisitPeriod')
-              }
-              size="small"
-              fullWidth
-              multiple
-              options={AVAILABLE_OBSERVATION_REVISIT_PERIODS}
-              renderInput={(params) => (
-                <MuiTextField {...params} label="Revisit Period" />
-              )}
-              value={observationParameters.revisitPeriod}
+            <ObservationFilterSelect
+              value={observationParameters.sensors}
+              options={AVAILABLE_OBSERVATION_SENSORS}
+              filterType="sensors"
+              label="Sensors"
             />
           </div>
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
               <label htmlFor="observation-date">Datasets Available</label>
+              {loadingDatasets && (
+                <Box ml="1">
+                  <Spinner />
+                </Box>
+              )}
             </div>
-            <Select.Root
-              value={selectedObservationLayerUrl}
-              onValueChange={setSelectedObservationLayerUrl}
-            >
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="observation-date">
-                {datasetOptions?.map((option) => (
-                  <Select.Item key={option.value} value={option.value}>
-                    {option.label}
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Root>
           </InputLabelContainer>
+          <Autocomplete
+            options={datasetOptions ?? []}
+            onChange={handleObservationChange}
+            value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
+            size="small"
+            fullWidth
+            disableClearable
+            renderInput={(params) => (
+              <MuiTextField
+                slotProps={{ inputLabel: { shrink: true } }}
+                {...params}
+              />
+            )}
+          />
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
           <Tabs.List>

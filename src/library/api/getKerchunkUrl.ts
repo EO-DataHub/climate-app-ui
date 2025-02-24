@@ -126,7 +126,7 @@ function buildCQL2Query(
 
         if (period === 'daily') {
           if (sensor === 'landsat') {
-            collections.push(`col_f99e920a-a58e-11ef-aab0-7a33b70d8782`)
+            collections.push('col_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789')
           } else {
             collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
           }
@@ -200,9 +200,18 @@ function buildLSTParamsFromSTAC(
       'reference_file' in feature.assets
         ? feature.assets.reference_file
         : feature.assets.cog
+
+    let label: string
+
+    if (period === 'monthly') {
+      label = `${year}-${month} ${period} ${prettySat} average ${timeOfDay.toLowerCase()}`
+    } else {
+      label = `${year}-${month}-${day} ${prettySat} ${timeOfDay.toLowerCase()}`
+    }
+
     const dataset: ObservationDatasetOption = {
       value: asset.href,
-      label: `${year}-${month}-${day} ${prettySat} ${timeOfDay} ${period}`,
+      label: label,
       date: `${year}-${month}-${day}`,
       sensor: prettySat,
       day_night: timeOfDay,

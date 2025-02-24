@@ -1,4 +1,12 @@
-import { Button, Flex, Spinner, Tabs, Text, TextField } from '@radix-ui/themes'
+import {
+  Box,
+  Button,
+  Flex,
+  Spinner,
+  Tabs,
+  Text,
+  TextField,
+} from '@radix-ui/themes'
 import { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -32,7 +40,7 @@ import {
   DEFAULT_SELECTED_OBSERVATION,
   ObservationDatasetOption,
 } from '../../../library/api/fakeApiData'
-
+import { toast } from 'react-toastify'
 export interface AutoCompleteOption {
   label: string
   value: number | string
@@ -54,6 +62,7 @@ export const Observations = () => {
   const { setIsMapLoading } = useContext(LoadingContext)
   const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
   const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
+  const [loadingDatasets, setLoadingDatasets] = useState(false)
 
   const {
     persistedMapCenter,
@@ -122,6 +131,8 @@ export const Observations = () => {
         (observation) => observation.toString(),
       )
 
+      setLoadingDatasets(true)
+
       QuerySTACCatalog(
         flatYears,
         flatMonths,
@@ -130,12 +141,14 @@ export const Observations = () => {
         flatObservation,
       )
         .then((newDatasetOptions) => {
+          setLoadingDatasets(false)
           setDatasetOptions(newDatasetOptions)
         })
         .catch((error) => {
           // eslint-disable-next-line no-console
-          console.error(error)
-          setDatasetOptions(undefined)
+          console.warn(error)
+          toast.error('There was a problem retrieving available datasets')
+          setDatasetOptions([DEFAULT_SELECTED_OBSERVATION])
         })
     }
   }, [observationParameters, setDatasetOptions])
@@ -253,41 +266,27 @@ export const Observations = () => {
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
               <label htmlFor="observation-date">Datasets Available</label>
+              {loadingDatasets && (
+                <Box ml="1">
+                  <Spinner />
+                </Box>
+              )}
             </div>
           </InputLabelContainer>
-          {datasetOptions && (
-            <Autocomplete
-              options={datasetOptions}
-              onChange={handleObservationChange}
-              value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
-              size="small"
-              fullWidth
-              disableClearable
-              renderInput={(params) => (
-                <MuiTextField
-                  slotProps={{ inputLabel: { shrink: true } }}
-                  {...params}
-                />
-              )}
-            />
-          )}
-
-          {/* <Select.Root
-              value={selectedObservationLayerUrl}
-              onValueChange={setSelectedObservationLayerUrl}
-            >
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="observation-date">
-                {datasetOptions?.map((option) => {
-                  console.log('DATA: ', datasetOptions)
-
-                  return (
-                  <Select.Item key={option.value} value={option.value}>
-                    {option.label}
-                  </Select.Item>)}
-                )}
-              </Select.Content>
-            </Select.Root> */}
+          <Autocomplete
+            options={datasetOptions ?? []}
+            onChange={handleObservationChange}
+            value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
+            size="small"
+            fullWidth
+            disableClearable
+            renderInput={(params) => (
+              <MuiTextField
+                slotProps={{ inputLabel: { shrink: true } }}
+                {...params}
+              />
+            )}
+          />
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
           <Tabs.List>

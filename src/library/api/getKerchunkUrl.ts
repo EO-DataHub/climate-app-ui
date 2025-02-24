@@ -193,7 +193,7 @@ function buildLSTParamsFromSTAC(
     const timeOfDay =
       feature.properties['lst:time_of_day'] ??
       feature.properties.day_night ??
-      feature.collection.substring(feature.collection.lastIndexOf('-') + 1)
+      ''
     const period = feature.properties['lst:type'] ?? 'daily'
 
     const asset =

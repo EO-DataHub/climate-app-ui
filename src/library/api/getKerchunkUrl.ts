@@ -122,7 +122,7 @@ function buildCQL2Query(
         if (period === 'daily') {
           collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
         } else {
-          collections.push(`eocis-lst-${shortSat}-${timeOfDay}-whatever`)
+          collections.push(`esacci-lst-${shortSat}-${timeOfDay}-monthly`)
         }
       }
     }

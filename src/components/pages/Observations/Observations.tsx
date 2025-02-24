@@ -278,6 +278,7 @@ export const Observations = () => {
           <Autocomplete
             options={datasetOptions ?? []}
             onChange={handleObservationChange}
+            getOptionKey={({ value }) => value?.toString() ?? ''}
             value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
             size="small"
             fullWidth

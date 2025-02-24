@@ -109,6 +109,10 @@ export const AVAILABLE_OBSERVATION_SENSORS = [
     label: 'Sentinel 3B (1km)',
     value: 'sentinel3b',
   },
+  {
+    label: 'Landsat, London (100km)',
+    value: 'landsat',
+  },
 ]
 export const AVAILABLE_OBSERVATION_TIME_OF_DAY = [
   {

@@ -5,15 +5,15 @@ const SEARCH_URL = import.meta.env.VITE_CATALOG_SEARCH_URL
 const PAGE_SIZE = Number(import.meta.env.VITE_CATALOG_PAGE_SIZE)
 
 interface RefFile {
-    reference_file: {
-      href: string
-    }
+  reference_file: {
+    href: string
+  }
 }
 
 interface COG {
-    cog: {
-      href: string
-    }
+  cog: {
+    href: string
+  }
 }
 
 interface Feature {
@@ -91,29 +91,30 @@ function buildCQL2Query(
     args: dateArgs,
   })
 
-  const prettySat = sensors.filter((sensor) => {
-    return sensor.startsWith('sentinel')
-  }).map((sensor) => {
-    if (sensor === 'sentinel3a') {
-      return 'Sentinel3A'
-    } else if (sensor === 'sentinel3b') {
-      return 'Sentinel3B'
-    } else {
-      return sensor
-    }
-  })
+  const prettySat = sensors
+    .filter((sensor) => {
+      return sensor.startsWith('sentinel')
+    })
+    .map((sensor) => {
+      if (sensor === 'sentinel3a') {
+        return 'Sentinel3A'
+      } else if (sensor === 'sentinel3b') {
+        return 'Sentinel3B'
+      } else {
+        return sensor
+      }
+    })
 
   if (prettySat.length > 0) {
     queries.push({
-        op: 'in',
-        args: [
-          {
-            property: 'properties.platform',
-          },
-          prettySat,
-        ],
-      },
-    )
+      op: 'in',
+      args: [
+        {
+          property: 'properties.platform',
+        },
+        prettySat,
+      ],
+    })
   }
 
   const collections = []
@@ -137,15 +138,14 @@ function buildCQL2Query(
   }
 
   queries.push({
-      op: 'in',
-      args: [
-        {
-          property: 'collection',
-        },
-        [...new Set(collections)],
-      ],
-    },
-  )
+    op: 'in',
+    args: [
+      {
+        property: 'collection',
+      },
+      [...new Set(collections)],
+    ],
+  })
 
   return {
     limit: PAGE_SIZE,
@@ -196,7 +196,10 @@ function buildLSTParamsFromSTAC(
       feature.collection.substring(feature.collection.lastIndexOf('-') + 1)
     const period = feature.properties['lst:type'] ?? 'daily'
 
-    const asset = "reference_file" in feature.assets ? feature.assets.reference_file : feature.assets.cog
+    const asset =
+      'reference_file' in feature.assets
+        ? feature.assets.reference_file
+        : feature.assets.cog
     const dataset: ObservationDatasetOption = {
       value: asset.href,
       label: `${year}-${month}-${day} ${prettySat} ${timeOfDay} ${period}`,

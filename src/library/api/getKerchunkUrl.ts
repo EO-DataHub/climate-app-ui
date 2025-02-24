@@ -4,6 +4,18 @@ import axios, { AxiosResponse } from 'axios'
 const SEARCH_URL = import.meta.env.VITE_CATALOG_SEARCH_URL
 const PAGE_SIZE = Number(import.meta.env.VITE_CATALOG_PAGE_SIZE)
 
+interface RefFile {
+    reference_file: {
+      href: string
+    }
+}
+
+interface COG {
+    cog: {
+      href: string
+    }
+}
+
 interface Feature {
   collection: string
   properties: {
@@ -11,13 +23,9 @@ interface Feature {
     platform: string
     'lst:type': string | undefined
     'lst:time_of_day': string | undefined
-    'day_night': string | undefined
+    day_night: string | undefined
   }
-  assets: {
-    reference_file: {
-      href: string
-    }
-  }
+  assets: RefFile | COG
 }
 
 interface FeatureCollection {
@@ -43,6 +51,8 @@ function buildCQL2Query(
   timeOfDays: string[],
   periods: string[],
 ): object {
+  const queries = []
+
   const dateArgs = []
 
   for (const year of years) {
@@ -76,23 +86,34 @@ function buildCQL2Query(
     }
   }
 
-  const dateQuery = {
+  queries.push({
     op: 'or',
     args: dateArgs,
-  }
-
-  const prettySat = sensors.map((sensor) => {
-    return sensor === 'sentinel3a' ? 'Sentinel3A' : 'Sentinel3B'
   })
 
-  const sensorQuery = {
-    op: 'in',
-    args: [
-      {
-        property: 'properties.platform',
+  const prettySat = sensors.filter((sensor) => {
+    return sensor.startsWith('sentinel')
+  }).map((sensor) => {
+    if (sensor === 'sentinel3a') {
+      return 'Sentinel3A'
+    } else if (sensor === 'sentinel3b') {
+      return 'Sentinel3B'
+    } else {
+      return sensor
+    }
+  })
+
+  if (prettySat.length > 0) {
+    queries.push({
+        op: 'in',
+        args: [
+          {
+            property: 'properties.platform',
+          },
+          prettySat,
+        ],
       },
-      prettySat,
-    ],
+    )
   }
 
   const collections = []
@@ -115,15 +136,16 @@ function buildCQL2Query(
     }
   }
 
-  const collectionQuery = {
-    op: 'in',
-    args: [
-      {
-        property: 'collection',
-      },
-      collections,
-    ],
-  }
+  queries.push({
+      op: 'in',
+      args: [
+        {
+          property: 'collection',
+        },
+        [...new Set(collections)],
+      ],
+    },
+  )
 
   return {
     limit: PAGE_SIZE,
@@ -132,7 +154,7 @@ function buildCQL2Query(
     },
     filter: {
       op: 'and',
-      args: [collectionQuery, sensorQuery, dateQuery],
+      args: queries,
     },
     sortBy: {
       field: 'properties.datetime',
@@ -169,12 +191,14 @@ function buildLSTParamsFromSTAC(
     const day = date.getUTCDate().toString().padStart(2, '0')
     const prettySat = feature.properties.platform ?? 'Landsat, London (100m)'
     const timeOfDay =
-      feature.properties['lst:time_of_day'] ?? feature.properties.day_night ??
+      feature.properties['lst:time_of_day'] ??
+      feature.properties.day_night ??
       feature.collection.substring(feature.collection.lastIndexOf('-') + 1)
     const period = feature.properties['lst:type'] ?? 'daily'
 
+    const asset = "reference_file" in feature.assets ? feature.assets.reference_file : feature.assets.cog
     const dataset: ObservationDatasetOption = {
-      value: feature.assets.reference_file.href,
+      value: asset.href,
       label: `${year}-${month}-${day} ${prettySat} ${timeOfDay} ${period}`,
       date: `${year}-${month}-${day}`,
       sensor: prettySat,

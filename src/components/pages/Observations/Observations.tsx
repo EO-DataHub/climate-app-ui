@@ -1,13 +1,5 @@
-import {
-  Button,
-  Flex,
-  Select,
-  Spinner,
-  Tabs,
-  Text,
-  TextField,
-} from '@radix-ui/themes'
-import { useContext, useEffect, useState } from 'react'
+import { Button, Flex, Spinner, Tabs, Text, TextField } from '@radix-ui/themes'
+import { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import {
@@ -30,9 +22,18 @@ import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import observationStyles from './Observations.module.scss'
 import { Autocomplete, TextField as MuiTextField } from '@mui/material'
-import { GetKerchunkUrl } from '../../../library/api/getKerchunkUrl'
+import { QuerySTACCatalog } from '../../../library/api/getKerchunkUrl'
+import {
+  VALID_OBSERVATION_MONTHS,
+  VALID_OBSERVATION_YEARS,
+  AVAILABLE_OBSERVATION_SENSORS,
+  AVAILABLE_OBSERVATION_TIME_OF_DAY,
+  AVAILABLE_OBSERVATION_TYPES,
+  DEFAULT_SELECTED_OBSERVATION,
+  ObservationDatasetOption,
+} from '../../../library/api/fakeApiData'
 
-interface AutoCompleteOption {
+export interface AutoCompleteOption {
   label: string
   value: number | string
 }
@@ -47,124 +48,6 @@ interface ObservationFilterProps {
 
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
-const VALID_OBSERVATION_YEARS = [
-  {
-    label: '2024',
-    value: 2024,
-  },
-  {
-    label: '2023',
-    value: 2023,
-  },
-  {
-    label: '2022',
-    value: 2022,
-  },
-  {
-    label: '2021',
-    value: 2021,
-  },
-  {
-    label: '2020',
-    value: 2020,
-  },
-  {
-    label: '2019',
-    value: 2019,
-  },
-  {
-    label: '2018',
-    value: 2018,
-  },
-]
-const VALID_OBSERVATION_MONTHS = [
-  {
-    label: 'Jan',
-    value: 1,
-  },
-  {
-    label: 'Feb',
-    value: 2,
-  },
-  {
-    label: 'Mar',
-    value: 3,
-  },
-  {
-    label: 'Apr',
-    value: 4,
-  },
-  {
-    label: 'May',
-    value: 5,
-  },
-  {
-    label: 'Jun',
-    value: 6,
-  },
-  {
-    label: 'Jul',
-    value: 7,
-  },
-  {
-    label: 'Aug',
-    value: 8,
-  },
-  {
-    label: 'Sep',
-    value: 9,
-  },
-  {
-    label: 'Oct',
-    value: 10,
-  },
-  {
-    label: 'Nov',
-    value: 11,
-  },
-  {
-    label: 'Dec',
-    value: 12,
-  },
-]
-const AVAILABLE_OBSERVATION_SENSORS = [
-  {
-    label: 'Sentinel 3A (1km)',
-    value: 'sentinel3a',
-  },
-  {
-    label: 'Sentinel 3B (1km)',
-    value: 'sentinel3b',
-  },
-]
-const AVAILABLE_OBSERVATION_TIME_OF_DAY = [
-  {
-    label: 'Day',
-    value: 'day',
-  },
-  {
-    label: 'Night',
-    value: 'night',
-  },
-]
-const AVAILABLE_OBSERVATION_TYPES = [
-  {
-    label: 'Daily',
-    value: 'daily',
-  },
-  {
-    label: 'Monthly (Avg)',
-    value: 'monthly',
-  },
-]
-
-const DEFAULT_OBSERVATION_PARAMETERS = {
-  years: [VALID_OBSERVATION_YEARS[0]],
-  months: VALID_OBSERVATION_MONTHS,
-  sensors: AVAILABLE_OBSERVATION_SENSORS,
-  timeOfDay: AVAILABLE_OBSERVATION_TIME_OF_DAY,
-  observation: [AVAILABLE_OBSERVATION_TYPES[1]],
-}
 
 export const Observations = () => {
   const navigate = useNavigate()
@@ -172,18 +55,18 @@ export const Observations = () => {
   const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
   const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
 
-  const [observationParameters, setObservationParameters] = useState(
-    DEFAULT_OBSERVATION_PARAMETERS,
-  )
-
   const {
     persistedMapCenter,
     persistedMapZoom,
-    selectedObservationLayerUrl = '',
+    selectedObservationLayerUrl,
+    selectedObservationOption,
+    observationParameters,
     setPersistedMapCenter,
     setPersistedMapZoom,
     setSelectedObservationLayerUrl,
     setDatasetOptions,
+    setObservationParameters,
+    setSelectedObservationOption,
     datasetOptions,
     markerCoordinates,
     observationMarkerValue,
@@ -229,25 +112,31 @@ export const Observations = () => {
 
       const flatYears = flattenParameters(years).map((year) => Number(year))
       const flatMonths = flattenParameters(months).map((year) => Number(year))
+      const flatSensors = flattenParameters(sensors).map((sensor) =>
+        sensor.toString(),
+      )
+      const flatTimeOfDay = flattenParameters(timeOfDay).map((timeOfDay) =>
+        timeOfDay.toString(),
+      )
+      const flatObservation = flattenParameters(observation).map(
+        (observation) => observation.toString(),
+      )
 
-      const sensorsParam = sensors.length > 1 ? 'all' : sensors[0]?.value
-      const timeOfDayParam = timeOfDay.length > 1 ? 'all' : timeOfDay[0]?.value
-      const observationParam =
-        observation.length > 1 ? 'all' : observation[0]?.value
-
-      try {
-        const newDatasetOptions = GetKerchunkUrl(
-          flatYears,
-          flatMonths,
-          sensorsParam,
-          timeOfDayParam,
-          observationParam,
-        )
-
-        setDatasetOptions(newDatasetOptions)
-      } catch (error) {
-        setDatasetOptions(undefined)
-      }
+      QuerySTACCatalog(
+        flatYears,
+        flatMonths,
+        flatSensors,
+        flatTimeOfDay,
+        flatObservation,
+      )
+        .then((newDatasetOptions) => {
+          setDatasetOptions(newDatasetOptions)
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error(error)
+          setDatasetOptions(undefined)
+        })
     }
   }, [observationParameters, setDatasetOptions])
 
@@ -259,6 +148,14 @@ export const Observations = () => {
       ...observationParameters,
       [type]: options,
     })
+  }
+
+  const handleObservationChange = (
+    _: SyntheticEvent,
+    option: ObservationDatasetOption,
+  ) => {
+    setSelectedObservationOption(option)
+    setSelectedObservationLayerUrl(option.value)
   }
 
   const handleSelectAssetsClick = () => {
@@ -357,20 +254,40 @@ export const Observations = () => {
             <div className={formStyles.labelWithInfoPopoverRow}>
               <label htmlFor="observation-date">Datasets Available</label>
             </div>
-            <Select.Root
+          </InputLabelContainer>
+          {datasetOptions && (
+            <Autocomplete
+              options={datasetOptions}
+              onChange={handleObservationChange}
+              value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
+              size="small"
+              fullWidth
+              disableClearable
+              renderInput={(params) => (
+                <MuiTextField
+                  slotProps={{ inputLabel: { shrink: true } }}
+                  {...params}
+                />
+              )}
+            />
+          )}
+
+          {/* <Select.Root
               value={selectedObservationLayerUrl}
               onValueChange={setSelectedObservationLayerUrl}
             >
               <Select.Trigger placeholder="Select" />
               <Select.Content id="observation-date">
-                {datasetOptions?.map((option) => (
+                {datasetOptions?.map((option) => {
+                  console.log('DATA: ', datasetOptions)
+
+                  return (
                   <Select.Item key={option.value} value={option.value}>
                     {option.label}
-                  </Select.Item>
-                ))}
+                  </Select.Item>)}
+                )}
               </Select.Content>
-            </Select.Root>
-          </InputLabelContainer>
+            </Select.Root> */}
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
           <Tabs.List>

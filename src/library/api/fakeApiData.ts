@@ -1,7 +1,9 @@
+import { AutoCompleteOption } from '../../components/pages/Observations/Observations'
+
 export interface ObservationDatasetOption {
-  value: string
+  value?: string
   label: string
-  date: string
+  date?: string
   time?: string
   sensor?: string
   day_night?: string
@@ -10,6 +12,139 @@ export interface ObservationTypeConfig {
   value: string
   label: string
   datasetOptions: [ObservationDatasetOption]
+}
+
+export const DEFAULT_SELECTED_OBSERVATION = {
+  label: 'No dataset selected',
+  value: undefined,
+  date: undefined,
+}
+
+export const VALID_OBSERVATION_YEARS = [
+  {
+    label: '2024',
+    value: 2024,
+  },
+  {
+    label: '2023',
+    value: 2023,
+  },
+  {
+    label: '2022',
+    value: 2022,
+  },
+  {
+    label: '2021',
+    value: 2021,
+  },
+  {
+    label: '2020',
+    value: 2020,
+  },
+  {
+    label: '2019',
+    value: 2019,
+  },
+  {
+    label: '2018',
+    value: 2018,
+  },
+]
+export const VALID_OBSERVATION_MONTHS = [
+  {
+    label: 'Jan',
+    value: 1,
+  },
+  {
+    label: 'Feb',
+    value: 2,
+  },
+  {
+    label: 'Mar',
+    value: 3,
+  },
+  {
+    label: 'Apr',
+    value: 4,
+  },
+  {
+    label: 'May',
+    value: 5,
+  },
+  {
+    label: 'Jun',
+    value: 6,
+  },
+  {
+    label: 'Jul',
+    value: 7,
+  },
+  {
+    label: 'Aug',
+    value: 8,
+  },
+  {
+    label: 'Sep',
+    value: 9,
+  },
+  {
+    label: 'Oct',
+    value: 10,
+  },
+  {
+    label: 'Nov',
+    value: 11,
+  },
+  {
+    label: 'Dec',
+    value: 12,
+  },
+]
+export const AVAILABLE_OBSERVATION_SENSORS = [
+  {
+    label: 'Sentinel 3A (1km)',
+    value: 'sentinel3a',
+  },
+  {
+    label: 'Sentinel 3B (1km)',
+    value: 'sentinel3b',
+  },
+]
+export const AVAILABLE_OBSERVATION_TIME_OF_DAY = [
+  {
+    label: 'Day',
+    value: 'day',
+  },
+  {
+    label: 'Night',
+    value: 'night',
+  },
+]
+export const AVAILABLE_OBSERVATION_TYPES = [
+  {
+    label: 'Daily',
+    value: 'daily',
+  },
+  {
+    label: 'Monthly (Avg)',
+    value: 'monthly',
+  },
+]
+
+export const DEFAULT_OBSERVATION_PARAMETERS = {
+  years: [VALID_OBSERVATION_YEARS[0]],
+  months: VALID_OBSERVATION_MONTHS,
+  sensors: AVAILABLE_OBSERVATION_SENSORS,
+  timeOfDay: AVAILABLE_OBSERVATION_TIME_OF_DAY,
+  observation: [AVAILABLE_OBSERVATION_TYPES[1]],
+}
+
+export interface ObservationParameters {
+  years: AutoCompleteOption[]
+  months: AutoCompleteOption[]
+  sensors: AutoCompleteOption[]
+  timeOfDay: AutoCompleteOption[]
+  observation: AutoCompleteOption[]
 }
 
 // const observationTypeConfigsJsonSchema = {

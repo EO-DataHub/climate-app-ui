@@ -19,13 +19,18 @@ export const useUpdateObservationsMapTiles = ({
   mapRef: MapRef
   maxTemp: string
   minTemp: string
-  selectedObservationLayerUrl: string
+  selectedObservationLayerUrl: string | undefined
   use_cog_urls: boolean
   setIsMapLoading: Dispatch<SetStateAction<boolean>> | undefined
 }) => {
   useEffect(
     function updateObservationsMapTiles() {
-      if (!isMapLoaded || !mapRef.current || !setIsMapLoading) {
+      if (
+        !isMapLoaded ||
+        !mapRef.current ||
+        !setIsMapLoading ||
+        !selectedObservationLayerUrl
+      ) {
         return
       }
       setIsMapLoading(true)

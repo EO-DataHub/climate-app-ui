@@ -6,7 +6,11 @@ import {
   SetStateAction,
 } from 'react'
 import { LngLat } from 'maplibre-gl'
-import { ObservationDatasetOption } from '../library/api/fakeApiData'
+import {
+  ObservationDatasetOption,
+  DEFAULT_OBSERVATION_PARAMETERS,
+  ObservationParameters,
+} from '../library/api/fakeApiData'
 
 export type ObservationMarkerValue = number | string | null
 
@@ -16,12 +20,18 @@ export interface ObservationsPageContextValue {
   persistedMapCenter: LngLat | undefined
   persistedMapZoom: number | undefined
   selectedObservationLayerUrl?: string
+  selectedObservationOption: ObservationDatasetOption | undefined
   datasetOptions: ObservationDatasetOption[] | undefined
+  observationParameters: ObservationParameters
   setMarkerCoordinates?: Dispatch<SetStateAction<LngLat | undefined>>
   setObservationMarkerValue?: Dispatch<SetStateAction<ObservationMarkerValue>>
   setPersistedMapCenter?: Dispatch<SetStateAction<LngLat | undefined>>
   setPersistedMapZoom?: Dispatch<SetStateAction<number | undefined>>
-  setSelectedObservationLayerUrl?: Dispatch<SetStateAction<string | undefined>>
+  setSelectedObservationLayerUrl: Dispatch<SetStateAction<string | undefined>>
+  setObservationParameters: Dispatch<SetStateAction<ObservationParameters>>
+  setSelectedObservationOption: Dispatch<
+    SetStateAction<ObservationDatasetOption | undefined>
+  >
   setDatasetOptions?: Dispatch<
     SetStateAction<ObservationDatasetOption[] | undefined>
   >
@@ -33,6 +43,11 @@ export const ObservationsPageContext =
     persistedMapZoom: undefined,
     selectedObservationLayerUrl: '',
     datasetOptions: undefined,
+    selectedObservationOption: undefined,
+    observationParameters: DEFAULT_OBSERVATION_PARAMETERS,
+    setSelectedObservationLayerUrl: useState,
+    setObservationParameters: useState,
+    setSelectedObservationOption: useState,
   })
 
 export const ObservationsContextProvider = ({
@@ -46,6 +61,10 @@ export const ObservationsContextProvider = ({
     useState<ObservationDatasetOption[]>()
   const [selectedObservationLayerUrl, setSelectedObservationLayerUrl] =
     useState<string>()
+  const [selectedObservationOption, setSelectedObservationOption] =
+    useState<ObservationDatasetOption>()
+  const [observationParameters, setObservationParameters] =
+    useState<ObservationParameters>(DEFAULT_OBSERVATION_PARAMETERS)
 
   const [markerCoordinates, setMarkerCoordinates] = useState<
     LngLat | undefined
@@ -63,13 +82,17 @@ export const ObservationsContextProvider = ({
         persistedMapCenter,
         persistedMapZoom,
         datasetOptions,
+        observationParameters,
         selectedObservationLayerUrl,
+        selectedObservationOption,
         setMarkerCoordinates,
         setObservationMarkerValue,
         setPersistedMapCenter,
         setPersistedMapZoom,
         setSelectedObservationLayerUrl,
         setDatasetOptions,
+        setSelectedObservationOption,
+        setObservationParameters,
       }}
     >
       {children}

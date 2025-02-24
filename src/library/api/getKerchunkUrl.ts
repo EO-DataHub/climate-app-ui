@@ -11,6 +11,7 @@ interface Feature {
     platform: string
     'lst:type': string | undefined
     'lst:time_of_day': string | undefined
+    'day_night': string | undefined
   }
   assets: {
     reference_file: {
@@ -102,7 +103,11 @@ function buildCQL2Query(
         const shortSat = sensor === 'sentinel3a' ? 's3a' : 's3b'
 
         if (period === 'daily') {
-          collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
+          if (sensor === 'landsat') {
+            collections.push(`col_f99e920a-a58e-11ef-aab0-7a33b70d8782`)
+          } else {
+            collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
+          }
         } else {
           collections.push(`esacci-lst-${shortSat}-${timeOfDay}-monthly`)
         }
@@ -162,9 +167,9 @@ function buildLSTParamsFromSTAC(
     const year = date.getUTCFullYear()
     const month = (date.getUTCMonth() + 1).toString().padStart(2, '0')
     const day = date.getUTCDate().toString().padStart(2, '0')
-    const prettySat = feature.properties.platform
+    const prettySat = feature.properties.platform ?? 'Landsat, London (100m)'
     const timeOfDay =
-      feature.properties['lst:time_of_day'] ??
+      feature.properties['lst:time_of_day'] ?? feature.properties.day_night ??
       feature.collection.substring(feature.collection.lastIndexOf('-') + 1)
     const period = feature.properties['lst:type'] ?? 'daily'
 

@@ -196,9 +196,7 @@ function buildLSTParamsFromSTAC(
     const timeOfDay =
       feature.properties['lst:time_of_day'] ??
       feature.properties.day_night ??
-      (feature.collection.endsWith('day')
-        ? 'day'
-        : 'night')
+      (feature.collection.endsWith('day') ? 'day' : 'night')
     const period = feature.properties['lst:type'] ?? 'daily'
 
     const asset =

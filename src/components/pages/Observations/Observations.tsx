@@ -188,10 +188,10 @@ export const Observations = () => {
       <Autocomplete
         onChange={(_, option) => handleAutoCompleteChange(option, filterType)}
         size="small"
-        disableCloseOnSelect
         disableClearable
+        disablePortal
         fullWidth
-        limitTags={2}
+        limitTags={3}
         multiple
         options={options}
         renderInput={(params) => (
@@ -278,9 +278,11 @@ export const Observations = () => {
           <Autocomplete
             options={datasetOptions ?? []}
             onChange={handleObservationChange}
+            getOptionKey={({ value }) => value?.toString() ?? ''}
             value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
             size="small"
             fullWidth
+            disablePortal
             disableClearable
             renderInput={(params) => (
               <MuiTextField

@@ -193,7 +193,7 @@ function buildLSTParamsFromSTAC(
     const timeOfDay =
       feature.properties['lst:time_of_day'] ??
       feature.properties.day_night ??
-      ''
+      feature.collection.endsWith('day') ? 'day' : 'night'
     const period = feature.properties['lst:type'] ?? 'daily'
 
     const asset =
@@ -204,7 +204,7 @@ function buildLSTParamsFromSTAC(
     let label: string
 
     if (period === 'monthly') {
-      label = `${year}-${month} ${period} ${prettySat} average ${timeOfDay.toLowerCase()}`
+      label = `${year}-${month} ${prettySat} ${period} average ${timeOfDay.toLowerCase()}`
     } else {
       label = `${year}-${month}-${day} ${prettySat} ${timeOfDay.toLowerCase()}`
     }

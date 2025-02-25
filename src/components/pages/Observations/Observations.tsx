@@ -384,15 +384,15 @@ export const Observations = () => {
       <div className={observationStyles.legendInputWrapper}>
         <TextField.Root
           size="1"
-          value={minTemp}
-          onChange={handleMinTempChange}
+          defaultValue={minTemp}
+          onBlur={handleMinTempChange}
           type="number"
           aria-label="Minimum temperature to show on the map"
         />
         <TextField.Root
           size="1"
-          value={maxTemp}
-          onChange={handleMaxTempChange}
+          defaultValue={maxTemp}
+          onBlur={handleMaxTempChange}
           type="number"
           aria-label="Maximum temperature to show on the map"
         />

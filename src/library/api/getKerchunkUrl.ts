@@ -189,11 +189,16 @@ function buildLSTParamsFromSTAC(
     const year = date.getUTCFullYear()
     const month = (date.getUTCMonth() + 1).toString().padStart(2, '0')
     const day = date.getUTCDate().toString().padStart(2, '0')
+    const hour = date.getUTCHours().toString().padStart(2, '0')
+    const minute = date.getUTCMinutes().toString().padStart(2, '0')
+    const second = date.getUTCSeconds().toString().padStart(2, '0')
     const prettySat = feature.properties.platform ?? 'Landsat, London (100m)'
     const timeOfDay =
       feature.properties['lst:time_of_day'] ??
       feature.properties.day_night ??
-      feature.collection.endsWith('day') ? 'day' : 'night'
+      (feature.collection.endsWith('day')
+        ? 'day'
+        : 'night')
     const period = feature.properties['lst:type'] ?? 'daily'
 
     const asset =
@@ -205,6 +210,8 @@ function buildLSTParamsFromSTAC(
 
     if (period === 'monthly') {
       label = `${year}-${month} ${prettySat} ${period} average ${timeOfDay.toLowerCase()}`
+    } else if (prettySat === 'Landsat, London (100m)') {
+      label = `${year}-${month}-${day} ${hour}:${minute}:${second} ${prettySat}`
     } else {
       label = `${year}-${month}-${day} ${prettySat} ${timeOfDay.toLowerCase()}`
     }

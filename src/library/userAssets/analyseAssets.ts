@@ -8,6 +8,7 @@ import AuthenticatedAxios from '../axios'
 
 const HUB_BASE_URL = import.meta.env.VITE_WORKFLOW_BASE_URL
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
+const HUB_ENV = import.meta.env.VITE_HUB_ENV
 
 const initiateAssetsRiskAnalysis = async ({
   authToken,
@@ -75,7 +76,12 @@ const getData = async ({
   jobId: string
   workspaceUserName: string
 }) => {
-  const resultsUrl = getResultsUrl({ jobId, workspaceUserName })
+  const processResponse =
+    await authenticatedAxiosInstance.authenticatedAxios.get(
+      `https://${HUB_ENV}.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/jobs/${jobId}`,
+    )
+  const process_id = processResponse.data.processID
+  const resultsUrl = getResultsUrl({ jobId, workspaceUserName, process_id })
   return authenticatedAxiosInstance.authenticatedAxios
     .get(resultsUrl)
     .then((response) => {

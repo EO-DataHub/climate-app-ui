@@ -45,7 +45,7 @@ jobs:
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
           VITE_AWS_BUCKET_NAME: ${{ vars.VITE_AWS_BUCKET_NAME }}
-          VITE_AWS_REGION: ${{ secrets.VITE_AWS_REGION }}
+          VITE_AWS_REGION: ${{ vars.VITE_AWS_REGION }}
           VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
           VITE_HUB_APP_WORKSPACE_NAME: ${{ secrets.VITE_HUB_APP_WORKSPACE_NAME }}
           VITE_HUB_BASE_URL: ${{vars.VITE_HUB_BASE_URL}}

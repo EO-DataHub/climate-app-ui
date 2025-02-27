@@ -8,7 +8,7 @@ export const getS3Credentials = ({
   authenticatedAxios: AxiosInstance
 }) => {
   return authenticatedAxios
-    .get(`${HUB_BASE_URL}/api/workspaces/s3/credentials`)
+    .post(`${HUB_BASE_URL}/api/workspaces/sparkgeouser/me/s3-tokens`)
     .then((response) => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return response.data

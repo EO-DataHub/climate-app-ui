@@ -9,6 +9,8 @@ import {
 } from '@radix-ui/themes'
 import { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ExpandMoreIcon from '@material-design-icons/svg/filled/expand_more.svg?react'
+import ExpandLessIcon from '@material-design-icons/svg/filled/expand_less.svg?react'
 
 import {
   MapSourceIds,
@@ -64,6 +66,7 @@ export const Observations = () => {
   const { setIsMapLoading } = useContext(LoadingContext)
   const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
   const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
+  const [showFilters, setShowFilters] = useState(true)
   const [loadingDatasets, setLoadingDatasets] = useState(false)
 
   const {
@@ -177,6 +180,8 @@ export const Observations = () => {
     navigate('/assets')
   }
 
+  const handleShowFilters = () => setShowFilters(!showFilters)
+
   const ObservationFilterSelect = ({
     value,
     options,
@@ -222,52 +227,62 @@ export const Observations = () => {
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
-          <InputLabelContainer>
-            <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-date">Find Datasets</label>
+          <Box width="100%" onClick={handleShowFilters}>
+            <InputLabelContainer>
+              <div className={formStyles.labelWithInfoPopoverRow}>
+                <label>Find Datasets</label>
+                {showFilters ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+              </div>
+            </InputLabelContainer>
+          </Box>
+          <Flex
+            display={showFilters ? 'flex' : 'none'}
+            width="100%"
+            gap="3"
+            direction="column"
+          >
+            <div className={formStyles.multipleInputsRow}>
+              <ObservationFilterSelect
+                value={observationParameters.years}
+                options={VALID_OBSERVATION_YEARS}
+                filterType="years"
+                label="Years"
+                showAllButton
+              />
+              <ObservationFilterSelect
+                value={observationParameters.months}
+                options={VALID_OBSERVATION_MONTHS}
+                filterType="months"
+                label="Months"
+                showAllButton
+              />
             </div>
-          </InputLabelContainer>
-          <div className={formStyles.multipleInputsRow}>
-            <ObservationFilterSelect
-              value={observationParameters.years}
-              options={VALID_OBSERVATION_YEARS}
-              filterType="years"
-              label="Years"
-              showAllButton
-            />
-            <ObservationFilterSelect
-              value={observationParameters.months}
-              options={VALID_OBSERVATION_MONTHS}
-              filterType="months"
-              label="Months"
-              showAllButton
-            />
-          </div>
-          <div className={formStyles.multipleInputsRow}>
-            <ObservationFilterSelect
-              value={observationParameters.observation}
-              options={AVAILABLE_OBSERVATION_TYPES}
-              filterType="observation"
-              label="Observation Type"
-            />
-            <ObservationFilterSelect
-              value={observationParameters.timeOfDay}
-              options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
-              filterType="timeOfDay"
-              label="TIme of day"
-            />
-          </div>
-          <div className={formStyles.multipleInputsRow}>
-            <ObservationFilterSelect
-              value={observationParameters.sensors}
-              options={AVAILABLE_OBSERVATION_SENSORS}
-              filterType="sensors"
-              label="Sensors"
-            />
-          </div>
+            <div className={formStyles.multipleInputsRow}>
+              <ObservationFilterSelect
+                value={observationParameters.observation}
+                options={AVAILABLE_OBSERVATION_TYPES}
+                filterType="observation"
+                label="Observation Type"
+              />
+              <ObservationFilterSelect
+                value={observationParameters.timeOfDay}
+                options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
+                filterType="timeOfDay"
+                label="TIme of day"
+              />
+            </div>
+            <div className={formStyles.multipleInputsRow}>
+              <ObservationFilterSelect
+                value={observationParameters.sensors}
+                options={AVAILABLE_OBSERVATION_SENSORS}
+                filterType="sensors"
+                label="Sensors"
+              />
+            </div>
+          </Flex>
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-date">Datasets Available</label>
+              <label htmlFor="available-datasets">Datasets Available</label>
               {loadingDatasets && (
                 <Box ml="1">
                   <Spinner />
@@ -276,6 +291,7 @@ export const Observations = () => {
             </div>
           </InputLabelContainer>
           <Autocomplete
+            id="available-datasets"
             options={datasetOptions ?? []}
             onChange={handleObservationChange}
             getOptionKey={({ value }) => value?.toString() ?? ''}

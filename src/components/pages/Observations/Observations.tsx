@@ -321,12 +321,33 @@ export const Observations = () => {
                   blackbody radiation at a given temperature, modified by
                   spectral emissivity component.
                 </p>
+                <h3>Citations:</h3>
+                <h4>1 - Sentinel 3A / 3B SLSTR data:</h4>
                 <p>
-                  <strong>Credit</strong>: University of Leicester, Surface
+                  <strong>Credit:</strong> University of Leicester, Surface
                   Temperature Group, NCEO
                 </p>
                 <p>
-                  <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J,
+                  <strong>Citation:</strong> Ghent, D., Anand, J. S., Veal, K.,
+                  & Remedios, J. (2024). The Operational and Climate Land
+                  Surface Temperature Products from the Sea and Land Surface
+                  Temperature Radiometers on Sentinel-3A and 3B. Remote Sensing,
+                  16(18), 3403.
+                  <br />
+                  <a
+                    target="blank"
+                    href="https://www.researchgate.net/publication/384025841_The_Operational_and_Climate_Land_Surface_Temperature_Products_from_the_Sea_and_Land_Surface_Temperature_Radiometers_on_Sentinel-3A_and_3B"
+                  >
+                    https://www.researchgate.net/publication/384025841_The_Operational_and_Climate_Land_Surface_Temperature_Products_from_the_Sea_and_Land_Surface_Temperature_Radiometers_on_Sentinel-3A_and_3B
+                  </a>
+                </p>
+                <h4>2 - Landsat, London (100m) data:</h4>
+                <p>
+                  <strong>Credit:</strong> University of Leicester, Surface
+                  Temperature Group, NCEO
+                </p>
+                <p>
+                  <strong>Citation:</strong> Perry, M. J. S, Remedios, J. J,
                   Ghent, D, Veal, K. L, Göttsche, F, A new inverse method for
                   the retrieval of Land Surface Temperature and Emissivity from
                   the ASTER instrument, AGU Earth and Space Science, (in review

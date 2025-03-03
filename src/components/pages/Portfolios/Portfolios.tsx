@@ -77,11 +77,21 @@ export const Portfolios = () => {
     }
 
     deleteUploadedFile({ authenticatedAxios, fileName, workspaceUserName })
-
-    setDeleteAssetOptions({
-      fileName: '',
-      shouldShowDeleteDialog: false,
-    })
+      .then(() => {
+        updateUploadedFilesList()
+        toast.success('File successfully deleted', {
+          autoClose: 5000,
+        })
+      })
+      .catch(() => {
+        toast.error('Error deleting file')
+      })
+      .finally(() => {
+        setDeleteAssetOptions({
+          fileName: '',
+          shouldShowDeleteDialog: false,
+        })
+      })
   }
 
   const handleDeleteCancel = () => {

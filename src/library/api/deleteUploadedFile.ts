@@ -14,16 +14,18 @@ export const deleteUploadedFile = ({
   fileName: string
   workspaceUserName: string
 }) => {
-  return getS3Credentials({ authenticatedAxios }).then((credentials) => {
-    const { accessKeyId, secretAccessKey, sessionToken } = credentials
-    const s3Client = new S3Client({
-      region: AWS_REGION,
-      credentials: { accessKeyId, secretAccessKey, sessionToken },
-    })
-    const command = new DeleteObjectCommand({
-      Bucket: AWS_BUCKET_NAME,
-      Key: `${workspaceUserName}/user-assets/${fileName}`,
-    })
-    return s3Client.send(command)
-  })
+  return getS3Credentials({ authenticatedAxios, workspaceUserName }).then(
+    (credentials) => {
+      const { accessKeyId, secretAccessKey, sessionToken } = credentials
+      const s3Client = new S3Client({
+        region: AWS_REGION,
+        credentials: { accessKeyId, secretAccessKey, sessionToken },
+      })
+      const command = new DeleteObjectCommand({
+        Bucket: AWS_BUCKET_NAME,
+        Key: `${workspaceUserName}/user-assets/${fileName}`,
+      })
+      return s3Client.send(command)
+    },
+  )
 }

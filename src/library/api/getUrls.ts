@@ -30,24 +30,16 @@ export const getResultsUrl = ({
   workspaceUserName: string
   process_id: string
 }) => {
-  return `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/workspaces-eodhp-${HUB_ENV}/processing-results/${process_id}/cat_${jobId}.json`
+  return `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/${process_id}/cat_${jobId}.json`
 }
 
 export const getCsvResultsUrl = ({
   workspaceUserName,
   jobId,
+  process_id,
 }: {
   jobId: string
   workspaceUserName: string
   process_id: string
 }) =>
-  `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/workspaces-eodhp-${HUB_ENV}/processing-results/cat_${jobId}/col_${jobId}/data.csv`
-
-export const getUploadedFileUrl = ({
-  workspaceUserName,
-  fileName,
-}: {
-  workspaceUserName: string
-  fileName: string
-}) =>
-  `https://${workspaceUserName}.workspaces.staging.eodhp.eco-ke-staging.com/files/${AWS_BUCKET_NAME}/user-assets/${fileName}`
+  `https://${workspaceUserName}.workspaces.test.eodhp.eco-ke-staging.com/files/${AWS_BUCKET_NAME}/processing-results/${process_id}/cat_${jobId}/col_${jobId}/data.csv`

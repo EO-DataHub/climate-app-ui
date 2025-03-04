@@ -19,7 +19,7 @@ export const uploadUserAssets = ({
   fileName: string
   workspaceUserName: string
 }) => {
-  return getS3Credentials({ authenticatedAxios })
+  return getS3Credentials({ authenticatedAxios, workspaceUserName })
     .then((credentials) => {
       const { accessKeyId, secretAccessKey, sessionToken } = credentials
       const s3Client = new S3Client({

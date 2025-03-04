@@ -97,7 +97,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
           getCsvResultsUrl({
             workspaceUserName,
             jobId: workflowJobIdAssociatedWithData,
-            process_id: analysedAssetsWorkflowNickname ?? '',
+            process_id: currentWorkflowTitle!,
           }),
         )
         .then((response) => {
@@ -109,6 +109,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
       authenticatedAxios,
       workflowJobIdAssociatedWithData,
       workspaceUserName,
+      currentWorkflowTitle,
     ],
   )
 

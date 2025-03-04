@@ -97,7 +97,6 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
           getCsvResultsUrl({
             workspaceUserName,
             jobId: workflowJobIdAssociatedWithData,
-            process_id: currentWorkflowTitle!,
           }),
         )
         .then((response) => {

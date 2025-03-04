@@ -26,7 +26,7 @@ import { Drawer } from '../Drawer/Drawer'
 import { deleteWorkflow } from '../../library/api/deleteWorkflow'
 import { Prompt } from '../Prompt/Prompt'
 
-const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+const HUB_BASE_URL = import.meta.env.VITE_WORKFLOW_BASE_URL
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 interface WorkflowInfoFromApi {

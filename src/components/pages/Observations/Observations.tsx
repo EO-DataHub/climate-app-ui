@@ -1,30 +1,27 @@
 import {
+  Box,
   Button,
   Flex,
-  Select,
   Spinner,
   Tabs,
   Text,
   TextField,
 } from '@radix-ui/themes'
-import { useContext, useState } from 'react'
+import { SyntheticEvent, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ExpandMoreIcon from '@material-design-icons/svg/filled/expand_more.svg?react'
+import ExpandLessIcon from '@material-design-icons/svg/filled/expand_less.svg?react'
 
 import {
   MapSourceIds,
   OBSERVATIONS_LAYER_INITIAL_OPACITY,
 } from '../../../configuration/constants'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { LoadingContext } from '../../../context/LoadingContext'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { Map } from '../../Map/Map'
 import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
-import {
-  observationSensorPopupContent,
-  observationTypePopupContent,
-} from '../../../configuration/infoPopupContentObservations'
 import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
@@ -34,6 +31,32 @@ import { useUpdateObservationsMapTiles } from './useUpdateObservationsMapTiles'
 import formStyles from '../../../library/genericStyles/forms.module.scss'
 import sidebarStyles from '../../Layout/Sidebar.module.scss'
 import observationStyles from './Observations.module.scss'
+import { Autocomplete, TextField as MuiTextField } from '@mui/material'
+import { QuerySTACCatalog } from '../../../library/api/getKerchunkUrl'
+import {
+  VALID_OBSERVATION_MONTHS,
+  VALID_OBSERVATION_YEARS,
+  AVAILABLE_OBSERVATION_SENSORS,
+  AVAILABLE_OBSERVATION_TIME_OF_DAY,
+  AVAILABLE_OBSERVATION_TYPES,
+  DEFAULT_SELECTED_OBSERVATION,
+  ObservationDatasetOption,
+} from '../../../library/api/fakeApiData'
+import { toast } from 'react-toastify'
+export interface AutoCompleteOption {
+  label: string
+  value: number | string
+}
+
+interface ObservationFilterProps {
+  value: AutoCompleteOption[]
+  options: AutoCompleteOption[]
+  filterType: string
+  label: string
+  showAllButton?: boolean
+}
+
+const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 const DEFAULT_MIN_TEMP = '-10'
 const DEFAULT_MAX_TEMP = '45'
@@ -43,23 +66,24 @@ export const Observations = () => {
   const { setIsMapLoading } = useContext(LoadingContext)
   const [minTemp, setMinTemp] = useState(DEFAULT_MIN_TEMP)
   const [maxTemp, setMaxTemp] = useState(DEFAULT_MAX_TEMP)
+  const [showFilters, setShowFilters] = useState(true)
+  const [loadingDatasets, setLoadingDatasets] = useState(false)
+
   const {
-    observationTypeConfigs,
     persistedMapCenter,
     persistedMapZoom,
     selectedObservationLayerUrl,
-    selectedObservationType,
+    selectedObservationOption,
+    observationParameters,
     setPersistedMapCenter,
     setPersistedMapZoom,
     setSelectedObservationLayerUrl,
-    setSelectedObservationType,
+    setDatasetOptions,
+    setObservationParameters,
+    setSelectedObservationOption,
+    datasetOptions,
     markerCoordinates,
     observationMarkerValue,
-    sensorFilterOptions,
-    isSensorFilterUsed,
-    selectedSensor,
-    setSelectedSensor,
-    filteredDatasetOptions,
   } = useContext(ObservationsPageContext)
 
   const { mapContainer, mapRef, isMapLoaded } = useMap({
@@ -92,82 +116,197 @@ export const Observations = () => {
     setIsMapLoading,
   })
 
-  const handleSelectObservationType = (value: string) => {
-    setSelectedObservationType?.(value)
+  useEffect(() => {
+    if (setDatasetOptions) {
+      const { years, months, sensors, timeOfDay, observation } =
+        observationParameters
+
+      const flattenParameters = (array: AutoCompleteOption[]) =>
+        array.map((input: AutoCompleteOption) => input.value)
+
+      const flatYears = flattenParameters(years).map((year) => Number(year))
+      const flatMonths = flattenParameters(months).map((year) => Number(year))
+      const flatSensors = flattenParameters(sensors).map((sensor) =>
+        sensor.toString(),
+      )
+      const flatTimeOfDay = flattenParameters(timeOfDay).map((timeOfDay) =>
+        timeOfDay.toString(),
+      )
+      const flatObservation = flattenParameters(observation).map(
+        (observation) => observation.toString(),
+      )
+
+      setLoadingDatasets(true)
+
+      QuerySTACCatalog(
+        flatYears,
+        flatMonths,
+        flatSensors,
+        flatTimeOfDay,
+        flatObservation,
+      )
+        .then((newDatasetOptions) => {
+          setLoadingDatasets(false)
+          setDatasetOptions(newDatasetOptions)
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.warn(error)
+          toast.error('There was a problem retrieving available datasets')
+          setDatasetOptions([DEFAULT_SELECTED_OBSERVATION])
+        })
+    }
+  }, [observationParameters, setDatasetOptions])
+
+  const handleAutoCompleteChange = (
+    options: AutoCompleteOption[],
+    type: string,
+  ) => {
+    setObservationParameters({
+      ...observationParameters,
+      [type]: options,
+    })
+  }
+
+  const handleObservationChange = (
+    _: SyntheticEvent,
+    option: ObservationDatasetOption,
+  ) => {
+    setSelectedObservationOption(option)
+    setSelectedObservationLayerUrl(option.value)
   }
 
   const handleSelectAssetsClick = () => {
     navigate('/assets')
   }
 
+  const handleShowFilters = () => setShowFilters(!showFilters)
+
+  const ObservationFilterSelect = ({
+    value,
+    options,
+    filterType,
+    label,
+    showAllButton,
+  }: ObservationFilterProps) => (
+    <>
+      <Autocomplete
+        onChange={(_, option) => handleAutoCompleteChange(option, filterType)}
+        size="small"
+        disableClearable
+        disablePortal
+        fullWidth
+        limitTags={3}
+        multiple
+        options={options}
+        renderInput={(params) => (
+          <MuiTextField
+            slotProps={{ inputLabel: { shrink: true } }}
+            {...params}
+            label={label}
+          />
+        )}
+        value={value}
+      />
+      {showAllButton && (
+        <Button
+          variant="soft"
+          onClick={(event) => {
+            event.preventDefault()
+            handleAutoCompleteChange(options, filterType)
+          }}
+          size="2"
+        >
+          All
+        </Button>
+      )}
+    </>
+  )
+
   const sidebarContent = (
     <div className={sidebarStyles.content}>
       <div className={sidebarStyles.contentMidSection}>
         <form className={sidebarStyles.contentForm}>
-          <div className={formStyles.multipleInputsRow}>
+          <Box width="100%" onClick={handleShowFilters}>
             <InputLabelContainer>
               <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="observation-type">Observation Type</label>
-                <InfoPopover>{observationTypePopupContent}</InfoPopover>
+                <label>Find Datasets</label>
+                {showFilters ? <ExpandLessIcon /> : <ExpandMoreIcon />}
               </div>
-
-              <Select.Root
-                onValueChange={handleSelectObservationType}
-                value={selectedObservationType}
-              >
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="observation-type">
-                  {observationTypeConfigs?.map(({ value, label }) => (
-                    <Select.Item value={value} key={value}>
-                      {label}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
             </InputLabelContainer>
-
-            {isSensorFilterUsed ? (
-              <InputLabelContainer>
-                <div className={formStyles.labelWithInfoPopoverRow}>
-                  <label htmlFor="sensor">Sensor</label>
-                  <InfoPopover>{observationSensorPopupContent}</InfoPopover>
-                </div>
-
-                <Select.Root
-                  onValueChange={setSelectedSensor}
-                  value={selectedSensor}
-                >
-                  <Select.Trigger placeholder="Select" />
-                  <Select.Content id="sensor">
-                    {sensorFilterOptions.map((option) => (
-                      <Select.Item value={option} key={option}>
-                        {option}
-                      </Select.Item>
-                    ))}
-                  </Select.Content>
-                </Select.Root>
-              </InputLabelContainer>
-            ) : null}
-          </div>
-
+          </Box>
+          <Flex
+            display={showFilters ? 'flex' : 'none'}
+            width="100%"
+            gap="3"
+            direction="column"
+          >
+            <div className={formStyles.multipleInputsRow}>
+              <ObservationFilterSelect
+                value={observationParameters.years}
+                options={VALID_OBSERVATION_YEARS}
+                filterType="years"
+                label="Years"
+                showAllButton
+              />
+              <ObservationFilterSelect
+                value={observationParameters.months}
+                options={VALID_OBSERVATION_MONTHS}
+                filterType="months"
+                label="Months"
+                showAllButton
+              />
+            </div>
+            <div className={formStyles.multipleInputsRow}>
+              <ObservationFilterSelect
+                value={observationParameters.observation}
+                options={AVAILABLE_OBSERVATION_TYPES}
+                filterType="observation"
+                label="Observation Type"
+              />
+              <ObservationFilterSelect
+                value={observationParameters.timeOfDay}
+                options={AVAILABLE_OBSERVATION_TIME_OF_DAY}
+                filterType="timeOfDay"
+                label="TIme of day"
+              />
+            </div>
+            <div className={formStyles.multipleInputsRow}>
+              <ObservationFilterSelect
+                value={observationParameters.sensors}
+                options={AVAILABLE_OBSERVATION_SENSORS}
+                filterType="sensors"
+                label="Sensors"
+              />
+            </div>
+          </Flex>
           <InputLabelContainer>
             <div className={formStyles.labelWithInfoPopoverRow}>
-              <label htmlFor="observation-date">Datasets Available</label>
+              <label htmlFor="available-datasets">Datasets Available</label>
+              {loadingDatasets && (
+                <Box ml="1">
+                  <Spinner />
+                </Box>
+              )}
             </div>
-            <Select.Root
-              value={selectedObservationLayerUrl}
-              onValueChange={setSelectedObservationLayerUrl}
-            >
-              <Select.Trigger placeholder="Select" />
-              <Select.Content id="observation-date">
-                {filteredDatasetOptions.map((option) => (
-                  <Select.Item key={option.value} value={option.value}>
-                    {option.label}
-                  </Select.Item>
-                ))}
-              </Select.Content>
-            </Select.Root>
           </InputLabelContainer>
+          <Autocomplete
+            id="available-datasets"
+            options={datasetOptions ?? []}
+            onChange={handleObservationChange}
+            getOptionKey={({ value }) => value?.toString() ?? ''}
+            value={selectedObservationOption ?? DEFAULT_SELECTED_OBSERVATION}
+            size="small"
+            fullWidth
+            disablePortal
+            disableClearable
+            renderInput={(params) => (
+              <MuiTextField
+                slotProps={{ inputLabel: { shrink: true } }}
+                {...params}
+              />
+            )}
+          />
         </form>
         <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
           <Tabs.List>
@@ -198,12 +337,33 @@ export const Observations = () => {
                   blackbody radiation at a given temperature, modified by
                   spectral emissivity component.
                 </p>
+                <h3>Citations:</h3>
+                <h4>1 - Sentinel 3A / 3B SLSTR data:</h4>
                 <p>
-                  <strong>Credit</strong>: University of Leicester, Surface
+                  <strong>Credit:</strong> University of Leicester, Surface
                   Temperature Group, NCEO
                 </p>
                 <p>
-                  <strong>Citation</strong>: Perry, M. J. S, Remedios, J. J,
+                  <strong>Citation:</strong> Ghent, D., Anand, J. S., Veal, K.,
+                  & Remedios, J. (2024). The Operational and Climate Land
+                  Surface Temperature Products from the Sea and Land Surface
+                  Temperature Radiometers on Sentinel-3A and 3B. Remote Sensing,
+                  16(18), 3403.
+                  <br />
+                  <a
+                    target="blank"
+                    href="https://www.researchgate.net/publication/384025841_The_Operational_and_Climate_Land_Surface_Temperature_Products_from_the_Sea_and_Land_Surface_Temperature_Radiometers_on_Sentinel-3A_and_3B"
+                  >
+                    https://www.researchgate.net/publication/384025841_The_Operational_and_Climate_Land_Surface_Temperature_Products_from_the_Sea_and_Land_Surface_Temperature_Radiometers_on_Sentinel-3A_and_3B
+                  </a>
+                </p>
+                <h4>2 - Landsat, London (100m) data:</h4>
+                <p>
+                  <strong>Credit:</strong> University of Leicester, Surface
+                  Temperature Group, NCEO
+                </p>
+                <p>
+                  <strong>Citation:</strong> Perry, M. J. S, Remedios, J. J,
                   Ghent, D, Veal, K. L, Göttsche, F, A new inverse method for
                   the retrieval of Land Surface Temperature and Emissivity from
                   the ASTER instrument, AGU Earth and Space Science, (in review
@@ -249,28 +409,27 @@ export const Observations = () => {
     }
   }
 
+  const legendUrl = `${HUB_BASE_URL}/titiler/core/colorMaps/jet?format=png`
+
   const legend = (
     <div className={observationStyles.legendWrapper}>
       <figure>
         <figcaption>Degrees Celsius</figcaption>
-        <img
-          src="https://test.eodatahub.org.uk/titiler/core/colorMaps/jet?format=png"
-          alt="Color Map Legend"
-        />
+        <img src={legendUrl} alt="Color Map Legend" />
       </figure>
 
       <div className={observationStyles.legendInputWrapper}>
         <TextField.Root
           size="1"
-          value={minTemp}
-          onChange={handleMinTempChange}
+          defaultValue={minTemp}
+          onBlur={handleMinTempChange}
           type="number"
           aria-label="Minimum temperature to show on the map"
         />
         <TextField.Root
           size="1"
-          value={maxTemp}
-          onChange={handleMaxTempChange}
+          defaultValue={maxTemp}
+          onBlur={handleMaxTempChange}
           type="number"
           aria-label="Maximum temperature to show on the map"
         />

@@ -1,0 +1,227 @@
+import { ObservationDatasetOption } from './fakeApiData.ts'
+import axios, { AxiosResponse } from 'axios'
+
+const SEARCH_URL = import.meta.env.VITE_CATALOG_SEARCH_URL
+const PAGE_SIZE = Number(import.meta.env.VITE_CATALOG_PAGE_SIZE)
+
+interface RefFile {
+  reference_file: {
+    href: string
+  }
+}
+
+interface COG {
+  cog: {
+    href: string
+  }
+}
+
+interface Feature {
+  collection: string
+  properties: {
+    datetime: string
+    platform: string
+    'lst:type': string | undefined
+    'lst:time_of_day': string | undefined
+    day_night: string | undefined
+  }
+  assets: RefFile | COG
+}
+
+interface FeatureCollection {
+  features: Feature[]
+}
+
+export async function QuerySTACCatalog(
+  years: number[],
+  months: number[],
+  sensor: string[],
+  timeOfDay: string[],
+  period: string[],
+): Promise<ObservationDatasetOption[]> {
+  const query = buildCQL2Query(years, months, sensor, timeOfDay, period)
+  const results = await executeCQL2Query(query)
+  return buildLSTParamsFromSTAC(results)
+}
+
+function buildCQL2Query(
+  years: number[],
+  months: number[],
+  sensors: string[],
+  timeOfDays: string[],
+  periods: string[],
+): object {
+  const queries = []
+
+  const dateArgs = []
+
+  for (const year of years) {
+    for (const month of months) {
+      const numberOfDays = new Date(year, month, 0).getDate()
+      const monthPad = month.toString().padStart(2, '0')
+
+      dateArgs.push({
+        op: 'and',
+        args: [
+          {
+            op: '>=',
+            args: [
+              {
+                property: 'properties.datetime',
+              },
+              `${year}-${monthPad}-01`,
+            ],
+          },
+          {
+            op: '<=',
+            args: [
+              {
+                property: 'properties.datetime',
+              },
+              `${year}-${monthPad}-${numberOfDays}`,
+            ],
+          },
+        ],
+      })
+    }
+  }
+
+  queries.push({
+    op: 'or',
+    args: dateArgs,
+  })
+
+  const prettySat = sensors
+    .filter((sensor) => {
+      return sensor.startsWith('sentinel')
+    })
+    .map((sensor) => {
+      if (sensor === 'sentinel3a') {
+        return 'Sentinel3A'
+      } else if (sensor === 'sentinel3b') {
+        return 'Sentinel3B'
+      } else {
+        return sensor
+      }
+    })
+
+  if (prettySat.length > 0) {
+    queries.push({
+      op: 'in',
+      args: [
+        {
+          property: 'properties.platform',
+        },
+        prettySat,
+      ],
+    })
+  }
+
+  const collections = []
+
+  for (const period of periods) {
+    for (const timeOfDay of timeOfDays) {
+      for (const sensor of sensors) {
+        const shortSat = sensor === 'sentinel3a' ? 's3a' : 's3b'
+
+        if (period === 'daily') {
+          if (sensor === 'landsat') {
+            collections.push('col_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789')
+          } else {
+            collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
+          }
+        } else {
+          collections.push(`esacci-lst-${shortSat}-${timeOfDay}-monthly`)
+        }
+      }
+    }
+  }
+
+  queries.push({
+    op: 'in',
+    args: [
+      {
+        property: 'collection',
+      },
+      [...new Set(collections)],
+    ],
+  })
+
+  return {
+    limit: PAGE_SIZE,
+    fields: {
+      include: ['properties'],
+    },
+    filter: {
+      op: 'and',
+      args: queries,
+    },
+    sortBy: {
+      field: 'properties.datetime',
+      direction: 'desc',
+    },
+  }
+}
+
+async function executeCQL2Query(query: object): Promise<FeatureCollection> {
+  async function _runQuery(query: object) {
+    return await axios.post(SEARCH_URL, query)
+  }
+
+  try {
+    const result: AxiosResponse<FeatureCollection> = await _runQuery(query)
+    return result.data
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw error
+    } else {
+      throw new Error('Unknown error')
+    }
+  }
+}
+
+function buildLSTParamsFromSTAC(
+  results: FeatureCollection,
+): ObservationDatasetOption[] {
+  return results.features.map((feature) => {
+    const date = new Date(feature.properties.datetime)
+
+    const year = date.getUTCFullYear()
+    const month = (date.getUTCMonth() + 1).toString().padStart(2, '0')
+    const day = date.getUTCDate().toString().padStart(2, '0')
+    const hour = date.getUTCHours().toString().padStart(2, '0')
+    const minute = date.getUTCMinutes().toString().padStart(2, '0')
+    const second = date.getUTCSeconds().toString().padStart(2, '0')
+    const prettySat = feature.properties.platform ?? 'Landsat, London (100m)'
+    const timeOfDay =
+      feature.properties['lst:time_of_day'] ??
+      feature.properties.day_night ??
+      (feature.collection.endsWith('day') ? 'day' : 'night')
+    const period = feature.properties['lst:type'] ?? 'daily'
+
+    const asset =
+      'reference_file' in feature.assets
+        ? feature.assets.reference_file
+        : feature.assets.cog
+
+    let label: string
+
+    if (period === 'monthly') {
+      label = `${year}-${month} ${prettySat} ${period} average ${timeOfDay.toLowerCase()}`
+    } else if (prettySat === 'Landsat, London (100m)') {
+      label = `${year}-${month}-${day} ${hour}:${minute}:${second} ${prettySat}`
+    } else {
+      label = `${year}-${month}-${day} ${prettySat} ${timeOfDay.toLowerCase()}`
+    }
+
+    const dataset: ObservationDatasetOption = {
+      value: asset.href,
+      label: label,
+      date: `${year}-${month}-${day}`,
+      sensor: prettySat,
+      day_night: timeOfDay,
+    }
+
+    return dataset
+  })
+}

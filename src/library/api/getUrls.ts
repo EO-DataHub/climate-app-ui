@@ -1,5 +1,6 @@
 const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME
 const HUB_ENV = import.meta.env.VITE_HUB_ENV
+const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
 
 import { AxiosInstance } from 'axios'
 
@@ -8,15 +9,13 @@ interface JobResponse {
 }
 
 export const getProcessId = async ({
-  workspaceUserName,
   jobId,
   authenticatedAxios,
 }: {
   jobId: string
-  workspaceUserName: string
   authenticatedAxios: AxiosInstance
 }) => {
-  const url = `https://${HUB_ENV}.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/jobs/${jobId}`
+  const url = `https://${HUB_ENV}.eodatahub.org.uk/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs/${jobId}`
   const response = await authenticatedAxios.get<JobResponse>(url)
   return response.data.processID
 }

@@ -78,7 +78,7 @@ const getData = async ({
 }) => {
   const processResponse =
     await authenticatedAxiosInstance.authenticatedAxios.get(
-      `https://${HUB_ENV}.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/jobs/${jobId}`,
+      `https://${HUB_ENV}.eodatahub.org.uk/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs/${jobId}`,
     )
   const process_id = processResponse.data.processID
   const resultsUrl = getResultsUrl({ jobId, workspaceUserName, process_id })

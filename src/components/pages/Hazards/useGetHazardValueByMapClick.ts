@@ -6,7 +6,6 @@ import { HazardsPageContext } from '../../../context/HazardsPageContext'
 
 const SPARKGEO_BASE_URL = import.meta.env.VITE_SPARKGEO_BASE_URL
 
-
 export const useGetHazardValueByMapClick = ({
   isMapLoaded,
   mapRef,

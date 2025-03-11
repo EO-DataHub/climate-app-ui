@@ -4,6 +4,9 @@ import { MapRef } from '../../Map/useMap'
 import { useMapClickToUpdateDraggableMarker } from '../../Map/useMapClickToUpdateDraggableMarker'
 import { HazardsPageContext } from '../../../context/HazardsPageContext'
 
+const SPARKGEO_BASE_URL = import.meta.env.VITE_SPARKGEO_BASE_URL
+
+
 export const useGetHazardValueByMapClick = ({
   isMapLoaded,
   mapRef,
@@ -30,7 +33,7 @@ export const useGetHazardValueByMapClick = ({
 
         const axiosController = new AbortController()
 
-        const url = `https://eodh-eu.sparkgeo.uk/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
+        const url = `${SPARKGEO_BASE_URL}/get_hazard_value?zarr_path=${zarrPath}/&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}`
 
         setHazardMarkerValue?.(null)
 

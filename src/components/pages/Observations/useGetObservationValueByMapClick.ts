@@ -5,6 +5,7 @@ import axios from 'axios'
 import { ObservationsPageContext } from '../../../context/ObservationsPageContext'
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
+const SPARKGEO_BASE_URL = import.meta.env.VITE_SPARKGEO_BASE_URL
 
 export const useGetObservationValueByMapclick = ({
   isMapLoaded,
@@ -45,19 +46,21 @@ export const useGetObservationValueByMapclick = ({
 
         const queryUrl = use_cog_urls
           ? `${HUB_BASE_URL}/titiler/core/cog/point/${markerCoordinates.lng},${markerCoordinates.lat}?url=${selectedObservationLayerUrl}`
-          : `https://eodh-eu.sparkgeo.uk/get_hazard_value?zarr_path=${selectedObservationLayerUrl}&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}&expression=x-273.15`
+          : `${SPARKGEO_BASE_URL}/get_value?zarr_path=${selectedObservationLayerUrl}&latitude=${markerCoordinates.lat}&longitude=${markerCoordinates.lng}&expression=x-273.15&data_variables=lst&data_variables=lst_uncertainty`
         setObservationMarkerValue(null)
 
         axios
           .get(queryUrl, { signal: axiosController.signal })
-
           .then((response) => {
             const observationValue = use_cog_urls
               ? response.data.values[0]
-              : response.data.hazard_value
+              : response.data.lst
+            const observationUncertainty = use_cog_urls
+              ? null
+              : response.data.lst_uncertainty
             setObservationMarkerValue(
               observationValue
-                ? Number(observationValue).toFixed(0)
+                ? `${Number(observationValue).toFixed(2)} (±${Number(observationUncertainty).toFixed(2)})`
                 : 'Unknown',
             )
           })

@@ -125,14 +125,19 @@ export const WorkflowActivityDrawer = ({
       !jobInfo ||
       !setAnalysisRunDate ||
       !setAnalysedAssetsFileName ||
-      !setWorkflowJobIdAssociatedWithData ||
-      !workspaceUserName
+      !setWorkflowJobIdAssociatedWithData
     ) {
       toast.error('Error viewing analysis')
       return
     }
 
-    const resultsUrl = getResultsUrl({ workspaceUserName, jobId })
+    if (!workspaceUserName) {
+      toast.error('Error viewing analysis: workspace user name is undefined')
+      return
+    }
+
+    const process_id = jobInfo.processID
+    const resultsUrl = getResultsUrl({ workspaceUserName, jobId, process_id })
 
     const jobWorkflowNickname =
       workflowNickNamesByHubWorkflowName[jobInfo.processID]

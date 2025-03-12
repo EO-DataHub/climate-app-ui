@@ -108,6 +108,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
       authenticatedAxios,
       workflowJobIdAssociatedWithData,
       workspaceUserName,
+      currentWorkflowTitle,
     ],
   )
 

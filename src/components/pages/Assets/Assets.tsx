@@ -39,7 +39,11 @@ import { useSyncAssetsTableSelectionWithMapAssets } from '../../../library/userA
 import { HubWorkflowOptions } from '../../../library/api/apiTypes'
 import { PortfoliosContext } from '../../../context/PortfoliosContext'
 import { getFilenameFromAwsFileKey } from '../../../library/api/getFilenameFromAwsFileKey'
-import { getUploadedFileUrl } from '../../../library/api/getUrls'
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+import { getS3Credentials } from '../../../library/api/getS3Credentials'
+
+const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME
+const AWS_REGION = import.meta.env.VITE_AWS_REGION
 
 export const Assets = () => {
   const [isAnalysisRunning, setIsAnalysisRunning] = useState(false)
@@ -328,18 +332,34 @@ export const Assets = () => {
 
       return
     }
-    return authenticatedAxios
-      .get(getUploadedFileUrl({ workspaceUserName, fileName: id }))
-      .then((response) => {
-        if (!setUserAssets) throw new Error('No setUserAssets')
-        if (!response) throw new Error('No response')
 
+    getS3Credentials({ authenticatedAxios, workspaceUserName })
+      .then((credentials) => {
+        const { accessKeyId, secretAccessKey, sessionToken } = credentials
+        const s3Client = new S3Client({
+          region: AWS_REGION,
+          credentials: { accessKeyId, secretAccessKey, sessionToken },
+        })
+        const command = new GetObjectCommand({
+          Bucket: AWS_BUCKET_NAME,
+          Key: `${workspaceUserName}/user-assets/${id}`,
+        })
+        return s3Client.send(command)
+      })
+      .then(async (response) => {
+        if (!response.Body) throw new Error('No response')
+        const bodyContents = await response.Body.transformToString()
+        return bodyContents
+      })
+      .then((data) => {
+        if (!setUserAssets) throw new Error('No setUserAssets')
+        if (!data) throw new Error('No data')
         resetAssetsState()
         setUploadedFileName?.(
           getFilenameFromAwsFileKey({ key: id, workspaceUserName }) ??
             'Unknown file name',
         )
-        setUserAssets(response.data as UserAssets)
+        setUserAssets(JSON.parse(data) as UserAssets)
       })
       .catch(() => {
         toast.error(

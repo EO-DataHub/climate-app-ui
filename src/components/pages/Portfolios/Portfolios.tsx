@@ -1,5 +1,14 @@
 import AddIcon from '@material-design-icons/svg/filled/add.svg?react'
-import { Button, Spinner, Table, Text, TextField } from '@radix-ui/themes'
+import DeleteIcon from '@material-design-icons/svg/filled/delete.svg?react'
+import {
+  Button,
+  Dialog,
+  Flex,
+  Spinner,
+  Table,
+  Text,
+  TextField,
+} from '@radix-ui/themes'
 import {
   createColumnHelper,
   flexRender,
@@ -28,11 +37,15 @@ import tableStyles from '../../../library/genericStyles/table.module.scss'
 import { useDebouncedCallback } from 'use-debounce'
 import { LoadingIndicator } from '../../LoadingIndicator/LoadingIndicator'
 import { PortfoliosContext } from '../../../context/PortfoliosContext'
+import { IconButtonOverride } from '../../IconButtonOverride/IconButtonOverride'
+import { deleteUploadedFile } from '../../../library/api/deleteUploadedFile'
 
 export const Portfolios = () => {
   const [globalFilter, setGlobalFilter] = useState('')
   const [isFileUploading, setIsFileUploading] = useState(false)
   const [tableSearchValue, setTableSearchValue] = useState('')
+  const [{ fileName, shouldShowDeleteDialog }, setDeleteAssetOptions] =
+    useState({ shouldShowDeleteDialog: false, fileName: '' })
   const {
     authenticatedAxios,
     workspaceUserName,
@@ -45,6 +58,48 @@ export const Portfolios = () => {
   const debouncedSetGlobalFilter = useDebouncedCallback((value) => {
     setGlobalFilter(value)
   }, 500)
+
+  const handleDeleteClick = (value: string) => {
+    setDeleteAssetOptions({
+      fileName: value,
+      shouldShowDeleteDialog: true,
+    })
+  }
+
+  const handleDeleteConfirmation = () => {
+    if (!authenticatedAxios || !workspaceUserName) {
+      toast.error('Unable to delete file, please try again')
+
+      return setDeleteAssetOptions({
+        fileName: '',
+        shouldShowDeleteDialog: false,
+      })
+    }
+
+    deleteUploadedFile({ authenticatedAxios, fileName, workspaceUserName })
+      .then(() => {
+        updateUploadedFilesList()
+        toast.success('File successfully deleted', {
+          autoClose: 5000,
+        })
+      })
+      .catch(() => {
+        toast.error('Error deleting file')
+      })
+      .finally(() => {
+        setDeleteAssetOptions({
+          fileName: '',
+          shouldShowDeleteDialog: false,
+        })
+      })
+  }
+
+  const handleDeleteCancel = () => {
+    setDeleteAssetOptions({
+      fileName: '',
+      shouldShowDeleteDialog: false,
+    })
+  }
 
   const handleLoadAssets = ({
     fileName,
@@ -86,6 +141,20 @@ export const Portfolios = () => {
       columnHelper.accessor('dateAdded', {
         header: 'Date Added',
         cell: (row) => row.getValue().toLocaleDateString('en-GB'),
+      }),
+      columnHelper.display({
+        id: 'actions',
+        header: 'Actions',
+        cell: ({ row }) => (
+          <Flex style={{ justifyContent: 'space-around' }}>
+            <IconButtonOverride
+              variant="ghost"
+              onClick={() => handleDeleteClick(row.getValue('name'))}
+            >
+              <DeleteIcon />
+            </IconButtonOverride>
+          </Flex>
+        ),
       }),
     ]
   }, [])
@@ -228,6 +297,32 @@ export const Portfolios = () => {
             }
             description="Upload a new portfolio of assets"
           />
+          <Dialog.Root open={shouldShowDeleteDialog}>
+            <Dialog.Content size="1">
+              <Dialog.Title align="center">Delete Portfolio</Dialog.Title>
+              <Flex direction="column" align="center" justify="center">
+                <Text as="div" size="3" mb="1">
+                  Are you sure you want to permanently delete {fileName}?
+                </Text>
+                <Text as="div" size="3" mb="3" weight="bold">
+                  <strong>This cannot be undone!</strong>
+                </Text>
+              </Flex>
+              <Flex justify="center" gap="6" align="center">
+                <Button
+                  variant="ghost"
+                  size="3"
+                  color="red"
+                  onClick={handleDeleteConfirmation}
+                >
+                  Delete
+                </Button>
+                <Button variant="ghost" size="3" onClick={handleDeleteCancel}>
+                  Cancel
+                </Button>
+              </Flex>
+            </Dialog.Content>
+          </Dialog.Root>
         </div>
       </div>
       {isFileInfoLoading ? (

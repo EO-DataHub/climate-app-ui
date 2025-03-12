@@ -4,6 +4,7 @@ import { bbox as turfBbox } from '@turf/turf'
 import { MapLayerMouseEvent, Popup } from 'maplibre-gl'
 import { useCallback, useContext, useState } from 'react'
 import ReactDOM from 'react-dom/client'
+import { getS3Credentials } from '../api/getS3Credentials'
 
 import {
   MAPLIBRE_FIT_BOUNDS_PADDING,
@@ -21,7 +22,10 @@ import { UserAssets } from './userAssetTypes'
 import assetsPopupStyles from './AssetsPopup.module.scss'
 import { AuthenticationContext } from '../../context/AuthenticationContext'
 import { toast } from 'react-toastify'
-import { getUploadedFileUrl } from '../api/getUrls'
+
+import { S3Client, GetObjectCommand } from '@aws-sdk/client-s3'
+const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME
+const AWS_REGION = import.meta.env.VITE_AWS_REGION
 
 export const useAssetPortfolios = ({
   isMapLoaded,
@@ -391,12 +395,27 @@ export const useAssetPortfolios = ({
 
         return
       }
-      return authenticatedAxios
-        .get(getUploadedFileUrl({ workspaceUserName, fileName: id }))
-        .then((response) => {
-          if (!response) throw new Error('No response')
 
-          updateUserAssetsInMap(response.data as UserAssets)
+      getS3Credentials({ authenticatedAxios, workspaceUserName })
+        .then((credentials) => {
+          const { accessKeyId, secretAccessKey, sessionToken } = credentials
+          const s3Client = new S3Client({
+            region: AWS_REGION,
+            credentials: { accessKeyId, secretAccessKey, sessionToken },
+          })
+          const command = new GetObjectCommand({
+            Bucket: AWS_BUCKET_NAME,
+            Key: `${workspaceUserName}/user-assets/${id}`,
+          })
+          return s3Client.send(command)
+        })
+        .then(async (response) => {
+          if (!response.Body) throw new Error('No response')
+          const bodyContents = await response.Body.transformToString()
+          return bodyContents
+        })
+        .then((data) => {
+          updateUserAssetsInMap(JSON.parse(data) as UserAssets)
         })
         .catch(() => {
           toast.error(

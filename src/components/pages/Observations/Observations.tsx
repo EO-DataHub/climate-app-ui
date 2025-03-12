@@ -409,7 +409,7 @@ export const Observations = () => {
     }
   }
 
-  const legendUrl = `${HUB_BASE_URL}/titiler/core/colorMaps/jet?format=png`
+  const legendUrl = `${HUB_BASE_URL}/titiler/colorMaps/jet?format=png`
 
   const legend = (
     <div className={observationStyles.legendWrapper}>

@@ -8,9 +8,9 @@
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
-      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs/user/catalogs/sparkgeouser/catalogs/processing-results/catalogs/minimalist-stac/catalogs/cat_0721004e-fe8a-11ef-a4fd-925b27b1cd31",
       "stac_collection": "['esacci-lst-s3b-night-monthly', 'esacci-lst-s3b-day-monthly', 'esacci-lst-s3a-night-monthly', 'esacci-lst-s3a-day-monthly']",
-      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[2].split('-')[0]}_S3{file_name.split('-')[4][-1]}_MONTHLY\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
     },
     "user_inputs": {
       "assets": {
@@ -39,9 +39,9 @@
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
-      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs/user/catalogs/sparkgeouser/catalogs/processing-results/catalogs/minimalist-stac/catalogs/cat_0721004e-fe8a-11ef-a4fd-925b27b1cd31",
       "stac_collection": "[ 'esacci-lst-s3b-day-monthly',  'esacci-lst-s3a-day-monthly']",
-      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[2].split('-')[0]}_S3{file_name.split('-')[4][-1]}_MONTHLY\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
     },
     "user_inputs": {
       "assets": {
@@ -70,9 +70,9 @@
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
-      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs/user/catalogs/sparkgeouser/catalogs/processing-results/catalogs/minimalist-stac/catalogs/cat_0721004e-fe8a-11ef-a4fd-925b27b1cd31",
       "stac_collection": "[ 'esacci-lst-s3b-night-monthly',  'esacci-lst-s3a-night-monthly']",
-      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[2].split('-')[0]}_S3{file_name.split('-')[4][-1]}_MONTHLY\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
     },
     "user_inputs": {
       "assets": {

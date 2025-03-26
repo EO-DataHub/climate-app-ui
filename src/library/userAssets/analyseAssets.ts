@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios'
-
 import { AnalysedUserAssets } from './userAssetTypes'
 import { getRelativeS3PathForAssetFile } from '../api/getHubAssetStorageUrls'
 import { getResultsUrl } from '../api/getUrls'
 import { HubWorkflowPresetInputs } from '../api/apiTypes'
 import AuthenticatedAxios from '../axios'
+import { getWorkspaceSessionTokens } from '../api/getWorkspaceSessionToken'
 
 const HUB_BASE_URL = import.meta.env.VITE_WORKFLOW_BASE_URL
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
@@ -78,7 +78,7 @@ const getData = async ({
 }) => {
   const processResponse =
     await authenticatedAxiosInstance.authenticatedAxios.get(
-      `https://${HUB_ENV}.eodatahub.org.uk/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs/${jobId}`,
+      `https://${HUB_ENV}.eodatahub.org.uk/ades/${workspaceUserName}/ogc-api/jobs/${jobId}`,
     )
   const process_id = processResponse.data.processID
   const resultsUrl = getResultsUrl({ jobId, workspaceUserName, process_id })
@@ -138,7 +138,6 @@ async function getAssetsRiskResults({
 }
 
 export const analyseAssets = ({
-  authToken,
   authenticatedAxiosInstance,
   workspaceUserName,
   endDate,
@@ -163,24 +162,45 @@ export const analyseAssets = ({
     throw new Error('The user must be logged in and have a username')
   }
 
-  return initiateAssetsRiskAnalysis({
-    authToken,
-    authenticatedAxiosInstance,
-    workspaceUserName,
-    endDate,
-    fileName,
-    hubWorkflowPresetInputs,
-    areUserAssetsASamplePortfolio,
-    startDate,
-  }).then((response) => {
-    const statusPollingUrl = response.data.links.find(
-      (link: { title: string }) => link.title === 'Status location',
-    ).href
+  const { authenticatedAxios } = authenticatedAxiosInstance
 
-    return getAssetsRiskResults({
-      authenticatedAxiosInstance,
-      url: statusPollingUrl,
+  return getWorkspaceSessionTokens({
+    authenticatedAxios,
+    workspaceUserName,
+  }).then(({ access }) => {
+    const getUpdatedTokens = async () => {
+      const { access }: { access: string } = await getWorkspaceSessionTokens({
+        authenticatedAxios,
+        workspaceUserName,
+      })
+
+      return access
+    }
+
+    const workspaceAxiosInstance = new AuthenticatedAxios(
+      access,
+      getUpdatedTokens,
+    )
+
+    return initiateAssetsRiskAnalysis({
+      authToken: access,
+      authenticatedAxiosInstance: workspaceAxiosInstance,
       workspaceUserName,
+      endDate,
+      fileName,
+      hubWorkflowPresetInputs,
+      areUserAssetsASamplePortfolio,
+      startDate,
+    }).then((response) => {
+      const statusPollingUrl = response.data.links.find(
+        (link: { title: string }) => link.title === 'Status location',
+      ).href
+
+      return getAssetsRiskResults({
+        authenticatedAxiosInstance: workspaceAxiosInstance,
+        url: statusPollingUrl,
+        workspaceUserName,
+      })
     })
   })
 }

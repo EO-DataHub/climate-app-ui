@@ -126,7 +126,7 @@ function buildCQL2Query(
 
         if (period === 'daily') {
           if (sensor === 'landsat') {
-            collections.push('col_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789')
+            collections.push('esacci-lst-l2p-lndst8-london')
           } else {
             collections.push(`eocis-lst-${shortSat}-${timeOfDay}`)
           }

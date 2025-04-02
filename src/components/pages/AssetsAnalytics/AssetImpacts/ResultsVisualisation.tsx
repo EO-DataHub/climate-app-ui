@@ -13,25 +13,38 @@ export const ResultsVisualisation = ({
 }) => {
   const { currentWorkflowNickname } = useContext(UserAssetsContext)
   const cssStyles = window.getComputedStyle(document.body)
-  const markerColor = cssStyles.getPropertyValue('--unclustered-marker-color')
+  const defaultMarkerColor = cssStyles.getPropertyValue(
+    '--unclustered-marker-color',
+  )
 
   const assetReturnedValues = Object.values(
     (assetToDetail?.features[0].properties.returned_values as {
-      [key: string]: { datetime: string; value: number | null }
+      [key: string]: { datetime: string; value: number | null; key: string }
     }) ?? {},
   ).filter(
-    (valueInfo: { datetime: string; value: number | null }) =>
+    (valueInfo: { datetime: string; value: number | null; key: string }) =>
       valueInfo.value !== null,
   )
 
-  const xValues =
-    assetReturnedValues?.map((valueInfo) => valueInfo.datetime) ?? []
+  const xValues = assetReturnedValues.map((valueInfo) => valueInfo.datetime)
+  const yValues = assetReturnedValues.map((valueInfo) => valueInfo.value)
+  const keys = assetReturnedValues.map((valueInfo) => valueInfo.key)
 
-  const yValues =
-    assetReturnedValues?.map(
-      (valueInfo: { datetime: string; value: number | null }) =>
-        valueInfo.value,
-    ) ?? []
+  // Assign colors based on the key
+  const colors = keys.map((key) => {
+    if (
+      key.endsWith('_plus_uncertainty') ||
+      key.endsWith('_plus_uncertainty_average')
+    ) {
+      return 'red'
+    } else if (
+      key.endsWith('_minus_uncertainty') ||
+      key.endsWith('_minus_uncertainty_average')
+    ) {
+      return 'blue'
+    }
+    return defaultMarkerColor // Default color
+  })
 
   return currentWorkflowNickname === HubWorkflowNicknames.OSC ? (
     <div className={containerStyles.flexRowCenterCenterFullDimensions}>
@@ -43,13 +56,15 @@ export const ResultsVisualisation = ({
         {
           x: xValues,
           y: yValues,
+          text: keys,
           hovertemplate:
+            'Data: %{text}<br>' +
             'Temperature: %{y:.1f} °C<br>' +
             'Date: %{x|%d %b %Y %H:%M}<br>' +
             '<extra></extra>',
           type: 'scatter',
           mode: 'markers',
-          marker: { color: markerColor, size: 10 },
+          marker: { color: colors, size: 10 },
         },
       ]}
       layout={{

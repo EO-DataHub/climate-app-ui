@@ -39,4 +39,4 @@ export const getCsvResultsUrl = ({
   workspaceUserName: string
   jobId: string
 }) =>
-  `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/lst-filter/cat_${jobId}/col_${jobId}/data.csv`
+  `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/lst-min-max/cat_${jobId}/col_${jobId}/data.csv`

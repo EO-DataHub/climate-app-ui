@@ -80,10 +80,9 @@ export const WorkflowActivityDrawer = ({
       const endDate = new Date()
       const startDate = subDays(endDate, 7)
       const formattedDateRange = `${formatISO(startDate)}/${formatISO(endDate)}`
-
       authenticatedAxios
         .get(
-          `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs?datetime=${formattedDateRange}&limit=500`,
+          `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs?started=${formattedDateRange}&limit=30`,
         )
         .then((response) => {
           const jobs = response.data.jobs as WorkflowInfoFromApi[]

@@ -13,6 +13,7 @@ export interface KeycloakUserInfo {
   given_name?: string
   family_name?: string
   email?: string
+  workspaces?: string[]
 }
 
 interface AuthenticationContextValue {
@@ -26,6 +27,9 @@ interface AuthenticationContextValue {
   token: string | undefined
   userInfo?: KeycloakUserInfo
   workspaceUserName?: string
+  selectedWorkspace?: string
+  setSelectedWorkspace: (workspace: string) => void
+  availableWorkspaces: string[]
 }
 
 const initOptions = {
@@ -45,6 +49,12 @@ export const AuthenticationContext = createContext<AuthenticationContextValue>({
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   token: undefined,
+  setSelectedWorkspace: () => {
+    throw new Error(
+      'setSelectedWorkspace must be used within an AuthenticationContextProvider',
+    )
+  },
+  availableWorkspaces: [],
 })
 
 export const AuthenticationContextProvider = ({
@@ -63,8 +73,10 @@ export const AuthenticationContextProvider = ({
     AxiosInstance | undefined
   >()
   const [userInfo, setUserInfo] = useState<KeycloakUserInfo>({})
-  const [token, setToken] = useState<string>() // we track this to trigger axios reinitialization
-  const workspaceUserName = userInfo?.preferred_username
+  const [token, setToken] = useState<string>()
+  const [selectedWorkspace, setSelectedWorkspace] = useState<string>()
+  const workspaceUserName = selectedWorkspace ?? userInfo?.preferred_username
+  const availableWorkspaces = userInfo?.workspaces ?? []
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()
@@ -183,6 +195,9 @@ export const AuthenticationContextProvider = ({
         token,
         userInfo,
         workspaceUserName,
+        selectedWorkspace,
+        setSelectedWorkspace,
+        availableWorkspaces,
       }}
     >
       {children}

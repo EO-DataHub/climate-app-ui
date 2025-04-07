@@ -1,8 +1,9 @@
 import { Outlet } from 'react-router-dom'
-
+import { WorkspaceSelector } from '../WorkspaceSelector'
 import appLayoutStyles from './AppLayout.module.scss'
 import { ActionsBar } from '../ActionsBar/ActionsBar'
 import { ToastContainer } from 'react-toastify'
+import '../../styles/WorkspaceSelector.css'
 
 export const AppLayout = () => {
   return (
@@ -13,7 +14,10 @@ export const AppLayout = () => {
         position="bottom-right"
       />
       <ActionsBar />
-      <Outlet />
+      <div className={appLayoutStyles.contentWrapper}>
+        <WorkspaceSelector />
+        <Outlet />
+      </div>
     </div>
   )
 }

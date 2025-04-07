@@ -24,6 +24,9 @@ export const UserMenu = ({
     login,
     logout,
     userInfo,
+    selectedWorkspace,
+    setSelectedWorkspace,
+    availableWorkspaces,
   } = useContext(AuthenticationContext)
   const firstInitial = userInfo?.given_name?.charAt(0)
   const lastInitial = userInfo?.family_name?.charAt(0)
@@ -68,11 +71,26 @@ export const UserMenu = ({
               </div>
               {userInfo?.name}
             </div>
+            {availableWorkspaces.length > 0 && (
+              <div className={userMenuStyles.workspaceSelector}>
+                <label htmlFor="workspace-select">Workspace:</label>
+                <select
+                  id="workspace-select"
+                  value={selectedWorkspace}
+                  onChange={(e) => setSelectedWorkspace(e.target.value)}
+                >
+                  {availableWorkspaces.map((workspace) => (
+                    <option key={workspace} value={workspace}>
+                      {workspace}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             <Link to="/settings" role="menuitem" onClick={closeMenu}>
               <SettingsIcon />
               Settings
             </Link>
-
             <DropdownMenu.Item onClick={logout}>
               <LogoutIcon /> Log out
             </DropdownMenu.Item>

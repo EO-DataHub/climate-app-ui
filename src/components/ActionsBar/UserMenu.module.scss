@@ -60,3 +60,42 @@
   border-radius: var(--radius-3);
   font-size: 0.7em;
 }
+
+.workspaceSelector {
+  @include containers.flexColumnStartStart;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  width: 100%;
+  border-bottom: 1px solid var(--accent-9);
+  margin-bottom: var(--space-2);
+
+  label {
+    font-size: 0.9em;
+    color: var(--accent-6);
+  }
+
+  select {
+    width: 100%;
+    padding: var(--space-2);
+    background-color: var(--app-background-dark);
+    border: 1px solid var(--accent-9);
+    border-radius: var(--radius-2);
+    color: var(--white);
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--accent-6);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-6);
+      box-shadow: 0 0 0 2px rgba(var(--accent-6-rgb), 0.2);
+    }
+
+    option {
+      background-color: var(--app-background-dark);
+      color: var(--white);
+    }
+  }
+}

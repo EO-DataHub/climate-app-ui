@@ -11,14 +11,30 @@ import { RouterProvider } from 'react-router-dom'
 import { UserAssetsProvider } from '../../context/UserAssetsContext'
 import { router } from './router'
 import { LoadingContextProvider } from '../../context/LoadingContext'
-import { AuthenticationContextProvider } from '../../context/AuthenticationContext'
+import {
+  AuthenticationContextProvider,
+  AuthenticationContext,
+} from '../../context/AuthenticationContext'
 import { HazardContextProvider } from '../../context/HazardsPageContext'
 import { ObservationsContextProvider } from '../../context/ObservationsPageContext'
 import { AssetsPageContextProvider } from '../../context/AssetsPageContext'
 import { PortfoliosContextProvider } from '../../context/PortfoliosContext'
+import { WorkspaceSelectionModal } from '../WorkspaceSelectionModal/WorkspaceSelectionModal'
+import { useContext } from 'react'
 
 const RADIX_THEME_PROPS: RadixThemeProps = {
   accentColor: 'indigo',
+}
+
+function AppContent() {
+  const { showWorkspaceModal } = useContext(AuthenticationContext)
+
+  return (
+    <>
+      <RouterProvider router={router} />
+      <WorkspaceSelectionModal isOpen={showWorkspaceModal} />
+    </>
+  )
 }
 
 function App() {
@@ -32,7 +48,7 @@ function App() {
                 <ObservationsContextProvider>
                   <AssetsPageContextProvider>
                     <PortfoliosContextProvider>
-                      <RouterProvider router={router} />
+                      <AppContent />
                     </PortfoliosContextProvider>
                   </AssetsPageContextProvider>
                 </ObservationsContextProvider>

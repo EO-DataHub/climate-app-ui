@@ -7,7 +7,7 @@ import {
   Spinner,
   Text,
 } from '@radix-ui/themes'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
 import CloseIcon from '@material-design-icons/svg/filled/close.svg?react'
 import { formatISO, subDays } from 'date-fns'
 
@@ -25,6 +25,8 @@ import { toast } from 'react-toastify'
 import { Drawer } from '../Drawer/Drawer'
 import { deleteWorkflow } from '../../library/api/deleteWorkflow'
 import { Prompt } from '../Prompt/Prompt'
+import { getWorkspaceSessionTokens } from '../../library/api/getWorkspaceSessionToken'
+import AuthenticatedAxios from '../../library/axios'
 
 const HUB_BASE_URL = import.meta.env.VITE_WORKFLOW_BASE_URL
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
@@ -71,150 +73,229 @@ export const WorkflowActivityDrawer = ({
     setWorkflowJobIdAssociatedWithData,
   } = useContext(UserAssetsContext)
 
-  const loadWorkflowActivity = () => {
+  const loadWorkflowActivity = useCallback(async () => {
     if (!authenticatedAxios || !workspaceUserName) return
 
     if (isDrawerOpen) {
       setIsWorkflowActivityLoading(true)
 
-      const endDate = new Date()
-      const startDate = subDays(endDate, 7)
-      const formattedDateRange = `${formatISO(startDate)}/${formatISO(endDate)}`
-      authenticatedAxios
-        .get(
-          `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs?started=${formattedDateRange}&limit=30`,
+      try {
+        // Get workspace session token
+        const { access } = await getWorkspaceSessionTokens({
+          authenticatedAxios: authenticatedAxios,
+          workspaceUserName,
+        })
+
+        const getUpdatedTokens = async () => {
+          const { access }: { access: string } =
+            await getWorkspaceSessionTokens({
+              authenticatedAxios: authenticatedAxios,
+              workspaceUserName,
+            })
+          return access
+        }
+
+        const workspaceAxiosInstance = new AuthenticatedAxios(
+          access,
+          getUpdatedTokens,
         )
-        .then((response) => {
-          const jobs = response.data.jobs as WorkflowInfoFromApi[]
 
-          const jobsRelatedToWorkflowsInThisApp = jobs.filter(({ processID }) =>
-            workflowsSupportedByThisApp.includes(processID),
-          )
+        const endDate = new Date()
+        const startDate = subDays(endDate, 7)
+        const formattedDateRange = `${formatISO(startDate)}/${formatISO(endDate)}`
 
-          const jobsSortedByDate = jobsRelatedToWorkflowsInThisApp.sort(
-            (a: WorkflowInfoFromApi, b: WorkflowInfoFromApi) => {
-              // UX requirement: show date analysis was started, or Date Error occurred or Date analysis was completed
-              const dateStringToUseForA = a.finished ?? a.started
-              const dateStringToUseForB = b.finished ?? b.started
-              return new Date(dateStringToUseForB).getTime() >
-                new Date(dateStringToUseForA).getTime()
-                ? 1
-                : -1
-            },
-          )
-          setWorkflowActivity(jobsSortedByDate)
-        })
-        .catch(() => {
-          setIsWorkflowActivityError(true)
-        })
-        .finally(() => {
-          setIsWorkflowActivityLoading(false)
-        })
+        const response = await workspaceAxiosInstance.authenticatedAxios.get(
+          `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs?started=${formattedDateRange}&limit=100`,
+        )
+
+        const jobs = response.data.jobs as WorkflowInfoFromApi[]
+
+        const jobsRelatedToWorkflowsInThisApp = jobs.filter(({ processID }) =>
+          workflowsSupportedByThisApp.includes(processID),
+        )
+
+        const jobsSortedByDate = jobsRelatedToWorkflowsInThisApp.sort(
+          (a: WorkflowInfoFromApi, b: WorkflowInfoFromApi) => {
+            const dateStringToUseForA = a.finished ?? a.started
+            const dateStringToUseForB = b.finished ?? b.started
+            return new Date(dateStringToUseForB).getTime() >
+              new Date(dateStringToUseForA).getTime()
+              ? 1
+              : -1
+          },
+        )
+        setWorkflowActivity(jobsSortedByDate)
+      } catch (error) {
+        setIsWorkflowActivityError(true)
+      } finally {
+        setIsWorkflowActivityLoading(false)
+      }
     }
-  }
+  }, [authenticatedAxios, workspaceUserName, isDrawerOpen])
 
-  useEffect(
-    loadWorkflowActivity,
-    [authenticatedAxios, workspaceUserName, analysedUserAssets, isDrawerOpen], // we want to refresh whenever analysedUserAssets has changes which indicated a workflow status has changes
-  )
+  useEffect(() => {
+    void loadWorkflowActivity()
+  }, [loadWorkflowActivity, analysedUserAssets])
 
-  const viewAnalysis = (jobId: string) => {
+  const viewAnalysis = async (jobId: string) => {
     const jobInfo = workflowActivity.find((job) => job.jobID === jobId)
     if (
       !jobInfo ||
       !setAnalysisRunDate ||
       !setAnalysedAssetsFileName ||
-      !setWorkflowJobIdAssociatedWithData
+      !setWorkflowJobIdAssociatedWithData ||
+      !authenticatedAxios ||
+      !workspaceUserName
     ) {
       toast.error('Error viewing analysis')
       return
     }
 
-    if (!workspaceUserName) {
-      toast.error('Error viewing analysis: workspace user name is undefined')
-      return
-    }
-
-    const process_id = jobInfo.processID
-    const resultsUrl = getResultsUrl({ workspaceUserName, jobId, process_id })
-
-    const jobWorkflowNickname =
-      workflowNickNamesByHubWorkflowName[jobInfo.processID]
-
-    if (!jobWorkflowNickname || !resultsUrl) {
-      toast.error('Error viewing analysis')
-      return
-    }
-
-    setAnalysisIdWaitingToBeViewed(jobId)
-    authenticatedAxios
-      ?.get(resultsUrl)
-      .then(({ data: { data } }) => {
-        if (data) {
-          setAnalysedUserAssets?.(data)
-          setAnalysisRunDate(
-            new Date(jobInfo.finished).toLocaleDateString('en-GB'),
-          )
-          setAnalysedAssetsFileName('placeholder-file-name')
-          setWorkflowJobIdAssociatedWithData(jobId)
-          setAnalysedAssetsWorkflowNickname?.(
-            workflowNickNamesByHubWorkflowName[jobInfo.processID],
-          )
-          setAnalysedAssetsWorkflowTitle?.(
-            workflowNickNamesByHubWorkflowName[jobInfo.processID] ?? null, // we can't currently get the workflow title, so we will use the nickname in the analysis page workflow title
-          )
-          closeDrawer()
-          setTimeout(() => {
-            // give react a second to update state so that table shows data - otherwise there is an issue with the analytics page where it doesnt update from context. Could be a react-table thing?
-            navigate('/analytics')
-          }, 1000)
-        }
-        if (!data) {
-          toast.error('Error viewing analysis')
-        }
+    try {
+      // Get workspace session token
+      const { access } = await getWorkspaceSessionTokens({
+        authenticatedAxios,
+        workspaceUserName,
       })
-      .catch(() => {
+
+      const getUpdatedTokens = async () => {
+        const { access }: { access: string } = await getWorkspaceSessionTokens({
+          authenticatedAxios,
+          workspaceUserName,
+        })
+        return access
+      }
+
+      const workspaceAxiosInstance = new AuthenticatedAxios(
+        access,
+        getUpdatedTokens,
+      )
+
+      const process_id = jobInfo.processID
+      const resultsUrl = getResultsUrl({ workspaceUserName, jobId, process_id })
+
+      const jobWorkflowNickname =
+        workflowNickNamesByHubWorkflowName[jobInfo.processID]
+
+      if (!jobWorkflowNickname || !resultsUrl) {
         toast.error('Error viewing analysis')
-      })
-      .finally(() => {
-        setAnalysisIdWaitingToBeViewed(undefined)
-      })
-  }
-  const cancelAnalysis = (jobId: string) => {
-    if (!authenticatedAxios || !workspaceUserName) return
-    deleteWorkflow({
-      jobId,
-      authenticatedAxios,
-    })
-      .then(() => {
-        loadWorkflowActivity()
-        toast.dismiss()
-        toast.success('Analysis cancelled.')
-      })
-      .catch(() => {
-        toast.error('Error cancelling analysis.')
-      })
+        return
+      }
+
+      setAnalysisIdWaitingToBeViewed(jobId)
+      const {
+        data: { data },
+      } = await workspaceAxiosInstance.authenticatedAxios.get(resultsUrl)
+
+      if (data) {
+        setAnalysedUserAssets?.(data)
+        setAnalysisRunDate(
+          new Date(jobInfo.finished).toLocaleDateString('en-GB'),
+        )
+        setAnalysedAssetsFileName('placeholder-file-name')
+        setWorkflowJobIdAssociatedWithData(jobId)
+        setAnalysedAssetsWorkflowNickname?.(
+          workflowNickNamesByHubWorkflowName[jobInfo.processID],
+        )
+        setAnalysedAssetsWorkflowTitle?.(
+          workflowNickNamesByHubWorkflowName[jobInfo.processID] ?? null,
+        )
+        closeDrawer()
+        setTimeout(() => {
+          navigate('/analytics')
+        }, 1000)
+      } else {
+        toast.error('Error viewing analysis')
+      }
+    } catch (error) {
+      toast.error('Error viewing analysis')
+    } finally {
+      setAnalysisIdWaitingToBeViewed(undefined)
+    }
   }
 
-  const clearAll = () => {
-    if (!authenticatedAxios || !workspaceUserName) return
-    const deletePromises = workflowActivity.map(({ jobID }) =>
-      deleteWorkflow({ jobId: jobID, authenticatedAxios }),
-    )
-    setIsActivityBeingCleared(true)
-    Promise.all(deletePromises)
-      .then(() => {
-        setWorkflowActivity([])
-        toast.dismiss()
-        toast.success('All activity has been cleared.')
+  const cancelAnalysis = async (jobId: string) => {
+    if (!authenticatedAxios || !workspaceUserName) {
+      toast.error('Error cancelling analysis: authentication not available')
+      return
+    }
+
+    try {
+      // Get workspace session token
+      const { access } = await getWorkspaceSessionTokens({
+        authenticatedAxios,
+        workspaceUserName,
       })
-      .catch(() => {
-        toast.error('Error clearing activity.')
+
+      const getUpdatedTokens = async () => {
+        const { access }: { access: string } = await getWorkspaceSessionTokens({
+          authenticatedAxios,
+          workspaceUserName,
+        })
+        return access
+      }
+
+      const workspaceAxiosInstance = new AuthenticatedAxios(
+        access,
+        getUpdatedTokens,
+      )
+
+      await deleteWorkflow({
+        jobId,
+        authenticatedAxios: workspaceAxiosInstance.authenticatedAxios,
       })
-      .finally(() => {
-        setIsActivityBeingCleared(false)
-      })
+      await loadWorkflowActivity()
+      toast.dismiss()
+      toast.success('Analysis cancelled.')
+    } catch (error) {
+      toast.error('Error cancelling analysis.')
+    }
   }
+
+  const clearAll = async () => {
+    if (!authenticatedAxios || !workspaceUserName) {
+      toast.error('Error clearing activity: authentication not available')
+      return
+    }
+
+    try {
+      // Get workspace session token
+      const { access } = await getWorkspaceSessionTokens({
+        authenticatedAxios,
+        workspaceUserName,
+      })
+
+      const getUpdatedTokens = async () => {
+        const { access }: { access: string } = await getWorkspaceSessionTokens({
+          authenticatedAxios,
+          workspaceUserName,
+        })
+        return access
+      }
+
+      const workspaceAxiosInstance = new AuthenticatedAxios(
+        access,
+        getUpdatedTokens,
+      )
+
+      const deletePromises = workflowActivity.map(({ jobID }) =>
+        deleteWorkflow({
+          jobId: jobID,
+          authenticatedAxios: workspaceAxiosInstance.authenticatedAxios,
+        }),
+      )
+      setIsActivityBeingCleared(true)
+      await Promise.all(deletePromises)
+      setWorkflowActivity([])
+      toast.dismiss()
+      toast.success('All activity has been cleared.')
+    } catch (error) {
+      toast.error('Error clearing activity.')
+    } finally {
+      setIsActivityBeingCleared(false)
+    }
+  }
+
   const badgeColor = {
     successful: 'green',
     failed: 'red',
@@ -268,7 +349,6 @@ export const WorkflowActivityDrawer = ({
         {!isWorkflowActivityLoading && !isWorkflowActivityError
           ? workflowActivity.map(
               ({ jobID, status, started, finished, processID }) => {
-                // UX requirement: show date analysis was started, or Date Error occurred or Date analysis was completed
                 const dateStringToUse = finished ?? started
                 return (
                   <div
@@ -293,7 +373,7 @@ export const WorkflowActivityDrawer = ({
                       {status === 'successful' ? (
                         <Link asChild size="1">
                           <button
-                            onClick={() => viewAnalysis(jobID)}
+                            onClick={() => void viewAnalysis(jobID)}
                             className={
                               workflowActivityStyles.workflowActivityButton
                             }
@@ -306,9 +386,7 @@ export const WorkflowActivityDrawer = ({
                           </button>
                         </Link>
                       ) : null}
-                      {status === 'running' &&
-                      authenticatedAxios &&
-                      workspaceUserName ? (
+                      {status === 'running' ? (
                         <Prompt
                           trigger={
                             <Link asChild size="1">
@@ -321,7 +399,7 @@ export const WorkflowActivityDrawer = ({
                               </button>
                             </Link>
                           }
-                          onConfirm={() => cancelAnalysis(jobID)}
+                          onConfirm={() => void cancelAnalysis(jobID)}
                           promptText="Do you want to cancel the ongoing analysis?"
                         />
                       ) : null}

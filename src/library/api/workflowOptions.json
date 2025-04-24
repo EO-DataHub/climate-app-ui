@@ -3,15 +3,8 @@
     "title": "Land Surface Temperature (LST) - Monthly (avg), Day & Night",
     "description": "This workflow provides monthly average daytime and nighttime land surface temperature observations for specified assets across the World, derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -41,15 +34,8 @@
     "title": "Land Surface Temperature (LST) - Monthly (avg), Day (+/- uncertainty)",
     "description": "This workflow provides monthly average daytime land surface temperature observations with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -79,15 +65,8 @@
     "title": "Land Surface Temperature (LST) - Monthly (avg), Night (+/- uncertainty)",
     "description": "This workflow provides monthly average nighttime land surface temperature observations with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -117,15 +96,8 @@
     "title": "Land Surface Temperature (LST) - Daily, Day & Night",
     "description": "This workflow provides daytime and nightime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -155,15 +127,8 @@
     "title": "Land Surface Temperature (LST) - Daily, Day",
     "description": "This workflow provides daytime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -193,15 +158,8 @@
     "title": "Land Surface Temperature (LST) -  Daily, Day  (+/- uncertainty)",
     "description": "This workflow provides daily daytime land surface temperature observations along with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -231,15 +189,8 @@
     "title": "Land Surface Temperature (LST) - Daily, Night",
     "description": "This workflow provides nighttime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -269,15 +220,8 @@
     "title": "Land Surface Temperature (LST) - Daily, Night (+/- uncertainty)",
     "description": "This workflow provides daily nighttime land surface temperature observations along with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -307,15 +251,8 @@
     "title": "Land Surface Temperature (LST) - London - Daily, Day & Night",
     "description": "This worfklow provides land surface temperature observations for specified assets across London, from the downscaled 100 metre resolution data provided by the University of Leicester. Data is available from May 2013 to October 2023.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -346,15 +283,8 @@
     "title": "Land Surface Temperature (LST) - London - Daily, Day & Night (+/- uncertainty)t",
     "description": "This workflow provides daily daytime and nighttime land surface temperature observations along with their associated uncertainty ranges (minimum and maximum values) for specified assets across London. The data is derived from the downscaled 100-metre resolution dataset provided by the University of Leicester and is available from May 2013 to October 2023.",
     "constraints": {
-      "supported_assets": [
-        "Point",
-        "Polygon",
-        "LineString"
-      ],
-      "required_columns": [
-        "latitude",
-        "longitude"
-      ]
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
       "workflow": "lst-min-max",
@@ -385,9 +315,7 @@
     "title": "OS Climate Physical Risk",
     "description": "This workflow assesses the physical risks of climate change, including chronic heat and inundation, for the specified asset portfolio.",
     "constraints": {
-      "supported_assets": [
-        "Point"
-      ],
+      "supported_assets": ["Point"],
       "required_columns": [
         "ID",
         "latitude",

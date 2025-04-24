@@ -13,6 +13,7 @@ export interface KeycloakUserInfo {
   given_name?: string
   family_name?: string
   email?: string
+  workspaces?: string[]
 }
 
 interface AuthenticationContextValue {
@@ -26,6 +27,11 @@ interface AuthenticationContextValue {
   token: string | undefined
   userInfo?: KeycloakUserInfo
   workspaceUserName?: string
+  selectedWorkspace?: string
+  setSelectedWorkspace: (workspace: string) => void
+  availableWorkspaces: string[]
+  showWorkspaceModal: boolean
+  setShowWorkspaceModal: (show: boolean) => void
 }
 
 const initOptions = {
@@ -38,6 +44,8 @@ const initOptions = {
 
 const authenticationInstance = new Keycloak(initOptions)
 
+const WORKSPACE_STORAGE_KEY = 'selectedWorkspace'
+
 export const AuthenticationContext = createContext<AuthenticationContextValue>({
   isAuthenticated: false,
   isAuthenticating: false,
@@ -45,6 +53,18 @@ export const AuthenticationContext = createContext<AuthenticationContextValue>({
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   token: undefined,
+  setSelectedWorkspace: () => {
+    throw new Error(
+      'setSelectedWorkspace must be used within an AuthenticationContextProvider',
+    )
+  },
+  availableWorkspaces: [],
+  showWorkspaceModal: false,
+  setShowWorkspaceModal: () => {
+    throw new Error(
+      'setShowWorkspaceModal must be used within an AuthenticationContextProvider',
+    )
+  },
 })
 
 export const AuthenticationContextProvider = ({
@@ -63,14 +83,34 @@ export const AuthenticationContextProvider = ({
     AxiosInstance | undefined
   >()
   const [userInfo, setUserInfo] = useState<KeycloakUserInfo>({})
-  const [token, setToken] = useState<string>() // we track this to trigger axios reinitialization
-  const workspaceUserName = userInfo?.preferred_username
+  const [token, setToken] = useState<string>()
+  const [selectedWorkspace, setSelectedWorkspace] = useState<
+    string | undefined
+  >(() => {
+    // Initialize from localStorage if available
+    return localStorage.getItem(WORKSPACE_STORAGE_KEY) ?? undefined
+  })
+  const [showWorkspaceModal, setShowWorkspaceModal] = useState<boolean>(false)
+  const workspaceUserName = selectedWorkspace ?? userInfo?.preferred_username
+  const availableWorkspaces = userInfo?.workspaces ?? []
+
+  // Update localStorage when workspace changes
+  useEffect(() => {
+    if (selectedWorkspace) {
+      localStorage.setItem(WORKSPACE_STORAGE_KEY, selectedWorkspace)
+    } else {
+      localStorage.removeItem(WORKSPACE_STORAGE_KEY)
+    }
+  }, [selectedWorkspace])
 
   const login = () => {
     if (isAuthenticated) return Promise.resolve()
     return authenticationInstance.login()
   }
   const logout = () => {
+    // Clear selected workspace on logout
+    localStorage.removeItem(WORKSPACE_STORAGE_KEY)
+    setSelectedWorkspace(undefined)
     return authenticationInstance.logout()
   }
 
@@ -131,12 +171,31 @@ export const AuthenticationContextProvider = ({
             setToken(authenticationInstance.token)
             return authenticationInstance.loadUserInfo()
           }
+          return null
         })
         .then((userInfo) => {
-          setUserInfo(userInfo as KeycloakUserInfo)
+          if (!userInfo) {
+            return
+          }
+          const keycloakUserInfo = userInfo as KeycloakUserInfo
+          setUserInfo(keycloakUserInfo)
+
+          // Only show workspace modal if we have workspaces and no workspace is selected
+          // or if the selected workspace is not in the available workspaces
+          const storedWorkspace = localStorage.getItem(WORKSPACE_STORAGE_KEY)
+          const workspaces = keycloakUserInfo.workspaces ?? []
+          if (
+            workspaces.length > 0 &&
+            (!storedWorkspace || !workspaces.includes(storedWorkspace))
+          ) {
+            setShowWorkspaceModal(true)
+          }
         })
-        .catch(() => {
+        .catch((error) => {
           setIsAuthenticationServiceError(true)
+          if (!error?.error?.includes('silent-check-sso')) {
+            toast.error('Authentication service error. Please try again later.')
+          }
         })
         .finally(() => {
           setIsAuthenticating(false)
@@ -183,6 +242,11 @@ export const AuthenticationContextProvider = ({
         token,
         userInfo,
         workspaceUserName,
+        selectedWorkspace,
+        setSelectedWorkspace,
+        availableWorkspaces,
+        showWorkspaceModal,
+        setShowWorkspaceModal,
       }}
     >
       {children}

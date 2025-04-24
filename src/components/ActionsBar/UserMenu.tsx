@@ -7,7 +7,6 @@ import SettingsIcon from '@material-design-icons/svg/filled/settings.svg?react'
 import userMenuStyles from './UserMenu.module.scss'
 import { useContext } from 'react'
 import { AuthenticationContext } from '../../context/AuthenticationContext'
-import { Link } from 'react-router-dom'
 import { LoadingIndicator } from '../LoadingIndicator/LoadingIndicator'
 
 export const UserMenu = ({
@@ -24,12 +23,18 @@ export const UserMenu = ({
     login,
     logout,
     userInfo,
+    setShowWorkspaceModal,
   } = useContext(AuthenticationContext)
   const firstInitial = userInfo?.given_name?.charAt(0)
   const lastInitial = userInfo?.family_name?.charAt(0)
 
   const closeMenu = () => {
     setIsUserMenuOpen(false)
+  }
+
+  const handleWorkspaceSettings = () => {
+    setShowWorkspaceModal(true)
+    closeMenu()
   }
 
   return (
@@ -68,11 +73,10 @@ export const UserMenu = ({
               </div>
               {userInfo?.name}
             </div>
-            <Link to="/settings" role="menuitem" onClick={closeMenu}>
+            <DropdownMenu.Item onClick={handleWorkspaceSettings}>
               <SettingsIcon />
-              Settings
-            </Link>
-
+              Change Workspace
+            </DropdownMenu.Item>
             <DropdownMenu.Item onClick={logout}>
               <LogoutIcon /> Log out
             </DropdownMenu.Item>

@@ -13,7 +13,7 @@ export interface KeycloakUserInfo {
   given_name?: string
   family_name?: string
   email?: string
-  workspaces?: string[]
+  member_groups?: string[]
 }
 
 interface AuthenticationContextValue {
@@ -92,7 +92,7 @@ export const AuthenticationContextProvider = ({
   })
   const [showWorkspaceModal, setShowWorkspaceModal] = useState<boolean>(false)
   const workspaceUserName = selectedWorkspace ?? userInfo?.preferred_username
-  const availableWorkspaces = userInfo?.workspaces ?? []
+  const availableWorkspaces = userInfo?.member_groups ?? []
 
   // Update localStorage when workspace changes
   useEffect(() => {
@@ -183,7 +183,7 @@ export const AuthenticationContextProvider = ({
           // Only show workspace modal if we have workspaces and no workspace is selected
           // or if the selected workspace is not in the available workspaces
           const storedWorkspace = localStorage.getItem(WORKSPACE_STORAGE_KEY)
-          const workspaces = keycloakUserInfo.workspaces ?? []
+          const workspaces = keycloakUserInfo.member_groups ?? []
           if (
             workspaces.length > 0 &&
             (!storedWorkspace || !workspaces.includes(storedWorkspace))

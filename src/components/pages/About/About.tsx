@@ -21,11 +21,10 @@ export const About = () => {
             future exposure and vulnerability of physical assets to various
             climate hazards, such as chronic heat, based on climate projections
             for different scenarios and years. These insights are complemented
-            by historic earth observation data (e.g land surface temperature)
+            by historic earth observation data (e.g., land surface temperature)
             which gives greater understanding into local variations, such as
             urban heat islands. Understanding these risks helps decision makers
-            make better, more informed financial, economic and policy
-            decisions..
+            make better, more informed financial, economic and policy decisions.
           </p>
           <p>
             To make the calculations, the CLARAT application uses open and

@@ -56,7 +56,6 @@ jobs:
           VITE_WORKFLOW_BASE_URL: ${{ vars.VITE_WORKFLOW_BASE_URL }}
           VITE_CATALOG_SEARCH_URL: ${{ vars.VITE_CATALOG_SEARCH_URL }}
           VITE_CATALOG_PAGE_SIZE: ${{ vars.VITE_CATALOG_PAGE_SIZE }}
-          VITE_HUB_ENV: ${{ vars.VITE_HUB_ENV }}
 
       - name: Stage build files for upload to s3
         uses: actions/upload-artifact@v4

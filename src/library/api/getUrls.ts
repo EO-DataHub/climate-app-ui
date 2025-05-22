@@ -1,6 +1,6 @@
 const AWS_BUCKET_NAME = import.meta.env.VITE_AWS_BUCKET_NAME
-const HUB_ENV = import.meta.env.VITE_HUB_ENV
 const HUB_APP_WORKSPACE_NAME = import.meta.env.VITE_HUB_APP_WORKSPACE_NAME
+const HUB_BASE_URL = import.meta.env.VITE_WORKFLOW_BASE_URL
 
 import { AxiosInstance } from 'axios'
 
@@ -15,7 +15,7 @@ export const getProcessId = async ({
   jobId: string
   authenticatedAxios: AxiosInstance
 }) => {
-  const url = `https://${HUB_ENV}.eodatahub.org.uk/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs/${jobId}`
+  const url = `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs/${jobId}`
   const response = await authenticatedAxios.get<JobResponse>(url)
   return response.data.processID
 }
@@ -29,7 +29,7 @@ export const getResultsUrl = ({
   workspaceUserName: string
   process_id: string
 }) => {
-  return `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/${process_id}/cat_${jobId}.json`
+  return `https://${workspaceUserName}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/${process_id}/cat_${jobId}.json`
 }
 
 export const getCsvResultsUrl = ({
@@ -39,4 +39,4 @@ export const getCsvResultsUrl = ({
   workspaceUserName: string
   jobId: string
 }) =>
-  `https://${workspaceUserName}.${HUB_ENV}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/lst-min-max/cat_${jobId}/col_${jobId}/data.csv`
+  `${HUB_BASE_URL}/${workspaceUserName}/files/${AWS_BUCKET_NAME}/processing-results/lst-min-max/cat_${jobId}/col_${jobId}/data.csv`

@@ -1,13 +1,137 @@
 [
   {
-    "title": "Land Surface Temperature (LST) - World, Day",
+    "title": "Land Surface Temperature (LST) - Monthly (avg), Day & Night",
+    "description": "This workflow provides monthly average daytime and nighttime land surface temperature observations for specified assets across the World, derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
+    "constraints": {
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
+    },
+    "preset_inputs": {
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs/user/catalogs/sparkgeouser/catalogs/processing-results/catalogs/minimalist-stac/catalogs/cat_0721004e-fe8a-11ef-a4fd-925b27b1cd31",
+      "stac_collection": "['esacci-lst-s3b-night-monthly', 'esacci-lst-s3b-day-monthly', 'esacci-lst-s3a-night-monthly', 'esacci-lst-s3a-day-monthly']",
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[2].split('-')[0]}_S3{file_name.split('-')[4][-1]}_MONTHLY\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
+    },
+    "user_inputs": {
+      "assets": {
+        "type": "file",
+        "file_type": "geojson",
+        "label": "Upload your asset GeoJSON file"
+      },
+      "start_date": {
+        "label": "Select the start date",
+        "type": "date",
+        "default": "2022-01-01"
+      },
+      "end_date": {
+        "label": "Select the end date",
+        "type": "date",
+        "default": "2022-12-31"
+      }
+    }
+  },
+  {
+    "title": "Land Surface Temperature (LST) - Monthly (avg), Day (+/- uncertainty)",
+    "description": "This workflow provides monthly average daytime land surface temperature observations with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
+    "constraints": {
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
+    },
+    "preset_inputs": {
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs/user/catalogs/sparkgeouser/catalogs/processing-results/catalogs/minimalist-stac/catalogs/cat_0721004e-fe8a-11ef-a4fd-925b27b1cd31",
+      "stac_collection": "[ 'esacci-lst-s3b-day-monthly',  'esacci-lst-s3a-day-monthly']",
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[2].split('-')[0]}_S3{file_name.split('-')[4][-1]}_MONTHLY\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
+    },
+    "user_inputs": {
+      "assets": {
+        "type": "file",
+        "file_type": "geojson",
+        "label": "Upload your asset GeoJSON file"
+      },
+      "start_date": {
+        "label": "Select the start date",
+        "type": "date",
+        "default": "2022-01-01"
+      },
+      "end_date": {
+        "label": "Select the end date",
+        "type": "date",
+        "default": "2022-12-31"
+      }
+    }
+  },
+  {
+    "title": "Land Surface Temperature (LST) - Monthly (avg), Night (+/- uncertainty)",
+    "description": "This workflow provides monthly average nighttime land surface temperature observations with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
+    "constraints": {
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
+    },
+    "preset_inputs": {
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac/catalogs/user/catalogs/sparkgeouser/catalogs/processing-results/catalogs/minimalist-stac/catalogs/cat_0721004e-fe8a-11ef-a4fd-925b27b1cd31",
+      "stac_collection": "[ 'esacci-lst-s3b-night-monthly',  'esacci-lst-s3a-night-monthly']",
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[2].split('-')[0]}_S3{file_name.split('-')[4][-1]}_MONTHLY\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
+    },
+    "user_inputs": {
+      "assets": {
+        "type": "file",
+        "file_type": "geojson",
+        "label": "Upload your asset GeoJSON file"
+      },
+      "start_date": {
+        "label": "Select the start date",
+        "type": "date",
+        "default": "2022-01-01"
+      },
+      "end_date": {
+        "label": "Select the end date",
+        "type": "date",
+        "default": "2022-12-31"
+      }
+    }
+  },
+  {
+    "title": "Land Surface Temperature (LST) - Daily, Day & Night",
+    "description": "This workflow provides daytime and nightime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
+    "constraints": {
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
+    },
+    "preset_inputs": {
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://api.stac.ceda.ac.uk",
+      "stac_collection": "['eocis-lst-s3b-night', 'eocis-lst-s3a-night','eocis-lst-s3b-day', 'eocis-lst-s3a-day']",
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
+    },
+    "user_inputs": {
+      "assets": {
+        "type": "file",
+        "file_type": "geojson",
+        "label": "Upload your asset GeoJSON file"
+      },
+      "start_date": {
+        "label": "Select the start date",
+        "type": "date",
+        "default": "2024-07-01"
+      },
+      "end_date": {
+        "label": "Select the end date",
+        "type": "date",
+        "default": "2024-07-31"
+      }
+    }
+  },
+  {
+    "title": "Land Surface Temperature (LST) - Daily, Day",
     "description": "This workflow provides daytime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
     "constraints": {
       "supported_assets": ["Point", "Polygon", "LineString"],
       "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
-      "workflow": "lst-filter",
+      "workflow": "lst-min-max",
       "stac_catalog": "https://api.stac.ceda.ac.uk",
       "stac_collection": "['eocis-lst-s3b-day', 'eocis-lst-s3a-day']",
       "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
@@ -31,14 +155,45 @@
     }
   },
   {
-    "title": "Land Surface Temperature (LST) - World, Night",
+    "title": "Land Surface Temperature (LST) -  Daily, Day  (+/- uncertainty)",
+    "description": "This workflow provides daily daytime land surface temperature observations along with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
+    "constraints": {
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
+    },
+    "preset_inputs": {
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://api.stac.ceda.ac.uk",
+      "stac_collection": "['eocis-lst-s3b-day', 'eocis-lst-s3a-day']",
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
+    },
+    "user_inputs": {
+      "assets": {
+        "type": "file",
+        "file_type": "geojson",
+        "label": "Upload your asset GeoJSON file"
+      },
+      "start_date": {
+        "label": "Select the start date",
+        "type": "date",
+        "default": "2024-07-01"
+      },
+      "end_date": {
+        "label": "Select the end date",
+        "type": "date",
+        "default": "2024-07-31"
+      }
+    }
+  },
+  {
+    "title": "Land Surface Temperature (LST) - Daily, Night",
     "description": "This workflow provides nighttime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR). Data is available from 1st January 2016 onwards.",
     "constraints": {
       "supported_assets": ["Point", "Polygon", "LineString"],
       "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
-      "workflow": "lst-filter",
+      "workflow": "lst-min-max",
       "stac_catalog": "https://api.stac.ceda.ac.uk",
       "stac_collection": "['eocis-lst-s3b-night', 'eocis-lst-s3a-night']",
       "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
@@ -62,18 +217,17 @@
     }
   },
   {
-    "title": "Land Surface Temperature (LST) - World, All",
-    "description": "This workflow provides daytime and nightime land surface temperature observations for specified assets across the World, from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR).   Data is available from 1st January 2016 onwards.",
+    "title": "Land Surface Temperature (LST) - Daily, Night (+/- uncertainty)",
+    "description": "This workflow provides daily nighttime land surface temperature observations along with their associated uncertainty ranges (minimum and maximum values) for specified assets across the World. The data is derived from the Sentinel Sea and Land Surface Temperature Radiometer (SLSTR) and is available from 1st January 2016 onwards.",
     "constraints": {
       "supported_assets": ["Point", "Polygon", "LineString"],
       "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
+      "workflow": "lst-min-max",
       "stac_catalog": "https://api.stac.ceda.ac.uk",
-      "stac_collection": "['eocis-lst-s3b-night', 'eocis-lst-s3a-night','eocis-lst-s3b-day', 'eocis-lst-s3a-day']",
-      "workflow": "lst-filter",
-      "stac_query": "{}",
-      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15'}"
+      "stac_collection": "['eocis-lst-s3b-night', 'eocis-lst-s3a-night']",
+      "extra_args": "{'output_name': \"{datetime_string[:-9]}_{file_name.split('_')[3].split('-')[0]}_S3{file_name.split('_')[1].split('-')[4][5]}\",'variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
     },
     "user_inputs": {
       "assets": {
@@ -94,18 +248,50 @@
     }
   },
   {
-    "title": "Land Surface Temperature (LST) - London, All",
+    "title": "Land Surface Temperature (LST) - London - Daily, Day & Night",
     "description": "This worfklow provides land surface temperature observations for specified assets across London, from the downscaled 100 metre resolution data provided by the University of Leicester. Data is available from May 2013 to October 2023.",
     "constraints": {
       "supported_assets": ["Point", "Polygon", "LineString"],
       "required_columns": ["latitude", "longitude"]
     },
     "preset_inputs": {
-      "workflow": "lst-filter",
-      "stac_catalog": "https://test.eodatahub.org.uk/api/catalogue/stac/catalogs/supported-datasets/temp-sparkgeouser/processing-results/cat_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789",
-      "stac_collection": "col_c1f6f668-b2f8-11ef-b6b1-ee3aaed8a789",
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac",
+      "stac_collection": "esacci-lst-l2p-lndst8-london",
       "stac_query": "{}",
-      "extra_args": "{'output_name':\"{datetime_string}\", 'unit':'°C'}"
+      "extra_args": "{'output_name':\"{datetime_string}\", 'unit':'°C','variable':'lst','unit':'°C','expression':'x - 273.15'}"
+    },
+    "user_inputs": {
+      "assets": {
+        "type": "file",
+        "file_type": "geojson",
+        "label": "Upload your asset GeoJSON file"
+      },
+      "start_date": {
+        "label": "Select the start date",
+        "type": "date",
+        "default": "2022-05-01"
+      },
+      "end_date": {
+        "label": "Select the end date",
+        "type": "date",
+        "default": "2022-08-30"
+      }
+    }
+  },
+  {
+    "title": "Land Surface Temperature (LST) - London - Daily, Day & Night (+/- uncertainty)t",
+    "description": "This workflow provides daily daytime and nighttime land surface temperature observations along with their associated uncertainty ranges (minimum and maximum values) for specified assets across London. The data is derived from the downscaled 100-metre resolution dataset provided by the University of Leicester and is available from May 2013 to October 2023.",
+    "constraints": {
+      "supported_assets": ["Point", "Polygon", "LineString"],
+      "required_columns": ["latitude", "longitude"]
+    },
+    "preset_inputs": {
+      "workflow": "lst-min-max",
+      "stac_catalog": "https://staging.eodatahub.org.uk/api/catalogue/stac",
+      "stac_collection": "esacci-lst-l2p-lndst8-london",
+      "stac_query": "{}",
+      "extra_args": "{'output_name':\"{datetime_string}\", 'unit':'°C','variable':'lst','unit':'°C','expression':'x - 273.15','output_type':'min_max'}"
     },
     "user_inputs": {
       "assets": {

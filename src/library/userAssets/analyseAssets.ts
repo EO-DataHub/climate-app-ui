@@ -101,6 +101,7 @@ async function getAssetsRiskResults({
     resolve: (result: {
       analysedData: AnalysedUserAssets
       jobId: string
+      process_id: string
     }) => void,
     reject: (error: unknown) => void,
   ) => {
@@ -116,7 +117,13 @@ async function getAssetsRiskResults({
           workspaceUserName,
         })
 
-        resolve({ analysedData: data, jobId })
+        const processResponse =
+          await authenticatedAxiosInstance.authenticatedAxios.get(
+            `${HUB_BASE_URL}/ades/${HUB_APP_WORKSPACE_NAME}/ogc-api/jobs/${jobId}`,
+          )
+        const process_id = processResponse.data.processID
+
+        resolve({ analysedData: data, jobId, process_id })
       } else {
         setTimeout(() => {
           void pollForAnalysisResults(resolve, reject)

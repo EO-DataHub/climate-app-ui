@@ -91,6 +91,7 @@ export const Assets = () => {
     setAreUserAssetsASamplePortfolio,
     setCurrentWorkflowNickname,
     setCurrentWorkflowTitle,
+    setProcessIdAssociatedWithData,
     setUploadedFileName,
     setUserAssets,
     setWorkflowJobIdAssociatedWithData,
@@ -157,12 +158,15 @@ export const Assets = () => {
     jobId,
     analysedData,
     analysisWorkflowNickname,
+    process_id,
   }: {
     jobId: string
     analysedData: AnalysedUserAssets
     analysisWorkflowNickname: string
+    process_id: string
   }) => {
     setWorkflowJobIdAssociatedWithData?.(jobId)
+    setProcessIdAssociatedWithData?.(process_id)
     setAnalysedUserAssets?.(analysedData)
     setAnalysisRunDate?.(
       ` ${new Date().toLocaleDateString('en-GB')} ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`,
@@ -268,6 +272,7 @@ export const Assets = () => {
                   jobId,
                   analysedData,
                   analysisWorkflowNickname: workflowNickName,
+                  process_id: hubWorkflowPresetInputs.workflow,
                 })
               }}
             >

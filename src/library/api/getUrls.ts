@@ -35,8 +35,10 @@ export const getResultsUrl = ({
 export const getCsvResultsUrl = ({
   workspaceUserName,
   jobId,
+  process_id,
 }: {
   workspaceUserName: string
   jobId: string
+  process_id: string
 }) =>
-  `${HUB_BASE_URL}/${workspaceUserName}/files/${AWS_BUCKET_NAME}/processing-results/lst-min-max/cat_${jobId}/col_${jobId}/data.csv`
+  `https://${workspaceUserName}.eodatahub-workspaces.org.uk/files/${AWS_BUCKET_NAME}/processing-results/${process_id}/cat_${jobId}/col_${jobId}/data.csv`

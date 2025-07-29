@@ -14,6 +14,8 @@ import {
 import { AuthenticationContext } from './AuthenticationContext'
 import { getCsvResultsUrl } from '../library/api/getUrls'
 import { HubWorkflowNicknames } from '../configuration/constants'
+import { getWorkspaceSessionTokens } from '../library/api/getWorkspaceSessionToken'
+import AuthenticatedAxios from '../library/axios'
 
 interface UserAssetsContextValue {
   analysedAssetsFileName?: string | null
@@ -31,12 +33,14 @@ interface UserAssetsContextValue {
   setAnalysisRunDate?: Dispatch<SetStateAction<string | undefined>>
   setCurrentWorkflowNickname?: Dispatch<SetStateAction<string | null>>
   setCurrentWorkflowTitle?: Dispatch<SetStateAction<string | null>>
+  setProcessIdAssociatedWithData?: Dispatch<SetStateAction<string | null>>
   setUploadedFileName?: Dispatch<SetStateAction<string | null>>
   setUserAssets?: Dispatch<SetStateAction<UserAssets>>
   setWorkflowJobIdAssociatedWithData?: Dispatch<SetStateAction<string | null>>
   uploadedFileName?: string | null
   userAssets?: UserAssets
   workflowJobIdAssociatedWithData?: string | null
+  processIdAssociatedWithData?: string | null
   areUserAssetsASamplePortfolio: boolean
   setAreUserAssetsASamplePortfolio?: Dispatch<SetStateAction<boolean>>
 }
@@ -65,6 +69,8 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
   const [analysisRunDate, setAnalysisRunDate] = useState<string>()
   const [workflowJobIdAssociatedWithData, setWorkflowJobIdAssociatedWithData] =
     useState<string | null>(null)
+  const [processIdAssociatedWithData, setProcessIdAssociatedWithData] =
+    useState<string | null>(null)
 
   const [csvResults, setCsvResults] = useState<string | null>(null)
   const [analysedAssetsWorkflowTitle, setAnalysedAssetsWorkflowTitle] =
@@ -84,6 +90,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
       if (
         !authenticatedAxios ||
         !workflowJobIdAssociatedWithData ||
+        !processIdAssociatedWithData ||
         !workspaceUserName ||
         analysedAssetsWorkflowNickname === HubWorkflowNicknames.OSC
       ) {
@@ -92,21 +99,49 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
 
       setCsvResults(null)
 
-      void authenticatedAxios
-        .get(
-          getCsvResultsUrl({
+      const csvResultsUrl = getCsvResultsUrl({
+        workspaceUserName,
+        jobId: workflowJobIdAssociatedWithData,
+        process_id: processIdAssociatedWithData,
+      })
+
+      // Get workspace session token and make request
+      void (async () => {
+        try {
+          // Get workspace session token
+          const { access } = await getWorkspaceSessionTokens({
+            authenticatedAxios,
             workspaceUserName,
-            jobId: workflowJobIdAssociatedWithData,
-          }),
-        )
-        .then((response) => {
+          })
+
+          const getUpdatedTokens = async () => {
+            const { access }: { access: string } =
+              await getWorkspaceSessionTokens({
+                authenticatedAxios,
+                workspaceUserName,
+              })
+            return access
+          }
+
+          const workspaceAxiosInstance = new AuthenticatedAxios(
+            access,
+            getUpdatedTokens,
+          )
+
+          const response =
+            await workspaceAxiosInstance.authenticatedAxios.get(csvResultsUrl)
           setCsvResults(response.data)
-        })
+        } catch (error) {
+          // eslint-disable-next-line no-console
+          console.error('Error fetching CSV results:', error)
+        }
+      })()
     },
     [
       analysedAssetsWorkflowNickname,
       authenticatedAxios,
       workflowJobIdAssociatedWithData,
+      processIdAssociatedWithData,
       workspaceUserName,
       currentWorkflowTitle,
     ],
@@ -124,6 +159,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
         csvResults,
         currentWorkflowNickname,
         currentWorkflowTitle,
+        processIdAssociatedWithData,
         setAnalysedAssetsFileName,
         setAnalysedAssetsWorkflowNickname,
         setAnalysedAssetsWorkflowTitle,
@@ -132,6 +168,7 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
         setAreUserAssetsASamplePortfolio,
         setCurrentWorkflowNickname,
         setCurrentWorkflowTitle,
+        setProcessIdAssociatedWithData,
         setUploadedFileName,
         setUserAssets,
         setWorkflowJobIdAssociatedWithData,

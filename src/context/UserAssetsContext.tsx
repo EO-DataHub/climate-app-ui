@@ -87,6 +87,9 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(
     function getCsvResults() {
+      // Always clear CSV results when workflow changes
+      setCsvResults(null)
+
       if (
         !authenticatedAxios ||
         !workflowJobIdAssociatedWithData ||
@@ -96,8 +99,6 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
       ) {
         return
       }
-
-      setCsvResults(null)
 
       const csvResultsUrl = getCsvResultsUrl({
         workspaceUserName,
@@ -134,6 +135,8 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error('Error fetching CSV results:', error)
+          // Ensure CSV results is null if the request fails
+          setCsvResults(null)
         }
       })()
     },

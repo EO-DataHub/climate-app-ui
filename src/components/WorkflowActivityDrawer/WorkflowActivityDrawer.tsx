@@ -71,6 +71,7 @@ export const WorkflowActivityDrawer = ({
     setAnalysedUserAssets,
     setAnalysisRunDate,
     setWorkflowJobIdAssociatedWithData,
+    setProcessIdAssociatedWithData,
   } = useContext(UserAssetsContext)
 
   const loadWorkflowActivity = useCallback(async () => {
@@ -144,6 +145,7 @@ export const WorkflowActivityDrawer = ({
       !setAnalysisRunDate ||
       !setAnalysedAssetsFileName ||
       !setWorkflowJobIdAssociatedWithData ||
+      !setProcessIdAssociatedWithData ||
       !authenticatedAxios ||
       !workspaceUserName
     ) {
@@ -194,6 +196,7 @@ export const WorkflowActivityDrawer = ({
         )
         setAnalysedAssetsFileName('placeholder-file-name')
         setWorkflowJobIdAssociatedWithData(jobId)
+        setProcessIdAssociatedWithData(process_id)
         setAnalysedAssetsWorkflowNickname?.(
           workflowNickNamesByHubWorkflowName[jobInfo.processID],
         )

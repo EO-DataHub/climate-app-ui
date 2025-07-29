@@ -320,7 +320,8 @@
         "ID",
         "latitude",
         "longitude",
-        "asset_type",
+        "asset_class",
+        "type",
         "location"
       ]
     },

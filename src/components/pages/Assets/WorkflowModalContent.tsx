@@ -18,6 +18,7 @@ import { HandleAnalyseAssetsProps } from './assetsTypes'
 import { getGeometriesPresentInFeatureCollection } from '../../../library/geoJson/getGeometriesPresentInFeatureClass'
 import { FeatureCollection } from 'geojson'
 import { UserAssetsContext } from '../../../context/UserAssetsContext'
+import { validateRequiredColumns } from '../../../library/userAssets/validateRequiredColumns'
 
 type DateErrorType = DateValidationError | 'required' | null
 
@@ -28,10 +29,14 @@ const WorkflowInformation = ({
   inputContent,
   workflowOptions,
   areGeometriesSupportedWorkflowOption,
+  areColumnsValidForWorkflowOption,
+  missingColumns,
 }: {
   inputContent: ReactNode
   workflowOptions: HubWorkflowOptions
   areGeometriesSupportedWorkflowOption: boolean
+  areColumnsValidForWorkflowOption: boolean
+  missingColumns: string[]
 }) => {
   const {
     title,
@@ -80,6 +85,13 @@ const WorkflowInformation = ({
       ) : null}
       {supportedGeometriesToUse.length < 1 ? (
         <p>Supported geometry information is missing.</p>
+      ) : null}
+
+      {!areColumnsValidForWorkflowOption && missingColumns.length > 0 ? (
+        <p className={modalStyles.geometryError}>
+          Your uploaded file is missing required columns:{' '}
+          {missingColumns.join(' and ')}
+        </p>
       ) : null}
 
       {inputContent}
@@ -131,6 +143,36 @@ export const WorkflowModalContent = ({
     })
   }
 
+  const getAreColumnsValidForWorkflow = ({
+    workflowOptions,
+  }: {
+    workflowOptions: HubWorkflowOptions
+  }) => {
+    if (!userAssets) return false
+
+    const validation = validateRequiredColumns(
+      userAssets as FeatureCollection,
+      workflowOptions.constraints.required_columns,
+    )
+
+    return validation.isValid
+  }
+
+  const getMissingColumnsForWorkflow = ({
+    workflowOptions,
+  }: {
+    workflowOptions: HubWorkflowOptions
+  }) => {
+    if (!userAssets) return []
+
+    const validation = validateRequiredColumns(
+      userAssets as FeatureCollection,
+      workflowOptions.constraints.required_columns,
+    )
+
+    return validation.missingColumns
+  }
+
   const initializeDateRangeValues = () => {
     if (areDateRangeInputsShowing) {
       setStartDate(
@@ -177,11 +219,22 @@ export const WorkflowModalContent = ({
             workflowOptions: options as HubWorkflowOptions,
           })
 
+        const areColumnsValidForWorkflowOption = getAreColumnsValidForWorkflow({
+          workflowOptions: options as HubWorkflowOptions,
+        })
+
+        const missingColumns = getMissingColumnsForWorkflow({
+          workflowOptions: options as HubWorkflowOptions,
+        })
+
         const selectAnalysisButton = (
           <Button
             variant="outline"
             onClick={() => handleSelectWorkflow(options as HubWorkflowOptions)}
-            disabled={!areGeometriesSupportedWorkflowOption}
+            disabled={
+              !areGeometriesSupportedWorkflowOption ||
+              !areColumnsValidForWorkflowOption
+            }
           >
             Select Workflow
           </Button>
@@ -195,6 +248,10 @@ export const WorkflowModalContent = ({
               areGeometriesSupportedWorkflowOption={
                 areGeometriesSupportedWorkflowOption
               }
+              areColumnsValidForWorkflowOption={
+                areColumnsValidForWorkflowOption
+              }
+              missingColumns={missingColumns}
             />
           </li>
         )
@@ -259,6 +316,12 @@ export const WorkflowModalContent = ({
           areGeometriesSupportedWorkflowOption={
             areUserAssetsGeometriesSupportedForSelectedWorkflow
           }
+          areColumnsValidForWorkflowOption={getAreColumnsValidForWorkflow({
+            workflowOptions: selectedWorkflowOptions,
+          })}
+          missingColumns={getMissingColumnsForWorkflow({
+            workflowOptions: selectedWorkflowOptions,
+          })}
         />
       ) : null}
       <Button
@@ -274,7 +337,10 @@ export const WorkflowModalContent = ({
           !!startDateError ||
           !!endDateError ||
           !hubWorkflowName ||
-          !areUserAssetsGeometriesSupportedForSelectedWorkflow
+          !areUserAssetsGeometriesSupportedForSelectedWorkflow ||
+          !getAreColumnsValidForWorkflow({
+            workflowOptions: selectedWorkflowOptions,
+          })
         }
       >
         Run Analysis

@@ -129,9 +129,34 @@ export const UserAssetsProvider = ({ children }: { children: ReactNode }) => {
             getUpdatedTokens,
           )
 
-          const response =
-            await workspaceAxiosInstance.authenticatedAxios.get(csvResultsUrl)
-          setCsvResults(response.data)
+          // First check if the CSV file exists using HEAD request
+          try {
+            await workspaceAxiosInstance.authenticatedAxios.head(csvResultsUrl)
+            // File exists, now fetch the content
+            const response =
+              await workspaceAxiosInstance.authenticatedAxios.get(csvResultsUrl)
+            setCsvResults(response.data)
+          } catch (headError: unknown) {
+            if (
+              headError &&
+              typeof headError === 'object' &&
+              'response' in headError &&
+              headError.response &&
+              typeof headError.response === 'object' &&
+              'status' in headError.response &&
+              headError.response.status === 404
+            ) {
+              // File doesn't exist
+              setCsvResults(null)
+            } else {
+              // Other error, try to fetch anyway as fallback
+              const response =
+                await workspaceAxiosInstance.authenticatedAxios.get(
+                  csvResultsUrl,
+                )
+              setCsvResults(response.data)
+            }
+          }
         } catch (error) {
           // eslint-disable-next-line no-console
           console.error('Error fetching CSV results:', error)

@@ -47,12 +47,16 @@
     "remark-math": "^6.0.0",
     "use-debounce": "^10.0.1",
     "vega": "^5.28.0",
-    "vega-lite": "^5.18.0"
+    "vega-lite": "^5.18.0",
+    "@rjsf/core": "^5.19.3",
+    "@rjsf/utils": "^5.19.3",
+    "@rjsf/validator-ajv8": "^5.19.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.2",
     "@testing-library/user-event": "^14.5.2",
+    "@types/react-jsonschema-form": "^1.7.13",
     "@types/geojson": "^7946.0.14",
     "@types/node": "^20.12.7",
     "@types/plotly.js": "^2.33.4",
@@ -79,6 +83,9 @@
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^1.5.3",
     "vitest-canvas-mock": "^0.3.3"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.19.0"
   },
   "engines": {
     "node": "21.7.1"

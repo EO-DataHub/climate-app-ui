@@ -1,23 +1,12 @@
-import { Button, Flex, Heading, Select, Spinner, Tabs } from '@radix-ui/themes'
+import Form, { IChangeEvent } from '@rjsf/core'
+import validator from '@rjsf/validator-ajv8'
+import { GenericObjectType } from '@rjsf/utils'
+import { Button, Flex, Heading, Spinner, Tabs } from '@radix-ui/themes'
 import { RasterTileSource } from 'maplibre-gl'
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-
-import {
-  climateModelPopupContent,
-  hazardIndicatorPopupContent,
-  hazardTypePopupContent,
-  scenarioPopupContent,
-  yearPopupContent,
-} from '../../../configuration/infoPopupContentHazards'
-import {
-  climateModelOptions,
-  getOptionsByClimateModel,
-  indicatorOptions,
-  legendParameters,
-} from '../../../library/api/fakeApiData'
+import { legendParameters } from '../../../library/api/fakeApiData'
 import { AssetsSelect } from '../../AssetsSelect/AssetsSelect'
-import { InfoPopover } from '../../InfoPopover/InfoPopover'
 import { InputLabelContainer } from '../../Form/InputLabelContainer'
 import { IntervalLegend } from '../../IntervalLegend/IntervalLegend'
 import { LoadingContext } from '../../../context/LoadingContext'
@@ -27,21 +16,45 @@ import {
   HAZARDS_LAYER_INITIAL_OPACITY,
   MapSourceIds,
 } from '../../../configuration/constants'
-import { PageWithMapLayout } from '../../Layout/PageWithMapLayout'
 import { useAssetPortfolios } from '../../../library/userAssets/useAssetPortfolios'
 import { useHazardMetadata } from '../../../library/hazards/useHazardMetadata'
 import { useMap } from '../../Map/useMap'
-import formStyles from '../../../library/genericStyles/forms.module.scss'
 import IndicatorDetailsFormatter from './IndicatorDetailsFormatter'
-import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import hazardStyles from './Hazards.module.scss'
 import { useGetHazardValueByMapClick } from './useGetHazardValueByMapClick'
 import { LocationValueOverview } from '../../LocationValueOverview/LocationValueOverview'
 import { HazardsPageContext } from '../../../context/HazardsPageContext'
-import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl'
+import {
+  chronicHeatSchema,
+  chronicHeatUiSchema,
+} from '../../../library/api/rjsfChronicHeat.ts'
+import sidebarStyles from '../../Layout/Sidebar.module.scss'
+import { RJSFRadixSelectWidget } from './RJSFRadixSelectWidget.tsx'
+import { PageWithMapLayout } from '../../Layout/PageWithMapLayout.tsx'
+import { RasterLayerOpacityControl } from '../../Map/RasterLayerOpacityControl.tsx'
+
+const customWidgets = {
+  customSelect: RJSFRadixSelectWidget,
+}
+
+interface HazardFormData {
+  scenario: string
+  year: string
+  climate_model: string
+  indicator: string
+}
+
+// There must be a type defined for this in RJSF, but I can't find it. I hate TypeScript more than I hate JavaScript.
+interface RSJFSelectItem {
+  title: string
+  const: string
+}
 
 const HUB_BASE_URL = import.meta.env.VITE_HUB_BASE_URL
 
 export const Hazards = () => {
+  const [hazardIndicatorLabel, setHazardIndicatorLabel] = useState('')
+  const [scenarioLabel, setScenarioLabel] = useState('')
   const {
     climateModel,
     hazardIndicator,
@@ -59,6 +72,13 @@ export const Hazards = () => {
     markerCoordinates,
   } = useContext(HazardsPageContext)
 
+  const [formData, setFormData] = useState<HazardFormData>({
+    year: year,
+    climate_model: climateModel,
+    scenario: scenario,
+    indicator: hazardIndicator,
+  })
+
   const { mapContainer, mapRef, isMapLoaded } = useMap({
     center: persistedMapCenter,
     zoom: persistedMapZoom,
@@ -72,12 +92,6 @@ export const Hazards = () => {
       isMapLoaded,
     })
 
-  const { scenarioOptions, yearOptions } =
-    getOptionsByClimateModel(climateModel)
-  const scenarioLabel = scenarioOptions.find(
-    (option) => option.value === scenario,
-  )?.label
-
   const hazardType = 'chronic_heat'
   const navigate = useNavigate()
   const { hazardMetadata, isHazardMetadataError, isHazardMetadataLoading } =
@@ -89,9 +103,6 @@ export const Hazards = () => {
       year,
     })
 
-  const hazardIndicatorLabel = indicatorOptions.find(
-    (option) => option.value === hazardIndicator,
-  )?.label
   const zarrPath = `https://ukri-eodh-hazard-tiles-sg.s3.eu-west-1.amazonaws.com/hazard/${hazardType}/osc/v2/${hazardIndicator}_${climateModel}_${scenario}_${year}-xarray`
 
   useGetHazardValueByMapClick({
@@ -168,9 +179,7 @@ export const Hazards = () => {
           type: 'raster',
           tiles: [tileUrlToUse],
         })
-      }
-
-      if (hazardSource) {
+      } else {
         hazardSource.setTiles([tileUrlToUse])
       }
 
@@ -233,106 +242,50 @@ export const Hazards = () => {
     ],
   )
 
+  useEffect(() => {
+    if (setHazardIndicator) setHazardIndicator(formData.indicator)
+    if (setClimateModel) setClimateModel(formData.climate_model)
+    if (setScenario) setScenario(formData.scenario)
+    if (setYear) setYear(formData.year)
+  }, [formData, setHazardIndicator, setClimateModel, setScenario, setYear])
+
   const sidebarContent = (
-    <div className={sidebarStyles.content}>
-      <div className={sidebarStyles.contentMidSection}>
-        <form className={sidebarStyles.contentForm}>
-          <div className={formStyles.multipleInputsRow}>
-            <InputLabelContainer>
-              <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="hazard-type">Hazard Type</label>
-                <InfoPopover>{hazardTypePopupContent}</InfoPopover>
-              </div>
+    <div className={hazardStyles.content}>
+      <div className={hazardStyles.contentMidSection}>
+        <Form
+          schema={chronicHeatSchema}
+          className={sidebarStyles.contentForm}
+          uiSchema={chronicHeatUiSchema}
+          widgets={customWidgets}
+          validator={validator}
+          formData={formData}
+          onChange={(e: IChangeEvent, idx) => {
+            if (idx === 'root_indicator') {
+              // Remove the magic and treat the data as a Plain Old Javascript Object
+              // so we don't get the linter moaning about "oneOf".
+              const pojo: GenericObjectType = Object.assign(
+                {},
+                e.schema.properties,
+              )
+              const res: RSJFSelectItem = pojo.indicator.oneOf.find(
+                (item: RSJFSelectItem) => item.const === e.formData?.indicator,
+              )
+              setHazardIndicatorLabel(res ? res.title : ' ')
+            } else if (idx === 'root_scenario') {
+              // Scenarios don't have pretty labels in inventory.json, so we just have to use the value.
+              setScenarioLabel(e.formData.scenario)
+            }
 
-              <Select.Root value={hazardType}>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="hazard-type">
-                  <Select.Item value={hazardType}>Chronic Heat</Select.Item>
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
+            setFormData(e.formData)
+          }}
+        />
 
-            <InputLabelContainer>
-              <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="hazard-indicator">Hazard Indicator</label>
-                <InfoPopover>{hazardIndicatorPopupContent}</InfoPopover>
-              </div>
-
-              <Select.Root
-                value={hazardIndicator}
-                onValueChange={setHazardIndicator}
-              >
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="hazard-indicator">
-                  {indicatorOptions.map(({ value, label }) => (
-                    <Select.Item key={value} value={value}>
-                      {label}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-          </div>
-
-          <div className={formStyles.multipleInputsRow}>
-            <InputLabelContainer>
-              <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="climateModel">Climate Model</label>
-                <InfoPopover>{climateModelPopupContent}</InfoPopover>
-              </div>
-
-              <Select.Root value={climateModel} onValueChange={setClimateModel}>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="climateModel">
-                  {climateModelOptions.map(({ value, label }) => (
-                    <Select.Item key={value} value={value}>
-                      {label}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-            <InputLabelContainer>
-              <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="scenario">Scenario</label>
-                <InfoPopover>{scenarioPopupContent}</InfoPopover>
-              </div>
-              <Select.Root value={scenario} onValueChange={setScenario}>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="scenario">
-                  {scenarioOptions.map(({ value, label }) => (
-                    <Select.Item key={value} value={value}>
-                      {label}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-            <InputLabelContainer>
-              <div className={formStyles.labelWithInfoPopoverRow}>
-                <label htmlFor="year">Year</label>
-                <InfoPopover>{yearPopupContent}</InfoPopover>
-              </div>
-              <Select.Root value={year} onValueChange={setYear}>
-                <Select.Trigger placeholder="Select" />
-                <Select.Content id="year">
-                  {yearOptions.map((year) => (
-                    <Select.Item key={year} value={year}>
-                      {year}
-                    </Select.Item>
-                  ))}
-                </Select.Content>
-              </Select.Root>
-            </InputLabelContainer>
-          </div>
-        </form>
-
-        <Tabs.Root defaultValue="overview" className={sidebarStyles.tabsRoot}>
+        <Tabs.Root defaultValue="overview" className={hazardStyles.tabsRoot}>
           <Tabs.List>
             <Tabs.Trigger value="overview">Overview</Tabs.Trigger>
             <Tabs.Trigger value="Methodology">Methodology</Tabs.Trigger>
           </Tabs.List>
-          <div className={sidebarStyles.tabsContentWrapper}>
+          <div className={hazardStyles.tabsContentWrapper}>
             <Tabs.Content value="overview">
               <LocationValueOverview
                 isMarkerOnMap={!!markerCoordinates}
@@ -353,23 +306,23 @@ export const Hazards = () => {
             </Tabs.Content>
           </div>
         </Tabs.Root>
+      </div>
 
-        <div className={sidebarStyles.contentBottomButtonRow}>
-          <div className={sidebarStyles.selectAssetsWrapper}>
-            <Flex gap="1">
-              <label>View Assets on Map</label>{' '}
-              {isPortfolioLoading ? <Spinner /> : null}
-            </Flex>
+      <div className={sidebarStyles.contentBottomButtonRow}>
+        <div className={sidebarStyles.selectAssetsWrapper}>
+          <Flex gap="1">
+            <label>View Assets on Map</label>{' '}
+            {isPortfolioLoading ? <Spinner /> : null}
+          </Flex>
 
-            <InputLabelContainer>
-              <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
-            </InputLabelContainer>
-          </div>
-          <div className={sidebarStyles.selectAssetsButtonWrapper}>
-            <Button onClick={handleSelectAssetsClick}>
-              Select Assets for Analysis
-            </Button>
-          </div>
+          <InputLabelContainer>
+            <AssetsSelect onValueChange={updateCurrentPortfolioShown} />
+          </InputLabelContainer>
+        </div>
+        <div className={sidebarStyles.selectAssetsButtonWrapper}>
+          <Button onClick={handleSelectAssetsClick}>
+            Select Assets for Analysis
+          </Button>
         </div>
       </div>
     </div>
